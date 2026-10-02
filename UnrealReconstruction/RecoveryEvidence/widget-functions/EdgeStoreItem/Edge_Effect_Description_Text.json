@@ -1,0 +1,478 @@
+{
+  "function": {
+    "name": "Edge Effect Description Text",
+    "statements": 16,
+    "raw_fallback": false,
+    "calls": [
+      "Conv_IntToInt64",
+      "FTrunc",
+      "Format",
+      "Multiply_DoubleDouble",
+      "Subtract_DoubleDouble"
+    ],
+    "fields": [
+      "ArgumentName",
+      "ArgumentValue",
+      "ArgumentValueDouble",
+      "ArgumentValueFloat",
+      "ArgumentValueGender",
+      "ArgumentValueInt",
+      "ArgumentValueType",
+      "As BP Global Manager",
+      "CallFunc_Conv_IntToInt64_ReturnValue",
+      "CallFunc_FTrunc_ReturnValue",
+      "CallFunc_Format_ReturnValue",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue",
+      "CallFunc_Subtract_DoubleDouble_ReturnValue",
+      "EdgingManager",
+      "K2Node_MakeArray_Array",
+      "K2Node_MakeStruct_FormatArgumentData",
+      "PerfectEdgeStreakThreshold",
+      "ReturnValue"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Subtract_DoubleDouble_ReturnValue",
+        "owner": "Edge Effect Description Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_DoubleDouble_ReturnValue",
+          "owner": "Edge Effect Description Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Subtract_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "EdgeStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "EdgingManager",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "EdgingManager",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "PerfectEdgeStreakThreshold",
+              "owner": "BP_EdgeManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PerfectEdgeStreakThreshold",
+                "owner": "BP_EdgeManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+        "owner": "Edge Effect Description Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+          "owner": "Edge Effect Description Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Subtract_DoubleDouble_ReturnValue",
+              "owner": "Edge Effect Description Text"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 100.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FTrunc_ReturnValue",
+        "owner": "Edge Effect Description Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FTrunc_ReturnValue",
+          "owner": "Edge Effect Description Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FTrunc",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+              "owner": "Edge Effect Description Text"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToInt64_ReturnValue",
+        "owner": "Edge Effect Description Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToInt64_ReturnValue",
+          "owner": "Edge Effect Description Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToInt64",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_FTrunc_ReturnValue",
+              "owner": "Edge Effect Description Text"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentName",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentName",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "Edge Effect Description Text"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": "threshold"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueType",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueType",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "Edge Effect Description Text"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValue",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValue",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "Edge Effect Description Text"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_TextConst",
+        "Value": {
+          "op": "FScriptText",
+          "TextLiteralType": "Empty",
+          "LocalizedSource": null,
+          "LocalizedKey": null,
+          "LocalizedNamespace": null,
+          "InvariantLiteralString": null,
+          "LiteralString": null,
+          "StringTableAsset": null,
+          "StringTableId": null,
+          "StringTableKey": null
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueInt",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueInt",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "Edge Effect Description Text"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToInt64_ReturnValue",
+          "owner": "Edge Effect Description Text"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueFloat",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueFloat",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "Edge Effect Description Text"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueDouble",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueDouble",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "Edge Effect Description Text"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueGender",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueGender",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "Edge Effect Description Text"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_SetArray",
+      "AssigningProperty": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeArray_Array",
+          "owner": "Edge Effect Description Text"
+        }
+      },
+      "ArrayInnerProp": null,
+      "Elements": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "Edge Effect Description Text"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Format_ReturnValue",
+        "owner": "Edge Effect Description Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Format_ReturnValue",
+          "owner": "Edge Effect Description Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Format",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "INCREASES PERFECT EDGE \r\nWindow = LAST {threshold}% OF TASK"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "FFE10130420805509413A1B7A8FD4F69"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeArray_Array",
+              "owner": "Edge Effect Description Text"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "Edge Effect Description Text"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Edge Effect Description Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Format_ReturnValue",
+          "owner": "Edge Effect Description Text"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Edge Effect Description Text"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

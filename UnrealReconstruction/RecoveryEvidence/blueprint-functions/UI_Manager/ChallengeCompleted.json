@@ -1,0 +1,65 @@
+{
+  "function": {
+    "name": "ChallengeCompleted",
+    "statements": 5,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_UI_Manager"
+    ],
+    "fields": [
+      "ChallengeID",
+      "K2Node_CustomEvent_ChallengeID",
+      "K2Node_CustomEvent_XPReward",
+      "XPReward"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_ChallengeID",
+        "owner": "ExecuteUbergraph_UI_Manager"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "ChallengeID",
+          "owner": "ChallengeCompleted"
+        }
+      }
+    },
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_XPReward",
+        "owner": "ExecuteUbergraph_UI_Manager"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "XPReward",
+          "owner": "ChallengeCompleted"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_UI_Manager",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 16531
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

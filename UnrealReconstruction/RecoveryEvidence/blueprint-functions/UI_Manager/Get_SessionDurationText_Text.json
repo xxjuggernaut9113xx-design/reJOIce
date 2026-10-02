@@ -1,0 +1,65 @@
+{
+  "function": {
+    "name": "Get_SessionDurationText_Text",
+    "statements": 3,
+    "raw_fallback": false,
+    "calls": [],
+    "fields": [
+      "GlobalManagerRef",
+      "ReturnValue",
+      "SessionDurationText"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "Get_SessionDurationText_Text"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_SessionDurationText_Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManagerRef",
+            "owner": "UI_Manager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "SessionDurationText",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SessionDurationText",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_SessionDurationText_Text"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

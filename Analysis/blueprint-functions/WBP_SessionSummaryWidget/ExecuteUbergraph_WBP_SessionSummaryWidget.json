@@ -1,0 +1,1556 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_WBP_SessionSummaryWidget",
+    "statements": 69,
+    "raw_fallback": false,
+    "calls": [
+      "AddToViewport",
+      "Add_IntInt",
+      "Array_Get",
+      "Array_Length",
+      "Create",
+      "GetAllWidgetsOfClass",
+      "GetGameInstance",
+      "GetGameMode",
+      "GetXPForNextLevel",
+      "GetXPProgressInCurrentLevel",
+      "InitializeBar",
+      "InitializePlayerCard",
+      "LaunchURL",
+      "Less_IntInt",
+      "PauseSequence",
+      "PlayAnimation",
+      "ReinitGameVariables",
+      "RemoveFromParent",
+      "SetVisibility"
+    ],
+    "fields": [
+      "",
+      "AdultContentWarningSplashButton",
+      "As BP CHGame Instance",
+      "As BP Global Manager",
+      "BeatSpawnerManagerCPP",
+      "BeginDisplay",
+      "CallFunc_Add_IntInt_ReturnValue",
+      "CallFunc_Array_Get_Item",
+      "CallFunc_Array_Length_ReturnValue",
+      "CallFunc_Create_ReturnValue",
+      "CallFunc_GetAllWidgetsOfClass_FoundWidgets",
+      "CallFunc_GetGameInstance_ReturnValue",
+      "CallFunc_GetGameMode_ReturnValue",
+      "CallFunc_GetXPForNextLevel_ReturnValue",
+      "CallFunc_GetXPProgressInCurrentLevel_ReturnValue",
+      "CallFunc_Less_IntInt_ReturnValue",
+      "CallFunc_PlayAnimation_ReturnValue",
+      "CallFunc_PlayAnimation_ReturnValue_1",
+      "CallFunc_PlayAnimation_ReturnValue_2",
+      "CallFunc_PlayAnimation_ReturnValue_3",
+      "CallFunc_PlayAnimation_ReturnValue_4",
+      "CallFunc_PlayAnimation_ReturnValue_5",
+      "CallFunc_PlayAnimation_ReturnValue_6",
+      "CallFunc_PlayAnimation_ReturnValue_7",
+      "CallFunc_PlayAnimation_ReturnValue_8",
+      "CallFunc_PlayAnimation_ReturnValue_9",
+      "CurrentLevel",
+      "DiscordClick",
+      "DiscordHover",
+      "DiscordUnhover",
+      "EntryPoint",
+      "K2Node_DynamicCast_AsBP_CHGame_Instance",
+      "K2Node_DynamicCast_AsBP_Global_Manager",
+      "K2Node_DynamicCast_bSuccess",
+      "K2Node_DynamicCast_bSuccess_1",
+      "NewUpdateSplashButton",
+      "PatreonClick",
+      "PatreonHover",
+      "PatreonUnhover",
+      "ProgressionManager",
+      "Temp_int_Array_Index_Variable",
+      "Temp_int_Loop_Counter_Variable",
+      "TutorialSplashButton",
+      "TwitterClick",
+      "TwitterHover",
+      "TwitterUnhover",
+      "WBP_PlayerCard",
+      "WBP_XPBar"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1956
+    },
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 116
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -89
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetAllWidgetsOfClass_FoundWidgets",
+              "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable",
+              "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Get_Item",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "RemoveFromParent",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue",
+        "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable",
+              "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable",
+        "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Length_ReturnValue",
+        "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Length_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -89
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Length_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Length",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetAllWidgetsOfClass_FoundWidgets",
+                "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Less_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable",
+              "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Length_ReturnValue",
+              "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 328,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable",
+        "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 15
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -287
+        },
+        "Offset": 21,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Create",
+          "Parameters": [
+            {
+              "op": "EX_Self"
+            },
+            {
+              "op": "EX_ObjectConst",
+              "Value": -283
+            },
+            {
+              "op": "EX_NoObject"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "AddToViewport",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "As BP Global Manager",
+            "owner": "WBP_SessionSummaryWidget_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "BeatSpawnerManagerCPP",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "BeatSpawnerManagerCPP",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 10,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PauseSequence",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP Global Manager",
+          "owner": "WBP_SessionSummaryWidget_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "ReinitGameVariables",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Create_ReturnValue",
+            "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AdultContentWarningSplashButton",
+          "owner": "MainMenu_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AdultContentWarningSplashButton",
+            "owner": "MainMenu_C"
+          }
+        }
+      },
+      "Offset": 16,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetVisibility",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Create_ReturnValue",
+            "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "TutorialSplashButton",
+          "owner": "MainMenu_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "TutorialSplashButton",
+            "owner": "MainMenu_C"
+          }
+        }
+      },
+      "Offset": 16,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetVisibility",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Create_ReturnValue",
+            "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "NewUpdateSplashButton",
+          "owner": "MainMenu_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "NewUpdateSplashButton",
+            "owner": "MainMenu_C"
+          }
+        }
+      },
+      "Offset": 16,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetVisibility",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_VirtualFunction",
+      "VirtualFunctionName": "RemoveFromParent",
+      "Parameters": []
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "TwitterUnhover",
+              "owner": "WBP_SessionSummaryWidget_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable",
+        "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 185
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable",
+        "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 751
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameInstance_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameInstance",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -2,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetGameInstance_ReturnValue",
+            "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+            "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "WBP_SessionSummaryWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetXPForNextLevel_ReturnValue",
+        "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetXPForNextLevel_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "WBP_SessionSummaryWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetXPForNextLevel_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetXPForNextLevel",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetXPProgressInCurrentLevel_ReturnValue",
+        "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetXPProgressInCurrentLevel_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "WBP_SessionSummaryWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetXPProgressInCurrentLevel_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetXPProgressInCurrentLevel",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "WBP_XPBar",
+          "owner": "WBP_SessionSummaryWidget_C"
+        }
+      },
+      "Offset": 85,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "InitializeBar",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "WBP_SessionSummaryWidget_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "ProgressionManager",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "ProgressionManager",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CurrentLevel",
+              "owner": "ProgressionManager"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentLevel",
+                "owner": "ProgressionManager"
+              }
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetXPProgressInCurrentLevel_ReturnValue",
+              "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetXPForNextLevel_ReturnValue",
+              "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameMode_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameMode",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetGameMode_ReturnValue",
+            "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess_1",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+            "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess_1",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP Global Manager",
+          "owner": "WBP_SessionSummaryWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "WBP_PlayerCard",
+          "owner": "WBP_SessionSummaryWidget_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "InitializePlayerCard",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_1",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "BeginDisplay",
+              "owner": "WBP_SessionSummaryWidget_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_SetArray",
+      "AssigningProperty": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetAllWidgetsOfClass_FoundWidgets",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "ArrayInnerProp": null,
+      "Elements": []
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -287
+      },
+      "Offset": 30,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "GetAllWidgetsOfClass",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetAllWidgetsOfClass_FoundWidgets",
+              "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+            }
+          },
+          {
+            "op": "EX_ObjectConst",
+            "Value": -283
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 779
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_7",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PatreonClick",
+              "owner": "WBP_SessionSummaryWidget_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "LaunchURL",
+      "Parameters": [
+        {
+          "op": "EX_StringConst",
+          "Value": "https://www.patreon.com/CockHeroGame"
+        }
+      ]
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_6",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PatreonHover",
+              "owner": "WBP_SessionSummaryWidget_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_5",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PatreonUnhover",
+              "owner": "WBP_SessionSummaryWidget_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_2",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DiscordClick",
+              "owner": "WBP_SessionSummaryWidget_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "LaunchURL",
+      "Parameters": [
+        {
+          "op": "EX_StringConst",
+          "Value": "https://discord.gg/dQXRpF6Uhf"
+        }
+      ]
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_3",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DiscordHover",
+              "owner": "WBP_SessionSummaryWidget_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_4",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DiscordUnhover",
+              "owner": "WBP_SessionSummaryWidget_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_8",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "TwitterClick",
+              "owner": "WBP_SessionSummaryWidget_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "LaunchURL",
+      "Parameters": [
+        {
+          "op": "EX_StringConst",
+          "Value": "https://x.com/CockHeroGame"
+        }
+      ]
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_9",
+          "owner": "ExecuteUbergraph_WBP_SessionSummaryWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "TwitterHover",
+              "owner": "WBP_SessionSummaryWidget_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 703
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

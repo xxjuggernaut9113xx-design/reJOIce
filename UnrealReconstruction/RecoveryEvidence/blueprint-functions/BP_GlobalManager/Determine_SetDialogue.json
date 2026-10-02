@@ -1,0 +1,466 @@
+{
+  "function": {
+    "name": "Determine&SetDialogue",
+    "statements": 20,
+    "raw_fallback": false,
+    "calls": [
+      "Array_Random",
+      "NotEqual_ByteByte",
+      "PlayAnimation",
+      "SetDealerTextUI"
+    ],
+    "fields": [
+      "",
+      "CallFunc_Array_Random_OutIndex",
+      "CallFunc_Array_Random_OutIndex_1",
+      "CallFunc_Array_Random_OutIndex_2",
+      "CallFunc_Array_Random_OutItem",
+      "CallFunc_Array_Random_OutItem_1",
+      "CallFunc_Array_Random_OutItem_2",
+      "CallFunc_PlayAnimation_ReturnValue",
+      "DealerText",
+      "DealerText_Slow_Generic_Array",
+      "DealterText_Fast_Generic_Array",
+      "DealterText_Medium_Generic_Array",
+      "HeatCategory",
+      "K2Node_SwitchEnum_CmpSuccess",
+      "ShowTextAnim",
+      "UIManager"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "Determine&SetDialogue"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 59,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "Determine&SetDialogue"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "PlayAnimation",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "UIManager",
+                  "owner": "BP_GlobalManager_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "ShowTextAnim",
+                "owner": "UI_Manager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "ShowTextAnim",
+                  "owner": "UI_Manager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": 1
+            },
+            {
+              "op": "EX_ByteConst",
+              "Value": 0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_False"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine&SetDialogue"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatCategory",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 231,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine&SetDialogue"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine&SetDialogue"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatCategory",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 360,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine&SetDialogue"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine&SetDialogue"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatCategory",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 451,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine&SetDialogue"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 542
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DealterText_Fast_Generic_Array",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem",
+              "owner": "Determine&SetDialogue"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex",
+              "owner": "Determine&SetDialogue"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "DealerText",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "DealerText",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Random_OutItem",
+          "owner": "Determine&SetDialogue"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 16,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SetDealerTextUI",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "Empty",
+              "LocalizedSource": null,
+              "LocalizedKey": null,
+              "LocalizedNamespace": null,
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 542
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DealterText_Medium_Generic_Array",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem_1",
+              "owner": "Determine&SetDialogue"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex_1",
+              "owner": "Determine&SetDialogue"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "DealerText",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "DealerText",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Random_OutItem_1",
+          "owner": "Determine&SetDialogue"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 317
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DealerText_Slow_Generic_Array",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem_2",
+              "owner": "Determine&SetDialogue"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex_2",
+              "owner": "Determine&SetDialogue"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "DealerText",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "DealerText",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Random_OutItem_2",
+          "owner": "Determine&SetDialogue"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 317
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

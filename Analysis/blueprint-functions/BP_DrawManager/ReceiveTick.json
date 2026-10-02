@@ -1,0 +1,49 @@
+{
+  "function": {
+    "name": "ReceiveTick",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_BP_DrawManager"
+    ],
+    "fields": [
+      "DeltaSeconds",
+      "K2Node_Event_DeltaSeconds"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_Event_DeltaSeconds",
+        "owner": "ExecuteUbergraph_BP_DrawManager"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "DeltaSeconds",
+          "owner": "ReceiveTick"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_BP_DrawManager",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 802
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

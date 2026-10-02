@@ -1,0 +1,162 @@
+{
+  "function": {
+    "name": "Get Avg Session Duration Text",
+    "statements": 7,
+    "raw_fallback": false,
+    "calls": [
+      "Concat_StrStr",
+      "Conv_StringToText",
+      "Conv_TextToString",
+      "FormatTime"
+    ],
+    "fields": [
+      "AvgTime",
+      "CallFunc_Concat_StrStr_ReturnValue",
+      "CallFunc_Conv_StringToText_ReturnValue",
+      "CallFunc_Conv_TextToString_ReturnValue",
+      "CallFunc_FormatTime_NewParam",
+      "ReturnValue"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "FormatTime",
+      "Parameters": [
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AvgTime",
+            "owner": "StatsScreenWidget_C"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_FormatTime_NewParam",
+            "owner": "Get Avg Session Duration Text"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue",
+        "owner": "Get Avg Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue",
+          "owner": "Get Avg Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_FormatTime_NewParam",
+              "owner": "Get Avg Session Duration Text"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue",
+        "owner": "Get Avg Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue",
+          "owner": "Get Avg Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Avg Duration:\r\n"
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_TextToString_ReturnValue",
+              "owner": "Get Avg Session Duration Text"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue",
+        "owner": "Get Avg Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "Get Avg Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue",
+              "owner": "Get Avg Session Duration Text"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "Get Avg Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get Avg Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "Get Avg Session Duration Text"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get Avg Session Duration Text"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

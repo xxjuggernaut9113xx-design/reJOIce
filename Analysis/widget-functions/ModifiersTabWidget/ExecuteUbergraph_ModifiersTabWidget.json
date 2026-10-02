@@ -1,0 +1,2686 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_ModifiersTabWidget",
+    "statements": 91,
+    "raw_fallback": false,
+    "calls": [
+      "AddChildToUniformGrid",
+      "AddToViewport",
+      "Add_IntInt",
+      "Array_Add",
+      "Array_Clear",
+      "Array_Contains",
+      "Array_Get",
+      "Array_IsEmpty",
+      "Array_Length",
+      "Array_RemoveItem",
+      "ClearChildren",
+      "Conv_StringToName",
+      "Conv_TextToString",
+      "Create",
+      "Divide_IntInt",
+      "GetChallengeDataForModifier",
+      "GetConflictingModifiers",
+      "GetDataTableRowFromName",
+      "GetDataTableRowNames",
+      "GetGameInstance",
+      "IsModifierUnlocked",
+      "Less_IntInt",
+      "Percent_IntInt",
+      "PlayToggleSound",
+      "Populate Details",
+      "PopulateDetails",
+      "PopulateModifiers",
+      "SaveAllData",
+      "SetButtonToggleWSound"
+    ],
+    "fields": [
+      "",
+      "ActiveModifiers",
+      "As BP CHGame Instance",
+      "CallFunc_AddChildToUniformGrid_ReturnValue",
+      "CallFunc_Add_IntInt_ReturnValue",
+      "CallFunc_Add_IntInt_ReturnValue_1",
+      "CallFunc_Array_Add_ReturnValue",
+      "CallFunc_Array_Add_ReturnValue_1",
+      "CallFunc_Array_Contains_ReturnValue",
+      "CallFunc_Array_Contains_ReturnValue_1",
+      "CallFunc_Array_Get_Item",
+      "CallFunc_Array_Get_Item_1",
+      "CallFunc_Array_IsEmpty_ReturnValue",
+      "CallFunc_Array_Length_ReturnValue",
+      "CallFunc_Array_Length_ReturnValue_1",
+      "CallFunc_Array_RemoveItem_ReturnValue",
+      "CallFunc_Array_RemoveItem_ReturnValue_1",
+      "CallFunc_Conv_StringToName_ReturnValue",
+      "CallFunc_Conv_TextToString_ReturnValue",
+      "CallFunc_Conv_TextToString_ReturnValue_1",
+      "CallFunc_Conv_TextToString_ReturnValue_2",
+      "CallFunc_Conv_TextToString_ReturnValue_3",
+      "CallFunc_Conv_TextToString_ReturnValue_4",
+      "CallFunc_Conv_TextToString_ReturnValue_5",
+      "CallFunc_Conv_TextToString_ReturnValue_6",
+      "CallFunc_Create_ReturnValue",
+      "CallFunc_Create_ReturnValue_1",
+      "CallFunc_Divide_IntInt_ReturnValue",
+      "CallFunc_GetChallengeDataForModifier_ReturnValue",
+      "CallFunc_GetConflictingModifiers_ReturnValue",
+      "CallFunc_GetDataTableRowFromName_OutRow",
+      "CallFunc_GetDataTableRowFromName_ReturnValue",
+      "CallFunc_GetDataTableRowNames_OutRowNames",
+      "CallFunc_GetGameInstance_ReturnValue",
+      "CallFunc_IsModifierUnlocked_ReturnValue",
+      "CallFunc_Less_IntInt_ReturnValue",
+      "CallFunc_Less_IntInt_ReturnValue_1",
+      "CallFunc_Percent_IntInt_ReturnValue",
+      "ConflictingModifiers",
+      "CurrentSave",
+      "Description",
+      "DisplayName",
+      "EntryPoint",
+      "K2Node_CreateDelegate_OutputDelegate",
+      "K2Node_CreateDelegate_OutputDelegate_1",
+      "K2Node_CustomEvent_ModifierTitle",
+      "K2Node_CustomEvent_Widget",
+      "K2Node_DynamicCast_AsBP_CHGame_Instance",
+      "K2Node_DynamicCast_bSuccess",
+      "ModifierDescription_6_222B640743A8D64F22E00FBD0036F4E6",
+      "ModifierIconIMG",
+      "ModifierIcon_8_239A563C482456ED7169CEB67E4E117E",
+      "ModifierTitle_4_F1AA0B694005408B7D63C8BC07A503CC",
+      "ModifiersDataTable",
+      "OnClicked",
+      "ProgressionManager",
+      "RemoveConflictsCalled",
+      "SelectedModifierTitle",
+      "Temp_int_Array_Index_Variable",
+      "Temp_int_Array_Index_Variable_1",
+      "Temp_int_Loop_Counter_Variable",
+      "Temp_int_Loop_Counter_Variable_1",
+      "UniformGridPanel_94"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 3513
+    },
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -94
+        },
+        "Offset": 21,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Create",
+          "Parameters": [
+            {
+              "op": "EX_Self"
+            },
+            {
+              "op": "EX_ObjectConst",
+              "Value": -91
+            },
+            {
+              "op": "EX_NoObject"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue_2",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue_2",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_CustomEvent_ModifierTitle",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetConflictingModifiers_ReturnValue",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetConflictingModifiers_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "ModifiersTabWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetConflictingModifiers_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetConflictingModifiers",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Conv_TextToString_ReturnValue_2",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            },
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP CHGame Instance",
+                    "owner": "ModifiersTabWidget_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CurrentSave",
+                    "owner": "BP_CHGameInstance_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "ActiveModifiers",
+                "owner": "BP_CHSaveGame_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "ActiveModifiers",
+                  "owner": "BP_CHSaveGame_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Offset": 63,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "PopulateDetails",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_CustomEvent_ModifierTitle",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetConflictingModifiers_ReturnValue",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "K2Node_CustomEvent_Widget",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "ModifierIconIMG",
+              "owner": "ModifierCardEntryWidget_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "ModifierIconIMG",
+                "owner": "ModifierCardEntryWidget_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "AddToViewport",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_BindDelegate",
+      "FunctionName": "ClearConflictingModifiers",
+      "Delegate": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "ObjectTerm": {
+        "op": "EX_Self"
+      }
+    },
+    {
+      "op": "EX_AddMulticastDelegate",
+      "Delegate": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Create_ReturnValue",
+            "owner": "ExecuteUbergraph_ModifiersTabWidget"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "RemoveConflictsCalled",
+          "owner": "ConflictingWidgetOverlayWidget_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "RemoveConflictsCalled",
+            "owner": "ConflictingWidgetOverlayWidget_C"
+          }
+        }
+      },
+      "DelegateToAdd": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -61
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Clear",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ConflictingModifiers",
+              "owner": "ModifiersTabWidget_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue_2",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue_2",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_CustomEvent_ModifierTitle",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetConflictingModifiers_ReturnValue",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetConflictingModifiers_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "ModifiersTabWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetConflictingModifiers_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetConflictingModifiers",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Conv_TextToString_ReturnValue_2",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            },
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP CHGame Instance",
+                    "owner": "ModifiersTabWidget_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CurrentSave",
+                    "owner": "BP_CHGameInstance_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "ActiveModifiers",
+                "owner": "BP_CHSaveGame_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "ActiveModifiers",
+                  "owner": "BP_CHSaveGame_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ConflictingModifiers",
+        "owner": "ModifiersTabWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ConflictingModifiers",
+          "owner": "ModifiersTabWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetConflictingModifiers_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SelectedModifierTitle",
+        "owner": "ModifiersTabWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "SelectedModifierTitle",
+          "owner": "ModifiersTabWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CustomEvent_ModifierTitle",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Length_ReturnValue",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Length_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -61
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Length_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Length",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowNames_OutRowNames",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Less_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable_1",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Length_ReturnValue",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1794
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -61
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetDataTableRowNames_OutRowNames",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetDataTableRowFromName_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -32
+        },
+        "Offset": 37,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetDataTableRowFromName_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetDataTableRowFromName",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "ModifiersDataTable",
+                "owner": "ModifiersTabWidget_C"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Get_Item",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetDataTableRowFromName_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Create_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -94
+        },
+        "Offset": 21,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Create_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Create",
+          "Parameters": [
+            {
+              "op": "EX_Self"
+            },
+            {
+              "op": "EX_ObjectConst",
+              "Value": -92
+            },
+            {
+              "op": "EX_NoObject"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "ModifierTitle_4_F1AA0B694005408B7D63C8BC07A503CC",
+              "owner": "ModifierInfoStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToName_ReturnValue",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToName_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToName",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_TextToString_ReturnValue",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue_1",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "ModifierTitle_4_F1AA0B694005408B7D63C8BC07A503CC",
+              "owner": "ModifierInfoStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetChallengeDataForModifier_ReturnValue",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetChallengeDataForModifier_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "ModifiersTabWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetChallengeDataForModifier_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetChallengeDataForModifier",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Conv_StringToName_ReturnValue",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsModifierUnlocked_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "ModifiersTabWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_IsModifierUnlocked_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "IsModifierUnlocked",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Conv_StringToName_ReturnValue",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Contains_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -61
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Contains_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Contains",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP CHGame Instance",
+                    "owner": "ModifiersTabWidget_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CurrentSave",
+                    "owner": "BP_CHGameInstance_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "ActiveModifiers",
+                "owner": "BP_CHSaveGame_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "ActiveModifiers",
+                  "owner": "BP_CHSaveGame_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Conv_TextToString_ReturnValue_1",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Create_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Offset": 122,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "Populate Details",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "ModifierTitle_4_F1AA0B694005408B7D63C8BC07A503CC",
+              "owner": "ModifierInfoStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "ModifierDescription_6_222B640743A8D64F22E00FBD0036F4E6",
+              "owner": "ModifierInfoStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "ModifierIcon_8_239A563C482456ED7169CEB67E4E117E",
+              "owner": "ModifierInfoStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Contains_ReturnValue_1",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_IsModifierUnlocked_ReturnValue",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "DisplayName",
+              "owner": "ChallengeData"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetChallengeDataForModifier_ReturnValue",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Description",
+              "owner": "ChallengeData"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetChallengeDataForModifier_ReturnValue",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Divide_IntInt_ReturnValue",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Divide_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Percent_IntInt_ReturnValue",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Percent_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Percent_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_AddChildToUniformGrid_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "UniformGridPanel_94",
+            "owner": "ModifiersTabWidget_C"
+          }
+        },
+        "Offset": 37,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_AddChildToUniformGrid_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "AddChildToUniformGrid",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Create_ReturnValue_1",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Divide_IntInt_ReturnValue",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Percent_IntInt_ReturnValue",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_BindDelegate",
+      "FunctionName": "ToggleModifier",
+      "Delegate": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "ObjectTerm": {
+        "op": "EX_Self"
+      }
+    },
+    {
+      "op": "EX_AddMulticastDelegate",
+      "Delegate": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Create_ReturnValue_1",
+            "owner": "ExecuteUbergraph_ModifiersTabWidget"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "OnClicked",
+          "owner": "ModifierCardEntryWidget_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "OnClicked",
+            "owner": "ModifierCardEntryWidget_C"
+          }
+        }
+      },
+      "DelegateToAdd": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue_1",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable_1",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable_1",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 715
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 2037
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -61
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ConflictingModifiers",
+              "owner": "ModifiersTabWidget_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable_1",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item_1",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -61
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_RemoveItem",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP CHGame Instance",
+                    "owner": "ModifiersTabWidget_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CurrentSave",
+                    "owner": "BP_CHGameInstance_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "ActiveModifiers",
+                "owner": "BP_CHSaveGame_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "ActiveModifiers",
+                  "owner": "BP_CHSaveGame_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Get_Item_1",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Length_ReturnValue_1",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Length_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -61
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Length_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Length",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "ConflictingModifiers",
+                "owner": "ModifiersTabWidget_C"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Less_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Length_ReturnValue_1",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2249,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable_1",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1868
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue_6",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue_6",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "SelectedModifierTitle",
+              "owner": "ModifiersTabWidget_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_1",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -61
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP CHGame Instance",
+                    "owner": "ModifiersTabWidget_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CurrentSave",
+                    "owner": "BP_CHGameInstance_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "ActiveModifiers",
+                "owner": "BP_CHSaveGame_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "ActiveModifiers",
+                  "owner": "BP_CHSaveGame_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Conv_TextToString_ReturnValue_6",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "PopulateModifiers",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "PlayToggleSound",
+      "Parameters": []
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable_1",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2106
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameInstance_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameInstance",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetGameInstance_ReturnValue",
+            "owner": "ExecuteUbergraph_ModifiersTabWidget"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+            "owner": "ExecuteUbergraph_ModifiersTabWidget"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "ModifiersTabWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "PopulateModifiers",
+      "Parameters": []
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UniformGridPanel_94",
+          "owner": "ModifiersTabWidget_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "ClearChildren",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_SetArray",
+      "AssigningProperty": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetDataTableRowNames_OutRowNames",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "ArrayInnerProp": null,
+      "Elements": []
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "GetDataTableRowNames",
+      "Parameters": [
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "ModifiersDataTable",
+            "owner": "ModifiersTabWidget_C"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetDataTableRowNames_OutRowNames",
+            "owner": "ExecuteUbergraph_ModifiersTabWidget"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable_1",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable_1",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 692
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue_5",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue_5",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_CustomEvent_ModifierTitle",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Contains_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -61
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Contains_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Contains",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP CHGame Instance",
+                    "owner": "ModifiersTabWidget_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CurrentSave",
+                    "owner": "BP_CHGameInstance_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "ActiveModifiers",
+                "owner": "BP_CHSaveGame_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "ActiveModifiers",
+                  "owner": "BP_CHSaveGame_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Conv_TextToString_ReturnValue_5",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3081,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Contains_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CustomEvent_Widget",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SetButtonToggleWSound",
+        "Parameters": [
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue_4",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue_4",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_CustomEvent_ModifierTitle",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -61
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_RemoveItem",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP CHGame Instance",
+                    "owner": "ModifiersTabWidget_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CurrentSave",
+                    "owner": "BP_CHGameInstance_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "ActiveModifiers",
+                "owner": "BP_CHSaveGame_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "ActiveModifiers",
+                  "owner": "BP_CHSaveGame_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Conv_TextToString_ReturnValue_4",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "ModifiersTabWidget_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue_2",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue_2",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_CustomEvent_ModifierTitle",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetConflictingModifiers_ReturnValue",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetConflictingModifiers_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "ModifiersTabWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetConflictingModifiers_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetConflictingModifiers",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Conv_TextToString_ReturnValue_2",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            },
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP CHGame Instance",
+                    "owner": "ModifiersTabWidget_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CurrentSave",
+                    "owner": "BP_CHGameInstance_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "ActiveModifiers",
+                "owner": "BP_CHSaveGame_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "ActiveModifiers",
+                  "owner": "BP_CHSaveGame_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -61
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetConflictingModifiers_ReturnValue",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 15,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CustomEvent_Widget",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SetButtonToggleWSound",
+        "Parameters": [
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue_3",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue_3",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_CustomEvent_ModifierTitle",
+              "owner": "ExecuteUbergraph_ModifiersTabWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue",
+        "owner": "ExecuteUbergraph_ModifiersTabWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -61
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue",
+          "owner": "ExecuteUbergraph_ModifiersTabWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP CHGame Instance",
+                    "owner": "ModifiersTabWidget_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CurrentSave",
+                    "owner": "BP_CHGameInstance_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "ActiveModifiers",
+                "owner": "BP_CHSaveGame_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "ActiveModifiers",
+                  "owner": "BP_CHSaveGame_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Conv_TextToString_ReturnValue_3",
+                "owner": "ExecuteUbergraph_ModifiersTabWidget"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 3044
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2427
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

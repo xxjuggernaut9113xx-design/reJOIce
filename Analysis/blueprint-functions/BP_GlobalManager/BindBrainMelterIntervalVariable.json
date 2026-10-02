@@ -1,0 +1,100 @@
+{
+  "function": {
+    "name": "BindBrainMelterIntervalVariable",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [],
+    "fields": [
+      "BrainMelterMediaBeatSwapInterval",
+      "CurrentBrainMelterSwapInterval",
+      "CurrentSave",
+      "GameInstance",
+      "MasterBrainMelterSwapInterval"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "MasterBrainMelterSwapInterval",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "MasterBrainMelterSwapInterval",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "BrainMelterMediaBeatSwapInterval",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "BrainMelterMediaBeatSwapInterval",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CurrentBrainMelterSwapInterval",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CurrentBrainMelterSwapInterval",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "MasterBrainMelterSwapInterval",
+          "owner": "BP_GlobalManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

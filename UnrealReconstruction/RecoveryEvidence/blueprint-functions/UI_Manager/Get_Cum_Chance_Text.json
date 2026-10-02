@@ -1,0 +1,218 @@
+{
+  "function": {
+    "name": "Get Cum Chance Text",
+    "statements": 8,
+    "raw_fallback": false,
+    "calls": [
+      "Concat_StrStr",
+      "Conv_IntToString",
+      "Conv_StringToText",
+      "FTrunc"
+    ],
+    "fields": [
+      "CallFunc_Concat_StrStr_ReturnValue",
+      "CallFunc_Concat_StrStr_ReturnValue_1",
+      "CallFunc_Conv_IntToString_ReturnValue",
+      "CallFunc_Conv_StringToText_ReturnValue",
+      "CallFunc_FTrunc_ReturnValue",
+      "CumSpawnChance",
+      "GlobalManagerRef",
+      "ReturnValue"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FTrunc_ReturnValue",
+        "owner": "Get Cum Chance Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FTrunc_ReturnValue",
+          "owner": "Get Cum Chance Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FTrunc",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManagerRef",
+                "owner": "UI_Manager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CumSpawnChance",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CumSpawnChance",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToString_ReturnValue",
+        "owner": "Get Cum Chance Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToString_ReturnValue",
+          "owner": "Get Cum Chance Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_FTrunc_ReturnValue",
+              "owner": "Get Cum Chance Text"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue",
+        "owner": "Get Cum Chance Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue",
+          "owner": "Get Cum Chance Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Cum Chance: "
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToString_ReturnValue",
+              "owner": "Get Cum Chance Text"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_1",
+        "owner": "Get Cum Chance Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_1",
+          "owner": "Get Cum Chance Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue",
+              "owner": "Get Cum Chance Text"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "%"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue",
+        "owner": "Get Cum Chance Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "Get Cum Chance Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue_1",
+              "owner": "Get Cum Chance Text"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "Get Cum Chance Text"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get Cum Chance Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "Get Cum Chance Text"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get Cum Chance Text"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

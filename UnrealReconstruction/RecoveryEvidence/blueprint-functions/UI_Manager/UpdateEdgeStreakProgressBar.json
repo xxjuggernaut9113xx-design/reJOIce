@@ -1,0 +1,707 @@
+{
+  "function": {
+    "name": "UpdateEdgeStreakProgressBar",
+    "statements": 24,
+    "raw_fallback": false,
+    "calls": [
+      "Conv_IntToDouble",
+      "Divide_DoubleDouble",
+      "LessEqual_DoubleDouble",
+      "SetFillColorAndOpacity",
+      "SetPercent",
+      "Subtract_DoubleDouble",
+      "Subtract_IntInt"
+    ],
+    "fields": [
+      "",
+      "AssignedStrokeCount",
+      "CallFunc_Conv_IntToDouble_ReturnValue",
+      "CallFunc_Conv_IntToDouble_ReturnValue_1",
+      "CallFunc_Divide_DoubleDouble_ReturnValue",
+      "CallFunc_LessEqual_DoubleDouble_ReturnValue",
+      "CallFunc_SetPercent_InPercent_ImplicitCast",
+      "CallFunc_SetPercent_InPercent_ImplicitCast_1",
+      "CallFunc_Subtract_DoubleDouble_ReturnValue",
+      "CallFunc_Subtract_IntInt_ReturnValue",
+      "CurrentStrokeCount",
+      "EdgeStreakProgressBar",
+      "EdgingManager",
+      "GlobalManagerRef",
+      "PerfectEdgeStreakThreshold"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+        "owner": "UpdateEdgeStreakProgressBar"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+          "owner": "UpdateEdgeStreakProgressBar"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "AssignedStrokeCount",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Subtract_IntInt_ReturnValue",
+        "owner": "UpdateEdgeStreakProgressBar"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "UpdateEdgeStreakProgressBar"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Subtract_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CurrentStrokeCount",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToDouble_ReturnValue_1",
+        "owner": "UpdateEdgeStreakProgressBar"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToDouble_ReturnValue_1",
+          "owner": "UpdateEdgeStreakProgressBar"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Subtract_IntInt_ReturnValue",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Subtract_DoubleDouble_ReturnValue",
+        "owner": "UpdateEdgeStreakProgressBar"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_DoubleDouble_ReturnValue",
+          "owner": "UpdateEdgeStreakProgressBar"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Subtract_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "GlobalManagerRef",
+                  "owner": "UI_Manager_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "EdgingManager",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "EdgingManager",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "PerfectEdgeStreakThreshold",
+              "owner": "BP_EdgeManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PerfectEdgeStreakThreshold",
+                "owner": "BP_EdgeManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+        "owner": "UpdateEdgeStreakProgressBar"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+          "owner": "UpdateEdgeStreakProgressBar"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Divide_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToDouble_ReturnValue_1",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_DoubleDouble_ReturnValue",
+          "owner": "UpdateEdgeStreakProgressBar"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "LessEqual_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Subtract_DoubleDouble_ReturnValue",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 607,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_DoubleDouble_ReturnValue",
+          "owner": "UpdateEdgeStreakProgressBar"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+        "owner": "UpdateEdgeStreakProgressBar"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+          "owner": "UpdateEdgeStreakProgressBar"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "AssignedStrokeCount",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Subtract_IntInt_ReturnValue",
+        "owner": "UpdateEdgeStreakProgressBar"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "UpdateEdgeStreakProgressBar"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Subtract_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CurrentStrokeCount",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToDouble_ReturnValue_1",
+        "owner": "UpdateEdgeStreakProgressBar"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToDouble_ReturnValue_1",
+          "owner": "UpdateEdgeStreakProgressBar"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Subtract_IntInt_ReturnValue",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+        "owner": "UpdateEdgeStreakProgressBar"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+          "owner": "UpdateEdgeStreakProgressBar"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Divide_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToDouble_ReturnValue_1",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SetPercent_InPercent_ImplicitCast",
+          "owner": "UpdateEdgeStreakProgressBar"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+            "owner": "UpdateEdgeStreakProgressBar"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "EdgeStreakProgressBar",
+          "owner": "UI_Manager_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetPercent",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_SetPercent_InPercent_ImplicitCast",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "EdgeStreakProgressBar",
+          "owner": "UI_Manager_C"
+        }
+      },
+      "Offset": 44,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetFillColorAndOpacity",
+        "Parameters": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -308,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 0.8431370258331299
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 905
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+        "owner": "UpdateEdgeStreakProgressBar"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+          "owner": "UpdateEdgeStreakProgressBar"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "AssignedStrokeCount",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Subtract_IntInt_ReturnValue",
+        "owner": "UpdateEdgeStreakProgressBar"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "UpdateEdgeStreakProgressBar"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Subtract_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CurrentStrokeCount",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToDouble_ReturnValue_1",
+        "owner": "UpdateEdgeStreakProgressBar"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToDouble_ReturnValue_1",
+          "owner": "UpdateEdgeStreakProgressBar"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Subtract_IntInt_ReturnValue",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+        "owner": "UpdateEdgeStreakProgressBar"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+          "owner": "UpdateEdgeStreakProgressBar"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Divide_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToDouble_ReturnValue_1",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SetPercent_InPercent_ImplicitCast_1",
+          "owner": "UpdateEdgeStreakProgressBar"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+            "owner": "UpdateEdgeStreakProgressBar"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "EdgeStreakProgressBar",
+          "owner": "UI_Manager_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetPercent",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_SetPercent_InPercent_ImplicitCast_1",
+              "owner": "UpdateEdgeStreakProgressBar"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "EdgeStreakProgressBar",
+          "owner": "UI_Manager_C"
+        }
+      },
+      "Offset": 44,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetFillColorAndOpacity",
+        "Parameters": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -308,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": 0.6444799900054932
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 0.1412629932165146
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 0.791297972202301
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

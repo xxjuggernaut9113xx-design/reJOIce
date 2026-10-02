@@ -1,0 +1,963 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_StoreWidget",
+    "statements": 49,
+    "raw_fallback": false,
+    "calls": [
+      "ClearAllTimerHandles",
+      "DetermineCardV2",
+      "DetermineShopKeeperStage",
+      "Divide_DoubleDouble",
+      "GetGameMode",
+      "IsValid",
+      "K2_ClearAndInvalidateTimerHandle",
+      "K2_SetTimerDelegate",
+      "LessEqual_DoubleDouble",
+      "PlayAnimation",
+      "PlayShopKeeperVoiceline",
+      "PrintString",
+      "RemoveFromParent",
+      "Stop",
+      "StopVoicelines",
+      "Subtract_DoubleDouble",
+      "Update ShopKeeper Image"
+    ],
+    "fields": [
+      "",
+      "As BP Global Manager",
+      "BeatSpawnerManager",
+      "ButtonPressEnabled?",
+      "CallFunc_Divide_DoubleDouble_ReturnValue",
+      "CallFunc_GetGameMode_ReturnValue",
+      "CallFunc_IsValid_ReturnValue",
+      "CallFunc_K2_SetTimerDelegate_ReturnValue",
+      "CallFunc_LessEqual_DoubleDouble_ReturnValue",
+      "CallFunc_PlayAnimation_ReturnValue",
+      "CallFunc_Subtract_DoubleDouble_ReturnValue",
+      "CanDraw?_152_A9DBFB6E4FCB050F8A8AE78F2265EA7D",
+      "DrawManager",
+      "EntryPoint",
+      "HasItems?_116_4B9A422E4B6962F11295CCB9DD7D918C",
+      "Idle",
+      "IdleTimerHandle",
+      "K2Node_CreateDelegate_OutputDelegate",
+      "K2Node_DynamicCast_AsBP_Global_Manager",
+      "K2Node_DynamicCast_bSuccess",
+      "MaxTimeHandler",
+      "MaxTimeOpen",
+      "PlayerVariablesStruct",
+      "RemainingTimeOpen",
+      "TimeRatio",
+      "VoicelineAudioComponent",
+      "bStopSequence"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "As BP Global Manager",
+            "owner": "StoreWidget_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "bStopSequence",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "bStopSequence",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Idle",
+              "owner": "StoreWidget_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "DetermineShopKeeperStage",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Update ShopKeeper Image",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "PlayShopKeeperVoiceline",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "HasItems?_116_4B9A422E4B6962F11295CCB9DD7D918C",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+              "owner": "ExecuteUbergraph_StoreWidget"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "CanDraw?_152_A9DBFB6E4FCB050F8A8AE78F2265EA7D",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+              "owner": "ExecuteUbergraph_StoreWidget"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1238
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsValid_ReturnValue",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "IsValid",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "VoicelineAudioComponent",
+              "owner": "StoreWidget_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 300,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsValid_ReturnValue",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "VoicelineAudioComponent",
+          "owner": "StoreWidget_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "Stop",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_VirtualFunction",
+      "VirtualFunctionName": "RemoveFromParent",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1238
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1238,
+      "BooleanExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ButtonPressEnabled?",
+          "owner": "StoreWidget_C"
+        }
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Close Click Called in Store"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -191,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6954190135002136
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 5.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "As BP Global Manager",
+            "owner": "StoreWidget_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "DrawManager",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "DetermineCardV2",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "K2_ClearAndInvalidateTimerHandle",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "MaxTimeHandler",
+            "owner": "StoreWidget_C"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ButtonPressEnabled?",
+          "owner": "StoreWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 221
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ButtonPressEnabled?",
+          "owner": "StoreWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameMode_ReturnValue",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameMode",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetGameMode_ReturnValue",
+            "owner": "ExecuteUbergraph_StoreWidget"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+            "owner": "ExecuteUbergraph_StoreWidget"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1238,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+            "owner": "ExecuteUbergraph_StoreWidget"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "BeatSpawnerManager",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "BeatSpawnerManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "ClearAllTimerHandles",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "StopVoicelines",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "K2_ClearAndInvalidateTimerHandle",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+              "owner": "ExecuteUbergraph_StoreWidget"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "IdleTimerHandle",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "IdleTimerHandle",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP Global Manager",
+          "owner": "StoreWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "RemainingTimeOpen",
+        "owner": "StoreWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "RemainingTimeOpen",
+          "owner": "StoreWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "MaxTimeOpen",
+          "owner": "StoreWidget_C"
+        }
+      }
+    },
+    {
+      "op": "EX_BindDelegate",
+      "FunctionName": "UpdateTimer",
+      "Delegate": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      },
+      "ObjectTerm": {
+        "op": "EX_Self"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_K2_SetTimerDelegate_ReturnValue",
+        "owner": "ExecuteUbergraph_StoreWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_K2_SetTimerDelegate_ReturnValue",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "K2_SetTimerDelegate",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_CreateDelegate_OutputDelegate",
+              "owner": "ExecuteUbergraph_StoreWidget"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.05000000074505806
+          },
+          {
+            "op": "EX_True"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "MaxTimeHandler",
+        "owner": "StoreWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "MaxTimeHandler",
+          "owner": "StoreWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_K2_SetTimerDelegate_ReturnValue",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 10
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_DoubleDouble_ReturnValue",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "LessEqual_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "RemainingTimeOpen",
+              "owner": "StoreWidget_C"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": "+0"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1082,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_DoubleDouble_ReturnValue",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "As BP Global Manager",
+            "owner": "StoreWidget_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "DrawManager",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "DetermineCardV2",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "K2_ClearAndInvalidateTimerHandle",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "MaxTimeHandler",
+            "owner": "StoreWidget_C"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ButtonPressEnabled?",
+          "owner": "StoreWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_VirtualFunction",
+      "VirtualFunctionName": "RemoveFromParent",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1238
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Subtract_DoubleDouble_ReturnValue",
+        "owner": "ExecuteUbergraph_StoreWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_DoubleDouble_ReturnValue",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Subtract_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "RemainingTimeOpen",
+              "owner": "StoreWidget_C"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 0.05
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "RemainingTimeOpen",
+        "owner": "StoreWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "RemainingTimeOpen",
+          "owner": "StoreWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_DoubleDouble_ReturnValue",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+        "owner": "ExecuteUbergraph_StoreWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Divide_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "RemainingTimeOpen",
+              "owner": "StoreWidget_C"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "MaxTimeOpen",
+              "owner": "StoreWidget_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "TimeRatio",
+        "owner": "StoreWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "TimeRatio",
+          "owner": "StoreWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+          "owner": "ExecuteUbergraph_StoreWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1238
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 319
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

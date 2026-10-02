@@ -1,0 +1,1317 @@
+{
+  "function": {
+    "name": "SuccubusEligibilityCheck",
+    "statements": 59,
+    "raw_fallback": false,
+    "calls": [
+      "AddToViewport",
+      "Add_IntInt",
+      "Array_Get",
+      "Array_Length",
+      "Create",
+      "CreateNotificationBox",
+      "EqualEqual_ByteByte",
+      "GreaterEqual_IntInt",
+      "Greater_IntInt",
+      "IsModifierActive?",
+      "LessEqual_IntInt",
+      "Less_IntInt",
+      "PlayAnimation",
+      "PlaySound2D",
+      "Subtract_IntInt",
+      "UpdateMetric"
+    ],
+    "fields": [
+      "",
+      "AllSpecialEventsArray",
+      "BaseWeight_8_F7A85592454B999BFA054687E376F2AF",
+      "CallFunc_Add_IntInt_ReturnValue",
+      "CallFunc_Array_Get_Item",
+      "CallFunc_Array_Length_ReturnValue",
+      "CallFunc_Create_ReturnValue",
+      "CallFunc_EqualEqual_ByteByte_ReturnValue",
+      "CallFunc_EqualEqual_ByteByte_ReturnValue_1",
+      "CallFunc_GreaterEqual_IntInt_ReturnValue",
+      "CallFunc_Greater_IntInt_ReturnValue",
+      "CallFunc_IsModifierActive__Active_",
+      "CallFunc_IsModifierActive__Active__1",
+      "CallFunc_LessEqual_IntInt_ReturnValue",
+      "CallFunc_Less_IntInt_ReturnValue",
+      "CallFunc_PlayAnimation_ReturnValue",
+      "CallFunc_Subtract_IntInt_ReturnValue",
+      "CanSuccubiSpawn?_150_8E10317348C0D9E436BC019A13ACDC60",
+      "CurrentComboCount_66_5F7B16A442F400DEAE401686B872656A",
+      "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+      "GameInstance",
+      "HeatCategory",
+      "IsEligibleReturn",
+      "K2Node_SetFieldsInStruct_StructOut",
+      "LocalEligiblityReturn",
+      "PG2TabbedInventory_Widget",
+      "PlayerItemCounts",
+      "PlayerVariablesStruct",
+      "ProgressionManager",
+      "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+      "Temp_int_Array_Index_Variable",
+      "Temp_int_Loop_Counter_Variable",
+      "Temp_int_Variable",
+      "UIManager",
+      "UsedLastSuccuShieldItems",
+      "bIsSuccuShieldToggled"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1751
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "LocalEligiblityReturn",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "IsModifierActive?",
+      "Parameters": [
+        {
+          "op": "EX_StringConst",
+          "Value": "Demon Proof"
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_IsModifierActive__Active__1",
+            "owner": "SuccubusEligibilityCheck"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 101,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsModifierActive__Active__1",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "LocalEligiblityReturn",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "IsEligibleReturn",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "LocalEligiblityReturn",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1751
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "IsModifierActive?",
+      "Parameters": [
+        {
+          "op": "EX_StringConst",
+          "Value": "Succufrenzy"
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_IsModifierActive__Active_",
+            "owner": "SuccubusEligibilityCheck"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 572,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsModifierActive__Active_",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable",
+        "owner": "SuccubusEligibilityCheck"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable",
+        "owner": "SuccubusEligibilityCheck"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Length_ReturnValue",
+        "owner": "SuccubusEligibilityCheck"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Length_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Length_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Length",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "AllSpecialEventsArray",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Less_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable",
+              "owner": "SuccubusEligibilityCheck"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Length_ReturnValue",
+              "owner": "SuccubusEligibilityCheck"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1583,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable",
+        "owner": "SuccubusEligibilityCheck"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      }
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1599
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AllSpecialEventsArray",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable",
+              "owner": "SuccubusEligibilityCheck"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "SuccubusEligibilityCheck"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_ByteByte_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "EqualEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Get_Item",
+                "owner": "SuccubusEligibilityCheck"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 8
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_ByteByte_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AllSpecialEventsArray",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable",
+              "owner": "SuccubusEligibilityCheck"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "SuccubusEligibilityCheck"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "BaseWeight_8_F7A85592454B999BFA054687E376F2AF",
+        "owner": "SpecialEventDataStruct"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "BaseWeight_8_F7A85592454B999BFA054687E376F2AF",
+          "owner": "SpecialEventDataStruct"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Array_Get_Item",
+            "owner": "SuccubusEligibilityCheck"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": 50.0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "K2Node_SetFieldsInStruct_StructOut",
+        "owner": "SuccubusEligibilityCheck"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SetFieldsInStruct_StructOut",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Get_Item",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 656,
+      "BooleanExpression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "CanSuccubiSpawn?_150_8E10317348C0D9E436BC019A13ACDC60",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_ByteByte_ReturnValue_1",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "EqualEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatCategory",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1673,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_ByteByte_ReturnValue_1",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "LocalEligiblityReturn",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 77
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Greater_IntInt_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Greater_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+              "owner": "PlayerItemCounts"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PlayerItemCounts",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 595,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Greater_IntInt_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 595,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UIManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PG2TabbedInventory_Widget",
+            "owner": "UI_Manager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PG2TabbedInventory_Widget",
+              "owner": "UI_Manager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "bIsSuccuShieldToggled",
+          "owner": "PG2TabbedInventory_Widget_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "bIsSuccuShieldToggled",
+            "owner": "PG2TabbedInventory_Widget_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Subtract_IntInt_ReturnValue",
+        "owner": "SuccubusEligibilityCheck"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Subtract_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+              "owner": "PlayerItemCounts"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PlayerItemCounts",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Variable",
+        "owner": "SuccubusEligibilityCheck"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Variable",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+        "owner": "PlayerItemCounts"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+          "owner": "PlayerItemCounts"
+        },
+        "StructExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "PlayerItemCounts",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Variable",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "ProgressionManager",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "Offset": 17,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "UpdateMetric",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 8
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "LocalEligiblityReturn",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_IntInt_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "LessEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Variable",
+              "owner": "SuccubusEligibilityCheck"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1488,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_IntInt_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UIManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PG2TabbedInventory_Widget",
+            "owner": "UI_Manager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PG2TabbedInventory_Widget",
+              "owner": "UI_Manager_C"
+            }
+          }
+        },
+        "Offset": 81,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "PlayAnimation",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "UIManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "PG2TabbedInventory_Widget",
+                  "owner": "UI_Manager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "PG2TabbedInventory_Widget",
+                    "owner": "UI_Manager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "UsedLastSuccuShieldItems",
+                "owner": "PG2TabbedInventory_Widget_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "UsedLastSuccuShieldItems",
+                  "owner": "PG2TabbedInventory_Widget_C"
+                }
+              }
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": 1
+            },
+            {
+              "op": "EX_ByteConst",
+              "Value": 0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_False"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -4055
+        },
+        "Offset": 21,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Create",
+          "Parameters": [
+            {
+              "op": "EX_Self"
+            },
+            {
+              "op": "EX_ObjectConst",
+              "Value": -4034
+            },
+            {
+              "op": "EX_NoObject"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "AddToViewport",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UIManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PG2TabbedInventory_Widget",
+            "owner": "UI_Manager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PG2TabbedInventory_Widget",
+              "owner": "UI_Manager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "bIsSuccuShieldToggled",
+          "owner": "PG2TabbedInventory_Widget_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "bIsSuccuShieldToggled",
+            "owner": "PG2TabbedInventory_Widget_C"
+          }
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -249
+      },
+      "Offset": 38,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlaySound2D",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          },
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3788
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 120,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3883
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "No SuccuShields Left"
+          },
+          {
+            "op": "EX_UnicodeStringConst",
+            "Value": "No Shields Left \u2014 Succubi May Appear"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 72,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3856
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "SuccuShield Active"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "1 Shield Consumed This Draw"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "LocalEligiblityReturn",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 77
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue",
+        "owner": "SuccubusEligibilityCheck"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable",
+              "owner": "SuccubusEligibilityCheck"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable",
+        "owner": "SuccubusEligibilityCheck"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 197
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_IntInt_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GreaterEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "CurrentComboCount_66_5F7B16A442F400DEAE401686B872656A",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 2000
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1735,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_IntInt_ReturnValue",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 640
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "LocalEligiblityReturn",
+          "owner": "SuccubusEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 77
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

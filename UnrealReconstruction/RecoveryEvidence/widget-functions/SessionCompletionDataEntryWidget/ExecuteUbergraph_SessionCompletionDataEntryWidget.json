@@ -1,0 +1,253 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_SessionCompletionDataEntryWidget",
+    "statements": 14,
+    "raw_fallback": false,
+    "calls": [
+      "Concat_StrStr",
+      "Conv_StringToText",
+      "PlayAnimation"
+    ],
+    "fields": [
+      "CallFunc_Concat_StrStr_ReturnValue",
+      "CallFunc_Conv_StringToText_ReturnValue",
+      "CallFunc_Conv_StringToText_ReturnValue_1",
+      "CallFunc_PlayAnimation_ReturnValue",
+      "CurrentValue",
+      "EntryPoint",
+      "K2Node_CustomEvent_ExtraString",
+      "K2Node_CustomEvent_LabelString",
+      "K2Node_CustomEvent_Value",
+      "LabelTextVar",
+      "ShowStatAndValueAnim",
+      "ValueTextVar"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_SessionCompletionDataEntryWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 278
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "ExecuteUbergraph_SessionCompletionDataEntryWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ShowStatAndValueAnim",
+              "owner": "SessionCompletionDataEntryWidget_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 278
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CurrentValue",
+        "owner": "SessionCompletionDataEntryWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CurrentValue",
+          "owner": "SessionCompletionDataEntryWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 15
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue",
+        "owner": "ExecuteUbergraph_SessionCompletionDataEntryWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "ExecuteUbergraph_SessionCompletionDataEntryWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_CustomEvent_LabelString",
+              "owner": "ExecuteUbergraph_SessionCompletionDataEntryWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "LabelTextVar",
+        "owner": "SessionCompletionDataEntryWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "LabelTextVar",
+          "owner": "SessionCompletionDataEntryWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "ExecuteUbergraph_SessionCompletionDataEntryWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue",
+        "owner": "ExecuteUbergraph_SessionCompletionDataEntryWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue",
+          "owner": "ExecuteUbergraph_SessionCompletionDataEntryWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_CustomEvent_Value",
+              "owner": "ExecuteUbergraph_SessionCompletionDataEntryWidget"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_CustomEvent_ExtraString",
+              "owner": "ExecuteUbergraph_SessionCompletionDataEntryWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue_1",
+        "owner": "ExecuteUbergraph_SessionCompletionDataEntryWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue_1",
+          "owner": "ExecuteUbergraph_SessionCompletionDataEntryWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue",
+              "owner": "ExecuteUbergraph_SessionCompletionDataEntryWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ValueTextVar",
+        "owner": "SessionCompletionDataEntryWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ValueTextVar",
+          "owner": "SessionCompletionDataEntryWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue_1",
+          "owner": "ExecuteUbergraph_SessionCompletionDataEntryWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 67
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "function": {
+    "name": "Play Not Allowed to Cum Loop",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "PlayAnimation",
+      "StopAnimation"
+    ],
+    "fields": [
+      "CallFunc_PlayAnimation_ReturnValue",
+      "CumButtonFlashGreenLoop",
+      "CumButtonFlashRedLoop"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "Play Not Allowed to Cum Loop"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CumButtonFlashRedLoop",
+              "owner": "UI_Manager_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_FinalFunction",
+      "StackNode": "StopAnimation",
+      "Parameters": [
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "CumButtonFlashGreenLoop",
+            "owner": "UI_Manager_C"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

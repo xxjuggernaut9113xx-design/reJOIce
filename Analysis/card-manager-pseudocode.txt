@@ -1,0 +1,155 @@
+
+//CheckAndReplaceEmptyDecks
+ExecuteUbergraph_BP_CardManager(1450)
+return void
+EX_EndOfScript({})
+
+//CreateMasterDecks
+ExecuteUbergraph_BP_CardManager(4166)
+return void
+EX_EndOfScript({})
+
+//ExecuteUbergraph_BP_CardManager
+flow.push(L4218)
+goto evaluated_offset(EntryPoint)
+flow.push(L755)
+flow.push(L575)
+flow.push(L395)
+flow.push(L215)
+CallFunc_ValidateMediaEntries_ReturnValue_4 = ValidateMediaEntries(As BP CHGame Instance->CurrentSave->Saved_Slow_FavoriteCards)
+Master_Favorite_Slow = CallFunc_ValidateMediaEntries_ReturnValue_4
+As BP CHGame Instance->CurrentSave->Saved_Slow_FavoriteCards = Master_Favorite_Slow
+goto flow.pop_or_return()
+CallFunc_ValidateMediaEntries_ReturnValue_3 = ValidateMediaEntries(As BP CHGame Instance->CurrentSave->Saved_Medium_FavoriteCards)
+Master_Favorite_Medium = CallFunc_ValidateMediaEntries_ReturnValue_3
+As BP CHGame Instance->CurrentSave->Saved_Medium_FavoriteCards = Master_Favorite_Medium
+goto flow.pop_or_return()
+CallFunc_ValidateMediaEntries_ReturnValue_2 = ValidateMediaEntries(As BP CHGame Instance->CurrentSave->Saved_Fast_FavoriteCards)
+Master_Favorite_Fast = CallFunc_ValidateMediaEntries_ReturnValue_2
+As BP CHGame Instance->CurrentSave->Saved_Fast_FavoriteCards = Master_Favorite_Fast
+goto flow.pop_or_return()
+CallFunc_ValidateMediaEntries_ReturnValue_1 = ValidateMediaEntries(As BP CHGame Instance->CurrentSave->Saved_Cum_FavoriteCards)
+Master_Favorite_Cum = CallFunc_ValidateMediaEntries_ReturnValue_1
+As BP CHGame Instance->CurrentSave->Saved_Cum_FavoriteCards = Master_Favorite_Cum
+goto flow.pop_or_return()
+CallFunc_ValidateMediaEntries_ReturnValue = ValidateMediaEntries(As BP CHGame Instance->CurrentSave->Saved_Succubus_FavoriteCards)
+Master_Favorite_Succubus = CallFunc_ValidateMediaEntries_ReturnValue
+As BP CHGame Instance->CurrentSave->Saved_Succubus_FavoriteCards = Master_Favorite_Succubus
+goto flow.pop_or_return()
+PrintString(this, "RESET FAST ARRAY", true, true, -51{0.1273529976606369, +0, 1.0, 1.0}, 15.0, "None")
+goto flow.pop_or_return()
+CallFunc_GetGameInstance_ReturnValue = GetGameInstance(this)
+K2Node_DynamicCast_AsBP_CHGame_Instance = cast<-3>(CallFunc_GetGameInstance_ReturnValue)
+K2Node_DynamicCast_bSuccess = cast_1(K2Node_DynamicCast_AsBP_CHGame_Instance)
+if (!K2Node_DynamicCast_bSuccess) goto flow.pop_or_return()
+As BP CHGame Instance = K2Node_DynamicCast_AsBP_CHGame_Instance
+Excluded Tags = As BP CHGame Instance->CurrentSave->ExcludedTags
+CallFunc_GetImportedMediaEntries_ReturnValue = K2Node_DynamicCast_AsBP_CHGame_Instance->FileImportManager->GetImportedMediaEntries()
+-39->Array_Append(AllCards, CallFunc_GetImportedMediaEntries_ReturnValue)
+CallFunc_GetAllEnabledMedia_ReturnValue = K2Node_DynamicCast_AsBP_CHGame_Instance->CHPack StoreController->GetAllEnabledMedia()
+-39->Array_Append(AllCards, CallFunc_GetAllEnabledMedia_ReturnValue)
+goto flow.pop_or_return()
+flow.push(L3456)
+flow.push(L3279)
+flow.push(L3102)
+flow.push(L2925)
+flow.push(L2748)
+flow.push(L2571)
+flow.push(L2394)
+flow.push(L1686)
+flow.push(L1863)
+flow.push(L2040)
+flow.push(L2217)
+CallFunc_Array_IsEmpty_ReturnValue_11 = -39->Array_IsEmpty(As BP Global Manager->DrawManager->FastCards)
+if (!CallFunc_Array_IsEmpty_ReturnValue_11) goto flow.pop_or_return()
+As BP Global Manager->DrawManager->FastCards = Master_FastCards
+goto L935
+CallFunc_Array_IsEmpty_ReturnValue_6 = -39->Array_IsEmpty(As BP Global Manager->DrawManager->AssCards)
+if (!CallFunc_Array_IsEmpty_ReturnValue_6) goto flow.pop_or_return()
+As BP Global Manager->DrawManager->AssCards = Master_AssCards
+goto flow.pop_or_return()
+CallFunc_Array_IsEmpty_ReturnValue_7 = -39->Array_IsEmpty(As BP Global Manager->DrawManager->SuccubusCards)
+if (!CallFunc_Array_IsEmpty_ReturnValue_7) goto flow.pop_or_return()
+As BP Global Manager->DrawManager->SuccubusCards = Master_SuccubusCards
+goto flow.pop_or_return()
+CallFunc_Array_IsEmpty_ReturnValue_9 = -39->Array_IsEmpty(As BP Global Manager->DrawManager->SlowCards)
+if (!CallFunc_Array_IsEmpty_ReturnValue_9) goto flow.pop_or_return()
+As BP Global Manager->DrawManager->SlowCards = Master_SlowCards
+goto flow.pop_or_return()
+CallFunc_Array_IsEmpty_ReturnValue_10 = -39->Array_IsEmpty(As BP Global Manager->DrawManager->MediumCards)
+if (!CallFunc_Array_IsEmpty_ReturnValue_10) goto flow.pop_or_return()
+As BP Global Manager->DrawManager->MediumCards = Master_MediumCards
+goto flow.pop_or_return()
+CallFunc_Array_IsEmpty_ReturnValue_5 = -39->Array_IsEmpty(As BP Global Manager->DrawManager->BoobCards)
+if (!CallFunc_Array_IsEmpty_ReturnValue_5) goto flow.pop_or_return()
+As BP Global Manager->DrawManager->BoobCards = Master_BoobCards
+goto flow.pop_or_return()
+CallFunc_Array_IsEmpty_ReturnValue_4 = -39->Array_IsEmpty(As BP Global Manager->DrawManager->SlowFavoriteCards)
+if (!CallFunc_Array_IsEmpty_ReturnValue_4) goto flow.pop_or_return()
+As BP Global Manager->DrawManager->SlowFavoriteCards = Master_Favorite_Slow
+goto flow.pop_or_return()
+CallFunc_Array_IsEmpty_ReturnValue_3 = -39->Array_IsEmpty(As BP Global Manager->DrawManager->MediumFavoriteCards)
+if (!CallFunc_Array_IsEmpty_ReturnValue_3) goto flow.pop_or_return()
+As BP Global Manager->DrawManager->MediumFavoriteCards = Master_Favorite_Medium
+goto flow.pop_or_return()
+CallFunc_Array_IsEmpty_ReturnValue_2 = -39->Array_IsEmpty(As BP Global Manager->DrawManager->FastFavoriteCards)
+if (!CallFunc_Array_IsEmpty_ReturnValue_2) goto flow.pop_or_return()
+As BP Global Manager->DrawManager->FastFavoriteCards = Master_Favorite_Fast
+goto flow.pop_or_return()
+CallFunc_Array_IsEmpty_ReturnValue_1 = -39->Array_IsEmpty(As BP Global Manager->DrawManager->CumFavoriteCards)
+if (!CallFunc_Array_IsEmpty_ReturnValue_1) goto flow.pop_or_return()
+As BP Global Manager->DrawManager->CumFavoriteCards = Master_Favorite_Cum
+goto flow.pop_or_return()
+CallFunc_Array_IsEmpty_ReturnValue = -39->Array_IsEmpty(As BP Global Manager->DrawManager->SuccubusFavoriteCards)
+if (!CallFunc_Array_IsEmpty_ReturnValue) goto flow.pop_or_return()
+As BP Global Manager->DrawManager->SuccubusFavoriteCards = Master_Favorite_Succubus
+goto flow.pop_or_return()
+CallFunc_Array_IsEmpty_ReturnValue_8 = -39->Array_IsEmpty(As BP Global Manager->DrawManager->CumCards)
+if (!CallFunc_Array_IsEmpty_ReturnValue_8) goto flow.pop_or_return()
+As BP Global Manager->DrawManager->CumCards = Master_CumCards
+goto flow.pop_or_return()
+As BP Global Manager->DrawManager->AssCards = Master_AssCards
+goto flow.pop_or_return()
+As BP Global Manager->DrawManager->BoobCards = Master_BoobCards
+goto L3633
+As BP Global Manager->DrawManager->SlowCards = Master_SlowCards
+goto L3705
+As BP Global Manager->DrawManager->MediumCards = Master_MediumCards
+goto L3781
+As BP Global Manager->DrawManager->FastCards = Master_FastCards
+goto L3857
+As BP Global Manager->DrawManager->SuccubusCards = Master_SuccubusCards
+goto L3933
+As BP Global Manager->DrawManager->CumCards = Master_CumCards
+goto L4009
+goto L4085
+goto flow.pop_or_return()
+-39->Array_Clear(AllCards)
+goto L1019
+goto L15
+return void
+EX_EndOfScript({})
+
+//ReceiveBeginPlay
+ExecuteUbergraph_BP_CardManager(4167)
+return void
+EX_EndOfScript({})
+
+//SetChildDecks
+ExecuteUbergraph_BP_CardManager(4161)
+return void
+EX_EndOfScript({})
+
+//UserConstructionScript
+CallFunc_GetGameMode_ReturnValue = GetGameMode(this)
+K2Node_DynamicCast_AsBP_Global_Manager = cast<-5>(CallFunc_GetGameMode_ReturnValue)
+K2Node_DynamicCast_bSuccess = cast_1(K2Node_DynamicCast_AsBP_Global_Manager)
+if (!K2Node_DynamicCast_bSuccess) goto L119
+As BP Global Manager = K2Node_DynamicCast_AsBP_Global_Manager
+return void
+EX_EndOfScript({})
+
+//Validate_PopulateSavedMedia
+ExecuteUbergraph_BP_CardManager(4213)
+return void
+EX_EndOfScript({})

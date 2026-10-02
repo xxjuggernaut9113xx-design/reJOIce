@@ -1,0 +1,140 @@
+{
+  "function": {
+    "name": "GetText_1",
+    "statements": 6,
+    "raw_fallback": false,
+    "calls": [
+      "Concat_StrStr",
+      "Conv_IntToString",
+      "Conv_StringToText"
+    ],
+    "fields": [
+      "AvgStrokeCount",
+      "CallFunc_Concat_StrStr_ReturnValue",
+      "CallFunc_Conv_IntToString_ReturnValue",
+      "CallFunc_Conv_StringToText_ReturnValue",
+      "ReturnValue"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToString_ReturnValue",
+        "owner": "GetText_1"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToString_ReturnValue",
+          "owner": "GetText_1"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToString",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AvgStrokeCount",
+              "owner": "StatsScreenWidget_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue",
+        "owner": "GetText_1"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue",
+          "owner": "GetText_1"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Avg Strokes:\r\n"
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToString_ReturnValue",
+              "owner": "GetText_1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue",
+        "owner": "GetText_1"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "GetText_1"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue",
+              "owner": "GetText_1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "GetText_1"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "GetText_1"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "GetText_1"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "GetText_1"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

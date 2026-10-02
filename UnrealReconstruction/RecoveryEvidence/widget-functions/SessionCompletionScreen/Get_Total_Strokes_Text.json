@@ -1,0 +1,165 @@
+{
+  "function": {
+    "name": "Get Total Strokes Text",
+    "statements": 6,
+    "raw_fallback": false,
+    "calls": [
+      "Concat_StrStr",
+      "Conv_IntToString",
+      "Conv_StringToText"
+    ],
+    "fields": [
+      "As BP Global Manager",
+      "CallFunc_Concat_StrStr_ReturnValue",
+      "CallFunc_Conv_IntToString_ReturnValue",
+      "CallFunc_Conv_StringToText_ReturnValue",
+      "PlayerVariablesStruct",
+      "ReturnValue",
+      "TotalStrokeCount_44_AD50F41C4038891C77EDE0ACC63BC34E"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToString_ReturnValue",
+        "owner": "Get Total Strokes Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToString_ReturnValue",
+          "owner": "Get Total Strokes Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToString",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "TotalStrokeCount_44_AD50F41C4038891C77EDE0ACC63BC34E",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SessionCompletionScreen_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerVariablesStruct",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue",
+        "owner": "Get Total Strokes Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue",
+          "owner": "Get Total Strokes Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Total Strokes: "
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToString_ReturnValue",
+              "owner": "Get Total Strokes Text"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue",
+        "owner": "Get Total Strokes Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "Get Total Strokes Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue",
+              "owner": "Get Total Strokes Text"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "Get Total Strokes Text"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get Total Strokes Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "Get Total Strokes Text"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get Total Strokes Text"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

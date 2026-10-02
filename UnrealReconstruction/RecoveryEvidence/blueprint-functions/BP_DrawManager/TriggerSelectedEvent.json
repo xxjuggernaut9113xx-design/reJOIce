@@ -1,0 +1,1783 @@
+{
+  "function": {
+    "name": "TriggerSelectedEvent",
+    "statements": 76,
+    "raw_fallback": false,
+    "calls": [
+      "AssFrenzyEvent",
+      "BoobFrenzyEvent",
+      "EqualEqual_IntInt",
+      "FastStrokeEvent",
+      "Is Double Time Active",
+      "Is Slow and Steady Active",
+      "Is Succu Frenzy Active",
+      "K2_ClearAndInvalidateTimerHandle",
+      "MediumStrokeEvent",
+      "MercyEvent",
+      "NotEqual_ByteByte",
+      "PostEdgeFast",
+      "PostEdgeSlow",
+      "PrintString",
+      "RandomIntegerInRange",
+      "SlowStrokeEvent",
+      "SpawnStoreEvent",
+      "SpawnSuccubus",
+      "TemptationEvent",
+      "VideoLoopStrokeEvent"
+    ],
+    "fields": [
+      "",
+      "CallFunc_EqualEqual_IntInt_ReturnValue",
+      "CallFunc_EqualEqual_IntInt_ReturnValue_1",
+      "CallFunc_Is_Double_Time_Active_Active_",
+      "CallFunc_Is_Slow_and_Steady_Active_Active_",
+      "CallFunc_Is_Succu_Frenzy_Active_Active",
+      "CallFunc_RandomIntegerInRange_ReturnValue",
+      "CallFunc_RandomIntegerInRange_ReturnValue_1",
+      "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+      "FoundEvent",
+      "GlobalManager",
+      "IdleTimerHandle",
+      "K2Node_SwitchEnum_CmpSuccess"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "GlobalManager",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "Is Succu Frenzy Active",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Is_Succu_Frenzy_Active_Active",
+              "owner": "TriggerSelectedEvent"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 191,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Is_Succu_Frenzy_Active_Active",
+          "owner": "TriggerSelectedEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "GlobalManager",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SpawnSuccubus",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Succubus Event Triggered"
+        },
+        {
+          "op": "EX_False"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -103,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2667
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "GlobalManager",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "Is Slow and Steady Active",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Is_Slow_and_Steady_Active_Active_",
+              "owner": "TriggerSelectedEvent"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 473,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Is_Slow_and_Steady_Active_Active_",
+          "owner": "TriggerSelectedEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+        "owner": "TriggerSelectedEvent"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+          "owner": "TriggerSelectedEvent"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_IntInt_ReturnValue_1",
+          "owner": "TriggerSelectedEvent"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "EqualEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+              "owner": "TriggerSelectedEvent"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1456,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_IntInt_ReturnValue_1",
+          "owner": "TriggerSelectedEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "GlobalManager",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "MediumStrokeEvent",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Medium Stroke Event Triggered"
+        },
+        {
+          "op": "EX_False"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -103,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2667
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "GlobalManager",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "Is Double Time Active",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Is_Double_Time_Active_Active_",
+              "owner": "TriggerSelectedEvent"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 623,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Is_Double_Time_Active_Active_",
+          "owner": "TriggerSelectedEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+        "owner": "TriggerSelectedEvent"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+          "owner": "TriggerSelectedEvent"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_IntInt_ReturnValue",
+          "owner": "TriggerSelectedEvent"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "EqualEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+              "owner": "TriggerSelectedEvent"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1591,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_IntInt_ReturnValue",
+          "owner": "TriggerSelectedEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 59
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "K2_ClearAndInvalidateTimerHandle",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "IdleTimerHandle",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "IdleTimerHandle",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "FoundEvent",
+                "owner": "TriggerSelectedEvent"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1318,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "FoundEvent",
+                "owner": "TriggerSelectedEvent"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1726,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "FoundEvent",
+                "owner": "TriggerSelectedEvent"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1456,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "FoundEvent",
+                "owner": "TriggerSelectedEvent"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 336,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "FoundEvent",
+                "owner": "TriggerSelectedEvent"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 5
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1591,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "FoundEvent",
+                "owner": "TriggerSelectedEvent"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 7
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1864,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "FoundEvent",
+                "owner": "TriggerSelectedEvent"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 8
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 59,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "FoundEvent",
+                "owner": "TriggerSelectedEvent"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 10
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1998,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "FoundEvent",
+                "owner": "TriggerSelectedEvent"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 14
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2127,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "FoundEvent",
+                "owner": "TriggerSelectedEvent"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 15
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2261,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "FoundEvent",
+                "owner": "TriggerSelectedEvent"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 30
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2396,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "FoundEvent",
+                "owner": "TriggerSelectedEvent"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 31
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2525,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "TriggerSelectedEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2667
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "GlobalManager",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "PostEdgeSlow",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Post Edge Slow Event Triggered"
+        },
+        {
+          "op": "EX_False"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -103,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2667
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "GlobalManager",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SlowStrokeEvent",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Slow Stroke Event Triggered"
+        },
+        {
+          "op": "EX_False"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -103,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2667
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "GlobalManager",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "FastStrokeEvent",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Fast Stroke Event Triggered"
+        },
+        {
+          "op": "EX_False"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -103,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2667
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "GlobalManager",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "PostEdgeFast",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Post Edge Fast Event Triggered"
+        },
+        {
+          "op": "EX_False"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -103,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2667
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "GlobalManager",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "TemptationEvent",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Temptation Event Triggered"
+        },
+        {
+          "op": "EX_False"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -103,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2667
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "GlobalManager",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "MercyEvent",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Mercy Event Triggered"
+        },
+        {
+          "op": "EX_False"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -103,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2667
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "GlobalManager",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "AssFrenzyEvent",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Ass Frenzy Event Triggered"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -103,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2667
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "GlobalManager",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "BoobFrenzyEvent",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Boob Frenzy Event Triggered"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -103,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2667
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "GlobalManager",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SpawnStoreEvent",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Store Event Triggered"
+        },
+        {
+          "op": "EX_False"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -103,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2667
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "GlobalManager",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "VideoLoopStrokeEvent",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Meidum VIdeo Loop Stroke Event Triggerd"
+        },
+        {
+          "op": "EX_False"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -103,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

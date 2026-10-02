@@ -1,0 +1,279 @@
+{
+  "function": {
+    "name": "Check For Special Events & Set Enum",
+    "statements": 16,
+    "raw_fallback": false,
+    "calls": [
+      "GreaterEqual_IntInt",
+      "RollChance"
+    ],
+    "fields": [
+      "CallFunc_GreaterEqual_IntInt_ReturnValue",
+      "CallFunc_RollChance_RollSuccessful_",
+      "CallFunc_RollChance_RollSuccessful__1",
+      "GlobalManager",
+      "IsSpecialEvent?",
+      "PlayerEdgedLastDraw?",
+      "PlayerVariablesStruct",
+      "SpecialEventsEnum",
+      "TotalEdgeCount_37_3E2139A84500E0750CF13CABDF834D7F"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 219,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "PlayerEdgedLastDraw?",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "PlayerEdgedLastDraw?",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_IntInt_ReturnValue",
+          "owner": "Check For Special Events & Set Enum"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GreaterEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "TotalEdgeCount_37_3E2139A84500E0750CF13CABDF834D7F",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "GlobalManager",
+                  "owner": "BP_DrawManager_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerVariablesStruct",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 5
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 262,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_IntInt_ReturnValue",
+          "owner": "Check For Special Events & Set Enum"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "RollChance",
+      "Parameters": [
+        {
+          "op": "EX_DoubleConst",
+          "Value": 50.0
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_RollChance_RollSuccessful_",
+            "owner": "Check For Special Events & Set Enum"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 262,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RollChance_RollSuccessful_",
+          "owner": "Check For Special Events & Set Enum"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "IsSpecialEvent?",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SpecialEventsEnum",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "SpecialEventsEnum",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SpecialEventsEnum",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 1
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 320
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 320,
+      "BooleanExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "RollChance",
+      "Parameters": [
+        {
+          "op": "EX_DoubleConst",
+          "Value": "+0"
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_RollChance_RollSuccessful__1",
+            "owner": "Check For Special Events & Set Enum"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 320
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SpecialEventsEnum",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "SpecialEventsEnum",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SpecialEventsEnum",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "IsSpecialEvent?",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 214
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

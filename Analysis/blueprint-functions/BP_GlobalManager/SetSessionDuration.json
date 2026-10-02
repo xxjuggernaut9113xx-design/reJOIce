@@ -1,0 +1,621 @@
+{
+  "function": {
+    "name": "SetSessionDuration",
+    "statements": 18,
+    "raw_fallback": false,
+    "calls": [
+      "Add_IntInt",
+      "Conv_IntToDouble",
+      "Conv_IntToString",
+      "Divide_DoubleDouble",
+      "FTrunc",
+      "GetCurrentSessionStats",
+      "GreaterEqual_DoubleDouble",
+      "Multiply_DoubleDouble",
+      "PrintString",
+      "SetSessionMetric",
+      "UpdateMetric"
+    ],
+    "fields": [
+      "",
+      "CallFunc_Add_IntInt_ReturnValue",
+      "CallFunc_Conv_IntToDouble_ReturnValue",
+      "CallFunc_Conv_IntToDouble_ReturnValue_1",
+      "CallFunc_Conv_IntToString_ReturnValue",
+      "CallFunc_Divide_DoubleDouble_ReturnValue",
+      "CallFunc_FTrunc_ReturnValue",
+      "CallFunc_GetCurrentSessionStats_ReturnValue",
+      "CallFunc_GetCurrentSessionStats_ReturnValue_1",
+      "CallFunc_GreaterEqual_DoubleDouble_ReturnValue",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue",
+      "GameInstance",
+      "Heat Level",
+      "PercentTimeAtHighHeat",
+      "PlayerVariablesStruct",
+      "ProgressionManager",
+      "SessionLength_56_D6CECACC4BB58ACDC313F09687D17721",
+      "Temp_int_Variable",
+      "TimeAtHighHeat"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue",
+        "owner": "SetSessionDuration"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "SetSessionDuration"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SessionLength_56_D6CECACC4BB58ACDC313F09687D17721",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Variable",
+        "owner": "SetSessionDuration"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Variable",
+          "owner": "SetSessionDuration"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "SetSessionDuration"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SessionLength_56_D6CECACC4BB58ACDC313F09687D17721",
+        "owner": "LegacyStats"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "SessionLength_56_D6CECACC4BB58ACDC313F09687D17721",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Variable",
+          "owner": "SetSessionDuration"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetCurrentSessionStats_ReturnValue",
+        "owner": "SetSessionDuration"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetCurrentSessionStats_ReturnValue",
+          "owner": "SetSessionDuration"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetCurrentSessionStats_ReturnValue",
+          "owner": "SetSessionDuration"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetCurrentSessionStats",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+        "owner": "SetSessionDuration"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+          "owner": "SetSessionDuration"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToDouble",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "TimeAtHighHeat",
+              "owner": "SessionStats"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetCurrentSessionStats_ReturnValue",
+                "owner": "SetSessionDuration"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToDouble_ReturnValue_1",
+        "owner": "SetSessionDuration"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToDouble_ReturnValue_1",
+          "owner": "SetSessionDuration"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToDouble",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SessionLength_56_D6CECACC4BB58ACDC313F09687D17721",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+        "owner": "SetSessionDuration"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+          "owner": "SetSessionDuration"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Divide_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+              "owner": "SetSessionDuration"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToDouble_ReturnValue_1",
+              "owner": "SetSessionDuration"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+        "owner": "SetSessionDuration"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+          "owner": "SetSessionDuration"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+              "owner": "SetSessionDuration"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 100.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FTrunc_ReturnValue",
+        "owner": "SetSessionDuration"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FTrunc_ReturnValue",
+          "owner": "SetSessionDuration"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FTrunc",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+              "owner": "SetSessionDuration"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "ProgressionManager",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "Offset": 21,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSessionMetric",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 24
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_FTrunc_ReturnValue",
+              "owner": "SetSessionDuration"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_DoubleDouble_ReturnValue",
+          "owner": "SetSessionDuration"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GreaterEqual_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Heat Level",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 70.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 777,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_DoubleDouble_ReturnValue",
+          "owner": "SetSessionDuration"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "ProgressionManager",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "Offset": 17,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "UpdateMetric",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 23
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetCurrentSessionStats_ReturnValue_1",
+        "owner": "SetSessionDuration"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetCurrentSessionStats_ReturnValue_1",
+          "owner": "SetSessionDuration"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetCurrentSessionStats_ReturnValue_1",
+          "owner": "SetSessionDuration"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetCurrentSessionStats",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToString_ReturnValue",
+        "owner": "SetSessionDuration"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToString_ReturnValue",
+          "owner": "SetSessionDuration"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToString",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "PercentTimeAtHighHeat",
+              "owner": "SessionStats"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetCurrentSessionStats_ReturnValue_1",
+                "owner": "SetSessionDuration"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Conv_IntToString_ReturnValue",
+            "owner": "SetSessionDuration"
+          }
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -2162,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

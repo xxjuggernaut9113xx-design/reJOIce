@@ -1,0 +1,78 @@
+{
+  "function": {
+    "name": "GetText",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "Conv_NameToText"
+    ],
+    "fields": [
+      "CallFunc_Conv_NameToText_ReturnValue",
+      "DisplayName",
+      "ReturnValue"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_NameToText_ReturnValue",
+        "owner": "GetText"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_NameToText_ReturnValue",
+          "owner": "GetText"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_NameToText",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DisplayName",
+              "owner": "+XCumChance_StoreItem_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "GetText"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "GetText"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_NameToText_ReturnValue",
+          "owner": "GetText"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "GetText"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

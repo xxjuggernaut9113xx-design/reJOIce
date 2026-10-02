@@ -1,0 +1,1979 @@
+{
+  "function": {
+    "name": "InitializeStats",
+    "statements": 73,
+    "raw_fallback": false,
+    "calls": [
+      "Conv_IntToInt64",
+      "Conv_StringToText",
+      "Format",
+      "GetAverageDurationText",
+      "GetAverageEdgesText",
+      "GetAverageStrokesPerMinuteText",
+      "GetAverageStrokesText",
+      "GetEquippedPlayerCard",
+      "GetHighscoresText",
+      "GetLevelProgressPercent",
+      "GetLifetimeStatsText",
+      "GetPlayerCardData",
+      "GetXPForNextLevel",
+      "GetXPProgressInCurrentLevel",
+      "SetBrushFromTexture",
+      "SetPercent",
+      "SetText"
+    ],
+    "fields": [
+      "",
+      "ArgumentName",
+      "ArgumentValue",
+      "ArgumentValueDouble",
+      "ArgumentValueFloat",
+      "ArgumentValueGender",
+      "ArgumentValueInt",
+      "ArgumentValueType",
+      "As BP CHGame Instance",
+      "AvgDurationText",
+      "AvgEdgesText",
+      "AvgStrokesPerMinText",
+      "AvgStrokesText",
+      "CallFunc_Conv_IntToInt64_ReturnValue",
+      "CallFunc_Conv_IntToInt64_ReturnValue_1",
+      "CallFunc_Conv_IntToInt64_ReturnValue_2",
+      "CallFunc_Conv_StringToText_ReturnValue",
+      "CallFunc_Conv_StringToText_ReturnValue_1",
+      "CallFunc_Conv_StringToText_ReturnValue_2",
+      "CallFunc_Conv_StringToText_ReturnValue_3",
+      "CallFunc_Conv_StringToText_ReturnValue_4",
+      "CallFunc_Conv_StringToText_ReturnValue_5",
+      "CallFunc_Format_ReturnValue",
+      "CallFunc_GetAverageDurationText_ReturnValue",
+      "CallFunc_GetAverageEdgesText_ReturnValue",
+      "CallFunc_GetAverageStrokesPerMinuteText_ReturnValue",
+      "CallFunc_GetAverageStrokesText_ReturnValue",
+      "CallFunc_GetEquippedPlayerCard_ReturnValue",
+      "CallFunc_GetHighscoresText_ReturnValue",
+      "CallFunc_GetLevelProgressPercent_ReturnValue",
+      "CallFunc_GetLifetimeStatsText_ReturnValue",
+      "CallFunc_GetPlayerCardData_ReturnValue",
+      "CallFunc_GetXPForNextLevel_ReturnValue",
+      "CallFunc_GetXPProgressInCurrentLevel_ReturnValue",
+      "CardImage",
+      "CurrentLevel",
+      "CurrentSave",
+      "HighscoresText",
+      "K2Node_MakeArray_Array",
+      "K2Node_MakeStruct_FormatArgumentData",
+      "K2Node_MakeStruct_FormatArgumentData_1",
+      "K2Node_MakeStruct_FormatArgumentData_2",
+      "LevelProgressBar",
+      "LevelText",
+      "LifetimeStatsText",
+      "PlayerCardTitle",
+      "Playercard_Name",
+      "ProgressionManager",
+      "SelectedPlayerCard"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 2571
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 2481
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1184
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 975
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 820
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 665
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 510
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 355
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 200
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetLifetimeStatsText_ReturnValue",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetLifetimeStatsText_ReturnValue",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "StatsTabWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetLifetimeStatsText_ReturnValue",
+          "owner": "InitializeStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetLifetimeStatsText",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue_4",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue_4",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetLifetimeStatsText_ReturnValue",
+              "owner": "InitializeStats"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "LifetimeStatsText",
+          "owner": "StatsTabWidget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_StringToText_ReturnValue_4",
+              "owner": "InitializeStats"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetHighscoresText_ReturnValue",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetHighscoresText_ReturnValue",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "StatsTabWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetHighscoresText_ReturnValue",
+          "owner": "InitializeStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetHighscoresText",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue_5",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue_5",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetHighscoresText_ReturnValue",
+              "owner": "InitializeStats"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "HighscoresText",
+          "owner": "StatsTabWidget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_StringToText_ReturnValue_5",
+              "owner": "InitializeStats"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetAverageDurationText_ReturnValue",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetAverageDurationText_ReturnValue",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "StatsTabWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetAverageDurationText_ReturnValue",
+          "owner": "InitializeStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetAverageDurationText",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue_3",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue_3",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetAverageDurationText_ReturnValue",
+              "owner": "InitializeStats"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AvgDurationText",
+          "owner": "StatsTabWidget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_StringToText_ReturnValue_3",
+              "owner": "InitializeStats"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetAverageEdgesText_ReturnValue",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetAverageEdgesText_ReturnValue",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "StatsTabWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetAverageEdgesText_ReturnValue",
+          "owner": "InitializeStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetAverageEdgesText",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue_2",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue_2",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetAverageEdgesText_ReturnValue",
+              "owner": "InitializeStats"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AvgEdgesText",
+          "owner": "StatsTabWidget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_StringToText_ReturnValue_2",
+              "owner": "InitializeStats"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetAverageStrokesPerMinuteText_ReturnValue",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetAverageStrokesPerMinuteText_ReturnValue",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "StatsTabWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetAverageStrokesPerMinuteText_ReturnValue",
+          "owner": "InitializeStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetAverageStrokesPerMinuteText",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue_1",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue_1",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetAverageStrokesPerMinuteText_ReturnValue",
+              "owner": "InitializeStats"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AvgStrokesPerMinText",
+          "owner": "StatsTabWidget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_StringToText_ReturnValue_1",
+              "owner": "InitializeStats"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetAverageStrokesText_ReturnValue",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetAverageStrokesText_ReturnValue",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "StatsTabWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetAverageStrokesText_ReturnValue",
+          "owner": "InitializeStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetAverageStrokesText",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetAverageStrokesText_ReturnValue",
+              "owner": "InitializeStats"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AvgStrokesText",
+          "owner": "StatsTabWidget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_StringToText_ReturnValue",
+              "owner": "InitializeStats"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetEquippedPlayerCard_ReturnValue",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetEquippedPlayerCard_ReturnValue",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "StatsTabWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetEquippedPlayerCard_ReturnValue",
+          "owner": "InitializeStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetEquippedPlayerCard",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetPlayerCardData_ReturnValue",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetPlayerCardData_ReturnValue",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "StatsTabWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetPlayerCardData_ReturnValue",
+          "owner": "InitializeStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetPlayerCardData",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetEquippedPlayerCard_ReturnValue",
+                "owner": "InitializeStats"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "SelectedPlayerCard",
+          "owner": "StatsTabWidget_C"
+        }
+      },
+      "Offset": 33,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetBrushFromTexture",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "CardImage",
+              "owner": "PlayerCardData"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetPlayerCardData_ReturnValue",
+                "owner": "InitializeStats"
+              }
+            }
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToInt64_ReturnValue",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToInt64_ReturnValue",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToInt64",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "StatsTabWidget_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "ProgressionManager",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "ProgressionManager",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CurrentLevel",
+              "owner": "ProgressionManager"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentLevel",
+                "owner": "ProgressionManager"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentName",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentName",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": "level"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueType",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueType",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValue",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValue",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_TextConst",
+        "Value": {
+          "op": "FScriptText",
+          "TextLiteralType": "Empty",
+          "LocalizedSource": null,
+          "LocalizedKey": null,
+          "LocalizedNamespace": null,
+          "InvariantLiteralString": null,
+          "LiteralString": null,
+          "StringTableAsset": null,
+          "StringTableId": null,
+          "StringTableKey": null
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueInt",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueInt",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToInt64_ReturnValue",
+          "owner": "InitializeStats"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueFloat",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueFloat",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueDouble",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueDouble",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueGender",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueGender",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetXPForNextLevel_ReturnValue",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetXPForNextLevel_ReturnValue",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "StatsTabWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetXPForNextLevel_ReturnValue",
+          "owner": "InitializeStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetXPForNextLevel",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetXPProgressInCurrentLevel_ReturnValue",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetXPProgressInCurrentLevel_ReturnValue",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "StatsTabWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetXPProgressInCurrentLevel_ReturnValue",
+          "owner": "InitializeStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetXPProgressInCurrentLevel",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToInt64_ReturnValue_1",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToInt64_ReturnValue_1",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToInt64",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetXPForNextLevel_ReturnValue",
+              "owner": "InitializeStats"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToInt64_ReturnValue_2",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToInt64_ReturnValue_2",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToInt64",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetXPProgressInCurrentLevel_ReturnValue",
+              "owner": "InitializeStats"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentName",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentName",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": "neededXP"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueType",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueType",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValue",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValue",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_TextConst",
+        "Value": {
+          "op": "FScriptText",
+          "TextLiteralType": "Empty",
+          "LocalizedSource": null,
+          "LocalizedKey": null,
+          "LocalizedNamespace": null,
+          "InvariantLiteralString": null,
+          "LiteralString": null,
+          "StringTableAsset": null,
+          "StringTableId": null,
+          "StringTableKey": null
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueInt",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueInt",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToInt64_ReturnValue_1",
+          "owner": "InitializeStats"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueFloat",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueFloat",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueDouble",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueDouble",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueGender",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueGender",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentName",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentName",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": "currentxp"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueType",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueType",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValue",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValue",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_TextConst",
+        "Value": {
+          "op": "FScriptText",
+          "TextLiteralType": "Empty",
+          "LocalizedSource": null,
+          "LocalizedKey": null,
+          "LocalizedNamespace": null,
+          "InvariantLiteralString": null,
+          "LiteralString": null,
+          "StringTableAsset": null,
+          "StringTableId": null,
+          "StringTableKey": null
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueInt",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueInt",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToInt64_ReturnValue_2",
+          "owner": "InitializeStats"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueFloat",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueFloat",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueDouble",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueDouble",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueGender",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueGender",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "InitializeStats"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_SetArray",
+      "AssigningProperty": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeArray_Array",
+          "owner": "InitializeStats"
+        }
+      },
+      "ArrayInnerProp": null,
+      "Elements": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "InitializeStats"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "InitializeStats"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "InitializeStats"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Format_ReturnValue",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Format_ReturnValue",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Format",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "Level {level} ({currentxp}XP/{neededXP}XP)"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "316DE7DF46EB81B546014A9FA130B0E1"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeArray_Array",
+              "owner": "InitializeStats"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "LevelText",
+          "owner": "StatsTabWidget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Format_ReturnValue",
+              "owner": "InitializeStats"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetLevelProgressPercent_ReturnValue",
+        "owner": "InitializeStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetLevelProgressPercent_ReturnValue",
+          "owner": "InitializeStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "StatsTabWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetLevelProgressPercent_ReturnValue",
+          "owner": "InitializeStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetLevelProgressPercent",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "LevelProgressBar",
+          "owner": "StatsTabWidget_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetPercent",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetLevelProgressPercent_ReturnValue",
+              "owner": "InitializeStats"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "PlayerCardTitle",
+          "owner": "StatsTabWidget_C"
+        }
+      },
+      "Offset": 67,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "StatsTabWidget_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "Playercard_Name",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Playercard_Name",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

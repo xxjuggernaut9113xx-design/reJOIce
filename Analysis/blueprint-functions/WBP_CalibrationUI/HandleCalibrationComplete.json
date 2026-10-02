@@ -1,0 +1,49 @@
+{
+  "function": {
+    "name": "HandleCalibrationComplete",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_WBP_CalibrationUI"
+    ],
+    "fields": [
+      "FinalProfile",
+      "K2Node_CustomEvent_FinalProfile"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_FinalProfile",
+        "owner": "ExecuteUbergraph_WBP_CalibrationUI"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "FinalProfile",
+          "owner": "HandleCalibrationComplete"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_WBP_CalibrationUI",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 1356
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

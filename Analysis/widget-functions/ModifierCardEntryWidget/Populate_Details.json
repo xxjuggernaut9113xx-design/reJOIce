@@ -1,0 +1,638 @@
+{
+  "function": {
+    "name": "Populate Details",
+    "statements": 27,
+    "raw_fallback": false,
+    "calls": [
+      "Format",
+      "SetBrushFromTexture",
+      "SetButtonToggle",
+      "SetText",
+      "SetVisibility"
+    ],
+    "fields": [
+      "",
+      "ArgumentName",
+      "ArgumentValue",
+      "ArgumentValueDouble",
+      "ArgumentValueFloat",
+      "ArgumentValueGender",
+      "ArgumentValueInt",
+      "ArgumentValueType",
+      "CallFunc_Format_ReturnValue",
+      "Challenge Description",
+      "Challenge Title",
+      "ChallengeRequiredText",
+      "Description",
+      "Icon",
+      "Is Unlocked?",
+      "IsEnabled",
+      "IsEnabled?",
+      "IsUnlocked?",
+      "K2Node_MakeArray_Array",
+      "K2Node_MakeStruct_FormatArgumentData",
+      "LockOverlay",
+      "ModifierDescription",
+      "ModifierDescription_Text",
+      "ModifierIcon",
+      "ModifierIconIMG",
+      "ModifierTitle",
+      "ModifierTitle_Text",
+      "Title"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Is Unlocked?",
+          "owner": "ModifierCardEntryWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "IsUnlocked?",
+          "owner": "Populate Details"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Challenge Title",
+        "owner": "ModifierCardEntryWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Challenge Title",
+          "owner": "ModifierCardEntryWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Challenge Title",
+          "owner": "Populate Details"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Challenge Description",
+        "owner": "ModifierCardEntryWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Challenge Description",
+          "owner": "ModifierCardEntryWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Challenge Description",
+          "owner": "Populate Details"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ModifierTitle_Text",
+        "owner": "ModifierCardEntryWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ModifierTitle_Text",
+          "owner": "ModifierCardEntryWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Title",
+          "owner": "Populate Details"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ModifierIconIMG",
+          "owner": "ModifierCardEntryWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Icon",
+          "owner": "Populate Details"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ModifierDescription_Text",
+        "owner": "ModifierCardEntryWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ModifierDescription_Text",
+          "owner": "ModifierCardEntryWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Description",
+          "owner": "Populate Details"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ModifierTitle",
+          "owner": "ModifierCardEntryWidget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ModifierTitle_Text",
+              "owner": "ModifierCardEntryWidget_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ModifierIcon",
+          "owner": "ModifierCardEntryWidget_C"
+        }
+      },
+      "Offset": 24,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetBrushFromTexture",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ModifierIconIMG",
+              "owner": "ModifierCardEntryWidget_C"
+            }
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ModifierDescription",
+          "owner": "ModifierCardEntryWidget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ModifierDescription_Text",
+              "owner": "ModifierCardEntryWidget_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "IsEnabled",
+          "owner": "ModifierCardEntryWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "IsEnabled?",
+          "owner": "Populate Details"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentName",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentName",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "Populate Details"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": "challengename"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueType",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueType",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "Populate Details"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 4
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValue",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValue",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "Populate Details"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Challenge Title",
+          "owner": "ModifierCardEntryWidget_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueInt",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueInt",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "Populate Details"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_Int64Const",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueFloat",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueFloat",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "Populate Details"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueDouble",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueDouble",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "Populate Details"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueGender",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueGender",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "Populate Details"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_SetArray",
+      "AssigningProperty": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeArray_Array",
+          "owner": "Populate Details"
+        }
+      },
+      "ArrayInnerProp": null,
+      "Elements": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "Populate Details"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Format_ReturnValue",
+        "owner": "Populate Details"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Format_ReturnValue",
+          "owner": "Populate Details"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Format",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "Complete:\r\n\"{challengename}\"\r\nChallenge"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "8E0F9C1C43EE49AD9EBD1D8D1305B4BE"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeArray_Array",
+              "owner": "Populate Details"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ChallengeRequiredText",
+          "owner": "ModifierCardEntryWidget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Format_ReturnValue",
+              "owner": "Populate Details"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "SetButtonToggle",
+      "Parameters": [
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "IsEnabled",
+            "owner": "ModifierCardEntryWidget_C"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 802,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "IsUnlocked?",
+          "owner": "Populate Details"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "LockOverlay",
+          "owner": "ModifierCardEntryWidget_C"
+        }
+      },
+      "Offset": 16,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetVisibility",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 840
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "LockOverlay",
+          "owner": "ModifierCardEntryWidget_C"
+        }
+      },
+      "Offset": 16,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetVisibility",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

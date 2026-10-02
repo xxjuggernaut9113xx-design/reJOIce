@@ -1,0 +1,630 @@
+{
+  "function": {
+    "name": "CalculateLifetimeAverages",
+    "statements": 21,
+    "raw_fallback": false,
+    "calls": [
+      "Calculate Average",
+      "FTrunc",
+      "GetGameInstance"
+    ],
+    "fields": [
+      "",
+      "AllSessionCombos",
+      "AllSessionEdges",
+      "AllSessionStrokeCounts",
+      "AllSessionTimes",
+      "AllStrokesPerEdge",
+      "AvgCombo",
+      "AvgSessionEdges",
+      "AvgStrokeCount",
+      "AvgStrokesPerEdge",
+      "AvgTime",
+      "CallFunc_Calculate_Average_Average",
+      "CallFunc_Calculate_Average_Average_1",
+      "CallFunc_Calculate_Average_Average_2",
+      "CallFunc_Calculate_Average_Average_3",
+      "CallFunc_Calculate_Average_Average_4",
+      "CallFunc_FTrunc_ReturnValue",
+      "CallFunc_FTrunc_ReturnValue_1",
+      "CallFunc_FTrunc_ReturnValue_2",
+      "CallFunc_FTrunc_ReturnValue_3",
+      "CallFunc_FTrunc_ReturnValue_4",
+      "CallFunc_GetGameInstance_ReturnValue",
+      "CurrentSave",
+      "K2Node_DynamicCast_AsBP_CHGame_Instance",
+      "K2Node_DynamicCast_bSuccess"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameInstance_ReturnValue",
+          "owner": "CalculateLifetimeAverages"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameInstance",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "CalculateLifetimeAverages"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetGameInstance_ReturnValue",
+            "owner": "CalculateLifetimeAverages"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "CalculateLifetimeAverages"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+            "owner": "CalculateLifetimeAverages"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 800,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "CalculateLifetimeAverages"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Calculate Average",
+      "Parameters": [
+        {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+                "owner": "CalculateLifetimeAverages"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              }
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "AllSessionEdges",
+            "owner": "BP_CHSaveGame_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AllSessionEdges",
+              "owner": "BP_CHSaveGame_C"
+            }
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Calculate_Average_Average",
+            "owner": "CalculateLifetimeAverages"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FTrunc_ReturnValue",
+        "owner": "CalculateLifetimeAverages"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FTrunc_ReturnValue",
+          "owner": "CalculateLifetimeAverages"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FTrunc",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Calculate_Average_Average",
+              "owner": "CalculateLifetimeAverages"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "AvgSessionEdges",
+        "owner": "StatsScreenWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AvgSessionEdges",
+          "owner": "StatsScreenWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FTrunc_ReturnValue",
+          "owner": "CalculateLifetimeAverages"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Calculate Average",
+      "Parameters": [
+        {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+                "owner": "CalculateLifetimeAverages"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              }
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "AllStrokesPerEdge",
+            "owner": "BP_CHSaveGame_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AllStrokesPerEdge",
+              "owner": "BP_CHSaveGame_C"
+            }
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Calculate_Average_Average_2",
+            "owner": "CalculateLifetimeAverages"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FTrunc_ReturnValue_2",
+        "owner": "CalculateLifetimeAverages"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FTrunc_ReturnValue_2",
+          "owner": "CalculateLifetimeAverages"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FTrunc",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Calculate_Average_Average_2",
+              "owner": "CalculateLifetimeAverages"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "AvgStrokesPerEdge",
+        "owner": "StatsScreenWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AvgStrokesPerEdge",
+          "owner": "StatsScreenWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FTrunc_ReturnValue_2",
+          "owner": "CalculateLifetimeAverages"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Calculate Average",
+      "Parameters": [
+        {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+                "owner": "CalculateLifetimeAverages"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              }
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "AllSessionStrokeCounts",
+            "owner": "BP_CHSaveGame_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AllSessionStrokeCounts",
+              "owner": "BP_CHSaveGame_C"
+            }
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Calculate_Average_Average_4",
+            "owner": "CalculateLifetimeAverages"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FTrunc_ReturnValue_4",
+        "owner": "CalculateLifetimeAverages"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FTrunc_ReturnValue_4",
+          "owner": "CalculateLifetimeAverages"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FTrunc",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Calculate_Average_Average_4",
+              "owner": "CalculateLifetimeAverages"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "AvgStrokeCount",
+        "owner": "StatsScreenWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AvgStrokeCount",
+          "owner": "StatsScreenWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FTrunc_ReturnValue_4",
+          "owner": "CalculateLifetimeAverages"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Calculate Average",
+      "Parameters": [
+        {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+                "owner": "CalculateLifetimeAverages"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              }
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "AllSessionCombos",
+            "owner": "BP_CHSaveGame_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AllSessionCombos",
+              "owner": "BP_CHSaveGame_C"
+            }
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Calculate_Average_Average_3",
+            "owner": "CalculateLifetimeAverages"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FTrunc_ReturnValue_3",
+        "owner": "CalculateLifetimeAverages"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FTrunc_ReturnValue_3",
+          "owner": "CalculateLifetimeAverages"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FTrunc",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Calculate_Average_Average_3",
+              "owner": "CalculateLifetimeAverages"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "AvgCombo",
+        "owner": "StatsScreenWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AvgCombo",
+          "owner": "StatsScreenWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FTrunc_ReturnValue_3",
+          "owner": "CalculateLifetimeAverages"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Calculate Average",
+      "Parameters": [
+        {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+                "owner": "CalculateLifetimeAverages"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              }
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "AllSessionTimes",
+            "owner": "BP_CHSaveGame_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AllSessionTimes",
+              "owner": "BP_CHSaveGame_C"
+            }
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Calculate_Average_Average_1",
+            "owner": "CalculateLifetimeAverages"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FTrunc_ReturnValue_1",
+        "owner": "CalculateLifetimeAverages"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FTrunc_ReturnValue_1",
+          "owner": "CalculateLifetimeAverages"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FTrunc",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Calculate_Average_Average_1",
+              "owner": "CalculateLifetimeAverages"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "AvgTime",
+        "owner": "StatsScreenWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AvgTime",
+          "owner": "StatsScreenWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FTrunc_ReturnValue_1",
+          "owner": "CalculateLifetimeAverages"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "function": {
+    "name": "AddCoins",
+    "statements": 5,
+    "raw_fallback": false,
+    "calls": [
+      "Add_IntInt",
+      "PlayAnimation"
+    ],
+    "fields": [
+      "AddCoinTextAnim",
+      "CallFunc_Add_IntInt_ReturnValue",
+      "CallFunc_PlayAnimation_ReturnValue",
+      "CoinsToAdd",
+      "PlayerCoinCount"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue",
+        "owner": "AddCoins"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "AddCoins"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerCoinCount",
+              "owner": "UI_Manager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CoinsToAdd",
+              "owner": "AddCoins"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "PlayerCoinCount",
+        "owner": "UI_Manager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "PlayerCoinCount",
+          "owner": "UI_Manager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "AddCoins"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "AddCoins"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AddCoinTextAnim",
+              "owner": "UI_Manager_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

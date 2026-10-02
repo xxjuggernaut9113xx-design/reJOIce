@@ -1,0 +1,126 @@
+{
+  "function": {
+    "name": "Get_HeatMeterBar_Percent",
+    "statements": 5,
+    "raw_fallback": false,
+    "calls": [
+      "Divide_DoubleDouble"
+    ],
+    "fields": [
+      "",
+      "CallFunc_Divide_DoubleDouble_ReturnValue",
+      "GlobalManagerRef",
+      "Heat Level",
+      "K2Node_FunctionResult_ReturnValue_ImplicitCast",
+      "ReturnValue"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+        "owner": "Get_HeatMeterBar_Percent"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+          "owner": "Get_HeatMeterBar_Percent"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Divide_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManagerRef",
+                "owner": "UI_Manager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "Heat Level",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Heat Level",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 100.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_FunctionResult_ReturnValue_ImplicitCast",
+          "owner": "Get_HeatMeterBar_Percent"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+            "owner": "Get_HeatMeterBar_Percent"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "Get_HeatMeterBar_Percent"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_HeatMeterBar_Percent"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_FunctionResult_ReturnValue_ImplicitCast",
+          "owner": "Get_HeatMeterBar_Percent"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_HeatMeterBar_Percent"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

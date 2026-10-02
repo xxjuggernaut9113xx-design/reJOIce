@@ -1,0 +1,258 @@
+{
+  "function": {
+    "name": "CheckBMAutoToggles",
+    "statements": 18,
+    "raw_fallback": false,
+    "calls": [
+      "EqualEqual_ByteByte"
+    ],
+    "fields": [
+      "AutoBMToggledCumEvent?",
+      "AutoBMToggledSuccubusEvent?",
+      "BMOverrideEnabled?",
+      "CallFunc_EqualEqual_ByteByte_ReturnValue",
+      "CallFunc_EqualEqual_ByteByte_ReturnValue_1",
+      "CurrentCardTypeEnum",
+      "CurrentSave",
+      "GameInstance",
+      "IsBrainMelterEnabled?"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 254
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 25
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 147,
+      "BooleanExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "BMOverrideEnabled?",
+          "owner": "BP_GlobalManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 40,
+      "BooleanExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "BMOverrideEnabled?",
+          "owner": "BP_GlobalManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_ByteByte_ReturnValue",
+          "owner": "CheckBMAutoToggles"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "EqualEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentCardTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 6
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_ByteByte_ReturnValue",
+          "owner": "CheckBMAutoToggles"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AutoBMToggledCumEvent?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AutoBMToggledCumEvent?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "IsBrainMelterEnabled?",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_ByteByte_ReturnValue_1",
+          "owner": "CheckBMAutoToggles"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "EqualEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentCardTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_ByteByte_ReturnValue_1",
+          "owner": "CheckBMAutoToggles"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AutoBMToggledSuccubusEvent?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AutoBMToggledSuccubusEvent?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "IsBrainMelterEnabled?",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

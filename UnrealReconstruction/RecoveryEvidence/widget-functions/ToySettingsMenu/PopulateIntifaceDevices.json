@@ -1,0 +1,49 @@
+{
+  "function": {
+    "name": "PopulateIntifaceDevices",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_ToySettingsMenu"
+    ],
+    "fields": [
+      "K2Node_CustomEvent_TotalDevices",
+      "TotalDevices"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_TotalDevices",
+        "owner": "ExecuteUbergraph_ToySettingsMenu"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "TotalDevices",
+          "owner": "PopulateIntifaceDevices"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_ToySettingsMenu",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 14518
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

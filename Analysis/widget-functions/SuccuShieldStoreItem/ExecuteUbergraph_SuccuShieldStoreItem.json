@@ -1,0 +1,3165 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_SuccuShieldStoreItem",
+    "statements": 100,
+    "raw_fallback": false,
+    "calls": [
+      "AddToPointsSpent",
+      "Add_IntInt",
+      "Clamp",
+      "GetGameMode",
+      "GreaterEqual_IntInt",
+      "NotEqual_ByteByte",
+      "PlayAnimation",
+      "PrintString",
+      "Refresh Prices",
+      "Subtract_IntInt"
+    ],
+    "fields": [
+      "",
+      "As BP Global Manager",
+      "BuyClickFailure",
+      "BuyClickSuccessful",
+      "BuyHover",
+      "BuyUnhover",
+      "CallFunc_Add_IntInt_ReturnValue",
+      "CallFunc_Add_IntInt_ReturnValue_1",
+      "CallFunc_Add_IntInt_ReturnValue_2",
+      "CallFunc_Add_IntInt_ReturnValue_3",
+      "CallFunc_Add_IntInt_ReturnValue_4",
+      "CallFunc_Clamp_ReturnValue",
+      "CallFunc_Clamp_ReturnValue_1",
+      "CallFunc_Clamp_ReturnValue_2",
+      "CallFunc_Clamp_ReturnValue_3",
+      "CallFunc_Clamp_ReturnValue_4",
+      "CallFunc_GetGameMode_ReturnValue",
+      "CallFunc_GreaterEqual_IntInt_ReturnValue",
+      "CallFunc_GreaterEqual_IntInt_ReturnValue_1",
+      "CallFunc_GreaterEqual_IntInt_ReturnValue_2",
+      "CallFunc_PlayAnimation_ReturnValue",
+      "CallFunc_PlayAnimation_ReturnValue_1",
+      "CallFunc_PlayAnimation_ReturnValue_2",
+      "CallFunc_PlayAnimation_ReturnValue_3",
+      "CallFunc_PlayAnimation_ReturnValue_4",
+      "CallFunc_PlayAnimation_ReturnValue_5",
+      "CallFunc_PlayAnimation_ReturnValue_6",
+      "CallFunc_PlayAnimation_ReturnValue_7",
+      "CallFunc_PlayAnimation_ReturnValue_8",
+      "CallFunc_Subtract_IntInt_ReturnValue",
+      "CallFunc_Subtract_IntInt_ReturnValue_1",
+      "EntryPoint",
+      "K2Node_DynamicCast_AsBP_Global_Manager",
+      "K2Node_DynamicCast_bSuccess",
+      "K2Node_SwitchEnum_CmpSuccess",
+      "K2Node_SwitchEnum_CmpSuccess_1",
+      "MaxSuccushieldItemCount",
+      "PG2TabbedInventory_Widget",
+      "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+      "PlayerItemCounts",
+      "PlayerUpgradeLevels",
+      "PlayerVariablesStruct",
+      "PurchaseCost",
+      "ReceiveSuccuShieldItems",
+      "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+      "SuccubusShieldsUpgradeLevel_17_1516352B49C0FDC3329A4D9A09D28E36",
+      "UIManager",
+      "UpgradeClickFailure",
+      "UpgradeClickSuccessful",
+      "UpgradeCost",
+      "UpgradeHover",
+      "UpgradeUnhover"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameMode_ReturnValue",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameMode",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -2,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetGameMode_ReturnValue",
+            "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+            "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4015,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP Global Manager",
+          "owner": "SuccuShieldStoreItem_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Refresh Prices",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4015
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "As BP Global Manager",
+                "owner": "SuccuShieldStoreItem_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "UIManager",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "UIManager",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PG2TabbedInventory_Widget",
+            "owner": "UI_Manager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PG2TabbedInventory_Widget",
+              "owner": "UI_Manager_C"
+            }
+          }
+        },
+        "Offset": 103,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "PlayAnimation",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_Context",
+                  "ObjectExpression": {
+                    "op": "EX_InstanceVariable",
+                    "Variable": {
+                      "field": "As BP Global Manager",
+                      "owner": "SuccuShieldStoreItem_C"
+                    }
+                  },
+                  "Offset": 9,
+                  "PropertyType": 0,
+                  "RValuePointer": {
+                    "field": "UIManager",
+                    "owner": "BP_GlobalManager_C"
+                  },
+                  "ContextExpression": {
+                    "op": "EX_InstanceVariable",
+                    "Variable": {
+                      "field": "UIManager",
+                      "owner": "BP_GlobalManager_C"
+                    }
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "PG2TabbedInventory_Widget",
+                  "owner": "UI_Manager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "PG2TabbedInventory_Widget",
+                    "owner": "UI_Manager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "ReceiveSuccuShieldItems",
+                "owner": "PG2TabbedInventory_Widget_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "ReceiveSuccuShieldItems",
+                  "owner": "PG2TabbedInventory_Widget_C"
+                }
+              }
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": 1
+            },
+            {
+              "op": "EX_ByteConst",
+              "Value": 0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_False"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SuccubusShieldsUpgradeLevel_17_1516352B49C0FDC3329A4D9A09D28E36",
+              "owner": "PlayerItemUpgradeLevels"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerUpgradeLevels",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerUpgradeLevels",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 712,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SuccubusShieldsUpgradeLevel_17_1516352B49C0FDC3329A4D9A09D28E36",
+              "owner": "PlayerItemUpgradeLevels"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerUpgradeLevels",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerUpgradeLevels",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1056,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SuccubusShieldsUpgradeLevel_17_1516352B49C0FDC3329A4D9A09D28E36",
+              "owner": "PlayerItemUpgradeLevels"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerUpgradeLevels",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerUpgradeLevels",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1400,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SuccubusShieldsUpgradeLevel_17_1516352B49C0FDC3329A4D9A09D28E36",
+              "owner": "PlayerItemUpgradeLevels"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerUpgradeLevels",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerUpgradeLevels",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1744,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SuccubusShieldsUpgradeLevel_17_1516352B49C0FDC3329A4D9A09D28E36",
+              "owner": "PlayerItemUpgradeLevels"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerUpgradeLevels",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerUpgradeLevels",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2088,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4015
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Subtract_IntInt_ReturnValue",
+        "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Subtract_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerVariablesStruct",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PurchaseCost",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+        "owner": "LegacyStats"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue",
+        "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+              "owner": "PlayerItemCounts"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerItemCounts",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerItemCounts",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Clamp_ReturnValue",
+        "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Clamp_ReturnValue",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Clamp",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Add_IntInt_ReturnValue",
+              "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "As BP Global Manager",
+                "owner": "SuccuShieldStoreItem_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "MaxSuccushieldItemCount",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "MaxSuccushieldItemCount",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+        "owner": "PlayerItemCounts"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+          "owner": "PlayerItemCounts"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerItemCounts",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerItemCounts",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Clamp_ReturnValue",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4015
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Subtract_IntInt_ReturnValue",
+        "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Subtract_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerVariablesStruct",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PurchaseCost",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+        "owner": "LegacyStats"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue_1",
+        "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue_1",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+              "owner": "PlayerItemCounts"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerItemCounts",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerItemCounts",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Clamp_ReturnValue_1",
+        "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Clamp_ReturnValue_1",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Clamp",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Add_IntInt_ReturnValue_1",
+              "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "As BP Global Manager",
+                "owner": "SuccuShieldStoreItem_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "MaxSuccushieldItemCount",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "MaxSuccushieldItemCount",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+        "owner": "PlayerItemCounts"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+          "owner": "PlayerItemCounts"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerItemCounts",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerItemCounts",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Clamp_ReturnValue_1",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4015
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Subtract_IntInt_ReturnValue",
+        "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Subtract_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerVariablesStruct",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PurchaseCost",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+        "owner": "LegacyStats"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue_2",
+        "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue_2",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+              "owner": "PlayerItemCounts"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerItemCounts",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerItemCounts",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 7
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Clamp_ReturnValue_2",
+        "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Clamp_ReturnValue_2",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Clamp",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Add_IntInt_ReturnValue_2",
+              "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "As BP Global Manager",
+                "owner": "SuccuShieldStoreItem_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "MaxSuccushieldItemCount",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "MaxSuccushieldItemCount",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+        "owner": "PlayerItemCounts"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+          "owner": "PlayerItemCounts"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerItemCounts",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerItemCounts",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Clamp_ReturnValue_2",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4015
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Subtract_IntInt_ReturnValue",
+        "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Subtract_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerVariablesStruct",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PurchaseCost",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+        "owner": "LegacyStats"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue_3",
+        "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue_3",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+              "owner": "PlayerItemCounts"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerItemCounts",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerItemCounts",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 10
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Clamp_ReturnValue_3",
+        "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Clamp_ReturnValue_3",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Clamp",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Add_IntInt_ReturnValue_3",
+              "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "As BP Global Manager",
+                "owner": "SuccuShieldStoreItem_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "MaxSuccushieldItemCount",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "MaxSuccushieldItemCount",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+        "owner": "PlayerItemCounts"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+          "owner": "PlayerItemCounts"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerItemCounts",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerItemCounts",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Clamp_ReturnValue_3",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4015
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Subtract_IntInt_ReturnValue",
+        "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Subtract_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerVariablesStruct",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PurchaseCost",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+        "owner": "LegacyStats"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue_4",
+        "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue_4",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+              "owner": "PlayerItemCounts"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerItemCounts",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerItemCounts",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 15
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Clamp_ReturnValue_4",
+        "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Clamp_ReturnValue_4",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Clamp",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Add_IntInt_ReturnValue_4",
+              "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "As BP Global Manager",
+                "owner": "SuccuShieldStoreItem_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "MaxSuccushieldItemCount",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "MaxSuccushieldItemCount",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+        "owner": "PlayerItemCounts"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+          "owner": "PlayerItemCounts"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerItemCounts",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerItemCounts",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Clamp_ReturnValue_4",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4015
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP Global Manager",
+          "owner": "SuccuShieldStoreItem_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "AddToPointsSpent",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PurchaseCost",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_1",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "BuyClickSuccessful",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 148
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GreaterEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36",
+              "owner": "PlayerItemCounts"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerItemCounts",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerItemCounts",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "As BP Global Manager",
+                "owner": "SuccuShieldStoreItem_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "MaxSuccushieldItemCount",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "MaxSuccushieldItemCount",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2768,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_2",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "BuyClickFailure",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Purchase Failed"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -107,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4015
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_IntInt_ReturnValue_1",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GreaterEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerVariablesStruct",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PurchaseCost",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2634,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_IntInt_ReturnValue_1",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2432
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2529
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_3",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "BuyHover",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4015
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_4",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "BuyUnhover",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4015
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_IntInt_ReturnValue_2",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GreaterEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerVariablesStruct",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UpgradeCost",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3864,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_IntInt_ReturnValue_2",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP Global Manager",
+          "owner": "SuccuShieldStoreItem_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "AddToPointsSpent",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UpgradeCost",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_5",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UpgradeClickSuccessful",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Subtract_IntInt_ReturnValue_1",
+        "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue_1",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Subtract_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerVariablesStruct",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UpgradeCost",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+        "owner": "LegacyStats"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue_1",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SuccubusShieldsUpgradeLevel_17_1516352B49C0FDC3329A4D9A09D28E36",
+              "owner": "PlayerItemUpgradeLevels"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerUpgradeLevels",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerUpgradeLevels",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3794,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SuccubusShieldsUpgradeLevel_17_1516352B49C0FDC3329A4D9A09D28E36",
+              "owner": "PlayerItemUpgradeLevels"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerUpgradeLevels",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerUpgradeLevels",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3724,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SuccubusShieldsUpgradeLevel_17_1516352B49C0FDC3329A4D9A09D28E36",
+              "owner": "PlayerItemUpgradeLevels"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerUpgradeLevels",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerUpgradeLevels",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3654,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SuccubusShieldsUpgradeLevel_17_1516352B49C0FDC3329A4D9A09D28E36",
+              "owner": "PlayerItemUpgradeLevels"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SuccuShieldStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerUpgradeLevels",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerUpgradeLevels",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3584,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4015
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SuccubusShieldsUpgradeLevel_17_1516352B49C0FDC3329A4D9A09D28E36",
+        "owner": "PlayerItemUpgradeLevels"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "SuccubusShieldsUpgradeLevel_17_1516352B49C0FDC3329A4D9A09D28E36",
+          "owner": "PlayerItemUpgradeLevels"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerUpgradeLevels",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerUpgradeLevels",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 4
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Refresh Prices",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4015
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SuccubusShieldsUpgradeLevel_17_1516352B49C0FDC3329A4D9A09D28E36",
+        "owner": "PlayerItemUpgradeLevels"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "SuccubusShieldsUpgradeLevel_17_1516352B49C0FDC3329A4D9A09D28E36",
+          "owner": "PlayerItemUpgradeLevels"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerUpgradeLevels",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerUpgradeLevels",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 3
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Refresh Prices",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4015
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SuccubusShieldsUpgradeLevel_17_1516352B49C0FDC3329A4D9A09D28E36",
+        "owner": "PlayerItemUpgradeLevels"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "SuccubusShieldsUpgradeLevel_17_1516352B49C0FDC3329A4D9A09D28E36",
+          "owner": "PlayerItemUpgradeLevels"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerUpgradeLevels",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerUpgradeLevels",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 2
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Refresh Prices",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4015
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SuccubusShieldsUpgradeLevel_17_1516352B49C0FDC3329A4D9A09D28E36",
+        "owner": "PlayerItemUpgradeLevels"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "SuccubusShieldsUpgradeLevel_17_1516352B49C0FDC3329A4D9A09D28E36",
+          "owner": "PlayerItemUpgradeLevels"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerUpgradeLevels",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerUpgradeLevels",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 1
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Refresh Prices",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4015
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_6",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UpgradeClickFailure",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4015
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_7",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UpgradeHover",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4015
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_8",
+          "owner": "ExecuteUbergraph_SuccuShieldStoreItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UpgradeUnhover",
+              "owner": "SuccuShieldStoreItem_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

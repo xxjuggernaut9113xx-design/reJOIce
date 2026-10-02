@@ -1,0 +1,95 @@
+{
+  "function": {
+    "name": "Get_MinimumBeatInterval_Text_0",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "Conv_StringToText"
+    ],
+    "fields": [
+      "As BP Global Manager",
+      "CallFunc_Conv_StringToText_ReturnValue",
+      "FavoriteDebugString",
+      "ReturnValue"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue",
+        "owner": "Get_MinimumBeatInterval_Text_0"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "Get_MinimumBeatInterval_Text_0"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "As BP Global Manager",
+                "owner": "FavoritedMedia_DEBUG_Widget_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "FavoriteDebugString",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "FavoriteDebugString",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "Get_MinimumBeatInterval_Text_0"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_MinimumBeatInterval_Text_0"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "Get_MinimumBeatInterval_Text_0"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_MinimumBeatInterval_Text_0"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

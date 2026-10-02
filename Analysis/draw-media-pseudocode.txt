@@ -1,0 +1,106 @@
+
+//GetRandomCard
+LocalCard = nullptr
+K2Node_MakeStruct_SlateBrush.DrawAs = 3
+K2Node_MakeStruct_SlateBrush.Tiling = 0
+K2Node_MakeStruct_SlateBrush.Mirroring = 0
+K2Node_MakeStruct_SlateBrush.ImageSize = -107{32.0, 32.0}
+K2Node_MakeStruct_SlateBrush.Margin = -108{+0, +0, +0, +0}
+K2Node_MakeStruct_SlateBrush.TintColor = -111{-103{1.0, 1.0, 1.0, 1.0}, 0}
+K2Node_MakeStruct_SlateBrush.OutlineSettings = -110{-105{+0, +0, +0, 1.0}, -111{-103{+0, +0, +0, +0}, 0}, +0, 1, false}
+K2Node_MakeStruct_SlateBrush.ResourceObject = LocalCard
+SlateBrushOutput = K2Node_MakeStruct_SlateBrush
+Texture2D = LocalCard
+CardArray = EX_ArrayConst({"InnerProperty":{"field":"CardArray.CardArray","owner":"GetRandomCard"},"Elements":[],"Value":null})
+return void
+EX_EndOfScript({})
+
+//GetAndSetRandomCard
+EX_LetValueOnPersistentFrame({"DestinationProperty":{"field":"K2Node_CustomEvent_Card_Array_1","owner":"ExecuteUbergraph_BP_DrawManager"},"AssignmentExpression":{"op":"EX_LocalOutVariable","Variable":{"field":"Card Array","owner":"GetAndSetRandomCard"}}})
+ExecuteUbergraph_BP_DrawManager(112)
+return void
+EX_EndOfScript({})
+
+//GetAndSetRandomVideoLoop
+EX_LetValueOnPersistentFrame({"DestinationProperty":{"field":"K2Node_CustomEvent_Card_Array","owner":"ExecuteUbergraph_BP_DrawManager"},"AssignmentExpression":{"op":"EX_LocalOutVariable","Variable":{"field":"Card Array","owner":"GetAndSetRandomVideoLoop"}}})
+ExecuteUbergraph_BP_DrawManager(792)
+return void
+EX_EndOfScript({})
+
+//TriggerSelectedEvent
+GlobalManager->Is Succu Frenzy Active(CallFunc_Is_Succu_Frenzy_Active_Active)
+if (!CallFunc_Is_Succu_Frenzy_Active_Active) goto L191
+GlobalManager->SpawnSuccubus()
+PrintString(this, "Succubus Event Triggered", false, true, -103{+0, 0.6600000262260437, 1.0, 1.0}, 2.0, "None")
+goto L2667
+GlobalManager->Is Slow and Steady Active(CallFunc_Is_Slow_and_Steady_Active_Active_)
+if (!CallFunc_Is_Slow_and_Steady_Active_Active_) goto L473
+CallFunc_RandomIntegerInRange_ReturnValue_1 = RandomIntegerInRange(0, 2)
+CallFunc_EqualEqual_IntInt_ReturnValue_1 = EqualEqual_IntInt(CallFunc_RandomIntegerInRange_ReturnValue_1, 0)
+if (!CallFunc_EqualEqual_IntInt_ReturnValue_1) goto L1456
+GlobalManager->MediumStrokeEvent()
+PrintString(this, "Medium Stroke Event Triggered", false, true, -103{+0, 0.6600000262260437, 1.0, 1.0}, 2.0, "None")
+goto L2667
+GlobalManager->Is Double Time Active(CallFunc_Is_Double_Time_Active_Active_)
+if (!CallFunc_Is_Double_Time_Active_Active_) goto L623
+CallFunc_RandomIntegerInRange_ReturnValue = RandomIntegerInRange(0, 4)
+CallFunc_EqualEqual_IntInt_ReturnValue = EqualEqual_IntInt(CallFunc_RandomIntegerInRange_ReturnValue, 0)
+if (!CallFunc_EqualEqual_IntInt_ReturnValue) goto L1591
+goto L59
+K2_ClearAndInvalidateTimerHandle(this, GlobalManager->IdleTimerHandle)
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(FoundEvent.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 0)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L1318
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(FoundEvent.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 1)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L1726
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(FoundEvent.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 3)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L1456
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(FoundEvent.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 4)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L336
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(FoundEvent.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 5)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L1591
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(FoundEvent.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 7)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L1864
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(FoundEvent.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 8)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L59
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(FoundEvent.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 10)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L1998
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(FoundEvent.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 14)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L2127
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(FoundEvent.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 15)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L2261
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(FoundEvent.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 30)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L2396
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(FoundEvent.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 31)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L2525
+goto L2667
+GlobalManager->PostEdgeSlow()
+PrintString(this, "Post Edge Slow Event Triggered", false, true, -103{+0, 0.6600000262260437, 1.0, 1.0}, 2.0, "None")
+goto L2667
+GlobalManager->SlowStrokeEvent()
+PrintString(this, "Slow Stroke Event Triggered", false, true, -103{+0, 0.6600000262260437, 1.0, 1.0}, 2.0, "None")
+goto L2667
+GlobalManager->FastStrokeEvent()
+PrintString(this, "Fast Stroke Event Triggered", false, true, -103{+0, 0.6600000262260437, 1.0, 1.0}, 2.0, "None")
+goto L2667
+GlobalManager->PostEdgeFast()
+PrintString(this, "Post Edge Fast Event Triggered", false, true, -103{+0, 0.6600000262260437, 1.0, 1.0}, 2.0, "None")
+goto L2667
+GlobalManager->TemptationEvent()
+PrintString(this, "Temptation Event Triggered", false, true, -103{+0, 0.6600000262260437, 1.0, 1.0}, 2.0, "None")
+goto L2667
+GlobalManager->MercyEvent()
+PrintString(this, "Mercy Event Triggered", false, true, -103{+0, 0.6600000262260437, 1.0, 1.0}, 2.0, "None")
+goto L2667
+GlobalManager->AssFrenzyEvent()
+PrintString(this, "Ass Frenzy Event Triggered", true, true, -103{+0, 0.6600000262260437, 1.0, 1.0}, 2.0, "None")
+goto L2667
+GlobalManager->BoobFrenzyEvent()
+PrintString(this, "Boob Frenzy Event Triggered", true, true, -103{+0, 0.6600000262260437, 1.0, 1.0}, 2.0, "None")
+goto L2667
+GlobalManager->SpawnStoreEvent()
+PrintString(this, "Store Event Triggered", false, true, -103{+0, 0.6600000262260437, 1.0, 1.0}, 2.0, "None")
+goto L2667
+GlobalManager->VideoLoopStrokeEvent()
+PrintString(this, "Meidum VIdeo Loop Stroke Event Triggerd", false, true, -103{+0, 0.6600000262260437, 1.0, 1.0}, 2.0, "None")
+return void
+EX_EndOfScript({})

@@ -1,0 +1,451 @@
+{
+  "function": {
+    "name": "GetHighScores",
+    "statements": 16,
+    "raw_fallback": false,
+    "calls": [
+      "Concat_StrStr",
+      "Conv_IntToString",
+      "Conv_StringToText",
+      "Conv_TextToString",
+      "FormatTime"
+    ],
+    "fields": [
+      "CallFunc_Concat_StrStr_ReturnValue",
+      "CallFunc_Concat_StrStr_ReturnValue_1",
+      "CallFunc_Concat_StrStr_ReturnValue_2",
+      "CallFunc_Concat_StrStr_ReturnValue_3",
+      "CallFunc_Concat_StrStr_ReturnValue_4",
+      "CallFunc_Concat_StrStr_ReturnValue_5",
+      "CallFunc_Concat_StrStr_ReturnValue_6",
+      "CallFunc_Conv_IntToString_ReturnValue",
+      "CallFunc_Conv_IntToString_ReturnValue_1",
+      "CallFunc_Conv_IntToString_ReturnValue_2",
+      "CallFunc_Conv_StringToText_ReturnValue",
+      "CallFunc_Conv_TextToString_ReturnValue",
+      "CallFunc_FormatTime_NewParam",
+      "HighestCombo",
+      "HighestEdges",
+      "HighestSessionTime",
+      "HighestStrokeCount",
+      "ReturnValue"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "FormatTime",
+      "Parameters": [
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "HighestSessionTime",
+            "owner": "StatsScreenWidget_C"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_FormatTime_NewParam",
+            "owner": "GetHighScores"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToString_ReturnValue",
+        "owner": "GetHighScores"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToString_ReturnValue",
+          "owner": "GetHighScores"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToString",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HighestStrokeCount",
+              "owner": "StatsScreenWidget_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToString_ReturnValue_1",
+        "owner": "GetHighScores"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToString_ReturnValue_1",
+          "owner": "GetHighScores"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToString",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HighestEdges",
+              "owner": "StatsScreenWidget_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToString_ReturnValue_2",
+        "owner": "GetHighScores"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToString_ReturnValue_2",
+          "owner": "GetHighScores"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToString",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HighestCombo",
+              "owner": "StatsScreenWidget_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue",
+        "owner": "GetHighScores"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue",
+          "owner": "GetHighScores"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_FormatTime_NewParam",
+              "owner": "GetHighScores"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue",
+        "owner": "GetHighScores"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue",
+          "owner": "GetHighScores"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Longest Session: "
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_TextToString_ReturnValue",
+              "owner": "GetHighScores"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_1",
+        "owner": "GetHighScores"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_1",
+          "owner": "GetHighScores"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue",
+              "owner": "GetHighScores"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "\r\nHighest Combo: "
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_2",
+        "owner": "GetHighScores"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_2",
+          "owner": "GetHighScores"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue_1",
+              "owner": "GetHighScores"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToString_ReturnValue_2",
+              "owner": "GetHighScores"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_3",
+        "owner": "GetHighScores"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_3",
+          "owner": "GetHighScores"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue_2",
+              "owner": "GetHighScores"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "\r\nHighest Edges: "
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_4",
+        "owner": "GetHighScores"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_4",
+          "owner": "GetHighScores"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue_3",
+              "owner": "GetHighScores"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToString_ReturnValue_1",
+              "owner": "GetHighScores"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_5",
+        "owner": "GetHighScores"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_5",
+          "owner": "GetHighScores"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue_4",
+              "owner": "GetHighScores"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "\r\nHighest Stroke Count: "
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_6",
+        "owner": "GetHighScores"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_6",
+          "owner": "GetHighScores"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue_5",
+              "owner": "GetHighScores"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToString_ReturnValue",
+              "owner": "GetHighScores"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue",
+        "owner": "GetHighScores"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "GetHighScores"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue_6",
+              "owner": "GetHighScores"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "GetHighScores"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "GetHighScores"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "GetHighScores"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "GetHighScores"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

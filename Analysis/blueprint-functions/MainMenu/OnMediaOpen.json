@@ -1,0 +1,49 @@
+{
+  "function": {
+    "name": "OnMediaOpen",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_MainMenu"
+    ],
+    "fields": [
+      "K2Node_CustomEvent_OpenedUrl",
+      "OpenedUrl"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_OpenedUrl",
+        "owner": "ExecuteUbergraph_MainMenu"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "OpenedUrl",
+          "owner": "OnMediaOpen"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_MainMenu",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 3970
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

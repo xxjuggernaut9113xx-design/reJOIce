@@ -1,0 +1,238 @@
+{
+  "function": {
+    "name": "Refresh Heat Difficulty",
+    "statements": 14,
+    "raw_fallback": false,
+    "calls": [
+      "InRange_FloatFloat"
+    ],
+    "fields": [
+      "CallFunc_InRange_FloatFloat_ReturnValue",
+      "CallFunc_InRange_FloatFloat_ReturnValue_1",
+      "CallFunc_InRange_FloatFloat_ReturnValue_2",
+      "Heat Level",
+      "HeatCategory"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_InRange_FloatFloat_ReturnValue_2",
+          "owner": "Refresh Heat Difficulty"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "InRange_FloatFloat",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Heat Level",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 30.0
+          },
+          {
+            "op": "EX_True"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 88,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_InRange_FloatFloat_ReturnValue_2",
+          "owner": "Refresh Heat Difficulty"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "HeatCategory",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "HeatCategory",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 2
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 264
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_InRange_FloatFloat_ReturnValue_1",
+          "owner": "Refresh Heat Difficulty"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "InRange_FloatFloat",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Heat Level",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 30.0
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 70.0
+          },
+          {
+            "op": "EX_True"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 176,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_InRange_FloatFloat_ReturnValue_1",
+          "owner": "Refresh Heat Difficulty"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "HeatCategory",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "HeatCategory",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 1
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 83
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_InRange_FloatFloat_ReturnValue",
+          "owner": "Refresh Heat Difficulty"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "InRange_FloatFloat",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Heat Level",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 70.0
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 100.0
+          },
+          {
+            "op": "EX_True"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 264,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_InRange_FloatFloat_ReturnValue",
+          "owner": "Refresh Heat Difficulty"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "HeatCategory",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "HeatCategory",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 83
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

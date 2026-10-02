@@ -1,0 +1,98 @@
+L40006: CallFunc_PlaySound2D_VolumeMultiplier_ImplicitCast = cast_3(CallFunc_ApplyVolumeScalar_Output_2)
+L40035: -249->PlaySound2D(this, -3783, CallFunc_PlaySound2D_VolumeMultiplier_ImplicitCast, 1.0, +0, nullptr, nullptr, true)
+L40099: CallFunc_PlayAnimation_ReturnValue_13 = UIManager->PlayAnimation(UIManager->SlowPaceAnim, +0, 1, 0, 1.0, false)
+L40190: BuildVoiceLineCandidatesFromContentTags(CallFunc_BuildVoiceLineCandidatesFromContentTags_Dialogue_Line_Structs)
+L40213: Set Dialogue and Play Voiceline(CallFunc_BuildVoiceLineCandidatesFromContentTags_Dialogue_Line_Structs)
+L40236: Change Beat Background(3)
+L40252: PlayMusic(0)
+L40268: goto flow.pop_or_return()
+L40269: DrawManager->SpawnCustomCardEvent(DrawManager->SlowCards, CallFunc_GetDataTableRowFromName_OutRow_5.MinStrokeCount_12_0AA6FA064B215005C183A09864D952FD, CallFunc_GetDataTableRowFromName_OutRow_5.MaxStrokeCount_13_7934B1034A80B50D3C96F0B95BFC0F99, CallFunc_GetDataTableRowFromName_OutRow_5.MinIntervalSeconds_14_81FD317D4C79DA60754B4DA2D8544B79, CallFunc_GetDataTableRowFromName_OutRow_5.MaxIntervalSeconds_15_4C32084F4E73C6075D1265905109B3F9, 0, Stroke Time Speed Multiplier, Stroke Count Multiplier, CallFunc_SpawnCustomCardEvent_SlateBrush_13, CallFunc_SpawnCustomCardEvent_StrokeInterval_13)
+L40446: goto L39677
+L40451: CallFunc_MakeLiteralName_ReturnValue_5 = MakeLiteralName("SlowHeat")
+L40492: CallFunc_GetDataTableRowFromName_ReturnValue_5 = -81->GetDataTableRowFromName(DrawManager->HeatCategoryDataTable, CallFunc_MakeLiteralName_ReturnValue_5, CallFunc_GetDataTableRowFromName_OutRow_5)
+L40583: if (!CallFunc_GetDataTableRowFromName_ReturnValue_5) goto flow.pop_or_return()
+L40593: goto L39461
+L40598: K2_ClearAndInvalidateTimerHandle(this, IdleTimerHandle)
+L40618: goto L40451
+L40623: goto L40598
+L40628: RollFavoritesChance(1, CallFunc_RollFavoritesChance_RollSuccess__3)
+L40653: if (!CallFunc_RollFavoritesChance_RollSuccess__3) goto L41408
+L40667: DrawManager->SpawnCustomCardEvent(DrawManager->MediumFavoriteCards, CallFunc_GetDataTableRowFromName_OutRow_7.MinStrokeCount_12_0AA6FA064B215005C183A09864D952FD, CallFunc_GetDataTableRowFromName_OutRow_7.MaxStrokeCount_13_7934B1034A80B50D3C96F0B95BFC0F99, CallFunc_GetDataTableRowFromName_OutRow_7.MinIntervalSeconds_14_81FD317D4C79DA60754B4DA2D8544B79, CallFunc_GetDataTableRowFromName_OutRow_7.MaxIntervalSeconds_15_4C32084F4E73C6075D1265905109B3F9, 1, Stroke Time Speed Multiplier, Stroke Count Multiplier, CallFunc_SpawnCustomCardEvent_SlateBrush_15, CallFunc_SpawnCustomCardEvent_StrokeInterval_15)
+L40844: -250->Array_Random(MediumBeatPatterns, CallFunc_Array_Random_OutItem_11, CallFunc_Array_Random_OutIndex_11)
+L40903: CheckIntervalMultipliers(CallFunc_Array_Random_OutItem_11, CallFunc_CheckIntervalMultipliers_BeatPatternStructOut_8)
+L40935: BeatSpawnerManagerCPP->StartPatternWithMediaSync(CallFunc_CheckIntervalMultipliers_BeatPatternStructOut_8, PlayerVariablesStruct.BeatSpawnInterval_77_50E3B83E42812441703681959441CAE9, PlayerVariablesStruct.CurrentStrokeCount_61_4214F0E64101BD89E3040096F440A11C, MediaPlaybackManager, 1.0, +0, Beat Travel Time)
+L41040: PlayerEdgedLastDraw? = false
+L41051: DrawManager->IsSpecialEvent? = false
+L41084: CurrentCardTypeEnum = 1
+L41104: ApplyVolumeScalar(1.0, SFXVolume, CallFunc_ApplyVolumeScalar_Output_3)
+L41145: CallFunc_PlaySound2D_VolumeMultiplier_ImplicitCast_1 = cast_3(CallFunc_ApplyVolumeScalar_Output_3)
+L41174: -249->PlaySound2D(this, -3785, CallFunc_PlaySound2D_VolumeMultiplier_ImplicitCast_1, 1.0, +0, nullptr, nullptr, true)
+L41238: CallFunc_PlayAnimation_ReturnValue_15 = UIManager->PlayAnimation(UIManager->MediumPaceAnim, +0, 1, 0, 1.0, false)
+L41329: BuildVoiceLineCandidatesFromContentTags(CallFunc_BuildVoiceLineCandidatesFromContentTags_Dialogue_Line_Structs_1)
+L41352: Set Dialogue and Play Voiceline(CallFunc_BuildVoiceLineCandidatesFromContentTags_Dialogue_Line_Structs_1)
+L41375: Change Beat Background(3)
+L41391: PlayMusic(1)
+L41407: goto flow.pop_or_return()
+L41408: DrawManager->SpawnCustomCardEvent(DrawManager->MediumCards, CallFunc_GetDataTableRowFromName_OutRow_7.MinStrokeCount_12_0AA6FA064B215005C183A09864D952FD, CallFunc_GetDataTableRowFromName_OutRow_7.MaxStrokeCount_13_7934B1034A80B50D3C96F0B95BFC0F99, CallFunc_GetDataTableRowFromName_OutRow_7.MinIntervalSeconds_14_81FD317D4C79DA60754B4DA2D8544B79, CallFunc_GetDataTableRowFromName_OutRow_7.MaxIntervalSeconds_15_4C32084F4E73C6075D1265905109B3F9, 1, Stroke Time Speed Multiplier, Stroke Count Multiplier, CallFunc_SpawnCustomCardEvent_SlateBrush_16, CallFunc_SpawnCustomCardEvent_StrokeInterval_16)
+L41585: goto L40844
+L41590: Set Dialogue and Play Voiceline(DialogueManagerBP->Generic_Medium_DLS)
+L41635: goto flow.pop_or_return()
+L41636: CallFunc_PlayAnimation_ReturnValue_14 = UIManager->PlayAnimation(UIManager->MediumPaceAnim, +0, 1, 0, 1.0, false)
+L41727: goto L41590
+L41732: CurrentCardTypeEnum = 1
+L41752: goto L41636
+L41757: DrawManager->IsSpecialEvent? = false
+L41790: goto L41732
+L41795: BeatSpawnerManager->SpawnBeatSequence()
+L41831: PlayerEdgedLastDraw? = false
+L41842: goto L41757
+L41847: CallFunc_MakeLiteralName_ReturnValue_6 = MakeLiteralName("MediumHeat")
+L41888: CallFunc_GetDataTableRowFromName_ReturnValue_6 = -81->GetDataTableRowFromName(DrawManager->HeatCategoryDataTable, CallFunc_MakeLiteralName_ReturnValue_6, CallFunc_GetDataTableRowFromName_OutRow_6)
+L41979: if (!CallFunc_GetDataTableRowFromName_ReturnValue_6) goto flow.pop_or_return()
+L41989: DrawManager->SpawnCustomVideoCardEvent(DrawManager->VideoArray, CallFunc_GetDataTableRowFromName_OutRow_6.MinStrokeCount_12_0AA6FA064B215005C183A09864D952FD, CallFunc_GetDataTableRowFromName_OutRow_6.MaxStrokeCount_13_7934B1034A80B50D3C96F0B95BFC0F99, CallFunc_GetDataTableRowFromName_OutRow_6.MinIntervalSeconds_14_81FD317D4C79DA60754B4DA2D8544B79, CallFunc_GetDataTableRowFromName_OutRow_6.MaxIntervalSeconds_15_4C32084F4E73C6075D1265905109B3F9, 1, Stroke Count Multiplier, Stroke Time Speed Multiplier, CallFunc_SpawnCustomVideoCardEvent_SlateBrush, CallFunc_SpawnCustomVideoCardEvent_StrokeInterval)
+L42166: goto L41795
+L42171: K2_ClearAndInvalidateTimerHandle(this, IdleTimerHandle)
+L42191: goto L41847
+L42196: goto L42171
+L42201: CallFunc_MakeLiteralName_ReturnValue_7 = MakeLiteralName("MediumHeat")
+L42242: CallFunc_GetDataTableRowFromName_ReturnValue_7 = -81->GetDataTableRowFromName(DrawManager->HeatCategoryDataTable, CallFunc_MakeLiteralName_ReturnValue_7, CallFunc_GetDataTableRowFromName_OutRow_7)
+L42333: if (!CallFunc_GetDataTableRowFromName_ReturnValue_7) goto flow.pop_or_return()
+L42343: goto L40628
+L42348: K2_ClearAndInvalidateTimerHandle(this, IdleTimerHandle)
+L42368: goto L42201
+L42373: goto L42348
+L42378: RollFavoritesChance(2, CallFunc_RollFavoritesChance_RollSuccess__4)
+L42403: if (!CallFunc_RollFavoritesChance_RollSuccess__4) goto L43149
+L42417: DrawManager->SpawnCustomCardEvent(DrawManager->FastFavoriteCards, CallFunc_GetDataTableRowFromName_OutRow_8.MinStrokeCount_12_0AA6FA064B215005C183A09864D952FD, CallFunc_GetDataTableRowFromName_OutRow_8.MaxStrokeCount_13_7934B1034A80B50D3C96F0B95BFC0F99, 0.15, CallFunc_GetDataTableRowFromName_OutRow_8.MaxIntervalSeconds_15_4C32084F4E73C6075D1265905109B3F9, 2, Stroke Time Speed Multiplier, Stroke Count Multiplier, CallFunc_SpawnCustomCardEvent_SlateBrush_17, CallFunc_SpawnCustomCardEvent_StrokeInterval_17)
+L42585: -250->Array_Random(FastBeatPatterns, CallFunc_Array_Random_OutItem_12, CallFunc_Array_Random_OutIndex_12)
+L42644: CheckIntervalMultipliers(CallFunc_Array_Random_OutItem_12, CallFunc_CheckIntervalMultipliers_BeatPatternStructOut_9)
+L42676: BeatSpawnerManagerCPP->StartPatternWithMediaSync(CallFunc_CheckIntervalMultipliers_BeatPatternStructOut_9, PlayerVariablesStruct.BeatSpawnInterval_77_50E3B83E42812441703681959441CAE9, PlayerVariablesStruct.CurrentStrokeCount_61_4214F0E64101BD89E3040096F440A11C, MediaPlaybackManager, 1.0, +0, Beat Travel Time)
+L42781: PlayerEdgedLastDraw? = false
+L42792: DrawManager->IsSpecialEvent? = false
+L42825: CurrentCardTypeEnum = 2
+L42845: ApplyVolumeScalar(1.0, SFXVolume, CallFunc_ApplyVolumeScalar_Output_4)
+L42886: CallFunc_PlaySound2D_VolumeMultiplier_ImplicitCast_2 = cast_3(CallFunc_ApplyVolumeScalar_Output_4)
+L42915: -249->PlaySound2D(this, -3782, CallFunc_PlaySound2D_VolumeMultiplier_ImplicitCast_2, 1.0, +0, nullptr, nullptr, true)
+L42979: CallFunc_PlayAnimation_ReturnValue_16 = UIManager->PlayAnimation(UIManager->FastPaceAnim, +0, 1, 0, 1.0, false)
+L43070: BuildVoiceLineCandidatesFromContentTags(CallFunc_BuildVoiceLineCandidatesFromContentTags_Dialogue_Line_Structs_2)
+L43093: Set Dialogue and Play Voiceline(CallFunc_BuildVoiceLineCandidatesFromContentTags_Dialogue_Line_Structs_2)
+L43116: Change Beat Background(3)
+L43132: PlayMusic(2)
+L43148: goto flow.pop_or_return()
+L43149: DrawManager->SpawnCustomCardEvent(DrawManager->FastCards, CallFunc_GetDataTableRowFromName_OutRow_8.MinStrokeCount_12_0AA6FA064B215005C183A09864D952FD, CallFunc_GetDataTableRowFromName_OutRow_8.MaxStrokeCount_13_7934B1034A80B50D3C96F0B95BFC0F99, 0.15, CallFunc_GetDataTableRowFromName_OutRow_8.MaxIntervalSeconds_15_4C32084F4E73C6075D1265905109B3F9, 2, Stroke Time Speed Multiplier, Stroke Count Multiplier, CallFunc_SpawnCustomCardEvent_SlateBrush_18, CallFunc_SpawnCustomCardEvent_StrokeInterval_18)
+L43317: goto L42585
+L43322: K2_ClearAndInvalidateTimerHandle(this, IdleTimerHandle)
+L43342: CallFunc_MakeLiteralName_ReturnValue_8 = MakeLiteralName("HighHeat")
+L43383: CallFunc_GetDataTableRowFromName_ReturnValue_8 = -81->GetDataTableRowFromName(DrawManager->HeatCategoryDataTable, CallFunc_MakeLiteralName_ReturnValue_8, CallFunc_GetDataTableRowFromName_OutRow_8)
+L43474: if (!CallFunc_GetDataTableRowFromName_ReturnValue_8) goto flow.pop_or_return()
+L43484: goto L42378
+L43489: goto L43322
+L43494: SetSessionDuration()
+L43508: goto flow.pop_or_return()
+L43509: goto L43494
+L43514: Format and Session Duration Text(0, CallFunc_Format_and_Session_Duration_Text_FormattedText, CallFunc_Format_and_Session_Duration_Text_Hours, CallFunc_Format_and_Session_Duration_Text_Minutes, CallFunc_Format_and_Session_Duration_Text_Seconds)
+L43569: UIManager->SessionDurationText->SetText(CallFunc_Format_and_Session_Duration_Text_FormattedText)
+L43636: goto flow.pop_or_return()
+L43637: goto L43514
+L43642: return void
+L43644: EX_EndOfScript({})

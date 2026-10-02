@@ -1,0 +1,324 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_StatsScreenWidget",
+    "statements": 21,
+    "raw_fallback": false,
+    "calls": [
+      "CalculateHighScores",
+      "CalculateLifetimeAverages",
+      "GetGameInstance",
+      "PlayAnimation",
+      "PlayBackgroundMediaManual",
+      "RefreshMainMenuBackground",
+      "RemoveFromParent"
+    ],
+    "fields": [
+      "",
+      "As BP CHGame Instance",
+      "BackgroundImage",
+      "ButtonHover",
+      "ButtonUnHover",
+      "CallFunc_GetGameInstance_ReturnValue",
+      "CallFunc_PlayAnimation_ReturnValue",
+      "CallFunc_PlayAnimation_ReturnValue_1",
+      "EntryPoint",
+      "K2Node_DynamicCast_AsBP_CHGame_Instance",
+      "K2Node_DynamicCast_bSuccess"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_StatsScreenWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "StatsScreenWidget_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "RefreshMainMenuBackground",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_VirtualFunction",
+      "VirtualFunctionName": "RemoveFromParent",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 396
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "CalculateHighScores",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "CalculateLifetimeAverages",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameInstance_ReturnValue",
+          "owner": "ExecuteUbergraph_StatsScreenWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameInstance",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_StatsScreenWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetGameInstance_ReturnValue",
+            "owner": "ExecuteUbergraph_StatsScreenWidget"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_StatsScreenWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+            "owner": "ExecuteUbergraph_StatsScreenWidget"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 396,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_StatsScreenWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "StatsScreenWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_StatsScreenWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "StatsScreenWidget_C"
+        }
+      },
+      "Offset": 43,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "PlayBackgroundMediaManual",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "backgroundmenuloop"
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "BackgroundImage",
+              "owner": "StatsScreenWidget_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 396
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 10
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_1",
+          "owner": "ExecuteUbergraph_StatsScreenWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ButtonHover",
+              "owner": "StatsScreenWidget_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 396
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "ExecuteUbergraph_StatsScreenWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ButtonUnHover",
+              "owner": "StatsScreenWidget_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 396
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 339
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

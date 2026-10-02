@@ -1,0 +1,141 @@
+
+//SuccubusEligibilityCheck
+flow.push(L1751)
+LocalEligiblityReturn = false
+IsModifierActive?("Demon Proof", CallFunc_IsModifierActive__Active__1)
+if (!CallFunc_IsModifierActive__Active__1) goto L101
+LocalEligiblityReturn = false
+IsEligibleReturn = LocalEligiblityReturn
+goto L1751
+IsModifierActive?("Succufrenzy", CallFunc_IsModifierActive__Active_)
+if (!CallFunc_IsModifierActive__Active_) goto L572
+Temp_int_Loop_Counter_Variable = 0
+Temp_int_Array_Index_Variable = 0
+CallFunc_Array_Length_ReturnValue = -250->Array_Length(AllSpecialEventsArray)
+CallFunc_Less_IntInt_ReturnValue = Less_IntInt(Temp_int_Loop_Counter_Variable, CallFunc_Array_Length_ReturnValue)
+if (!CallFunc_Less_IntInt_ReturnValue) goto L1583
+Temp_int_Array_Index_Variable = Temp_int_Loop_Counter_Variable
+flow.push(L1599)
+-250->Array_Get(AllSpecialEventsArray, Temp_int_Array_Index_Variable, CallFunc_Array_Get_Item)
+CallFunc_EqualEqual_ByteByte_ReturnValue = EqualEqual_ByteByte(CallFunc_Array_Get_Item.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 8)
+if (!CallFunc_EqualEqual_ByteByte_ReturnValue) goto flow.pop_or_return()
+-250->Array_Get(AllSpecialEventsArray, Temp_int_Array_Index_Variable, CallFunc_Array_Get_Item)
+CallFunc_Array_Get_Item.BaseWeight_8_F7A85592454B999BFA054687E376F2AF = 50.0
+K2Node_SetFieldsInStruct_StructOut = CallFunc_Array_Get_Item
+goto flow.pop_or_return()
+if (!PlayerVariablesStruct.CanSuccubiSpawn?_150_8E10317348C0D9E436BC019A13ACDC60) goto L656
+CallFunc_EqualEqual_ByteByte_ReturnValue_1 = EqualEqual_ByteByte(HeatCategory, 0)
+if (!CallFunc_EqualEqual_ByteByte_ReturnValue_1) goto L1673
+LocalEligiblityReturn = true
+goto L77
+CallFunc_Greater_IntInt_ReturnValue = Greater_IntInt(PlayerItemCounts.SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36, 0)
+if (!CallFunc_Greater_IntInt_ReturnValue) goto L595
+if (!UIManager->PG2TabbedInventory_Widget->bIsSuccuShieldToggled) goto L595
+CallFunc_Subtract_IntInt_ReturnValue = Subtract_IntInt(PlayerItemCounts.SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36, 1)
+Temp_int_Variable = CallFunc_Subtract_IntInt_ReturnValue
+PlayerItemCounts.SuccubusShieldsAvailable_42_1516352B49C0FDC3329A4D9A09D28E36 = Temp_int_Variable
+GameInstance->ProgressionManager->UpdateMetric(8, 1)
+LocalEligiblityReturn = false
+CallFunc_LessEqual_IntInt_ReturnValue = LessEqual_IntInt(Temp_int_Variable, 0)
+if (!CallFunc_LessEqual_IntInt_ReturnValue) goto L1488
+CallFunc_PlayAnimation_ReturnValue = UIManager->PG2TabbedInventory_Widget->PlayAnimation(UIManager->PG2TabbedInventory_Widget->UsedLastSuccuShieldItems, +0, 1, 0, 1.0, false)
+CallFunc_Create_ReturnValue = -4055->Create(this, -4034, nullptr)
+CallFunc_Create_ReturnValue->AddToViewport(0)
+UIManager->PG2TabbedInventory_Widget->bIsSuccuShieldToggled = false
+-249->PlaySound2D(this, -3788, 1.0, 1.0, +0, nullptr, nullptr, true)
+UIManager->CreateNotificationBox(-3883, "No SuccuShields Left", "No Shields Left — Succubi May Appear")
+goto flow.pop_or_return()
+UIManager->CreateNotificationBox(-3856, "SuccuShield Active", "1 Shield Consumed This Draw")
+goto flow.pop_or_return()
+LocalEligiblityReturn = true
+goto L77
+CallFunc_Add_IntInt_ReturnValue = Add_IntInt(Temp_int_Loop_Counter_Variable, 1)
+Temp_int_Loop_Counter_Variable = CallFunc_Add_IntInt_ReturnValue
+goto L197
+CallFunc_GreaterEqual_IntInt_ReturnValue = GreaterEqual_IntInt(PlayerVariablesStruct.CurrentComboCount_66_5F7B16A442F400DEAE401686B872656A, 2000)
+if (!CallFunc_GreaterEqual_IntInt_ReturnValue) goto L1735
+goto L640
+LocalEligiblityReturn = false
+goto L77
+return void
+EX_EndOfScript({})
+
+//CheckEventConditions_ReturnArray
+flow.push(L2140)
+-250->Array_Clear(EligibleSpecialEvents)
+Temp_int_Loop_Counter_Variable = 0
+Temp_int_Array_Index_Variable = 0
+CallFunc_Array_Length_ReturnValue = -250->Array_Length(AllSpecialEventsArray)
+CallFunc_Less_IntInt_ReturnValue = Less_IntInt(Temp_int_Loop_Counter_Variable, CallFunc_Array_Length_ReturnValue)
+if (!CallFunc_Less_IntInt_ReturnValue) goto L781
+Temp_int_Array_Index_Variable = Temp_int_Loop_Counter_Variable
+flow.push(L813)
+-250->Array_Get(AllSpecialEventsArray, Temp_int_Array_Index_Variable, CallFunc_Array_Get_Item)
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(CallFunc_Array_Get_Item.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 3)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L887
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(CallFunc_Array_Get_Item.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 4)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L1031
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(CallFunc_Array_Get_Item.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 5)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L1175
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(CallFunc_Array_Get_Item.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 7)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L1319
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(CallFunc_Array_Get_Item.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 8)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L1343
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(CallFunc_Array_Get_Item.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 10)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L1504
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(CallFunc_Array_Get_Item.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 14)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L1657
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(CallFunc_Array_Get_Item.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 15)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L1818
+K2Node_SwitchEnum_CmpSuccess = NotEqual_ByteByte(CallFunc_Array_Get_Item.EventName_32_3CCBA75146AFAAE3B8D277BEDC593943, 30)
+if (!K2Node_SwitchEnum_CmpSuccess) goto L1979
+goto flow.pop_or_return()
+EligibleSpecialEvents = EligibleSpecialEvents
+goto L2140
+CallFunc_Add_IntInt_ReturnValue = Add_IntInt(Temp_int_Loop_Counter_Variable, 1)
+Temp_int_Loop_Counter_Variable = CallFunc_Add_IntInt_ReturnValue
+goto L92
+SlowStrokeEventCheck()
+if (!true) goto flow.pop_or_return()
+-250->Array_Get(AllSpecialEventsArray, Temp_int_Array_Index_Variable, CallFunc_Array_Get_Item)
+CallFunc_Array_Add_ReturnValue_7 = -250->Array_Add(EligibleSpecialEvents, CallFunc_Array_Get_Item)
+goto flow.pop_or_return()
+MediumStrokeEventCheck()
+if (!true) goto flow.pop_or_return()
+-250->Array_Get(AllSpecialEventsArray, Temp_int_Array_Index_Variable, CallFunc_Array_Get_Item)
+CallFunc_Array_Add_ReturnValue_6 = -250->Array_Add(EligibleSpecialEvents, CallFunc_Array_Get_Item)
+goto flow.pop_or_return()
+FastStrokeEventCheck()
+if (!true) goto flow.pop_or_return()
+-250->Array_Get(AllSpecialEventsArray, Temp_int_Array_Index_Variable, CallFunc_Array_Get_Item)
+CallFunc_Array_Add_ReturnValue_5 = -250->Array_Add(EligibleSpecialEvents, CallFunc_Array_Get_Item)
+goto flow.pop_or_return()
+TemptationEligibilityCheck(CallFunc_TemptationEligibilityCheck_IsEligibleReturn)
+goto flow.pop_or_return()
+SuccubusEligibilityCheck(CallFunc_SuccubusEligibilityCheck_IsEligibleReturn)
+if (!CallFunc_SuccubusEligibilityCheck_IsEligibleReturn) goto flow.pop_or_return()
+-250->Array_Get(AllSpecialEventsArray, Temp_int_Array_Index_Variable, CallFunc_Array_Get_Item)
+CallFunc_Array_Add_ReturnValue_2 = -250->Array_Add(EligibleSpecialEvents, CallFunc_Array_Get_Item)
+goto flow.pop_or_return()
+MercyEligibilityCheck(CallFunc_MercyEligibilityCheck_IsEligibleReturn)
+if (!false) goto flow.pop_or_return()
+-250->Array_Get(AllSpecialEventsArray, Temp_int_Array_Index_Variable, CallFunc_Array_Get_Item)
+CallFunc_Array_Add_ReturnValue_4 = -250->Array_Add(EligibleSpecialEvents, CallFunc_Array_Get_Item)
+goto flow.pop_or_return()
+AssFrenzyEligibilityCheck(CallFunc_AssFrenzyEligibilityCheck_IsEligibleReturn)
+if (!CallFunc_AssFrenzyEligibilityCheck_IsEligibleReturn) goto flow.pop_or_return()
+-250->Array_Get(AllSpecialEventsArray, Temp_int_Array_Index_Variable, CallFunc_Array_Get_Item)
+CallFunc_Array_Add_ReturnValue = -250->Array_Add(EligibleSpecialEvents, CallFunc_Array_Get_Item)
+goto flow.pop_or_return()
+BoobFrenzyEligibilityCheck(CallFunc_BoobFrenzyEligibilityCheck_IsEligibleReturn)
+if (!CallFunc_BoobFrenzyEligibilityCheck_IsEligibleReturn) goto flow.pop_or_return()
+-250->Array_Get(AllSpecialEventsArray, Temp_int_Array_Index_Variable, CallFunc_Array_Get_Item)
+CallFunc_Array_Add_ReturnValue_1 = -250->Array_Add(EligibleSpecialEvents, CallFunc_Array_Get_Item)
+goto flow.pop_or_return()
+StoreEventCheck(CallFunc_StoreEventCheck_StoreEligibilityReturn)
+if (!CallFunc_StoreEventCheck_StoreEligibilityReturn) goto flow.pop_or_return()
+-250->Array_Get(AllSpecialEventsArray, Temp_int_Array_Index_Variable, CallFunc_Array_Get_Item)
+CallFunc_Array_Add_ReturnValue_3 = -250->Array_Add(EligibleSpecialEvents, CallFunc_Array_Get_Item)
+goto flow.pop_or_return()
+return void
+EX_EndOfScript({})

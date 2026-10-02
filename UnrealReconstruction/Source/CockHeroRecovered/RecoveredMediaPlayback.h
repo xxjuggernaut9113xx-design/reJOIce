@@ -1,0 +1,33 @@
+#pragma once
+#include "CoreMinimal.h"
+#include "RecoveredMedia.h"
+#include "RecoveredMediaPlayback.generated.h"
+class UMediaPlayer;
+class UMediaTexture;
+class UTexture;
+class UMaterialInstanceDynamic;
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRecoveredMediaReady, UTexture*, Texture);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRecoveredMediaError, const FString&, Error);
+
+// Editor/runtime adapter for existing files; original transition, audio, and sync logic remains separate.
+UCLASS(BlueprintType)
+class COCKHERORECOVERED_API URecoveredMediaPlayback : public UObject {
+    GENERATED_BODY()
+public:
+    UPROPERTY(BlueprintReadOnly) TObjectPtr<UMediaPlayer> MediaPlayer;
+    UPROPERTY(BlueprintReadOnly) TObjectPtr<UMediaTexture> VideoTexture;
+    UPROPERTY(BlueprintReadOnly) TObjectPtr<UTexture> CurrentTexture;
+    UPROPERTY(BlueprintReadOnly) TObjectPtr<UMaterialInstanceDynamic> VideoMaterial;
+    UPROPERTY(BlueprintReadOnly) FRecoveredMediaEntry CurrentEntry;
+    UPROPERTY(BlueprintAssignable) FRecoveredMediaReady OnMediaReady;
+    UPROPERTY(BlueprintAssignable) FRecoveredMediaError OnMediaError;
+    UFUNCTION(BlueprintCallable, Category="Recovered|Media") bool OpenEntry(const FRecoveredMediaEntry& Entry);
+    UFUNCTION(BlueprintCallable, Category="Recovered|Media") void StopPlayback();
+    UFUNCTION(BlueprintCallable, Category="Recovered|Media") void SetPaused(bool bPaused);
+    UFUNCTION(BlueprintCallable, Category="Recovered|Media") bool SetPlaybackRate(float Rate);
+    UFUNCTION(BlueprintCallable, Category="Recovered|Media") UMaterialInstanceDynamic* GetVideoDisplayMaterial();
+    virtual void BeginDestroy() override;
+private:
+    UFUNCTION() void HandleOpened(FString Url);
+    UFUNCTION() void HandleFailed(FString Url);
+};

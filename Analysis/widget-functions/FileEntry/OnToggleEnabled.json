@@ -1,0 +1,49 @@
+{
+  "function": {
+    "name": "OnToggleEnabled",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_FileEntry"
+    ],
+    "fields": [
+      "K2Node_CustomEvent_bIsChecked",
+      "bIsChecked"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_bIsChecked",
+        "owner": "ExecuteUbergraph_FileEntry"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "bIsChecked",
+          "owner": "OnToggleEnabled"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_FileEntry",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 487
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

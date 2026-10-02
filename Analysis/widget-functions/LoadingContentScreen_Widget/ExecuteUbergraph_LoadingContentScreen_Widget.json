@@ -1,0 +1,1155 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_LoadingContentScreen_Widget",
+    "statements": 45,
+    "raw_fallback": false,
+    "calls": [
+      "Array_Random",
+      "Conv_IntToInt64",
+      "Format",
+      "GetCurrentFilterProcessed",
+      "GetCurrentFilterProgress",
+      "GetCurrentFilterTotal",
+      "GetGameMode",
+      "SetPercent",
+      "SetText"
+    ],
+    "fields": [
+      "",
+      "ArgumentName",
+      "ArgumentValue",
+      "ArgumentValueDouble",
+      "ArgumentValueFloat",
+      "ArgumentValueGender",
+      "ArgumentValueInt",
+      "ArgumentValueType",
+      "As BP Global Manager",
+      "CallFunc_Array_Random_OutIndex",
+      "CallFunc_Array_Random_OutItem",
+      "CallFunc_Conv_IntToInt64_ReturnValue",
+      "CallFunc_Conv_IntToInt64_ReturnValue_1",
+      "CallFunc_Format_ReturnValue",
+      "CallFunc_Format_ReturnValue_1",
+      "CallFunc_GetCurrentFilterProcessed_ReturnValue",
+      "CallFunc_GetCurrentFilterProgress_ReturnValue",
+      "CallFunc_GetCurrentFilterTotal_ReturnValue",
+      "CallFunc_GetGameMode_ReturnValue",
+      "Card Manager",
+      "CardManager",
+      "EntryPoint",
+      "K2Node_DynamicCast_AsBP_Global_Manager",
+      "K2Node_DynamicCast_bSuccess",
+      "K2Node_MakeArray_Array",
+      "K2Node_MakeArray_Array_1",
+      "K2Node_MakeStruct_FormatArgumentData",
+      "K2Node_MakeStruct_FormatArgumentData_1",
+      "K2Node_MakeStruct_FormatArgumentData_2",
+      "LoadScreenTipsArray",
+      "LoadScreenTipsText",
+      "LoadingScreenProgress",
+      "SortingProgressText"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameMode_ReturnValue",
+          "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameMode",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+          "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetGameMode_ReturnValue",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1502,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP Global Manager",
+          "owner": "LoadingContentScreen_Widget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+          "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Card Manager",
+          "owner": "LoadingContentScreen_Widget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "As BP Global Manager",
+            "owner": "LoadingContentScreen_Widget_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CardManager",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "CardManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1502
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -37
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "LoadScreenTipsArray",
+              "owner": "LoadingContentScreen_Widget_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem",
+              "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex",
+              "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentName",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentName",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": "loadscreentip"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueType",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueType",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 4
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValue",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValue",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Random_OutItem",
+          "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueInt",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueInt",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_Int64Const",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueFloat",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueFloat",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueDouble",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueDouble",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueGender",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueGender",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_SetArray",
+      "AssigningProperty": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeArray_Array",
+          "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+        }
+      },
+      "ArrayInnerProp": null,
+      "Elements": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Format_ReturnValue",
+        "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Format_ReturnValue",
+          "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Format",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "Tip: {loadscreentip}"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "D4619B884E1DFF59FD088DA3D0DA032B"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeArray_Array",
+              "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "LoadScreenTipsText",
+          "owner": "LoadingContentScreen_Widget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Format_ReturnValue",
+              "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 10
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetCurrentFilterProgress_ReturnValue",
+        "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetCurrentFilterProgress_ReturnValue",
+          "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetCurrentFilterProgress",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "LoadingScreenProgress",
+          "owner": "LoadingContentScreen_Widget_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetPercent",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetCurrentFilterProgress_ReturnValue",
+              "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetCurrentFilterProcessed_ReturnValue",
+        "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetCurrentFilterProcessed_ReturnValue",
+          "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetCurrentFilterProcessed",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetCurrentFilterTotal_ReturnValue",
+        "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetCurrentFilterTotal_ReturnValue",
+          "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetCurrentFilterTotal",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToInt64_ReturnValue",
+        "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToInt64_ReturnValue",
+          "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToInt64",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetCurrentFilterProcessed_ReturnValue",
+              "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToInt64_ReturnValue_1",
+        "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToInt64_ReturnValue_1",
+          "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToInt64",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetCurrentFilterTotal_ReturnValue",
+              "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentName",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentName",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": "currentprocessed"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueType",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueType",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValue",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValue",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_TextConst",
+        "Value": {
+          "op": "FScriptText",
+          "TextLiteralType": "Empty",
+          "LocalizedSource": null,
+          "LocalizedKey": null,
+          "LocalizedNamespace": null,
+          "InvariantLiteralString": null,
+          "LiteralString": null,
+          "StringTableAsset": null,
+          "StringTableId": null,
+          "StringTableKey": null
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueInt",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueInt",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToInt64_ReturnValue",
+          "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueFloat",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueFloat",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueDouble",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueDouble",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueGender",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueGender",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentName",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentName",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": "totalmedia"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueType",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueType",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValue",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValue",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_TextConst",
+        "Value": {
+          "op": "FScriptText",
+          "TextLiteralType": "Empty",
+          "LocalizedSource": null,
+          "LocalizedKey": null,
+          "LocalizedNamespace": null,
+          "InvariantLiteralString": null,
+          "LiteralString": null,
+          "StringTableAsset": null,
+          "StringTableId": null,
+          "StringTableKey": null
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueInt",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueInt",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToInt64_ReturnValue_1",
+          "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueFloat",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueFloat",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueDouble",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueDouble",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueGender",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueGender",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_SetArray",
+      "AssigningProperty": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeArray_Array_1",
+          "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+        }
+      },
+      "ArrayInnerProp": null,
+      "Elements": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Format_ReturnValue_1",
+        "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Format_ReturnValue_1",
+          "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Format",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "Sorting {currentprocessed}/{totalmedia} media"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "6C8ACE2342F428966E128C95B03DBF47"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeArray_Array_1",
+              "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "SortingProgressText",
+          "owner": "LoadingContentScreen_Widget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Format_ReturnValue_1",
+              "owner": "ExecuteUbergraph_LoadingContentScreen_Widget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

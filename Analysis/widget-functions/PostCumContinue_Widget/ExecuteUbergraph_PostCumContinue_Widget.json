@@ -1,0 +1,526 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_PostCumContinue_Widget",
+    "statements": 17,
+    "raw_fallback": false,
+    "calls": [
+      "AddToViewport",
+      "Array_Add",
+      "Create",
+      "GetGameMode",
+      "PauseSequence",
+      "PlayAnimation"
+    ],
+    "fields": [
+      "",
+      "BeatSpawnerManagerCPP",
+      "BrokenComboArray_137_4965B77C45AC878DA2C308BC8873F425",
+      "CallFunc_Array_Add_ReturnValue",
+      "CallFunc_Create_ReturnValue",
+      "CallFunc_GetGameMode_ReturnValue",
+      "CallFunc_PlayAnimation_ReturnValue",
+      "CurrentComboCount_66_5F7B16A442F400DEAE401686B872656A",
+      "EdgeStreak_38_4FA71F134FD2BB0EE85D7B96148820C9",
+      "EntryPoint",
+      "IdleButton",
+      "K2Node_DynamicCast_AsBP_Global_Manager",
+      "K2Node_DynamicCast_bSuccess",
+      "PlayerVariablesStruct"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "IdleButton",
+              "owner": "PostCumContinue_Widget_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 638
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 10
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameMode_ReturnValue",
+          "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameMode",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+          "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -2,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetGameMode_ReturnValue",
+            "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+            "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 638,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+            "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "BeatSpawnerManagerCPP",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "BeatSpawnerManagerCPP",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 10,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PauseSequence",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -73
+        },
+        "Offset": 21,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Create",
+          "Parameters": [
+            {
+              "op": "EX_Self"
+            },
+            {
+              "op": "EX_ObjectConst",
+              "Value": -71
+            },
+            {
+              "op": "EX_NoObject"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "AddToViewport",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue",
+        "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue",
+          "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -43
+        },
+        "Offset": 90,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue",
+          "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "BrokenComboArray_137_4965B77C45AC878DA2C308BC8873F425",
+                "owner": "LegacyStats"
+              },
+              "StructExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_LocalVariable",
+                  "Variable": {
+                    "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+                    "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "PlayerVariablesStruct",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "PlayerVariablesStruct",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              }
+            },
+            {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "CurrentComboCount_66_5F7B16A442F400DEAE401686B872656A",
+                "owner": "LegacyStats"
+              },
+              "StructExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_LocalVariable",
+                  "Variable": {
+                    "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+                    "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "PlayerVariablesStruct",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "PlayerVariablesStruct",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "BrokenComboArray_137_4965B77C45AC878DA2C308BC8873F425",
+        "owner": "LegacyStats"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "BrokenComboArray_137_4965B77C45AC878DA2C308BC8873F425",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+              "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "BrokenComboArray_137_4965B77C45AC878DA2C308BC8873F425",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+              "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "EdgeStreak_38_4FA71F134FD2BB0EE85D7B96148820C9",
+        "owner": "LegacyStats"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "EdgeStreak_38_4FA71F134FD2BB0EE85D7B96148820C9",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+              "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CurrentComboCount_66_5F7B16A442F400DEAE401686B872656A",
+        "owner": "LegacyStats"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "CurrentComboCount_66_5F7B16A442F400DEAE401686B872656A",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+              "owner": "ExecuteUbergraph_PostCumContinue_Widget"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

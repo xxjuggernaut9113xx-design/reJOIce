@@ -1,0 +1,65 @@
+{
+  "function": {
+    "name": "OnRowToggled",
+    "statements": 5,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_ImportMenuWidget"
+    ],
+    "fields": [
+      "FilePath",
+      "K2Node_CustomEvent_FilePath_1",
+      "K2Node_CustomEvent_bIsEnabled",
+      "bIsEnabled"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_FilePath_1",
+        "owner": "ExecuteUbergraph_ImportMenuWidget"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "FilePath",
+          "owner": "OnRowToggled"
+        }
+      }
+    },
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_bIsEnabled",
+        "owner": "ExecuteUbergraph_ImportMenuWidget"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "bIsEnabled",
+          "owner": "OnRowToggled"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_ImportMenuWidget",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 2750
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

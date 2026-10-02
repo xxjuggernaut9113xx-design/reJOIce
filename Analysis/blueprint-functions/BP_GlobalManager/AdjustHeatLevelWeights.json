@@ -1,0 +1,1993 @@
+{
+  "function": {
+    "name": "AdjustHeatLevelWeights",
+    "statements": 76,
+    "raw_fallback": false,
+    "calls": [
+      "Add_IntInt",
+      "Array_Add",
+      "Array_Clear",
+      "Array_Get",
+      "Array_Length",
+      "Concat_StrStr",
+      "Conv_DoubleToString",
+      "GetEnumeratorUserFriendlyName",
+      "Less_IntInt",
+      "NotEqual_ByteByte",
+      "PrintString",
+      "Update Fast Heat Weights",
+      "Update Medium Heat Weights",
+      "Update Slow Heat Weights"
+    ],
+    "fields": [
+      "",
+      "BaseWeight_8_F7A85592454B999BFA054687E376F2AF",
+      "CallFunc_Add_IntInt_ReturnValue",
+      "CallFunc_Add_IntInt_ReturnValue_1",
+      "CallFunc_Add_IntInt_ReturnValue_2",
+      "CallFunc_Array_Add_ReturnValue",
+      "CallFunc_Array_Add_ReturnValue_1",
+      "CallFunc_Array_Add_ReturnValue_2",
+      "CallFunc_Array_Get_Item",
+      "CallFunc_Array_Get_Item_1",
+      "CallFunc_Array_Get_Item_2",
+      "CallFunc_Array_Length_ReturnValue",
+      "CallFunc_Array_Length_ReturnValue_1",
+      "CallFunc_Array_Length_ReturnValue_2",
+      "CallFunc_Concat_StrStr_ReturnValue",
+      "CallFunc_Concat_StrStr_ReturnValue_1",
+      "CallFunc_Concat_StrStr_ReturnValue_2",
+      "CallFunc_Concat_StrStr_ReturnValue_3",
+      "CallFunc_Concat_StrStr_ReturnValue_4",
+      "CallFunc_Concat_StrStr_ReturnValue_5",
+      "CallFunc_Concat_StrStr_ReturnValue_6",
+      "CallFunc_Concat_StrStr_ReturnValue_7",
+      "CallFunc_Concat_StrStr_ReturnValue_8",
+      "CallFunc_Conv_DoubleToString_ReturnValue",
+      "CallFunc_Conv_DoubleToString_ReturnValue_1",
+      "CallFunc_Conv_DoubleToString_ReturnValue_2",
+      "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+      "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue_1",
+      "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue_2",
+      "CallFunc_Less_IntInt_ReturnValue",
+      "CallFunc_Less_IntInt_ReturnValue_1",
+      "CallFunc_Less_IntInt_ReturnValue_2",
+      "CallFunc_Update_Fast_Heat_Weights_SpecialEventModified",
+      "CallFunc_Update_Medium_Heat_Weights_SpecialEventModified",
+      "CallFunc_Update_Slow_Heat_Weights_SpecialEventModified",
+      "EligibleEventArray",
+      "EligibleEventsModified",
+      "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+      "HeatCategory",
+      "K2Node_SwitchEnum_CmpSuccess",
+      "LocalEligibleEvents",
+      "Temp_int_Array_Index_Variable",
+      "Temp_int_Array_Index_Variable_1",
+      "Temp_int_Array_Index_Variable_2",
+      "Temp_int_Loop_Counter_Variable",
+      "Temp_int_Loop_Counter_Variable_1",
+      "Temp_int_Loop_Counter_Variable_2",
+      "WeightMultiplier_10_EE5726D44873A9CAE6B27F8E95128C05"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 2867
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Clear",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "LocalEligibleEvents",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatCategory",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 182,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatCategory",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1023,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatCategory",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1909,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Switch on E_HeatCategory High Heat Triggered in Adjust Heat Level Weights"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -2162,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Length_ReturnValue_1",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Length_ReturnValue_1",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Length_ReturnValue_1",
+          "owner": "AdjustHeatLevelWeights"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Length",
+          "Parameters": [
+            {
+              "op": "EX_LocalOutVariable",
+              "Variable": {
+                "field": "EligibleEventArray",
+                "owner": "AdjustHeatLevelWeights"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Less_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Length_ReturnValue_1",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 991,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      }
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 2793
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_LocalOutVariable",
+            "Variable": {
+              "field": "EligibleEventArray",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Update Fast Heat Weights",
+      "Parameters": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Array_Get_Item",
+            "owner": "AdjustHeatLevelWeights"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Update_Fast_Heat_Weights_SpecialEventModified",
+            "owner": "AdjustHeatLevelWeights"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_1",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_1",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 28,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_1",
+          "owner": "AdjustHeatLevelWeights"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "LocalEligibleEvents",
+                "owner": "AdjustHeatLevelWeights"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Update_Fast_Heat_Weights_SpecialEventModified",
+                "owner": "AdjustHeatLevelWeights"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_DoubleToString_ReturnValue",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_DoubleToString_ReturnValue",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_DoubleToString",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "BaseWeight_8_F7A85592454B999BFA054687E376F2AF",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Update_Fast_Heat_Weights_SpecialEventModified",
+                "owner": "AdjustHeatLevelWeights"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue_1",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue_1",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetEnumeratorUserFriendlyName",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -4010
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Update_Fast_Heat_Weights_SpecialEventModified",
+                "owner": "AdjustHeatLevelWeights"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_1",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_1",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue_1",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": " Event Weight Updated"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_3",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_3",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue_1",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_DoubleToString_ReturnValue",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_5",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_5",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue_3",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": ""
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Concat_StrStr_ReturnValue_5",
+            "owner": "AdjustHeatLevelWeights"
+          }
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -2162,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "EligibleEventsModified",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "EligibleEventsModified",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "LocalEligibleEvents",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2867
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Switch on E_HeatCategory Medium Heat Triggered in Adjust Heat Level Weights"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -2162,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable_1",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable_1",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable_2",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable_2",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Length_ReturnValue_2",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Length_ReturnValue_2",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Length_ReturnValue_2",
+          "owner": "AdjustHeatLevelWeights"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Length",
+          "Parameters": [
+            {
+              "op": "EX_LocalOutVariable",
+              "Variable": {
+                "field": "EligibleEventArray",
+                "owner": "AdjustHeatLevelWeights"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue_1",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Less_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable_1",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Length_ReturnValue_2",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 991,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue_1",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable_2",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable_2",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable_1",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      }
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1835
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_LocalOutVariable",
+            "Variable": {
+              "field": "EligibleEventArray",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable_2",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item_2",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Update Medium Heat Weights",
+      "Parameters": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Array_Get_Item_2",
+            "owner": "AdjustHeatLevelWeights"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Update_Medium_Heat_Weights_SpecialEventModified",
+            "owner": "AdjustHeatLevelWeights"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_2",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_2",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 28,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_2",
+          "owner": "AdjustHeatLevelWeights"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "LocalEligibleEvents",
+                "owner": "AdjustHeatLevelWeights"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Update_Medium_Heat_Weights_SpecialEventModified",
+                "owner": "AdjustHeatLevelWeights"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_DoubleToString_ReturnValue_2",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_DoubleToString_ReturnValue_2",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_DoubleToString",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "WeightMultiplier_10_EE5726D44873A9CAE6B27F8E95128C05",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Update_Medium_Heat_Weights_SpecialEventModified",
+                "owner": "AdjustHeatLevelWeights"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue_2",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue_2",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetEnumeratorUserFriendlyName",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -4010
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Update_Medium_Heat_Weights_SpecialEventModified",
+                "owner": "AdjustHeatLevelWeights"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_6",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_6",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue_2",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": " Event Weight Updated"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_7",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_7",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue_6",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "="
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_8",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_8",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue_7",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_DoubleToString_ReturnValue_2",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Concat_StrStr_ReturnValue_8",
+            "owner": "AdjustHeatLevelWeights"
+          }
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -2162,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue_1",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue_1",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable_1",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable_1",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable_1",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue_1",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1211
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Switch on E_HeatCategory Slow Heat Triggered in Adjust Heat Level Weights"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -2162,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable_2",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable_2",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable_1",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable_1",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Length_ReturnValue",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Length_ReturnValue",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Length_ReturnValue",
+          "owner": "AdjustHeatLevelWeights"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Length",
+          "Parameters": [
+            {
+              "op": "EX_LocalOutVariable",
+              "Variable": {
+                "field": "EligibleEventArray",
+                "owner": "AdjustHeatLevelWeights"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue_2",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Less_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable_2",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Length_ReturnValue",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 991,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue_2",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable_1",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable_1",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable_2",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      }
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 2719
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_LocalOutVariable",
+            "Variable": {
+              "field": "EligibleEventArray",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable_1",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item_1",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Update Slow Heat Weights",
+      "Parameters": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Array_Get_Item_1",
+            "owner": "AdjustHeatLevelWeights"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Update_Slow_Heat_Weights_SpecialEventModified",
+            "owner": "AdjustHeatLevelWeights"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 28,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue",
+          "owner": "AdjustHeatLevelWeights"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "LocalEligibleEvents",
+                "owner": "AdjustHeatLevelWeights"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Update_Slow_Heat_Weights_SpecialEventModified",
+                "owner": "AdjustHeatLevelWeights"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_DoubleToString_ReturnValue_1",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_DoubleToString_ReturnValue_1",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_DoubleToString",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "BaseWeight_8_F7A85592454B999BFA054687E376F2AF",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Update_Slow_Heat_Weights_SpecialEventModified",
+                "owner": "AdjustHeatLevelWeights"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetEnumeratorUserFriendlyName",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -4010
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "EventName_32_3CCBA75146AFAAE3B8D277BEDC593943",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Update_Slow_Heat_Weights_SpecialEventModified",
+                "owner": "AdjustHeatLevelWeights"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": " Event Weight Updated"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_2",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_2",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "="
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_4",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_4",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue_2",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_DoubleToString_ReturnValue_1",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Concat_StrStr_ReturnValue_4",
+            "owner": "AdjustHeatLevelWeights"
+          }
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -2162,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue_2",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue_2",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable_2",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable_2",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable_2",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue_2",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2095
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable",
+              "owner": "AdjustHeatLevelWeights"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable",
+        "owner": "AdjustHeatLevelWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "AdjustHeatLevelWeights"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 368
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

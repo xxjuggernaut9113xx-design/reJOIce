@@ -1,0 +1,194 @@
+{
+  "function": {
+    "name": "Determine&HeatAdd",
+    "statements": 14,
+    "raw_fallback": false,
+    "calls": [
+      "AddHeat",
+      "NotEqual_ByteByte"
+    ],
+    "fields": [
+      "HeatCategory",
+      "HighCategory_HeatAdd",
+      "K2Node_SwitchEnum_CmpSuccess",
+      "MedCategory_HeatAdd",
+      "SlowCategory_HeatAdd"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine&HeatAdd"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatCategory",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 140,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine&HeatAdd"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine&HeatAdd"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatCategory",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 168,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine&HeatAdd"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine&HeatAdd"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatCategory",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 196,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine&HeatAdd"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 219
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "AddHeat",
+      "Parameters": [
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "HighCategory_HeatAdd",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 219
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "AddHeat",
+      "Parameters": [
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "MedCategory_HeatAdd",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 219
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "AddHeat",
+      "Parameters": [
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SlowCategory_HeatAdd",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

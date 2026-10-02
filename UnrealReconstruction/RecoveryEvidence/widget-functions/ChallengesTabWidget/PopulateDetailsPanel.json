@@ -1,0 +1,4040 @@
+{
+  "function": {
+    "name": "PopulateDetailsPanel",
+    "statements": 141,
+    "raw_fallback": false,
+    "calls": [
+      "Add_IntInt",
+      "Array_Get",
+      "Array_Length",
+      "Concat_StrStr",
+      "Conv_IntToInt64",
+      "Conv_NameToString",
+      "Conv_NameToText",
+      "Conv_StringToText",
+      "Conv_TextToString",
+      "Format",
+      "GetChallengeProgressText",
+      "GetPlayerCardData",
+      "Less_IntInt",
+      "NotEqual_ByteByte",
+      "PlayAnimation",
+      "PrintString",
+      "Replace",
+      "SetBrushFromTexture",
+      "SetColorAndOpacity",
+      "SetText"
+    ],
+    "fields": [
+      "",
+      "ArgumentName",
+      "ArgumentValue",
+      "ArgumentValueDouble",
+      "ArgumentValueFloat",
+      "ArgumentValueGender",
+      "ArgumentValueInt",
+      "ArgumentValueType",
+      "As BP CHGame Instance",
+      "CallFunc_Add_IntInt_ReturnValue",
+      "CallFunc_Array_Get_Item",
+      "CallFunc_Array_Length_ReturnValue",
+      "CallFunc_Concat_StrStr_ReturnValue",
+      "CallFunc_Concat_StrStr_ReturnValue_1",
+      "CallFunc_Concat_StrStr_ReturnValue_2",
+      "CallFunc_Concat_StrStr_ReturnValue_3",
+      "CallFunc_Concat_StrStr_ReturnValue_4",
+      "CallFunc_Conv_IntToInt64_ReturnValue",
+      "CallFunc_Conv_IntToInt64_ReturnValue_1",
+      "CallFunc_Conv_NameToString_ReturnValue",
+      "CallFunc_Conv_NameToText_ReturnValue",
+      "CallFunc_Conv_StringToText_ReturnValue",
+      "CallFunc_Conv_StringToText_ReturnValue_1",
+      "CallFunc_Conv_StringToText_ReturnValue_2",
+      "CallFunc_Conv_TextToString_ReturnValue",
+      "CallFunc_Conv_TextToString_ReturnValue_1",
+      "CallFunc_Conv_TextToString_ReturnValue_2",
+      "CallFunc_Conv_TextToString_ReturnValue_3",
+      "CallFunc_Conv_TextToString_ReturnValue_4",
+      "CallFunc_Format_ReturnValue",
+      "CallFunc_Format_ReturnValue_1",
+      "CallFunc_Format_ReturnValue_2",
+      "CallFunc_Format_ReturnValue_3",
+      "CallFunc_Format_ReturnValue_4",
+      "CallFunc_GetChallengeProgressText_ReturnValue",
+      "CallFunc_GetPlayerCardData_ReturnValue",
+      "CallFunc_Less_IntInt_ReturnValue",
+      "CallFunc_PlayAnimation_ReturnValue",
+      "CallFunc_Replace_ReturnValue",
+      "CardName",
+      "Challenge Description",
+      "Challenge Title",
+      "ChallengeComplete?",
+      "ChallengeIcon",
+      "ChallengeTitle",
+      "Challenge_ID",
+      "ColorUseRule",
+      "CompletionStatusText",
+      "InteractionButtonText",
+      "ItemIdentifier",
+      "K2Node_MakeArray_Array",
+      "K2Node_MakeArray_Array_1",
+      "K2Node_MakeArray_Array_2",
+      "K2Node_MakeArray_Array_3",
+      "K2Node_MakeArray_Array_4",
+      "K2Node_MakeStruct_FormatArgumentData",
+      "K2Node_MakeStruct_FormatArgumentData_1",
+      "K2Node_MakeStruct_FormatArgumentData_2",
+      "K2Node_MakeStruct_FormatArgumentData_3",
+      "K2Node_MakeStruct_FormatArgumentData_4",
+      "K2Node_MakeStruct_SlateColor",
+      "K2Node_MakeStruct_SlateColor_1",
+      "K2Node_SwitchEnum_CmpSuccess",
+      "ProgressionManager",
+      "RequirementDescription",
+      "RewardType",
+      "Rewards",
+      "RewardsBody",
+      "RewardsDescription",
+      "SpecifiedColor",
+      "Temp_int_Array_Index_Variable",
+      "Temp_int_Loop_Counter_Variable",
+      "UpdateDetailsPanelBounce",
+      "Value"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 5342
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ChallengeTitle",
+          "owner": "ChallengesTabWidget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Challenge Title",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1120,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "ChallengeComplete?",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SpecifiedColor",
+        "owner": "SlateColor"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "SpecifiedColor",
+          "owner": "SlateColor"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateColor",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -140,
+        "StructSize": 16,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.5209959745407104
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.12477199733257294
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ColorUseRule",
+        "owner": "SlateColor"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ColorUseRule",
+          "owner": "SlateColor"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateColor",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CompletionStatusText",
+          "owner": "ChallengesTabWidget_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetColorAndOpacity",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeStruct_SlateColor",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CompletionStatusText",
+          "owner": "ChallengesTabWidget_C"
+        }
+      },
+      "Offset": 63,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "Completed"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "4387653F4F82A5E6F073D0BED2FC7002"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ChallengeIcon",
+          "owner": "ChallengesTabWidget_C"
+        }
+      },
+      "Offset": 24,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetBrushFromTexture",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "ChallengeIcon",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "RequirementDescription",
+          "owner": "ChallengesTabWidget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Challenge Description",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UpdateDetailsPanelBounce",
+              "owner": "ChallengesTabWidget_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetChallengeProgressText_ReturnValue",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetChallengeProgressText_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "ChallengesTabWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetChallengeProgressText_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetChallengeProgressText",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Challenge_ID",
+                "owner": "PopulateDetailsPanel"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue_2",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue_2",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetChallengeProgressText_ReturnValue",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "InteractionButtonText",
+          "owner": "ChallengesTabWidget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_StringToText_ReturnValue_2",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "RewardsDescription",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "RewardsDescription",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": ""
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Length_ReturnValue",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Length_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -107
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Length_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Length",
+          "Parameters": [
+            {
+              "op": "EX_LocalOutVariable",
+              "Variable": {
+                "field": "Rewards",
+                "owner": "PopulateDetailsPanel"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Less_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Length_ReturnValue",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1342,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1425
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -107
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_LocalOutVariable",
+            "Variable": {
+              "field": "Rewards",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "RewardType",
+              "owner": "CHRewardData"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Get_Item",
+                "owner": "PopulateDetailsPanel"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1499,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "RewardType",
+              "owner": "CHRewardData"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Get_Item",
+                "owner": "PopulateDetailsPanel"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2649,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "RewardType",
+              "owner": "CHRewardData"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Get_Item",
+                "owner": "PopulateDetailsPanel"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3275,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "RewardType",
+              "owner": "CHRewardData"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Get_Item",
+                "owner": "PopulateDetailsPanel"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3998,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "RewardType",
+              "owner": "CHRewardData"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Get_Item",
+                "owner": "PopulateDetailsPanel"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4703,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SpecifiedColor",
+        "owner": "SlateColor"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "SpecifiedColor",
+          "owner": "SlateColor"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateColor_1",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -140,
+        "StructSize": 16,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.015208999626338482
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.01298299990594387
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ColorUseRule",
+        "owner": "SlateColor"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ColorUseRule",
+          "owner": "SlateColor"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateColor_1",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CompletionStatusText",
+          "owner": "ChallengesTabWidget_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetColorAndOpacity",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeStruct_SlateColor_1",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CompletionStatusText",
+          "owner": "ChallengesTabWidget_C"
+        }
+      },
+      "Offset": 64,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "Incomplete"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "882825CB4FC17BA8DA48D0A510ED5CEF"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 280
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue_1",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue_1",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "RewardsDescription",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "RewardsBody",
+          "owner": "ChallengesTabWidget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_StringToText_ReturnValue_1",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 647
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -107
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_LocalOutVariable",
+            "Variable": {
+              "field": "Rewards",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToInt64_ReturnValue_1",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToInt64_ReturnValue_1",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToInt64",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Value",
+              "owner": "CHRewardData"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Get_Item",
+                "owner": "PopulateDetailsPanel"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentName",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentName",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_4",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": "value"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueType",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueType",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_4",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValue",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValue",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_4",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_TextConst",
+        "Value": {
+          "op": "FScriptText",
+          "TextLiteralType": "Empty",
+          "LocalizedSource": null,
+          "LocalizedKey": null,
+          "LocalizedNamespace": null,
+          "InvariantLiteralString": null,
+          "LiteralString": null,
+          "StringTableAsset": null,
+          "StringTableId": null,
+          "StringTableKey": null
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueInt",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueInt",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_4",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToInt64_ReturnValue_1",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueFloat",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueFloat",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_4",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueDouble",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueDouble",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_4",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueGender",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueGender",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_4",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_SetArray",
+      "AssigningProperty": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeArray_Array_4",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "ArrayInnerProp": null,
+      "Elements": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_4",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Format_ReturnValue_4",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Format_ReturnValue_4",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Format",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "+ {value} XP\r\n"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "0EF8182B47BF66DDC2D2D4BDAB975667"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeArray_Array_4",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue_4",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue_4",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Format_ReturnValue_4",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_4",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_4",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "RewardsDescription",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_TextToString_ReturnValue_4",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "RewardsDescription",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "RewardsDescription",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_4",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -107
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_LocalOutVariable",
+            "Variable": {
+              "field": "Rewards",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToInt64_ReturnValue_1",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToInt64_ReturnValue_1",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToInt64",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Value",
+              "owner": "CHRewardData"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Get_Item",
+                "owner": "PopulateDetailsPanel"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentName",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentName",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_4",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": "value"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueType",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueType",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_4",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValue",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValue",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_4",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_TextConst",
+        "Value": {
+          "op": "FScriptText",
+          "TextLiteralType": "Empty",
+          "LocalizedSource": null,
+          "LocalizedKey": null,
+          "LocalizedNamespace": null,
+          "InvariantLiteralString": null,
+          "LiteralString": null,
+          "StringTableAsset": null,
+          "StringTableId": null,
+          "StringTableKey": null
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueInt",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueInt",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_4",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToInt64_ReturnValue_1",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueFloat",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueFloat",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_4",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueDouble",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueDouble",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_4",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueGender",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueGender",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_4",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_SetArray",
+      "AssigningProperty": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeArray_Array_4",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "ArrayInnerProp": null,
+      "Elements": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_4",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Format_ReturnValue_4",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Format_ReturnValue_4",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Format",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "+ {value} XP\r\n"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "0EF8182B47BF66DDC2D2D4BDAB975667"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeArray_Array_4",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue_4",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue_4",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Format_ReturnValue_4",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_4",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_4",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "RewardsDescription",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_TextToString_ReturnValue_4",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Concat_StrStr_ReturnValue_4",
+            "owner": "PopulateDetailsPanel"
+          }
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -140,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -107
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_LocalOutVariable",
+            "Variable": {
+              "field": "Rewards",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToInt64_ReturnValue",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToInt64_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToInt64",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Value",
+              "owner": "CHRewardData"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Get_Item",
+                "owner": "PopulateDetailsPanel"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentName",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentName",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": "value"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueType",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueType",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValue",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValue",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_TextConst",
+        "Value": {
+          "op": "FScriptText",
+          "TextLiteralType": "Empty",
+          "LocalizedSource": null,
+          "LocalizedKey": null,
+          "LocalizedNamespace": null,
+          "InvariantLiteralString": null,
+          "LiteralString": null,
+          "StringTableAsset": null,
+          "StringTableId": null,
+          "StringTableKey": null
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueInt",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueInt",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToInt64_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueFloat",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueFloat",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueDouble",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueDouble",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueGender",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueGender",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_SetArray",
+      "AssigningProperty": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeArray_Array_2",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "ArrayInnerProp": null,
+      "Elements": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_2",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Format_ReturnValue_2",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Format_ReturnValue_2",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Format",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "+ {value} UP\r\n"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "ACA1E4CA4F9C25A09D310391EBF411A1"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeArray_Array_2",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue_2",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue_2",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Format_ReturnValue_2",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_3",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_3",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "RewardsDescription",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_TextToString_ReturnValue_2",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "RewardsDescription",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "RewardsDescription",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_3",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "RewardsDescription",
+            "owner": "PopulateDetailsPanel"
+          }
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -140,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -107
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_LocalOutVariable",
+            "Variable": {
+              "field": "Rewards",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_NameToString_ReturnValue",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_NameToString_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_NameToString",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "ItemIdentifier",
+              "owner": "CHRewardData"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Get_Item",
+                "owner": "PopulateDetailsPanel"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Replace_ReturnValue",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Replace_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Replace",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_NameToString_ReturnValue",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "_"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": " "
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Replace_ReturnValue",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentName",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentName",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_3",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": "packname"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueType",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueType",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_3",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 4
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValue",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValue",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_3",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueInt",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueInt",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_3",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_Int64Const",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueFloat",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueFloat",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_3",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueDouble",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueDouble",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_3",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueGender",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueGender",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_3",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_SetArray",
+      "AssigningProperty": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeArray_Array_3",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "ArrayInnerProp": null,
+      "Elements": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_3",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Format_ReturnValue_3",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Format_ReturnValue_3",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Format",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "+ {packname} pack\r\n"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "0C135FAA443BCC986122F794D758F11D"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeArray_Array_3",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue_3",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue_3",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Format_ReturnValue_3",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_1",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_1",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "RewardsDescription",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_TextToString_ReturnValue_3",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "RewardsDescription",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "RewardsDescription",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_1",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "RewardsDescription",
+            "owner": "PopulateDetailsPanel"
+          }
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -140,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -107
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_LocalOutVariable",
+            "Variable": {
+              "field": "Rewards",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetPlayerCardData_ReturnValue",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetPlayerCardData_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "ChallengesTabWidget_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 28,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetPlayerCardData_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetPlayerCardData",
+          "Parameters": [
+            {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "ItemIdentifier",
+                "owner": "CHRewardData"
+              },
+              "StructExpression": {
+                "op": "EX_LocalVariable",
+                "Variable": {
+                  "field": "CallFunc_Array_Get_Item",
+                  "owner": "PopulateDetailsPanel"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentName",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentName",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": "playercard"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueType",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueType",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 4
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValue",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValue",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "CardName",
+          "owner": "PlayerCardData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetPlayerCardData_ReturnValue",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueInt",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueInt",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_Int64Const",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueFloat",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueFloat",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueDouble",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueDouble",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueGender",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueGender",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_SetArray",
+      "AssigningProperty": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeArray_Array_1",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "ArrayInnerProp": null,
+      "Elements": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData_1",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Format_ReturnValue_1",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Format_ReturnValue_1",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Format",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "+ {playercard} player card\r\n"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "828650AC4871BFBE8A37B6A3EF23B826"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeArray_Array_1",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue_1",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue_1",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Format_ReturnValue_1",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_2",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_2",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "RewardsDescription",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_TextToString_ReturnValue_1",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "RewardsDescription",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "RewardsDescription",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_2",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "RewardsDescription",
+            "owner": "PopulateDetailsPanel"
+          }
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -140,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -107
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_LocalOutVariable",
+            "Variable": {
+              "field": "Rewards",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_NameToText_ReturnValue",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_NameToText_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_NameToText",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "ItemIdentifier",
+              "owner": "CHRewardData"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Get_Item",
+                "owner": "PopulateDetailsPanel"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentName",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentName",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": "value"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueType",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueType",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 4
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValue",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValue",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_NameToText_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueInt",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueInt",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_Int64Const",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueFloat",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueFloat",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueDouble",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueDouble",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueGender",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueGender",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_SetArray",
+      "AssigningProperty": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeArray_Array",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "ArrayInnerProp": null,
+      "Elements": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "PopulateDetailsPanel"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Format_ReturnValue",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Format_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Format",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "+ {value} Modifier\r\n"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "C25EC2E14F09A5F5F9AA4BB5330300AA"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeArray_Array",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Format_ReturnValue",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "RewardsDescription",
+              "owner": "PopulateDetailsPanel"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_TextToString_ReturnValue",
+              "owner": "PopulateDetailsPanel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "RewardsDescription",
+        "owner": "PopulateDetailsPanel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "RewardsDescription",
+          "owner": "PopulateDetailsPanel"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue",
+          "owner": "PopulateDetailsPanel"
+        }
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "RewardsDescription",
+            "owner": "PopulateDetailsPanel"
+          }
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -140,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

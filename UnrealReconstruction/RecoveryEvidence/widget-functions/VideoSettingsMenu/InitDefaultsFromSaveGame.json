@@ -1,0 +1,5080 @@
+{
+  "function": {
+    "name": "InitDefaultsFromSaveGame",
+    "statements": 252,
+    "raw_fallback": false,
+    "calls": [
+      "NotEqual_ByteByte",
+      "NotEqual_IntInt",
+      "NotEqual_StriStri",
+      "SetSelectedOption"
+    ],
+    "fields": [
+      "",
+      "AreContextualBeatSFXEnabled?",
+      "AreLootDropsEnabled?",
+      "AreNotificationBoxesEnabled?",
+      "As BP CHGame Instance",
+      "AssFrenzyComboBox",
+      "AssFrenzyEnabled?",
+      "AutoBMToggledCumEvent?",
+      "AutoBMToggledSuccubusEvent?",
+      "AutoToggleBrainMelterCumComboBox",
+      "AutoToggleBrainMelterSuccubusComboBox",
+      "BackgroundMusicComboBox",
+      "BallRubbingComboBox",
+      "BoobFrenzyComboBox",
+      "BoobFrenzyEnabled?",
+      "BrainMelterMediaBeatSwapInterval",
+      "BrainMelterMediaSwapComboBox",
+      "BreathplayComboBox",
+      "ContextualBeatSFXComboBox",
+      "CurrentSave",
+      "DynamicBackgroundsComboBox",
+      "EdgePacingMultiplier",
+      "EdgePacingMultiplierEnum",
+      "FPSLimit",
+      "FPSLimitComboBOx",
+      "FullScreenMode",
+      "HealthBarAndTextComboBox",
+      "IsDynamicMusicEnabled?",
+      "IsScreenShakeEnabled",
+      "K2Node_SwitchEnum_CmpSuccess",
+      "K2Node_SwitchEnum_CmpSuccess_1",
+      "K2Node_SwitchInteger_CmpSuccess",
+      "K2Node_SwitchString_CmpSuccess",
+      "K2Node_SwitchString_CmpSuccess_1",
+      "K2Node_SwitchString_CmpSuccess_2",
+      "LootDropComboBox",
+      "MoanSFXComboBox",
+      "Modifier_BallRubbingEnabled?",
+      "Modifier_HoldBreathEnabled?",
+      "Modifier_NippleRubbingEnabled?",
+      "NippleRubbingComboBox",
+      "NotificationBoxesComboBox",
+      "OnomatopoeiaComboBox_1",
+      "ResolutionComboBox",
+      "ResolutionSelection",
+      "ScreenmodeComboBox",
+      "ScreenshakeComboBox",
+      "ShaftOnlyComboBox",
+      "ShaftOnlyModifierEnabled?",
+      "StrokeCountMultiplier",
+      "StrokeMultiplierEnum",
+      "SyncShortVideosToBeatComboBox",
+      "TaskModifiersEnabled?",
+      "TaskModifiersToggleComboBox",
+      "TipOnlyComboBox",
+      "TipOnlyModifierEnabled?",
+      "VoicelinesComboBox",
+      "bColoredBackgroundEnabled?",
+      "bHealthBarUIEnabled?",
+      "bMediaSyncEnabled",
+      "bMoanSFXEnabled?",
+      "bOnomatopoeiasEnabled?",
+      "bVoiceLinesEnabled?"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 6633
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 6500
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 5869
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 5238
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 5105
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 4972
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 4839
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 4273
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 3844
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 3185
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 2625
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 2492
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 2359
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 2226
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 2093
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1960
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1827
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1694
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1561
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1428
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1295
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1162
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1029
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 896
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 763
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 630
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 497
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 364
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 231
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "FPSLimitComboBOx",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 63,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "FPSLimit",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "FPSLimit",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 326,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "bHealthBarUIEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "bHealthBarUIEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "HealthBarAndTextComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "HealthBarAndTextComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 459,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "bMoanSFXEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "bMoanSFXEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "MoanSFXComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "MoanSFXComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 592,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "IsScreenShakeEnabled",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "IsScreenShakeEnabled",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ScreenshakeComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ScreenshakeComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 725,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "bVoiceLinesEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "bVoiceLinesEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "VoicelinesComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "VoicelinesComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 858,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "bOnomatopoeiasEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "bOnomatopoeiasEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "OnomatopoeiaComboBox_1",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "OnomatopoeiaComboBox_1",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 991,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "bColoredBackgroundEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "bColoredBackgroundEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "DynamicBackgroundsComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "DynamicBackgroundsComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1124,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AutoBMToggledSuccubusEvent?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AutoBMToggledSuccubusEvent?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AutoToggleBrainMelterSuccubusComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AutoToggleBrainMelterSuccubusComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1257,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AutoBMToggledCumEvent?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AutoBMToggledCumEvent?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AutoToggleBrainMelterCumComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AutoToggleBrainMelterCumComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1390,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AreLootDropsEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AreLootDropsEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "LootDropComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "LootDropComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1523,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AssFrenzyEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AssFrenzyEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AssFrenzyComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AssFrenzyComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1656,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "BoobFrenzyEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "BoobFrenzyEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "BoobFrenzyComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "BoobFrenzyComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1789,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "IsDynamicMusicEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "IsDynamicMusicEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "BackgroundMusicComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "BackgroundMusicComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1922,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AreNotificationBoxesEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AreNotificationBoxesEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "NotificationBoxesComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "NotificationBoxesComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2055,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AreContextualBeatSFXEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AreContextualBeatSFXEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ContextualBeatSFXComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ContextualBeatSFXComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2188,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "TaskModifiersEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "TaskModifiersEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "TaskModifiersToggleComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "TaskModifiersToggleComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2321,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Modifier_BallRubbingEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Modifier_BallRubbingEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "BallRubbingComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "BallRubbingComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2454,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Modifier_HoldBreathEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Modifier_HoldBreathEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "BreathplayComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "BreathplayComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2587,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Modifier_NippleRubbingEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Modifier_NippleRubbingEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "NippleRubbingComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "NippleRubbingComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "BrainMelterMediaBeatSwapInterval",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "BrainMelterMediaBeatSwapInterval",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3138,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "BrainMelterMediaBeatSwapInterval",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "BrainMelterMediaBeatSwapInterval",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3090,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "BrainMelterMediaBeatSwapInterval",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "BrainMelterMediaBeatSwapInterval",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3042,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "BrainMelterMediaBeatSwapInterval",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "BrainMelterMediaBeatSwapInterval",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2994,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "BrainMelterMediaSwapComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 25,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Every 4 Beats"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "BrainMelterMediaSwapComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 25,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Every 3 Beats"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "BrainMelterMediaSwapComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 25,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Every 2 Beats"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "BrainMelterMediaSwapComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 24,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Every 1 Beat"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "FPSLimit",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "FPSLimit",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "30"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3807,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "FPSLimit",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "FPSLimit",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "60"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3770,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "FPSLimit",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "FPSLimit",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "120"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3732,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "FPSLimit",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "FPSLimit",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "144"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3694,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "FPSLimit",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "FPSLimit",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Unlimited"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3650,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "FPSLimitComboBOx",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 21,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Unlimited"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "FPSLimitComboBOx",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "144"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "FPSLimitComboBOx",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "120"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "FPSLimitComboBOx",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "60"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "FPSLimitComboBOx",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "30"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_1",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "FullScreenMode",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "FullScreenMode",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Fullscreen"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4228,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_1",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_1",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "FullScreenMode",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "FullScreenMode",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Windowed"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4185,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_1",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_1",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "FullScreenMode",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "FullScreenMode",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Borderless"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4140,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_1",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ScreenmodeComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 22,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Borderless"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ScreenmodeComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 20,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Windowed"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ScreenmodeComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 22,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Fullscreen"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "ResolutionSelection",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "ResolutionSelection",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "1280x720"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4796,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "ResolutionSelection",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "ResolutionSelection",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "1920x1080"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4664,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "ResolutionSelection",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "ResolutionSelection",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "2560x1440"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4752,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "ResolutionSelection",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "ResolutionSelection",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "3840x2160"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4708,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ResolutionComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 21,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "1920x1080"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ResolutionComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 21,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "3840x2160"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ResolutionComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 21,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "2560x1440"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ResolutionComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 20,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "1280x720"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4934,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Modifier_NippleRubbingEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Modifier_NippleRubbingEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "NippleRubbingComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "NippleRubbingComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 5067,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "TipOnlyModifierEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "TipOnlyModifierEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "TipOnlyComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "TipOnlyComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 5200,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "ShaftOnlyModifierEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "ShaftOnlyModifierEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ShaftOnlyComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ShaftOnlyComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "EdgePacingMultiplierEnum",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "EdgePacingMultiplierEnum",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 5832,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "EdgePacingMultiplierEnum",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "EdgePacingMultiplierEnum",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 5795,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "EdgePacingMultiplierEnum",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "EdgePacingMultiplierEnum",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 5758,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "EdgePacingMultiplierEnum",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "EdgePacingMultiplierEnum",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 5721,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "EdgePacingMultiplierEnum",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "EdgePacingMultiplierEnum",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 5684,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "EdgePacingMultiplier",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "8x"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "EdgePacingMultiplier",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "4x"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "EdgePacingMultiplier",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "3x"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "EdgePacingMultiplier",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "2x"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "EdgePacingMultiplier",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "1x"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "StrokeMultiplierEnum",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "StrokeMultiplierEnum",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 6463,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "StrokeMultiplierEnum",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "StrokeMultiplierEnum",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 6426,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "StrokeMultiplierEnum",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "StrokeMultiplierEnum",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 6389,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "StrokeMultiplierEnum",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "StrokeMultiplierEnum",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 6352,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "VideoSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "StrokeMultiplierEnum",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "StrokeMultiplierEnum",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 6315,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitDefaultsFromSaveGame"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "StrokeCountMultiplier",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "8x"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "StrokeCountMultiplier",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "4x"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "StrokeCountMultiplier",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "3x"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "StrokeCountMultiplier",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "2x"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "StrokeCountMultiplier",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "1x"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 6595,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VideoSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "bMediaSyncEnabled",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "bMediaSyncEnabled",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "SyncShortVideosToBeatComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "On"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "SyncShortVideosToBeatComboBox",
+          "owner": "VideoSettingsMenu_C"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetSelectedOption",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

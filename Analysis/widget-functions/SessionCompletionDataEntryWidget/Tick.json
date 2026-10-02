@@ -1,0 +1,65 @@
+{
+  "function": {
+    "name": "Tick",
+    "statements": 5,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_SessionCompletionDataEntryWidget"
+    ],
+    "fields": [
+      "InDeltaTime",
+      "K2Node_Event_InDeltaTime",
+      "K2Node_Event_MyGeometry",
+      "MyGeometry"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_Event_MyGeometry",
+        "owner": "ExecuteUbergraph_SessionCompletionDataEntryWidget"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "MyGeometry",
+          "owner": "Tick"
+        }
+      }
+    },
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_Event_InDeltaTime",
+        "owner": "ExecuteUbergraph_SessionCompletionDataEntryWidget"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "InDeltaTime",
+          "owner": "Tick"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_SessionCompletionDataEntryWidget",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 10
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

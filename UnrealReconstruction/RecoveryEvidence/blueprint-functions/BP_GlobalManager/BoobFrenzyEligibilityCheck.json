@@ -1,0 +1,141 @@
+{
+  "function": {
+    "name": "BoobFrenzyEligibilityCheck",
+    "statements": 11,
+    "raw_fallback": false,
+    "calls": [
+      "EqualEqual_ByteByte"
+    ],
+    "fields": [
+      "CallFunc_EqualEqual_ByteByte_ReturnValue",
+      "HeatCategory",
+      "IsBrainMelterEnabled?",
+      "IsEligibleReturn",
+      "LocalBool"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "LocalBool",
+          "owner": "BoobFrenzyEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 105,
+      "BooleanExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "IsBrainMelterEnabled?",
+          "owner": "BP_GlobalManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_ByteByte_ReturnValue",
+          "owner": "BoobFrenzyEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "EqualEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatCategory",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 105,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_ByteByte_ReturnValue",
+          "owner": "BoobFrenzyEligibilityCheck"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "LocalBool",
+          "owner": "BoobFrenzyEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "IsEligibleReturn",
+          "owner": "BoobFrenzyEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "LocalBool",
+          "owner": "BoobFrenzyEligibilityCheck"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 121
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "LocalBool",
+          "owner": "BoobFrenzyEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 81
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

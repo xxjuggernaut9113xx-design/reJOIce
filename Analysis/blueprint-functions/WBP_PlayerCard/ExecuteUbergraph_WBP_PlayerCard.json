@@ -1,0 +1,144 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_WBP_PlayerCard",
+    "statements": 10,
+    "raw_fallback": false,
+    "calls": [
+      "GetGameInstance"
+    ],
+    "fields": [
+      "",
+      "As BP CHGame Instance",
+      "CallFunc_GetGameInstance_ReturnValue",
+      "EntryPoint",
+      "K2Node_DynamicCast_AsBP_CHGame_Instance",
+      "K2Node_DynamicCast_bSuccess"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_WBP_PlayerCard"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameInstance_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_PlayerCard"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameInstance",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_WBP_PlayerCard"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetGameInstance_ReturnValue",
+            "owner": "ExecuteUbergraph_WBP_PlayerCard"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_WBP_PlayerCard"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+            "owner": "ExecuteUbergraph_WBP_PlayerCard"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 139,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_WBP_PlayerCard"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "WBP_PlayerCard_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_WBP_PlayerCard"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 139
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 10
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

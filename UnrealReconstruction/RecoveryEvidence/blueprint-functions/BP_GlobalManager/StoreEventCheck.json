@@ -1,0 +1,166 @@
+{
+  "function": {
+    "name": "StoreEventCheck",
+    "statements": 13,
+    "raw_fallback": false,
+    "calls": [
+      "GreaterEqual_IntInt"
+    ],
+    "fields": [
+      "CallFunc_GreaterEqual_IntInt_ReturnValue",
+      "Eligibility",
+      "IsStoreOnCooldown",
+      "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+      "PlayerVariablesStruct",
+      "StoreEligibilityReturn"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Eligibility",
+          "owner": "StoreEventCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 60,
+      "BooleanExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "IsStoreOnCooldown",
+          "owner": "BP_GlobalManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Eligibility",
+          "owner": "StoreEventCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "StoreEligibilityReturn",
+          "owner": "StoreEventCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Eligibility",
+          "owner": "StoreEventCheck"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 149
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_IntInt_ReturnValue",
+          "owner": "StoreEventCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GreaterEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 200
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 133,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_IntInt_ReturnValue",
+          "owner": "StoreEventCheck"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Eligibility",
+          "owner": "StoreEventCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 36
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Eligibility",
+          "owner": "StoreEventCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 36
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

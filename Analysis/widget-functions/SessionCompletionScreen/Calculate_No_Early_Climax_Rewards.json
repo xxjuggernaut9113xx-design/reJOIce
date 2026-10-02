@@ -1,0 +1,99 @@
+{
+  "function": {
+    "name": "Calculate No Early Climax Rewards",
+    "statements": 6,
+    "raw_fallback": false,
+    "calls": [],
+    "fields": [
+      "As BP Global Manager",
+      "IsAllowedToCum?_93_467B5BBA4DB5A23E91E88E925D3F56A2",
+      "No Early Climax Reward",
+      "PlayerVariablesStruct"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 73,
+      "BooleanExpression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "IsAllowedToCum?_93_467B5BBA4DB5A23E91E88E925D3F56A2",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "SessionCompletionScreen_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "No Early Climax Reward",
+        "owner": "SessionCompletionScreen_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "No Early Climax Reward",
+          "owner": "SessionCompletionScreen_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 6
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 96
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "No Early Climax Reward",
+        "owner": "SessionCompletionScreen_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "No Early Climax Reward",
+          "owner": "SessionCompletionScreen_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

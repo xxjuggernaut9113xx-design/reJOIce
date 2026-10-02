@@ -1,0 +1,81 @@
+{
+  "function": {
+    "name": "AddToCumMeter",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "Add_DoubleDouble"
+    ],
+    "fields": [
+      "CallFunc_Add_DoubleDouble_ReturnValue",
+      "CumMeterPercentage",
+      "Percentage (0-1.0)"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_DoubleDouble_ReturnValue",
+        "owner": "AddToCumMeter"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_DoubleDouble_ReturnValue",
+          "owner": "AddToCumMeter"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CumMeterPercentage",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Percentage (0-1.0)",
+              "owner": "AddToCumMeter"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CumMeterPercentage",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CumMeterPercentage",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_DoubleDouble_ReturnValue",
+          "owner": "AddToCumMeter"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

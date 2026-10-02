@@ -1,0 +1,49 @@
+{
+  "function": {
+    "name": "ChangeCheatCodeRedeemVisibility",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_TagSettingsMenu"
+    ],
+    "fields": [
+      "CheatCodeTextRedeemText",
+      "K2Node_CustomEvent_CheatCodeTextRedeemText"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_CheatCodeTextRedeemText",
+        "owner": "ExecuteUbergraph_TagSettingsMenu"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CheatCodeTextRedeemText",
+          "owner": "ChangeCheatCodeRedeemVisibility"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_TagSettingsMenu",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 1001
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

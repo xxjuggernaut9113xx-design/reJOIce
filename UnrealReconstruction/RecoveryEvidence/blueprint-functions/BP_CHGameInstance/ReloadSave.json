@@ -1,0 +1,247 @@
+{
+  "function": {
+    "name": "ReloadSave",
+    "statements": 11,
+    "raw_fallback": false,
+    "calls": [
+      "LoadGameFromSlot",
+      "PrintString",
+      "ReloadSave"
+    ],
+    "fields": [
+      "",
+      "CHPack StoreController",
+      "CallFunc_LoadGameFromSlot_ReturnValue",
+      "CurrentSave",
+      "K2Node_DynamicCast_AsBP_CHSave_Game",
+      "K2Node_DynamicCast_bSuccess",
+      "SaveGameClass",
+      "SaveSlotName",
+      "UserIndex"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LoadGameFromSlot_ReturnValue",
+          "owner": "ReloadSave"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "LoadGameFromSlot",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "SaveSlotName",
+              "owner": "BP_CHGameInstance_C"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UserIndex",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHSave_Game",
+          "owner": "ReloadSave"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_LoadGameFromSlot_ReturnValue",
+            "owner": "ReloadSave"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ReloadSave"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_CHSave_Game",
+            "owner": "ReloadSave"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 214,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ReloadSave"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CurrentSave",
+          "owner": "BP_CHGameInstance_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHSave_Game",
+          "owner": "ReloadSave"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "CHPack StoreController",
+            "owner": "BP_CHGameInstance_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "SaveGameClass",
+          "owner": "CHPackStoreController"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SaveGameClass",
+            "owner": "CHPackStoreController"
+          }
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -1
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CHPack StoreController",
+          "owner": "BP_CHGameInstance_C"
+        }
+      },
+      "Offset": 10,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "ReloadSave",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 320
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Reload Save Failed! Check Game Instance"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -67,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

@@ -1,0 +1,385 @@
+{
+  "function": {
+    "name": "InitializeScreen",
+    "statements": 18,
+    "raw_fallback": false,
+    "calls": [
+      "Array_IsEmpty",
+      "Conv_IntToText",
+      "GetUnlockPoints",
+      "OnAllSourcesComplete__DelegateSignature",
+      "PlayNextSource",
+      "SetText",
+      "SetVisibility"
+    ],
+    "fields": [
+      "",
+      "50PercentPenaltyText",
+      "As BP CHGame Instance",
+      "CHPack StoreController",
+      "CallFunc_Array_IsEmpty_ReturnValue",
+      "CallFunc_Conv_IntToText_ReturnValue",
+      "CallFunc_GetUnlockPoints_ReturnValue",
+      "CurrentSourceIndex",
+      "Did Player Win?",
+      "DidPlayerWin?",
+      "DisplayedUP",
+      "InData",
+      "OnAllSourcesComplete",
+      "RewardData",
+      "UPSources",
+      "UPTotalText"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "RewardData",
+        "owner": "WBP_UPRewardScreen_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "RewardData",
+          "owner": "WBP_UPRewardScreen_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "InData",
+          "owner": "InitializeScreen"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CurrentSourceIndex",
+        "owner": "WBP_UPRewardScreen_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CurrentSourceIndex",
+          "owner": "WBP_UPRewardScreen_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetUnlockPoints_ReturnValue",
+        "owner": "InitializeScreen"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetUnlockPoints_ReturnValue",
+          "owner": "InitializeScreen"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "WBP_UPRewardScreen_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CHPack StoreController",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CHPack StoreController",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetUnlockPoints_ReturnValue",
+          "owner": "InitializeScreen"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetUnlockPoints",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "DisplayedUP",
+        "owner": "WBP_UPRewardScreen_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "DisplayedUP",
+          "owner": "WBP_UPRewardScreen_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetUnlockPoints_ReturnValue",
+          "owner": "InitializeScreen"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToText_ReturnValue",
+        "owner": "InitializeScreen"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToText_ReturnValue",
+          "owner": "InitializeScreen"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToText",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DisplayedUP",
+              "owner": "WBP_UPRewardScreen_C"
+            }
+          },
+          {
+            "op": "EX_False"
+          },
+          {
+            "op": "EX_True"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 324
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UPTotalText",
+          "owner": "WBP_UPRewardScreen_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToText_ReturnValue",
+              "owner": "InitializeScreen"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "PlayNextSource",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Did Player Win?",
+          "owner": "WBP_UPRewardScreen_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "DidPlayerWin?",
+          "owner": "InitializeScreen"
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 426,
+      "BooleanExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Did Player Win?",
+          "owner": "WBP_UPRewardScreen_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "50PercentPenaltyText",
+          "owner": "WBP_UPRewardScreen_C"
+        }
+      },
+      "Offset": 16,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetVisibility",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue",
+          "owner": "InitializeScreen"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -49
+        },
+        "Offset": 28,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue",
+          "owner": "InitializeScreen"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "UPSources",
+                "owner": "SessionRewardData"
+              },
+              "StructExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "RewardData",
+                  "owner": "WBP_UPRewardScreen_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 469,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue",
+          "owner": "InitializeScreen"
+        }
+      }
+    },
+    {
+      "op": "EX_CallMulticastDelegate",
+      "Delegate": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "OnAllSourcesComplete",
+          "owner": "WBP_UPRewardScreen_C"
+        }
+      },
+      "StackNode": "OnAllSourcesComplete__DelegateSignature",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 469
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "50PercentPenaltyText",
+          "owner": "WBP_UPRewardScreen_C"
+        }
+      },
+      "Offset": 16,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetVisibility",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 328
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

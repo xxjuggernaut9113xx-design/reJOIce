@@ -1,0 +1,1804 @@
+{
+  "function": {
+    "name": "Determine Time and Stroke Multiplier Basedon Combo",
+    "statements": 57,
+    "raw_fallback": false,
+    "calls": [
+      "Multiply_DoubleDouble",
+      "NotEqual_ByteByte"
+    ],
+    "fields": [
+      "CallFunc_Multiply_DoubleDouble_ReturnValue",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue_1",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue_10",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue_11",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue_12",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue_13",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue_14",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue_2",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue_3",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue_4",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue_5",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue_6",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue_7",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue_8",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue_9",
+      "CurrentComboTypeEnum",
+      "DifficultyStrokeCounterMultiplier",
+      "DifficultyStrokeSpeedMultiplier",
+      "GlobalManager",
+      "K2Node_SwitchEnum_CmpSuccess",
+      "Stroke Count Multiplier",
+      "Stroke Time Speed Multiplier"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CurrentComboTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentComboTypeEnum",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 541,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CurrentComboTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentComboTypeEnum",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 780,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CurrentComboTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentComboTypeEnum",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1019,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CurrentComboTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentComboTypeEnum",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1258,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CurrentComboTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentComboTypeEnum",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1497,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CurrentComboTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentComboTypeEnum",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 5
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1668,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CurrentComboTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentComboTypeEnum",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 6
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1907,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CurrentComboTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentComboTypeEnum",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 7
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2146,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2380
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_13",
+        "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_13",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 0.8
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "DifficultyStrokeCounterMultiplier",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "DifficultyStrokeCounterMultiplier",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Stroke Count Multiplier",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Stroke Count Multiplier",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Stroke Count Multiplier",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_13",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_14",
+        "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_14",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.4
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "DifficultyStrokeSpeedMultiplier",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "DifficultyStrokeSpeedMultiplier",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Stroke Time Speed Multiplier",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Stroke Time Speed Multiplier",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Stroke Time Speed Multiplier",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_14",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2380
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_11",
+        "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_11",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 0.8
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "DifficultyStrokeCounterMultiplier",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "DifficultyStrokeCounterMultiplier",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Stroke Count Multiplier",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Stroke Count Multiplier",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Stroke Count Multiplier",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_11",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_12",
+        "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_12",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.25
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "DifficultyStrokeSpeedMultiplier",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "DifficultyStrokeSpeedMultiplier",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Stroke Time Speed Multiplier",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Stroke Time Speed Multiplier",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Stroke Time Speed Multiplier",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_12",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2380
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_9",
+        "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_9",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "DifficultyStrokeCounterMultiplier",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "DifficultyStrokeCounterMultiplier",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Stroke Count Multiplier",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Stroke Count Multiplier",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Stroke Count Multiplier",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_9",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_10",
+        "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_10",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "DifficultyStrokeSpeedMultiplier",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "DifficultyStrokeSpeedMultiplier",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Stroke Time Speed Multiplier",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Stroke Time Speed Multiplier",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Stroke Time Speed Multiplier",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_10",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2380
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_7",
+        "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_7",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.25
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "DifficultyStrokeCounterMultiplier",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "DifficultyStrokeCounterMultiplier",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Stroke Count Multiplier",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Stroke Count Multiplier",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Stroke Count Multiplier",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_7",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_8",
+        "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_8",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 0.95
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "DifficultyStrokeSpeedMultiplier",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "DifficultyStrokeSpeedMultiplier",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Stroke Time Speed Multiplier",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Stroke Time Speed Multiplier",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Stroke Time Speed Multiplier",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_8",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2380
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_6",
+        "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_6",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.5
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "DifficultyStrokeCounterMultiplier",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "DifficultyStrokeCounterMultiplier",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Stroke Count Multiplier",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Stroke Count Multiplier",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Stroke Count Multiplier",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_6",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Stroke Time Speed Multiplier",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Stroke Time Speed Multiplier",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Stroke Time Speed Multiplier",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": 0.85
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2380
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_4",
+        "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_4",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.75
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "DifficultyStrokeCounterMultiplier",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "DifficultyStrokeCounterMultiplier",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Stroke Count Multiplier",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Stroke Count Multiplier",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Stroke Count Multiplier",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_4",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_5",
+        "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_5",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 0.8
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "DifficultyStrokeSpeedMultiplier",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "DifficultyStrokeSpeedMultiplier",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Stroke Time Speed Multiplier",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Stroke Time Speed Multiplier",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Stroke Time Speed Multiplier",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_5",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2380
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_2",
+        "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_2",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 2.25
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "DifficultyStrokeCounterMultiplier",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "DifficultyStrokeCounterMultiplier",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Stroke Count Multiplier",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Stroke Count Multiplier",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Stroke Count Multiplier",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_2",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_3",
+        "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_3",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 0.75
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "DifficultyStrokeSpeedMultiplier",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "DifficultyStrokeSpeedMultiplier",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Stroke Time Speed Multiplier",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Stroke Time Speed Multiplier",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Stroke Time Speed Multiplier",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_3",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2380
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+        "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 3.0
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "DifficultyStrokeCounterMultiplier",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "DifficultyStrokeCounterMultiplier",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Stroke Count Multiplier",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Stroke Count Multiplier",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Stroke Count Multiplier",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_1",
+        "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_1",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 0.6
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "DifficultyStrokeSpeedMultiplier",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "DifficultyStrokeSpeedMultiplier",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Stroke Time Speed Multiplier",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Stroke Time Speed Multiplier",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Stroke Time Speed Multiplier",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_1",
+          "owner": "Determine Time and Stroke Multiplier Basedon Combo"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

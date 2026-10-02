@@ -1,0 +1,237 @@
+{
+  "function": {
+    "name": "GetText",
+    "statements": 8,
+    "raw_fallback": false,
+    "calls": [
+      "Concat_StrStr",
+      "Conv_StringToText",
+      "GetConnectionStatus",
+      "GetEnumeratorUserFriendlyName",
+      "RefreshHandyStatus"
+    ],
+    "fields": [
+      "",
+      "AdultToyManager",
+      "As BP CHGame Instance",
+      "CallFunc_Concat_StrStr_ReturnValue",
+      "CallFunc_Conv_StringToText_ReturnValue",
+      "CallFunc_GetConnectionStatus_ReturnValue",
+      "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+      "ReturnValue"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "As BP CHGame Instance",
+            "owner": "ToySettingsMenu_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AdultToyManager",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AdultToyManager",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "Offset": 10,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "RefreshHandyStatus",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetConnectionStatus_ReturnValue",
+        "owner": "GetText"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetConnectionStatus_ReturnValue",
+          "owner": "GetText"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "ToySettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "AdultToyManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AdultToyManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetConnectionStatus_ReturnValue",
+          "owner": "GetText"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetConnectionStatus",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+        "owner": "GetText"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+          "owner": "GetText"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetEnumeratorUserFriendlyName",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -58
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetConnectionStatus_ReturnValue",
+              "owner": "GetText"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue",
+        "owner": "GetText"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue",
+          "owner": "GetText"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Status: "
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+              "owner": "GetText"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue",
+        "owner": "GetText"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "GetText"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue",
+              "owner": "GetText"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "GetText"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "GetText"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "GetText"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "GetText"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

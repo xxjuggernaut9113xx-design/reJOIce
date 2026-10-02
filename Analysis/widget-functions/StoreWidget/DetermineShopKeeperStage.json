@@ -1,0 +1,293 @@
+{
+  "function": {
+    "name": "DetermineShopKeeperStage",
+    "statements": 17,
+    "raw_fallback": false,
+    "calls": [
+      "InRange_IntInt"
+    ],
+    "fields": [
+      "As BP Global Manager",
+      "CallFunc_InRange_IntInt_ReturnValue",
+      "CallFunc_InRange_IntInt_ReturnValue_1",
+      "CallFunc_InRange_IntInt_ReturnValue_2",
+      "PointsSpent",
+      "ShopKeeperStageENUM"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 297
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 203
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 109
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_InRange_IntInt_ReturnValue",
+          "owner": "DetermineShopKeeperStage"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "InRange_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "As BP Global Manager",
+                "owner": "StoreWidget_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "PointsSpent",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PointsSpent",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 999
+          },
+          {
+            "op": "EX_True"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_InRange_IntInt_ReturnValue",
+          "owner": "DetermineShopKeeperStage"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ShopKeeperStageENUM",
+        "owner": "StoreWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ShopKeeperStageENUM",
+          "owner": "StoreWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_InRange_IntInt_ReturnValue_1",
+          "owner": "DetermineShopKeeperStage"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "InRange_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "As BP Global Manager",
+                "owner": "StoreWidget_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "PointsSpent",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PointsSpent",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1000
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 7000
+          },
+          {
+            "op": "EX_True"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_InRange_IntInt_ReturnValue_1",
+          "owner": "DetermineShopKeeperStage"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ShopKeeperStageENUM",
+        "owner": "StoreWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ShopKeeperStageENUM",
+          "owner": "StoreWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 1
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_InRange_IntInt_ReturnValue_2",
+          "owner": "DetermineShopKeeperStage"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "InRange_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "As BP Global Manager",
+                "owner": "StoreWidget_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "PointsSpent",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PointsSpent",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 7000
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 999999
+          },
+          {
+            "op": "EX_True"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_InRange_IntInt_ReturnValue_2",
+          "owner": "DetermineShopKeeperStage"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ShopKeeperStageENUM",
+        "owner": "StoreWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ShopKeeperStageENUM",
+          "owner": "StoreWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 2
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

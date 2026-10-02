@@ -1,0 +1,4300 @@
+{
+  "function": {
+    "name": "AddFavoriteCardToArray",
+    "statements": 91,
+    "raw_fallback": false,
+    "calls": [
+      "Array_Add",
+      "Array_Contains",
+      "Array_RemoveItem",
+      "CreateNotificationBox",
+      "NotEqual_ByteByte",
+      "SaveAllData"
+    ],
+    "fields": [
+      "",
+      "CallFunc_Array_Add_ReturnValue",
+      "CallFunc_Array_Add_ReturnValue_1",
+      "CallFunc_Array_Add_ReturnValue_2",
+      "CallFunc_Array_Add_ReturnValue_3",
+      "CallFunc_Array_Add_ReturnValue_4",
+      "CallFunc_Array_Add_ReturnValue_5",
+      "CallFunc_Array_Add_ReturnValue_6",
+      "CallFunc_Array_Add_ReturnValue_7",
+      "CallFunc_Array_Add_ReturnValue_8",
+      "CallFunc_Array_Add_ReturnValue_9",
+      "CallFunc_Array_Contains_ReturnValue",
+      "CallFunc_Array_Contains_ReturnValue_1",
+      "CallFunc_Array_Contains_ReturnValue_2",
+      "CallFunc_Array_Contains_ReturnValue_3",
+      "CallFunc_Array_Contains_ReturnValue_4",
+      "CallFunc_Array_RemoveItem_ReturnValue",
+      "CallFunc_Array_RemoveItem_ReturnValue_1",
+      "CallFunc_Array_RemoveItem_ReturnValue_2",
+      "CallFunc_Array_RemoveItem_ReturnValue_3",
+      "CallFunc_Array_RemoveItem_ReturnValue_4",
+      "CallFunc_Array_RemoveItem_ReturnValue_5",
+      "CallFunc_Array_RemoveItem_ReturnValue_6",
+      "CallFunc_Array_RemoveItem_ReturnValue_7",
+      "CallFunc_Array_RemoveItem_ReturnValue_8",
+      "CallFunc_Array_RemoveItem_ReturnValue_9",
+      "Card Type",
+      "CardManager",
+      "CumFavoriteCards",
+      "CurrentSave",
+      "DrawManager",
+      "FastFavoriteCards",
+      "Favorited Card",
+      "GameInstance",
+      "GlobalManager",
+      "K2Node_MakeArray_Array",
+      "K2Node_SwitchEnum_CmpSuccess",
+      "Master_Favorite_Cum",
+      "Master_Favorite_Fast",
+      "Master_Favorite_Medium",
+      "Master_Favorite_Slow",
+      "Master_SuccubusCards",
+      "MediumFavoriteCards",
+      "Saved_Cum_FavoriteCards",
+      "Saved_Fast_FavoriteCards",
+      "Saved_Medium_FavoriteCards",
+      "Saved_Slow_FavoriteCards",
+      "Saved_Succubus_FavoriteCards",
+      "SlowFavoriteCards",
+      "SuccubusFavoriteCards",
+      "Temp_struct_Variable",
+      "UIManager"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Card Type",
+              "owner": "AddFavoriteCardToArray"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 410,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AddFavoriteCardToArray"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Card Type",
+              "owner": "AddFavoriteCardToArray"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1608,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AddFavoriteCardToArray"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Card Type",
+              "owner": "AddFavoriteCardToArray"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2786,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AddFavoriteCardToArray"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Card Type",
+              "owner": "AddFavoriteCardToArray"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3984,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AddFavoriteCardToArray"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Card Type",
+              "owner": "AddFavoriteCardToArray"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2786,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AddFavoriteCardToArray"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Card Type",
+              "owner": "AddFavoriteCardToArray"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 5
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2786,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AddFavoriteCardToArray"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Card Type",
+              "owner": "AddFavoriteCardToArray"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 6
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 5190,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AddFavoriteCardToArray"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Card Type",
+              "owner": "AddFavoriteCardToArray"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 7
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2786,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AddFavoriteCardToArray"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Card Type",
+              "owner": "AddFavoriteCardToArray"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 8
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2786,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "AddFavoriteCardToArray"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6381
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Contains_ReturnValue_4",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Contains_ReturnValue_4",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Contains",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CardManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CardManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "Master_Favorite_Slow",
+                "owner": "BP_CardManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "Master_Favorite_Slow",
+                  "owner": "BP_CardManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1063,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Contains_ReturnValue_4",
+          "owner": "AddFavoriteCardToArray"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_9",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_9",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_RemoveItem",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CardManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CardManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "Master_Favorite_Slow",
+                "owner": "BP_CardManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "Master_Favorite_Slow",
+                  "owner": "BP_CardManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_8",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_8",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_RemoveItem",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "SlowFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "SlowFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Saved_Slow_FavoriteCards",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GameInstance",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Saved_Slow_FavoriteCards",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Saved_Slow_FavoriteCards",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CardManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CardManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Master_Favorite_Slow",
+          "owner": "BP_CardManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Master_Favorite_Slow",
+            "owner": "BP_CardManager_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "GameInstance",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 83,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -115
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Media Unfavorited"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Slow Media removed from your favorites."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6381
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_9",
+        "owner": "AddFavoriteCardToArray"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_9",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_9",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CardManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CardManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "Master_Favorite_Slow",
+                "owner": "BP_CardManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "Master_Favorite_Slow",
+                  "owner": "BP_CardManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_8",
+        "owner": "AddFavoriteCardToArray"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_8",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_8",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "SlowFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "SlowFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Saved_Slow_FavoriteCards",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GameInstance",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Saved_Slow_FavoriteCards",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Saved_Slow_FavoriteCards",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CardManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CardManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Master_Favorite_Slow",
+          "owner": "BP_CardManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Master_Favorite_Slow",
+            "owner": "BP_CardManager_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "GameInstance",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 77,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -114
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Media Favorited"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Slow Media added to your favorites."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6381
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Contains_ReturnValue_3",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Contains_ReturnValue_3",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Contains",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CardManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CardManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "Master_Favorite_Medium",
+                "owner": "BP_CardManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "Master_Favorite_Medium",
+                  "owner": "BP_CardManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2263,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Contains_ReturnValue_3",
+          "owner": "AddFavoriteCardToArray"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_6",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_6",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_RemoveItem",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "MediumFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "MediumFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_7",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_7",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_RemoveItem",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CardManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CardManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "Master_Favorite_Medium",
+                "owner": "BP_CardManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "Master_Favorite_Medium",
+                  "owner": "BP_CardManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Saved_Medium_FavoriteCards",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GameInstance",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Saved_Medium_FavoriteCards",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Saved_Medium_FavoriteCards",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CardManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CardManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Master_Favorite_Medium",
+          "owner": "BP_CardManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Master_Favorite_Medium",
+            "owner": "BP_CardManager_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "GameInstance",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 85,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -115
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Media Unfavorited"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Medium Media removed from your favorites."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6381
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_6",
+        "owner": "AddFavoriteCardToArray"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_6",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_6",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "MediumFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "MediumFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_7",
+        "owner": "AddFavoriteCardToArray"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_7",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_7",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CardManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CardManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "Master_Favorite_Medium",
+                "owner": "BP_CardManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "Master_Favorite_Medium",
+                  "owner": "BP_CardManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_SetArray",
+      "AssigningProperty": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeArray_Array",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "ArrayInnerProp": null,
+      "Elements": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "Favorited Card",
+            "owner": "AddFavoriteCardToArray"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Saved_Medium_FavoriteCards",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GameInstance",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Saved_Medium_FavoriteCards",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Saved_Medium_FavoriteCards",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeArray_Array",
+          "owner": "AddFavoriteCardToArray"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "GameInstance",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 79,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -114
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Media Favorited"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Medium Media added to your favorites."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6381
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Contains_ReturnValue_2",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Contains_ReturnValue_2",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Contains",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CardManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CardManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "Master_Favorite_Fast",
+                "owner": "BP_CardManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "Master_Favorite_Fast",
+                  "owner": "BP_CardManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3439,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Contains_ReturnValue_2",
+          "owner": "AddFavoriteCardToArray"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_5",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_5",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_RemoveItem",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CardManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CardManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "Master_Favorite_Fast",
+                "owner": "BP_CardManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "Master_Favorite_Fast",
+                  "owner": "BP_CardManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_4",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_4",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_RemoveItem",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "FastFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "FastFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Temp_struct_Variable",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Saved_Fast_FavoriteCards",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GameInstance",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Saved_Fast_FavoriteCards",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Saved_Fast_FavoriteCards",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CardManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CardManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Master_Favorite_Fast",
+          "owner": "BP_CardManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Master_Favorite_Fast",
+            "owner": "BP_CardManager_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "GameInstance",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 83,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -115
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Media Unfavorited"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Fast Media removed from your favorites."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6381
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_5",
+        "owner": "AddFavoriteCardToArray"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_5",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_5",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CardManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CardManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "Master_Favorite_Fast",
+                "owner": "BP_CardManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "Master_Favorite_Fast",
+                  "owner": "BP_CardManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_4",
+        "owner": "AddFavoriteCardToArray"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_4",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_4",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "FastFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "FastFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Saved_Fast_FavoriteCards",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GameInstance",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Saved_Fast_FavoriteCards",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Saved_Fast_FavoriteCards",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CardManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CardManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Master_Favorite_Fast",
+          "owner": "BP_CardManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Master_Favorite_Fast",
+            "owner": "BP_CardManager_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "GameInstance",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 77,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -114
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Media Favorited"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Fast Media added to your favorites."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6381
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Contains_ReturnValue_1",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Contains_ReturnValue_1",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Contains",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CardManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CardManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "Master_SuccubusCards",
+                "owner": "BP_CardManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "Master_SuccubusCards",
+                  "owner": "BP_CardManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4641,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Contains_ReturnValue_1",
+          "owner": "AddFavoriteCardToArray"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_3",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_3",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_RemoveItem",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CardManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CardManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "Master_SuccubusCards",
+                "owner": "BP_CardManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "Master_SuccubusCards",
+                  "owner": "BP_CardManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_2",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_2",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_RemoveItem",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "SuccubusFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "SuccubusFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Saved_Succubus_FavoriteCards",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GameInstance",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Saved_Succubus_FavoriteCards",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Saved_Succubus_FavoriteCards",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CardManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CardManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Master_SuccubusCards",
+          "owner": "BP_CardManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Master_SuccubusCards",
+            "owner": "BP_CardManager_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "GameInstance",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 87,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -115
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Media Unfavorited"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Succubus Media removed from your favorites."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6381
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_3",
+        "owner": "AddFavoriteCardToArray"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_3",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_3",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CardManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CardManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "Master_SuccubusCards",
+                "owner": "BP_CardManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "Master_SuccubusCards",
+                  "owner": "BP_CardManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_2",
+        "owner": "AddFavoriteCardToArray"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_2",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_2",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "SuccubusFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "SuccubusFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Saved_Succubus_FavoriteCards",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GameInstance",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Saved_Succubus_FavoriteCards",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Saved_Succubus_FavoriteCards",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CardManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CardManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Master_SuccubusCards",
+          "owner": "BP_CardManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Master_SuccubusCards",
+            "owner": "BP_CardManager_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "GameInstance",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 81,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -114
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Media Favorited"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Succubus Media added to your favorites."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6381
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Contains_ReturnValue",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Contains_ReturnValue",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Contains",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CardManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CardManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "Master_Favorite_Cum",
+                "owner": "BP_CardManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "Master_Favorite_Cum",
+                  "owner": "BP_CardManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 5842,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Contains_ReturnValue",
+          "owner": "AddFavoriteCardToArray"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_1",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue_1",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_RemoveItem",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CardManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CardManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "Master_Favorite_Cum",
+                "owner": "BP_CardManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "Master_Favorite_Cum",
+                  "owner": "BP_CardManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_RemoveItem_ReturnValue",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_RemoveItem",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CumFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CumFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Saved_Cum_FavoriteCards",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GameInstance",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Saved_Cum_FavoriteCards",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Saved_Cum_FavoriteCards",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CardManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CardManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Master_Favorite_Cum",
+          "owner": "BP_CardManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Master_Favorite_Cum",
+            "owner": "BP_CardManager_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "GameInstance",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 82,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -115
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Media Unfavorited"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Cum Media removed from your favorites."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6381
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_1",
+        "owner": "AddFavoriteCardToArray"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_1",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_1",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CardManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CardManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "Master_Favorite_Cum",
+                "owner": "BP_CardManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "Master_Favorite_Cum",
+                  "owner": "BP_CardManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue",
+        "owner": "AddFavoriteCardToArray"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue",
+          "owner": "AddFavoriteCardToArray"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -78
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue",
+          "owner": "AddFavoriteCardToArray"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CumFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CumFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Favorited Card",
+                "owner": "AddFavoriteCardToArray"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Saved_Cum_FavoriteCards",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManager",
+                "owner": "BP_DrawManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GameInstance",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Saved_Cum_FavoriteCards",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Saved_Cum_FavoriteCards",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CardManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CardManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Master_Favorite_Cum",
+          "owner": "BP_CardManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Master_Favorite_Cum",
+            "owner": "BP_CardManager_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "GameInstance",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 76,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -114
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Media Favorited"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Cum Media added to your favorites."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

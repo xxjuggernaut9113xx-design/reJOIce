@@ -1,0 +1,718 @@
+{
+  "function": {
+    "name": "Format and Session Duration Text",
+    "statements": 25,
+    "raw_fallback": false,
+    "calls": [
+      "Concat_StrStr",
+      "Conv_IntToText",
+      "Conv_StringToText",
+      "Conv_TextToString",
+      "Divide_IntInt",
+      "Percent_IntInt"
+    ],
+    "fields": [
+      "CallFunc_Concat_StrStr_ReturnValue",
+      "CallFunc_Concat_StrStr_ReturnValue_1",
+      "CallFunc_Concat_StrStr_ReturnValue_2",
+      "CallFunc_Concat_StrStr_ReturnValue_3",
+      "CallFunc_Conv_IntToText_ReturnValue",
+      "CallFunc_Conv_IntToText_ReturnValue_1",
+      "CallFunc_Conv_IntToText_ReturnValue_2",
+      "CallFunc_Conv_StringToText_ReturnValue",
+      "CallFunc_Conv_TextToString_ReturnValue",
+      "CallFunc_Conv_TextToString_ReturnValue_1",
+      "CallFunc_Conv_TextToString_ReturnValue_2",
+      "CallFunc_Divide_IntInt_ReturnValue",
+      "CallFunc_Divide_IntInt_ReturnValue_1",
+      "CallFunc_Percent_IntInt_ReturnValue",
+      "CallFunc_Percent_IntInt_ReturnValue_1",
+      "FormattedText",
+      "Hours",
+      "Minutes",
+      "PlayerVariablesStruct",
+      "Seconds",
+      "SessionDurationText",
+      "SessionLength_56_D6CECACC4BB58ACDC313F09687D17721",
+      "SessionTimeHours",
+      "SessionTimeMinutes",
+      "SessionTimeSeconds"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Divide_IntInt_ReturnValue",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_IntInt_ReturnValue",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Divide_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SessionLength_56_D6CECACC4BB58ACDC313F09687D17721",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 3600
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SessionTimeHours",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "SessionTimeHours",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_IntInt_ReturnValue",
+          "owner": "Format and Session Duration Text"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Percent_IntInt_ReturnValue_1",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Percent_IntInt_ReturnValue_1",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Percent_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SessionLength_56_D6CECACC4BB58ACDC313F09687D17721",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 3600
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Divide_IntInt_ReturnValue_1",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_IntInt_ReturnValue_1",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Divide_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Percent_IntInt_ReturnValue_1",
+              "owner": "Format and Session Duration Text"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 60
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SessionTimeMinutes",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "SessionTimeMinutes",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_IntInt_ReturnValue_1",
+          "owner": "Format and Session Duration Text"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Percent_IntInt_ReturnValue",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Percent_IntInt_ReturnValue",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Percent_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SessionLength_56_D6CECACC4BB58ACDC313F09687D17721",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 60
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SessionTimeSeconds",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "SessionTimeSeconds",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Percent_IntInt_ReturnValue",
+          "owner": "Format and Session Duration Text"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToText_ReturnValue",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToText_ReturnValue",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToText",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "SessionTimeHours",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_False"
+          },
+          {
+            "op": "EX_True"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 2
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToText_ReturnValue_1",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToText_ReturnValue_1",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToText",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "SessionTimeMinutes",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_False"
+          },
+          {
+            "op": "EX_True"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 2
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToText_ReturnValue",
+              "owner": "Format and Session Duration Text"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue_1",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue_1",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToText_ReturnValue_1",
+              "owner": "Format and Session Duration Text"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_TextToString_ReturnValue",
+              "owner": "Format and Session Duration Text"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": ":"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_1",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_1",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue",
+              "owner": "Format and Session Duration Text"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_TextToString_ReturnValue_1",
+              "owner": "Format and Session Duration Text"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_2",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_2",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue_1",
+              "owner": "Format and Session Duration Text"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": ":"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToText_ReturnValue_2",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToText_ReturnValue_2",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToText",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "SessionTimeSeconds",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_False"
+          },
+          {
+            "op": "EX_True"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 2
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue_2",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue_2",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToText_ReturnValue_2",
+              "owner": "Format and Session Duration Text"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Concat_StrStr_ReturnValue_3",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Concat_StrStr_ReturnValue_3",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Concat_StrStr",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue_2",
+              "owner": "Format and Session Duration Text"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_TextToString_ReturnValue_2",
+              "owner": "Format and Session Duration Text"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Concat_StrStr_ReturnValue_3",
+              "owner": "Format and Session Duration Text"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SessionDurationText",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "SessionDurationText",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "Format and Session Duration Text"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "FormattedText",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "FormattedText",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "SessionDurationText",
+          "owner": "BP_GlobalManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Hours",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "Hours",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Minutes",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "Minutes",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Seconds",
+        "owner": "Format and Session Duration Text"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "Seconds",
+          "owner": "Format and Session Duration Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

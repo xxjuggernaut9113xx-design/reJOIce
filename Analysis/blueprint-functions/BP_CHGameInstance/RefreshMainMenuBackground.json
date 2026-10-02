@@ -1,0 +1,149 @@
+{
+  "function": {
+    "name": "RefreshMainMenuBackground",
+    "statements": 7,
+    "raw_fallback": false,
+    "calls": [
+      "IsValid",
+      "PlayBackgroundMediaManual",
+      "PrintString"
+    ],
+    "fields": [
+      "BackgroundImage",
+      "CallFunc_IsValid_ReturnValue",
+      "MainMenuWidget"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsValid_ReturnValue",
+          "owner": "RefreshMainMenuBackground"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "IsValid",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "MainMenuWidget",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 113,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsValid_ReturnValue",
+          "owner": "RefreshMainMenuBackground"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "PlayBackgroundMediaManual",
+      "Parameters": [
+        {
+          "op": "EX_StringConst",
+          "Value": "backgroundmenuloop"
+        },
+        {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "MainMenuWidget",
+              "owner": "BP_CHGameInstance_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "BackgroundImage",
+            "owner": "MainMenu_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "BackgroundImage",
+              "owner": "MainMenu_C"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 210
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Main Menu Reference Not Valid."
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -67,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

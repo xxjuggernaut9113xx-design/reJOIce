@@ -1,0 +1,619 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_EditUsernameOverlay",
+    "statements": 28,
+    "raw_fallback": false,
+    "calls": [
+      "Conv_StringToText",
+      "Conv_TextToString",
+      "GetGameInstance",
+      "GetText",
+      "Greater_IntInt",
+      "Left",
+      "Len",
+      "OnClosed__DelegateSignature",
+      "PlaySound2D",
+      "RemoveFromParent",
+      "SaveAllData",
+      "SetText"
+    ],
+    "fields": [
+      "",
+      "As BP CHGame Instance",
+      "CallFunc_Conv_StringToText_ReturnValue",
+      "CallFunc_Conv_TextToString_ReturnValue",
+      "CallFunc_GetGameInstance_ReturnValue",
+      "CallFunc_GetText_ReturnValue",
+      "CallFunc_Greater_IntInt_ReturnValue",
+      "CallFunc_Left_ReturnValue",
+      "CallFunc_Len_ReturnValue",
+      "CurrentSave",
+      "EditableTextBox_126",
+      "EntryPoint",
+      "K2Node_ComponentBoundEvent_Text",
+      "K2Node_DynamicCast_AsBP_CHGame_Instance",
+      "K2Node_DynamicCast_bSuccess",
+      "OnClosed",
+      "Playercard_Name"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_EditUsernameOverlay"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -49
+      },
+      "Offset": 38,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlaySound2D",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          },
+          {
+            "op": "EX_ObjectConst",
+            "Value": -65
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.25
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue",
+        "owner": "ExecuteUbergraph_EditUsernameOverlay"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue",
+          "owner": "ExecuteUbergraph_EditUsernameOverlay"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_ComponentBoundEvent_Text",
+              "owner": "ExecuteUbergraph_EditUsernameOverlay"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Len_ReturnValue",
+        "owner": "ExecuteUbergraph_EditUsernameOverlay"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Len_ReturnValue",
+          "owner": "ExecuteUbergraph_EditUsernameOverlay"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Len",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_TextToString_ReturnValue",
+              "owner": "ExecuteUbergraph_EditUsernameOverlay"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Greater_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_EditUsernameOverlay"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Greater_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Len_ReturnValue",
+              "owner": "ExecuteUbergraph_EditUsernameOverlay"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 14
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 777,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Greater_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_EditUsernameOverlay"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue",
+        "owner": "ExecuteUbergraph_EditUsernameOverlay"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue",
+          "owner": "ExecuteUbergraph_EditUsernameOverlay"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_ComponentBoundEvent_Text",
+              "owner": "ExecuteUbergraph_EditUsernameOverlay"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Left_ReturnValue",
+        "owner": "ExecuteUbergraph_EditUsernameOverlay"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Left_ReturnValue",
+          "owner": "ExecuteUbergraph_EditUsernameOverlay"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Left",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_TextToString_ReturnValue",
+              "owner": "ExecuteUbergraph_EditUsernameOverlay"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 14
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue",
+        "owner": "ExecuteUbergraph_EditUsernameOverlay"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "ExecuteUbergraph_EditUsernameOverlay"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Left_ReturnValue",
+              "owner": "ExecuteUbergraph_EditUsernameOverlay"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "EditableTextBox_126",
+          "owner": "EditUsernameOverlay_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_StringToText_ReturnValue",
+              "owner": "ExecuteUbergraph_EditUsernameOverlay"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 777
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameInstance_ReturnValue",
+          "owner": "ExecuteUbergraph_EditUsernameOverlay"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameInstance",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_EditUsernameOverlay"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetGameInstance_ReturnValue",
+            "owner": "ExecuteUbergraph_EditUsernameOverlay"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_EditUsernameOverlay"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+            "owner": "ExecuteUbergraph_EditUsernameOverlay"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 777,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_EditUsernameOverlay"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "EditUsernameOverlay_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_EditUsernameOverlay"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "EditableTextBox_126",
+          "owner": "EditUsernameOverlay_C"
+        }
+      },
+      "Offset": 63,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "EditUsernameOverlay_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "Playercard_Name",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Playercard_Name",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 777
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 10
+    },
+    {
+      "op": "EX_VirtualFunction",
+      "VirtualFunctionName": "RemoveFromParent",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 777
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetText_ReturnValue",
+        "owner": "ExecuteUbergraph_EditUsernameOverlay"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetText_ReturnValue",
+          "owner": "ExecuteUbergraph_EditUsernameOverlay"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "EditableTextBox_126",
+            "owner": "EditUsernameOverlay_C"
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetText_ReturnValue",
+          "owner": "ExecuteUbergraph_EditUsernameOverlay"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetText",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Playercard_Name",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "EditUsernameOverlay_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Playercard_Name",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Playercard_Name",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetText_ReturnValue",
+          "owner": "ExecuteUbergraph_EditUsernameOverlay"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "EditUsernameOverlay_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_CallMulticastDelegate",
+      "Delegate": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "OnClosed",
+          "owner": "EditUsernameOverlay_C"
+        }
+      },
+      "StackNode": "OnClosed__DelegateSignature",
+      "Parameters": []
+    },
+    {
+      "op": "EX_VirtualFunction",
+      "VirtualFunctionName": "RemoveFromParent",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

@@ -1,0 +1,1423 @@
+{
+  "function": {
+    "name": "RollFavoritesChance",
+    "statements": 73,
+    "raw_fallback": false,
+    "calls": [
+      "Array_IsEmpty",
+      "CreateNotificationBox",
+      "LessEqual_IntInt",
+      "NotEqual_ByteByte",
+      "RandomIntegerInRange"
+    ],
+    "fields": [
+      "",
+      "CallFunc_Array_IsEmpty_ReturnValue",
+      "CallFunc_Array_IsEmpty_ReturnValue_1",
+      "CallFunc_Array_IsEmpty_ReturnValue_2",
+      "CallFunc_Array_IsEmpty_ReturnValue_3",
+      "CallFunc_Array_IsEmpty_ReturnValue_4",
+      "CallFunc_LessEqual_IntInt_ReturnValue",
+      "CallFunc_RandomIntegerInRange_ReturnValue",
+      "Card Type",
+      "CumFavoriteCards",
+      "DrawManager",
+      "FastFavoriteCards",
+      "FavoritesLikelyhoodPercent",
+      "K2Node_SwitchEnum_CmpSuccess",
+      "MediumFavoriteCards",
+      "RollSuccess?",
+      "RollSuccessLocal",
+      "SlowFavoriteCards",
+      "SuccubusFavoriteCards",
+      "UIManager"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "RollSuccessLocal",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Card Type",
+              "owner": "RollFavoritesChance"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 421,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Card Type",
+              "owner": "RollFavoritesChance"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 742,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Card Type",
+              "owner": "RollFavoritesChance"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1044,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Card Type",
+              "owner": "RollFavoritesChance"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1346,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Card Type",
+              "owner": "RollFavoritesChance"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1044,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Card Type",
+              "owner": "RollFavoritesChance"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 5
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1044,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Card Type",
+              "owner": "RollFavoritesChance"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 6
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1648,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Card Type",
+              "owner": "RollFavoritesChance"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 7
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1044,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Card Type",
+              "owner": "RollFavoritesChance"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 8
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1044,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1950
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_4",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 41,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_4",
+          "owner": "RollFavoritesChance"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "SlowFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "SlowFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 543,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_4",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "RollSuccessLocal",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "RollSuccess?",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "RollSuccessLocal",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1950
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+        "owner": "RollFavoritesChance"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 100
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_IntInt_ReturnValue",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "LessEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+              "owner": "RollFavoritesChance"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "FavoritesLikelyhoodPercent",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 508,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_IntInt_ReturnValue",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "RollSuccessLocal",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 71,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3887
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Playing Favorite"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Favorited Media is Displayed"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 519
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_3",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 41,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_3",
+          "owner": "RollFavoritesChance"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "MediumFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "MediumFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 845,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_3",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "RollSuccessLocal",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 519
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+        "owner": "RollFavoritesChance"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 100
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_IntInt_ReturnValue",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "LessEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+              "owner": "RollFavoritesChance"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "FavoritesLikelyhoodPercent",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 829,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_IntInt_ReturnValue",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "RollSuccessLocal",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 71,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3887
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Playing Favorite"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Favorited Media is Displayed"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 519
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_2",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 41,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_2",
+          "owner": "RollFavoritesChance"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "FastFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "FastFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1147,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_2",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "RollSuccessLocal",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 519
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+        "owner": "RollFavoritesChance"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 100
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_IntInt_ReturnValue",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "LessEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+              "owner": "RollFavoritesChance"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "FavoritesLikelyhoodPercent",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1131,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_IntInt_ReturnValue",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "RollSuccessLocal",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 71,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3887
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Playing Favorite"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Favorited Media is Displayed"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 519
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 41,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue",
+          "owner": "RollFavoritesChance"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "SuccubusFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "SuccubusFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1449,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "RollSuccessLocal",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 519
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+        "owner": "RollFavoritesChance"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 100
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_IntInt_ReturnValue",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "LessEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+              "owner": "RollFavoritesChance"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "FavoritesLikelyhoodPercent",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1433,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_IntInt_ReturnValue",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "RollSuccessLocal",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 71,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3887
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Playing Favorite"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Favorited Media is Displayed"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 519
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_1",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 41,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_1",
+          "owner": "RollFavoritesChance"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CumFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CumFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1751,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_1",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "RollSuccessLocal",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 519
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+        "owner": "RollFavoritesChance"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 100
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_IntInt_ReturnValue",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "LessEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+              "owner": "RollFavoritesChance"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "FavoritesLikelyhoodPercent",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1735,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_IntInt_ReturnValue",
+          "owner": "RollFavoritesChance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "RollSuccessLocal",
+          "owner": "RollFavoritesChance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 71,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3887
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Playing Favorite"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Favorited Media is Displayed"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 519
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

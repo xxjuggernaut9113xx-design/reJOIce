@@ -1,0 +1,195 @@
+{
+  "function": {
+    "name": "Get_IntifaceStatusText_Text",
+    "statements": 9,
+    "raw_fallback": false,
+    "calls": [
+      "IsButtplugConnected"
+    ],
+    "fields": [
+      "AdultToyManager",
+      "As BP CHGame Instance",
+      "CallFunc_IsButtplugConnected_ReturnValue",
+      "Return String",
+      "ReturnValue"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsButtplugConnected_ReturnValue",
+          "owner": "Get_IntifaceStatusText_Text"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "ToySettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "AdultToyManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AdultToyManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_IsButtplugConnected_ReturnValue",
+          "owner": "Get_IntifaceStatusText_Text"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "IsButtplugConnected",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 185,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsButtplugConnected_ReturnValue",
+          "owner": "Get_IntifaceStatusText_Text"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Return String",
+        "owner": "Get_IntifaceStatusText_Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Return String",
+          "owner": "Get_IntifaceStatusText_Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_TextConst",
+        "Value": {
+          "op": "FScriptText",
+          "TextLiteralType": "LocalizedText",
+          "LocalizedSource": {
+            "op": "EX_StringConst",
+            "Value": "Status: Connected"
+          },
+          "LocalizedKey": {
+            "op": "EX_StringConst",
+            "Value": "B0C9191D495C99C5D3906DAA77671E55"
+          },
+          "LocalizedNamespace": {
+            "op": "EX_StringConst",
+            "Value": ""
+          },
+          "InvariantLiteralString": null,
+          "LiteralString": null,
+          "StringTableAsset": null,
+          "StringTableId": null,
+          "StringTableKey": null
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "Get_IntifaceStatusText_Text"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_IntifaceStatusText_Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Return String",
+          "owner": "Get_IntifaceStatusText_Text"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 268
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Return String",
+        "owner": "Get_IntifaceStatusText_Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Return String",
+          "owner": "Get_IntifaceStatusText_Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_TextConst",
+        "Value": {
+          "op": "FScriptText",
+          "TextLiteralType": "LocalizedText",
+          "LocalizedSource": {
+            "op": "EX_StringConst",
+            "Value": "Status: Disconnected"
+          },
+          "LocalizedKey": {
+            "op": "EX_StringConst",
+            "Value": "5DD3CABB4E18BF885CCEFEBE833842AC"
+          },
+          "LocalizedNamespace": {
+            "op": "EX_StringConst",
+            "Value": ""
+          },
+          "InvariantLiteralString": null,
+          "LiteralString": null,
+          "StringTableAsset": null,
+          "StringTableId": null,
+          "StringTableKey": null
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 153
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_IntifaceStatusText_Text"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

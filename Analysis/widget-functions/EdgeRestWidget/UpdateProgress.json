@@ -1,0 +1,303 @@
+{
+  "function": {
+    "name": "UpdateProgress",
+    "statements": 13,
+    "raw_fallback": false,
+    "calls": [
+      "DetermineCardV2",
+      "Divide_DoubleDouble",
+      "FClamp",
+      "GetUnpausedTimeSeconds",
+      "GreaterEqual_DoubleDouble",
+      "K2_ClearTimer",
+      "RemoveFromParent",
+      "Subtract_DoubleDouble"
+    ],
+    "fields": [
+      "",
+      "As BP Global Manager",
+      "Break Duration",
+      "CallFunc_Divide_DoubleDouble_ReturnValue",
+      "CallFunc_FClamp_ReturnValue",
+      "CallFunc_GetUnpausedTimeSeconds_ReturnValue",
+      "CallFunc_GreaterEqual_DoubleDouble_ReturnValue",
+      "CallFunc_Subtract_DoubleDouble_ReturnValue",
+      "CurrentProgress",
+      "DrawManager",
+      "ProgressBarPercent",
+      "StartTime"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetUnpausedTimeSeconds_ReturnValue",
+        "owner": "UpdateProgress"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetUnpausedTimeSeconds_ReturnValue",
+          "owner": "UpdateProgress"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetUnpausedTimeSeconds",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Subtract_DoubleDouble_ReturnValue",
+        "owner": "UpdateProgress"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_DoubleDouble_ReturnValue",
+          "owner": "UpdateProgress"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Subtract_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetUnpausedTimeSeconds_ReturnValue",
+              "owner": "UpdateProgress"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "StartTime",
+              "owner": "EdgeRestWidget_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+        "owner": "UpdateProgress"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+          "owner": "UpdateProgress"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Divide_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Subtract_DoubleDouble_ReturnValue",
+              "owner": "UpdateProgress"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Break Duration",
+              "owner": "EdgeRestWidget_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FClamp_ReturnValue",
+        "owner": "UpdateProgress"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FClamp_ReturnValue",
+          "owner": "UpdateProgress"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FClamp",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+              "owner": "UpdateProgress"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CurrentProgress",
+        "owner": "EdgeRestWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CurrentProgress",
+          "owner": "EdgeRestWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FClamp_ReturnValue",
+          "owner": "UpdateProgress"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ProgressBarPercent",
+        "owner": "EdgeRestWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ProgressBarPercent",
+          "owner": "EdgeRestWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CurrentProgress",
+          "owner": "EdgeRestWidget_C"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_DoubleDouble_ReturnValue",
+          "owner": "UpdateProgress"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GreaterEqual_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentProgress",
+              "owner": "EdgeRestWidget_C"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 381,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_DoubleDouble_ReturnValue",
+          "owner": "UpdateProgress"
+        }
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "K2_ClearTimer",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "UpdateProgress"
+        }
+      ]
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "As BP Global Manager",
+            "owner": "EdgeRestWidget_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "DrawManager",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "DetermineCardV2",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_VirtualFunction",
+      "VirtualFunctionName": "RemoveFromParent",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

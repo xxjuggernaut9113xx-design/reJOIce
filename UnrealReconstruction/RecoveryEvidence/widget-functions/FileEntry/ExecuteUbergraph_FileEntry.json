@@ -1,0 +1,534 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_FileEntry",
+    "statements": 26,
+    "raw_fallback": false,
+    "calls": [
+      "Conv_StringToText",
+      "OnRemoveFile_Event__DelegateSignature",
+      "OnToggleEnabled_Event__DelegateSignature",
+      "PlayAnimation",
+      "PlaySound2D",
+      "SetCheckedState",
+      "SetText"
+    ],
+    "fields": [
+      "",
+      "CallFunc_Conv_StringToText_ReturnValue",
+      "CallFunc_Conv_StringToText_ReturnValue_1",
+      "CallFunc_PlayAnimation_ReturnValue",
+      "CallFunc_PlayAnimation_ReturnValue_1",
+      "EnableCheckBox",
+      "EntryPoint",
+      "FilePath",
+      "FilePathTextUMG",
+      "HoverRemove",
+      "K2Node_CreateDelegate_OutputDelegate",
+      "K2Node_CreateDelegate_OutputDelegate_1",
+      "K2Node_CustomEvent_bIsChecked",
+      "OnCheckStateChanged",
+      "OnClicked",
+      "OnRemoveFile_Event",
+      "OnToggleEnabled_Event",
+      "RemoveButton",
+      "UnHoverRemove",
+      "bEnabled"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_FileEntry"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -41
+      },
+      "Offset": 38,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlaySound2D",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          },
+          {
+            "op": "EX_ObjectConst",
+            "Value": -59
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.75
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_CallMulticastDelegate",
+      "Delegate": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "OnRemoveFile_Event",
+          "owner": "FileEntry_C"
+        }
+      },
+      "StackNode": "OnRemoveFile_Event__DelegateSignature",
+      "Parameters": [
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "FilePath",
+            "owner": "FileEntry_C"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 638
+    },
+    {
+      "op": "EX_BindDelegate",
+      "FunctionName": "RemoveButtonOnClicked_Event",
+      "Delegate": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate_1",
+          "owner": "ExecuteUbergraph_FileEntry"
+        }
+      },
+      "ObjectTerm": {
+        "op": "EX_Self"
+      }
+    },
+    {
+      "op": "EX_AddMulticastDelegate",
+      "Delegate": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "RemoveButton",
+            "owner": "FileEntry_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "OnClicked",
+          "owner": "Button"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "OnClicked",
+            "owner": "Button"
+          }
+        }
+      },
+      "DelegateToAdd": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate_1",
+          "owner": "ExecuteUbergraph_FileEntry"
+        }
+      }
+    },
+    {
+      "op": "EX_BindDelegate",
+      "FunctionName": "OnToggleEnabled",
+      "Delegate": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate",
+          "owner": "ExecuteUbergraph_FileEntry"
+        }
+      },
+      "ObjectTerm": {
+        "op": "EX_Self"
+      }
+    },
+    {
+      "op": "EX_AddMulticastDelegate",
+      "Delegate": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "EnableCheckBox",
+            "owner": "FileEntry_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "OnCheckStateChanged",
+          "owner": "CheckBox"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "OnCheckStateChanged",
+            "owner": "CheckBox"
+          }
+        }
+      },
+      "DelegateToAdd": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate",
+          "owner": "ExecuteUbergraph_FileEntry"
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 366,
+      "BooleanExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "bEnabled",
+          "owner": "FileEntry_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "EnableCheckBox",
+          "owner": "FileEntry_C"
+        }
+      },
+      "Offset": 12,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetCheckedState",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue_1",
+        "owner": "ExecuteUbergraph_FileEntry"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue_1",
+          "owner": "ExecuteUbergraph_FileEntry"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "FilePath",
+              "owner": "FileEntry_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "FilePathTextUMG",
+          "owner": "FileEntry_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_StringToText_ReturnValue_1",
+              "owner": "ExecuteUbergraph_FileEntry"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 638
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "EnableCheckBox",
+          "owner": "FileEntry_C"
+        }
+      },
+      "Offset": 12,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetCheckedState",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue",
+        "owner": "ExecuteUbergraph_FileEntry"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "ExecuteUbergraph_FileEntry"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "FilePath",
+              "owner": "FileEntry_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "FilePathTextUMG",
+          "owner": "FileEntry_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_StringToText_ReturnValue",
+              "owner": "ExecuteUbergraph_FileEntry"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 638
+    },
+    {
+      "op": "EX_CallMulticastDelegate",
+      "Delegate": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "OnToggleEnabled_Event",
+          "owner": "FileEntry_C"
+        }
+      },
+      "StackNode": "OnToggleEnabled_Event__DelegateSignature",
+      "Parameters": [
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "FilePath",
+            "owner": "FileEntry_C"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_CustomEvent_bIsChecked",
+            "owner": "ExecuteUbergraph_FileEntry"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 638
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 638
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 10
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "ExecuteUbergraph_FileEntry"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HoverRemove",
+              "owner": "FileEntry_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 638
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_1",
+          "owner": "ExecuteUbergraph_FileEntry"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UnHoverRemove",
+              "owner": "FileEntry_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

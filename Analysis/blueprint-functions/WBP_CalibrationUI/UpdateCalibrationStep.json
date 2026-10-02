@@ -1,0 +1,65 @@
+{
+  "function": {
+    "name": "UpdateCalibrationStep",
+    "statements": 5,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_WBP_CalibrationUI"
+    ],
+    "fields": [
+      "K2Node_CustomEvent_Progress",
+      "K2Node_CustomEvent_State",
+      "Progress",
+      "State"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_State",
+        "owner": "ExecuteUbergraph_WBP_CalibrationUI"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "State",
+          "owner": "UpdateCalibrationStep"
+        }
+      }
+    },
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_Progress",
+        "owner": "ExecuteUbergraph_WBP_CalibrationUI"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Progress",
+          "owner": "UpdateCalibrationStep"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_WBP_CalibrationUI",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 4875
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

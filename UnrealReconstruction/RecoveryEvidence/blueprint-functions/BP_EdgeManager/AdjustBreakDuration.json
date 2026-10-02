@@ -1,0 +1,232 @@
+{
+  "function": {
+    "name": "AdjustBreakDuration",
+    "statements": 7,
+    "raw_fallback": false,
+    "calls": [
+      "FClamp",
+      "Multiply_DoubleDouble",
+      "RandomFloatInRange",
+      "Subtract_DoubleDouble"
+    ],
+    "fields": [
+      "CallFunc_FClamp_ReturnValue",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue",
+      "CallFunc_RandomFloatInRange_ReturnValue",
+      "CallFunc_Subtract_DoubleDouble_ReturnValue",
+      "EdgeBreakDurationScaled",
+      "GlobalManagerRef"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomFloatInRange_ReturnValue",
+        "owner": "AdjustBreakDuration"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomFloatInRange_ReturnValue",
+          "owner": "AdjustBreakDuration"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomFloatInRange",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 0.05
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 0.1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+        "owner": "AdjustBreakDuration"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+          "owner": "AdjustBreakDuration"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManagerRef",
+                "owner": "BP_EdgeManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "EdgeBreakDurationScaled",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "EdgeBreakDurationScaled",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomFloatInRange_ReturnValue",
+              "owner": "AdjustBreakDuration"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Subtract_DoubleDouble_ReturnValue",
+        "owner": "AdjustBreakDuration"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_DoubleDouble_ReturnValue",
+          "owner": "AdjustBreakDuration"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Subtract_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManagerRef",
+                "owner": "BP_EdgeManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "EdgeBreakDurationScaled",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "EdgeBreakDurationScaled",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+              "owner": "AdjustBreakDuration"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FClamp_ReturnValue",
+        "owner": "AdjustBreakDuration"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FClamp_ReturnValue",
+          "owner": "AdjustBreakDuration"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FClamp",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Subtract_DoubleDouble_ReturnValue",
+              "owner": "AdjustBreakDuration"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 30.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "EdgeBreakDurationScaled",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManagerRef",
+            "owner": "BP_EdgeManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "EdgeBreakDurationScaled",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "EdgeBreakDurationScaled",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FClamp_ReturnValue",
+          "owner": "AdjustBreakDuration"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

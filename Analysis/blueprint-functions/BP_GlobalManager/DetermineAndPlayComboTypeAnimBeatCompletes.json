@@ -1,0 +1,577 @@
+{
+  "function": {
+    "name": "DetermineAndPlayComboTypeAnimBeatCompletes",
+    "statements": 25,
+    "raw_fallback": false,
+    "calls": [
+      "DetermineComboType",
+      "NotEqual_ByteByte",
+      "PlayAnimation"
+    ],
+    "fields": [
+      "CallFunc_PlayAnimation_ReturnValue",
+      "CallFunc_PlayAnimation_ReturnValue_1",
+      "CallFunc_PlayAnimation_ReturnValue_2",
+      "CurrentComboTypeEnum",
+      "HighComboBeatComplete",
+      "K2Node_SwitchEnum_CmpSuccess",
+      "LowComboBeatComplete",
+      "MediumComboBeatComplete",
+      "UIManager"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "DetermineComboType",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentComboTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 379,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentComboTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 379,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentComboTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 379,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentComboTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 475,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentComboTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 475,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentComboTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 5
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 571,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentComboTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 6
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 571,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentComboTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 7
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 571,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 662
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_2",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 59,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_2",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "PlayAnimation",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "UIManager",
+                  "owner": "BP_GlobalManager_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "LowComboBeatComplete",
+                "owner": "UI_Manager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "LowComboBeatComplete",
+                  "owner": "UI_Manager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": 1
+            },
+            {
+              "op": "EX_ByteConst",
+              "Value": 0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_False"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 662
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_1",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 59,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_1",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "PlayAnimation",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "UIManager",
+                  "owner": "BP_GlobalManager_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "MediumComboBeatComplete",
+                "owner": "UI_Manager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "MediumComboBeatComplete",
+                  "owner": "UI_Manager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": 1
+            },
+            {
+              "op": "EX_ByteConst",
+              "Value": 0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_False"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 662
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 59,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "DetermineAndPlayComboTypeAnimBeatCompletes"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "PlayAnimation",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "UIManager",
+                  "owner": "BP_GlobalManager_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "HighComboBeatComplete",
+                "owner": "UI_Manager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "HighComboBeatComplete",
+                  "owner": "UI_Manager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": 1
+            },
+            {
+              "op": "EX_ByteConst",
+              "Value": 0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_False"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

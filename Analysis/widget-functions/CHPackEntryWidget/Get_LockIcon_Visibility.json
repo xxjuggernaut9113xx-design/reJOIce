@@ -1,0 +1,154 @@
+{
+  "function": {
+    "name": "Get_LockIcon_Visibility",
+    "statements": 11,
+    "raw_fallback": false,
+    "calls": [
+      "SetVisibility"
+    ],
+    "fields": [
+      "",
+      "PatreonLockIcon",
+      "ReturnValue",
+      "bIsLocked",
+      "bIsPatreonExclusive",
+      "bIsPatron?"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 53,
+      "BooleanExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "bIsPatron?",
+          "owner": "CHPackEntryWidget_C"
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 130,
+      "BooleanExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "bIsLocked",
+          "owner": "CHPackEntryWidget_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "Get_LockIcon_Visibility"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_LockIcon_Visibility"
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 1
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 150
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 14,
+      "BooleanExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "bIsPatreonExclusive",
+          "owner": "CHPackEntryWidget_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "PatreonLockIcon",
+          "owner": "CHPackEntryWidget_C"
+        }
+      },
+      "Offset": 16,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetVisibility",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "Get_LockIcon_Visibility"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_LockIcon_Visibility"
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 1
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 150
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "Get_LockIcon_Visibility"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_LockIcon_Visibility"
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_LockIcon_Visibility"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "function": {
+    "name": "UpdateMasterEdgeCount&Set",
+    "statements": 7,
+    "raw_fallback": false,
+    "calls": [
+      "Conv_IntToDouble",
+      "FTrunc",
+      "Multiply_DoubleDouble"
+    ],
+    "fields": [
+      "CallFunc_Conv_IntToDouble_ReturnValue",
+      "CallFunc_FTrunc_ReturnValue",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue",
+      "CurrentEdgesUntillNextMercy",
+      "MasterEdgesUntilNextMercy"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+        "owner": "UpdateMasterEdgeCount&Set"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+          "owner": "UpdateMasterEdgeCount&Set"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToDouble",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "MasterEdgesUntilNextMercy",
+              "owner": "BP_EdgeManager_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+        "owner": "UpdateMasterEdgeCount&Set"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+          "owner": "UpdateMasterEdgeCount&Set"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+              "owner": "UpdateMasterEdgeCount&Set"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.25
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FTrunc_ReturnValue",
+        "owner": "UpdateMasterEdgeCount&Set"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FTrunc_ReturnValue",
+          "owner": "UpdateMasterEdgeCount&Set"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FTrunc",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+              "owner": "UpdateMasterEdgeCount&Set"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "MasterEdgesUntilNextMercy",
+        "owner": "BP_EdgeManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "MasterEdgesUntilNextMercy",
+          "owner": "BP_EdgeManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FTrunc_ReturnValue",
+          "owner": "UpdateMasterEdgeCount&Set"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CurrentEdgesUntillNextMercy",
+        "owner": "BP_EdgeManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CurrentEdgesUntillNextMercy",
+          "owner": "BP_EdgeManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "MasterEdgesUntilNextMercy",
+          "owner": "BP_EdgeManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

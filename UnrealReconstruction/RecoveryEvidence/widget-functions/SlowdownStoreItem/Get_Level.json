@@ -1,0 +1,136 @@
+{
+  "function": {
+    "name": "Get Level",
+    "statements": 5,
+    "raw_fallback": false,
+    "calls": [
+      "Conv_StringToText",
+      "GetEnumeratorUserFriendlyName"
+    ],
+    "fields": [
+      "As BP Global Manager",
+      "CallFunc_Conv_StringToText_ReturnValue",
+      "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+      "PlayerUpgradeLevels",
+      "ReturnValue",
+      "SlowdownUpgradeLevel_19_C3DC25D2450806D51DF04090A62E69DB"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+        "owner": "Get Level"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+          "owner": "Get Level"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetEnumeratorUserFriendlyName",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -121
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SlowdownUpgradeLevel_19_C3DC25D2450806D51DF04090A62E69DB",
+              "owner": "PlayerItemUpgradeLevels"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SlowdownStoreItem_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerUpgradeLevels",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerUpgradeLevels",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue",
+        "owner": "Get Level"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "Get Level"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+              "owner": "Get Level"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "Get Level"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get Level"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "Get Level"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get Level"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

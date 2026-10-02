@@ -1,0 +1,103 @@
+{
+  "function": {
+    "name": "Calculate Time Rewards",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "Divide_IntInt"
+    ],
+    "fields": [
+      "As BP Global Manager",
+      "CallFunc_Divide_IntInt_ReturnValue",
+      "PlayerVariablesStruct",
+      "SessionLength_56_D6CECACC4BB58ACDC313F09687D17721",
+      "TimeReward"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Divide_IntInt_ReturnValue",
+        "owner": "Calculate Time Rewards"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_IntInt_ReturnValue",
+          "owner": "Calculate Time Rewards"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Divide_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SessionLength_56_D6CECACC4BB58ACDC313F09687D17721",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SessionCompletionScreen_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerVariablesStruct",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 180
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "TimeReward",
+        "owner": "SessionCompletionScreen_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "TimeReward",
+          "owner": "SessionCompletionScreen_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_IntInt_ReturnValue",
+          "owner": "Calculate Time Rewards"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

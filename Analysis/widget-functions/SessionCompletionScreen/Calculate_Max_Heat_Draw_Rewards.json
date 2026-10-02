@@ -1,0 +1,103 @@
+{
+  "function": {
+    "name": "Calculate Max Heat Draw Rewards",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "Divide_IntInt"
+    ],
+    "fields": [
+      "As BP Global Manager",
+      "CallFunc_Divide_IntInt_ReturnValue",
+      "MaxHeatReward",
+      "PlayerVariablesStruct",
+      "SessionDrawsAtMaxHeat_128_A9B9F4024B90B927E3EAFFA94F6FAFA0"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Divide_IntInt_ReturnValue",
+        "owner": "Calculate Max Heat Draw Rewards"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_IntInt_ReturnValue",
+          "owner": "Calculate Max Heat Draw Rewards"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Divide_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SessionDrawsAtMaxHeat_128_A9B9F4024B90B927E3EAFFA94F6FAFA0",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP Global Manager",
+                  "owner": "SessionCompletionScreen_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "PlayerVariablesStruct",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 10
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "MaxHeatReward",
+        "owner": "SessionCompletionScreen_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "MaxHeatReward",
+          "owner": "SessionCompletionScreen_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_IntInt_ReturnValue",
+          "owner": "Calculate Max Heat Draw Rewards"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

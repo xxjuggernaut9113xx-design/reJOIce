@@ -1,0 +1,1001 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_AudioSettingsMenu",
+    "statements": 40,
+    "raw_fallback": false,
+    "calls": [
+      "GetGameInstance",
+      "GetValue",
+      "PopulateSliderDefaults",
+      "SaveAllData"
+    ],
+    "fields": [
+      "",
+      "As BP CHGame Instance",
+      "BackgroundMusicVolSlider",
+      "BackgroundMusicVolume",
+      "CallFunc_GetGameInstance_ReturnValue",
+      "CallFunc_GetValue_ReturnValue",
+      "CallFunc_GetValue_ReturnValue_1",
+      "CallFunc_GetValue_ReturnValue_2",
+      "CallFunc_GetValue_ReturnValue_3",
+      "CallFunc_GetValue_ReturnValue_4",
+      "CallFunc_GetValue_ReturnValue_5",
+      "ContextBeatSFXVolSlider",
+      "ContextBeatSFXVolume",
+      "CurrentSave",
+      "EntryPoint",
+      "K2Node_DynamicCast_AsBP_CHGame_Instance",
+      "K2Node_DynamicCast_bSuccess",
+      "K2Node_VariableSet_BackgroundMusicVolume_ImplicitCast",
+      "K2Node_VariableSet_ContextBeatSFXVolume_ImplicitCast",
+      "K2Node_VariableSet_MetronomeVolume_ImplicitCast",
+      "K2Node_VariableSet_MoansVolume_ImplicitCast",
+      "K2Node_VariableSet_SFXVolume_ImplicitCast",
+      "K2Node_VariableSet_VoicelinesVolume_ImplicitCast",
+      "MetronomeVolSlider",
+      "MetronomeVolume",
+      "MoansVolSlider",
+      "MoansVolume",
+      "SFXVolSlider",
+      "SFXVolume",
+      "VoicelinesVolSlider",
+      "VoicelinesVolume"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "PopulateSliderDefaults",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1294
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameInstance_ReturnValue",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameInstance",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetGameInstance_ReturnValue",
+            "owner": "ExecuteUbergraph_AudioSettingsMenu"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+            "owner": "ExecuteUbergraph_AudioSettingsMenu"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1294,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "AudioSettingsMenu_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 10
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetValue_ReturnValue",
+        "owner": "ExecuteUbergraph_AudioSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetValue_ReturnValue",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "MetronomeVolSlider",
+            "owner": "AudioSettingsMenu_C"
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetValue_ReturnValue",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetValue",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_VariableSet_MetronomeVolume_ImplicitCast",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 4,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetValue_ReturnValue",
+            "owner": "ExecuteUbergraph_AudioSettingsMenu"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "MetronomeVolume",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "AudioSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "MetronomeVolume",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "MetronomeVolume",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_VariableSet_MetronomeVolume_ImplicitCast",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "AudioSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1294
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetValue_ReturnValue_1",
+        "owner": "ExecuteUbergraph_AudioSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetValue_ReturnValue_1",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "VoicelinesVolSlider",
+            "owner": "AudioSettingsMenu_C"
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetValue_ReturnValue_1",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetValue",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_VariableSet_VoicelinesVolume_ImplicitCast",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 4,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetValue_ReturnValue_1",
+            "owner": "ExecuteUbergraph_AudioSettingsMenu"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "VoicelinesVolume",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "AudioSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "VoicelinesVolume",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "VoicelinesVolume",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_VariableSet_VoicelinesVolume_ImplicitCast",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "AudioSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1294
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetValue_ReturnValue_2",
+        "owner": "ExecuteUbergraph_AudioSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetValue_ReturnValue_2",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SFXVolSlider",
+            "owner": "AudioSettingsMenu_C"
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetValue_ReturnValue_2",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetValue",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_VariableSet_SFXVolume_ImplicitCast",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 4,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetValue_ReturnValue_2",
+            "owner": "ExecuteUbergraph_AudioSettingsMenu"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SFXVolume",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "AudioSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "SFXVolume",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SFXVolume",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_VariableSet_SFXVolume_ImplicitCast",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "AudioSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1294
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetValue_ReturnValue_3",
+        "owner": "ExecuteUbergraph_AudioSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetValue_ReturnValue_3",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "MoansVolSlider",
+            "owner": "AudioSettingsMenu_C"
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetValue_ReturnValue_3",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetValue",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_VariableSet_MoansVolume_ImplicitCast",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 4,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetValue_ReturnValue_3",
+            "owner": "ExecuteUbergraph_AudioSettingsMenu"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "MoansVolume",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "AudioSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "MoansVolume",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "MoansVolume",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_VariableSet_MoansVolume_ImplicitCast",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "AudioSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1294
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetValue_ReturnValue_4",
+        "owner": "ExecuteUbergraph_AudioSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetValue_ReturnValue_4",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "BackgroundMusicVolSlider",
+            "owner": "AudioSettingsMenu_C"
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetValue_ReturnValue_4",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetValue",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_VariableSet_BackgroundMusicVolume_ImplicitCast",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 4,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetValue_ReturnValue_4",
+            "owner": "ExecuteUbergraph_AudioSettingsMenu"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "BackgroundMusicVolume",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "AudioSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "BackgroundMusicVolume",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "BackgroundMusicVolume",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_VariableSet_BackgroundMusicVolume_ImplicitCast",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "AudioSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1294
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetValue_ReturnValue_5",
+        "owner": "ExecuteUbergraph_AudioSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetValue_ReturnValue_5",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "ContextBeatSFXVolSlider",
+            "owner": "AudioSettingsMenu_C"
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetValue_ReturnValue_5",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetValue",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_VariableSet_ContextBeatSFXVolume_ImplicitCast",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 4,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetValue_ReturnValue_5",
+            "owner": "ExecuteUbergraph_AudioSettingsMenu"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ContextBeatSFXVolume",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "AudioSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "ContextBeatSFXVolume",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "ContextBeatSFXVolume",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_VariableSet_ContextBeatSFXVolume_ImplicitCast",
+          "owner": "ExecuteUbergraph_AudioSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "AudioSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

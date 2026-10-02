@@ -1,0 +1,71 @@
+{
+  "function": {
+    "name": "OpenAndPlayCumMedia",
+    "statements": 3,
+    "raw_fallback": false,
+    "calls": [
+      "GetAndSetRandomCard"
+    ],
+    "fields": [
+      "",
+      "CumCards",
+      "DrawManager"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "DrawManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 45,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "GetAndSetRandomCard",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "DrawManager",
+                "owner": "BP_GlobalManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CumCards",
+              "owner": "BP_DrawManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CumCards",
+                "owner": "BP_DrawManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

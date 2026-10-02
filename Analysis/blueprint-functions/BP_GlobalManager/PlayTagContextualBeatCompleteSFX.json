@@ -1,0 +1,1580 @@
+{
+  "function": {
+    "name": "PlayTagContextualBeatCompleteSFX",
+    "statements": 62,
+    "raw_fallback": false,
+    "calls": [
+      "Add_IntInt",
+      "ApplyVolumeScalar",
+      "Array_Add",
+      "Array_Clear",
+      "Array_Get",
+      "Array_Length",
+      "Array_Random",
+      "Less_IntInt",
+      "NotEqual_StriStri",
+      "PlaySound2D"
+    ],
+    "fields": [
+      "",
+      "AreContextualBeatSFXEnabled?",
+      "AssjobSoundsArray",
+      "BlowjobSoundsArray",
+      "CallFunc_Add_IntInt_ReturnValue",
+      "CallFunc_ApplyVolumeScalar_Output",
+      "CallFunc_Array_Add_ReturnValue",
+      "CallFunc_Array_Add_ReturnValue_1",
+      "CallFunc_Array_Add_ReturnValue_2",
+      "CallFunc_Array_Add_ReturnValue_3",
+      "CallFunc_Array_Add_ReturnValue_4",
+      "CallFunc_Array_Add_ReturnValue_5",
+      "CallFunc_Array_Add_ReturnValue_6",
+      "CallFunc_Array_Add_ReturnValue_7",
+      "CallFunc_Array_Get_Item",
+      "CallFunc_Array_Length_ReturnValue",
+      "CallFunc_Array_Random_OutIndex",
+      "CallFunc_Array_Random_OutIndex_1",
+      "CallFunc_Array_Random_OutIndex_2",
+      "CallFunc_Array_Random_OutIndex_3",
+      "CallFunc_Array_Random_OutIndex_4",
+      "CallFunc_Array_Random_OutIndex_5",
+      "CallFunc_Array_Random_OutIndex_6",
+      "CallFunc_Array_Random_OutIndex_7",
+      "CallFunc_Array_Random_OutIndex_8",
+      "CallFunc_Array_Random_OutItem",
+      "CallFunc_Array_Random_OutItem_1",
+      "CallFunc_Array_Random_OutItem_2",
+      "CallFunc_Array_Random_OutItem_3",
+      "CallFunc_Array_Random_OutItem_4",
+      "CallFunc_Array_Random_OutItem_5",
+      "CallFunc_Array_Random_OutItem_6",
+      "CallFunc_Array_Random_OutItem_7",
+      "CallFunc_Array_Random_OutItem_8",
+      "CallFunc_Less_IntInt_ReturnValue",
+      "CallFunc_PlaySound2D_VolumeMultiplier_ImplicitCast",
+      "Context Beat SFXVolume",
+      "CowgirlSoundsArray",
+      "CumSoundsArray",
+      "CurrentSave",
+      "EligibleContextSFX",
+      "GameInstance",
+      "HandjobSoundsArray",
+      "K2Node_SwitchString_CmpSuccess",
+      "PaizuriSoundsArray",
+      "SelectedRandomCard",
+      "SexSoundsArray",
+      "SuccubusSoundsArray",
+      "Tags",
+      "Temp_int_Array_Index_Variable",
+      "Temp_int_Loop_Counter_Variable"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 2075
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AreContextualBeatSFXEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AreContextualBeatSFXEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Clear",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "EligibleContextSFX",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable",
+        "owner": "PlayTagContextualBeatCompleteSFX"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable",
+        "owner": "PlayTagContextualBeatCompleteSFX"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Length_ReturnValue",
+        "owner": "PlayTagContextualBeatCompleteSFX"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Length_ReturnValue",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 28,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Length_ReturnValue",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Length",
+          "Parameters": [
+            {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "Tags",
+                "owner": "CHPackMediaEntry"
+              },
+              "StructExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "SelectedRandomCard",
+                  "owner": "BP_GlobalManager_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Less_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Length_ReturnValue",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 775,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable",
+        "owner": "PlayTagContextualBeatCompleteSFX"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      }
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 977
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 46,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Tags",
+              "owner": "CHPackMediaEntry"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "SelectedRandomCard",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "assjob"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1051,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "blowjob"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1179,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "cowgirl"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1307,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "cum"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1435,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "handjob"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1563,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "paizuri"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1691,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "sex"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1819,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "succubus"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1947,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "ApplyVolumeScalar",
+      "Parameters": [
+        {
+          "op": "EX_DoubleConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Context Beat SFXVolume",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_ApplyVolumeScalar_Output",
+            "owner": "PlayTagContextualBeatCompleteSFX"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "EligibleContextSFX",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem_1",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex_1",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlaySound2D_VolumeMultiplier_ImplicitCast",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_ApplyVolumeScalar_Output",
+            "owner": "PlayTagContextualBeatCompleteSFX"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -249
+      },
+      "Offset": 50,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlaySound2D",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem_1",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_PlaySound2D_VolumeMultiplier_ImplicitCast",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.5
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": -0.2800000011920929
+          },
+          {
+            "op": "EX_ObjectConst",
+            "Value": -2181
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue",
+        "owner": "PlayTagContextualBeatCompleteSFX"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable",
+        "owner": "PlayTagContextualBeatCompleteSFX"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 146
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AssjobSoundsArray",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_7",
+        "owner": "PlayTagContextualBeatCompleteSFX"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_7",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 28,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_7",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "EligibleContextSFX",
+                "owner": "BP_GlobalManager_C"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Random_OutItem",
+                "owner": "PlayTagContextualBeatCompleteSFX"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "BlowjobSoundsArray",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem_8",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex_8",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_6",
+        "owner": "PlayTagContextualBeatCompleteSFX"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_6",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 28,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_6",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "EligibleContextSFX",
+                "owner": "BP_GlobalManager_C"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Random_OutItem_8",
+                "owner": "PlayTagContextualBeatCompleteSFX"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CowgirlSoundsArray",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem_7",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex_7",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_5",
+        "owner": "PlayTagContextualBeatCompleteSFX"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_5",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 28,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_5",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "EligibleContextSFX",
+                "owner": "BP_GlobalManager_C"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Random_OutItem_7",
+                "owner": "PlayTagContextualBeatCompleteSFX"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CumSoundsArray",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem_6",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex_6",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_4",
+        "owner": "PlayTagContextualBeatCompleteSFX"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_4",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 28,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_4",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "EligibleContextSFX",
+                "owner": "BP_GlobalManager_C"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Random_OutItem_6",
+                "owner": "PlayTagContextualBeatCompleteSFX"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HandjobSoundsArray",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem_5",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex_5",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_3",
+        "owner": "PlayTagContextualBeatCompleteSFX"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_3",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 28,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_3",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "EligibleContextSFX",
+                "owner": "BP_GlobalManager_C"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Random_OutItem_5",
+                "owner": "PlayTagContextualBeatCompleteSFX"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PaizuriSoundsArray",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem_4",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex_4",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_2",
+        "owner": "PlayTagContextualBeatCompleteSFX"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_2",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 28,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_2",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "EligibleContextSFX",
+                "owner": "BP_GlobalManager_C"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Random_OutItem_4",
+                "owner": "PlayTagContextualBeatCompleteSFX"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "SexSoundsArray",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem_3",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex_3",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue_1",
+        "owner": "PlayTagContextualBeatCompleteSFX"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue_1",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 28,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue_1",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "EligibleContextSFX",
+                "owner": "BP_GlobalManager_C"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Random_OutItem_3",
+                "owner": "PlayTagContextualBeatCompleteSFX"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "SuccubusSoundsArray",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem_2",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex_2",
+              "owner": "PlayTagContextualBeatCompleteSFX"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Add_ReturnValue",
+        "owner": "PlayTagContextualBeatCompleteSFX"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Add_ReturnValue",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 28,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Add_ReturnValue",
+          "owner": "PlayTagContextualBeatCompleteSFX"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Add",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "EligibleContextSFX",
+                "owner": "BP_GlobalManager_C"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Random_OutItem_2",
+                "owner": "PlayTagContextualBeatCompleteSFX"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+
+// ReceiveBeginPlay entry L15147
+L15147: SetEnableWorldRendering(this, false);
+L15159: CallFunc_GetGameInstance_ReturnValue = GetGameInstance(this);
+L15180: K2Node_DynamicCast_AsBP_CHGame_Instance = cast<-6>(CallFunc_GetGameInstance_ReturnValue);
+L15216: K2Node_DynamicCast_bSuccess = cast_1(K2Node_DynamicCast_AsBP_CHGame_Instance);
+L15245: if (!K2Node_DynamicCast_bSuccess) goto flow.pop_or_return();
+L15255: GameInstance = K2Node_DynamicCast_AsBP_CHGame_Instance;
+L15274: CallFunc_DoesSaveGameExist_ReturnValue = DoesSaveGameExist(SaveSlotName, UserIndex);
+L15312: if (!CallFunc_DoesSaveGameExist_ReturnValue) goto L16520;
+L15326: CallFunc_LoadGameFromSlot_ReturnValue = LoadGameFromSlot(SaveSlotName, UserIndex);
+L15364: PrintString(this, "Save Found, Loading Game...", true, true, -2162{+0, 0.6600000262260437, 1.0, 1.0}, 2.0, "None");
+L15458: CallFunc_MakeTransform_ReturnValue_4 = MakeTransform(EX_VectorConst({"Value":{"op":"FVector","X":"+0","Y":"+0","Z":"+0"}}), EX_RotationConst({"Value":{"op":"FRotator","Pitch":"+0","Yaw":"+0","Roll":"+0"}}), EX_VectorConst({"Value":{"op":"FVector","X":1.0,"Y":1.0,"Z":1.0}}));
+L15561: CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue_4 = BeginDeferredActorSpawnFromClass(this, -29, CallFunc_MakeTransform_ReturnValue_4, 0, nullptr, 1);
+L15605: CallFunc_MakeTransform_ReturnValue_4 = MakeTransform(EX_VectorConst({"Value":{"op":"FVector","X":"+0","Y":"+0","Z":"+0"}}), EX_RotationConst({"Value":{"op":"FRotator","Pitch":"+0","Yaw":"+0","Roll":"+0"}}), EX_VectorConst({"Value":{"op":"FVector","X":1.0,"Y":1.0,"Z":1.0}}));
+L15708: CallFunc_FinishSpawningActor_ReturnValue_4 = FinishSpawningActor(CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue_4, CallFunc_MakeTransform_ReturnValue_4, 1);
+L15748: GameInstance->LatencyCompensationManager = CallFunc_FinishSpawningActor_ReturnValue_4;
+L15789: GameInstance->LatencyCompensationManager->InitializeWithSaveGame(GameInstance->CurrentSave);
+L15874: CreateMainMenuUI();
+L15888: CallFunc_SpawnObject_ReturnValue_2 = SpawnObject(-30, this);
+L15918: MediaPlaybackManager = CallFunc_SpawnObject_ReturnValue_2;
+L15937: MediaPlaybackManager->bBeatSyncEnabled = GameInstance->CurrentSave->bMediaSyncEnabled;
+L16022: MediaPlaybackManager->LatencyManager = GameInstance->LatencyCompensationManager;
+L16085: CallFunc_SpawnObject_ReturnValue_1 = SpawnObject(-26, this);
+L16115: CHPackManager = CallFunc_SpawnObject_ReturnValue_1;
+L16134: CHPackManager->SetPatronStatus(GameInstance->CurrentSave->IsPatron?);
+L16219: CallFunc_GetAllChpackPaths_ReturnValue = CHPackManager->GetAllChpackPaths();
+L16269: CallFunc_Array_IsEmpty_ReturnValue_7 = -250->Array_IsEmpty(CallFunc_GetAllChpackPaths_ReturnValue);
+L16320: CallFunc_Conv_BoolToString_ReturnValue_2 = Conv_BoolToString(CallFunc_Array_IsEmpty_ReturnValue_7);
+L16357: CallFunc_Concat_StrStr_ReturnValue_5 = Concat_StrStr("CH PATH ARRAY EMPTY?: ", CallFunc_Conv_BoolToString_ReturnValue_2);
+L16418: PrintString(this, CallFunc_Concat_StrStr_ReturnValue_5, true, true, -2162{+0, 0.6600000262260437, 1.0, 1.0}, 2.0, "None");
+L16492: Temp_int_Loop_Counter_Variable = 0;
+L16515: goto L10465;
+L16520: CallFunc_CreateSaveGameObject_ReturnValue = CreateSaveGameObject(-10);
+L16549: CurrentSave = CallFunc_CreateSaveGameObject_ReturnValue;
+L16568: PrintString(this, "Save Not Found, Creating...", true, true, -2162{+0, 0.6600000262260437, 1.0, 1.0}, 2.0, "None");
+L16662: goto L15458;
+L16667: InitializeWidgets&Managers();
+L16681: goto flow.pop_or_return();
+
+// StartGameButton entry L16773
+L16773: goto L16667;
+L16778: ApplyVolumeScalar(0.5, SFXVolume, CallFunc_ApplyVolumeScalar_Output_1);
+L16819: CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast_1 = cast_3(CallFunc_ApplyVolumeScalar_Output_1);
+L16848: CallFunc_SpawnSound2D_ReturnValue_1 = -249->SpawnSound2D(this, -3789, CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast_1, 1.0, +0, nullptr, false, true);
+L16922: BeatSpawnerManagerCPP->PauseSequence();
+L16954: IsStoreOnCooldown = true;
+L16965: K2_ClearAndInvalidateTimerHandle(this, IdleTimerHandle);
+L16985: CallFunc_Create_ReturnValue_4 = -4055->Create(this, -4053, PlayerControllerRef);
+L17046: CallFunc_Create_ReturnValue_4->AddToViewport(0);
+L17083: CurrentCardTypeEnum = 4;
+L17103: EX_BindDelegate({"FunctionName":"CompleteStoreCooldown","Delegate":{"op":"EX_LocalVariable","Variable":{"field":"K2Node_CreateDelegate_OutputDelegate_12","owner":"ExecuteUbergraph_BP_GlobalManager"}},"ObjectTerm":{"op":"EX_Self"}});
+L17126: CallFunc_K2_SetTimerDelegate_ReturnValue_5 = K2_SetTimerDelegate(K2Node_CreateDelegate_OutputDelegate_12, 180.0, false, +0, +0);
+L17179: Change Beat Background(1);
+L17195: goto flow.pop_or_return();
+
+// InitializeWidgets&Managers entry L24590
+L24590: PrintString(this, "Initializing Widgets & Managers...", true, true, -2162{+0, 0.6600000262260437, 1.0, 1.0}, 2.0, "None");
+L24691: CallFunc_MakeTransform_ReturnValue_5 = MakeTransform(EX_VectorConst({"Value":{"op":"FVector","X":"+0","Y":"+0","Z":"+0"}}), EX_RotationConst({"Value":{"op":"FRotator","Pitch":"+0","Yaw":"+0","Roll":"+0"}}), EX_VectorConst({"Value":{"op":"FVector","X":1.0,"Y":1.0,"Z":1.0}}));
+L24794: CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue_5 = BeginDeferredActorSpawnFromClass(this, -5, CallFunc_MakeTransform_ReturnValue_5, 0, nullptr, 1);
+L24838: CallFunc_MakeTransform_ReturnValue_5 = MakeTransform(EX_VectorConst({"Value":{"op":"FVector","X":"+0","Y":"+0","Z":"+0"}}), EX_RotationConst({"Value":{"op":"FRotator","Pitch":"+0","Yaw":"+0","Roll":"+0"}}), EX_VectorConst({"Value":{"op":"FVector","X":1.0,"Y":1.0,"Z":1.0}}));
+L24941: CallFunc_FinishSpawningActor_ReturnValue_5 = FinishSpawningActor(CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue_5, CallFunc_MakeTransform_ReturnValue_5, 1);
+L24981: CardManager = CallFunc_FinishSpawningActor_ReturnValue_5;
+L25000: CardManager->Validate&PopulateSavedMedia();
+L25036: Temp_string_Variable = "Feet Fanatic";
+L25068: Temp_string_Variable_1 = "Boobs Fanatic";
+L25101: Temp_string_Variable_2 = "Ass Fanatic";
+L25132: CallFunc_Array_Contains_ReturnValue = -250->Array_Contains(GameInstance->CurrentSave->ActiveModifiers, Temp_string_Variable_1);
+L25236: CallFunc_Array_Contains_ReturnValue_1 = -250->Array_Contains(GameInstance->CurrentSave->ActiveModifiers, Temp_string_Variable);
+L25340: CallFunc_Array_Contains_ReturnValue_2 = -250->Array_Contains(GameInstance->CurrentSave->ActiveModifiers, Temp_string_Variable_2);
+L25444: CallFunc_FilterMediaIntoCategoriesAsync_OutSlowCards = [];
+L25455: CallFunc_FilterMediaIntoCategoriesAsync_OutMediumCards = [];
+L25466: CallFunc_FilterMediaIntoCategoriesAsync_OutFastCards = [];
+L25477: CallFunc_FilterMediaIntoCategoriesAsync_OutCumCards = [];
+L25488: CallFunc_FilterMediaIntoCategoriesAsync_OutSuccubusCards = [];
+L25499: CallFunc_FilterMediaIntoCategoriesAsync_OutAssCards = [];
+L25510: CallFunc_FilterMediaIntoCategoriesAsync_OutBoobCards = [];
+L25521: FilterMediaIntoCategoriesAsync(this, CardManager->AllCards, CardManager->Excluded Tags, CallFunc_Array_Contains_ReturnValue_2, CallFunc_Array_Contains_ReturnValue, CallFunc_Array_Contains_ReturnValue_1, CallFunc_FilterMediaIntoCategoriesAsync_OutSlowCards, CallFunc_FilterMediaIntoCategoriesAsync_OutMediumCards, CallFunc_FilterMediaIntoCategoriesAsync_OutFastCards, CallFunc_FilterMediaIntoCategoriesAsync_OutCumCards, CallFunc_FilterMediaIntoCategoriesAsync_OutSuccubusCards, CallFunc_FilterMediaIntoCategoriesAsync_OutAssCards, CallFunc_FilterMediaIntoCategoriesAsync_OutBoobCards, CallFunc_FilterMediaIntoCategoriesAsync_OutProgress, CallFunc_FilterMediaIntoCategoriesAsync_OutProcessedCount, CallFunc_FilterMediaIntoCategoriesAsync_OutTotalCount, -2167{388, 343019241, "ExecuteUbergraph_BP_GlobalManager", this}, 100);
+L25754: goto flow.pop_or_return();
+
+// ReinitGameVariables entry L31659
+L31659: MediaPlaybackManager->StopPlayback(true);
+L31692: EX_ClearMulticastDelegate({"DelegateToClear":{"op":"EX_Context","ObjectExpression":{"op":"EX_InstanceVariable","Variable":{"field":"BeatSpawnerManagerCPP","owner":"BP_GlobalManager_C"}},"Offset":9,"PropertyType":0,"RValuePointer":{"field":"OnBeatFired","owner":"BeatSpawnerManager"},"ContextExpression":{"op":"EX_InstanceVariable","Variable":{"field":"OnBeatFired","owner":"BeatSpawnerManager"}}}});
+L31724: EX_ClearMulticastDelegate({"DelegateToClear":{"op":"EX_Context","ObjectExpression":{"op":"EX_InstanceVariable","Variable":{"field":"BeatSpawnerManagerCPP","owner":"BP_GlobalManager_C"}},"Offset":9,"PropertyType":0,"RValuePointer":{"field":"OnBeatHitCenter","owner":"BeatSpawnerManager"},"ContextExpression":{"op":"EX_InstanceVariable","Variable":{"field":"OnBeatHitCenter","owner":"BeatSpawnerManager"}}}});
+L31756: EX_ClearMulticastDelegate({"DelegateToClear":{"op":"EX_Context","ObjectExpression":{"op":"EX_InstanceVariable","Variable":{"field":"BeatSpawnerManagerCPP","owner":"BP_GlobalManager_C"}},"Offset":9,"PropertyType":0,"RValuePointer":{"field":"OnSequenceEnd","owner":"BeatSpawnerManager"},"ContextExpression":{"op":"EX_InstanceVariable","Variable":{"field":"OnSequenceEnd","owner":"BeatSpawnerManager"}}}});
+L31788: EX_ClearMulticastDelegate({"DelegateToClear":{"op":"EX_Context","ObjectExpression":{"op":"EX_InstanceVariable","Variable":{"field":"BeatSpawnerManagerCPP","owner":"BP_GlobalManager_C"}},"Offset":9,"PropertyType":0,"RValuePointer":{"field":"OnSequencePaused","owner":"BeatSpawnerManager"},"ContextExpression":{"op":"EX_InstanceVariable","Variable":{"field":"OnSequencePaused","owner":"BeatSpawnerManager"}}}});
+L31820: -4056->RemoveAllWidgets(this);
+L31853: OpenLevel(this, "Untitled", true, "");
+L31880: goto flow.pop_or_return();
+
+// SuccessfulCum entry L19331
+L19331: GameInstance->ProgressionManager->UpdateMetric(14, 1);
+L19392: CurrentCardTypeEnum = 6;
+L19412: UIManager->CreateNotificationBox(-3889, "Perfect Finish", "Full Rewards Unlocked — Victory Achieved");
+L19556: Change Beat Background(5);
+L19572: CallFunc_Array_Add_ReturnValue_1 = -250->Array_Add(PlayerVariablesStruct.BrokenComboArray_137_4965B77C45AC878DA2C308BC8873F425, PlayerVariablesStruct.CurrentComboCount_66_5F7B16A442F400DEAE401686B872656A);
+L19658: PlayerVariablesStruct.BrokenComboArray_137_4965B77C45AC878DA2C308BC8873F425 = PlayerVariablesStruct.BrokenComboArray_137_4965B77C45AC878DA2C308BC8873F425;
+L19703: PlayerVariablesStruct.CanDraw?_152_A9DBFB6E4FCB050F8A8AE78F2265EA7D = true;
+L19723: PlayerVariablesStruct.EdgeStreak_38_4FA71F134FD2BB0EE85D7B96148820C9 = 0;
+L19755: PlayerVariablesStruct.CurrentComboCount_66_5F7B16A442F400DEAE401686B872656A = 0;
+L19787: PlayerVariablesStruct.HasCame?_131_A20AD0624A6199B4DB13138959343167 = true;
+L19807: CallFunc_Create_ReturnValue_11 = -4055->Create(this, -4047, nullptr);
+L19860: CallFunc_Create_ReturnValue_11->AddToViewport(0);
+L19897: FindSpecialEventDialogueStructs(3, CallFunc_FindSpecialEventDialogueStructs_DialogueStructArray_4);
+L19922: Set Dialogue and Play Voiceline(CallFunc_FindSpecialEventDialogueStructs_DialogueStructArray_4);
+L19945: PlayerVariablesStruct.CanUseItems?_95_5DA0FAB747CA4CDCE12D5CA50A03E14E = false;
+L19965: PlayerVariablesStruct.HasCame?_131_A20AD0624A6199B4DB13138959343167 = true;
+L19985: PrintString(this, "Cumming on Time!! Good job!!!!!", true, true, -2162{0.15055499970912933, 1.0, +0, 1.0}, 5.0, "None");
+L20083: BeatSpawnerManagerCPP->ApplySpeedModifier(5.0);
+L20120: BeatSpawnerManagerCPP->ApplyStrokeCountModifier(10);
+L20157: CallFunc_PlayAnimation_ReturnValue_6 = UIManager->PlayAnimation(nullptr, +0, 1, 0, 1.0, false);
+L20218: CallFunc_Create_ReturnValue_16 = -4055->Create(this, -4041, nullptr);
+L20271: CallFunc_Create_ReturnValue_16->AddToViewport(0);
+L20308: Delay(this, 10.0, -2167{232, 1448042494, "ExecuteUbergraph_BP_GlobalManager", this});
+L20362: goto flow.pop_or_return();
+
+// PrematureCum entry L17755
+L17755: GameInstance->ProgressionManager->UpdateMetric(21, 1);
+L17816: GameInstance->ProgressionManager->UpdateMetric(11, 1);
+L17877: if (!HasTaunted?) goto L17952;
+L17891: GameInstance->ProgressionManager->UpdateMetric(29, 1);
+L17952: K2_ClearAndInvalidateTimerHandle(this, EdgingManager->EdgeHoldTimerHandle);
+L17994: UIManager->CreateNotificationBox(-3888, "Early Climax", "Post-Game Rewards Cut in Half");
+L18084: Change Beat Background(4);
+L18100: CallFunc_Array_Add_ReturnValue = -250->Array_Add(PlayerVariablesStruct.BrokenComboArray_137_4965B77C45AC878DA2C308BC8873F425, PlayerVariablesStruct.CurrentComboCount_66_5F7B16A442F400DEAE401686B872656A);
+L18186: PlayerVariablesStruct.BrokenComboArray_137_4965B77C45AC878DA2C308BC8873F425 = PlayerVariablesStruct.BrokenComboArray_137_4965B77C45AC878DA2C308BC8873F425;
+L18231: PlayerVariablesStruct.EdgeStreak_38_4FA71F134FD2BB0EE85D7B96148820C9 = 0;
+L18263: PlayerVariablesStruct.CurrentComboCount_66_5F7B16A442F400DEAE401686B872656A = 0;
+L18295: PlayerVariablesStruct.HasCame?_131_A20AD0624A6199B4DB13138959343167 = true;
+L18315: PlayerVariablesStruct.CanDraw?_152_A9DBFB6E4FCB050F8A8AE78F2265EA7D = true;
+L18335: CallFunc_EqualEqual_ByteByte_ReturnValue = EqualEqual_ByteByte(CurrentCardTypeEnum, 3);
+L18366: if (!CallFunc_EqualEqual_ByteByte_ReturnValue) goto L19122;
+L18380: CallFunc_Create_ReturnValue_5 = -4055->Create(this, -4046, nullptr);
+L18433: CallFunc_Create_ReturnValue_5->AddToViewport(0);
+L18470: FindSpecialEventDialogueStructs(6, CallFunc_FindSpecialEventDialogueStructs_DialogueStructArray_3);
+L18495: Set Dialogue and Play Voiceline(CallFunc_FindSpecialEventDialogueStructs_DialogueStructArray_3);
+L18518: GameInstance->ProgressionManager->UpdateMetric(22, 1);
+L18579: PlayerVariablesStruct.CanUseItems?_95_5DA0FAB747CA4CDCE12D5CA50A03E14E = false;
+L18599: PlayerVariablesStruct.HasCame?_131_A20AD0624A6199B4DB13138959343167 = true;
+L18619: CurrentCardTypeEnum = 6;
+L18639: BeatSpawnerManagerCPP->ApplySpeedModifier(5.0);
+L18676: BeatSpawnerManagerCPP->ApplyStrokeCountModifier(10);
+L18713: CallFunc_PlayAnimation_ReturnValue_5 = UIManager->PlayAnimation(UIManager->EarlyCumAnim, +0, 1, 0, 1.0, false);
+L18804: CallFunc_Create_ReturnValue_9 = -4055->Create(this, -4041, nullptr);
+L18857: CallFunc_Create_ReturnValue_9->AddToViewport(0);
+L18894: IsModifierActive?("Iron Man", CallFunc_IsModifierActive__Active_);
+L18927: if (!CallFunc_IsModifierActive__Active_) goto flow.pop_or_return();
+L18937: GameInstance->ProgressionManager->StoreController->ApplyIronManPenalty();
+L19013: UIManager->CreateNotificationBox(-3858, "Iron Man Penalty", "All packs locked. Unlock Points reset to 0.");
+L19121: goto flow.pop_or_return();
+
+// BeatCompleteBind entry L25970
+L25970: BeatComplete(K2Node_CustomEvent_BeatEvent);
+L25993: goto flow.pop_or_return();
+
+// BeatSequenceEnd entry L25994
+L25994: PlayerVariablesStruct.CanDraw?_152_A9DBFB6E4FCB050F8A8AE78F2265EA7D = true;
+L26014: CallFunc_Create_ReturnValue_10 = -4055->Create(this, -4033, nullptr);
+L26067: CheckBMAutoToggles();
+L26081: CallFunc_Create_ReturnValue_10->AddToViewport(0);
+L26118: Delay(this, 0.10000000149011612, -2167{373, 203016640, "ExecuteUbergraph_BP_GlobalManager", this});
+L26172: goto flow.pop_or_return();

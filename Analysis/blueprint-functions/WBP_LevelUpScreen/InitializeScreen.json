@@ -1,0 +1,363 @@
+{
+  "function": {
+    "name": "InitializeScreen",
+    "statements": 11,
+    "raw_fallback": false,
+    "calls": [
+      "Conv_IntToText",
+      "Conv_NameToText",
+      "GetIconForLevel",
+      "InitializePlayerCard",
+      "PlayAnimation",
+      "SetBrushFromTexture",
+      "SetText"
+    ],
+    "fields": [
+      "",
+      "Anim_LevelUp",
+      "As BP CHGame Instance",
+      "CallFunc_Conv_IntToText_ReturnValue",
+      "CallFunc_Conv_NameToText_ReturnValue",
+      "CallFunc_GetIconForLevel_ReturnValue",
+      "CallFunc_PlayAnimation_ReturnValue",
+      "InData",
+      "LevelText",
+      "LevelUpData",
+      "NewLevel",
+      "ProgressionManager",
+      "RankIcon",
+      "RankTitle",
+      "Title",
+      "WBP_PlayerCard"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "LevelUpData",
+        "owner": "WBP_LevelUpScreen_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "LevelUpData",
+          "owner": "WBP_LevelUpScreen_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "InData",
+          "owner": "InitializeScreen"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToText_ReturnValue",
+        "owner": "InitializeScreen"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToText_ReturnValue",
+          "owner": "InitializeScreen"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToText",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "NewLevel",
+              "owner": "LevelUpEventData"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "LevelUpData",
+                "owner": "WBP_LevelUpScreen_C"
+              }
+            }
+          },
+          {
+            "op": "EX_False"
+          },
+          {
+            "op": "EX_True"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 324
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "LevelText",
+          "owner": "WBP_LevelUpScreen_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToText_ReturnValue",
+              "owner": "InitializeScreen"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_NameToText_ReturnValue",
+        "owner": "InitializeScreen"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_NameToText_ReturnValue",
+          "owner": "InitializeScreen"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_NameToText",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Title",
+              "owner": "LevelUpEventData"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "LevelUpData",
+                "owner": "WBP_LevelUpScreen_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "RankTitle",
+          "owner": "WBP_LevelUpScreen_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_NameToText_ReturnValue",
+              "owner": "InitializeScreen"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "InitializeScreen"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Anim_LevelUp",
+              "owner": "WBP_LevelUpScreen_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "WBP_PlayerCard",
+          "owner": "WBP_LevelUpScreen_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "InitializePlayerCard",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetIconForLevel_ReturnValue",
+          "owner": "InitializeScreen"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "WBP_LevelUpScreen_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 28,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetIconForLevel_ReturnValue",
+          "owner": "InitializeScreen"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetIconForLevel",
+          "Parameters": [
+            {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "NewLevel",
+                "owner": "LevelUpEventData"
+              },
+              "StructExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "LevelUpData",
+                  "owner": "WBP_LevelUpScreen_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "RankIcon",
+          "owner": "WBP_LevelUpScreen_C"
+        }
+      },
+      "Offset": 24,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetBrushFromTexture",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetIconForLevel_ReturnValue",
+              "owner": "InitializeScreen"
+            }
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

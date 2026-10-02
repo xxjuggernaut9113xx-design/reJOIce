@@ -1,0 +1,82 @@
+{
+  "function": {
+    "name": "ApplyVolumeScalar",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "Multiply_DoubleDouble"
+    ],
+    "fields": [
+      "CallFunc_Multiply_DoubleDouble_ReturnValue",
+      "DefaultVolume",
+      "Output",
+      "Scalar"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+        "owner": "ApplyVolumeScalar"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+          "owner": "ApplyVolumeScalar"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "DefaultVolume",
+              "owner": "ApplyVolumeScalar"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Scalar",
+              "owner": "ApplyVolumeScalar"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Output",
+        "owner": "ApplyVolumeScalar"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "Output",
+          "owner": "ApplyVolumeScalar"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+          "owner": "ApplyVolumeScalar"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

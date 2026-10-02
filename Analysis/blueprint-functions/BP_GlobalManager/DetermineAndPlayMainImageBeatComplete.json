@@ -1,0 +1,300 @@
+{
+  "function": {
+    "name": "DetermineAndPlayMainImageBeatComplete",
+    "statements": 8,
+    "raw_fallback": false,
+    "calls": [
+      "Divide_DoubleDouble",
+      "GetEndTime",
+      "PlayAnimation"
+    ],
+    "fields": [
+      "",
+      "BeatCompleteMainImage",
+      "BeatEventInput",
+      "CallFunc_Divide_DoubleDouble_A_ImplicitCast",
+      "CallFunc_Divide_DoubleDouble_ReturnValue",
+      "CallFunc_GetEndTime_ReturnValue",
+      "CallFunc_PlayAnimation_PlaybackSpeed_ImplicitCast",
+      "CallFunc_PlayAnimation_ReturnValue",
+      "CurrentSave",
+      "GameInstance",
+      "Interval",
+      "IsScreenShakeEnabled",
+      "UIManager"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 338,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "IsScreenShakeEnabled",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "IsScreenShakeEnabled",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetEndTime_ReturnValue",
+        "owner": "DetermineAndPlayMainImageBeatComplete"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetEndTime_ReturnValue",
+          "owner": "DetermineAndPlayMainImageBeatComplete"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UIManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "BeatCompleteMainImage",
+            "owner": "UI_Manager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "BeatCompleteMainImage",
+              "owner": "UI_Manager_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetEndTime_ReturnValue",
+          "owner": "DetermineAndPlayMainImageBeatComplete"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetEndTime",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_DoubleDouble_A_ImplicitCast",
+          "owner": "DetermineAndPlayMainImageBeatComplete"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 4,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetEndTime_ReturnValue",
+            "owner": "DetermineAndPlayMainImageBeatComplete"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+        "owner": "DetermineAndPlayMainImageBeatComplete"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+          "owner": "DetermineAndPlayMainImageBeatComplete"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Divide_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Divide_DoubleDouble_A_ImplicitCast",
+              "owner": "DetermineAndPlayMainImageBeatComplete"
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Interval",
+              "owner": "BeatEvent"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "BeatEventInput",
+                "owner": "DetermineAndPlayMainImageBeatComplete"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_PlaybackSpeed_ImplicitCast",
+          "owner": "DetermineAndPlayMainImageBeatComplete"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+            "owner": "DetermineAndPlayMainImageBeatComplete"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "DetermineAndPlayMainImageBeatComplete"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 63,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "DetermineAndPlayMainImageBeatComplete"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "PlayAnimation",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "UIManager",
+                  "owner": "BP_GlobalManager_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "BeatCompleteMainImage",
+                "owner": "UI_Manager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "BeatCompleteMainImage",
+                  "owner": "UI_Manager_C"
+                }
+              }
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": 1
+            },
+            {
+              "op": "EX_ByteConst",
+              "Value": 0
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_PlayAnimation_PlaybackSpeed_ImplicitCast",
+                "owner": "DetermineAndPlayMainImageBeatComplete"
+              }
+            },
+            {
+              "op": "EX_False"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "function": {
+    "name": "SpawnNote",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_BP_GlobalManager"
+    ],
+    "fields": [
+      "BeatEvent",
+      "K2Node_CustomEvent_BeatEvent_1"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_BeatEvent_1",
+        "owner": "ExecuteUbergraph_BP_GlobalManager"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "BeatEvent",
+          "owner": "SpawnNote"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_BP_GlobalManager",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 25755
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

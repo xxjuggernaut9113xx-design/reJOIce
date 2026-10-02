@@ -1,0 +1,1119 @@
+{
+  "function": {
+    "name": "PopulateModifiers",
+    "statements": 42,
+    "raw_fallback": false,
+    "calls": [
+      "AddChildToWrapBox",
+      "Add_IntInt",
+      "Array_Get",
+      "Array_Length",
+      "ClearChildren",
+      "Conv_TextToString",
+      "Create",
+      "EqualEqual_StriStri",
+      "GetDataTableRowFromName",
+      "GetDataTableRowNames",
+      "Less_IntInt",
+      "PopulateDetails",
+      "SetRenderTransform"
+    ],
+    "fields": [
+      "",
+      "ActiveModifiers",
+      "Angle",
+      "As BP CHGame Instance",
+      "CallFunc_AddChildToWrapBox_ReturnValue",
+      "CallFunc_Add_IntInt_ReturnValue",
+      "CallFunc_Add_IntInt_ReturnValue_1",
+      "CallFunc_Array_Get_Item",
+      "CallFunc_Array_Get_Item_1",
+      "CallFunc_Array_Length_ReturnValue",
+      "CallFunc_Array_Length_ReturnValue_1",
+      "CallFunc_Conv_TextToString_ReturnValue",
+      "CallFunc_Create_ReturnValue",
+      "CallFunc_EqualEqual_StriStri_ReturnValue",
+      "CallFunc_GetDataTableRowFromName_OutRow",
+      "CallFunc_GetDataTableRowFromName_ReturnValue",
+      "CallFunc_GetDataTableRowNames_OutRowNames",
+      "CallFunc_Less_IntInt_ReturnValue",
+      "CallFunc_Less_IntInt_ReturnValue_1",
+      "CurrentSessionStats",
+      "K2Node_MakeStruct_WidgetTransform",
+      "ModifierDescription_6_222B640743A8D64F22E00FBD0036F4E6",
+      "ModifierIcon_8_239A563C482456ED7169CEB67E4E117E",
+      "ModifierTitle_4_F1AA0B694005408B7D63C8BC07A503CC",
+      "ModifierWrapBox",
+      "ModifiersDataTable",
+      "ProgressionManager",
+      "Scale",
+      "Shear",
+      "Temp_int_Array_Index_Variable",
+      "Temp_int_Array_Index_Variable_1",
+      "Temp_int_Loop_Counter_Variable",
+      "Temp_int_Loop_Counter_Variable_1",
+      "Translation"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1440
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ModifierWrapBox",
+          "owner": "UI_Manager_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "ClearChildren",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable",
+        "owner": "PopulateModifiers"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable_1",
+        "owner": "PopulateModifiers"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable_1",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Length_ReturnValue",
+        "owner": "PopulateModifiers"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Length_ReturnValue",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -207
+        },
+        "Offset": 72,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Length_ReturnValue",
+          "owner": "PopulateModifiers"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Length",
+          "Parameters": [
+            {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "ActiveModifiers",
+                "owner": "SessionStats"
+              },
+              "StructExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_Context",
+                  "ObjectExpression": {
+                    "op": "EX_InstanceVariable",
+                    "Variable": {
+                      "field": "As BP CHGame Instance",
+                      "owner": "UI_Manager_C"
+                    }
+                  },
+                  "Offset": 9,
+                  "PropertyType": 0,
+                  "RValuePointer": {
+                    "field": "ProgressionManager",
+                    "owner": "BP_CHGameInstance_C"
+                  },
+                  "ContextExpression": {
+                    "op": "EX_InstanceVariable",
+                    "Variable": {
+                      "field": "ProgressionManager",
+                      "owner": "BP_CHGameInstance_C"
+                    }
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CurrentSessionStats",
+                  "owner": "ProgressionManager"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CurrentSessionStats",
+                    "owner": "ProgressionManager"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Less_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable",
+              "owner": "PopulateModifiers"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Length_ReturnValue",
+              "owner": "PopulateModifiers"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue",
+          "owner": "PopulateModifiers"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable_1",
+        "owner": "PopulateModifiers"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable_1",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "PopulateModifiers"
+        }
+      }
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1292
+    },
+    {
+      "op": "EX_SetArray",
+      "AssigningProperty": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetDataTableRowNames_OutRowNames",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "ArrayInnerProp": null,
+      "Elements": []
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "GetDataTableRowNames",
+      "Parameters": [
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "ModifiersDataTable",
+            "owner": "UI_Manager_C"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetDataTableRowNames_OutRowNames",
+            "owner": "PopulateModifiers"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable_1",
+        "owner": "PopulateModifiers"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable_1",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable",
+        "owner": "PopulateModifiers"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Length_ReturnValue_1",
+        "owner": "PopulateModifiers"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Length_ReturnValue_1",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -207
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Length_ReturnValue_1",
+          "owner": "PopulateModifiers"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Length",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowNames_OutRowNames",
+                "owner": "PopulateModifiers"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue_1",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Less_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable_1",
+              "owner": "PopulateModifiers"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Length_ReturnValue_1",
+              "owner": "PopulateModifiers"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue_1",
+          "owner": "PopulateModifiers"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable",
+        "owner": "PopulateModifiers"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable_1",
+          "owner": "PopulateModifiers"
+        }
+      }
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1366
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -207
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetDataTableRowNames_OutRowNames",
+              "owner": "PopulateModifiers"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable",
+              "owner": "PopulateModifiers"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "PopulateModifiers"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetDataTableRowFromName_ReturnValue",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -93
+        },
+        "Offset": 37,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetDataTableRowFromName_ReturnValue",
+          "owner": "PopulateModifiers"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetDataTableRowFromName",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "ModifiersDataTable",
+                "owner": "UI_Manager_C"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Get_Item",
+                "owner": "PopulateModifiers"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "PopulateModifiers"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetDataTableRowFromName_ReturnValue",
+          "owner": "PopulateModifiers"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -207
+      },
+      "Offset": 90,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "ActiveModifiers",
+              "owner": "SessionStats"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP CHGame Instance",
+                    "owner": "UI_Manager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "ProgressionManager",
+                  "owner": "BP_CHGameInstance_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "ProgressionManager",
+                    "owner": "BP_CHGameInstance_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSessionStats",
+                "owner": "ProgressionManager"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSessionStats",
+                  "owner": "ProgressionManager"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable_1",
+              "owner": "PopulateModifiers"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item_1",
+              "owner": "PopulateModifiers"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_TextToString_ReturnValue",
+        "owner": "PopulateModifiers"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_TextToString_ReturnValue",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_TextToString",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "ModifierTitle_4_F1AA0B694005408B7D63C8BC07A503CC",
+              "owner": "ModifierInfoStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "PopulateModifiers"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_StriStri_ReturnValue",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "EqualEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item_1",
+              "owner": "PopulateModifiers"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_TextToString_ReturnValue",
+              "owner": "PopulateModifiers"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_StriStri_ReturnValue",
+          "owner": "PopulateModifiers"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -378
+        },
+        "Offset": 21,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "PopulateModifiers"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Create",
+          "Parameters": [
+            {
+              "op": "EX_Self"
+            },
+            {
+              "op": "EX_ObjectConst",
+              "Value": -367
+            },
+            {
+              "op": "EX_NoObject"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "Offset": 68,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "PopulateDetails",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "ModifierIcon_8_239A563C482456ED7169CEB67E4E117E",
+              "owner": "ModifierInfoStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "PopulateModifiers"
+              }
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "ModifierTitle_4_F1AA0B694005408B7D63C8BC07A503CC",
+              "owner": "ModifierInfoStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "PopulateModifiers"
+              }
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "ModifierDescription_6_222B640743A8D64F22E00FBD0036F4E6",
+              "owner": "ModifierInfoStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "PopulateModifiers"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Translation",
+        "owner": "WidgetTransform"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Translation",
+          "owner": "WidgetTransform"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_WidgetTransform",
+            "owner": "PopulateModifiers"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -309,
+        "StructSize": 16,
+        "Value": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": "+0"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Scale",
+        "owner": "WidgetTransform"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Scale",
+          "owner": "WidgetTransform"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_WidgetTransform",
+            "owner": "PopulateModifiers"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -309,
+        "StructSize": 16,
+        "Value": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": -1.0
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Shear",
+        "owner": "WidgetTransform"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Shear",
+          "owner": "WidgetTransform"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_WidgetTransform",
+            "owner": "PopulateModifiers"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -309,
+        "StructSize": 16,
+        "Value": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": "+0"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Angle",
+        "owner": "WidgetTransform"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Angle",
+          "owner": "WidgetTransform"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_WidgetTransform",
+            "owner": "PopulateModifiers"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetRenderTransform",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeStruct_WidgetTransform",
+              "owner": "PopulateModifiers"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_AddChildToWrapBox_ReturnValue",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "ModifierWrapBox",
+            "owner": "UI_Manager_C"
+          }
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_AddChildToWrapBox_ReturnValue",
+          "owner": "PopulateModifiers"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "AddChildToWrapBox",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Create_ReturnValue",
+                "owner": "PopulateModifiers"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue",
+        "owner": "PopulateModifiers"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable",
+              "owner": "PopulateModifiers"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable",
+        "owner": "PopulateModifiers"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "PopulateModifiers"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 87
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue_1",
+        "owner": "PopulateModifiers"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue_1",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable_1",
+              "owner": "PopulateModifiers"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable_1",
+        "owner": "PopulateModifiers"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable_1",
+          "owner": "PopulateModifiers"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue_1",
+          "owner": "PopulateModifiers"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 364
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

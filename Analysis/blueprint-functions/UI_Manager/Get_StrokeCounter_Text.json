@@ -1,0 +1,183 @@
+{
+  "function": {
+    "name": "Get_StrokeCounter_Text",
+    "statements": 6,
+    "raw_fallback": false,
+    "calls": [
+      "Clamp",
+      "Conv_IntToText",
+      "GetBeatsRemaining"
+    ],
+    "fields": [
+      "BeatSpawnerManagerCPP",
+      "CallFunc_Clamp_ReturnValue",
+      "CallFunc_Conv_IntToText_ReturnValue",
+      "CallFunc_GetBeatsRemaining_ReturnValue",
+      "GlobalManagerRef",
+      "ReturnValue"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetBeatsRemaining_ReturnValue",
+        "owner": "Get_StrokeCounter_Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetBeatsRemaining_ReturnValue",
+          "owner": "Get_StrokeCounter_Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManagerRef",
+              "owner": "UI_Manager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "BeatSpawnerManagerCPP",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "BeatSpawnerManagerCPP",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetBeatsRemaining_ReturnValue",
+          "owner": "Get_StrokeCounter_Text"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetBeatsRemaining",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Clamp_ReturnValue",
+        "owner": "Get_StrokeCounter_Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Clamp_ReturnValue",
+          "owner": "Get_StrokeCounter_Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Clamp",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetBeatsRemaining_ReturnValue",
+              "owner": "Get_StrokeCounter_Text"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 999
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToText_ReturnValue",
+        "owner": "Get_StrokeCounter_Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToText_ReturnValue",
+          "owner": "Get_StrokeCounter_Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Clamp_ReturnValue",
+              "owner": "Get_StrokeCounter_Text"
+            }
+          },
+          {
+            "op": "EX_False"
+          },
+          {
+            "op": "EX_True"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 324
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "Get_StrokeCounter_Text"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_StrokeCounter_Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToText_ReturnValue",
+          "owner": "Get_StrokeCounter_Text"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_StrokeCounter_Text"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

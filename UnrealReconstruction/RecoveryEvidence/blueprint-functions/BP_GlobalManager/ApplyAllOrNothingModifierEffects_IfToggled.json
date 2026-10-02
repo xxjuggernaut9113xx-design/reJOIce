@@ -1,0 +1,98 @@
+{
+  "function": {
+    "name": "ApplyAllOrNothingModifierEffects_IfToggled",
+    "statements": 6,
+    "raw_fallback": false,
+    "calls": [
+      "IsModifierActive?"
+    ],
+    "fields": [
+      "CallFunc_IsModifierActive__Active_",
+      "CumMeterPercentage",
+      "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+      "PlayerVariablesStruct"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "IsModifierActive?",
+      "Parameters": [
+        {
+          "op": "EX_StringConst",
+          "Value": "All or Nothing"
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_IsModifierActive__Active_",
+            "owner": "ApplyAllOrNothingModifierEffects_IfToggled"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 112,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsModifierActive__Active_",
+          "owner": "ApplyAllOrNothingModifierEffects_IfToggled"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+        "owner": "LegacyStats"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "PlayerCoins_68_973E21014EEAD400FB28C1BFC6BC7AE4",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CumMeterPercentage",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CumMeterPercentage",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

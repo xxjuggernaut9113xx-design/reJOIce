@@ -1,0 +1,461 @@
+{
+  "function": {
+    "name": "DetermineAndPlayHeatSFX",
+    "statements": 20,
+    "raw_fallback": false,
+    "calls": [
+      "ApplyVolumeScalar",
+      "NotEqual_ByteByte",
+      "PlaySound2D"
+    ],
+    "fields": [
+      "",
+      "CallFunc_ApplyVolumeScalar_Output",
+      "CallFunc_ApplyVolumeScalar_Output_1",
+      "CallFunc_ApplyVolumeScalar_Output_2",
+      "CallFunc_PlaySound2D_VolumeMultiplier_ImplicitCast",
+      "CallFunc_PlaySound2D_VolumeMultiplier_ImplicitCast_1",
+      "CallFunc_PlaySound2D_VolumeMultiplier_ImplicitCast_2",
+      "HeatCategory",
+      "K2Node_SwitchEnum_CmpSuccess",
+      "SFXVolume"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayHeatSFX"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatCategory",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 140,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayHeatSFX"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayHeatSFX"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatCategory",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 287,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayHeatSFX"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayHeatSFX"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatCategory",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 434,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndPlayHeatSFX"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 576
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "ApplyVolumeScalar",
+      "Parameters": [
+        {
+          "op": "EX_DoubleConst",
+          "Value": 1.0
+        },
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SFXVolume",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_ApplyVolumeScalar_Output",
+            "owner": "DetermineAndPlayHeatSFX"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlaySound2D_VolumeMultiplier_ImplicitCast",
+          "owner": "DetermineAndPlayHeatSFX"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_ApplyVolumeScalar_Output",
+            "owner": "DetermineAndPlayHeatSFX"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -249
+      },
+      "Offset": 50,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlaySound2D",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          },
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3792
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_PlaySound2D_VolumeMultiplier_ImplicitCast",
+              "owner": "DetermineAndPlayHeatSFX"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.019999999552965164
+          },
+          {
+            "op": "EX_ObjectConst",
+            "Value": -2183
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 576
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "ApplyVolumeScalar",
+      "Parameters": [
+        {
+          "op": "EX_DoubleConst",
+          "Value": 0.8
+        },
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SFXVolume",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_ApplyVolumeScalar_Output_1",
+            "owner": "DetermineAndPlayHeatSFX"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlaySound2D_VolumeMultiplier_ImplicitCast_1",
+          "owner": "DetermineAndPlayHeatSFX"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_ApplyVolumeScalar_Output_1",
+            "owner": "DetermineAndPlayHeatSFX"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -249
+      },
+      "Offset": 50,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlaySound2D",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          },
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3792
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_PlaySound2D_VolumeMultiplier_ImplicitCast_1",
+              "owner": "DetermineAndPlayHeatSFX"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.800000011920929
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.019999999552965164
+          },
+          {
+            "op": "EX_ObjectConst",
+            "Value": -2183
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 576
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "ApplyVolumeScalar",
+      "Parameters": [
+        {
+          "op": "EX_DoubleConst",
+          "Value": 0.6
+        },
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SFXVolume",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_ApplyVolumeScalar_Output_2",
+            "owner": "DetermineAndPlayHeatSFX"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlaySound2D_VolumeMultiplier_ImplicitCast_2",
+          "owner": "DetermineAndPlayHeatSFX"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_ApplyVolumeScalar_Output_2",
+            "owner": "DetermineAndPlayHeatSFX"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -249
+      },
+      "Offset": 50,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlaySound2D",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          },
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3792
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_PlaySound2D_VolumeMultiplier_ImplicitCast_2",
+              "owner": "DetermineAndPlayHeatSFX"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.6000000238418579
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.019999999552965164
+          },
+          {
+            "op": "EX_ObjectConst",
+            "Value": -2183
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

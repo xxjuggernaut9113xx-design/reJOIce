@@ -1,0 +1,342 @@
+{
+  "function": {
+    "name": "CalculateSuccubusStrokeModifier",
+    "statements": 15,
+    "raw_fallback": false,
+    "calls": [
+      "Add_DoubleDouble",
+      "Conv_IntToDouble",
+      "CreateNotificationBox",
+      "GetCurrentSessionStats",
+      "IsModifierActive?",
+      "Multiply_DoubleDouble"
+    ],
+    "fields": [
+      "",
+      "CallFunc_Add_DoubleDouble_ReturnValue",
+      "CallFunc_Conv_IntToDouble_ReturnValue",
+      "CallFunc_GetCurrentSessionStats_ReturnValue",
+      "CallFunc_IsModifierActive__Active_",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue",
+      "GameInstance",
+      "Local Return",
+      "ProgressionManager",
+      "Stroke Count Modifier",
+      "Stroke Count Multiplier",
+      "SuccubiDefeated",
+      "UIManager"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Local Return",
+        "owner": "CalculateSuccubusStrokeModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Local Return",
+          "owner": "CalculateSuccubusStrokeModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "IsModifierActive?",
+      "Parameters": [
+        {
+          "op": "EX_StringConst",
+          "Value": "Hivemind"
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_IsModifierActive__Active_",
+            "owner": "CalculateSuccubusStrokeModifier"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 451,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsModifierActive__Active_",
+          "owner": "CalculateSuccubusStrokeModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetCurrentSessionStats_ReturnValue",
+        "owner": "CalculateSuccubusStrokeModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetCurrentSessionStats_ReturnValue",
+          "owner": "CalculateSuccubusStrokeModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetCurrentSessionStats_ReturnValue",
+          "owner": "CalculateSuccubusStrokeModifier"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetCurrentSessionStats",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+        "owner": "CalculateSuccubusStrokeModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+          "owner": "CalculateSuccubusStrokeModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToDouble",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SuccubiDefeated",
+              "owner": "SessionStats"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetCurrentSessionStats_ReturnValue",
+                "owner": "CalculateSuccubusStrokeModifier"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+        "owner": "CalculateSuccubusStrokeModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+          "owner": "CalculateSuccubusStrokeModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 0.4
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+              "owner": "CalculateSuccubusStrokeModifier"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_DoubleDouble_ReturnValue",
+        "owner": "CalculateSuccubusStrokeModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_DoubleDouble_ReturnValue",
+          "owner": "CalculateSuccubusStrokeModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Stroke Count Multiplier",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+              "owner": "CalculateSuccubusStrokeModifier"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Local Return",
+        "owner": "CalculateSuccubusStrokeModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Local Return",
+          "owner": "CalculateSuccubusStrokeModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_DoubleDouble_ReturnValue",
+          "owner": "CalculateSuccubusStrokeModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 86,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3857
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Hivemind"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Succubus Stroke Count Permanently Increased by +40%"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Stroke Count Modifier",
+        "owner": "CalculateSuccubusStrokeModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "Stroke Count Modifier",
+          "owner": "CalculateSuccubusStrokeModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Local Return",
+          "owner": "CalculateSuccubusStrokeModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 483
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Local Return",
+        "owner": "CalculateSuccubusStrokeModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Local Return",
+          "owner": "CalculateSuccubusStrokeModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Stroke Count Multiplier",
+          "owner": "BP_GlobalManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 419
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

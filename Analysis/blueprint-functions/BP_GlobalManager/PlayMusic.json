@@ -1,0 +1,1004 @@
+{
+  "function": {
+    "name": "PlayMusic",
+    "statements": 45,
+    "raw_fallback": false,
+    "calls": [
+      "ApplyVolumeScalar",
+      "IsValid",
+      "NotEqual_ByteByte",
+      "SpawnSound2D",
+      "Stop"
+    ],
+    "fields": [
+      "",
+      "ActiveMusicComponent",
+      "Background Music Volume",
+      "CallFunc_ApplyVolumeScalar_Output",
+      "CallFunc_ApplyVolumeScalar_Output_1",
+      "CallFunc_ApplyVolumeScalar_Output_2",
+      "CallFunc_ApplyVolumeScalar_Output_3",
+      "CallFunc_IsValid_ReturnValue",
+      "CallFunc_SpawnSound2D_ReturnValue",
+      "CallFunc_SpawnSound2D_ReturnValue_1",
+      "CallFunc_SpawnSound2D_ReturnValue_2",
+      "CallFunc_SpawnSound2D_ReturnValue_3",
+      "CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast",
+      "CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast_1",
+      "CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast_2",
+      "CardType",
+      "CurrentSave",
+      "GameInstance",
+      "IsDynamicMusicEnabled?",
+      "K2Node_SwitchEnum_CmpSuccess"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1222,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "IsDynamicMusicEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "IsDynamicMusicEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsValid_ReturnValue",
+          "owner": "PlayMusic"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "IsValid",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ActiveMusicComponent",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 137,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsValid_ReturnValue",
+          "owner": "PlayMusic"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ActiveMusicComponent",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "Stop",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayMusic"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CardType",
+              "owner": "PlayMusic"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 547,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayMusic"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayMusic"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CardType",
+              "owner": "PlayMusic"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 715,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayMusic"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayMusic"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CardType",
+              "owner": "PlayMusic"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 883,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayMusic"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayMusic"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CardType",
+              "owner": "PlayMusic"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1051,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayMusic"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayMusic"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CardType",
+              "owner": "PlayMusic"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1186,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayMusic"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayMusic"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CardType",
+              "owner": "PlayMusic"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 5
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1186,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayMusic"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayMusic"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CardType",
+              "owner": "PlayMusic"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 6
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1186,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayMusic"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayMusic"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CardType",
+              "owner": "PlayMusic"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 7
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1186,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayMusic"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayMusic"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CardType",
+              "owner": "PlayMusic"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 8
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1186,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayMusic"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1222
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "ApplyVolumeScalar",
+      "Parameters": [
+        {
+          "op": "EX_DoubleConst",
+          "Value": 0.1
+        },
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Background Music Volume",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_ApplyVolumeScalar_Output_3",
+            "owner": "PlayMusic"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast_2",
+          "owner": "PlayMusic"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_ApplyVolumeScalar_Output_3",
+            "owner": "PlayMusic"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_2",
+          "owner": "PlayMusic"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -249
+        },
+        "Offset": 42,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_2",
+          "owner": "PlayMusic"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "SpawnSound2D",
+          "Parameters": [
+            {
+              "op": "EX_Self"
+            },
+            {
+              "op": "EX_ObjectConst",
+              "Value": -3794
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast_2",
+                "owner": "PlayMusic"
+              }
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_NoObject"
+            },
+            {
+              "op": "EX_False"
+            },
+            {
+              "op": "EX_True"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ActiveMusicComponent",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_2",
+          "owner": "PlayMusic"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1222
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "ApplyVolumeScalar",
+      "Parameters": [
+        {
+          "op": "EX_DoubleConst",
+          "Value": 0.1
+        },
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Background Music Volume",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_ApplyVolumeScalar_Output_2",
+            "owner": "PlayMusic"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast_1",
+          "owner": "PlayMusic"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_ApplyVolumeScalar_Output_2",
+            "owner": "PlayMusic"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_1",
+          "owner": "PlayMusic"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -249
+        },
+        "Offset": 42,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_1",
+          "owner": "PlayMusic"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "SpawnSound2D",
+          "Parameters": [
+            {
+              "op": "EX_Self"
+            },
+            {
+              "op": "EX_ObjectConst",
+              "Value": -3795
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast_1",
+                "owner": "PlayMusic"
+              }
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_NoObject"
+            },
+            {
+              "op": "EX_False"
+            },
+            {
+              "op": "EX_True"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ActiveMusicComponent",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_1",
+          "owner": "PlayMusic"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1222
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "ApplyVolumeScalar",
+      "Parameters": [
+        {
+          "op": "EX_DoubleConst",
+          "Value": 0.15
+        },
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Background Music Volume",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_ApplyVolumeScalar_Output_1",
+            "owner": "PlayMusic"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast",
+          "owner": "PlayMusic"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_ApplyVolumeScalar_Output_1",
+            "owner": "PlayMusic"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue",
+          "owner": "PlayMusic"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -249
+        },
+        "Offset": 42,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue",
+          "owner": "PlayMusic"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "SpawnSound2D",
+          "Parameters": [
+            {
+              "op": "EX_Self"
+            },
+            {
+              "op": "EX_ObjectConst",
+              "Value": -3793
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast",
+                "owner": "PlayMusic"
+              }
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_NoObject"
+            },
+            {
+              "op": "EX_False"
+            },
+            {
+              "op": "EX_True"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ActiveMusicComponent",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue",
+          "owner": "PlayMusic"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1222
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "ApplyVolumeScalar",
+      "Parameters": [
+        {
+          "op": "EX_DoubleConst",
+          "Value": 0.2
+        },
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Background Music Volume",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_ApplyVolumeScalar_Output",
+            "owner": "PlayMusic"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_3",
+          "owner": "PlayMusic"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -249
+        },
+        "Offset": 38,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_3",
+          "owner": "PlayMusic"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "SpawnSound2D",
+          "Parameters": [
+            {
+              "op": "EX_Self"
+            },
+            {
+              "op": "EX_ObjectConst",
+              "Value": -3796
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.20000000298023224
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_NoObject"
+            },
+            {
+              "op": "EX_False"
+            },
+            {
+              "op": "EX_True"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ActiveMusicComponent",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_3",
+          "owner": "PlayMusic"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1222
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ActiveMusicComponent",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "Stop",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

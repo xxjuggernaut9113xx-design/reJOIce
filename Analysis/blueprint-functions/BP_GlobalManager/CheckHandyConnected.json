@@ -1,0 +1,225 @@
+{
+  "function": {
+    "name": "CheckHandyConnected",
+    "statements": 10,
+    "raw_fallback": false,
+    "calls": [
+      "ConstructVaRestRequest",
+      "GetEngineSubsystem",
+      "SetContentType",
+      "SetStringField",
+      "SetURL",
+      "SetVerb",
+      "StaticConstructVaRestJsonObject"
+    ],
+    "fields": [
+      "",
+      "CallFunc_ConstructVaRestRequest_ReturnValue",
+      "CallFunc_GetEngineSubsystem_ReturnValue",
+      "MyRequest",
+      "VaRest_MakeJson_Target"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "VaRest_MakeJson_Target",
+          "owner": "CheckHandyConnected"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "StaticConstructVaRestJsonObject",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "VaRest_MakeJson_Target",
+          "owner": "CheckHandyConnected"
+        }
+      },
+      "Offset": 29,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetStringField",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "authKey"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "MMKXmvM2"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetEngineSubsystem_ReturnValue",
+          "owner": "CheckHandyConnected"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetEngineSubsystem",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -70
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ConstructVaRestRequest_ReturnValue",
+          "owner": "CheckHandyConnected"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetEngineSubsystem_ReturnValue",
+            "owner": "CheckHandyConnected"
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_ConstructVaRestRequest_ReturnValue",
+          "owner": "CheckHandyConnected"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "ConstructVaRestRequest",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "MyRequest",
+          "owner": "CheckHandyConnected"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ConstructVaRestRequest_ReturnValue",
+          "owner": "CheckHandyConnected"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "MyRequest",
+          "owner": "CheckHandyConnected"
+        }
+      },
+      "Offset": 12,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetVerb",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "MyRequest",
+          "owner": "CheckHandyConnected"
+        }
+      },
+      "Offset": 12,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetContentType",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "MyRequest",
+          "owner": "CheckHandyConnected"
+        }
+      },
+      "Offset": 68,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetURL",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "https://www.handyfeeling.com/api/v2/handy/v2/getSettings"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

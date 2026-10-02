@@ -1,0 +1,49 @@
+{
+  "function": {
+    "name": "MediumVideoLoopEligibilityCheck",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [],
+    "fields": [
+      "IsEligibleReturn",
+      "LocalEligiblityReturn"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "LocalEligiblityReturn",
+          "owner": "MediumVideoLoopEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "IsEligibleReturn",
+          "owner": "MediumVideoLoopEligibilityCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

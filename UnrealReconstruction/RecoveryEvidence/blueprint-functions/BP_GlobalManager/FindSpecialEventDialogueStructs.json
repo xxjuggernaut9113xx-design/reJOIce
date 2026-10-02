@@ -1,0 +1,220 @@
+{
+  "function": {
+    "name": "FindSpecialEventDialogueStructs",
+    "statements": 8,
+    "raw_fallback": false,
+    "calls": [
+      "GetEnumeratorUserFriendlyName",
+      "Map_Find",
+      "ToLower",
+      "Trim"
+    ],
+    "fields": [
+      "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+      "CallFunc_Map_Find_ReturnValue",
+      "CallFunc_Map_Find_Value",
+      "CallFunc_ToLower_ReturnValue",
+      "CallFunc_Trim_ReturnValue",
+      "DialogueMap",
+      "DialogueStructArray",
+      "Event",
+      "Lines_4_C603FDCB469D5A5917EDCE9DCA7EED9F",
+      "ReturnLines"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+        "owner": "FindSpecialEventDialogueStructs"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+          "owner": "FindSpecialEventDialogueStructs"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetEnumeratorUserFriendlyName",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -4008
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Event",
+              "owner": "FindSpecialEventDialogueStructs"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_ToLower_ReturnValue",
+        "owner": "FindSpecialEventDialogueStructs"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ToLower_ReturnValue",
+          "owner": "FindSpecialEventDialogueStructs"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "ToLower",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+              "owner": "FindSpecialEventDialogueStructs"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Trim_ReturnValue",
+        "owner": "FindSpecialEventDialogueStructs"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Trim_ReturnValue",
+          "owner": "FindSpecialEventDialogueStructs"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Trim",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_ToLower_ReturnValue",
+              "owner": "FindSpecialEventDialogueStructs"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Map_Find_ReturnValue",
+          "owner": "FindSpecialEventDialogueStructs"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -12
+        },
+        "Offset": 37,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Map_Find_ReturnValue",
+          "owner": "FindSpecialEventDialogueStructs"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Map_Find",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "DialogueMap",
+                "owner": "BP_GlobalManager_C"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Trim_ReturnValue",
+                "owner": "FindSpecialEventDialogueStructs"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Map_Find_Value",
+                "owner": "FindSpecialEventDialogueStructs"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnLines",
+        "owner": "FindSpecialEventDialogueStructs"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "ReturnLines",
+          "owner": "FindSpecialEventDialogueStructs"
+        }
+      },
+      "Expression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Lines_4_C603FDCB469D5A5917EDCE9DCA7EED9F",
+          "owner": "DialogueBucket"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Map_Find_Value",
+            "owner": "FindSpecialEventDialogueStructs"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "DialogueStructArray",
+        "owner": "FindSpecialEventDialogueStructs"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "DialogueStructArray",
+          "owner": "FindSpecialEventDialogueStructs"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "ReturnLines",
+          "owner": "FindSpecialEventDialogueStructs"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

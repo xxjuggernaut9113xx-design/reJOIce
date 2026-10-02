@@ -1,0 +1,473 @@
+{
+  "function": {
+    "name": "BeatComplete",
+    "statements": 27,
+    "raw_fallback": false,
+    "calls": [
+      "AddOneToLifetimeStrokesSave",
+      "Add_IntInt",
+      "AddtoCumMeteronBeatComplete",
+      "Beat Complete Add Lootbar Reward",
+      "BeatCompleteClothesBreaker",
+      "Determine And Trigger Cum Meter Override Event",
+      "Determine&CoinAdd",
+      "Determine&HeatAdd",
+      "DetermineAndPlayComboTypeAnimBeatCompletes",
+      "DetermineAndPlayHeatGainAnimsOnBeatComplete",
+      "DetermineAndPlayMainImageBeatComplete",
+      "DetermineBeatCompleteSFX",
+      "GetBeatsRemaining",
+      "PlayBrainMelter",
+      "SpawnWidget_Onomatopoeia",
+      "Subtract_IntInt",
+      "UpdateBeatCompleteMetrics",
+      "UpdateEdgeStreakProgressBar"
+    ],
+    "fields": [
+      "",
+      "AssignedStrokeCount_98_927676934A034C51DF7E64A9CDE11E4C",
+      "BeatEventInput",
+      "BeatSpawnerManagerCPP",
+      "CallFunc_Add_IntInt_ReturnValue",
+      "CallFunc_Add_IntInt_ReturnValue_1",
+      "CallFunc_GetBeatsRemaining_ReturnValue",
+      "CallFunc_Subtract_IntInt_ReturnValue",
+      "CurrentComboCount_66_5F7B16A442F400DEAE401686B872656A",
+      "CurrentStrokeCount_61_4214F0E64101BD89E3040096F440A11C",
+      "PlayerVariablesStruct",
+      "Temp_int_Variable",
+      "Temp_int_Variable_1",
+      "Temp_int_Variable_2",
+      "TotalStrokeCount_44_AD50F41C4038891C77EDE0ACC63BC34E",
+      "UIManager"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue_1",
+        "owner": "BeatComplete"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue_1",
+          "owner": "BeatComplete"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "TotalStrokeCount_44_AD50F41C4038891C77EDE0ACC63BC34E",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Variable",
+        "owner": "BeatComplete"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Variable",
+          "owner": "BeatComplete"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue_1",
+          "owner": "BeatComplete"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "TotalStrokeCount_44_AD50F41C4038891C77EDE0ACC63BC34E",
+        "owner": "LegacyStats"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "TotalStrokeCount_44_AD50F41C4038891C77EDE0ACC63BC34E",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Variable",
+          "owner": "BeatComplete"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue",
+        "owner": "BeatComplete"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "BeatComplete"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "CurrentComboCount_66_5F7B16A442F400DEAE401686B872656A",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Variable_1",
+        "owner": "BeatComplete"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Variable_1",
+          "owner": "BeatComplete"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "BeatComplete"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CurrentComboCount_66_5F7B16A442F400DEAE401686B872656A",
+        "owner": "LegacyStats"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "CurrentComboCount_66_5F7B16A442F400DEAE401686B872656A",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Variable_1",
+          "owner": "BeatComplete"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "DetermineBeatCompleteSFX",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "AddOneToLifetimeStrokesSave",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Subtract_IntInt_ReturnValue",
+        "owner": "BeatComplete"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "BeatComplete"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Subtract_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "CurrentStrokeCount_61_4214F0E64101BD89E3040096F440A11C",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Variable_2",
+        "owner": "BeatComplete"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Variable_2",
+          "owner": "BeatComplete"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "BeatComplete"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CurrentStrokeCount_61_4214F0E64101BD89E3040096F440A11C",
+        "owner": "LegacyStats"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "CurrentStrokeCount_61_4214F0E64101BD89E3040096F440A11C",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Variable_2",
+          "owner": "BeatComplete"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "DetermineAndPlayMainImageBeatComplete",
+      "Parameters": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "BeatEventInput",
+            "owner": "BeatComplete"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "DetermineAndPlayHeatGainAnimsOnBeatComplete",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "DetermineAndPlayComboTypeAnimBeatCompletes",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Determine&CoinAdd",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Determine&HeatAdd",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "AddtoCumMeteronBeatComplete",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Determine And Trigger Cum Meter Override Event",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "SpawnWidget_Onomatopoeia",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Beat Complete Add Lootbar Reward",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "PlayBrainMelter",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "BeatCompleteClothesBreaker",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetBeatsRemaining_ReturnValue",
+        "owner": "BeatComplete"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetBeatsRemaining_ReturnValue",
+          "owner": "BeatComplete"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "BeatSpawnerManagerCPP",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetBeatsRemaining_ReturnValue",
+          "owner": "BeatComplete"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetBeatsRemaining",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 41,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "UpdateEdgeStreakProgressBar",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetBeatsRemaining_ReturnValue",
+              "owner": "BeatComplete"
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "AssignedStrokeCount_98_927676934A034C51DF7E64A9CDE11E4C",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "UpdateBeatCompleteMetrics",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

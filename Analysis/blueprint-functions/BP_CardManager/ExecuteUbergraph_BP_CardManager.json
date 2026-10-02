@@ -1,0 +1,3267 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_BP_CardManager",
+    "statements": 119,
+    "raw_fallback": false,
+    "calls": [
+      "Array_Append",
+      "Array_Clear",
+      "Array_IsEmpty",
+      "GetAllEnabledMedia",
+      "GetGameInstance",
+      "GetImportedMediaEntries",
+      "PrintString",
+      "ValidateMediaEntries"
+    ],
+    "fields": [
+      "",
+      "AllCards",
+      "As BP CHGame Instance",
+      "As BP Global Manager",
+      "AssCards",
+      "BoobCards",
+      "CHPack StoreController",
+      "CallFunc_Array_IsEmpty_ReturnValue",
+      "CallFunc_Array_IsEmpty_ReturnValue_1",
+      "CallFunc_Array_IsEmpty_ReturnValue_10",
+      "CallFunc_Array_IsEmpty_ReturnValue_11",
+      "CallFunc_Array_IsEmpty_ReturnValue_2",
+      "CallFunc_Array_IsEmpty_ReturnValue_3",
+      "CallFunc_Array_IsEmpty_ReturnValue_4",
+      "CallFunc_Array_IsEmpty_ReturnValue_5",
+      "CallFunc_Array_IsEmpty_ReturnValue_6",
+      "CallFunc_Array_IsEmpty_ReturnValue_7",
+      "CallFunc_Array_IsEmpty_ReturnValue_8",
+      "CallFunc_Array_IsEmpty_ReturnValue_9",
+      "CallFunc_GetAllEnabledMedia_ReturnValue",
+      "CallFunc_GetGameInstance_ReturnValue",
+      "CallFunc_GetImportedMediaEntries_ReturnValue",
+      "CallFunc_ValidateMediaEntries_ReturnValue",
+      "CallFunc_ValidateMediaEntries_ReturnValue_1",
+      "CallFunc_ValidateMediaEntries_ReturnValue_2",
+      "CallFunc_ValidateMediaEntries_ReturnValue_3",
+      "CallFunc_ValidateMediaEntries_ReturnValue_4",
+      "CumCards",
+      "CumFavoriteCards",
+      "CurrentSave",
+      "DrawManager",
+      "EntryPoint",
+      "Excluded Tags",
+      "ExcludedTags",
+      "FastCards",
+      "FastFavoriteCards",
+      "FileImportManager",
+      "K2Node_DynamicCast_AsBP_CHGame_Instance",
+      "K2Node_DynamicCast_bSuccess",
+      "Master_AssCards",
+      "Master_BoobCards",
+      "Master_CumCards",
+      "Master_FastCards",
+      "Master_Favorite_Cum",
+      "Master_Favorite_Fast",
+      "Master_Favorite_Medium",
+      "Master_Favorite_Slow",
+      "Master_Favorite_Succubus",
+      "Master_MediumCards",
+      "Master_SlowCards",
+      "Master_SuccubusCards",
+      "MediumCards",
+      "MediumFavoriteCards",
+      "Saved_Cum_FavoriteCards",
+      "Saved_Fast_FavoriteCards",
+      "Saved_Medium_FavoriteCards",
+      "Saved_Slow_FavoriteCards",
+      "Saved_Succubus_FavoriteCards",
+      "SlowCards",
+      "SlowFavoriteCards",
+      "SuccubusCards",
+      "SuccubusFavoriteCards"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 4218
+    },
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 755
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 575
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 395
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 215
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_ValidateMediaEntries_ReturnValue_4",
+        "owner": "ExecuteUbergraph_BP_CardManager"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ValidateMediaEntries_ReturnValue_4",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "ValidateMediaEntries",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "BP_CardManager_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "Saved_Slow_FavoriteCards",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Saved_Slow_FavoriteCards",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Master_Favorite_Slow",
+        "owner": "BP_CardManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_Favorite_Slow",
+          "owner": "BP_CardManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ValidateMediaEntries_ReturnValue_4",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Saved_Slow_FavoriteCards",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Saved_Slow_FavoriteCards",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Saved_Slow_FavoriteCards",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_Favorite_Slow",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_ValidateMediaEntries_ReturnValue_3",
+        "owner": "ExecuteUbergraph_BP_CardManager"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ValidateMediaEntries_ReturnValue_3",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "ValidateMediaEntries",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "BP_CardManager_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "Saved_Medium_FavoriteCards",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Saved_Medium_FavoriteCards",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Master_Favorite_Medium",
+        "owner": "BP_CardManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_Favorite_Medium",
+          "owner": "BP_CardManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ValidateMediaEntries_ReturnValue_3",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Saved_Medium_FavoriteCards",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Saved_Medium_FavoriteCards",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Saved_Medium_FavoriteCards",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_Favorite_Medium",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_ValidateMediaEntries_ReturnValue_2",
+        "owner": "ExecuteUbergraph_BP_CardManager"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ValidateMediaEntries_ReturnValue_2",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "ValidateMediaEntries",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "BP_CardManager_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "Saved_Fast_FavoriteCards",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Saved_Fast_FavoriteCards",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Master_Favorite_Fast",
+        "owner": "BP_CardManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_Favorite_Fast",
+          "owner": "BP_CardManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ValidateMediaEntries_ReturnValue_2",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Saved_Fast_FavoriteCards",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Saved_Fast_FavoriteCards",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Saved_Fast_FavoriteCards",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_Favorite_Fast",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_ValidateMediaEntries_ReturnValue_1",
+        "owner": "ExecuteUbergraph_BP_CardManager"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ValidateMediaEntries_ReturnValue_1",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "ValidateMediaEntries",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "BP_CardManager_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "Saved_Cum_FavoriteCards",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Saved_Cum_FavoriteCards",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Master_Favorite_Cum",
+        "owner": "BP_CardManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_Favorite_Cum",
+          "owner": "BP_CardManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ValidateMediaEntries_ReturnValue_1",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Saved_Cum_FavoriteCards",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Saved_Cum_FavoriteCards",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Saved_Cum_FavoriteCards",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_Favorite_Cum",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_ValidateMediaEntries_ReturnValue",
+        "owner": "ExecuteUbergraph_BP_CardManager"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ValidateMediaEntries_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "ValidateMediaEntries",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "BP_CardManager_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSave",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "Saved_Succubus_FavoriteCards",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Saved_Succubus_FavoriteCards",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Master_Favorite_Succubus",
+        "owner": "BP_CardManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_Favorite_Succubus",
+          "owner": "BP_CardManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ValidateMediaEntries_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Saved_Succubus_FavoriteCards",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Saved_Succubus_FavoriteCards",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Saved_Succubus_FavoriteCards",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_Favorite_Succubus",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "RESET FAST ARRAY"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -51,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.1273529976606369
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 15.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameInstance_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameInstance",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetGameInstance_ReturnValue",
+            "owner": "ExecuteUbergraph_BP_CardManager"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+            "owner": "ExecuteUbergraph_BP_CardManager"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "BP_CardManager_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Excluded Tags",
+        "owner": "BP_CardManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Excluded Tags",
+          "owner": "BP_CardManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "ExcludedTags",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "ExcludedTags",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetImportedMediaEntries_ReturnValue",
+        "owner": "ExecuteUbergraph_BP_CardManager"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetImportedMediaEntries_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+              "owner": "ExecuteUbergraph_BP_CardManager"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "FileImportManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "FileImportManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetImportedMediaEntries_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetImportedMediaEntries",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -39
+      },
+      "Offset": 28,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Append",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AllCards",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetImportedMediaEntries_ReturnValue",
+              "owner": "ExecuteUbergraph_BP_CardManager"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetAllEnabledMedia_ReturnValue",
+        "owner": "ExecuteUbergraph_BP_CardManager"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetAllEnabledMedia_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+              "owner": "ExecuteUbergraph_BP_CardManager"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CHPack StoreController",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CHPack StoreController",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetAllEnabledMedia_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetAllEnabledMedia",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -39
+      },
+      "Offset": 28,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Append",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AllCards",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetAllEnabledMedia_ReturnValue",
+              "owner": "ExecuteUbergraph_BP_CardManager"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 3456
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 3279
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 3102
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 2925
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 2748
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 2571
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 2394
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1686
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1863
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 2040
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 2217
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_11",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -39
+        },
+        "Offset": 63,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_11",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP Global Manager",
+                    "owner": "BP_CardManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "FastCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "FastCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_11",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "FastCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "FastCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "FastCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_FastCards",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 935
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_6",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -39
+        },
+        "Offset": 63,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_6",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP Global Manager",
+                    "owner": "BP_CardManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "AssCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "AssCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_6",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "AssCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AssCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AssCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_AssCards",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_7",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -39
+        },
+        "Offset": 63,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_7",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP Global Manager",
+                    "owner": "BP_CardManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "SuccubusCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "SuccubusCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_7",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SuccubusCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "SuccubusCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SuccubusCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_SuccubusCards",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_9",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -39
+        },
+        "Offset": 63,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_9",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP Global Manager",
+                    "owner": "BP_CardManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "SlowCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "SlowCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_9",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SlowCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "SlowCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SlowCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_SlowCards",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_10",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -39
+        },
+        "Offset": 63,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_10",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP Global Manager",
+                    "owner": "BP_CardManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "MediumCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "MediumCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_10",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "MediumCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "MediumCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "MediumCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_MediumCards",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_5",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -39
+        },
+        "Offset": 63,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_5",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP Global Manager",
+                    "owner": "BP_CardManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "BoobCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "BoobCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_5",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "BoobCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "BoobCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "BoobCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_BoobCards",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_4",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -39
+        },
+        "Offset": 63,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_4",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP Global Manager",
+                    "owner": "BP_CardManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "SlowFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "SlowFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_4",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SlowFavoriteCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "SlowFavoriteCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SlowFavoriteCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_Favorite_Slow",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_3",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -39
+        },
+        "Offset": 63,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_3",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP Global Manager",
+                    "owner": "BP_CardManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "MediumFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "MediumFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_3",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "MediumFavoriteCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "MediumFavoriteCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "MediumFavoriteCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_Favorite_Medium",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_2",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -39
+        },
+        "Offset": 63,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_2",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP Global Manager",
+                    "owner": "BP_CardManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "FastFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "FastFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_2",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "FastFavoriteCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "FastFavoriteCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "FastFavoriteCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_Favorite_Fast",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_1",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -39
+        },
+        "Offset": 63,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_1",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP Global Manager",
+                    "owner": "BP_CardManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CumFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CumFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_1",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CumFavoriteCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CumFavoriteCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "CumFavoriteCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_Favorite_Cum",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -39
+        },
+        "Offset": 63,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP Global Manager",
+                    "owner": "BP_CardManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "SuccubusFavoriteCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "SuccubusFavoriteCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SuccubusFavoriteCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "SuccubusFavoriteCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SuccubusFavoriteCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_Favorite_Succubus",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_8",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -39
+        },
+        "Offset": 63,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_8",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP Global Manager",
+                    "owner": "BP_CardManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "DrawManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "DrawManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CumCards",
+                "owner": "BP_DrawManager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CumCards",
+                  "owner": "BP_DrawManager_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue_8",
+          "owner": "ExecuteUbergraph_BP_CardManager"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CumCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CumCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "CumCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_CumCards",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "AssCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AssCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AssCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_AssCards",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "BoobCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "BoobCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "BoobCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_BoobCards",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 3633
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SlowCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "SlowCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SlowCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_SlowCards",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 3705
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "MediumCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "MediumCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "MediumCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_MediumCards",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 3781
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "FastCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "FastCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "FastCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_FastCards",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 3857
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SuccubusCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "SuccubusCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SuccubusCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_SuccubusCards",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 3933
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CumCards",
+        "owner": "BP_DrawManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "BP_CardManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "DrawManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DrawManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CumCards",
+          "owner": "BP_DrawManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "CumCards",
+            "owner": "BP_DrawManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Master_CumCards",
+          "owner": "BP_CardManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4009
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4085
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -39
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Clear",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AllCards",
+              "owner": "BP_CardManager_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1019
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 15
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

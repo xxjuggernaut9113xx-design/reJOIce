@@ -1,0 +1,3672 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_VoicelineSettingsMenu",
+    "statements": 144,
+    "raw_fallback": false,
+    "calls": [
+      "AddChild",
+      "Add_IntInt",
+      "Array_Get",
+      "Array_Length",
+      "ClearChildren",
+      "Create",
+      "EqualEqual_IgnoreCase_TextText",
+      "EqualEqual_TextText",
+      "GetAllChildren",
+      "GetDataTableRowFromName",
+      "GetDataTableRowNames",
+      "GetGameInstance",
+      "InitDefaultsFromSaveGame",
+      "IsValid",
+      "Less_IntInt",
+      "NotEqual_StriStri",
+      "PackClicked",
+      "PlayAnimation",
+      "PopulateVoicePackEntry",
+      "PopulateVoicepacks",
+      "SaveAllData",
+      "SetText",
+      "SetVisibility",
+      "SpawnSound2D",
+      "Stop"
+    ],
+    "fields": [
+      "",
+      "As BP CHGame Instance",
+      "AudioComponent",
+      "CallFunc_AddChild_ReturnValue",
+      "CallFunc_Add_IntInt_ReturnValue",
+      "CallFunc_Add_IntInt_ReturnValue_1",
+      "CallFunc_Array_Get_Item",
+      "CallFunc_Array_Get_Item_1",
+      "CallFunc_Array_Get_Item_2",
+      "CallFunc_Array_Get_Item_3",
+      "CallFunc_Array_Get_Item_4",
+      "CallFunc_Array_Get_Item_5",
+      "CallFunc_Array_Length_ReturnValue",
+      "CallFunc_Array_Length_ReturnValue_1",
+      "CallFunc_Create_ReturnValue",
+      "CallFunc_EqualEqual_IgnoreCase_TextText_ReturnValue",
+      "CallFunc_EqualEqual_TextText_ReturnValue",
+      "CallFunc_EqualEqual_TextText_ReturnValue_1",
+      "CallFunc_GetAllChildren_ReturnValue",
+      "CallFunc_GetDataTableRowFromName_OutRow",
+      "CallFunc_GetDataTableRowFromName_ReturnValue",
+      "CallFunc_GetDataTableRowNames_OutRowNames",
+      "CallFunc_GetGameInstance_ReturnValue",
+      "CallFunc_IsValid_ReturnValue",
+      "CallFunc_IsValid_ReturnValue_1",
+      "CallFunc_IsValid_ReturnValue_2",
+      "CallFunc_IsValid_ReturnValue_3",
+      "CallFunc_Less_IntInt_ReturnValue",
+      "CallFunc_Less_IntInt_ReturnValue_1",
+      "CallFunc_PlayAnimation_ReturnValue",
+      "CallFunc_PlayAnimation_ReturnValue_1",
+      "CallFunc_PlayAnimation_ReturnValue_10",
+      "CallFunc_PlayAnimation_ReturnValue_11",
+      "CallFunc_PlayAnimation_ReturnValue_12",
+      "CallFunc_PlayAnimation_ReturnValue_13",
+      "CallFunc_PlayAnimation_ReturnValue_2",
+      "CallFunc_PlayAnimation_ReturnValue_3",
+      "CallFunc_PlayAnimation_ReturnValue_4",
+      "CallFunc_PlayAnimation_ReturnValue_5",
+      "CallFunc_PlayAnimation_ReturnValue_6",
+      "CallFunc_PlayAnimation_ReturnValue_7",
+      "CallFunc_PlayAnimation_ReturnValue_8",
+      "CallFunc_PlayAnimation_ReturnValue_9",
+      "CallFunc_SpawnSound2D_ReturnValue",
+      "CallFunc_SpawnSound2D_ReturnValue_1",
+      "CallFunc_SpawnSound2D_ReturnValue_2",
+      "CallFunc_SpawnSound2D_ReturnValue_3",
+      "CurrentSave",
+      "Description",
+      "Description_6_0FC65A7646EF20EB578620971131601B",
+      "Display Name ID",
+      "DisplayName_4_0FAE4CAF482DE63DD8ABB6B0DA9E9EC3",
+      "EntryPoint",
+      "EquipButtonClick",
+      "EquipButtonHover",
+      "EquipButtonText",
+      "EquipButtonUnhover",
+      "EquippedPack",
+      "K2Node_ComponentBoundEvent_SelectedItem",
+      "K2Node_CreateDelegate_OutputDelegate",
+      "K2Node_CustomEvent_CheatCodeTextRedeemText",
+      "K2Node_CustomEvent_DisplayName",
+      "K2Node_CustomEvent_Widget",
+      "K2Node_DynamicCast_AsBP_CHGame_Instance",
+      "K2Node_DynamicCast_AsVoice_Pack_Entry_Widget",
+      "K2Node_DynamicCast_bSuccess",
+      "K2Node_DynamicCast_bSuccess_1",
+      "K2Node_SwitchString_CmpSuccess",
+      "OnClicked",
+      "PackDescription",
+      "PackTitle",
+      "PacksScrollbox",
+      "SPHEnabled?",
+      "Sample1",
+      "Sample1ButtonClick",
+      "Sample1ButtonHover",
+      "Sample1ButtonUnhover",
+      "Sample1Wave_23_0A78C6CE488A8D4DA7BAE7946002BB5B",
+      "Sample2",
+      "Sample2ButtonClick",
+      "Sample2ButtonHover",
+      "Sample2ButtonUnhover",
+      "Sample2Wave_24_81E36E0347D3D9F688F85DAD76E0046B",
+      "Sample3",
+      "Sample3ButtonClick",
+      "Sample3ButtonHover",
+      "Sample3ButtonUnhover",
+      "Sample3Wave_25_533B338B436D5419B8BB72A15853F3CD",
+      "SampleLine1",
+      "SampleLine2",
+      "SampleLine3",
+      "SelectPackAnim",
+      "SelectedEntryWidget",
+      "SelectedPack",
+      "SelectedVoiceLine_28_C99B539545EDDFA03C81ADB83186C17E",
+      "SelectedVoicePack",
+      "SelectedVoicePack_22_F692D5FE4798F36F49662A8594A7FC00",
+      "Selection Line",
+      "Table",
+      "Tag1",
+      "Tag2",
+      "Tag3",
+      "Tag4",
+      "Tags",
+      "Tags_9_C25760204EC97351EE1E969326EA0DE2",
+      "Temp_int_Array_Index_Variable",
+      "Temp_int_Array_Index_Variable_1",
+      "Temp_int_Loop_Counter_Variable",
+      "Temp_int_Loop_Counter_Variable_1",
+      "Voice Pack Enum",
+      "VoicelinesAllowedToTrigger?"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 4586
+    },
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "SelectPackAnim",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsValid_ReturnValue_3",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "IsValid",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AudioComponent",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 141,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsValid_ReturnValue_3",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AudioComponent",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "Stop",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_3",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -79
+        },
+        "Offset": 60,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_3",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "SpawnSound2D",
+          "Parameters": [
+            {
+              "op": "EX_Self"
+            },
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "SelectedEntryWidget",
+                  "owner": "VoicelineSettingsMenu_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "Selection Line",
+                "owner": "VoicePackEntryWidget_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "Selection Line",
+                  "owner": "VoicePackEntryWidget_C"
+                }
+              }
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_NoObject"
+            },
+            {
+              "op": "EX_False"
+            },
+            {
+              "op": "EX_True"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AudioComponent",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_3",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "EquippedPack",
+        "owner": "VoicelineSettingsMenu_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "EquippedPack",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "SelectedPack",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SelectedVoicePack",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "SelectedVoicePack",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SelectedVoicePack",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Voice Pack Enum",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "EquipButtonText",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Offset": 62,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "Equipped"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "C93E2F0243706F1B599BE19041279EFB"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable",
+        "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetAllChildren_ReturnValue",
+        "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetAllChildren_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "PacksScrollbox",
+            "owner": "VoicelineSettingsMenu_C"
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetAllChildren_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetAllChildren",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Length_ReturnValue_1",
+        "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Length_ReturnValue_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -82
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Length_ReturnValue_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Length",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetAllChildren_ReturnValue",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Less_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Length_ReturnValue_1",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable",
+        "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 970
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetAllChildren_ReturnValue",
+        "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetAllChildren_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "PacksScrollbox",
+            "owner": "VoicelineSettingsMenu_C"
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetAllChildren_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetAllChildren",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -82
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetAllChildren_ReturnValue",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item_5",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsVoice_Pack_Entry_Widget",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -160,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Array_Get_Item_5",
+            "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsVoice_Pack_Entry_Widget",
+            "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_TextText_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "EqualEqual_TextText",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "K2Node_DynamicCast_AsVoice_Pack_Entry_Widget",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "Display Name ID",
+              "owner": "VoicePackEntryWidget_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Display Name ID",
+                "owner": "VoicePackEntryWidget_C"
+              }
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "EquippedPack",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_TextText_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "PackClicked",
+      "Parameters": [
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "EquippedPack",
+            "owner": "VoicelineSettingsMenu_C"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsVoice_Pack_Entry_Widget",
+            "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue",
+        "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable",
+        "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 494
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CustomEvent_CheatCodeTextRedeemText",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Offset": 16,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetVisibility",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameInstance_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameInstance",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetGameInstance_ReturnValue",
+            "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+            "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "InitDefaultsFromSaveGame",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "VoicelinesAllowedToTrigger?",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "PopulateVoicepacks",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable",
+        "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 471
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable_1",
+        "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Length_ReturnValue",
+        "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Length_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -82
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Length_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Length",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowNames_OutRowNames",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Less_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable_1",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Length_ReturnValue",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Array_Index_Variable_1",
+        "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Array_Index_Variable_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1914
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -82
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetDataTableRowNames_OutRowNames",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Array_Index_Variable_1",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetDataTableRowFromName_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -56
+        },
+        "Offset": 37,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetDataTableRowFromName_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetDataTableRowFromName",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Table",
+                "owner": "VoicelineSettingsMenu_C"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Get_Item",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetDataTableRowFromName_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -162
+        },
+        "Offset": 21,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Create",
+          "Parameters": [
+            {
+              "op": "EX_Self"
+            },
+            {
+              "op": "EX_ObjectConst",
+              "Value": -160
+            },
+            {
+              "op": "EX_NoObject"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Create_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Offset": 158,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "PopulateVoicePackEntry",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "DisplayName_4_0FAE4CAF482DE63DD8ABB6B0DA9E9EC3",
+              "owner": "VoicePacksInfo"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Description_6_0FC65A7646EF20EB578620971131601B",
+              "owner": "VoicePacksInfo"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Sample1Wave_23_0A78C6CE488A8D4DA7BAE7946002BB5B",
+              "owner": "VoicePacksInfo"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Sample2Wave_24_81E36E0347D3D9F688F85DAD76E0046B",
+              "owner": "VoicePacksInfo"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Sample3Wave_25_533B338B436D5419B8BB72A15853F3CD",
+              "owner": "VoicePacksInfo"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Tags_9_C25760204EC97351EE1E969326EA0DE2",
+              "owner": "VoicePacksInfo"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SelectedVoicePack_22_F692D5FE4798F36F49662A8594A7FC00",
+              "owner": "VoicePacksInfo"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SelectedVoiceLine_28_C99B539545EDDFA03C81ADB83186C17E",
+              "owner": "VoicePacksInfo"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetDataTableRowFromName_OutRow",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_BindDelegate",
+      "FunctionName": "PackClicked",
+      "Delegate": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "ObjectTerm": {
+        "op": "EX_Self"
+      }
+    },
+    {
+      "op": "EX_AddMulticastDelegate",
+      "Delegate": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Create_ReturnValue",
+            "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "OnClicked",
+          "owner": "VoicePackEntryWidget_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "OnClicked",
+            "owner": "VoicePackEntryWidget_C"
+          }
+        }
+      },
+      "DelegateToAdd": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_AddChild_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "PacksScrollbox",
+            "owner": "VoicelineSettingsMenu_C"
+          }
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_AddChild_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "AddChild",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Create_ReturnValue",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue_1",
+        "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Loop_Counter_Variable_1",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable_1",
+        "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1288
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "PacksScrollbox",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "ClearChildren",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_SetArray",
+      "AssigningProperty": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetDataTableRowNames_OutRowNames",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "ArrayInnerProp": null,
+      "Elements": []
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "GetDataTableRowNames",
+      "Parameters": [
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Table",
+            "owner": "VoicelineSettingsMenu_C"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetDataTableRowNames_OutRowNames",
+            "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Loop_Counter_Variable_1",
+        "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Loop_Counter_Variable_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1265
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_13",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "SelectPackAnim",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_TextText_ReturnValue_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "EqualEqual_TextText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_CustomEvent_DisplayName",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "EquippedPack",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3115,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_TextText_ReturnValue_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "EquipButtonText",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Offset": 62,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "Equipped"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "8A1FB442452C6DA08A8B5C841B2A1E83"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "SelectedEntryWidget",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CustomEvent_Widget",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Voice Pack Enum",
+        "owner": "VoicelineSettingsMenu_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Voice Pack Enum",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_CustomEvent_Widget",
+            "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Voice Pack Enum",
+          "owner": "VoicePackEntryWidget_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Voice Pack Enum",
+            "owner": "VoicePackEntryWidget_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SelectedPack",
+        "owner": "VoicelineSettingsMenu_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "SelectedPack",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CustomEvent_DisplayName",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Sample1",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_CustomEvent_Widget",
+            "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "SampleLine1",
+          "owner": "VoicePackEntryWidget_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SampleLine1",
+            "owner": "VoicePackEntryWidget_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Sample2",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_CustomEvent_Widget",
+            "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "SampleLine2",
+          "owner": "VoicePackEntryWidget_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SampleLine2",
+            "owner": "VoicePackEntryWidget_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Sample3",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_CustomEvent_Widget",
+            "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "SampleLine3",
+          "owner": "VoicePackEntryWidget_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SampleLine3",
+            "owner": "VoicePackEntryWidget_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "PackTitle",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Offset": 45,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "K2Node_CustomEvent_Widget",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "Display Name ID",
+              "owner": "VoicePackEntryWidget_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Display Name ID",
+                "owner": "VoicePackEntryWidget_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "PackDescription",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Offset": 45,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "K2Node_CustomEvent_Widget",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "Description",
+              "owner": "VoicePackEntryWidget_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Description",
+                "owner": "VoicePackEntryWidget_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -82
+      },
+      "Offset": 55,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "K2Node_CustomEvent_Widget",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "Tags",
+              "owner": "VoicePackEntryWidget_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Tags",
+                "owner": "VoicePackEntryWidget_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item_1",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Tag1",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item_1",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -82
+      },
+      "Offset": 55,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "K2Node_CustomEvent_Widget",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "Tags",
+              "owner": "VoicePackEntryWidget_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Tags",
+                "owner": "VoicePackEntryWidget_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item_2",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Tag2",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item_2",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -82
+      },
+      "Offset": 55,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "K2Node_CustomEvent_Widget",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "Tags",
+              "owner": "VoicePackEntryWidget_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Tags",
+                "owner": "VoicePackEntryWidget_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 2
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item_3",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Tag3",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item_3",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -82
+      },
+      "Offset": 55,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Get",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "K2Node_CustomEvent_Widget",
+                "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "Tags",
+              "owner": "VoicePackEntryWidget_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Tags",
+                "owner": "VoicePackEntryWidget_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 3
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item_4",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Tag4",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Get_Item_4",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "EquipButtonText",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Offset": 59,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "Equip"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "B78995AD4D6EE0EF8C0E43B88986C084"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2274
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_4",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Sample1ButtonClick",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsValid_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "IsValid",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AudioComponent",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3327,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsValid_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AudioComponent",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "Stop",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -79
+        },
+        "Offset": 38,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "SpawnSound2D",
+          "Parameters": [
+            {
+              "op": "EX_Self"
+            },
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Sample1",
+                "owner": "VoicelineSettingsMenu_C"
+              }
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_NoObject"
+            },
+            {
+              "op": "EX_False"
+            },
+            {
+              "op": "EX_True"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AudioComponent",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_9",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Sample2ButtonClick",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsValid_ReturnValue_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "IsValid",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AudioComponent",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3543,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsValid_ReturnValue_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AudioComponent",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "Stop",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -79
+        },
+        "Offset": 38,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "SpawnSound2D",
+          "Parameters": [
+            {
+              "op": "EX_Self"
+            },
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Sample2",
+                "owner": "VoicelineSettingsMenu_C"
+              }
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_NoObject"
+            },
+            {
+              "op": "EX_False"
+            },
+            {
+              "op": "EX_True"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AudioComponent",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_12",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Sample3ButtonClick",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsValid_ReturnValue_2",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "IsValid",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AudioComponent",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3759,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsValid_ReturnValue_2",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AudioComponent",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "Stop",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_2",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -79
+        },
+        "Offset": 38,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_2",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "SpawnSound2D",
+          "Parameters": [
+            {
+              "op": "EX_Self"
+            },
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Sample3",
+                "owner": "VoicelineSettingsMenu_C"
+              }
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_NoObject"
+            },
+            {
+              "op": "EX_False"
+            },
+            {
+              "op": "EX_True"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AudioComponent",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_2",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_IgnoreCase_TextText_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "EqualEqual_IgnoreCase_TextText",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "SelectedPack",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "EquippedPack",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3902,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_IgnoreCase_TextText_ReturnValue",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_3",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "EquipButtonClick",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 15
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_ComponentBoundEvent_SelectedItem",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "on"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4050,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_ComponentBoundEvent_SelectedItem",
+              "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "off"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4142,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "SPHEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SPHEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SaveAllData",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "SPHEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SPHEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4105
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_1",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "EquipButtonHover",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_2",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "EquipButtonUnhover",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_5",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Sample1ButtonHover",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_6",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Sample1ButtonUnhover",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_7",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Sample2ButtonHover",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_8",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Sample2ButtonUnhover",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_10",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Sample3ButtonHover",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_11",
+          "owner": "ExecuteUbergraph_VoicelineSettingsMenu"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Sample3ButtonUnhover",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

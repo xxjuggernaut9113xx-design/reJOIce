@@ -1,0 +1,282 @@
+{
+  "function": {
+    "name": "AdjustPostEdgeBreakDelay",
+    "statements": 10,
+    "raw_fallback": false,
+    "calls": [
+      "Add_DoubleDouble",
+      "Conv_IntToDouble",
+      "Divide_IntInt",
+      "FClamp",
+      "FTrunc"
+    ],
+    "fields": [
+      "",
+      "CallFunc_Add_DoubleDouble_A_ImplicitCast",
+      "CallFunc_Add_DoubleDouble_ReturnValue",
+      "CallFunc_Conv_IntToDouble_ReturnValue",
+      "CallFunc_Conv_IntToDouble_ReturnValue_1",
+      "CallFunc_Divide_IntInt_ReturnValue",
+      "CallFunc_FClamp_ReturnValue",
+      "CallFunc_FTrunc_ReturnValue",
+      "EdgeStreak",
+      "GlobalManagerRef",
+      "Post Edge Break Duration",
+      "PostEdgeBreakDuration"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Divide_IntInt_ReturnValue",
+        "owner": "AdjustPostEdgeBreakDelay"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_IntInt_ReturnValue",
+          "owner": "AdjustPostEdgeBreakDelay"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Divide_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManagerRef",
+                "owner": "BP_EdgeManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "EdgeStreak",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "EdgeStreak",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 5
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+        "owner": "AdjustPostEdgeBreakDelay"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+          "owner": "AdjustPostEdgeBreakDelay"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Divide_IntInt_ReturnValue",
+              "owner": "AdjustPostEdgeBreakDelay"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FTrunc_ReturnValue",
+        "owner": "AdjustPostEdgeBreakDelay"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FTrunc_ReturnValue",
+          "owner": "AdjustPostEdgeBreakDelay"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FTrunc",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+              "owner": "AdjustPostEdgeBreakDelay"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToDouble_ReturnValue_1",
+        "owner": "AdjustPostEdgeBreakDelay"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToDouble_ReturnValue_1",
+          "owner": "AdjustPostEdgeBreakDelay"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_FTrunc_ReturnValue",
+              "owner": "AdjustPostEdgeBreakDelay"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_DoubleDouble_A_ImplicitCast",
+          "owner": "AdjustPostEdgeBreakDelay"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 4,
+        "Target": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "PostEdgeBreakDuration",
+            "owner": "BP_EdgeManager_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_DoubleDouble_ReturnValue",
+        "owner": "AdjustPostEdgeBreakDelay"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_DoubleDouble_ReturnValue",
+          "owner": "AdjustPostEdgeBreakDelay"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Add_DoubleDouble_A_ImplicitCast",
+              "owner": "AdjustPostEdgeBreakDelay"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToDouble_ReturnValue_1",
+              "owner": "AdjustPostEdgeBreakDelay"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FClamp_ReturnValue",
+        "owner": "AdjustPostEdgeBreakDelay"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FClamp_ReturnValue",
+          "owner": "AdjustPostEdgeBreakDelay"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FClamp",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Add_DoubleDouble_ReturnValue",
+              "owner": "AdjustPostEdgeBreakDelay"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 8.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Post Edge Break Duration",
+        "owner": "AdjustPostEdgeBreakDelay"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "Post Edge Break Duration",
+          "owner": "AdjustPostEdgeBreakDelay"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FClamp_ReturnValue",
+          "owner": "AdjustPostEdgeBreakDelay"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

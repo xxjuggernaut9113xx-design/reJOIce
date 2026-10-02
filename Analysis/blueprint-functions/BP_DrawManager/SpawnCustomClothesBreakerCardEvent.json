@@ -1,0 +1,1123 @@
+{
+  "function": {
+    "name": "SpawnCustomClothesBreakerCardEvent",
+    "statements": 24,
+    "raw_fallback": false,
+    "calls": [
+      "Conv_IntToDouble",
+      "FClamp",
+      "FTrunc",
+      "Multiply_DoubleDouble",
+      "RandomFloatInRange",
+      "RandomIntegerInRange",
+      "Refresh Heat Difficulty",
+      "SetBrushFromTexture",
+      "SetStretch",
+      "SetVisibility"
+    ],
+    "fields": [
+      "",
+      "AssignedStrokeCount_98_927676934A034C51DF7E64A9CDE11E4C",
+      "BeatSpawnInterval_77_50E3B83E42812441703681959441CAE9",
+      "CallFunc_Conv_IntToDouble_ReturnValue",
+      "CallFunc_FClamp_ReturnValue",
+      "CallFunc_FTrunc_ReturnValue",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue",
+      "CallFunc_Multiply_DoubleDouble_ReturnValue_1",
+      "CallFunc_RandomFloatInRange_ReturnValue",
+      "CallFunc_RandomIntegerInRange_ReturnValue",
+      "CurrentCardTypeEnum",
+      "CurrentStrokeCount_61_4214F0E64101BD89E3040096F440A11C",
+      "GlobalManager",
+      "ImageAbove",
+      "ImageBelow",
+      "IsClothesBreakerEvent?",
+      "MainImage",
+      "MainImage_Overlay",
+      "MaxInterval",
+      "MaxStrokes",
+      "MinInterval",
+      "MinStrokes",
+      "PlayerVariablesStruct",
+      "ScaleBoxOverlay",
+      "ScaleBox_416",
+      "SelectedStrokeCount",
+      "SlateBrush",
+      "Stretch",
+      "StrokeCountMultiplier",
+      "StrokeInterval",
+      "TimeSpeedMultiplier",
+      "UIManager",
+      "bHasUObject",
+      "bIsDynamicallyLoaded",
+      "bStopSequence"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SelectedStrokeCount",
+        "owner": "SpawnCustomClothesBreakerCardEvent"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "SelectedStrokeCount",
+          "owner": "SpawnCustomClothesBreakerCardEvent"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "GlobalManager",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "Refresh Heat Difficulty",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "bStopSequence",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "bStopSequence",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UIManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "MainImage",
+          "owner": "UI_Manager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "MainImage",
+            "owner": "UI_Manager_C"
+          }
+        }
+      },
+      "Offset": 24,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetBrushFromTexture",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "ImageBelow",
+              "owner": "SpawnCustomClothesBreakerCardEvent"
+            }
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UIManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "MainImage_Overlay",
+          "owner": "UI_Manager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "MainImage_Overlay",
+            "owner": "UI_Manager_C"
+          }
+        }
+      },
+      "Offset": 24,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetBrushFromTexture",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "ImageAbove",
+              "owner": "SpawnCustomClothesBreakerCardEvent"
+            }
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UIManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "ScaleBoxOverlay",
+          "owner": "UI_Manager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "ScaleBoxOverlay",
+            "owner": "UI_Manager_C"
+          }
+        }
+      },
+      "Offset": 85,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetStretch",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "GlobalManager",
+                    "owner": "BP_DrawManager_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "UIManager",
+                  "owner": "BP_GlobalManager_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "UIManager",
+                    "owner": "BP_GlobalManager_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "ScaleBox_416",
+                "owner": "UI_Manager_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "ScaleBox_416",
+                  "owner": "UI_Manager_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "Stretch",
+              "owner": "ScaleBox"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Stretch",
+                "owner": "ScaleBox"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UIManager",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "MainImage_Overlay",
+          "owner": "UI_Manager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "MainImage_Overlay",
+            "owner": "UI_Manager_C"
+          }
+        }
+      },
+      "Offset": 16,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetVisibility",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "IsClothesBreakerEvent?",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+        "owner": "SpawnCustomClothesBreakerCardEvent"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+          "owner": "SpawnCustomClothesBreakerCardEvent"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "MinStrokes",
+              "owner": "SpawnCustomClothesBreakerCardEvent"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "MaxStrokes",
+              "owner": "SpawnCustomClothesBreakerCardEvent"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+        "owner": "SpawnCustomClothesBreakerCardEvent"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+          "owner": "SpawnCustomClothesBreakerCardEvent"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_IntToDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+              "owner": "SpawnCustomClothesBreakerCardEvent"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_1",
+        "owner": "SpawnCustomClothesBreakerCardEvent"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_1",
+          "owner": "SpawnCustomClothesBreakerCardEvent"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_IntToDouble_ReturnValue",
+              "owner": "SpawnCustomClothesBreakerCardEvent"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "StrokeCountMultiplier",
+              "owner": "SpawnCustomClothesBreakerCardEvent"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FTrunc_ReturnValue",
+        "owner": "SpawnCustomClothesBreakerCardEvent"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FTrunc_ReturnValue",
+          "owner": "SpawnCustomClothesBreakerCardEvent"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FTrunc",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Multiply_DoubleDouble_ReturnValue_1",
+              "owner": "SpawnCustomClothesBreakerCardEvent"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SelectedStrokeCount",
+        "owner": "SpawnCustomClothesBreakerCardEvent"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "SelectedStrokeCount",
+          "owner": "SpawnCustomClothesBreakerCardEvent"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FTrunc_ReturnValue",
+          "owner": "SpawnCustomClothesBreakerCardEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "AssignedStrokeCount_98_927676934A034C51DF7E64A9CDE11E4C",
+        "owner": "LegacyStats"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "AssignedStrokeCount_98_927676934A034C51DF7E64A9CDE11E4C",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "SelectedStrokeCount",
+          "owner": "SpawnCustomClothesBreakerCardEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CurrentStrokeCount_61_4214F0E64101BD89E3040096F440A11C",
+        "owner": "LegacyStats"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "CurrentStrokeCount_61_4214F0E64101BD89E3040096F440A11C",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "SelectedStrokeCount",
+          "owner": "SpawnCustomClothesBreakerCardEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomFloatInRange_ReturnValue",
+        "owner": "SpawnCustomClothesBreakerCardEvent"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomFloatInRange_ReturnValue",
+          "owner": "SpawnCustomClothesBreakerCardEvent"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomFloatInRange",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "MinInterval",
+              "owner": "SpawnCustomClothesBreakerCardEvent"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "MaxInterval",
+              "owner": "SpawnCustomClothesBreakerCardEvent"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+        "owner": "SpawnCustomClothesBreakerCardEvent"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+          "owner": "SpawnCustomClothesBreakerCardEvent"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Multiply_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomFloatInRange_ReturnValue",
+              "owner": "SpawnCustomClothesBreakerCardEvent"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "TimeSpeedMultiplier",
+              "owner": "SpawnCustomClothesBreakerCardEvent"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FClamp_ReturnValue",
+        "owner": "SpawnCustomClothesBreakerCardEvent"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FClamp_ReturnValue",
+          "owner": "SpawnCustomClothesBreakerCardEvent"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FClamp",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Multiply_DoubleDouble_ReturnValue",
+              "owner": "SpawnCustomClothesBreakerCardEvent"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 0.28
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 5.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "BeatSpawnInterval_77_50E3B83E42812441703681959441CAE9",
+        "owner": "LegacyStats"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "BeatSpawnInterval_77_50E3B83E42812441703681959441CAE9",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FClamp_ReturnValue",
+          "owner": "SpawnCustomClothesBreakerCardEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CurrentCardTypeEnum",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GlobalManager",
+            "owner": "BP_DrawManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CurrentCardTypeEnum",
+          "owner": "BP_GlobalManager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "CurrentCardTypeEnum",
+            "owner": "BP_GlobalManager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CurrentCardTypeEnum",
+          "owner": "SpawnCustomClothesBreakerCardEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SlateBrush",
+        "owner": "SpawnCustomClothesBreakerCardEvent"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "SlateBrush",
+          "owner": "SpawnCustomClothesBreakerCardEvent"
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -109,
+        "StructSize": 224,
+        "Value": [
+          {
+            "op": "EX_BitFieldConst",
+            "Property": {
+              "field": "bIsDynamicallyLoaded",
+              "owner": "SlateBrush"
+            },
+            "Value": 0
+          },
+          {
+            "op": "EX_BitFieldConst",
+            "Property": {
+              "field": "bHasUObject",
+              "owner": "SlateBrush"
+            },
+            "Value": 0
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 3
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -107,
+            "StructSize": 8,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": 32.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 32.0
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -108,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -111,
+            "StructSize": 20,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -103,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  }
+                ]
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -110,
+            "StructSize": 64,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -105,
+                "StructSize": 32,
+                "Value": [
+                  {
+                    "op": "EX_DoubleConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_DoubleConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_DoubleConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_DoubleConst",
+                    "Value": 1.0
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -111,
+                "StructSize": 20,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -103,
+                    "StructSize": 16,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_ByteConst",
+                    "Value": 0
+                  }
+                ]
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 1
+              },
+              {
+                "op": "EX_False"
+              }
+            ]
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_NameConst",
+            "Value": "None"
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -102,
+            "StructSize": 20,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -104,
+                "StructSize": 8,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -104,
+                "StructSize": 8,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_False"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "StrokeInterval",
+        "owner": "SpawnCustomClothesBreakerCardEvent"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "StrokeInterval",
+          "owner": "SpawnCustomClothesBreakerCardEvent"
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_ChallengeEntryWidget",
+    "statements": 10,
+    "raw_fallback": false,
+    "calls": [
+      "OnChallengeClicked__DelegateSignature",
+      "OnTrackButtonClicked__DelegateSignature",
+      "PlayAnimation"
+    ],
+    "fields": [
+      "ButtonHover",
+      "ButtonUnhover",
+      "CallFunc_PlayAnimation_ReturnValue",
+      "CallFunc_PlayAnimation_ReturnValue_1",
+      "Challenge_ID",
+      "EntryPoint",
+      "OnChallengeClicked",
+      "OnTrackButtonClicked"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_ChallengeEntryWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeEntryWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ButtonHover",
+              "owner": "ChallengeEntryWidget_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 176
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlayAnimation_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ChallengeEntryWidget"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayAnimation",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ButtonUnhover",
+              "owner": "ChallengeEntryWidget_C"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 176
+    },
+    {
+      "op": "EX_CallMulticastDelegate",
+      "Delegate": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "OnChallengeClicked",
+          "owner": "ChallengeEntryWidget_C"
+        }
+      },
+      "StackNode": "OnChallengeClicked__DelegateSignature",
+      "Parameters": [
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Challenge_ID",
+            "owner": "ChallengeEntryWidget_C"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 176
+    },
+    {
+      "op": "EX_CallMulticastDelegate",
+      "Delegate": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "OnTrackButtonClicked",
+          "owner": "ChallengeEntryWidget_C"
+        }
+      },
+      "StackNode": "OnTrackButtonClicked__DelegateSignature",
+      "Parameters": [
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Challenge_ID",
+            "owner": "ChallengeEntryWidget_C"
+          }
+        },
+        {
+          "op": "EX_Self"
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

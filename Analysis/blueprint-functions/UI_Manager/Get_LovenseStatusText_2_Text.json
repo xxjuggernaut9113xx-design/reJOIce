@@ -1,0 +1,212 @@
+{
+  "function": {
+    "name": "Get_LovenseStatusText_2_Text",
+    "statements": 9,
+    "raw_fallback": false,
+    "calls": [
+      "HasAnyConnectedButtplugDevices"
+    ],
+    "fields": [
+      "AdultToyManager",
+      "CallFunc_HasAnyConnectedButtplugDevices_ReturnValue",
+      "GameInstance",
+      "GlobalManagerRef",
+      "Output",
+      "ReturnValue"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_HasAnyConnectedButtplugDevices_ReturnValue",
+          "owner": "Get_LovenseStatusText_2_Text"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManagerRef",
+                "owner": "UI_Manager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GameInstance",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "AdultToyManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AdultToyManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_HasAnyConnectedButtplugDevices_ReturnValue",
+          "owner": "Get_LovenseStatusText_2_Text"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "HasAnyConnectedButtplugDevices",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 209,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_HasAnyConnectedButtplugDevices_ReturnValue",
+          "owner": "Get_LovenseStatusText_2_Text"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Output",
+        "owner": "Get_LovenseStatusText_2_Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Output",
+          "owner": "Get_LovenseStatusText_2_Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_TextConst",
+        "Value": {
+          "op": "FScriptText",
+          "TextLiteralType": "LocalizedText",
+          "LocalizedSource": {
+            "op": "EX_StringConst",
+            "Value": "Intiface: Connected"
+          },
+          "LocalizedKey": {
+            "op": "EX_StringConst",
+            "Value": "BDCEEA8A4694876CEC997C9474F794DA"
+          },
+          "LocalizedNamespace": {
+            "op": "EX_StringConst",
+            "Value": ""
+          },
+          "InvariantLiteralString": null,
+          "LiteralString": null,
+          "StringTableAsset": null,
+          "StringTableId": null,
+          "StringTableKey": null
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "Get_LovenseStatusText_2_Text"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_LovenseStatusText_2_Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Output",
+          "owner": "Get_LovenseStatusText_2_Text"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 294
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Output",
+        "owner": "Get_LovenseStatusText_2_Text"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Output",
+          "owner": "Get_LovenseStatusText_2_Text"
+        }
+      },
+      "Expression": {
+        "op": "EX_TextConst",
+        "Value": {
+          "op": "FScriptText",
+          "TextLiteralType": "LocalizedText",
+          "LocalizedSource": {
+            "op": "EX_StringConst",
+            "Value": "Intiface: Disconnected"
+          },
+          "LocalizedKey": {
+            "op": "EX_StringConst",
+            "Value": "B5EDFCA04109B2B6174119AA1A9C9E54"
+          },
+          "LocalizedNamespace": {
+            "op": "EX_StringConst",
+            "Value": ""
+          },
+          "InvariantLiteralString": null,
+          "LiteralString": null,
+          "StringTableAsset": null,
+          "StringTableId": null,
+          "StringTableKey": null
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 177
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_LovenseStatusText_2_Text"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

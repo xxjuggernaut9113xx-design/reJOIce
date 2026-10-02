@@ -1,0 +1,138 @@
+{
+  "function": {
+    "name": "PlayBackgroundMediaManual",
+    "statements": 5,
+    "raw_fallback": false,
+    "calls": [
+      "FindVideoFile",
+      "PlayMediaEntry",
+      "StopPlayback"
+    ],
+    "fields": [
+      "",
+      "BackgroundMediaPlayer",
+      "CallFunc_FindVideoFile_ReturnValue",
+      "FileName (Undercase)",
+      "Image Widget"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "BackgroundMediaPlayer",
+          "owner": "BP_CHGameInstance_C"
+        }
+      },
+      "Offset": 11,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "StopPlayback",
+        "Parameters": [
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FindVideoFile_ReturnValue",
+        "owner": "PlayBackgroundMediaManual"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FindVideoFile_ReturnValue",
+          "owner": "PlayBackgroundMediaManual"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "BackgroundMediaPlayer",
+            "owner": "BP_CHGameInstance_C"
+          }
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_FindVideoFile_ReturnValue",
+          "owner": "PlayBackgroundMediaManual"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "FindVideoFile",
+          "Parameters": [
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "FileName (Undercase)",
+                "owner": "PlayBackgroundMediaManual"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "BackgroundMediaPlayer",
+          "owner": "BP_CHGameInstance_C"
+        }
+      },
+      "Offset": 33,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlayMediaEntry",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_FindVideoFile_ReturnValue",
+              "owner": "PlayBackgroundMediaManual"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Image Widget",
+              "owner": "PlayBackgroundMediaManual"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": -1.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

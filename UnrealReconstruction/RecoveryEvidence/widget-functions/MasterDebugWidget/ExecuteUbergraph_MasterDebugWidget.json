@@ -1,0 +1,567 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_MasterDebugWidget",
+    "statements": 25,
+    "raw_fallback": false,
+    "calls": [
+      "Add_IntInt",
+      "Clamp",
+      "GetActiveWidgetIndex",
+      "GetChildrenCount",
+      "RemoveFromParent",
+      "SetActiveWidgetIndex",
+      "Subtract_IntInt"
+    ],
+    "fields": [
+      "",
+      "CallFunc_Add_IntInt_ReturnValue",
+      "CallFunc_Clamp_ReturnValue",
+      "CallFunc_Clamp_ReturnValue_1",
+      "CallFunc_GetActiveWidgetIndex_ReturnValue",
+      "CallFunc_GetActiveWidgetIndex_ReturnValue_1",
+      "CallFunc_GetChildrenCount_ReturnValue",
+      "CallFunc_GetChildrenCount_ReturnValue_1",
+      "CallFunc_Subtract_IntInt_ReturnValue",
+      "EntryPoint",
+      "Temp_int_Variable",
+      "Temp_int_Variable_1",
+      "WidgetSwitcher"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetActiveWidgetIndex_ReturnValue",
+        "owner": "ExecuteUbergraph_MasterDebugWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetActiveWidgetIndex_ReturnValue",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "WidgetSwitcher",
+            "owner": "MasterDebugWidget_C"
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetActiveWidgetIndex_ReturnValue",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetActiveWidgetIndex",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetActiveWidgetIndex_ReturnValue",
+        "owner": "ExecuteUbergraph_MasterDebugWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetActiveWidgetIndex_ReturnValue",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Variable",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetChildrenCount_ReturnValue",
+        "owner": "ExecuteUbergraph_MasterDebugWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetChildrenCount_ReturnValue",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "WidgetSwitcher",
+            "owner": "MasterDebugWidget_C"
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetChildrenCount_ReturnValue",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetChildrenCount",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Clamp_ReturnValue",
+        "owner": "ExecuteUbergraph_MasterDebugWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Clamp_ReturnValue",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Clamp",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Variable",
+              "owner": "ExecuteUbergraph_MasterDebugWidget"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetChildrenCount_ReturnValue",
+              "owner": "ExecuteUbergraph_MasterDebugWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "WidgetSwitcher",
+          "owner": "MasterDebugWidget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetActiveWidgetIndex",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Clamp_ReturnValue",
+              "owner": "ExecuteUbergraph_MasterDebugWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 733
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetActiveWidgetIndex_ReturnValue",
+        "owner": "ExecuteUbergraph_MasterDebugWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetActiveWidgetIndex_ReturnValue",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "WidgetSwitcher",
+            "owner": "MasterDebugWidget_C"
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetActiveWidgetIndex_ReturnValue",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetActiveWidgetIndex",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Subtract_IntInt_ReturnValue",
+        "owner": "ExecuteUbergraph_MasterDebugWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Subtract_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetActiveWidgetIndex_ReturnValue",
+              "owner": "ExecuteUbergraph_MasterDebugWidget"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Variable",
+        "owner": "ExecuteUbergraph_MasterDebugWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Variable",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 10
+    },
+    {
+      "op": "EX_VirtualFunction",
+      "VirtualFunctionName": "RemoveFromParent",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 733
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetActiveWidgetIndex_ReturnValue_1",
+        "owner": "ExecuteUbergraph_MasterDebugWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetActiveWidgetIndex_ReturnValue_1",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "WidgetSwitcher",
+            "owner": "MasterDebugWidget_C"
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetActiveWidgetIndex_ReturnValue_1",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetActiveWidgetIndex",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_IntInt_ReturnValue",
+        "owner": "ExecuteUbergraph_MasterDebugWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetActiveWidgetIndex_ReturnValue_1",
+              "owner": "ExecuteUbergraph_MasterDebugWidget"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Variable_1",
+        "owner": "ExecuteUbergraph_MasterDebugWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Variable_1",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetActiveWidgetIndex_ReturnValue_1",
+        "owner": "ExecuteUbergraph_MasterDebugWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetActiveWidgetIndex_ReturnValue_1",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "WidgetSwitcher",
+            "owner": "MasterDebugWidget_C"
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetActiveWidgetIndex_ReturnValue_1",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetActiveWidgetIndex",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetActiveWidgetIndex_ReturnValue_1",
+        "owner": "ExecuteUbergraph_MasterDebugWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetActiveWidgetIndex_ReturnValue_1",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Variable_1",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetChildrenCount_ReturnValue_1",
+        "owner": "ExecuteUbergraph_MasterDebugWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetChildrenCount_ReturnValue_1",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "WidgetSwitcher",
+            "owner": "MasterDebugWidget_C"
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetChildrenCount_ReturnValue_1",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetChildrenCount",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Clamp_ReturnValue_1",
+        "owner": "ExecuteUbergraph_MasterDebugWidget"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Clamp_ReturnValue_1",
+          "owner": "ExecuteUbergraph_MasterDebugWidget"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Clamp",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Temp_int_Variable_1",
+              "owner": "ExecuteUbergraph_MasterDebugWidget"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetChildrenCount_ReturnValue_1",
+              "owner": "ExecuteUbergraph_MasterDebugWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "WidgetSwitcher",
+          "owner": "MasterDebugWidget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetActiveWidgetIndex",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Clamp_ReturnValue_1",
+              "owner": "ExecuteUbergraph_MasterDebugWidget"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 733
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 238
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

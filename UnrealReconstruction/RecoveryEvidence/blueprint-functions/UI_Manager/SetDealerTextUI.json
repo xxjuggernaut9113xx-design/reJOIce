@@ -1,0 +1,44 @@
+{
+  "function": {
+    "name": "SetDealerTextUI",
+    "statements": 3,
+    "raw_fallback": false,
+    "calls": [],
+    "fields": [
+      "DealerText",
+      "DealerTextDisplay"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "DealerTextDisplay",
+        "owner": "UI_Manager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "DealerTextDisplay",
+          "owner": "UI_Manager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "DealerText",
+          "owner": "SetDealerTextUI"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "function": {
+    "name": "PlaySoundWithPitch",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "PlaySound2D"
+    ],
+    "fields": [
+      "",
+      "CallFunc_PlaySound2D_PitchMultiplier_ImplicitCast",
+      "Pitch"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PlaySound2D_PitchMultiplier_ImplicitCast",
+          "owner": "PlaySoundWithPitch"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "Pitch",
+            "owner": "PlaySoundWithPitch"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -33
+      },
+      "Offset": 42,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlaySound2D",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          },
+          {
+            "op": "EX_ObjectConst",
+            "Value": -57
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.5
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_PlaySound2D_PitchMultiplier_ImplicitCast",
+              "owner": "PlaySoundWithPitch"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "function": {
+    "name": "RollChanceforDynamicEdgeEvent",
+    "statements": 5,
+    "raw_fallback": false,
+    "calls": [
+      "GreaterEqual_DoubleDouble",
+      "RandomFloatInRange"
+    ],
+    "fields": [
+      "CallFunc_GreaterEqual_DoubleDouble_ReturnValue",
+      "CallFunc_RandomFloatInRange_ReturnValue",
+      "DynamicEdgeChance",
+      "GlobalManagerRef",
+      "IsDynamicEdge"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomFloatInRange_ReturnValue",
+        "owner": "RollChanceforDynamicEdgeEvent"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomFloatInRange_ReturnValue",
+          "owner": "RollChanceforDynamicEdgeEvent"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomFloatInRange",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 100.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_DoubleDouble_ReturnValue",
+          "owner": "RollChanceforDynamicEdgeEvent"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GreaterEqual_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManagerRef",
+                "owner": "BP_EdgeManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "DynamicEdgeChance",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "DynamicEdgeChance",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomFloatInRange_ReturnValue",
+              "owner": "RollChanceforDynamicEdgeEvent"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "IsDynamicEdge",
+          "owner": "RollChanceforDynamicEdgeEvent"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_DoubleDouble_ReturnValue",
+          "owner": "RollChanceforDynamicEdgeEvent"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

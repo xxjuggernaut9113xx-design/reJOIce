@@ -1,0 +1,294 @@
+{
+  "function": {
+    "name": "Determine And Trigger Cum Meter Override Event",
+    "statements": 18,
+    "raw_fallback": false,
+    "calls": [
+      "BooleanOR",
+      "EqualEqual_ByteByte",
+      "GreaterEqual_DoubleDouble",
+      "Is Succu Frenzy Active",
+      "Spawn100PercentCumMeterOverrideEvent",
+      "Start Cum Window Timer"
+    ],
+    "fields": [
+      "CallFunc_BooleanOR_ReturnValue",
+      "CallFunc_BooleanOR_ReturnValue_1",
+      "CallFunc_EqualEqual_ByteByte_ReturnValue",
+      "CallFunc_EqualEqual_ByteByte_ReturnValue_1",
+      "CallFunc_EqualEqual_ByteByte_ReturnValue_2",
+      "CallFunc_GreaterEqual_DoubleDouble_ReturnValue",
+      "CallFunc_Is_Succu_Frenzy_Active_Active",
+      "CumMeterPercentage",
+      "CurrentCardTypeEnum",
+      "HasCumMeterOverideTriggered?"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Is Succu Frenzy Active",
+      "Parameters": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Is_Succu_Frenzy_Active_Active",
+            "owner": "Determine And Trigger Cum Meter Override Event"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 108,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Is_Succu_Frenzy_Active_Active",
+          "owner": "Determine And Trigger Cum Meter Override Event"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_DoubleDouble_ReturnValue",
+          "owner": "Determine And Trigger Cum Meter Override Event"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GreaterEqual_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CumMeterPercentage",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 335,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_DoubleDouble_ReturnValue",
+          "owner": "Determine And Trigger Cum Meter Override Event"
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 296,
+      "BooleanExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "HasCumMeterOverideTriggered?",
+          "owner": "BP_GlobalManager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 335
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_ByteByte_ReturnValue",
+          "owner": "Determine And Trigger Cum Meter Override Event"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "EqualEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentCardTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_ByteByte_ReturnValue_1",
+          "owner": "Determine And Trigger Cum Meter Override Event"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "EqualEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentCardTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 6
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_ByteByte_ReturnValue_2",
+          "owner": "Determine And Trigger Cum Meter Override Event"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "EqualEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentCardTypeEnum",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 5
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_BooleanOR_ReturnValue",
+          "owner": "Determine And Trigger Cum Meter Override Event"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "BooleanOR",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_EqualEqual_ByteByte_ReturnValue_2",
+              "owner": "Determine And Trigger Cum Meter Override Event"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_EqualEqual_ByteByte_ReturnValue_1",
+              "owner": "Determine And Trigger Cum Meter Override Event"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_BooleanOR_ReturnValue_1",
+          "owner": "Determine And Trigger Cum Meter Override Event"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "BooleanOR",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_BooleanOR_ReturnValue",
+              "owner": "Determine And Trigger Cum Meter Override Event"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_EqualEqual_ByteByte_ReturnValue",
+              "owner": "Determine And Trigger Cum Meter Override Event"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 37,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_BooleanOR_ReturnValue_1",
+          "owner": "Determine And Trigger Cum Meter Override Event"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 335
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Spawn100PercentCumMeterOverrideEvent",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Start Cum Window Timer",
+      "Parameters": []
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "HasCumMeterOverideTriggered?",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

@@ -1,0 +1,1573 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_ChallengeTrackerUI",
+    "statements": 52,
+    "raw_fallback": false,
+    "calls": [
+      "Array_IsValidIndex",
+      "GetChallengeData",
+      "GetChallengeProgress",
+      "GetGameInstance",
+      "GetGameMode",
+      "GetRequirementDisplayText",
+      "GetRequirementProgressPercent",
+      "GreaterEqual_DoubleDouble",
+      "PrintString",
+      "SetBrushFromTexture",
+      "SetFillColorAndOpacity",
+      "SetPercent",
+      "SetText",
+      "SetVisibility"
+    ],
+    "fields": [
+      "",
+      "As BP CHGame Instance",
+      "As BP Global Manager",
+      "CallFunc_Array_IsValidIndex_ReturnValue",
+      "CallFunc_Array_IsValidIndex_ReturnValue_1",
+      "CallFunc_GetChallengeData_ReturnValue",
+      "CallFunc_GetChallengeProgress_ReturnValue",
+      "CallFunc_GetGameInstance_ReturnValue",
+      "CallFunc_GetGameMode_ReturnValue",
+      "CallFunc_GetRequirementDisplayText_ReturnValue",
+      "CallFunc_GetRequirementDisplayText_ReturnValue_1",
+      "CallFunc_GetRequirementProgressPercent_ReturnValue",
+      "CallFunc_GetRequirementProgressPercent_ReturnValue_1",
+      "CallFunc_GreaterEqual_DoubleDouble_A_ImplicitCast",
+      "CallFunc_GreaterEqual_DoubleDouble_A_ImplicitCast_1",
+      "CallFunc_GreaterEqual_DoubleDouble_ReturnValue",
+      "CallFunc_GreaterEqual_DoubleDouble_ReturnValue_1",
+      "Challenge ID",
+      "ChallengeData",
+      "ChallengeNameText",
+      "ChallengeProgress",
+      "ChallengeProgressBar0",
+      "ChallengeProgressBar1",
+      "ChallengeTextRequirement0",
+      "ChallengeTextRequirement1",
+      "DisplayName",
+      "EntryPoint",
+      "Icon",
+      "ImageIcon",
+      "K2Node_DynamicCast_AsBP_CHGame_Instance",
+      "K2Node_DynamicCast_AsBP_Global_Manager",
+      "K2Node_DynamicCast_bSuccess",
+      "K2Node_DynamicCast_bSuccess_1",
+      "ProgressionManager",
+      "RequirementBox0",
+      "RequirementBox1",
+      "Requirements",
+      "bIsComplete"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameMode_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameMode",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetGameMode_ReturnValue",
+            "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+            "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2089,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP Global Manager",
+          "owner": "ChallengeTrackerUI_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_Global_Manager",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameInstance_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameInstance",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -2,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetGameInstance_ReturnValue",
+            "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess_1",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+            "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2089,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess_1",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "ChallengeTrackerUI_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2089
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetChallengeData_ReturnValue",
+        "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetChallengeData_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "ChallengeTrackerUI_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetChallengeData_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetChallengeData",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Challenge ID",
+                "owner": "ChallengeTrackerUI_C"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ChallengeData",
+        "owner": "ChallengeTrackerUI_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ChallengeData",
+          "owner": "ChallengeTrackerUI_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetChallengeData_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ImageIcon",
+          "owner": "ChallengeTrackerUI_C"
+        }
+      },
+      "Offset": 33,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetBrushFromTexture",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Icon",
+              "owner": "ChallengeData"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "ChallengeData",
+                "owner": "ChallengeTrackerUI_C"
+              }
+            }
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ChallengeNameText",
+          "owner": "ChallengeTrackerUI_C"
+        }
+      },
+      "Offset": 32,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "DisplayName",
+              "owner": "ChallengeData"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "ChallengeData",
+                "owner": "ChallengeTrackerUI_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetChallengeProgress_ReturnValue",
+        "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetChallengeProgress_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "ChallengeTrackerUI_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 19,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetChallengeProgress_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetChallengeProgress",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Challenge ID",
+                "owner": "ChallengeTrackerUI_C"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ChallengeProgress",
+        "owner": "ChallengeTrackerUI_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ChallengeProgress",
+          "owner": "ChallengeTrackerUI_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetChallengeProgress_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 691,
+      "BooleanExpression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "bIsComplete",
+          "owner": "ChallengeProgress"
+        },
+        "StructExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "ChallengeProgress",
+            "owner": "ChallengeTrackerUI_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ChallengeTextRequirement0",
+          "owner": "ChallengeTrackerUI_C"
+        }
+      },
+      "Offset": 63,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "Completed"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "BB44BA61416E66F26DA817A92712F205"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2089
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsValidIndex_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -57
+        },
+        "Offset": 33,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsValidIndex_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsValidIndex",
+          "Parameters": [
+            {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "Requirements",
+                "owner": "ChallengeProgress"
+              },
+              "StructExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "ChallengeProgress",
+                  "owner": "ChallengeTrackerUI_C"
+                }
+              }
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1912,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsValidIndex_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetRequirementDisplayText_ReturnValue",
+        "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetRequirementDisplayText_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "ChallengeTrackerUI_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 24,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetRequirementDisplayText_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetRequirementDisplayText",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Challenge ID",
+                "owner": "ChallengeTrackerUI_C"
+              }
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ChallengeTextRequirement0",
+          "owner": "ChallengeTrackerUI_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetRequirementDisplayText_ReturnValue",
+              "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetRequirementProgressPercent_ReturnValue",
+        "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetRequirementProgressPercent_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "ChallengeTrackerUI_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 24,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetRequirementProgressPercent_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetRequirementProgressPercent",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Challenge ID",
+                "owner": "ChallengeTrackerUI_C"
+              }
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ChallengeProgressBar0",
+          "owner": "ChallengeTrackerUI_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetPercent",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetRequirementProgressPercent_ReturnValue",
+              "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetRequirementProgressPercent_ReturnValue",
+        "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetRequirementProgressPercent_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "ChallengeTrackerUI_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 24,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetRequirementProgressPercent_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetRequirementProgressPercent",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Challenge ID",
+                "owner": "ChallengeTrackerUI_C"
+              }
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_DoubleDouble_A_ImplicitCast",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 4,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetRequirementProgressPercent_ReturnValue",
+            "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_DoubleDouble_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GreaterEqual_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GreaterEqual_DoubleDouble_A_ImplicitCast",
+              "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1261,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_DoubleDouble_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ChallengeProgressBar0",
+          "owner": "ChallengeTrackerUI_C"
+        }
+      },
+      "Offset": 44,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetFillColorAndOpacity",
+        "Parameters": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -83,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 0.5149180293083191
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 0.12213899940252304
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "RequirementBox0",
+          "owner": "ChallengeTrackerUI_C"
+        }
+      },
+      "Offset": 16,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetVisibility",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsValidIndex_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -57
+        },
+        "Offset": 33,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsValidIndex_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsValidIndex",
+          "Parameters": [
+            {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "Requirements",
+                "owner": "ChallengeProgress"
+              },
+              "StructExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "ChallengeProgress",
+                  "owner": "ChallengeTrackerUI_C"
+                }
+              }
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2051,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsValidIndex_ReturnValue",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetRequirementDisplayText_ReturnValue_1",
+        "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetRequirementDisplayText_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "ChallengeTrackerUI_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 24,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetRequirementDisplayText_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetRequirementDisplayText",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Challenge ID",
+                "owner": "ChallengeTrackerUI_C"
+              }
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ChallengeTextRequirement1",
+          "owner": "ChallengeTrackerUI_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetRequirementDisplayText_ReturnValue_1",
+              "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetRequirementProgressPercent_ReturnValue_1",
+        "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetRequirementProgressPercent_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "ChallengeTrackerUI_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 24,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetRequirementProgressPercent_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetRequirementProgressPercent",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Challenge ID",
+                "owner": "ChallengeTrackerUI_C"
+              }
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ChallengeProgressBar1",
+          "owner": "ChallengeTrackerUI_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetPercent",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetRequirementProgressPercent_ReturnValue_1",
+              "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetRequirementProgressPercent_ReturnValue_1",
+        "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetRequirementProgressPercent_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "ChallengeTrackerUI_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 24,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetRequirementProgressPercent_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetRequirementProgressPercent",
+          "Parameters": [
+            {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Challenge ID",
+                "owner": "ChallengeTrackerUI_C"
+              }
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_DoubleDouble_A_ImplicitCast_1",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 4,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetRequirementProgressPercent_ReturnValue_1",
+            "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_DoubleDouble_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GreaterEqual_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GreaterEqual_DoubleDouble_A_ImplicitCast_1",
+              "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1869,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_DoubleDouble_ReturnValue_1",
+          "owner": "ExecuteUbergraph_ChallengeTrackerUI"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ChallengeProgressBar1",
+          "owner": "ChallengeTrackerUI_C"
+        }
+      },
+      "Offset": 44,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetFillColorAndOpacity",
+        "Parameters": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -83,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 0.5149180293083191
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 0.12213899940252304
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "RequirementBox1",
+          "owner": "ChallengeTrackerUI_C"
+        }
+      },
+      "Offset": 16,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetVisibility",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2089
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "RequirementBox0",
+          "owner": "ChallengeTrackerUI_C"
+        }
+      },
+      "Offset": 16,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetVisibility",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Invalid Requirement Index [0}"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -83,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1299
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "RequirementBox1",
+          "owner": "ChallengeTrackerUI_C"
+        }
+      },
+      "Offset": 16,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetVisibility",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

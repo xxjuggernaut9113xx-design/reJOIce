@@ -1,0 +1,63 @@
+{
+  "function": {
+    "name": "Get_CumButtonText_ColorAndOpacity",
+    "statements": 3,
+    "raw_fallback": false,
+    "calls": [],
+    "fields": [
+      "GlobalManagerRef",
+      "IsAllowedToCum?_93_467B5BBA4DB5A23E91E88E925D3F56A2",
+      "PlayerVariablesStruct",
+      "ReturnValue"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 45,
+      "BooleanExpression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "IsAllowedToCum?_93_467B5BBA4DB5A23E91E88E925D3F56A2",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManagerRef",
+              "owner": "UI_Manager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_CumButtonText_ColorAndOpacity"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

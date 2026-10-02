@@ -1,0 +1,49 @@
+{
+  "function": {
+    "name": "Refresh Challenge Displays",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_UI_Manager"
+    ],
+    "fields": [
+      "ChallengeID",
+      "K2Node_CustomEvent_ChallengeID_1"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_ChallengeID_1",
+        "owner": "ExecuteUbergraph_UI_Manager"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "ChallengeID",
+          "owner": "Refresh Challenge Displays"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_UI_Manager",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 15082
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

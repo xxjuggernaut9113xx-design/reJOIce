@@ -1,0 +1,192 @@
+{
+  "function": {
+    "name": "CheckEdgesUntilMercy",
+    "statements": 12,
+    "raw_fallback": false,
+    "calls": [
+      "LessEqual_IntInt",
+      "Subtract_IntInt"
+    ],
+    "fields": [
+      "CallFunc_LessEqual_IntInt_ReturnValue",
+      "CallFunc_Subtract_IntInt_ReturnValue",
+      "CurrentEdgesUntillNextMercy",
+      "IsMercySpawnable",
+      "IsMercySpawnable?",
+      "Temp_int_Variable"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_IntInt_ReturnValue",
+          "owner": "CheckEdgesUntilMercy"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "LessEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentEdgesUntillNextMercy",
+              "owner": "BP_EdgeManager_C"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 83,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_IntInt_ReturnValue",
+          "owner": "CheckEdgesUntilMercy"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "IsMercySpawnable",
+          "owner": "CheckEdgesUntilMercy"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "IsMercySpawnable?",
+          "owner": "CheckEdgesUntilMercy"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "IsMercySpawnable",
+          "owner": "CheckEdgesUntilMercy"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 195
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Subtract_IntInt_ReturnValue",
+        "owner": "CheckEdgesUntilMercy"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "CheckEdgesUntilMercy"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Subtract_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentEdgesUntillNextMercy",
+              "owner": "BP_EdgeManager_C"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Temp_int_Variable",
+        "owner": "CheckEdgesUntilMercy"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Variable",
+          "owner": "CheckEdgesUntilMercy"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Subtract_IntInt_ReturnValue",
+          "owner": "CheckEdgesUntilMercy"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CurrentEdgesUntillNextMercy",
+        "owner": "BP_EdgeManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CurrentEdgesUntillNextMercy",
+          "owner": "BP_EdgeManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Temp_int_Variable",
+          "owner": "CheckEdgesUntilMercy"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "IsMercySpawnable",
+          "owner": "CheckEdgesUntilMercy"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 59
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

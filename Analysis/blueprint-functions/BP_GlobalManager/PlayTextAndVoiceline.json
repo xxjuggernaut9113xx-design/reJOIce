@@ -1,0 +1,253 @@
+{
+  "function": {
+    "name": "PlayTextAndVoiceline",
+    "statements": 8,
+    "raw_fallback": false,
+    "calls": [
+      "Array_Random",
+      "PlaySound2D"
+    ],
+    "fields": [
+      "",
+      "CallFunc_Array_Random_OutIndex",
+      "CallFunc_Array_Random_OutItem",
+      "DealerTextDisplay",
+      "DialogueLineArray",
+      "LocalSoundCue",
+      "LocalTextVar",
+      "SoundBase_7_AF053D3244BF04B3D52C4A80C3C163B5",
+      "Text_6_61A489F941CC60585CE4F98BB0A7AB74",
+      "UIManager"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_LocalOutVariable",
+            "Variable": {
+              "field": "DialogueLineArray",
+              "owner": "PlayTextAndVoiceline"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem",
+              "owner": "PlayTextAndVoiceline"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex",
+              "owner": "PlayTextAndVoiceline"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "LocalSoundCue",
+          "owner": "PlayTextAndVoiceline"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "SoundBase_7_AF053D3244BF04B3D52C4A80C3C163B5",
+          "owner": "DialogueLine"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Array_Random_OutItem",
+            "owner": "PlayTextAndVoiceline"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -250
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_LocalOutVariable",
+            "Variable": {
+              "field": "DialogueLineArray",
+              "owner": "PlayTextAndVoiceline"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem",
+              "owner": "PlayTextAndVoiceline"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex",
+              "owner": "PlayTextAndVoiceline"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "LocalTextVar",
+        "owner": "PlayTextAndVoiceline"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "LocalTextVar",
+          "owner": "PlayTextAndVoiceline"
+        }
+      },
+      "Expression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Text_6_61A489F941CC60585CE4F98BB0A7AB74",
+          "owner": "DialogueLine"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Array_Random_OutItem",
+            "owner": "PlayTextAndVoiceline"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "DealerTextDisplay",
+        "owner": "UI_Manager_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "UIManager",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "DealerTextDisplay",
+          "owner": "UI_Manager_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "DealerTextDisplay",
+            "owner": "UI_Manager_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "LocalTextVar",
+          "owner": "PlayTextAndVoiceline"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -249
+      },
+      "Offset": 38,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlaySound2D",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "LocalSoundCue",
+              "owner": "PlayTextAndVoiceline"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

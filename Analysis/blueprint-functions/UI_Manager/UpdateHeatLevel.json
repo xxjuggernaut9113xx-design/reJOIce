@@ -1,0 +1,353 @@
+{
+  "function": {
+    "name": "UpdateHeatLevel",
+    "statements": 13,
+    "raw_fallback": false,
+    "calls": [
+      "Add_DoubleDouble",
+      "FClamp",
+      "Less_DoubleDouble",
+      "RandomFloatInRange",
+      "SetBackgroundColor"
+    ],
+    "fields": [
+      "",
+      "CallFunc_Add_DoubleDouble_ReturnValue",
+      "CallFunc_Add_DoubleDouble_ReturnValue_1",
+      "CallFunc_FClamp_ReturnValue",
+      "CallFunc_FClamp_ReturnValue_1",
+      "CallFunc_Less_DoubleDouble_ReturnValue",
+      "CallFunc_RandomFloatInRange_ReturnValue",
+      "CallFunc_RandomFloatInRange_ReturnValue_1",
+      "DrawButtonTextButton",
+      "HeatLevel"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "DrawButtonTextButton",
+          "owner": "UI_Manager_C"
+        }
+      },
+      "Offset": 44,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetBackgroundColor",
+        "Parameters": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -308,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 0.005475000012665987
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_DoubleDouble_ReturnValue",
+        "owner": "UpdateHeatLevel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_DoubleDouble_ReturnValue",
+          "owner": "UpdateHeatLevel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatLevel",
+              "owner": "UI_Manager_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FClamp_ReturnValue",
+        "owner": "UpdateHeatLevel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FClamp_ReturnValue",
+          "owner": "UpdateHeatLevel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FClamp",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Add_DoubleDouble_ReturnValue",
+              "owner": "UpdateHeatLevel"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 100.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "HeatLevel",
+        "owner": "UI_Manager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "HeatLevel",
+          "owner": "UI_Manager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FClamp_ReturnValue",
+          "owner": "UpdateHeatLevel"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomFloatInRange_ReturnValue_1",
+        "owner": "UpdateHeatLevel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomFloatInRange_ReturnValue_1",
+          "owner": "UpdateHeatLevel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomFloatInRange",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_DoubleDouble_ReturnValue",
+          "owner": "UpdateHeatLevel"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Less_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomFloatInRange_ReturnValue_1",
+              "owner": "UpdateHeatLevel"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": "+0"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 466,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_DoubleDouble_ReturnValue",
+          "owner": "UpdateHeatLevel"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomFloatInRange_ReturnValue",
+        "owner": "UpdateHeatLevel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomFloatInRange_ReturnValue",
+          "owner": "UpdateHeatLevel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomFloatInRange",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 10.0
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 20.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_DoubleDouble_ReturnValue_1",
+        "owner": "UpdateHeatLevel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_DoubleDouble_ReturnValue_1",
+          "owner": "UpdateHeatLevel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomFloatInRange_ReturnValue",
+              "owner": "UpdateHeatLevel"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatLevel",
+              "owner": "UI_Manager_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FClamp_ReturnValue_1",
+        "owner": "UpdateHeatLevel"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FClamp_ReturnValue_1",
+          "owner": "UpdateHeatLevel"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FClamp",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Add_DoubleDouble_ReturnValue_1",
+              "owner": "UpdateHeatLevel"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 100.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "HeatLevel",
+        "owner": "UI_Manager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "HeatLevel",
+          "owner": "UI_Manager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FClamp_ReturnValue_1",
+          "owner": "UpdateHeatLevel"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

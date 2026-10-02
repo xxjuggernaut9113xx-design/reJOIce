@@ -1,0 +1,49 @@
+{
+  "function": {
+    "name": "SpawnBeatSequence",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_UI_Manager"
+    ],
+    "fields": [
+      "K2Node_CustomEvent_Time_Interval",
+      "Time Interval"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_Time_Interval",
+        "owner": "ExecuteUbergraph_UI_Manager"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Time Interval",
+          "owner": "SpawnBeatSequence"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_UI_Manager",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 3596
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "function": {
+    "name": "StopAudioComponent",
+    "statements": 5,
+    "raw_fallback": false,
+    "calls": [
+      "IsValid",
+      "Stop"
+    ],
+    "fields": [
+      "",
+      "AudioComponent",
+      "CallFunc_IsValid_ReturnValue"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsValid_ReturnValue",
+          "owner": "StopAudioComponent"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "IsValid",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "AudioComponent",
+              "owner": "VoicelineSettingsMenu_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 79,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsValid_ReturnValue",
+          "owner": "StopAudioComponent"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AudioComponent",
+          "owner": "VoicelineSettingsMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "Stop",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

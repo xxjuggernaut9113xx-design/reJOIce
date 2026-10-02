@@ -1,0 +1,169 @@
+{
+  "function": {
+    "name": "Get_TabbedInventory_Widget_Visibility",
+    "statements": 10,
+    "raw_fallback": false,
+    "calls": [
+      "EqualEqual_ByteByte"
+    ],
+    "fields": [
+      "CallFunc_EqualEqual_ByteByte_ReturnValue",
+      "CurrentInventoryTab",
+      "GlobalManagerRef",
+      "ReturnValue",
+      "Visibility"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Visibility",
+        "owner": "Get_TabbedInventory_Widget_Visibility"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Visibility",
+          "owner": "Get_TabbedInventory_Widget_Visibility"
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_ByteByte_ReturnValue",
+          "owner": "Get_TabbedInventory_Widget_Visibility"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "EqualEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GlobalManagerRef",
+                "owner": "UI_Manager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CurrentInventoryTab",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentInventoryTab",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 139,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_ByteByte_ReturnValue",
+          "owner": "Get_TabbedInventory_Widget_Visibility"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Visibility",
+        "owner": "Get_TabbedInventory_Widget_Visibility"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Visibility",
+          "owner": "Get_TabbedInventory_Widget_Visibility"
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "Get_TabbedInventory_Widget_Visibility"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_TabbedInventory_Widget_Visibility"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Visibility",
+          "owner": "Get_TabbedInventory_Widget_Visibility"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 164
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Visibility",
+        "owner": "Get_TabbedInventory_Widget_Visibility"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Visibility",
+          "owner": "Get_TabbedInventory_Widget_Visibility"
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 1
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 107
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_TabbedInventory_Widget_Visibility"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "function": {
+    "name": "ApplyRawDogModifier_IfValid",
+    "statements": 7,
+    "raw_fallback": false,
+    "calls": [
+      "IsModifierActive?"
+    ],
+    "fields": [
+      "",
+      "CallFunc_IsModifierActive__Active_",
+      "CanUseItems?_95_5DA0FAB747CA4CDCE12D5CA50A03E14E",
+      "GlobalManager",
+      "PlayerVariablesStruct"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "GlobalManager",
+          "owner": "BP_DrawManager_C"
+        }
+      },
+      "Offset": 32,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "IsModifierActive?",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "Raw Dog"
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_IsModifierActive__Active_",
+              "owner": "ApplyRawDogModifier_IfValid"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 115,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsModifierActive__Active_",
+          "owner": "ApplyRawDogModifier_IfValid"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "CanUseItems?_95_5DA0FAB747CA4CDCE12D5CA50A03E14E",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 157
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "CanUseItems?_95_5DA0FAB747CA4CDCE12D5CA50A03E14E",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManager",
+              "owner": "BP_DrawManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

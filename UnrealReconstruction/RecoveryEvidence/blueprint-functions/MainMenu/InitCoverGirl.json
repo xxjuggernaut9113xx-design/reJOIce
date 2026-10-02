@@ -1,0 +1,977 @@
+{
+  "function": {
+    "name": "InitCoverGirl",
+    "statements": 26,
+    "raw_fallback": false,
+    "calls": [
+      "Array_Random",
+      "SetStyle"
+    ],
+    "fields": [
+      "",
+      "CallFunc_Array_Random_OutIndex",
+      "CallFunc_Array_Random_OutItem",
+      "ColorUseRule",
+      "CoverGirlButton",
+      "Disabled",
+      "DisabledForeground",
+      "DrawAs",
+      "Hovered",
+      "HoveredForeground",
+      "HoveredSlateSound",
+      "ImageSize",
+      "K2Node_MakeStruct_ButtonStyle",
+      "K2Node_MakeStruct_SlateBrush",
+      "K2Node_MakeStruct_SlateColor",
+      "Margin",
+      "Mirroring",
+      "Normal",
+      "NormalForeground",
+      "NormalPadding",
+      "OutlineSettings",
+      "PatreonCoverGirlArray",
+      "Pressed",
+      "PressedForeground",
+      "PressedPadding",
+      "PressedSlateSound",
+      "ResourceObject",
+      "SpecifiedColor",
+      "Tiling",
+      "TintColor"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SpecifiedColor",
+        "owner": "SlateColor"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "SpecifiedColor",
+          "owner": "SlateColor"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateColor",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -174,
+        "StructSize": 16,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ColorUseRule",
+        "owner": "SlateColor"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ColorUseRule",
+          "owner": "SlateColor"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateColor",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -87
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PatreonCoverGirlArray",
+              "owner": "MainMenu_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem",
+              "owner": "InitCoverGirl"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex",
+              "owner": "InitCoverGirl"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "DrawAs",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "DrawAs",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 3
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Tiling",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Tiling",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Mirroring",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Mirroring",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ImageSize",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ImageSize",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -181,
+        "StructSize": 8,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": 32.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 32.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Margin",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Margin",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -182,
+        "StructSize": 16,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "TintColor",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "TintColor",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeStruct_SlateColor",
+          "owner": "InitCoverGirl"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "OutlineSettings",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "OutlineSettings",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -184,
+        "StructSize": 64,
+        "Value": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -176,
+            "StructSize": 32,
+            "Value": [
+              {
+                "op": "EX_DoubleConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_DoubleConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_DoubleConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_DoubleConst",
+                "Value": 1.0
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -185,
+            "StructSize": 20,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -174,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              }
+            ]
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ResourceObject",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Random_OutItem",
+          "owner": "InitCoverGirl"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Normal",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Normal",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeStruct_SlateBrush",
+          "owner": "InitCoverGirl"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Hovered",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Hovered",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeStruct_SlateBrush",
+          "owner": "InitCoverGirl"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Pressed",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Pressed",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeStruct_SlateBrush",
+          "owner": "InitCoverGirl"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Disabled",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Disabled",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeStruct_SlateBrush",
+          "owner": "InitCoverGirl"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "NormalForeground",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "NormalForeground",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -185,
+        "StructSize": 20,
+        "Value": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -174,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              }
+            ]
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "HoveredForeground",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "HoveredForeground",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -185,
+        "StructSize": 20,
+        "Value": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -174,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              }
+            ]
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "PressedForeground",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "PressedForeground",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -185,
+        "StructSize": 20,
+        "Value": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -174,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              }
+            ]
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "DisabledForeground",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "DisabledForeground",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -185,
+        "StructSize": 20,
+        "Value": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -174,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              }
+            ]
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "NormalPadding",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "NormalPadding",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -182,
+        "StructSize": 16,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "PressedPadding",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "PressedPadding",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -182,
+        "StructSize": 16,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "PressedSlateSound",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "PressedSlateSound",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -186,
+        "StructSize": 32,
+        "Value": [
+          {
+            "op": "EX_NoObject"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "HoveredSlateSound",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "HoveredSlateSound",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "InitCoverGirl"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -186,
+        "StructSize": 32,
+        "Value": [
+          {
+            "op": "EX_NoObject"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CoverGirlButton",
+          "owner": "MainMenu_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetStyle",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeStruct_ButtonStyle",
+              "owner": "InitCoverGirl"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

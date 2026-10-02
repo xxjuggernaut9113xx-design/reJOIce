@@ -1,0 +1,307 @@
+{
+  "function": {
+    "name": "InitializeScreen",
+    "statements": 13,
+    "raw_fallback": false,
+    "calls": [
+      "Array_IsEmpty",
+      "InitializeBar",
+      "InitializePlayerCard",
+      "OnAllSourcesComplete__DelegateSignature",
+      "PlayNextSource",
+      "PrintString"
+    ],
+    "fields": [
+      "",
+      "CallFunc_Array_IsEmpty_ReturnValue",
+      "CurrentSourceIndex",
+      "DidPlayerWin?",
+      "InRewardData",
+      "OnAllSourcesComplete",
+      "RewardData",
+      "StartingLevel",
+      "StartingXP",
+      "UPSources",
+      "WBP_PlayerCard",
+      "WBP_XPBar",
+      "XPToNextLevel"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "WBP_PlayerCard",
+          "owner": "WBP_XPScreen_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "InitializePlayerCard",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "RewardData",
+        "owner": "WBP_XPScreen_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "RewardData",
+          "owner": "WBP_XPScreen_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "InRewardData",
+          "owner": "InitializeScreen"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CurrentSourceIndex",
+        "owner": "WBP_XPScreen_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CurrentSourceIndex",
+          "owner": "WBP_XPScreen_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "WBP_XPBar",
+          "owner": "WBP_XPScreen_C"
+        }
+      },
+      "Offset": 68,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "InitializeBar",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "StartingLevel",
+              "owner": "SessionRewardData"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "RewardData",
+                "owner": "WBP_XPScreen_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "StartingXP",
+              "owner": "SessionRewardData"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "RewardData",
+                "owner": "WBP_XPScreen_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "XPToNextLevel",
+              "owner": "SessionRewardData"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "RewardData",
+                "owner": "WBP_XPScreen_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "DidPlayerWin?",
+          "owner": "WBP_XPScreen_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "DidPlayerWin?",
+          "owner": "InitializeScreen"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue",
+          "owner": "InitializeScreen"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -51
+        },
+        "Offset": 28,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue",
+          "owner": "InitializeScreen"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_IsEmpty",
+          "Parameters": [
+            {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "UPSources",
+                "owner": "SessionRewardData"
+              },
+              "StructExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "RewardData",
+                  "owner": "WBP_XPScreen_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 394,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_IsEmpty_ReturnValue",
+          "owner": "InitializeScreen"
+        }
+      }
+    },
+    {
+      "op": "EX_CallMulticastDelegate",
+      "Delegate": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "OnAllSourcesComplete",
+          "owner": "WBP_XPScreen_C"
+        }
+      },
+      "StackNode": "OnAllSourcesComplete__DelegateSignature",
+      "Parameters": []
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "XP Sources Empty, Calling Complete"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -82,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 408
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "PlayNextSource",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

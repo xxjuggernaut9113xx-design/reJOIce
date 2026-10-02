@@ -1,0 +1,227 @@
+{
+  "function": {
+    "name": "PlayNextSource",
+    "statements": 11,
+    "raw_fallback": false,
+    "calls": [
+      "Array_Length",
+      "Initialize",
+      "Less_IntInt",
+      "OnAllSourcesComplete__DelegateSignature",
+      "SetVisibility"
+    ],
+    "fields": [
+      "",
+      "CallFunc_Array_Length_ReturnValue",
+      "CallFunc_Less_IntInt_ReturnValue",
+      "CurrentSourceIndex",
+      "OnAllSourcesComplete",
+      "RewardData",
+      "XBP_XPSourceText",
+      "XPSources",
+      "bWaitingForLevelUp"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 19,
+      "BooleanExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "bWaitingForLevelUp",
+          "owner": "WBP_XPScreen_C"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 265
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Array_Length_ReturnValue",
+        "owner": "PlayNextSource"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Length_ReturnValue",
+          "owner": "PlayNextSource"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -51
+        },
+        "Offset": 28,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Length_ReturnValue",
+          "owner": "PlayNextSource"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Length",
+          "Parameters": [
+            {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "XPSources",
+                "owner": "SessionRewardData"
+              },
+              "StructExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "RewardData",
+                  "owner": "WBP_XPScreen_C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue",
+          "owner": "PlayNextSource"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Less_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSourceIndex",
+              "owner": "WBP_XPScreen_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Length_ReturnValue",
+              "owner": "PlayNextSource"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 246,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Less_IntInt_ReturnValue",
+          "owner": "PlayNextSource"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "XBP_XPSourceText",
+          "owner": "WBP_XPScreen_C"
+        }
+      },
+      "Offset": 16,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetVisibility",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "XBP_XPSourceText",
+          "owner": "WBP_XPScreen_C"
+        }
+      },
+      "Offset": 42,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "Initialize",
+        "Parameters": [
+          {
+            "op": "EX_ArrayGetByRef",
+            "ArrayVariable": {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "XPSources",
+                "owner": "SessionRewardData"
+              },
+              "StructExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "RewardData",
+                  "owner": "WBP_XPScreen_C"
+                }
+              }
+            },
+            "ArrayIndex": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSourceIndex",
+                "owner": "WBP_XPScreen_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 265
+    },
+    {
+      "op": "EX_CallMulticastDelegate",
+      "Delegate": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "OnAllSourcesComplete",
+          "owner": "WBP_XPScreen_C"
+        }
+      },
+      "StackNode": "OnAllSourcesComplete__DelegateSignature",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

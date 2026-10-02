@@ -1,0 +1,429 @@
+{
+  "function": {
+    "name": "SetButtonToggleWSound",
+    "statements": 14,
+    "raw_fallback": false,
+    "calls": [
+      "PlaySound2D",
+      "SetColorAndOpacity",
+      "SetText"
+    ],
+    "fields": [
+      "",
+      "ButtonEnabled?",
+      "ButtonText",
+      "ColorUseRule",
+      "K2Node_MakeStruct_SlateColor",
+      "K2Node_MakeStruct_SlateColor_1",
+      "SpecifiedColor"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 293,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "ButtonEnabled?",
+          "owner": "SetButtonToggleWSound"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ButtonText",
+          "owner": "ModifierCardEntryWidget_C"
+        }
+      },
+      "Offset": 61,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "Enabled"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "D167714D42DB85BD88D09295B745C3A8"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SpecifiedColor",
+        "owner": "SlateColor"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "SpecifiedColor",
+          "owner": "SlateColor"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateColor_1",
+            "owner": "SetButtonToggleWSound"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -76,
+        "StructSize": 16,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.5209959745407104
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.12477199733257294
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ColorUseRule",
+        "owner": "SlateColor"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ColorUseRule",
+          "owner": "SlateColor"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateColor_1",
+            "owner": "SetButtonToggleWSound"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ButtonText",
+          "owner": "ModifierCardEntryWidget_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetColorAndOpacity",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeStruct_SlateColor_1",
+              "owner": "SetButtonToggleWSound"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -50
+      },
+      "Offset": 38,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlaySound2D",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          },
+          {
+            "op": "EX_ObjectConst",
+            "Value": -85
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.5
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.5
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.10000000149011612
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 568
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ButtonText",
+          "owner": "ModifierCardEntryWidget_C"
+        }
+      },
+      "Offset": 62,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "Disabled"
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "18C3494E4AB7104BEB306E8EA1CA21E3"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SpecifiedColor",
+        "owner": "SlateColor"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "SpecifiedColor",
+          "owner": "SlateColor"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateColor",
+            "owner": "SetButtonToggleWSound"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -76,
+        "StructSize": 16,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.015208999626338482
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.01298299990594387
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ColorUseRule",
+        "owner": "SlateColor"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ColorUseRule",
+          "owner": "SlateColor"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateColor",
+            "owner": "SetButtonToggleWSound"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ButtonText",
+          "owner": "ModifierCardEntryWidget_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetColorAndOpacity",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeStruct_SlateColor",
+              "owner": "SetButtonToggleWSound"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -50
+      },
+      "Offset": 38,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlaySound2D",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          },
+          {
+            "op": "EX_ObjectConst",
+            "Value": -84
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.5
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.8500000238418579
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

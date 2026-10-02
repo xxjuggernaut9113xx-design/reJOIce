@@ -1,0 +1,49 @@
+{
+  "function": {
+    "name": "PostEdgeSlowEventCheck",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [],
+    "fields": [
+      "IsEligible",
+      "IsEligibleReturn"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "IsEligibleReturn",
+          "owner": "PostEdgeSlowEventCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "IsEligible",
+          "owner": "PostEdgeSlowEventCheck"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

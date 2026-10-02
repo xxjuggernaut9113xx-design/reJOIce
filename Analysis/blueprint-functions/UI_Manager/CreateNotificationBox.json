@@ -1,0 +1,81 @@
+{
+  "function": {
+    "name": "CreateNotificationBox",
+    "statements": 6,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_UI_Manager"
+    ],
+    "fields": [
+      "Description",
+      "Icon",
+      "K2Node_CustomEvent_Description",
+      "K2Node_CustomEvent_Icon",
+      "K2Node_CustomEvent_Title",
+      "Title"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_Icon",
+        "owner": "ExecuteUbergraph_UI_Manager"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Icon",
+          "owner": "CreateNotificationBox"
+        }
+      }
+    },
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_Title",
+        "owner": "ExecuteUbergraph_UI_Manager"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Title",
+          "owner": "CreateNotificationBox"
+        }
+      }
+    },
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_Description",
+        "owner": "ExecuteUbergraph_UI_Manager"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Description",
+          "owner": "CreateNotificationBox"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_UI_Manager",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 14001
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

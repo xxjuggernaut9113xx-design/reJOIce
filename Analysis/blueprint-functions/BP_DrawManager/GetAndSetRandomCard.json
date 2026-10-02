@@ -1,0 +1,49 @@
+{
+  "function": {
+    "name": "GetAndSetRandomCard",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_BP_DrawManager"
+    ],
+    "fields": [
+      "Card Array",
+      "K2Node_CustomEvent_Card_Array_1"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_Card_Array_1",
+        "owner": "ExecuteUbergraph_BP_DrawManager"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "Card Array",
+          "owner": "GetAndSetRandomCard"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_BP_DrawManager",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 112
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

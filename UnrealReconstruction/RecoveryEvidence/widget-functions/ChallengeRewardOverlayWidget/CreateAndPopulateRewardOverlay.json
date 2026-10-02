@@ -1,0 +1,50 @@
+{
+  "function": {
+    "name": "CreateAndPopulateRewardOverlay",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "CheckandPlayRewardAnim"
+    ],
+    "fields": [
+      "Rewards"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Rewards",
+        "owner": "ChallengeRewardOverlayWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Rewards",
+          "owner": "ChallengeRewardOverlayWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "Rewards",
+          "owner": "CreateAndPopulateRewardOverlay"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "CheckandPlayRewardAnim",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

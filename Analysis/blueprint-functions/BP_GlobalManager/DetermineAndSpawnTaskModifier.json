@@ -1,0 +1,4495 @@
+{
+  "function": {
+    "name": "DetermineAndSpawnTaskModifier",
+    "statements": 231,
+    "raw_fallback": false,
+    "calls": [
+      "CreateNotificationBox",
+      "NotEqual_ByteByte",
+      "NotEqual_IntInt",
+      "RandomIntegerInRange",
+      "SetStrokeZoneBaseOnly",
+      "SetStrokeZoneFullRange",
+      "SetStrokeZoneHeadOnly"
+    ],
+    "fields": [
+      "",
+      "AdultToyManager",
+      "CallFunc_RandomIntegerInRange_ReturnValue",
+      "CallFunc_RandomIntegerInRange_ReturnValue_1",
+      "CallFunc_RandomIntegerInRange_ReturnValue_2",
+      "CallFunc_RandomIntegerInRange_ReturnValue_3",
+      "CallFunc_RandomIntegerInRange_ReturnValue_4",
+      "CallFunc_RandomIntegerInRange_ReturnValue_5",
+      "CallFunc_RandomIntegerInRange_ReturnValue_6",
+      "CallFunc_RandomIntegerInRange_ReturnValue_7",
+      "CurrentSave",
+      "GameInstance",
+      "HeatCategory",
+      "K2Node_SwitchEnum_CmpSuccess",
+      "K2Node_SwitchInteger_CmpSuccess",
+      "K2Node_SwitchInteger_CmpSuccess_1",
+      "K2Node_SwitchInteger_CmpSuccess_2",
+      "K2Node_SwitchInteger_CmpSuccess_3",
+      "K2Node_SwitchInteger_CmpSuccess_4",
+      "K2Node_SwitchInteger_CmpSuccess_5",
+      "K2Node_SwitchInteger_CmpSuccess_6",
+      "K2Node_SwitchInteger_CmpSuccess_7",
+      "Modifier_BallRubbingEnabled?",
+      "Modifier_HoldBreathEnabled?",
+      "Modifier_NippleRubbingEnabled?",
+      "NippleTitleText",
+      "TaskModifiersEnabled?",
+      "UIManager"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "NippleTitleText",
+        "owner": "DetermineAndSpawnTaskModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "NippleTitleText",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": "Rub Your Nipple"
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 6880,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "TaskModifiersEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "TaskModifiersEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatCategory",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 233,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatCategory",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1990,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatCategory",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2849,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6880
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+        "owner": "DetermineAndSpawnTaskModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 16
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1514,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 5
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 6
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 7
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 8
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3660,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 9
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3660,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 10
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3660,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 11
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3660,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 12
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3660,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 13
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 14
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4410,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 15
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4410,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_5",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 16
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4410,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_5",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue_4",
+        "owner": "DetermineAndSpawnTaskModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue_4",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 7
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_4",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_4",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 5302,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_4",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_4",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_4",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 5447,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_4",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_4",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_4",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 5545,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_4",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_4",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_4",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 5659,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_4",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_4",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_4",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 5756,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_4",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_4",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_4",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 5
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 5871,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_4",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_4",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_4",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 6
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 5976,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_4",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_4",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_4",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 7
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 6087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_4",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6880
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue_6",
+        "owner": "DetermineAndSpawnTaskModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue_6",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 5
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_6",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_6",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1845,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_6",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_6",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_6",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 6191,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_6",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_6",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_6",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 6287,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_6",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_6",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_6",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 6378,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_6",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_6",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_6",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 6485,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_6",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_6",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_6",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 5
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 6585,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_6",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6880
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 64,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3875
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Shaft - Normal"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Stroke your shaft only."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AdultToyManager",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AdultToyManager",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "Offset": 10,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetStrokeZoneBaseOnly",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6880
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+        "owner": "DetermineAndSpawnTaskModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 16
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1514,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1514,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1514,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1514,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1514,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 5
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 6
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 7
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 8
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 9
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 10
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 11
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3660,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 12
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3660,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 13
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3660,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 14
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4410,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 15
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4410,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 16
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4410,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_2",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6880
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+        "owner": "DetermineAndSpawnTaskModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 15
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1514,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1514,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1514,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1514,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1514,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 5
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1514,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 6
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1514,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 7
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1514,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 8
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1514,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 9
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 10
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 11
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 12
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 13
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3660,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 14
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4410,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 15
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4410,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_1",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6880
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue_3",
+        "owner": "DetermineAndSpawnTaskModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue_3",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 5
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_3",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_3",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4324,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_3",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_3",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_3",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4236,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_3",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_3",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_3",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4143,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_3",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_3",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_3",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3991,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_3",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_3",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_3",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 6684,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_3",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_3",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_3",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 5
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 6777,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_3",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6880
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 71,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3882
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Tip - Underhand"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "stroke your tip underhandedly"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AdultToyManager",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AdultToyManager",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "Offset": 10,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetStrokeZoneHeadOnly",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6880
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 66,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3878
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Tip - Tight"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "stroke just your tip tightly"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4084
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 61,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3866
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Tip - Loose"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "stroke your tip loosely"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4084
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 59,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3864
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Tip - Normal"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Stroke just your tip"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4084
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+        "owner": "DetermineAndSpawnTaskModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4925,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4762,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 4597,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6880
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Modifier_BallRubbingEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Modifier_BallRubbingEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 80,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3862
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Rub Your Balls"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Gently rub your balls while you stroke."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6880
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Modifier_HoldBreathEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Modifier_HoldBreathEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 78,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3861
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Hold Your Breath"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Hold your breath while you stroke. "
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6880
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1087,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Modifier_NippleRubbingEnabled?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Modifier_NippleRubbingEnabled?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue_7",
+        "owner": "DetermineAndSpawnTaskModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue_7",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_7",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_7",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 5256,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_7",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_7",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomIntegerInRange_ReturnValue_7",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 5122,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchInteger_CmpSuccess_7",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6880
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "NippleTitleText",
+        "owner": "DetermineAndSpawnTaskModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "NippleTitleText",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": "Rub your left nipple"
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 67,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3872
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "NippleTitleText",
+              "owner": "DetermineAndSpawnTaskModifier"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Rub Your Nipple while you stroke."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6880
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "NippleTitleText",
+        "owner": "DetermineAndSpawnTaskModifier"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "NippleTitleText",
+          "owner": "DetermineAndSpawnTaskModifier"
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": "Rub your right nipple"
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 5162
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 64,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3860
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Full - Normal"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Stroke your entire cock."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AdultToyManager",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AdultToyManager",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "Offset": 10,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetStrokeZoneFullRange",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 6880
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 71,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3865
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Full - Loose"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Loosely stroke your entire cock."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 5388
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 87,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3868
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Full - Loose Twist"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "stroke your entire cock loosely in a twist"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 5388
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 70,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3877
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Full - Tight"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "stroke your entire cock tightly"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 5388
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 88,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3880
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Full - Tight Twist"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "tightly stroke your entire cock in a spiral"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 5388
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 78,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3881
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Full - Underhand"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Stroke your entire cock underhanded"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 5388
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 84,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3859
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Full - Two Fingers"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "form a ring and stroke your entire cock"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 5388
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 77,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3870
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Full - Rough"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "stroke your entire cock hard and rough"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 5388
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 69,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3867
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Shaft - Loose"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "loose stroking on your shaft."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1931
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 64,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3879
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Shaft - Tight"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Firm grip on your shaft."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1931
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 80,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3873
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Shaft - Two Fingers"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Form a ring and stroke your shaft."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1931
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 73,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3874
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Shaft - Underhand"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Stroke your shaft underhanded"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1931
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 72,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3876
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Shaft - Rough"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Stroke your shaft hard and rough"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1931
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 66,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3871
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Tip - Rough"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "stroke your tip hard & rough"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4084
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UIManager",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 76,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "CreateNotificationBox",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -3863
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Tip - Two FIngers"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "form a ring and stroke your tip."
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 4084
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

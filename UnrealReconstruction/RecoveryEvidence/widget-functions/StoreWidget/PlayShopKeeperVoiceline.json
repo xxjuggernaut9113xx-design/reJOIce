@@ -1,0 +1,665 @@
+{
+  "function": {
+    "name": "PlayShopKeeperVoiceline",
+    "statements": 24,
+    "raw_fallback": false,
+    "calls": [
+      "ApplyVolumeScalar",
+      "Array_Random",
+      "NotEqual_ByteByte",
+      "SpawnSound2D"
+    ],
+    "fields": [
+      "",
+      "As BP Global Manager",
+      "CallFunc_ApplyVolumeScalar_Output",
+      "CallFunc_Array_Random_OutIndex",
+      "CallFunc_Array_Random_OutIndex_1",
+      "CallFunc_Array_Random_OutIndex_2",
+      "CallFunc_Array_Random_OutItem",
+      "CallFunc_Array_Random_OutItem_1",
+      "CallFunc_Array_Random_OutItem_2",
+      "CallFunc_SpawnSound2D_ReturnValue",
+      "CallFunc_SpawnSound2D_ReturnValue_1",
+      "CallFunc_SpawnSound2D_ReturnValue_2",
+      "CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast",
+      "CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast_1",
+      "CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast_2",
+      "K2Node_SwitchEnum_CmpSuccess",
+      "ShopKeeperStageENUM",
+      "Stage1ShopVoicelines",
+      "Stage2ShopVoicelines",
+      "Stage3ShopVoicelines",
+      "VoicelineAudioComponent",
+      "Voicelines Volume"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP Global Manager",
+          "owner": "StoreWidget_C"
+        }
+      },
+      "Offset": 63,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "ApplyVolumeScalar",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "As BP Global Manager",
+                "owner": "StoreWidget_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "Voicelines Volume",
+              "owner": "BP_GlobalManager_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "Voicelines Volume",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_ApplyVolumeScalar_Output",
+              "owner": "PlayShopKeeperVoiceline"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayShopKeeperVoiceline"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ShopKeeperStageENUM",
+              "owner": "StoreWidget_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 225,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayShopKeeperVoiceline"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayShopKeeperVoiceline"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ShopKeeperStageENUM",
+              "owner": "StoreWidget_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 411,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayShopKeeperVoiceline"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayShopKeeperVoiceline"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ShopKeeperStageENUM",
+              "owner": "StoreWidget_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 597,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "PlayShopKeeperVoiceline"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 778
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -87
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Stage1ShopVoicelines",
+              "owner": "StoreWidget_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem_2",
+              "owner": "PlayShopKeeperVoiceline"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex_2",
+              "owner": "PlayShopKeeperVoiceline"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast_1",
+          "owner": "PlayShopKeeperVoiceline"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_ApplyVolumeScalar_Output",
+            "owner": "PlayShopKeeperVoiceline"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_2",
+          "owner": "PlayShopKeeperVoiceline"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -80
+        },
+        "Offset": 42,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_2",
+          "owner": "PlayShopKeeperVoiceline"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "SpawnSound2D",
+          "Parameters": [
+            {
+              "op": "EX_Self"
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Random_OutItem_2",
+                "owner": "PlayShopKeeperVoiceline"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast_1",
+                "owner": "PlayShopKeeperVoiceline"
+              }
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_NoObject"
+            },
+            {
+              "op": "EX_False"
+            },
+            {
+              "op": "EX_True"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "VoicelineAudioComponent",
+          "owner": "StoreWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_2",
+          "owner": "PlayShopKeeperVoiceline"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 778
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -87
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Stage2ShopVoicelines",
+              "owner": "StoreWidget_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem_1",
+              "owner": "PlayShopKeeperVoiceline"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex_1",
+              "owner": "PlayShopKeeperVoiceline"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast",
+          "owner": "PlayShopKeeperVoiceline"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_ApplyVolumeScalar_Output",
+            "owner": "PlayShopKeeperVoiceline"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_1",
+          "owner": "PlayShopKeeperVoiceline"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -80
+        },
+        "Offset": 42,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_1",
+          "owner": "PlayShopKeeperVoiceline"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "SpawnSound2D",
+          "Parameters": [
+            {
+              "op": "EX_Self"
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Random_OutItem_1",
+                "owner": "PlayShopKeeperVoiceline"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast",
+                "owner": "PlayShopKeeperVoiceline"
+              }
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_NoObject"
+            },
+            {
+              "op": "EX_False"
+            },
+            {
+              "op": "EX_True"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "VoicelineAudioComponent",
+          "owner": "StoreWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue_1",
+          "owner": "PlayShopKeeperVoiceline"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 778
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -87
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "Stage3ShopVoicelines",
+              "owner": "StoreWidget_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem",
+              "owner": "PlayShopKeeperVoiceline"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex",
+              "owner": "PlayShopKeeperVoiceline"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast_2",
+          "owner": "PlayShopKeeperVoiceline"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_ApplyVolumeScalar_Output",
+            "owner": "PlayShopKeeperVoiceline"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue",
+          "owner": "PlayShopKeeperVoiceline"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -80
+        },
+        "Offset": 42,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue",
+          "owner": "PlayShopKeeperVoiceline"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "SpawnSound2D",
+          "Parameters": [
+            {
+              "op": "EX_Self"
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_Array_Random_OutItem",
+                "owner": "PlayShopKeeperVoiceline"
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_SpawnSound2D_VolumeMultiplier_ImplicitCast_2",
+                "owner": "PlayShopKeeperVoiceline"
+              }
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_NoObject"
+            },
+            {
+              "op": "EX_False"
+            },
+            {
+              "op": "EX_True"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "VoicelineAudioComponent",
+          "owner": "StoreWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnSound2D_ReturnValue",
+          "owner": "PlayShopKeeperVoiceline"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

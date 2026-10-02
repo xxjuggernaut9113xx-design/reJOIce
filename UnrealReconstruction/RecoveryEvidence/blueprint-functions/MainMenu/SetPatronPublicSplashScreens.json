@@ -1,0 +1,2513 @@
+{
+  "function": {
+    "name": "SetPatronPublicSplashScreens",
+    "statements": 12,
+    "raw_fallback": false,
+    "calls": [
+      "RemoveFromParent",
+      "SetStyle"
+    ],
+    "fields": [
+      "",
+      "As BP CHGame Instance",
+      "CurrentSave",
+      "HasSeenSplashes?",
+      "IsPatron?",
+      "NewUpdateSplashButton",
+      "NonPatronSplash",
+      "PatronSplash",
+      "TutorialSplashButton",
+      "bHasUObject",
+      "bIsDynamicallyLoaded"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "NonPatronSplash",
+        "owner": "SetPatronPublicSplashScreens"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "NonPatronSplash",
+          "owner": "SetPatronPublicSplashScreens"
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -180,
+        "StructSize": 1120,
+        "Value": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -183,
+            "StructSize": 224,
+            "Value": [
+              {
+                "op": "EX_BitFieldConst",
+                "Property": {
+                  "field": "bIsDynamicallyLoaded",
+                  "owner": "SlateBrush"
+                },
+                "Value": 0
+              },
+              {
+                "op": "EX_BitFieldConst",
+                "Property": {
+                  "field": "bHasUObject",
+                  "owner": "SlateBrush"
+                },
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 3
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -181,
+                "StructSize": 8,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 32.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 32.0
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -182,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -185,
+                "StructSize": 20,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -174,
+                    "StructSize": 16,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_ByteConst",
+                    "Value": 0
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -184,
+                "StructSize": 64,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -176,
+                    "StructSize": 32,
+                    "Value": [
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": 1.0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -185,
+                    "StructSize": 20,
+                    "Value": [
+                      {
+                        "op": "EX_StructConst",
+                        "Struct": -174,
+                        "StructSize": 16,
+                        "Value": [
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          }
+                        ]
+                      },
+                      {
+                        "op": "EX_ByteConst",
+                        "Value": 0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_ByteConst",
+                    "Value": 1
+                  },
+                  {
+                    "op": "EX_False"
+                  }
+                ]
+              },
+              {
+                "op": "EX_ObjectConst",
+                "Value": -238
+              },
+              {
+                "op": "EX_NameConst",
+                "Value": "None"
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -173,
+                "StructSize": 20,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -175,
+                    "StructSize": 8,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -175,
+                    "StructSize": 8,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_False"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -183,
+            "StructSize": 224,
+            "Value": [
+              {
+                "op": "EX_BitFieldConst",
+                "Property": {
+                  "field": "bIsDynamicallyLoaded",
+                  "owner": "SlateBrush"
+                },
+                "Value": 0
+              },
+              {
+                "op": "EX_BitFieldConst",
+                "Property": {
+                  "field": "bHasUObject",
+                  "owner": "SlateBrush"
+                },
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 3
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -181,
+                "StructSize": 8,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 32.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 32.0
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -182,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -185,
+                "StructSize": 20,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -174,
+                    "StructSize": 16,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_ByteConst",
+                    "Value": 0
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -184,
+                "StructSize": 64,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -176,
+                    "StructSize": 32,
+                    "Value": [
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": 1.0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -185,
+                    "StructSize": 20,
+                    "Value": [
+                      {
+                        "op": "EX_StructConst",
+                        "Struct": -174,
+                        "StructSize": 16,
+                        "Value": [
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          }
+                        ]
+                      },
+                      {
+                        "op": "EX_ByteConst",
+                        "Value": 0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_ByteConst",
+                    "Value": 1
+                  },
+                  {
+                    "op": "EX_False"
+                  }
+                ]
+              },
+              {
+                "op": "EX_ObjectConst",
+                "Value": -238
+              },
+              {
+                "op": "EX_NameConst",
+                "Value": "None"
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -173,
+                "StructSize": 20,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -175,
+                    "StructSize": 8,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -175,
+                    "StructSize": 8,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_False"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -183,
+            "StructSize": 224,
+            "Value": [
+              {
+                "op": "EX_BitFieldConst",
+                "Property": {
+                  "field": "bIsDynamicallyLoaded",
+                  "owner": "SlateBrush"
+                },
+                "Value": 0
+              },
+              {
+                "op": "EX_BitFieldConst",
+                "Property": {
+                  "field": "bHasUObject",
+                  "owner": "SlateBrush"
+                },
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 3
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -181,
+                "StructSize": 8,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 32.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 32.0
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -182,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -185,
+                "StructSize": 20,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -174,
+                    "StructSize": 16,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_ByteConst",
+                    "Value": 0
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -184,
+                "StructSize": 64,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -176,
+                    "StructSize": 32,
+                    "Value": [
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": 1.0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -185,
+                    "StructSize": 20,
+                    "Value": [
+                      {
+                        "op": "EX_StructConst",
+                        "Struct": -174,
+                        "StructSize": 16,
+                        "Value": [
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          }
+                        ]
+                      },
+                      {
+                        "op": "EX_ByteConst",
+                        "Value": 0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_ByteConst",
+                    "Value": 1
+                  },
+                  {
+                    "op": "EX_False"
+                  }
+                ]
+              },
+              {
+                "op": "EX_ObjectConst",
+                "Value": -238
+              },
+              {
+                "op": "EX_NameConst",
+                "Value": "None"
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -173,
+                "StructSize": 20,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -175,
+                    "StructSize": 8,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -175,
+                    "StructSize": 8,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_False"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -183,
+            "StructSize": 224,
+            "Value": [
+              {
+                "op": "EX_BitFieldConst",
+                "Property": {
+                  "field": "bIsDynamicallyLoaded",
+                  "owner": "SlateBrush"
+                },
+                "Value": 0
+              },
+              {
+                "op": "EX_BitFieldConst",
+                "Property": {
+                  "field": "bHasUObject",
+                  "owner": "SlateBrush"
+                },
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -181,
+                "StructSize": 8,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -182,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -185,
+                "StructSize": 20,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -174,
+                    "StructSize": 16,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_ByteConst",
+                    "Value": 0
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -184,
+                "StructSize": 64,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -176,
+                    "StructSize": 32,
+                    "Value": [
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": 1.0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -185,
+                    "StructSize": 20,
+                    "Value": [
+                      {
+                        "op": "EX_StructConst",
+                        "Struct": -174,
+                        "StructSize": 16,
+                        "Value": [
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          }
+                        ]
+                      },
+                      {
+                        "op": "EX_ByteConst",
+                        "Value": 0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_ByteConst",
+                    "Value": 1
+                  },
+                  {
+                    "op": "EX_False"
+                  }
+                ]
+              },
+              {
+                "op": "EX_NoObject"
+              },
+              {
+                "op": "EX_NameConst",
+                "Value": "None"
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -173,
+                "StructSize": 20,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -175,
+                    "StructSize": 8,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -175,
+                    "StructSize": 8,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_False"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -185,
+            "StructSize": 20,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -174,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  }
+                ]
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 2
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -185,
+            "StructSize": 20,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -174,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  }
+                ]
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 2
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -185,
+            "StructSize": 20,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -174,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  }
+                ]
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 2
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -185,
+            "StructSize": 20,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -174,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  }
+                ]
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 2
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -182,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -182,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -186,
+            "StructSize": 32,
+            "Value": [
+              {
+                "op": "EX_NoObject"
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -186,
+            "StructSize": 32,
+            "Value": [
+              {
+                "op": "EX_NoObject"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "PatronSplash",
+        "owner": "SetPatronPublicSplashScreens"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "PatronSplash",
+          "owner": "SetPatronPublicSplashScreens"
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -180,
+        "StructSize": 1120,
+        "Value": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -183,
+            "StructSize": 224,
+            "Value": [
+              {
+                "op": "EX_BitFieldConst",
+                "Property": {
+                  "field": "bIsDynamicallyLoaded",
+                  "owner": "SlateBrush"
+                },
+                "Value": 0
+              },
+              {
+                "op": "EX_BitFieldConst",
+                "Property": {
+                  "field": "bHasUObject",
+                  "owner": "SlateBrush"
+                },
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 3
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -181,
+                "StructSize": 8,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 32.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 32.0
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -182,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -185,
+                "StructSize": 20,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -174,
+                    "StructSize": 16,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_ByteConst",
+                    "Value": 0
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -184,
+                "StructSize": 64,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -176,
+                    "StructSize": 32,
+                    "Value": [
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": 1.0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -185,
+                    "StructSize": 20,
+                    "Value": [
+                      {
+                        "op": "EX_StructConst",
+                        "Struct": -174,
+                        "StructSize": 16,
+                        "Value": [
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          }
+                        ]
+                      },
+                      {
+                        "op": "EX_ByteConst",
+                        "Value": 0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_ByteConst",
+                    "Value": 1
+                  },
+                  {
+                    "op": "EX_False"
+                  }
+                ]
+              },
+              {
+                "op": "EX_ObjectConst",
+                "Value": -237
+              },
+              {
+                "op": "EX_NameConst",
+                "Value": "None"
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -173,
+                "StructSize": 20,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -175,
+                    "StructSize": 8,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -175,
+                    "StructSize": 8,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_False"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -183,
+            "StructSize": 224,
+            "Value": [
+              {
+                "op": "EX_BitFieldConst",
+                "Property": {
+                  "field": "bIsDynamicallyLoaded",
+                  "owner": "SlateBrush"
+                },
+                "Value": 0
+              },
+              {
+                "op": "EX_BitFieldConst",
+                "Property": {
+                  "field": "bHasUObject",
+                  "owner": "SlateBrush"
+                },
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 3
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -181,
+                "StructSize": 8,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 32.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 32.0
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -182,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -185,
+                "StructSize": 20,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -174,
+                    "StructSize": 16,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_ByteConst",
+                    "Value": 0
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -184,
+                "StructSize": 64,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -176,
+                    "StructSize": 32,
+                    "Value": [
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": 1.0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -185,
+                    "StructSize": 20,
+                    "Value": [
+                      {
+                        "op": "EX_StructConst",
+                        "Struct": -174,
+                        "StructSize": 16,
+                        "Value": [
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          }
+                        ]
+                      },
+                      {
+                        "op": "EX_ByteConst",
+                        "Value": 0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_ByteConst",
+                    "Value": 1
+                  },
+                  {
+                    "op": "EX_False"
+                  }
+                ]
+              },
+              {
+                "op": "EX_ObjectConst",
+                "Value": -237
+              },
+              {
+                "op": "EX_NameConst",
+                "Value": "None"
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -173,
+                "StructSize": 20,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -175,
+                    "StructSize": 8,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -175,
+                    "StructSize": 8,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_False"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -183,
+            "StructSize": 224,
+            "Value": [
+              {
+                "op": "EX_BitFieldConst",
+                "Property": {
+                  "field": "bIsDynamicallyLoaded",
+                  "owner": "SlateBrush"
+                },
+                "Value": 0
+              },
+              {
+                "op": "EX_BitFieldConst",
+                "Property": {
+                  "field": "bHasUObject",
+                  "owner": "SlateBrush"
+                },
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 3
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -181,
+                "StructSize": 8,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 32.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 32.0
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -182,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -185,
+                "StructSize": 20,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -174,
+                    "StructSize": 16,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_ByteConst",
+                    "Value": 0
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -184,
+                "StructSize": 64,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -176,
+                    "StructSize": 32,
+                    "Value": [
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": 1.0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -185,
+                    "StructSize": 20,
+                    "Value": [
+                      {
+                        "op": "EX_StructConst",
+                        "Struct": -174,
+                        "StructSize": 16,
+                        "Value": [
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          }
+                        ]
+                      },
+                      {
+                        "op": "EX_ByteConst",
+                        "Value": 0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_ByteConst",
+                    "Value": 1
+                  },
+                  {
+                    "op": "EX_False"
+                  }
+                ]
+              },
+              {
+                "op": "EX_ObjectConst",
+                "Value": -237
+              },
+              {
+                "op": "EX_NameConst",
+                "Value": "None"
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -173,
+                "StructSize": 20,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -175,
+                    "StructSize": 8,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -175,
+                    "StructSize": 8,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_False"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -183,
+            "StructSize": 224,
+            "Value": [
+              {
+                "op": "EX_BitFieldConst",
+                "Property": {
+                  "field": "bIsDynamicallyLoaded",
+                  "owner": "SlateBrush"
+                },
+                "Value": 0
+              },
+              {
+                "op": "EX_BitFieldConst",
+                "Property": {
+                  "field": "bHasUObject",
+                  "owner": "SlateBrush"
+                },
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -181,
+                "StructSize": 8,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -182,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -185,
+                "StructSize": 20,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -174,
+                    "StructSize": 16,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": 1.0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_ByteConst",
+                    "Value": 0
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -184,
+                "StructSize": 64,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -176,
+                    "StructSize": 32,
+                    "Value": [
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_DoubleConst",
+                        "Value": 1.0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -185,
+                    "StructSize": 20,
+                    "Value": [
+                      {
+                        "op": "EX_StructConst",
+                        "Struct": -174,
+                        "StructSize": 16,
+                        "Value": [
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          },
+                          {
+                            "op": "EX_FloatConst",
+                            "Value": "+0"
+                          }
+                        ]
+                      },
+                      {
+                        "op": "EX_ByteConst",
+                        "Value": 0
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_ByteConst",
+                    "Value": 1
+                  },
+                  {
+                    "op": "EX_False"
+                  }
+                ]
+              },
+              {
+                "op": "EX_NoObject"
+              },
+              {
+                "op": "EX_NameConst",
+                "Value": "None"
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -173,
+                "StructSize": 20,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -175,
+                    "StructSize": 8,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -175,
+                    "StructSize": 8,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_False"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -185,
+            "StructSize": 20,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -174,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  }
+                ]
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 2
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -185,
+            "StructSize": 20,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -174,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  }
+                ]
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 2
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -185,
+            "StructSize": 20,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -174,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  }
+                ]
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 2
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -185,
+            "StructSize": 20,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -174,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  }
+                ]
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 2
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -182,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -182,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -186,
+            "StructSize": 32,
+            "Value": [
+              {
+                "op": "EX_NoObject"
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -186,
+            "StructSize": 32,
+            "Value": [
+              {
+                "op": "EX_NoObject"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3635,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "MainMenu_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "HasSeenSplashes?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "HasSeenSplashes?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "TutorialSplashButton",
+          "owner": "MainMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "RemoveFromParent",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "NewUpdateSplashButton",
+          "owner": "MainMenu_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "RemoveFromParent",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 3736
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3695,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "IsPatron?",
+          "owner": "SetPatronPublicSplashScreens"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "NewUpdateSplashButton",
+          "owner": "MainMenu_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetStyle",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "PatronSplash",
+              "owner": "SetPatronPublicSplashScreens"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 3736
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "NewUpdateSplashButton",
+          "owner": "MainMenu_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetStyle",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "NonPatronSplash",
+              "owner": "SetPatronPublicSplashScreens"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

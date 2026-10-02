@@ -1,0 +1,84 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_ConflictingWidgetOverlayWidget",
+    "statements": 10,
+    "raw_fallback": false,
+    "calls": [
+      "CancelCalled__DelegateSignature",
+      "RemoveConflictsCalled__DelegateSignature",
+      "RemoveFromParent"
+    ],
+    "fields": [
+      "CancelCalled",
+      "EntryPoint",
+      "RemoveConflictsCalled"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_ConflictingWidgetOverlayWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_VirtualFunction",
+      "VirtualFunctionName": "RemoveFromParent",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 91
+    },
+    {
+      "op": "EX_CallMulticastDelegate",
+      "Delegate": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "RemoveConflictsCalled",
+          "owner": "ConflictingWidgetOverlayWidget_C"
+        }
+      },
+      "StackNode": "RemoveConflictsCalled__DelegateSignature",
+      "Parameters": []
+    },
+    {
+      "op": "EX_VirtualFunction",
+      "VirtualFunctionName": "RemoveFromParent",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 91
+    },
+    {
+      "op": "EX_CallMulticastDelegate",
+      "Delegate": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CancelCalled",
+          "owner": "ConflictingWidgetOverlayWidget_C"
+        }
+      },
+      "StackNode": "CancelCalled__DelegateSignature",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 10
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

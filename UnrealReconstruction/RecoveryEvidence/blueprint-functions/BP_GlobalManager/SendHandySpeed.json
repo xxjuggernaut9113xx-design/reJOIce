@@ -1,0 +1,546 @@
+{
+  "function": {
+    "name": "SendHandySpeed",
+    "statements": 19,
+    "raw_fallback": false,
+    "calls": [
+      "ConstructVaRestRequestExt",
+      "Conv_BoolToString",
+      "Divide_DoubleDouble",
+      "ExecuteProcessRequest",
+      "FClamp",
+      "GetBoolField",
+      "GetEngineSubsystem",
+      "PrintString",
+      "SetContentType",
+      "SetNumberField",
+      "SetRequestObject",
+      "SetStringField",
+      "SetURL",
+      "SetVerb",
+      "StaticConstructVaRestJsonObject"
+    ],
+    "fields": [
+      "",
+      "BeatSpawnInterval_77_50E3B83E42812441703681959441CAE9",
+      "CallFunc_ConstructVaRestRequestExt_ReturnValue",
+      "CallFunc_Conv_BoolToString_ReturnValue",
+      "CallFunc_Divide_DoubleDouble_ReturnValue",
+      "CallFunc_FClamp_ReturnValue",
+      "CallFunc_GetBoolField_ReturnValue",
+      "CallFunc_GetEngineSubsystem_ReturnValue",
+      "CallFunc_SetNumberField_Number_ImplicitCast",
+      "JsonObj",
+      "PlayerVariablesStruct",
+      "VaRest_MakeJson_Target"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "VaRest_MakeJson_Target",
+          "owner": "SendHandySpeed"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "StaticConstructVaRestJsonObject",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "JsonObj",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "VaRest_MakeJson_Target",
+          "owner": "SendHandySpeed"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "JsonObj",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 29,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetStringField",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "authKey"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "MMKXmvM2"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+        "owner": "SendHandySpeed"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+          "owner": "SendHandySpeed"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Divide_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 60.0
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "BeatSpawnInterval_77_50E3B83E42812441703681959441CAE9",
+              "owner": "LegacyStats"
+            },
+            "StructExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "PlayerVariablesStruct",
+                "owner": "BP_GlobalManager_C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FClamp_ReturnValue",
+        "owner": "SendHandySpeed"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FClamp_ReturnValue",
+          "owner": "SendHandySpeed"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FClamp",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Divide_DoubleDouble_ReturnValue",
+              "owner": "SendHandySpeed"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 100.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SetNumberField_Number_ImplicitCast",
+          "owner": "SendHandySpeed"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_FClamp_ReturnValue",
+            "owner": "SendHandySpeed"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "JsonObj",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 26,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetNumberField",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "speed"
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_SetNumberField_Number_ImplicitCast",
+              "owner": "SendHandySpeed"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetEngineSubsystem_ReturnValue",
+          "owner": "SendHandySpeed"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetEngineSubsystem",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -70
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ConstructVaRestRequestExt_ReturnValue",
+          "owner": "SendHandySpeed"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetEngineSubsystem_ReturnValue",
+            "owner": "SendHandySpeed"
+          }
+        },
+        "Offset": 14,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_ConstructVaRestRequestExt_ReturnValue",
+          "owner": "SendHandySpeed"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "ConstructVaRestRequestExt",
+          "Parameters": [
+            {
+              "op": "EX_ByteConst",
+              "Value": 1
+            },
+            {
+              "op": "EX_ByteConst",
+              "Value": 2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ConstructVaRestRequestExt_ReturnValue",
+          "owner": "SendHandySpeed"
+        }
+      },
+      "Offset": 12,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetVerb",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ConstructVaRestRequestExt_ReturnValue",
+          "owner": "SendHandySpeed"
+        }
+      },
+      "Offset": 12,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetContentType",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ConstructVaRestRequestExt_ReturnValue",
+          "owner": "SendHandySpeed"
+        }
+      },
+      "Offset": 68,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetURL",
+        "Parameters": [
+          {
+            "op": "EX_StringConst",
+            "Value": "https://www.handyfeeling.com/api/v2/handy/v2/getSettings"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ConstructVaRestRequestExt_ReturnValue",
+          "owner": "SendHandySpeed"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetRequestObject",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "JsonObj",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ConstructVaRestRequestExt_ReturnValue",
+          "owner": "SendHandySpeed"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "ExecuteProcessRequest",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetBoolField_ReturnValue",
+          "owner": "SendHandySpeed"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "JsonObj",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 21,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetBoolField_ReturnValue",
+          "owner": "SendHandySpeed"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetBoolField",
+          "Parameters": [
+            {
+              "op": "EX_StringConst",
+              "Value": "connected"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_BoolToString_ReturnValue",
+        "owner": "SendHandySpeed"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_BoolToString_ReturnValue",
+          "owner": "SendHandySpeed"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_BoolToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetBoolField_ReturnValue",
+              "owner": "SendHandySpeed"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Conv_BoolToString_ReturnValue",
+            "owner": "SendHandySpeed"
+          }
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -2162,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.06232300028204918
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 5.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

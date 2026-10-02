@@ -1,0 +1,147 @@
+{
+  "function": {
+    "name": "Get_DisabledItemsText_Visibility",
+    "statements": 9,
+    "raw_fallback": false,
+    "calls": [],
+    "fields": [
+      "CanUseItems?_95_5DA0FAB747CA4CDCE12D5CA50A03E14E",
+      "GlobalManagerRef",
+      "PlayerVariablesStruct",
+      "ReturnValue",
+      "Visibility"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Visibility",
+        "owner": "Get_DisabledItemsText_Visibility"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Visibility",
+          "owner": "Get_DisabledItemsText_Visibility"
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 117,
+      "BooleanExpression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "CanUseItems?_95_5DA0FAB747CA4CDCE12D5CA50A03E14E",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GlobalManagerRef",
+              "owner": "UI_Manager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Visibility",
+        "owner": "Get_DisabledItemsText_Visibility"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Visibility",
+          "owner": "Get_DisabledItemsText_Visibility"
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 1
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "Get_DisabledItemsText_Visibility"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_DisabledItemsText_Visibility"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Visibility",
+          "owner": "Get_DisabledItemsText_Visibility"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 142
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Visibility",
+        "owner": "Get_DisabledItemsText_Visibility"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Visibility",
+          "owner": "Get_DisabledItemsText_Visibility"
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 85
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "Get_DisabledItemsText_Visibility"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

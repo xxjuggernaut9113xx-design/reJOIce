@@ -1,0 +1,219 @@
+{
+  "function": {
+    "name": "PopulateVoicePackEntry",
+    "statements": 11,
+    "raw_fallback": false,
+    "calls": [
+      "SetText"
+    ],
+    "fields": [
+      "",
+      "Description",
+      "Display Name ID",
+      "DisplayName",
+      "Sample1",
+      "Sample2",
+      "Sample3",
+      "SampleLine1",
+      "SampleLine2",
+      "SampleLine3",
+      "Selection Line",
+      "SelectionLine",
+      "Tags",
+      "Voice Pack Enum",
+      "VoicePackEnum"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Display Name ID",
+        "owner": "VoicePackEntryWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Display Name ID",
+          "owner": "VoicePackEntryWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "DisplayName",
+          "owner": "PopulateVoicePackEntry"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "SampleLine1",
+          "owner": "VoicePackEntryWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Sample1",
+          "owner": "PopulateVoicePackEntry"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "SampleLine2",
+          "owner": "VoicePackEntryWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Sample2",
+          "owner": "PopulateVoicePackEntry"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "SampleLine3",
+          "owner": "VoicePackEntryWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Sample3",
+          "owner": "PopulateVoicePackEntry"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Tags",
+        "owner": "VoicePackEntryWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Tags",
+          "owner": "VoicePackEntryWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "Tags",
+          "owner": "PopulateVoicePackEntry"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Description",
+        "owner": "VoicePackEntryWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Description",
+          "owner": "VoicePackEntryWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Description",
+          "owner": "PopulateVoicePackEntry"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "DisplayName",
+          "owner": "VoicePackEntryWidget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "DisplayName",
+              "owner": "PopulateVoicePackEntry"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Voice Pack Enum",
+        "owner": "VoicePackEntryWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Voice Pack Enum",
+          "owner": "VoicePackEntryWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "VoicePackEnum",
+          "owner": "PopulateVoicePackEntry"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Selection Line",
+          "owner": "VoicePackEntryWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "SelectionLine",
+          "owner": "PopulateVoicePackEntry"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

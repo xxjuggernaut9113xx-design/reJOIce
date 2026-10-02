@@ -1,0 +1,49 @@
+{
+  "function": {
+    "name": "PlayerCardClick",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_PlayerCardsTabWidget"
+    ],
+    "fields": [
+      "CardID",
+      "K2Node_CustomEvent_CardID"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_CardID",
+        "owner": "ExecuteUbergraph_PlayerCardsTabWidget"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CardID",
+          "owner": "PlayerCardClick"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_PlayerCardsTabWidget",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 2436
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

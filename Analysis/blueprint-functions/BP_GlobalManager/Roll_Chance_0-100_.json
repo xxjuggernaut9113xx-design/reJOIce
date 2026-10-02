@@ -1,0 +1,103 @@
+{
+  "function": {
+    "name": "Roll Chance (0-100%) ",
+    "statements": 5,
+    "raw_fallback": false,
+    "calls": [
+      "LessEqual_DoubleDouble",
+      "RandomFloatInRange"
+    ],
+    "fields": [
+      "CallFunc_LessEqual_DoubleDouble_ReturnValue",
+      "CallFunc_RandomFloatInRange_ReturnValue",
+      "Float",
+      "Return"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomFloatInRange_ReturnValue",
+        "owner": "Roll Chance (0-100%) "
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomFloatInRange_ReturnValue",
+          "owner": "Roll Chance (0-100%) "
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomFloatInRange",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 100.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_DoubleDouble_ReturnValue",
+          "owner": "Roll Chance (0-100%) "
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "LessEqual_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_RandomFloatInRange_ReturnValue",
+              "owner": "Roll Chance (0-100%) "
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Float",
+              "owner": "Roll Chance (0-100%) "
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "Return",
+          "owner": "Roll Chance (0-100%) "
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LessEqual_DoubleDouble_ReturnValue",
+          "owner": "Roll Chance (0-100%) "
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

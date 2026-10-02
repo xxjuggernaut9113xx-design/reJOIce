@@ -1,0 +1,129 @@
+{
+  "function": {
+    "name": "IsModifierActive?",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "Array_Contains"
+    ],
+    "fields": [
+      "Active?",
+      "ActiveModifiers",
+      "CallFunc_Array_Contains_ReturnValue",
+      "CurrentSessionStats",
+      "GameInstance",
+      "Modifier Name",
+      "ProgressionManager"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Contains_ReturnValue",
+          "owner": "IsModifierActive?"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_ObjectConst",
+          "Value": -250
+        },
+        "Offset": 81,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_Array_Contains_ReturnValue",
+          "owner": "IsModifierActive?"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "Array_Contains",
+          "Parameters": [
+            {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "ActiveModifiers",
+                "owner": "SessionStats"
+              },
+              "StructExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_Context",
+                  "ObjectExpression": {
+                    "op": "EX_InstanceVariable",
+                    "Variable": {
+                      "field": "GameInstance",
+                      "owner": "BP_GlobalManager_C"
+                    }
+                  },
+                  "Offset": 9,
+                  "PropertyType": 0,
+                  "RValuePointer": {
+                    "field": "ProgressionManager",
+                    "owner": "BP_CHGameInstance_C"
+                  },
+                  "ContextExpression": {
+                    "op": "EX_InstanceVariable",
+                    "Variable": {
+                      "field": "ProgressionManager",
+                      "owner": "BP_CHGameInstance_C"
+                    }
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "CurrentSessionStats",
+                  "owner": "ProgressionManager"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "CurrentSessionStats",
+                    "owner": "ProgressionManager"
+                  }
+                }
+              }
+            },
+            {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "Modifier Name",
+                "owner": "IsModifierActive?"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "Active?",
+          "owner": "IsModifierActive?"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Contains_ReturnValue",
+          "owner": "IsModifierActive?"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "function": {
+    "name": "Refresh Prices",
+    "statements": 3,
+    "raw_fallback": false,
+    "calls": [],
+    "fields": [
+      "PurchaseCost"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "PurchaseCost",
+        "owner": "ResupplyStoreItem_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "PurchaseCost",
+          "owner": "ResupplyStoreItem_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 350
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

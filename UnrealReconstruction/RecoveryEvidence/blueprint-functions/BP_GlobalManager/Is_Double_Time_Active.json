@@ -1,0 +1,59 @@
+{
+  "function": {
+    "name": "Is Double Time Active",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "IsModifierActive?"
+    ],
+    "fields": [
+      "Active?",
+      "CallFunc_IsModifierActive__Active_"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "IsModifierActive?",
+      "Parameters": [
+        {
+          "op": "EX_StringConst",
+          "Value": "Double Time"
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_IsModifierActive__Active_",
+            "owner": "Is Double Time Active"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "Active?",
+          "owner": "Is Double Time Active"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_IsModifierActive__Active_",
+          "owner": "Is Double Time Active"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

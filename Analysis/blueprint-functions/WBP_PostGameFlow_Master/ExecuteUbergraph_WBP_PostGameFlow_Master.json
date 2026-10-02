@@ -1,0 +1,1386 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_WBP_PostGameFlow_Master",
+    "statements": 60,
+    "raw_fallback": false,
+    "calls": [
+      "Delay",
+      "EndSession",
+      "GetGameInstance",
+      "Initialize",
+      "InitializeScreen",
+      "K2_ClearAndInvalidateTimerHandle",
+      "K2_SetTimerDelegate",
+      "NotEqual_IntInt",
+      "PlayPostGameVoicelines",
+      "PlaySound2D",
+      "PrepareSessionRewards",
+      "ResumeAfterLevelUp",
+      "SetActiveWidgetIndex"
+    ],
+    "fields": [
+      "",
+      "As BP CHGame Instance",
+      "CallFunc_GetGameInstance_ReturnValue",
+      "CallFunc_K2_SetTimerDelegate_ReturnValue",
+      "CallFunc_NotEqual_IntInt_ReturnValue",
+      "CallFunc_PrepareSessionRewards_ReturnValue",
+      "CurrentSessionStats",
+      "DidPlayerWin?",
+      "EntryPoint",
+      "K2Node_CreateDelegate_OutputDelegate",
+      "K2Node_CreateDelegate_OutputDelegate_1",
+      "K2Node_CreateDelegate_OutputDelegate_2",
+      "K2Node_CreateDelegate_OutputDelegate_3",
+      "K2Node_CreateDelegate_OutputDelegate_4",
+      "K2Node_CustomEvent_LevelUpData",
+      "K2Node_DynamicCast_AsBP_CHGame_Instance",
+      "K2Node_DynamicCast_bSuccess",
+      "OnAllSourcesComplete",
+      "OnLevelUpTriggered",
+      "OnScreenComplete",
+      "ProgressionManager",
+      "RewardData",
+      "ScreenSwitchDelay",
+      "SessionsWon",
+      "TimerHandle",
+      "WBP_LevelUpScreen",
+      "WBP_SessionSummaryWidget",
+      "WBP_UPRewardScreen",
+      "WBP_XPScreen",
+      "WidgetSwitcher",
+      "bWaitingForLevelUp"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 1809
+    },
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "WidgetSwitcher",
+          "owner": "WBP_PostGameFlow_Master_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetActiveWidgetIndex",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "WBP_LevelUpScreen",
+          "owner": "WBP_PostGameFlow_Master_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "InitializeScreen",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_CustomEvent_LevelUpData",
+              "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "WidgetSwitcher",
+          "owner": "WBP_PostGameFlow_Master_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetActiveWidgetIndex",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "WBP_UPRewardScreen",
+          "owner": "WBP_PostGameFlow_Master_C"
+        }
+      },
+      "Offset": 32,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "InitializeScreen",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "RewardData",
+              "owner": "WBP_PostGameFlow_Master_C"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DidPlayerWin?",
+              "owner": "WBP_PostGameFlow_Master_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -34
+      },
+      "Offset": 38,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlaySound2D",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          },
+          {
+            "op": "EX_ObjectConst",
+            "Value": -51
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "WidgetSwitcher",
+          "owner": "WBP_PostGameFlow_Master_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetActiveWidgetIndex",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "WBP_XPScreen",
+          "owner": "WBP_PostGameFlow_Master_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "ResumeAfterLevelUp",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "WidgetSwitcher",
+          "owner": "WBP_PostGameFlow_Master_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetActiveWidgetIndex",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "WBP_SessionSummaryWidget",
+          "owner": "WBP_PostGameFlow_Master_C"
+        }
+      },
+      "Offset": 32,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "Initialize",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "RewardData",
+              "owner": "WBP_PostGameFlow_Master_C"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DidPlayerWin?",
+              "owner": "WBP_PostGameFlow_Master_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -34
+      },
+      "Offset": 38,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "PlaySound2D",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          },
+          {
+            "op": "EX_ObjectConst",
+            "Value": -51
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "WBP_SessionSummaryWidget",
+          "owner": "WBP_PostGameFlow_Master_C"
+        }
+      },
+      "Offset": 14,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "PlayPostGameVoicelines",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameInstance_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameInstance",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_GetGameInstance_ReturnValue",
+            "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+            "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "As BP CHGame Instance",
+          "owner": "WBP_PostGameFlow_Master_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHGame_Instance",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_PrepareSessionRewards_ReturnValue",
+        "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PrepareSessionRewards_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP CHGame Instance",
+              "owner": "WBP_PostGameFlow_Master_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "ProgressionManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 63,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_PrepareSessionRewards_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "PrepareSessionRewards",
+          "Parameters": [
+            {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP CHGame Instance",
+                    "owner": "WBP_PostGameFlow_Master_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "ProgressionManager",
+                  "owner": "BP_CHGameInstance_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "ProgressionManager",
+                    "owner": "BP_CHGameInstance_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSessionStats",
+                "owner": "ProgressionManager"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSessionStats",
+                  "owner": "ProgressionManager"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "RewardData",
+        "owner": "WBP_PostGameFlow_Master_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "RewardData",
+          "owner": "WBP_PostGameFlow_Master_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_PrepareSessionRewards_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_NotEqual_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "SessionsWon",
+              "owner": "SessionStats"
+            },
+            "StructExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_Context",
+                "ObjectExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "As BP CHGame Instance",
+                    "owner": "WBP_PostGameFlow_Master_C"
+                  }
+                },
+                "Offset": 9,
+                "PropertyType": 0,
+                "RValuePointer": {
+                  "field": "ProgressionManager",
+                  "owner": "BP_CHGameInstance_C"
+                },
+                "ContextExpression": {
+                  "op": "EX_InstanceVariable",
+                  "Variable": {
+                    "field": "ProgressionManager",
+                    "owner": "BP_CHGameInstance_C"
+                  }
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "CurrentSessionStats",
+                "owner": "ProgressionManager"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "CurrentSessionStats",
+                  "owner": "ProgressionManager"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "DidPlayerWin?",
+          "owner": "WBP_PostGameFlow_Master_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_NotEqual_IntInt_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "As BP CHGame Instance",
+            "owner": "WBP_PostGameFlow_Master_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "ProgressionManager",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "Offset": 63,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "EndSession",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_Context",
+              "ObjectExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "As BP CHGame Instance",
+                  "owner": "WBP_PostGameFlow_Master_C"
+                }
+              },
+              "Offset": 9,
+              "PropertyType": 0,
+              "RValuePointer": {
+                "field": "ProgressionManager",
+                "owner": "BP_CHGameInstance_C"
+              },
+              "ContextExpression": {
+                "op": "EX_InstanceVariable",
+                "Variable": {
+                  "field": "ProgressionManager",
+                  "owner": "BP_CHGameInstance_C"
+                }
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "CurrentSessionStats",
+              "owner": "ProgressionManager"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSessionStats",
+                "owner": "ProgressionManager"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "WidgetSwitcher",
+          "owner": "WBP_PostGameFlow_Master_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetActiveWidgetIndex",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_BindDelegate",
+      "FunctionName": "HandleLevelUp",
+      "Delegate": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate_3",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      },
+      "ObjectTerm": {
+        "op": "EX_Self"
+      }
+    },
+    {
+      "op": "EX_AddMulticastDelegate",
+      "Delegate": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "WBP_XPScreen",
+            "owner": "WBP_PostGameFlow_Master_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "OnLevelUpTriggered",
+          "owner": "WBP_XPScreen_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "OnLevelUpTriggered",
+            "owner": "WBP_XPScreen_C"
+          }
+        }
+      },
+      "DelegateToAdd": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate_3",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      }
+    },
+    {
+      "op": "EX_BindDelegate",
+      "FunctionName": "HandleXPComplete",
+      "Delegate": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate_4",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      },
+      "ObjectTerm": {
+        "op": "EX_Self"
+      }
+    },
+    {
+      "op": "EX_AddMulticastDelegate",
+      "Delegate": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "WBP_XPScreen",
+            "owner": "WBP_PostGameFlow_Master_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "OnAllSourcesComplete",
+          "owner": "WBP_XPScreen_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "OnAllSourcesComplete",
+            "owner": "WBP_XPScreen_C"
+          }
+        }
+      },
+      "DelegateToAdd": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate_4",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      }
+    },
+    {
+      "op": "EX_BindDelegate",
+      "FunctionName": "HandleLevelUpComplete",
+      "Delegate": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      },
+      "ObjectTerm": {
+        "op": "EX_Self"
+      }
+    },
+    {
+      "op": "EX_AddMulticastDelegate",
+      "Delegate": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "WBP_LevelUpScreen",
+            "owner": "WBP_PostGameFlow_Master_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "OnScreenComplete",
+          "owner": "WBP_LevelUpScreen_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "OnScreenComplete",
+            "owner": "WBP_LevelUpScreen_C"
+          }
+        }
+      },
+      "DelegateToAdd": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      }
+    },
+    {
+      "op": "EX_BindDelegate",
+      "FunctionName": "HandleUPComplete",
+      "Delegate": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate_1",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      },
+      "ObjectTerm": {
+        "op": "EX_Self"
+      }
+    },
+    {
+      "op": "EX_AddMulticastDelegate",
+      "Delegate": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "WBP_UPRewardScreen",
+            "owner": "WBP_PostGameFlow_Master_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "OnAllSourcesComplete",
+          "owner": "WBP_UPRewardScreen_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "OnAllSourcesComplete",
+            "owner": "WBP_UPRewardScreen_C"
+          }
+        }
+      },
+      "DelegateToAdd": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate_1",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "WBP_XPScreen",
+          "owner": "WBP_PostGameFlow_Master_C"
+        }
+      },
+      "Offset": 32,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "InitializeScreen",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "RewardData",
+              "owner": "WBP_PostGameFlow_Master_C"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "DidPlayerWin?",
+              "owner": "WBP_PostGameFlow_Master_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_BindDelegate",
+      "FunctionName": "CheckLevelUp",
+      "Delegate": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_CreateDelegate_OutputDelegate_2",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      },
+      "ObjectTerm": {
+        "op": "EX_Self"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_K2_SetTimerDelegate_ReturnValue",
+        "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_K2_SetTimerDelegate_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "K2_SetTimerDelegate",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_CreateDelegate_OutputDelegate_2",
+              "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+            }
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 0.5
+          },
+          {
+            "op": "EX_True"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "TimerHandle",
+        "owner": "WBP_PostGameFlow_Master_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "TimerHandle",
+          "owner": "WBP_PostGameFlow_Master_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_K2_SetTimerDelegate_ReturnValue",
+          "owner": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1501,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "WBP_XPScreen",
+            "owner": "WBP_PostGameFlow_Master_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "bWaitingForLevelUp",
+          "owner": "WBP_XPScreen_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "bWaitingForLevelUp",
+            "owner": "WBP_XPScreen_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "K2_ClearAndInvalidateTimerHandle",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "TimerHandle",
+            "owner": "WBP_PostGameFlow_Master_C"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1563,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "WBP_XPScreen",
+            "owner": "WBP_PostGameFlow_Master_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "bWaitingForLevelUp",
+          "owner": "WBP_XPScreen_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "bWaitingForLevelUp",
+            "owner": "WBP_XPScreen_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1360
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "Delay",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "ScreenSwitchDelay",
+            "owner": "WBP_PostGameFlow_Master_C"
+          }
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -48,
+          "StructSize": 32,
+          "Value": [
+            {
+              "op": "EX_SkipOffsetConst",
+              "Value": 102
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": 230916614
+            },
+            {
+              "op": "EX_NameConst",
+              "Value": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+            },
+            {
+              "op": "EX_Self"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "Delay",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "ScreenSwitchDelay",
+            "owner": "WBP_PostGameFlow_Master_C"
+          }
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -48,
+          "StructSize": 32,
+          "Value": [
+            {
+              "op": "EX_SkipOffsetConst",
+              "Value": 15
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": 110025273
+            },
+            {
+              "op": "EX_NameConst",
+              "Value": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+            },
+            {
+              "op": "EX_Self"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1522
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "Delay",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "ScreenSwitchDelay",
+            "owner": "WBP_PostGameFlow_Master_C"
+          }
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -48,
+          "StructSize": 32,
+          "Value": [
+            {
+              "op": "EX_SkipOffsetConst",
+              "Value": 258
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": 417617368
+            },
+            {
+              "op": "EX_NameConst",
+              "Value": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+            },
+            {
+              "op": "EX_Self"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "Delay",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "ScreenSwitchDelay",
+            "owner": "WBP_PostGameFlow_Master_C"
+          }
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -48,
+          "StructSize": 32,
+          "Value": [
+            {
+              "op": "EX_SkipOffsetConst",
+              "Value": 336
+            },
+            {
+              "op": "EX_IntConst",
+              "Value": -1194372835
+            },
+            {
+              "op": "EX_NameConst",
+              "Value": "ExecuteUbergraph_WBP_PostGameFlow_Master"
+            },
+            {
+              "op": "EX_Self"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1464
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

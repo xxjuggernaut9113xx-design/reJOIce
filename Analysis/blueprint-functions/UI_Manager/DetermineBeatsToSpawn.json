@@ -1,0 +1,1719 @@
+{
+  "function": {
+    "name": "DetermineBeatsToSpawn",
+    "statements": 58,
+    "raw_fallback": false,
+    "calls": [
+      "Array_Random",
+      "DetermineDialogue",
+      "InRange_FloatFloat",
+      "RandomFloatInRange",
+      "RandomIntegerInRange",
+      "SetBrush",
+      "SpawnBeatSequence",
+      "UpdateHeatLevel"
+    ],
+    "fields": [
+      "",
+      "CallFunc_Array_Random_OutIndex",
+      "CallFunc_Array_Random_OutIndex_1",
+      "CallFunc_Array_Random_OutIndex_2",
+      "CallFunc_Array_Random_OutItem",
+      "CallFunc_Array_Random_OutItem_1",
+      "CallFunc_Array_Random_OutItem_2",
+      "CallFunc_InRange_FloatFloat_ReturnValue",
+      "CallFunc_InRange_FloatFloat_ReturnValue_1",
+      "CallFunc_InRange_FloatFloat_ReturnValue_2",
+      "CallFunc_RandomFloatInRange_ReturnValue",
+      "CallFunc_RandomFloatInRange_ReturnValue_1",
+      "CallFunc_RandomFloatInRange_ReturnValue_2",
+      "CallFunc_RandomIntegerInRange_ReturnValue",
+      "CallFunc_RandomIntegerInRange_ReturnValue_1",
+      "CallFunc_RandomIntegerInRange_ReturnValue_2",
+      "CardArray",
+      "DrawAs",
+      "HeatLevel",
+      "ImageSize",
+      "IsBeatSpawnable",
+      "K2Node_MakeStruct_SlateBrush",
+      "K2Node_MakeStruct_SlateBrush_1",
+      "K2Node_MakeStruct_SlateBrush_2",
+      "MainImage",
+      "Margin",
+      "Mirroring",
+      "OutlineSettings",
+      "ResourceObject",
+      "StrokeCounterDisplay",
+      "Tiling",
+      "TintColor"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "UpdateHeatLevel",
+      "Parameters": []
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2348,
+      "BooleanExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "IsBeatSpawnable",
+          "owner": "UI_Manager_C"
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2348,
+      "BooleanExpression": {
+        "op": "EX_True"
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_InRange_FloatFloat_ReturnValue_2",
+          "owner": "DetermineBeatsToSpawn"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "InRange_FloatFloat",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatLevel",
+              "owner": "UI_Manager_C"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 33.0
+          },
+          {
+            "op": "EX_True"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 807,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_InRange_FloatFloat_ReturnValue_2",
+          "owner": "DetermineBeatsToSpawn"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+        "owner": "DetermineBeatsToSpawn"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+          "owner": "DetermineBeatsToSpawn"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 6
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 20
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "StrokeCounterDisplay",
+        "owner": "UI_Manager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "StrokeCounterDisplay",
+          "owner": "UI_Manager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue_2",
+          "owner": "DetermineBeatsToSpawn"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomFloatInRange_ReturnValue_2",
+        "owner": "DetermineBeatsToSpawn"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomFloatInRange_ReturnValue_2",
+          "owner": "DetermineBeatsToSpawn"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomFloatInRange",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 0.5
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "SpawnBeatSequence",
+      "Parameters": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_RandomFloatInRange_ReturnValue_2",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -207
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CardArray",
+              "owner": "UI_Manager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem_2",
+              "owner": "DetermineBeatsToSpawn"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex_2",
+              "owner": "DetermineBeatsToSpawn"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "DrawAs",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "DrawAs",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush_2",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 3
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Tiling",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Tiling",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush_2",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Mirroring",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Mirroring",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush_2",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ImageSize",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ImageSize",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush_2",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -317,
+        "StructSize": 8,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": 32.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 32.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Margin",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Margin",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush_2",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -318,
+        "StructSize": 16,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "TintColor",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "TintColor",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush_2",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -321,
+        "StructSize": 20,
+        "Value": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -308,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              }
+            ]
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "OutlineSettings",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "OutlineSettings",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush_2",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -320,
+        "StructSize": 64,
+        "Value": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -311,
+            "StructSize": 32,
+            "Value": [
+              {
+                "op": "EX_DoubleConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_DoubleConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_DoubleConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_DoubleConst",
+                "Value": 1.0
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -321,
+            "StructSize": 20,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -308,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              }
+            ]
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ResourceObject",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush_2",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Random_OutItem_2",
+          "owner": "DetermineBeatsToSpawn"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "MainImage",
+          "owner": "UI_Manager_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetBrush",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeStruct_SlateBrush_2",
+              "owner": "DetermineBeatsToSpawn"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "DetermineDialogue",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2348
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_InRange_FloatFloat_ReturnValue_1",
+          "owner": "DetermineBeatsToSpawn"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "InRange_FloatFloat",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatLevel",
+              "owner": "UI_Manager_C"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 33.0
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 66.0
+          },
+          {
+            "op": "EX_True"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1580,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_InRange_FloatFloat_ReturnValue_1",
+          "owner": "DetermineBeatsToSpawn"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+        "owner": "DetermineBeatsToSpawn"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+          "owner": "DetermineBeatsToSpawn"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 10
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 20
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "StrokeCounterDisplay",
+        "owner": "UI_Manager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "StrokeCounterDisplay",
+          "owner": "UI_Manager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue_1",
+          "owner": "DetermineBeatsToSpawn"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomFloatInRange_ReturnValue_1",
+        "owner": "DetermineBeatsToSpawn"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomFloatInRange_ReturnValue_1",
+          "owner": "DetermineBeatsToSpawn"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomFloatInRange",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 0.15
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 0.6
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "SpawnBeatSequence",
+      "Parameters": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_RandomFloatInRange_ReturnValue_1",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -207
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CardArray",
+              "owner": "UI_Manager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem",
+              "owner": "DetermineBeatsToSpawn"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex",
+              "owner": "DetermineBeatsToSpawn"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "DrawAs",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "DrawAs",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 3
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Tiling",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Tiling",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Mirroring",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Mirroring",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ImageSize",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ImageSize",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -317,
+        "StructSize": 8,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": 32.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 32.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Margin",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Margin",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -318,
+        "StructSize": 16,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "TintColor",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "TintColor",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -321,
+        "StructSize": 20,
+        "Value": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -308,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              }
+            ]
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "OutlineSettings",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "OutlineSettings",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -320,
+        "StructSize": 64,
+        "Value": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -311,
+            "StructSize": 32,
+            "Value": [
+              {
+                "op": "EX_DoubleConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_DoubleConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_DoubleConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_DoubleConst",
+                "Value": 1.0
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -321,
+            "StructSize": 20,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -308,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              }
+            ]
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ResourceObject",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Random_OutItem",
+          "owner": "DetermineBeatsToSpawn"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "MainImage",
+          "owner": "UI_Manager_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetBrush",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeStruct_SlateBrush",
+              "owner": "DetermineBeatsToSpawn"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "DetermineDialogue",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2348
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_InRange_FloatFloat_ReturnValue",
+          "owner": "DetermineBeatsToSpawn"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "InRange_FloatFloat",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HeatLevel",
+              "owner": "UI_Manager_C"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 66.0
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 100.0
+          },
+          {
+            "op": "EX_True"
+          },
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2348,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_InRange_FloatFloat_ReturnValue",
+          "owner": "DetermineBeatsToSpawn"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+        "owner": "DetermineBeatsToSpawn"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+          "owner": "DetermineBeatsToSpawn"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomIntegerInRange",
+        "Parameters": [
+          {
+            "op": "EX_IntConst",
+            "Value": 15
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 30
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "StrokeCounterDisplay",
+        "owner": "UI_Manager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "StrokeCounterDisplay",
+          "owner": "UI_Manager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomIntegerInRange_ReturnValue",
+          "owner": "DetermineBeatsToSpawn"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_RandomFloatInRange_ReturnValue",
+        "owner": "DetermineBeatsToSpawn"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_RandomFloatInRange_ReturnValue",
+          "owner": "DetermineBeatsToSpawn"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "RandomFloatInRange",
+        "Parameters": [
+          {
+            "op": "EX_DoubleConst",
+            "Value": 0.1
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 0.4
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "SpawnBeatSequence",
+      "Parameters": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_RandomFloatInRange_ReturnValue",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -207
+      },
+      "Offset": 37,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Array_Random",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CardArray",
+              "owner": "UI_Manager_C"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutItem_1",
+              "owner": "DetermineBeatsToSpawn"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Array_Random_OutIndex_1",
+              "owner": "DetermineBeatsToSpawn"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "DrawAs",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "DrawAs",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush_1",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 3
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Tiling",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Tiling",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush_1",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Mirroring",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Mirroring",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush_1",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ImageSize",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ImageSize",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush_1",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -317,
+        "StructSize": 8,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": 32.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 32.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Margin",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Margin",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush_1",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -318,
+        "StructSize": 16,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "TintColor",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "TintColor",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush_1",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -321,
+        "StructSize": 20,
+        "Value": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -308,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              }
+            ]
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "OutlineSettings",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "OutlineSettings",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush_1",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -320,
+        "StructSize": 64,
+        "Value": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -311,
+            "StructSize": 32,
+            "Value": [
+              {
+                "op": "EX_DoubleConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_DoubleConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_DoubleConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_DoubleConst",
+                "Value": 1.0
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -321,
+            "StructSize": 20,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -308,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              }
+            ]
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ResourceObject",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush_1",
+            "owner": "DetermineBeatsToSpawn"
+          }
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Array_Random_OutItem_1",
+          "owner": "DetermineBeatsToSpawn"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "MainImage",
+          "owner": "UI_Manager_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetBrush",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeStruct_SlateBrush_1",
+              "owner": "DetermineBeatsToSpawn"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "DetermineDialogue",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

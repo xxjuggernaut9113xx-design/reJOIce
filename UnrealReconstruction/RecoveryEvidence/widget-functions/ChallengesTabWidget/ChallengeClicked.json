@@ -1,0 +1,49 @@
+{
+  "function": {
+    "name": "ChallengeClicked",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_ChallengesTabWidget"
+    ],
+    "fields": [
+      "Challenge_ID",
+      "K2Node_CustomEvent_Challenge_ID_1"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_Challenge_ID_1",
+        "owner": "ExecuteUbergraph_ChallengesTabWidget"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Challenge_ID",
+          "owner": "ChallengeClicked"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_ChallengesTabWidget",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 6020
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

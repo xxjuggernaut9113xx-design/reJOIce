@@ -1,0 +1,99 @@
+{
+  "function": {
+    "name": "Calculate No Items Used Rewards",
+    "statements": 6,
+    "raw_fallback": false,
+    "calls": [],
+    "fields": [
+      "As BP Global Manager",
+      "HasUsedDefensiveItems_100_B25E8ADE4339064C2B4C6DA4EE174A36",
+      "NoItemsUsedReward",
+      "PlayerVariablesStruct"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 73,
+      "BooleanExpression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "HasUsedDefensiveItems_100_B25E8ADE4339064C2B4C6DA4EE174A36",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "SessionCompletionScreen_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "NoItemsUsedReward",
+        "owner": "SessionCompletionScreen_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "NoItemsUsedReward",
+          "owner": "SessionCompletionScreen_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 5
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 96
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "NoItemsUsedReward",
+        "owner": "SessionCompletionScreen_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "NoItemsUsedReward",
+          "owner": "SessionCompletionScreen_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

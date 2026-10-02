@@ -1,0 +1,267 @@
+{
+  "function": {
+    "name": "GetColorAndOpacity",
+    "statements": 11,
+    "raw_fallback": false,
+    "calls": [
+      "FClamp",
+      "Get Cum Meter Percent"
+    ],
+    "fields": [
+      "",
+      "A",
+      "B",
+      "CallFunc_FClamp_ReturnValue",
+      "CallFunc_FClamp_Value_ImplicitCast",
+      "CallFunc_Get_Cum_Meter_Percent_ReturnValue",
+      "G",
+      "K2Node_MakeStruct_A_ImplicitCast",
+      "K2Node_MakeStruct_LinearColor",
+      "R",
+      "ReturnValue"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Get_Cum_Meter_Percent_ReturnValue",
+        "owner": "GetColorAndOpacity"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Get_Cum_Meter_Percent_ReturnValue",
+          "owner": "GetColorAndOpacity"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "Get Cum Meter Percent",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FClamp_Value_ImplicitCast",
+          "owner": "GetColorAndOpacity"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 4,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_Get_Cum_Meter_Percent_ReturnValue",
+            "owner": "GetColorAndOpacity"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FClamp_ReturnValue",
+        "owner": "GetColorAndOpacity"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FClamp_ReturnValue",
+          "owner": "GetColorAndOpacity"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FClamp",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_FClamp_Value_ImplicitCast",
+              "owner": "GetColorAndOpacity"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 0.2
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "R",
+        "owner": "LinearColor"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "R",
+          "owner": "LinearColor"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_LinearColor",
+            "owner": "GetColorAndOpacity"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": 1.0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "G",
+        "owner": "LinearColor"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "G",
+          "owner": "LinearColor"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_LinearColor",
+            "owner": "GetColorAndOpacity"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": 1.0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "B",
+        "owner": "LinearColor"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "B",
+          "owner": "LinearColor"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_LinearColor",
+            "owner": "GetColorAndOpacity"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": 1.0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeStruct_A_ImplicitCast",
+          "owner": "GetColorAndOpacity"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 3,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_FClamp_ReturnValue",
+            "owner": "GetColorAndOpacity"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "A",
+        "owner": "LinearColor"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "A",
+          "owner": "LinearColor"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_LinearColor",
+            "owner": "GetColorAndOpacity"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeStruct_A_ImplicitCast",
+          "owner": "GetColorAndOpacity"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "GetColorAndOpacity"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "GetColorAndOpacity"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeStruct_LinearColor",
+          "owner": "GetColorAndOpacity"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "GetColorAndOpacity"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

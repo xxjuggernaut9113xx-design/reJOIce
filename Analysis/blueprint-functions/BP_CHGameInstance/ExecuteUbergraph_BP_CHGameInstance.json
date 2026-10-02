@@ -1,0 +1,2538 @@
+{
+  "function": {
+    "name": "ExecuteUbergraph_BP_CHGameInstance",
+    "statements": 117,
+    "raw_fallback": false,
+    "calls": [
+      "ApplyResolutionSettings",
+      "ApplySettings",
+      "CreateSaveGameObject",
+      "DoesSaveGameExist",
+      "ExecuteConsoleCommand",
+      "GetAllPackInfos",
+      "GetGameUserSettings",
+      "Init",
+      "InitializeProgression",
+      "InitializeWithGameInstance",
+      "LoadGameFromSlot",
+      "NotEqual_StriStri",
+      "PrintString",
+      "SaveGameToSlot",
+      "SetAsBackgroundInstance",
+      "SetFullscreenMode",
+      "SetModifierDataTable",
+      "SetPlayerCardDataTable",
+      "SetScreenResolution",
+      "SetStrokeSlider",
+      "SpawnObject"
+    ],
+    "fields": [
+      "",
+      "AdultToyManager",
+      "BackgroundMediaPlayer",
+      "CHPack StoreController",
+      "CallFunc_CreateSaveGameObject_ReturnValue",
+      "CallFunc_DoesSaveGameExist_ReturnValue",
+      "CallFunc_GetAllPackInfos_ReturnValue",
+      "CallFunc_GetGameUserSettings_ReturnValue",
+      "CallFunc_GetGameUserSettings_ReturnValue_1",
+      "CallFunc_GetGameUserSettings_ReturnValue_2",
+      "CallFunc_GetGameUserSettings_ReturnValue_3",
+      "CallFunc_GetGameUserSettings_ReturnValue_4",
+      "CallFunc_GetGameUserSettings_ReturnValue_5",
+      "CallFunc_GetGameUserSettings_ReturnValue_6",
+      "CallFunc_LoadGameFromSlot_ReturnValue",
+      "CallFunc_SaveGameToSlot_ReturnValue",
+      "CallFunc_SetStrokeSlider_SliderValue_ImplicitCast",
+      "CallFunc_SpawnObject_ReturnValue",
+      "CallFunc_SpawnObject_ReturnValue_1",
+      "CallFunc_SpawnObject_ReturnValue_2",
+      "CallFunc_SpawnObject_ReturnValue_3",
+      "CallFunc_SpawnObject_ReturnValue_4",
+      "CurrentSave",
+      "EntryPoint",
+      "FPSLimit",
+      "FileImportManager",
+      "FullScreenMode",
+      "HandyMaxStrokeLength",
+      "K2Node_DynamicCast_AsBP_CHSave_Game",
+      "K2Node_DynamicCast_bSuccess",
+      "K2Node_MakeStruct_IntPoint",
+      "K2Node_MakeStruct_IntPoint_1",
+      "K2Node_MakeStruct_IntPoint_2",
+      "K2Node_MakeStruct_IntPoint_3",
+      "K2Node_SwitchString_CmpSuccess",
+      "K2Node_SwitchString_CmpSuccess_1",
+      "K2Node_SwitchString_CmpSuccess_2",
+      "ProgressionManager",
+      "ResolutionSelection",
+      "SaveGameClass",
+      "SaveSlotName",
+      "StoreController",
+      "UserIndex",
+      "X",
+      "Y"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_ComputedJump",
+      "CodeOffsetExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EntryPoint",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnObject_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "SpawnObject",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -6
+          },
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "FileImportManager",
+          "owner": "BP_CHGameInstance_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnObject_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnObject_ReturnValue_3",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "SpawnObject",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -10
+          },
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ProgressionManager",
+          "owner": "BP_CHGameInstance_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnObject_ReturnValue_3",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ProgressionManager",
+          "owner": "BP_CHGameInstance_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetModifierDataTable",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -25
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ProgressionManager",
+          "owner": "BP_CHGameInstance_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetPlayerCardDataTable",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -24
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ProgressionManager",
+          "owner": "BP_CHGameInstance_C"
+        }
+      },
+      "Offset": 10,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "InitializeProgression",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "ProgressionManager",
+            "owner": "BP_CHGameInstance_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "StoreController",
+          "owner": "ProgressionManager"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "StoreController",
+            "owner": "ProgressionManager"
+          }
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CHPack StoreController",
+          "owner": "BP_CHGameInstance_C"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_DoesSaveGameExist_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "DoesSaveGameExist",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "SaveSlotName",
+              "owner": "BP_CHGameInstance_C"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UserIndex",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1832,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_DoesSaveGameExist_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_LoadGameFromSlot_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "LoadGameFromSlot",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "SaveSlotName",
+              "owner": "BP_CHGameInstance_C"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UserIndex",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHSave_Game",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "Expression": {
+        "op": "EX_DynamicCast",
+        "ClassPtr": -1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "CallFunc_LoadGameFromSlot_ReturnValue",
+            "owner": "ExecuteUbergraph_BP_CHGameInstance"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 1,
+        "Target": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_DynamicCast_AsBP_CHSave_Game",
+            "owner": "ExecuteUbergraph_BP_CHGameInstance"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3408,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_bSuccess",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CurrentSave",
+          "owner": "BP_CHGameInstance_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_DynamicCast_AsBP_CHSave_Game",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SetStrokeSlider_SliderValue_ImplicitCast",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "Expression": {
+        "op": "EX_PrimitiveCast",
+        "ConversionType": 3,
+        "Target": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "HandyMaxStrokeLength",
+            "owner": "BP_CHSaveGame_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HandyMaxStrokeLength",
+              "owner": "BP_CHSaveGame_C"
+            }
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AdultToyManager",
+          "owner": "BP_CHGameInstance_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetStrokeSlider",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_SetStrokeSlider_SliderValue_ImplicitCast",
+              "owner": "ExecuteUbergraph_BP_CHGameInstance"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "FPSLimit",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "FPSLimit",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "30"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1972,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "FPSLimit",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "FPSLimit",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "60"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 897,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "FPSLimit",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "FPSLimit",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "120"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2002,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "FPSLimit",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "FPSLimit",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "144"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2033,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "FPSLimit",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "FPSLimit",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Unlimited"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2064,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_2",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "ExecuteConsoleCommand",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "t.MaxFPS 60"
+        },
+        {
+          "op": "EX_NoObject"
+        }
+      ]
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "FullScreenMode",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "FullScreenMode",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Fullscreen"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2093,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "FullScreenMode",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "FullScreenMode",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Windowed"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1275,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "FullScreenMode",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "FullScreenMode",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "Borderless"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2189,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "No FullScreen Mode Option Found - Defaulting to Windowed."
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -67,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.6600000262260437
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 2.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue_1",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameUserSettings",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue_1",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "Offset": 12,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetFullscreenMode",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue_1",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "ApplySettings",
+        "Parameters": [
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_1",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "ResolutionSelection",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "ResolutionSelection",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "1280x720"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2285,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_1",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_1",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "ResolutionSelection",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "ResolutionSelection",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "1920x1080"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1669,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_1",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_1",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "ResolutionSelection",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "ResolutionSelection",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "2560x1440"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2448,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_1",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_1",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "CurrentSave",
+                "owner": "BP_CHGameInstance_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "ResolutionSelection",
+              "owner": "BP_CHSaveGame_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "ResolutionSelection",
+                "owner": "BP_CHSaveGame_C"
+              }
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "3840x2160"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 2611,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchString_CmpSuccess_1",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue_4",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameUserSettings",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "X",
+        "owner": "IntPoint"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "X",
+          "owner": "IntPoint"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_IntPoint_1",
+            "owner": "ExecuteUbergraph_BP_CHGameInstance"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 1920
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Y",
+        "owner": "IntPoint"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Y",
+          "owner": "IntPoint"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_IntPoint_1",
+            "owner": "ExecuteUbergraph_BP_CHGameInstance"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 1080
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue_4",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetScreenResolution",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeStruct_IntPoint_1",
+              "owner": "ExecuteUbergraph_BP_CHGameInstance"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue_4",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "Offset": 11,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "ApplyResolutionSettings",
+        "Parameters": [
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 3408
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_CreateSaveGameObject_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "CreateSaveGameObject",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CurrentSave",
+          "owner": "BP_CHGameInstance_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_CreateSaveGameObject_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Created New SaveGame"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -67,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.02633100003004074
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 5.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 451
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "ExecuteConsoleCommand",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "t.MaxFPS 30"
+        },
+        {
+          "op": "EX_NoObject"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 922
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "ExecuteConsoleCommand",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "t.MaxFPS 120"
+        },
+        {
+          "op": "EX_NoObject"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 922
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "ExecuteConsoleCommand",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "t.MaxFPS 144"
+        },
+        {
+          "op": "EX_NoObject"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 922
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "ExecuteConsoleCommand",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "t.MaxFPS 0"
+        },
+        {
+          "op": "EX_NoObject"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 922
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameUserSettings",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "Offset": 12,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetFullscreenMode",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "ApplySettings",
+        "Parameters": [
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1366
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue_2",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameUserSettings",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue_2",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "Offset": 12,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetFullscreenMode",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue_2",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "Offset": 15,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "ApplySettings",
+        "Parameters": [
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1366
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue_3",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameUserSettings",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "X",
+        "owner": "IntPoint"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "X",
+          "owner": "IntPoint"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_IntPoint",
+            "owner": "ExecuteUbergraph_BP_CHGameInstance"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 1280
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Y",
+        "owner": "IntPoint"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Y",
+          "owner": "IntPoint"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_IntPoint",
+            "owner": "ExecuteUbergraph_BP_CHGameInstance"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 720
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue_3",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetScreenResolution",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeStruct_IntPoint",
+              "owner": "ExecuteUbergraph_BP_CHGameInstance"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue_3",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "Offset": 11,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "ApplyResolutionSettings",
+        "Parameters": [
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 3408
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue_5",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameUserSettings",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "X",
+        "owner": "IntPoint"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "X",
+          "owner": "IntPoint"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_IntPoint_2",
+            "owner": "ExecuteUbergraph_BP_CHGameInstance"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 2560
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Y",
+        "owner": "IntPoint"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Y",
+          "owner": "IntPoint"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_IntPoint_2",
+            "owner": "ExecuteUbergraph_BP_CHGameInstance"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 1440
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue_5",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetScreenResolution",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeStruct_IntPoint_2",
+              "owner": "ExecuteUbergraph_BP_CHGameInstance"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue_5",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "Offset": 11,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "ApplyResolutionSettings",
+        "Parameters": [
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 3408
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue_6",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetGameUserSettings",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "X",
+        "owner": "IntPoint"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "X",
+          "owner": "IntPoint"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_IntPoint_3",
+            "owner": "ExecuteUbergraph_BP_CHGameInstance"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 3840
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Y",
+        "owner": "IntPoint"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Y",
+          "owner": "IntPoint"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_IntPoint_3",
+            "owner": "ExecuteUbergraph_BP_CHGameInstance"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_IntConst",
+        "Value": 2160
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue_6",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetScreenResolution",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeStruct_IntPoint_3",
+              "owner": "ExecuteUbergraph_BP_CHGameInstance"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetGameUserSettings_ReturnValue_6",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "Offset": 11,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "ApplyResolutionSettings",
+        "Parameters": [
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 3408
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnObject_ReturnValue_1",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "SpawnObject",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -4
+          },
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AdultToyManager",
+          "owner": "BP_CHGameInstance_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnObject_ReturnValue_1",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "AdultToyManager",
+          "owner": "BP_CHGameInstance_C"
+        }
+      },
+      "Offset": 11,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "InitializeWithGameInstance",
+        "Parameters": [
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnObject_ReturnValue_4",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "SpawnObject",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -5
+          },
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CHPack StoreController",
+          "owner": "BP_CHGameInstance_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnObject_ReturnValue_4",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "CHPack StoreController",
+            "owner": "BP_CHGameInstance_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "SaveGameClass",
+          "owner": "CHPackStoreController"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "SaveGameClass",
+            "owner": "CHPackStoreController"
+          }
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_ObjectConst",
+        "Value": -1
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CHPack StoreController",
+          "owner": "BP_CHGameInstance_C"
+        }
+      },
+      "Offset": 10,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "Init",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetAllPackInfos_ReturnValue",
+        "owner": "ExecuteUbergraph_BP_CHGameInstance"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetAllPackInfos_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "CHPack StoreController",
+            "owner": "BP_CHGameInstance_C"
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetAllPackInfos_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetAllPackInfos",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 10
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnObject_ReturnValue_2",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "SpawnObject",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -9
+          },
+          {
+            "op": "EX_Self"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "BackgroundMediaPlayer",
+          "owner": "BP_CHGameInstance_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SpawnObject_ReturnValue_2",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "BackgroundMediaPlayer",
+          "owner": "BP_CHGameInstance_C"
+        }
+      },
+      "Offset": 11,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetAsBackgroundInstance",
+        "Parameters": [
+          {
+            "op": "EX_True"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2774
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Save Succeeded"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -67,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 0.01826399937272072
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 6.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 3408
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "PrintString",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "Save Failed"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_True"
+        },
+        {
+          "op": "EX_StructConst",
+          "Struct": -67,
+          "StructSize": 16,
+          "Value": [
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": "+0"
+            },
+            {
+              "op": "EX_FloatConst",
+              "Value": 1.0
+            }
+          ]
+        },
+        {
+          "op": "EX_FloatConst",
+          "Value": 6.0
+        },
+        {
+          "op": "EX_NameConst",
+          "Value": "None"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 3408
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SaveGameToSlot_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "SaveGameToSlot",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "SaveSlotName",
+              "owner": "BP_CHGameInstance_C"
+            }
+          },
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "UserIndex",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 3206,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_SaveGameToSlot_ReturnValue",
+          "owner": "ExecuteUbergraph_BP_CHGameInstance"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 3120
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 3289
+    },
+    {
+      "op": "EX_CallMath",
+      "StackNode": "ExecuteConsoleCommand",
+      "Parameters": [
+        {
+          "op": "EX_Self"
+        },
+        {
+          "op": "EX_StringConst",
+          "Value": "DisableAllScreenMessages"
+        },
+        {
+          "op": "EX_NoObject"
+        }
+      ]
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 3033
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 3360
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

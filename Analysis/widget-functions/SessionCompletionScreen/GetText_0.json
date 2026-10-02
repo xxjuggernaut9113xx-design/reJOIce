@@ -1,0 +1,169 @@
+{
+  "function": {
+    "name": "GetText_0",
+    "statements": 8,
+    "raw_fallback": false,
+    "calls": [],
+    "fields": [
+      "As BP Global Manager",
+      "IsAllowedToCum?_93_467B5BBA4DB5A23E91E88E925D3F56A2",
+      "PlayerVariablesStruct",
+      "ReturnValue",
+      "VictoryDefeatText"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 143,
+      "BooleanExpression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "IsAllowedToCum?_93_467B5BBA4DB5A23E91E88E925D3F56A2",
+          "owner": "LegacyStats"
+        },
+        "StructExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "As BP Global Manager",
+              "owner": "SessionCompletionScreen_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "PlayerVariablesStruct",
+            "owner": "BP_GlobalManager_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "PlayerVariablesStruct",
+              "owner": "BP_GlobalManager_C"
+            }
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "VictoryDefeatText",
+        "owner": "GetText_0"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "VictoryDefeatText",
+          "owner": "GetText_0"
+        }
+      },
+      "Expression": {
+        "op": "EX_TextConst",
+        "Value": {
+          "op": "FScriptText",
+          "TextLiteralType": "LocalizedText",
+          "LocalizedSource": {
+            "op": "EX_StringConst",
+            "Value": "Victory!"
+          },
+          "LocalizedKey": {
+            "op": "EX_StringConst",
+            "Value": "5CDFDE72485A4FE2DD617087589EF691"
+          },
+          "LocalizedNamespace": {
+            "op": "EX_StringConst",
+            "Value": ""
+          },
+          "InvariantLiteralString": null,
+          "LiteralString": null,
+          "StringTableAsset": null,
+          "StringTableId": null,
+          "StringTableKey": null
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ReturnValue",
+        "owner": "GetText_0"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "GetText_0"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "VictoryDefeatText",
+          "owner": "GetText_0"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 226
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "VictoryDefeatText",
+        "owner": "GetText_0"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "VictoryDefeatText",
+          "owner": "GetText_0"
+        }
+      },
+      "Expression": {
+        "op": "EX_TextConst",
+        "Value": {
+          "op": "FScriptText",
+          "TextLiteralType": "LocalizedText",
+          "LocalizedSource": {
+            "op": "EX_StringConst",
+            "Value": "You came too early!!"
+          },
+          "LocalizedKey": {
+            "op": "EX_StringConst",
+            "Value": "D68D964045EF4C0C9739B29995C9DFB8"
+          },
+          "LocalizedNamespace": {
+            "op": "EX_StringConst",
+            "Value": ""
+          },
+          "InvariantLiteralString": null,
+          "LiteralString": null,
+          "StringTableAsset": null,
+          "StringTableId": null,
+          "StringTableKey": null
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 111
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "ReturnValue",
+          "owner": "GetText_0"
+        }
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

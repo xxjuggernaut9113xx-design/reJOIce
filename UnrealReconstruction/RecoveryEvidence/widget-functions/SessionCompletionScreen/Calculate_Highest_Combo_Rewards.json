@@ -1,0 +1,78 @@
+{
+  "function": {
+    "name": "Calculate Highest Combo Rewards",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "Divide_IntInt"
+    ],
+    "fields": [
+      "CallFunc_Divide_IntInt_ReturnValue",
+      "HighestCombo",
+      "HighestComboReward"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Divide_IntInt_ReturnValue",
+        "owner": "Calculate Highest Combo Rewards"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_IntInt_ReturnValue",
+          "owner": "Calculate Highest Combo Rewards"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Divide_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "HighestCombo",
+              "owner": "SessionCompletionScreen_C"
+            }
+          },
+          {
+            "op": "EX_IntConst",
+            "Value": 300
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "HighestComboReward",
+        "owner": "SessionCompletionScreen_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "HighestComboReward",
+          "owner": "SessionCompletionScreen_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Divide_IntInt_ReturnValue",
+          "owner": "Calculate Highest Combo Rewards"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

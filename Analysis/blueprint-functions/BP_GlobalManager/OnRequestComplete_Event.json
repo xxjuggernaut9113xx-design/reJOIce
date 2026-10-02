@@ -1,0 +1,49 @@
+{
+  "function": {
+    "name": "OnRequestComplete_Event",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_BP_GlobalManager"
+    ],
+    "fields": [
+      "K2Node_CustomEvent_Request_1",
+      "Request"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_Request_1",
+        "owner": "ExecuteUbergraph_BP_GlobalManager"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Request",
+          "owner": "OnRequestComplete_Event"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_BP_GlobalManager",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 15070
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

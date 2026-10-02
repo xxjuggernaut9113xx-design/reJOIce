@@ -1,0 +1,49 @@
+{
+  "function": {
+    "name": "SpawnEdgeBreak",
+    "statements": 4,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_BP_GlobalManager"
+    ],
+    "fields": [
+      "EdgesUntilNextMercy",
+      "K2Node_CustomEvent_EdgesUntilNextMercy"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_CustomEvent_EdgesUntilNextMercy",
+        "owner": "ExecuteUbergraph_BP_GlobalManager"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "EdgesUntilNextMercy",
+          "owner": "SpawnEdgeBreak"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_BP_GlobalManager",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 20468
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

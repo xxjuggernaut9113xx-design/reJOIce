@@ -1,0 +1,65 @@
+{
+  "function": {
+    "name": "Tick",
+    "statements": 5,
+    "raw_fallback": false,
+    "calls": [
+      "ExecuteUbergraph_WBP_XPBar"
+    ],
+    "fields": [
+      "InDeltaTime",
+      "K2Node_Event_InDeltaTime",
+      "K2Node_Event_MyGeometry",
+      "MyGeometry"
+    ]
+  },
+  "statements": [
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_Event_MyGeometry",
+        "owner": "ExecuteUbergraph_WBP_XPBar"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "MyGeometry",
+          "owner": "Tick"
+        }
+      }
+    },
+    {
+      "op": "EX_LetValueOnPersistentFrame",
+      "DestinationProperty": {
+        "field": "K2Node_Event_InDeltaTime",
+        "owner": "ExecuteUbergraph_WBP_XPBar"
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "InDeltaTime",
+          "owner": "Tick"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalFinalFunction",
+      "StackNode": "ExecuteUbergraph_WBP_XPBar",
+      "Parameters": [
+        {
+          "op": "EX_IntConst",
+          "Value": 136
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}
