@@ -62,6 +62,11 @@ FString URecoveredSaveGame::GetStringSetting(const FString& Name,const FString& 
 bool URecoveredSaveGame::SetBoolSetting(const FString& Name,bool Value) { return WriteSetting(StateJson,Name,MakeShared<FJsonValueBoolean>(Value)); }
 bool URecoveredSaveGame::SetNumberSetting(const FString& Name,double Value) { return FMath::IsFinite(Value) && WriteSetting(StateJson,Name,MakeShared<FJsonValueNumber>(Value)); }
 bool URecoveredSaveGame::SetStringSetting(const FString& Name,const FString& Value) { return WriteSetting(StateJson,Name,MakeShared<FJsonValueString>(Value)); }
+bool URecoveredSaveGame::SetStringArraySetting(const FString& Name,const TArray<FString>& Values) {
+    TArray<TSharedPtr<FJsonValue>> JsonValues;
+    for (const FString& Value : Values) JsonValues.Add(MakeShared<FJsonValueString>(Value));
+    return WriteSetting(StateJson,Name,MakeShared<FJsonValueArray>(JsonValues));
+}
 
 bool URecoveredGameInstance::LoadRecoveredSave() {
     LastSaveError.Reset();

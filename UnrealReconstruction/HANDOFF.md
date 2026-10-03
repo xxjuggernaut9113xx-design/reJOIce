@@ -1,3 +1,5 @@
+> Latest supplied-patch integration: see [RECONSTRUCTION_COMPLETION_HANDOFF.md](RECONSTRUCTION_COMPLETION_HANDOFF.md) for current build checks and unresolved features. Historical completion statements below do not establish full-game parity.
+
 # Unreal reconstruction handoff
 
 This is an editable partial reconstruction, not a complete game. The user will finish the remaining implementation. The last saved automation report (2026.10.02-17.37.27) contains 37 passed tests, zero warnings and zero failures. These results were verified from the existing report at handoff; no new test run was performed during handoff.

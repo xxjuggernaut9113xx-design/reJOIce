@@ -3,6 +3,10 @@
 #include "RecoveredSessionWidget.h"
 #include "RecoveredEventWidgets.h"
 #include "RecoveredCalibrationWidget.h"
+#include "RecoveredAudioSettings.h"
+#include "RecoveredVideoSettings.h"
+#include "RecoveredTagSettings.h"
+#include "RecoveredToySettings.h"
 #include "Dom/JsonObject.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
@@ -175,6 +179,11 @@ FString URecoveredWidgetRecovery::BuildWidgetAssets(const FString& EvidencePath)
             if(Screen.Key==TEXT("DifficultySelectScreen_Widget")) ParentClass=URecoveredDifficultyMenu::StaticClass();
             if(Screen.Key==TEXT("SettingsMenuWidget")) ParentClass=URecoveredSettingsMenu::StaticClass();
             if(Screen.Key==TEXT("VoicelineSettingsMenu")) ParentClass=URecoveredVoiceSettings::StaticClass();
+            if(Screen.Key==TEXT("AudioSettingsMenu")) ParentClass=URecoveredAudioSettingsMenu::StaticClass();
+            if(Screen.Key==TEXT("VideoSettingsMenu")) ParentClass=URecoveredVideoSettingsMenu::StaticClass();
+            if(Screen.Key==TEXT("TagSettingsMenu")) ParentClass=URecoveredTagSettingsMenu::StaticClass();
+            if(Screen.Key==TEXT("ToySettingsMenu")) ParentClass=URecoveredToySettingsMenu::StaticClass();
+
             if(!Blueprint) {
                 auto* Factory=NewObject<UWidgetBlueprintFactory>(); Factory->ParentClass=ParentClass;
                 Blueprint=Cast<UWidgetBlueprint>(Factory->FactoryCreateNew(UWidgetBlueprint::StaticClass(),Package,FName(*Screen.Key),RF_Public|RF_Standalone,nullptr,GWarn));

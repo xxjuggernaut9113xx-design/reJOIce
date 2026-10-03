@@ -69,3 +69,11 @@ $scripts = (Resolve-Path './Materials/Scripts').Path
 Close the project in the Ghidra GUI before running headless analysis. Work on a copy if you want to retain this exact checkpoint. PDB application is retained and disabled during continuation; code analysis and later pseudocode export are separate phases. A successful save does not mean every analyzer completed.
 
 For Blueprint decoding, use retoc 0.1.5 and UAssetGUI 1.1.0 with the supplied mappings and instructions in `Materials/CONTINUATION.md`. The source containers and prior decoded data are available after restoration.
+
+## Supplied patch integration (2026-10-03)
+
+Pull current `main` for the repaired source and 12 updated widget assets. See
+[the patch handoff](UnrealReconstruction/RECONSTRUCTION_COMPLETION_HANDOFF.md)
+for the fresh 39-test result and remaining limitations. Release archives and old
+reconstruction-sync reports describe the earlier transfer snapshot; current source
+and editable assets are in Git.

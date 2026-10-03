@@ -70,7 +70,7 @@ bool FRecoveredStoreBindingTest::RunTest(const FString& Parameters) {
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredAllAnimationsTest,"CockHero.Recovery.RestoredAnimationAssetReload",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
 bool FRecoveredAllAnimationsTest::RunTest(const FString& Parameters) {
     FString Text;TSharedPtr<FJsonObject> Report;
-    if (!FFileHelper::LoadFileToString(Text,*(FPaths::ProjectDir()/TEXT("Saved/all-animation-restore-report.json"))) || !FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Text),Report)) { AddError(TEXT("Missing animation recovery report"));return false; }
+    if (!FFileHelper::LoadFileToString(Text,*(FPaths::ProjectDir()/TEXT("RecoveryEvidence/animation-reload-expectations.json"))) || !FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Text),Report)) { AddError(TEXT("Missing animation recovery report"));return false; }
     int32 Screens=0,Animations=0;
     for (const auto& Pair:Report->Values) {
         auto Result=Pair.Value->AsObject();if (!Result->GetBoolField(TEXT("saved_assets"))) continue;

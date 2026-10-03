@@ -35,7 +35,11 @@ void ARecoveredGlobalManager::HandleRecoveredOutcome(const FRecoveredOutcomeEffe
     else if (Effects.OutcomeOverlaySourceIndex==-4046) Overlay=TEXT("CummingEarlySuccubus_Overlay_Widget");
     else if (Effects.OutcomeOverlaySourceIndex==-4045) Overlay=TEXT("CummingEarlyOverlay_Widget");
     SpawnRecoveredOverlay(Overlay);
-    SpawnRecoveredOverlay(TEXT("PostCumContinue_Widget"));
+    if (UUserWidget* PostCum = SpawnRecoveredOverlay(TEXT("PostCumContinue_Widget"))) {
+        BindPostGameResultsButton(PostCum);
+    }
+    // Outcome stinger: success for on-time, fail for early.
+    PlayRecoveredSessionSound(Effects.OutcomeOverlaySourceIndex == -4047 ? TEXT("Success") : TEXT("Fail"));
     if (Effects.bDelayedContinuationRequested && GetWorld()) {
         GetWorldTimerManager().SetTimer(OutcomeContinuationTimer,[this]() {
             if (BeatTimeline) BeatTimeline->ApplySpeedModifier(.7699999809265137f);
@@ -48,6 +52,7 @@ void ARecoveredGlobalManager::HandleRecoveredOutcome(const FRecoveredOutcomeEffe
 }
 
 void ARecoveredGlobalManager::PresentRecoveredBeat(const FRecoveredBeatEvent& Event) {
+    PlayRecoveredSessionSound(TEXT("BeatTick"));
     auto* Controller=UGameplayStatics::GetPlayerController(this,0);
     UClass* Class=LoadClass<UUserWidget>(nullptr,TEXT("/Game/Recovery/UI/UMG_BeatIcon.UMG_BeatIcon_C"));
     if (!Controller || !Class) return;

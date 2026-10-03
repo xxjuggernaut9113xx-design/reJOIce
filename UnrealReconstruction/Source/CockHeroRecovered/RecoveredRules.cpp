@@ -202,10 +202,55 @@ void ARecoveredGlobalManager::BeatComplete() {
     UpdateBeatCompleteMetrics();
 }
 void ARecoveredGlobalManager::HandleBeatHitCenter(const FRecoveredBeatEvent& Event) { BeatComplete(); }
+void ARecoveredGlobalManager::ApplySavedCalibrationToTimeline() {
+    if (!BeatTimeline) return;
+    double OffsetSeconds = 0;
+    if (auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance())) {
+        if (Instance->CalibrationManager && Instance->CalibrationManager->CurrentProfile.IsValid()) {
+            OffsetSeconds = Instance->CalibrationManager->GetCompensatedTimelineOffset();
+        }
+    }
+    BeatTimeline->ApplyCalibrationOffset(OffsetSeconds);
+}
+void ARecoveredGlobalManager::ApplyStoreItemEffect(FName ItemID, int32 Level) {
+    const FString ID = ItemID.ToString();
+    const float Potency = 1.0f + 0.25f * static_cast<float>(Level);
+    if (ID == TEXT("Slowdown")) {
+        if (BeatTimeline && bCanUseSlowdown) {
+            BeatTimeline->ApplySpeedModifier(0.6f);
+            bCanUseSlowdown = false;
+        }
+    } else if (ID == TEXT("BonerPill")) {
+        if (bCanUseBonerPill) {
+            PlayerVariables.bHasEdged = false;
+            bCanUseBonerPill = false;
+            URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats, ERecoveredMetric::BonerPillsUsed, 1);
+        }
+    } else if (ID == TEXT("DecreaseHeat")) {
+        AddHeat(-25.0 * Potency);
+    } else if (ID == TEXT("SuccuShield")) {
+        SuccubusShields += 1;
+    } else if (ID == TEXT("Edge")) {
+        PlayerVariables.bIsPlayerEdgeable = true;
+    } else if (ID == TEXT("Resupply")) {
+        bCanUseSlowdown = true;
+        bCanUseBonerPill = true;
+        PlayerVariables.bCanUseItems = true;
+    } else if (ID == TEXT("XCumChance")) {
+        PlayerVariables.bIsAllowedToCum = true;
+    } else if (ID == TEXT("Break")) {
+        if (BeatTimeline) BeatTimeline->PauseSequence();
+        if (MediaPlayback) MediaPlayback->SetPaused(true);
+    }
+    PlayerVariables.TotalDefenseItemUses += 1;
+    URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats, ERecoveredMetric::ItemsUsed, 1);
+    OnSessionAction.Broadcast(FName(*(FString(TEXT("StoreItemUsed_")) + ID)));
+}
 bool ARecoveredGlobalManager::StartRecoveredBeatSequence(const FRecoveredBeatPattern& Pattern, double BaseInterval, int32 StrokeCount, float SpeedModifier, double TravelTime) {
     // Bind to the live actor after subobject instancing, rather than the class-default actor.
     BeatTimeline->OnBeatHitCenter.AddUniqueDynamic(this, &ARecoveredGlobalManager::HandleBeatHitCenter);
     BeatTimeline->OnSequenceEnd.AddUniqueDynamic(this, &ARecoveredGlobalManager::CompleteBeatSequence);
+    ApplySavedCalibrationToTimeline();
     if (!BeatTimeline->StartPattern(Pattern, BaseInterval, StrokeCount, SpeedModifier, TravelTime)) return false;
     PlayerVariables.CurrentStrokeCount = StrokeCount;
     PlayerVariables.AssignedStrokeCount = StrokeCount;

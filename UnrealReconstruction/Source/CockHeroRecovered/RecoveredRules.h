@@ -185,6 +185,7 @@ public:
     UPROPERTY(Transient, BlueprintReadOnly, Category="Recovered Menu") TObjectPtr<class UUserWidget> MainMenu;
     UPROPERTY(Transient, BlueprintReadOnly, Category="Recovered Menu") FString StartupError;
     UFUNCTION(BlueprintCallable, Category="Recovered Menu") bool CreateMainMenuUI();
+    UFUNCTION(BlueprintCallable, Category="Recovered Menu") bool ReturnToMainMenu();
     UPROPERTY(Transient, BlueprintReadOnly, Category="Recovered Session") TObjectPtr<class UUserWidget> SessionScreen;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Media") FString MediaManifestPath=TEXT("C:/Users/webma/Downloads/Cock_Hero_Shipping_Build_V0.04_-_Exclusive/PrepV2/Windows/Extracted/Base_Game_CG/manifest.json");
     UFUNCTION(BlueprintCallable, Category="Recovered Session") bool InitializeRecoveredSession();
@@ -193,6 +194,7 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered") FRecoveredDifficultyConfig ActiveDifficulty;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered State") FRecoveredPlayerVariables PlayerVariables;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered State") FRecoveredSessionStats SessionStats;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered State") FRecoveredLifetimeStats LifetimeStats;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered State") double CumMeterPercentage = 0;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered State") double LootBarPercentage = 0;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered State") double LootBarMultiplier = 1;
@@ -268,12 +270,34 @@ public:
     UFUNCTION(BlueprintCallable,Category="Recovered Events") bool SpawnRecoveredStore();
     UFUNCTION() void CompleteRecoveredStoreCooldown();
     UFUNCTION() void HandleRecoveredOutcome(const FRecoveredOutcomeEffects& Effects);
+    // Post-game: session finalization, lifetime accounting, reward granting,
+    // and presentation of the recovered post-game master screen. The original
+    // ViewResultsButton routes through ExecuteUbergraph entry 67; the native
+    // binding below reproduces that routing.
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void FinalizeRecoveredSession();
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void OpenPostGameResults();
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") int32 CalculateRecoveredSessionXP() const;
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") TArray<FRecoveredReward> PrepareRecoveredSessionRewards(int32 SessionXP) const;
+    UFUNCTION() void BindPostGameResultsButton(UUserWidget* PostCumWidget);
+    UFUNCTION() void UpdateRecoveredLifetimeStats(int32 SessionXP);
+    // Reads the saved calibration profile (if any) and applies its compensated
+    // offset to the beat timeline. Called at session start and at every beat
+    // sequence start so recalibration takes effect without restarting.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Calibration") void ApplySavedCalibrationToTimeline();
+    // Applies a purchased store item's effect to the live session. Called by
+    // URecoveredStoreItemWidget after the coin deduction succeeds.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Store") void ApplyStoreItemEffect(FName ItemID, int32 Level);
+    // Audio presentation: plays session sounds (beat SFX with contextual pitch,
+    // outcome stingers) as 2D sounds scaled by the saved volume settings.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Audio") void PlayRecoveredSessionSound(FName SoundID);
+    UFUNCTION(BlueprintCallable, Category="Recovered|Audio") float GetRecoveredVolume(const FString& SettingName, float Fallback) const;
     UPROPERTY(Transient) TArray<TObjectPtr<class UUserWidget>> EventOverlays;
     FTimerHandle StoreCooldownTimer;
     FTimerHandle OutcomeContinuationTimer;
     bool StartPaceCard(uint8 Pace,bool bPlayMedia,bool bPrepare);
     UFUNCTION(BlueprintCallable,Category="Recovered|Session") bool DrawRecoveredSpecialCard(FName Event,bool bPlayMedia=true);
     FTimerHandle SessionDurationTimer;
+    bool bRecoveredSessionFinalized = false;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Outcomes") FRecoveredOutcomeEffects LastOutcomeEffects;
     UPROPERTY(BlueprintAssignable,Category="Recovered Outcomes") FRecoveredOutcomeRequested OnOutcomeRequested;
     UFUNCTION(BlueprintCallable,Category="Recovered Outcomes") void SuccessfulCum();
@@ -327,5 +351,6 @@ public:
     UFUNCTION(BlueprintCallable,Category="Recovered Save") bool SetBoolSetting(const FString& Name,bool Value);
     UFUNCTION(BlueprintCallable,Category="Recovered Save") bool SetNumberSetting(const FString& Name,double Value);
     UFUNCTION(BlueprintCallable,Category="Recovered Save") bool SetStringSetting(const FString& Name,const FString& Value);
+    UFUNCTION(BlueprintCallable,Category="Recovered Save") bool SetStringArraySetting(const FString& Name,const TArray<FString>& Values);
     // This does not implement original GVAS migration or restore original saves.
 };

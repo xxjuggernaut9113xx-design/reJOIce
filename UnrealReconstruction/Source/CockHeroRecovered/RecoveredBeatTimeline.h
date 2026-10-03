@@ -37,6 +37,11 @@ public:
     UFUNCTION(BlueprintCallable, Category="Recovered") void StopSequence();
     UFUNCTION(BlueprintCallable, Category="Recovered") bool ApplySpeedModifier(float SpeedModifier);
     UFUNCTION(BlueprintCallable, Category="Recovered") bool ApplyStrokeCountModifier(int32 Factor);
+    // Latency compensation from the calibration manager: the master timeline
+    // runs ahead by this many seconds so beats fire early enough to be
+    // perceived on time. Kept separate from TimelineOffset (pause bookkeeping).
+    UFUNCTION(BlueprintCallable, Category="Recovered") void ApplyCalibrationOffset(double OffsetSeconds);
+    UFUNCTION(BlueprintPure, Category="Recovered") double GetCalibrationOffset() const { return CalibrationOffset; }
     UFUNCTION(BlueprintPure, Category="Recovered") int32 GetBeatsRemaining() const;
     UFUNCTION(BlueprintPure, Category="Recovered") double GetMasterTimelinePosition() const;
     UFUNCTION(BlueprintPure, Category="Recovered") float GetCurrentInterval() const;
@@ -48,6 +53,7 @@ protected:
 private:
     double MasterTimeReference = 0;
     double TimelineOffset = 0;
+    double CalibrationOffset = 0;
     int32 NextFire = 0;
     int32 NextHit = 0;
     uint64 Generation = 0;

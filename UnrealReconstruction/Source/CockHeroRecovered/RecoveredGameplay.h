@@ -115,6 +115,26 @@ struct COCKHERORECOVERED_API FRecoveredSessionStats {
 };
 
 USTRUCT(BlueprintType)
+struct COCKHERORECOVERED_API FRecoveredLifetimeStats {
+    GENERATED_BODY()
+    // Accumulated across all finalized sessions.
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Lifetime") int32 TotalSessionsCompleted = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Lifetime") int32 TotalSessionsWon = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Lifetime") int32 TotalStrokes = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Lifetime") int32 TotalEdges = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Lifetime") int32 TotalSuccubiDefeated = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Lifetime") int32 TotalEnemiesDefeated = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Lifetime") int32 TotalXPEarned = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Lifetime") int32 TotalCoinsEarned = 0;
+    // Peak values: kept as the maximum ever observed, mirroring the native
+    // RecordSessionMetric lifetime-best behavior.
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Lifetime") int32 BestCombo = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Lifetime") int32 BestEdgeStreak = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Lifetime") int32 LongestSessionSeconds = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Lifetime") int32 MostStrokesInSession = 0;
+};
+
+USTRUCT(BlueprintType)
 struct COCKHERORECOVERED_API FRecoveredDeviceState {
     GENERATED_BODY()
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Device State") bool bLovense = false;

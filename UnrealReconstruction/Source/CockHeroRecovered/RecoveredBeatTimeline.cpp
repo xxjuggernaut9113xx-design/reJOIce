@@ -109,7 +109,9 @@ bool URecoveredBeatTimeline::ApplyStrokeCountModifier(int32 Factor) {
 }
 void URecoveredBeatTimeline::PauseSequence() {
     if (!bIsRunning) return;
-    TimelineOffset = GetMasterTimelinePosition();
+    // Fold only the uncalibrated position into the pause offset; the
+    // calibration offset stays separate and keeps applying after resume.
+    TimelineOffset = GetMasterTimelinePosition() - CalibrationOffset;
     MasterTimeReference = FPlatformTime::Seconds();
     bIsRunning = false;
     OnSequencePaused.Broadcast();
@@ -127,7 +129,16 @@ void URecoveredBeatTimeline::StopSequence() {
     OnSequencePaused.Broadcast();
 }
 int32 URecoveredBeatTimeline::GetBeatsRemaining() const { return FMath::Max(TotalStrokes - CompletedBeats, 0); }
-double URecoveredBeatTimeline::GetMasterTimelinePosition() const { return bIsRunning ? FPlatformTime::Seconds() - MasterTimeReference + TimelineOffset : TimelineOffset; }
+void URecoveredBeatTimeline::ApplyCalibrationOffset(double OffsetSeconds) {
+    // Latency compensation is a small positive shift; clamp to a sane range so
+    // a bad profile cannot throw the timeline off by seconds.
+    CalibrationOffset = FMath::Clamp(OffsetSeconds, 0.0, 2.0);
+}
+double URecoveredBeatTimeline::GetMasterTimelinePosition() const {
+    // The timeline runs ahead by the calibration offset so beats fire early
+    // enough to land on the player's perception of the beat.
+    return bIsRunning ? FPlatformTime::Seconds() - MasterTimeReference + TimelineOffset + CalibrationOffset : TimelineOffset + CalibrationOffset;
+}
 void URecoveredBeatTimeline::AdvanceTo(double TimelineTime) {
     if (!bIsRunning) return;
     const uint64 CurrentGeneration = Generation;
@@ -148,7 +159,7 @@ void URecoveredBeatTimeline::AdvanceTo(double TimelineTime) {
     }
     if (CompletedBeats >= TotalStrokes && NextHit >= BeatQueue.Num()) {
         bIsRunning = false;
-        TimelineOffset = TimelineTime;
+        TimelineOffset = TimelineTime - CalibrationOffset;
         // Presentation/widget teardown and the original deferred end callback remain adapters.
         OnSequenceEnd.Broadcast();
     }

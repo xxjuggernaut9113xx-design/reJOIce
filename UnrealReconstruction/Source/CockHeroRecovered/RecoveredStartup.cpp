@@ -47,7 +47,10 @@ void ARecoveredGlobalManager::BeginPlay() {
 
 bool ARecoveredGlobalManager::CreateMainMenuUI() {
     StartupError.Reset();
-    if (IsValid(MainMenu)) return true;
+    // A removed-from-viewport widget is still IsValid; only reuse the menu if
+    // it is actually on screen. Otherwise drop the stale reference and build fresh.
+    if (IsValid(MainMenu) && MainMenu->IsInViewport()) return true;
+    MainMenu = nullptr;
     APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0);
     if (!Controller) { StartupError=TEXT("Main menu requires a local player controller"); return false; }
     UClass* MenuClass=LoadClass<URecoveredMainMenu>(nullptr,TEXT("/Game/Recovery/UI/MainMenu.MainMenu_C"));
@@ -62,6 +65,43 @@ bool ARecoveredGlobalManager::CreateMainMenuUI() {
     Controller->SetInputMode(Input);
     Controller->bShowMouseCursor=true;
     return true;
+}
+
+bool ARecoveredGlobalManager::ReturnToMainMenu() {
+    // Full session teardown before returning: stop playback, clear every
+    // session timer, unbind every session delegate, remove session widgets,
+    // then rebuild the main menu. Without this, looping timers and stale
+    // delegates survive the menu return and duplicate on the next session.
+    if (BeatTimeline) BeatTimeline->StopSequence();
+    if (MediaPlayback) MediaPlayback->SetPaused(true);
+    FTimerManager& Timers = GetWorldTimerManager();
+    Timers.ClearTimer(SessionDurationTimer);
+    Timers.ClearTimer(StoreCooldownTimer);
+    Timers.ClearTimer(OutcomeContinuationTimer);
+    if (BeatTimeline) {
+        BeatTimeline->OnBeatFired.RemoveDynamic(this, &ARecoveredGlobalManager::PresentRecoveredBeat);
+        BeatTimeline->OnBeatHitCenter.RemoveDynamic(this, &ARecoveredGlobalManager::HandleBeatHitCenter);
+    }
+    OnMetricUpdateRequested.RemoveDynamic(this, &ARecoveredGlobalManager::HandleRecoveredMetric);
+    OnOutcomeRequested.RemoveDynamic(this, &ARecoveredGlobalManager::HandleRecoveredOutcome);
+    OnSessionAction.RemoveDynamic(this, &ARecoveredGlobalManager::HandleRecoveredSessionAction);
+    for (const auto& Overlay : EventOverlays) {
+        if (IsValid(Overlay)) Overlay->RemoveFromParent();
+    }
+    EventOverlays.Reset();
+    if (IsValid(SessionScreen)) {
+        SessionScreen->RemoveFromParent();
+        SessionScreen = nullptr;
+    }
+    // Reset per-session state; lifetime stats and progression persist.
+    bRecoveredSessionFinalized = false;
+    SessionStats = FRecoveredSessionStats();
+    PlayerVariables = FRecoveredPlayerVariables();
+    HeatLevel = 10.0;
+    CumMeterPercentage = 0;
+    LootBarPercentage = 0;
+    bStopSequence = false;
+    return CreateMainMenuUI();
 }
 
 bool ARecoveredGlobalManager::InitializeRecoveredSession() {
@@ -84,6 +124,7 @@ bool ARecoveredGlobalManager::InitializeRecoveredSession() {
     if (!SessionScreen) { LastSessionError=TEXT("Could not construct the recovered gameplay screen"); return false; }
     SessionScreen->AddToViewport(0);
     if (Instance->ChallengeTracker) Instance->ChallengeTracker->StartNewSession();
+    ApplySavedCalibrationToTimeline();
     BeatTimeline->OnBeatFired.AddUniqueDynamic(this,&ARecoveredGlobalManager::PresentRecoveredBeat);
     OnMetricUpdateRequested.AddUniqueDynamic(this,&ARecoveredGlobalManager::HandleRecoveredMetric);
     OnOutcomeRequested.AddUniqueDynamic(this,&ARecoveredGlobalManager::HandleRecoveredOutcome);
