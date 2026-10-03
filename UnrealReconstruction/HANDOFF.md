@@ -46,3 +46,7 @@ Asset generators can overwrite current native parents, animations or reports. Re
 ## Analysis materials
 
 The targeted slice is complete (712 matching symbols, 390 eligible functions, 390 exports); do not repeat it. Complete-image analysis and Blueprint decoding have separate coverage limits. Matching executable/PDB, original cooked containers and Ghidra databases are private release assets. See [continuation instructions](../Materials/CONTINUATION.md) and [hash manifest](../Materials/materials-manifest.json). Zero-byte .gpr markers are normal; complete .rep databases were opened read-only. Material availability does not establish full-game completion.
+
+## Transfer to another machine — October 3, 2026
+
+[START_ON_OTHER_MACHINE.md](../START_ON_OTHER_MACHINE.md) provides the download and restore commands. The local reconstruction source and assets matched this repository at transfer time. The latest release assets add the saved full-image Ghidra checkpoint (573,011 functions; 43,658,219 instructions), remaining analysis files and project media. Analysis is partial because the run timed out and encountered a heap-memory error. Rebuild Unreal on the destination machine after adjusting the four documented absolute media paths. No game-completion claim is made.

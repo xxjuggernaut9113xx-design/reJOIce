@@ -214,7 +214,7 @@
     "Ghidra_build_date": "2026-Sep-21 1613 UTC"
   },
   "original_files_modified": false,
-  "external_media_included": false,
+  "external_media_included": true,
   "existing_git_projects": [
     {
       "name": "CockHeroChallengeLifecycleOct02",
@@ -521,8 +521,8 @@
     }
   ],
   "complete_image": {
-    "release_project_name": "CockHeroV004",
-    "release_snapshot": "preserved original PDB-applied complete-image database, before long continuation",
+    "release_project_name": "CockHeroFullImageResumed",
+    "release_snapshot": "Saved resumed analysis after timeout and heap-memory exhaustion; all .rep files retained",
     "original_project_path": "C:\\Users\\webma\\analysis\\cockhero-v004\\projects\\CockHeroV004",
     "readability_passed": true,
     "before_resume_functions": 554595,
@@ -534,13 +534,28 @@
     "long_resume_project": "D:/reJOIce-materials/Projects/CockHeroFullImageResumed",
     "long_resume_analysis_timeout_seconds": 7200,
     "pdb_reapplication_disabled": true,
-    "resume_state": "running; final coverage and save outcome pending",
+    "resume_state": "saved partial analysis; timed out and encountered Java heap-memory exhaustion",
     "resume_started_utc": "2026-10-02T23:42:35.7496022Z",
-    "status_checked_utc": "2026-10-03T00:06:10.110343+00:00",
     "slice_exports_repeated": false,
     "analysis_log_path": "D:/reJOIce-materials/full-image-resume.log",
     "expected_final_status_path": "Materials/Verification/full-image-resume-status.json",
-    "previous_targeted_export_wall_seconds": 115
+    "previous_targeted_export_wall_seconds": 115,
+    "resume_functions": 573011,
+    "resume_instructions": 43658219,
+    "resume_analyzed": false,
+    "resume_timed_out": true,
+    "resume_save_succeeded": true,
+    "resume_out_of_memory": true,
+    "headless_heap_used": "2G default",
+    "recommended_continuation_heap": "8G on a machine with sufficient RAM",
+    "resume_reported_analyzer_seconds": 8309,
+    "database_cumulative_analysis_seconds": 8609.657,
+    "latest_project_name": "CockHeroFullImageResumed",
+    "latest_checkpoint_manifest": "Materials/transfer-manifest.json",
+    "latest_checkpoint_asset": "full-image-saved-analysis-20261003.zip",
+    "baseline_project_name": "CockHeroV004",
+    "baseline_release_asset": "complete-image-pdb-project-v004.zip",
+    "latest_readability_report": "Materials/Verification/full-image-transfer-verified.json"
   },
   "blueprint_coverage": {
     "unique_assets": 134,
@@ -574,7 +589,7 @@
     "read_complete_image": [
       "<GHIDRA_HEADLESS>",
       "<EXTRACTED_PROJECT_DIRECTORY>",
-      "CockHeroV004",
+      "CockHeroFullImageResumed",
       "-process",
       "CockHero.exe",
       "-readOnly",
@@ -588,7 +603,7 @@
     "resume_complete_image": [
       "<GHIDRA_HEADLESS>",
       "<COPIED_PROJECT_DIRECTORY>",
-      "CockHeroV004",
+      "CockHeroFullImageResumed",
       "-process",
       "CockHero.exe",
       "-analysisTimeoutPerFile",
@@ -623,6 +638,18 @@
       "<OUTPUT>/BP_GlobalManager-functions.json",
       "VER_UE5_3",
       "FunctionOnly"
+    ],
+    "verify_transfer": [
+      "python",
+      "Materials/Scripts/verify_downloads.py",
+      "MaterialDownloads",
+      "--manifest",
+      "Materials/transfer-manifest.json"
+    ],
+    "restore_workspace": [
+      "python",
+      "Materials/Scripts/restore_workspace.py",
+      "MaterialDownloads"
     ]
   },
   "verification": {
@@ -631,5 +658,11 @@
     "pdb_match_verified": true,
     "shipping_game_executed": false
   },
-  "original_shipping_files_rehashed_unchanged": true
+  "original_shipping_files_rehashed_unchanged": true,
+  "external_media_manifest": "Materials/transfer-manifest.json",
+  "other_machine_guide": "START_ON_OTHER_MACHINE.md",
+  "continuation_environment": {
+    "JAVA_HOME": "<JDK_24_DIRECTORY>",
+    "GHIDRA_HEADLESS_MAXMEM": "8G"
+  }
 }

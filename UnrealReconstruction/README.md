@@ -1,5 +1,7 @@
 # CockHero Unreal reconstruction — 2026-10-02
 
+**October 3 transfer:** follow [START_ON_OTHER_MACHINE.md](../START_ON_OTHER_MACHINE.md) for the complete saved workspace, release downloads, media restoration and destination-machine build setup. Source and assets were verified against the local reconstruction.
+
 The project is being handed off for the user to complete. Rust and AvtoHmver integration were cancelled. **The full game is not complete.** This is an isolated, editable partial reconstruction for Unreal Engine 5.3.2-29314046.
 
 The current saved automation report records **37 passing tests**, 0 with warnings, zero failures and zero tests left unrun. The report is `Saved/Automation/index.json`. Static fixtures cover 14,076 rule cases and 400 additional calibration cases derived from decoded instructions; they are not observations of the original executable running. New integration checks are separate from that fixture count.
