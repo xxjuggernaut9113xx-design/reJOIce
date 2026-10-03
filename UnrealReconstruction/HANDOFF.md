@@ -26,7 +26,7 @@ Check the newly generated `Saved/Automation/index.json` timestamp and counters a
 - `Content/Recovery` and `Content/NewSetup`: editable recovered assets and startup classes.
 - `RecoveryEvidence`: decoded bytecode, defaults, layouts, aliases and static verification fixtures.
 - `Scripts`: editor Python tools for selected asset restoration.
-- `Saved/all-animation-restore-report.json`: 72 restored screens, 357 animations; nine screens still need specialized callbacks.
+- `../Verification/animation-restore-report.json`: 72 restored screens, 357 animations; nine screens still need specialized callbacks.
 - `README.md` and the parent `RECOVERY_STATUS.md`: current scope and limitations.
 
 The original image manifest and image files remain external dependencies at the original Downloads location. The reconstruction uses the separate save slot `CockHeroRecovered_Standalone_v1`; original save compatibility is not implemented. Original files and saves have not been modified, and the original shipping executable has not been run.
@@ -39,6 +39,10 @@ The original image manifest and image files remain external dependencies at the 
 4. Finish settings controls, inventory actions, remaining audio presentation and specialized animation callbacks.
 5. Run fresh automation and runtime smoke checks, followed by GUI verification of navigation, playback, saves and reopening.
 
-Native postgame lifecycle evidence is in the parent `ghidra-challenge-lifecycle/runtime-helpers.c`. Postgame widget functions are in the parent `blueprint-functions` and `widget-functions` directories. Static evidence is not an observation of the original executable running.
+Native postgame lifecycle evidence is in the `../Analysis/ghidra-challenge-lifecycle/runtime-helpers.c`. Postgame widget functions are in the `../Analysis/blueprint-functions` and `../Analysis/widget-functions` directories. Static evidence is not an observation of the original executable running.
 
 Asset generators can overwrite current native parents, animations or reports. Read a script before running it; do not bulk-run historical generators. Keep engine changes confined to this project: the installed engine has not been patched.
+
+## Analysis materials
+
+The targeted slice is complete (712 matching symbols, 390 eligible functions, 390 exports); do not repeat it. Complete-image analysis and Blueprint decoding have separate coverage limits. Matching executable/PDB, original cooked containers and Ghidra databases are private release assets. See [continuation instructions](../Materials/CONTINUATION.md) and [hash manifest](../Materials/materials-manifest.json). Zero-byte .gpr markers are normal; complete .rep databases were opened read-only. Material availability does not establish full-game completion.
