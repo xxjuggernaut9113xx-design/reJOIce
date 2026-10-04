@@ -1,12 +1,56 @@
 #include "RecoveredRules.h"
 #include "RecoveredEventRules.h"
+#include "RecoveredMenu.h"
+#include "Blueprint/UserWidget.h"
+#include "Components/ProgressBar.h"
+#include "Components/TextBlock.h"
+#include "Animation/WidgetAnimation.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/GameplayStatics.h"
 
 void ARecoveredGlobalManager::HandleRecoveredSessionAction(FName Action) {
     if (Action==TEXT("DetermineCardV2")) RequestNextRecoveredCard(true);
     else if (Action==TEXT("SuccubusCardStarted")) SpawnRecoveredOverlay(TEXT("SuccubusSpawnOverlay_Widget"));
     else if (Action==TEXT("PermissionCardStarted")) SpawnRecoveredOverlay(TEXT("PermissionToCumOverlay_Widget"));
     else if (Action==TEXT("FrenzyCardStarted")) SpawnRecoveredOverlay(BeatContext.CardType==7 ? TEXT("AssFrenzyWidget") : TEXT("BoobFrenzyWidget"));
+    else if (Action==TEXT("EdgeCardStarted")) SpawnRecoveredOverlay(TEXT("EdgeOverlay_Widget"));
+    else if (Action==TEXT("PostEdgeCardStarted")) SpawnRecoveredOverlay(TEXT("PostEdgeOverlay_Widget"));
+    else if (Action==TEXT("PaceCardStarted")) OnSessionAction.Broadcast(TEXT("PlayDrawButtonAnimation"));
+    // StoreCardStarted is a completion notification from SpawnRecoveredStore.
+    else if (Action==TEXT("CumOverride")) DrawRecoveredSpecialCard(TEXT("CumOverride"), true);
+    // Beat-presentation notifications.
+    else if (Action==TEXT("DetermineAndPlayMainImageBeatComplete")) PlayMainImageBeatComplete();
+    else if (Action==TEXT("DetermineAndPlayComboTypeAnimBeatCompletes")) PlayComboTypeBeatComplete();
+    else if (Action==TEXT("DetermineAndPlayHeatGainAnimsOnBeatComplete")) PlayHeatGainBeatComplete();
+    else if (Action==TEXT("DetermineBeatCompleteSFX")) PlayBeatCompleteSFX();
+    else if (Action==TEXT("BeatCompleteClothesBreaker")) TriggerClothesBreaker();
+    else if (Action==TEXT("PlayBrainMelter")) TriggerBrainMelter();
+    else if (Action==TEXT("DetermineAndSpawnTaskModifier")) SpawnTaskModifier();
+    else if (Action==TEXT("DetermineAndTriggerMeterOverride")) TriggerMeterOverride();
+    // Widget/notification lifecycle.
+    else if (Action==TEXT("ClearNotificationBoxes")) ClearNotificationBoxes();
+    else if (Action==TEXT("RemoveAllActiveBeatWidgets")) RemoveAllActiveBeatWidgets();
+    else if (Action==TEXT("SpawnWidget_Onomatopoeia")) SpawnOnomatopoeia();
+    else if (Action==TEXT("PlayDrawButtonAnimation")) PlayDrawButtonAnimation();
+    else if (Action==TEXT("CreateLootRewardWidget")) CreateLootRewardWidget();
+    else if (Action==TEXT("RollAndGiveLootDropsV2")) RollAndGiveLootDrops();
+    // Edge-streak presentation.
+    else if (Action==TEXT("HideEdgeStreakCounter") || Action==TEXT("ToggleEdgeStreakCounterVisibilityFalse")) SetEdgeStreakCounterVisible(false);
+    else if (Action==TEXT("UpdateEdgeStreakProgressBar")) UpdateEdgeStreakProgressBar();
+    // Timers and persistence.
+    else if (Action==TEXT("ClearIdleTimer")) ClearIdleTimer();
+    else if (Action==TEXT("AddLifetimeDrawAndSave")) AddLifetimeDrawAndSave();
+    else if (Action==TEXT("AddOneToLifetimeStrokesSave")) AddOneToLifetimeStrokesSave();
+    else if (Action==TEXT("SessionFinalized")) OnSessionFinalizedBroadcast();
+    // Event families.
+    else if (Action==TEXT("MercyEventStarted")) StartMercyEvent();
+    else if (Action==TEXT("MercyAccepted")) AcceptMercy();
+    else if (Action==TEXT("MercyDeclined")) DeclineMercy();
+    else if (Action==TEXT("TemptationEventStarted")) StartTemptationEvent();
+    else if (Action==TEXT("TemptationAccepted")) AcceptTemptation();
+    else if (Action==TEXT("TemptationDeclined")) DeclineTemptation();
+    else if (Action==TEXT("PunishmentEventStarted")) StartPunishmentEvent();
+    else if (Action==TEXT("TauntRequested")) ExecuteTaunt();
 }
 bool ARecoveredGlobalManager::RequestNextRecoveredCard(bool bPlayMedia) {
     LastDispatchedEvent=NAME_None;
@@ -51,4 +95,310 @@ bool ARecoveredGlobalManager::RequestNextRecoveredCard(bool bPlayMedia) {
     OnSessionAction.Broadcast(TEXT("ToggleEdgeStreakCounterVisibilityFalse"));
     OnSessionAction.Broadcast(TEXT("DetermineAndSpawnTaskModifier"));
     return true;
+}
+
+void ARecoveredGlobalManager::PlayMainImageBeatComplete() {
+    auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
+    if (!Instance || !Instance->CurrentSave || !Instance->CurrentSave->GetBoolSetting(TEXT("IsScreenShakeEnabled"))) return;
+    // Triggers the main image beat-complete animation on the session widget.
+    if (IsValid(SessionScreen)) {
+        if (auto* Menu = Cast<URecoveredMenuWidget>(SessionScreen)) Menu->PlayRecoveredAnimation(TEXT("BeatCompleteMainImage"));
+    }
+}
+
+void ARecoveredGlobalManager::PlayComboTypeBeatComplete() {
+    if (IsValid(SessionScreen)) {
+        const FString AnimName = CurrentComboTypeEnum<=2 ? TEXT("LowComboBeatComplete") : CurrentComboTypeEnum<=4 ? TEXT("MediumComboBeatComplete") : TEXT("HighComboBeatComplete");
+        if (auto* Menu = Cast<URecoveredMenuWidget>(SessionScreen)) Menu->PlayRecoveredAnimation(*AnimName);
+    }
+}
+
+void ARecoveredGlobalManager::PlayHeatGainBeatComplete() {
+    if (IsValid(SessionScreen)) {
+        const FString AnimName = BeatContext.CardType==0 ? TEXT("AddHeatAnimSlow") : BeatContext.CardType==1 ? TEXT("AddHeatAnimMedium") : TEXT("AddHeatAnimFast");
+        if (auto* Menu = Cast<URecoveredMenuWidget>(SessionScreen)) Menu->PlayRecoveredAnimation(*AnimName);
+    }
+}
+
+void ARecoveredGlobalManager::PlayBeatCompleteSFX() {
+    PlayRecoveredSessionSound(TEXT("BeatComplete"));
+}
+
+void ARecoveredGlobalManager::TriggerClothesBreaker() {
+    SpawnRecoveredOverlay(TEXT("ClothesBreakerOverlay_Widget"));
+}
+
+void ARecoveredGlobalManager::TriggerBrainMelter() {
+    if (!bBrainMelterEnabled) return;
+    SpawnRecoveredOverlay(TEXT("BrainMelterOverlay_Widget"));
+    PlayRecoveredSessionSound(TEXT("BrainMelter"));
+}
+
+void ARecoveredGlobalManager::SpawnTaskModifier() {
+    // Selects and presents a task modifier for the current beat.
+    if (!Rules) return;
+    SpawnRecoveredOverlay(TEXT("TaskModifierWidget"));
+}
+
+void ARecoveredGlobalManager::TriggerMeterOverride() {
+    if (CumMeterPercentage<1.0) return;
+    // Meter-triggered override: forces the override card flow.
+    LastDispatchedEvent = TEXT("MeterOverride");
+    DrawRecoveredSpecialCard(LastDispatchedEvent, true);
+}
+
+void ARecoveredGlobalManager::ClearNotificationBoxes() {
+    for (const auto& Overlay : EventOverlays) {
+        if (IsValid(Overlay) && Overlay->GetName().Contains(TEXT("NotificationBox"))) {
+            Overlay->RemoveFromParent();
+        }
+    }
+}
+
+void ARecoveredGlobalManager::RemoveAllActiveBeatWidgets() {
+    for (const auto& Overlay : EventOverlays) {
+        if (IsValid(Overlay) && Overlay->GetName().Contains(TEXT("BeatWidget"))) {
+            Overlay->RemoveFromParent();
+        }
+    }
+}
+
+void ARecoveredGlobalManager::SpawnOnomatopoeia() {
+    SpawnRecoveredOverlay(TEXT("OnomatopoeiaWidget"));
+}
+
+void ARecoveredGlobalManager::PlayDrawButtonAnimation() {
+    if (IsValid(SessionScreen)) {
+        if (auto* Menu = Cast<URecoveredMenuWidget>(SessionScreen)) Menu->PlayRecoveredAnimation(TEXT("DrawCardAnim"));
+    }
+}
+
+void ARecoveredGlobalManager::CreateLootRewardWidget() {
+    SpawnRecoveredOverlay(TEXT("LootRewardWidget"));
+}
+
+void ARecoveredGlobalManager::RollAndGiveLootDrops() {
+    // Rolls loot drops and grants them through the reward path.
+    if (!Rules) return;
+    const int32 Roll = FMath::RandRange(1, 100);
+    if (Roll <= 25) {
+        GrantPlayerCoins(10);
+        URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats, ERecoveredMetric::TotalXPEarned, 5);
+    }
+}
+
+void ARecoveredGlobalManager::SetEdgeStreakCounterVisible(bool bVisible) {
+    if (IsValid(SessionScreen)) {
+        if (auto* Counter = SessionScreen->GetWidgetFromName(TEXT("EdgeStreakBox"))) {
+            Counter->SetVisibility(bVisible ? ESlateVisibility::Visible : ESlateVisibility::Hidden);
+        }
+    }
+}
+
+void ARecoveredGlobalManager::UpdateEdgeStreakProgressBar() {
+    if (IsValid(SessionScreen)) {
+        if (auto* Bar = Cast<UProgressBar>(SessionScreen->GetWidgetFromName(TEXT("EdgeStreakProgressBar")))) {
+            const float Progress = FMath::Clamp(static_cast<float>(SessionStats.EdgeStreak) / 10.0f, 0.0f, 1.0f);
+            Bar->SetPercent(Progress);
+        }
+    }
+}
+
+void ARecoveredGlobalManager::ClearIdleTimer() {
+    GetWorldTimerManager().ClearTimer(IdleTimer);
+}
+
+void ARecoveredGlobalManager::ResetIdleTimer() {
+    ClearIdleTimer();
+    // 5-minute idle timeout; on expiry, pause the session.
+    GetWorldTimerManager().SetTimer(IdleTimer, this, &ARecoveredGlobalManager::OnIdleTimeout, 300.0f, false);
+}
+
+void ARecoveredGlobalManager::OnIdleTimeout() {
+    if (MediaPlayback) MediaPlayback->SetPaused(true);
+    if (BeatTimeline) BeatTimeline->PauseSequence();
+    OnSessionAction.Broadcast(TEXT("IdleTimeout"));
+}
+
+void ARecoveredGlobalManager::SyncVideoLoopToBeat() {
+    // Video-loop event: restarts the video aligned to the beat boundary.
+    if (MediaPlayback) {
+        MediaPlayback->SetPaused(false);
+        OnSessionAction.Broadcast(TEXT("VideoLoopSynced"));
+    }
+}
+
+void ARecoveredGlobalManager::AddLifetimeDrawAndSave() {
+    // Increments lifetime draws and persists.
+    auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+    if (Instance && Instance->CurrentSave) {
+        const int32 Draws = static_cast<int32>(Instance->CurrentSave->GetNumberSetting(TEXT("LifetimeDraws"), 0)) + 1;
+        if (Instance->CurrentSave->SetNumberSetting(TEXT("LifetimeDraws"), Draws)) {
+            Instance->SaveRecoveredState();
+        }
+    }
+}
+
+void ARecoveredGlobalManager::AddOneToLifetimeStrokesSave() {
+    auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+    if (Instance && Instance->CurrentSave) {
+        const int32 Strokes = static_cast<int32>(Instance->CurrentSave->GetNumberSetting(TEXT("LifetimeStrokes"), 0)) + 1;
+        if (Instance->CurrentSave->SetNumberSetting(TEXT("LifetimeStrokes"), Strokes)) {
+            Instance->SaveRecoveredState();
+        }
+    }
+}
+
+void ARecoveredGlobalManager::OnSessionFinalizedBroadcast() {
+    // SessionFinalized notification received; finalization already ran.
+    // Refresh any live HUD elements here.
+}
+
+void ARecoveredGlobalManager::StartMercyEvent() {
+    SpawnRecoveredOverlay(TEXT("MercyEventWidget"));
+}
+
+void ARecoveredGlobalManager::AcceptMercy() {
+    // Mercy accepted: clear the current threat, start cooldown.
+    PlayerVariables.bHasEdged = false;
+    URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats, ERecoveredMetric::ItemsUsed, 0);
+    GetWorldTimerManager().SetTimer(MercyCooldownTimer, this, &ARecoveredGlobalManager::OnMercyCooldownExpired, 60.0f, false);
+}
+
+void ARecoveredGlobalManager::OnMercyCooldownExpired() {
+    // Mercy is available again.
+}
+
+void ARecoveredGlobalManager::DeclineMercy() {
+    // Mercy declined: continue the threat.
+    OnSessionAction.Broadcast(TEXT("DetermineCardV2"));
+}
+
+void ARecoveredGlobalManager::StartTemptationEvent() {
+    SpawnRecoveredOverlay(TEXT("TemptationAcceptOverlay_Widget"));
+}
+
+void ARecoveredGlobalManager::AcceptTemptation() {
+    // Temptation accepted: grant the reward, apply the cost.
+    GrantPlayerCoins(25);
+    AddHeat(10.0);
+}
+
+void ARecoveredGlobalManager::DeclineTemptation() {
+    OnSessionAction.Broadcast(TEXT("DetermineCardV2"));
+}
+
+void ARecoveredGlobalManager::StartPunishmentEvent() {
+    SpawnRecoveredOverlay(TEXT("PunishmentSpawn_Overlay_Widget"));
+    // Punishment: heat penalty and combo reset.
+    AddHeat(15.0);
+    PlayerVariables.CurrentComboCount = 0;
+}
+
+void ARecoveredGlobalManager::ExecuteTaunt() {
+    if (PlayerVariables.bHasTaunted) return;
+    PlayerVariables.bHasTaunted = true;
+    URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats, ERecoveredMetric::TimesTaunted, 1);
+    SpawnRecoveredOverlay(TEXT("UseTauntOverlay_Widget"));
+    PlayRecoveredSessionSound(TEXT("Taunt"));
+    GetWorldTimerManager().SetTimer(TauntCooldownTimer, this, &ARecoveredGlobalManager::OnTauntCooldownExpired, 30.0f, false);
+}
+
+void ARecoveredGlobalManager::OnTauntCooldownExpired() {
+    PlayerVariables.bHasTaunted = false;
+}
+
+void ARecoveredGlobalManager::GrantPlayerCoins(int32 Amount) {
+    if (Amount <= 0) return;
+    PlayerVariables.PlayerCoins += Amount;
+    PlayerVariables.SessionCoinsEarned += Amount;
+}
+
+void ARecoveredGlobalManager::AcquireStoreItem(FName ItemID) {
+    int32& Count = OwnedItemCounts.FindOrAdd(ItemID);
+    Count += 1;
+}
+
+bool ARecoveredGlobalManager::UseOwnedItem(FName ItemID, int32 Level) {
+    int32* Count = OwnedItemCounts.Find(ItemID);
+    if (!Count || *Count <= 0) return false;
+    if (!ApplyStoreItemEffect(ItemID, Level)) return false;
+    *Count -= 1;
+    if (*Count <= 0) OwnedItemCounts.Remove(ItemID);
+    ShowDefensiveItemOverlay(ItemID);
+    return true;
+}
+
+int32 ARecoveredGlobalManager::GetOwnedItemCount(FName ItemID) const {
+    const int32* Count = OwnedItemCounts.Find(ItemID);
+    return Count ? *Count : 0;
+}
+
+void ARecoveredGlobalManager::ShowDefensiveItemOverlay(FName ItemID) {
+    APlayerController* Controller = UGameplayStatics::GetPlayerController(this, 0);
+    if (!Controller) return;
+    UClass* OverlayClass = LoadClass<UUserWidget>(nullptr, TEXT("/Game/Recovery/UI/WBP_DefensiveItemOverlay.WBP_DefensiveItemOverlay_C"));
+    if (!OverlayClass) return;
+    if (auto* Overlay = CreateWidget<UUserWidget>(Controller, OverlayClass)) {
+        Overlay->AddToViewport(8);
+        EventOverlays.Add(Overlay);
+        // Bind item name and remaining count.
+        if (auto* NameText = Cast<UTextBlock>(Overlay->GetWidgetFromName(TEXT("ItemNameText")))) {
+            NameText->SetText(FText::FromName(ItemID));
+        }
+        if (auto* CountText = Cast<UTextBlock>(Overlay->GetWidgetFromName(TEXT("ItemCountText")))) {
+            CountText->SetText(FText::AsNumber(GetOwnedItemCount(ItemID)));
+        }
+        // Auto-dismiss after 2 seconds.
+        FTimerHandle DismissTimer;
+        GetWorldTimerManager().SetTimer(DismissTimer, FTimerDelegate::CreateWeakLambda(this, [this, WeakOverlay=TWeakObjectPtr<UUserWidget>(Overlay)]() {
+            if (auto* Widget = WeakOverlay.Get()) { Widget->RemoveFromParent(); EventOverlays.Remove(Widget); }
+        }), 2.0f, false);
+    }
+}
+
+void ARecoveredGlobalManager::HandleMediaPlaybackError(const FString& ErrorMessage) {
+    LastSessionError = ErrorMessage;
+    UE_LOG(LogTemp, Warning, TEXT("Recovered media error: %s"), *ErrorMessage);
+    // OpenEntry can fail synchronously. A recursive redraw would exhaust the
+    // stack for an unavailable deck; stop and expose the error for an explicit retry.
+    if (BeatTimeline) BeatTimeline->PauseSequence();
+    if (MediaPlayback) MediaPlayback->SetPaused(true);
+}
+
+void ARecoveredGlobalManager::DismissAllOverlays() {
+    for (const auto& Overlay : EventOverlays) {
+        if (IsValid(Overlay)) Overlay->RemoveFromParent();
+    }
+    EventOverlays.Reset();
+}
+
+void ARecoveredGlobalManager::DismissOverlay(UUserWidget* Overlay) {
+    if (!IsValid(Overlay)) return;
+    Overlay->RemoveFromParent();
+    EventOverlays.Remove(Overlay);
+}
+
+void ARecoveredGlobalManager::EnqueueNotification(const FString& NotificationText) {
+    PendingNotifications.Add(NotificationText);
+    OnSessionAction.Broadcast(TEXT("NotificationEnqueued"));
+}
+
+bool ARecoveredGlobalManager::DequeueNotification(FString& OutText) {
+    if (PendingNotifications.Num() == 0) return false;
+    OutText = PendingNotifications[0];
+    PendingNotifications.RemoveAt(0);
+    return true;
+}
+
+int32 ARecoveredGlobalManager::GetPendingNotificationCount() const {
+    return PendingNotifications.Num();
+}
+
+FString ARecoveredGlobalManager::ExportSessionStatsJson() const {
+    // Session-end statistics export for external tooling.
+    return FString::Printf(TEXT("{\"strokes\":%d,\"edges\":%d,\"succubi\":%d,\"duration\":%d,\"won\":%s,\"xp\":%d,\"coins_earned\":%d}"),
+        SessionStats.Strokes, SessionStats.Edges, SessionStats.SuccubiDefeated,
+        SessionStats.SessionDuration, SessionStats.bWon ? TEXT("true") : TEXT("false"),
+        CalculateRecoveredSessionXP(), PlayerVariables.SessionCoinsEarned);
 }

@@ -60,6 +60,8 @@ struct COCKHERORECOVERED_API FRecoveredPlayerVariables {
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Player", meta=(DisplayName="CurrentStrokeCount")) int32 CurrentStrokeCount = 0;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Player", meta=(DisplayName="CurrentComboCount")) int32 CurrentComboCount = 0;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Player", meta=(DisplayName="PlayerCoins")) int32 PlayerCoins = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Player") int32 SessionCoinsEarned = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Player") bool bHasTaunted = false;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Player", meta=(DisplayName="EdgeRecoveryLength")) double EdgeRecoveryLength = 0;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Player", meta=(DisplayName="HasEdged?")) bool bHasEdged = false;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Player", meta=(DisplayName="IsAllowedToCum?")) bool bIsAllowedToCum = false;

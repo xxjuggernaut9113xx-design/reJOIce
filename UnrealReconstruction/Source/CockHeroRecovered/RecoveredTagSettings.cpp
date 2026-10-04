@@ -50,15 +50,15 @@ void URecoveredTagSettingsMenu::ClearExcludedTags() {
 TArray<FString> URecoveredTagSettingsMenu::CollectAvailableTags() const {
     TSet<FString> Unique;
     auto* Manager = GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
-    if (Manager && Manager->MediaDeckState) {
-        const FRecoveredMediaDecks& Decks = Manager->MediaDeckState->Master;
-        const TArray<FRecoveredMediaEntry>* All[] = { &Decks.Slow, &Decks.Medium, &Decks.Fast, &Decks.Cum, &Decks.Succubus, &Decks.Ass };
-        for (const auto* Deck : All) {
-            for (const FRecoveredMediaEntry& Entry : *Deck) {
-                for (const FString& Tag : Entry.Tags) {
-                    if (!Tag.IsEmpty()) Unique.Add(Tag);
-                }
-            }
+    if (Manager) {
+        TArray<FRecoveredMediaEntry> Entries;
+        FString Error;
+        if (URecoveredMediaLibrary::ReadPackManifest(Manager->MediaManifestPath,Entries,Error)) {
+            for (const auto& Entry:Entries) for (const FString& Tag:Entry.Tags) if (!Tag.IsEmpty()) Unique.Add(Tag);
+        } else if (Manager->MediaDeckState) {
+            const auto& Decks=Manager->MediaDeckState->Master;
+            const TArray<FRecoveredMediaEntry>* All[]={&Decks.Slow,&Decks.Medium,&Decks.Fast,&Decks.Cum,&Decks.Succubus,&Decks.Ass,&Decks.Boobs};
+            for (const auto* Deck:All) for (const auto& Entry:*Deck) for (const auto& Tag:Entry.Tags) if (!Tag.IsEmpty()) Unique.Add(Tag);
         }
     }
     TArray<FString> Out = Unique.Array();
@@ -67,20 +67,28 @@ TArray<FString> URecoveredTagSettingsMenu::CollectAvailableTags() const {
 }
 
 void URecoveredTagSettingsMenu::BuildTagEntries() {
-    auto* Container = Cast<UPanelWidget>(GetWidgetFromName(TEXT("VertiBox1")));
-    if (!Container) return;
-    Container->ClearChildren();
+    TArray<UPanelWidget*> Columns;
+    for (const TCHAR* Name : {TEXT("VertiBox1"), TEXT("VertiBox2"), TEXT("VertiBox3")}) {
+        if (auto* Column=Cast<UPanelWidget>(GetWidgetFromName(Name))) { Column->ClearChildren(); Columns.Add(Column); }
+    }
+    if (Columns.IsEmpty()) return;
+    int32 ColumnIndex=0;
     TagToggleForwarders.Reset();
     // Load the native tag entry widget class; fall back to a checkbox+label row.
+    UClass* EntryClass=LoadClass<UUserWidget>(nullptr,TEXT("/Game/Recovery/UI/TagFilterEntry_WIDGET.TagFilterEntry_WIDGET_C"));
     const TArray<FString> Tags = CollectAvailableTags();
     for (const FString& Tag : Tags) {
-        auto* Row = NewObject<UHorizontalBox>(this);
-        auto* Check = NewObject<UCheckBox>(this);
-        auto* Label = NewObject<UTextBlock>(this);
+        UUserWidget* Entry=EntryClass && GetWorld() ? CreateWidget<UUserWidget>(GetWorld(),EntryClass) : nullptr;
+        UCheckBox* Check=Entry ? Cast<UCheckBox>(Entry->GetWidgetFromName(TEXT("CheckBox"))) : nullptr;
+        UTextBlock* Label=Entry ? Cast<UTextBlock>(Entry->GetWidgetFromName(TEXT("TagString"))) : nullptr;
+        UWidget* Row=Entry;
+        if (!Check || !Label) {
+            auto* Fallback=NewObject<UHorizontalBox>(this);
+            Check=NewObject<UCheckBox>(this);Label=NewObject<UTextBlock>(this);
+            Fallback->AddChildToHorizontalBox(Check);Fallback->AddChildToHorizontalBox(Label);Row=Fallback;
+        }
         Label->SetText(FText::FromString(Tag));
-        Row->AddChildToHorizontalBox(Check);
-        Row->AddChildToHorizontalBox(Label);
-        Container->AddChild(Row);
+        Columns[ColumnIndex++ % Columns.Num()]->AddChild(Row);
         if (Check) {
             Check->SetCheckedState(IsTagExcluded(Tag) ? ECheckBoxState::Unchecked : ECheckBoxState::Checked);
             // Dynamic delegates don't pass the sender, so each checkbox gets a
@@ -97,4 +105,12 @@ void URecoveredTagSettingsMenu::BuildTagEntries() {
 
 void URecoveredTagToggleForward::ForwardToggle(bool bChecked) {
     if (Owner) Owner->SetTagExcluded(Tag, !bChecked);
+}
+
+void URecoveredTagSettingsMenu::SelectAllTags() { ClearExcludedTags(); }
+void URecoveredTagSettingsMenu::DeselectAllTags() {
+    auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+    if (!Instance || !Instance->CurrentSave) return;
+    if (Instance->CurrentSave->SetStringArraySetting(TEXT("ExcludedTags"), CollectAvailableTags())) Instance->SaveRecoveredState();
+    InitDefaultsFromSaveGame();
 }

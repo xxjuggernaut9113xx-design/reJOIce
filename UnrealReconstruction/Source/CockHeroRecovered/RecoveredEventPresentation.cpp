@@ -4,6 +4,7 @@
 #include "Animation/WidgetAnimation.h"
 #include "Kismet/GameplayStatics.h"
 #include "TimerManager.h"
+#include "Misc/PackageName.h"
 
 UUserWidget* ARecoveredGlobalManager::SpawnRecoveredOverlay(FName ScreenName) {
     if (ScreenName.IsNone() || !GetWorld()) return nullptr;
@@ -11,6 +12,7 @@ UUserWidget* ARecoveredGlobalManager::SpawnRecoveredOverlay(FName ScreenName) {
     if (!Controller) return nullptr;
     const FString Name=ScreenName.ToString();
     const FString Path=TEXT("/Game/Recovery/UI/")+Name+TEXT(".")+Name+TEXT("_C");
+    if (!FPackageName::DoesPackageExist(TEXT("/Game/Recovery/UI/")+Name)) { LastSessionError=TEXT("Overlay asset is unavailable: ")+Name; return nullptr; }
     UClass* Class=LoadClass<UUserWidget>(nullptr,*Path);
     if (!Class) return nullptr;
     auto* Widget=CreateWidget<UUserWidget>(Controller,Class);

@@ -18,28 +18,28 @@ const FAudioSliderDef GAudioSliders[] = {
 
 void URecoveredAudioSettingsMenu::BindControls(bool bBind) {
     if (auto* Slider = Cast<USlider>(GetWidgetFromName(TEXT("BackgroundMusicVolSlider")))) {
-        if (bBind) Slider->OnMouseCaptureEnd.AddUniqueDynamic(this, &URecoveredAudioSettingsMenu::OnMusicSliderCommitted);
-        else Slider->OnMouseCaptureEnd.RemoveDynamic(this, &URecoveredAudioSettingsMenu::OnMusicSliderCommitted);
+        if (bBind) { Slider->OnMouseCaptureEnd.AddUniqueDynamic(this, &URecoveredAudioSettingsMenu::OnMusicSliderCommitted); Slider->OnControllerCaptureEnd.AddUniqueDynamic(this, &URecoveredAudioSettingsMenu::OnMusicSliderCommitted); }
+        else { Slider->OnMouseCaptureEnd.RemoveDynamic(this, &URecoveredAudioSettingsMenu::OnMusicSliderCommitted); Slider->OnControllerCaptureEnd.RemoveDynamic(this, &URecoveredAudioSettingsMenu::OnMusicSliderCommitted); }
     }
     if (auto* Slider = Cast<USlider>(GetWidgetFromName(TEXT("SFXVolSlider")))) {
-        if (bBind) Slider->OnMouseCaptureEnd.AddUniqueDynamic(this, &URecoveredAudioSettingsMenu::OnSFXSliderCommitted);
-        else Slider->OnMouseCaptureEnd.RemoveDynamic(this, &URecoveredAudioSettingsMenu::OnSFXSliderCommitted);
+        if (bBind) { Slider->OnMouseCaptureEnd.AddUniqueDynamic(this, &URecoveredAudioSettingsMenu::OnSFXSliderCommitted); Slider->OnControllerCaptureEnd.AddUniqueDynamic(this, &URecoveredAudioSettingsMenu::OnSFXSliderCommitted); }
+        else { Slider->OnMouseCaptureEnd.RemoveDynamic(this, &URecoveredAudioSettingsMenu::OnSFXSliderCommitted); Slider->OnControllerCaptureEnd.RemoveDynamic(this, &URecoveredAudioSettingsMenu::OnSFXSliderCommitted); }
     }
     if (auto* Slider = Cast<USlider>(GetWidgetFromName(TEXT("MoansVolSlider")))) {
-        if (bBind) Slider->OnMouseCaptureEnd.AddUniqueDynamic(this, &URecoveredAudioSettingsMenu::OnMoansSliderCommitted);
-        else Slider->OnMouseCaptureEnd.RemoveDynamic(this, &URecoveredAudioSettingsMenu::OnMoansSliderCommitted);
+        if (bBind) { Slider->OnMouseCaptureEnd.AddUniqueDynamic(this, &URecoveredAudioSettingsMenu::OnMoansSliderCommitted); Slider->OnControllerCaptureEnd.AddUniqueDynamic(this, &URecoveredAudioSettingsMenu::OnMoansSliderCommitted); }
+        else { Slider->OnMouseCaptureEnd.RemoveDynamic(this, &URecoveredAudioSettingsMenu::OnMoansSliderCommitted); Slider->OnControllerCaptureEnd.RemoveDynamic(this, &URecoveredAudioSettingsMenu::OnMoansSliderCommitted); }
     }
     if (auto* Slider = Cast<USlider>(GetWidgetFromName(TEXT("VoicelinesVolSlider")))) {
-        if (bBind) Slider->OnMouseCaptureEnd.AddUniqueDynamic(this, &URecoveredAudioSettingsMenu::OnVoicelinesSliderCommitted);
-        else Slider->OnMouseCaptureEnd.RemoveDynamic(this, &URecoveredAudioSettingsMenu::OnVoicelinesSliderCommitted);
+        if (bBind) { Slider->OnMouseCaptureEnd.AddUniqueDynamic(this, &URecoveredAudioSettingsMenu::OnVoicelinesSliderCommitted); Slider->OnControllerCaptureEnd.AddUniqueDynamic(this, &URecoveredAudioSettingsMenu::OnVoicelinesSliderCommitted); }
+        else { Slider->OnMouseCaptureEnd.RemoveDynamic(this, &URecoveredAudioSettingsMenu::OnVoicelinesSliderCommitted); Slider->OnControllerCaptureEnd.RemoveDynamic(this, &URecoveredAudioSettingsMenu::OnVoicelinesSliderCommitted); }
     }
     if (auto* Slider = Cast<USlider>(GetWidgetFromName(TEXT("ContextBeatSFXVolSlider")))) {
-        if (bBind) Slider->OnMouseCaptureEnd.AddUniqueDynamic(this, &URecoveredAudioSettingsMenu::OnBeatSFXSliderCommitted);
-        else Slider->OnMouseCaptureEnd.RemoveDynamic(this, &URecoveredAudioSettingsMenu::OnBeatSFXSliderCommitted);
+        if (bBind) { Slider->OnMouseCaptureEnd.AddUniqueDynamic(this, &URecoveredAudioSettingsMenu::OnBeatSFXSliderCommitted); Slider->OnControllerCaptureEnd.AddUniqueDynamic(this, &URecoveredAudioSettingsMenu::OnBeatSFXSliderCommitted); }
+        else { Slider->OnMouseCaptureEnd.RemoveDynamic(this, &URecoveredAudioSettingsMenu::OnBeatSFXSliderCommitted); Slider->OnControllerCaptureEnd.RemoveDynamic(this, &URecoveredAudioSettingsMenu::OnBeatSFXSliderCommitted); }
     }
     if (auto* Slider = Cast<USlider>(GetWidgetFromName(TEXT("MetronomeVolSlider")))) {
-        if (bBind) Slider->OnMouseCaptureEnd.AddUniqueDynamic(this, &URecoveredAudioSettingsMenu::OnMetronomeSliderCommitted);
-        else Slider->OnMouseCaptureEnd.RemoveDynamic(this, &URecoveredAudioSettingsMenu::OnMetronomeSliderCommitted);
+        if (bBind) { Slider->OnMouseCaptureEnd.AddUniqueDynamic(this, &URecoveredAudioSettingsMenu::OnMetronomeSliderCommitted); Slider->OnControllerCaptureEnd.AddUniqueDynamic(this, &URecoveredAudioSettingsMenu::OnMetronomeSliderCommitted); }
+        else { Slider->OnMouseCaptureEnd.RemoveDynamic(this, &URecoveredAudioSettingsMenu::OnMetronomeSliderCommitted); Slider->OnControllerCaptureEnd.RemoveDynamic(this, &URecoveredAudioSettingsMenu::OnMetronomeSliderCommitted); }
     }
 }
 

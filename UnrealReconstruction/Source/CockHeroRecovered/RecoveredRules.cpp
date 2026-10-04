@@ -1,6 +1,8 @@
 #include "RecoveredRules.h"
 #include "DataTableUtils.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/GameplayStatics.h"
+#include "Blueprint/UserWidget.h"
 #include "RecoveredEventRules.h"
 #include "RecoveredChallengeTracker.h"
 
@@ -8,10 +10,13 @@ void URecoveredGameInstance::Init() {
     Super::Init();
     // Reconstruction plumbing; original loading/challenge initialization is still separate.
     ProgressionManager=NewObject<URecoveredProgressionManager>(this);
+    DeviceManager=NewObject<URecoveredDeviceManager>(this);
     ProgressionManager->LevelDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_LevelData.DT_LevelData"));
     ProgressionManager->PlayerCardDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_PlayerCards.DT_PlayerCards"));
     ProgressionManager->ModifierDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_Modifiers.DT_Modifiers"));
     LoadRecoveredSave();
+    CalibrationManager=NewObject<URecoveredCalibrationManager>(this);
+    if (CurrentSave) CurrentSave->GetLatencyProfile(CalibrationManager->CurrentProfile);
     if (CurrentSave) {
         const FString State=CurrentSave->GetStringSetting(TEXT("RecoveryProgressionState"),TEXT(""));
         const bool bHasState=CurrentSave->HasSetting(TEXT("RecoveryProgressionState"));
@@ -129,6 +134,7 @@ void ARecoveredGlobalManager::AddHeat(double HeatAdd) {
 }
 void ARecoveredGlobalManager::AddCoins(int32 Coins) {
     const int32 Earned = URecoveredStateRuleLibrary::AddCoinsToState(PlayerVariables, Coins);
+    if (Earned>0) PlayerVariables.SessionCoinsEarned=URecoveredStateRuleLibrary::AddInt32Wrapping(PlayerVariables.SessionCoinsEarned,Earned);
     OnCoinsAdded.Broadcast(Earned, PlayerVariables.PlayerCoins);
 }
 void ARecoveredGlobalManager::AddToCumMeter(double Amount) {
@@ -212,39 +218,50 @@ void ARecoveredGlobalManager::ApplySavedCalibrationToTimeline() {
     }
     BeatTimeline->ApplyCalibrationOffset(OffsetSeconds);
 }
-void ARecoveredGlobalManager::ApplyStoreItemEffect(FName ItemID, int32 Level) {
+bool ARecoveredGlobalManager::ApplyStoreItemEffect(FName ItemID, int32 Level) {
     const FString ID = ItemID.ToString();
     const float Potency = 1.0f + 0.25f * static_cast<float>(Level);
+    bool bApplied = false;
     if (ID == TEXT("Slowdown")) {
         if (BeatTimeline && bCanUseSlowdown) {
             BeatTimeline->ApplySpeedModifier(0.6f);
             bCanUseSlowdown = false;
+            bApplied = true;
         }
     } else if (ID == TEXT("BonerPill")) {
         if (bCanUseBonerPill) {
             PlayerVariables.bHasEdged = false;
             bCanUseBonerPill = false;
             URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats, ERecoveredMetric::BonerPillsUsed, 1);
+            bApplied = true;
         }
     } else if (ID == TEXT("DecreaseHeat")) {
         AddHeat(-25.0 * Potency);
+        bApplied = true;
     } else if (ID == TEXT("SuccuShield")) {
         SuccubusShields += 1;
+        bApplied = true;
     } else if (ID == TEXT("Edge")) {
         PlayerVariables.bIsPlayerEdgeable = true;
+        bApplied = true;
     } else if (ID == TEXT("Resupply")) {
         bCanUseSlowdown = true;
         bCanUseBonerPill = true;
         PlayerVariables.bCanUseItems = true;
+        bApplied = true;
     } else if (ID == TEXT("XCumChance")) {
         PlayerVariables.bIsAllowedToCum = true;
+        bApplied = true;
     } else if (ID == TEXT("Break")) {
         if (BeatTimeline) BeatTimeline->PauseSequence();
         if (MediaPlayback) MediaPlayback->SetPaused(true);
+        bApplied = true;
     }
+    if (!bApplied) return false;
     PlayerVariables.TotalDefenseItemUses += 1;
     URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats, ERecoveredMetric::ItemsUsed, 1);
     OnSessionAction.Broadcast(FName(*(FString(TEXT("StoreItemUsed_")) + ID)));
+    return true;
 }
 bool ARecoveredGlobalManager::StartRecoveredBeatSequence(const FRecoveredBeatPattern& Pattern, double BaseInterval, int32 StrokeCount, float SpeedModifier, double TravelTime) {
     // Bind to the live actor after subobject instancing, rather than the class-default actor.
@@ -282,7 +299,11 @@ bool ARecoveredGlobalManager::LoadMediaPack(const FString& ManifestPath,const TA
     if(!MediaDeckState) MediaDeckState=NewObject<URecoveredDeckState>(this);
     MediaDeckState->Master=URecoveredMediaLibrary::FilterMedia(Entries,ExcludedTags,BeatContext.ActiveModifiers.Contains(TEXT("Ass Fanatic")),BeatContext.ActiveModifiers.Contains(TEXT("Boobs Fanatic")),BeatContext.ActiveModifiers.Contains(TEXT("Feet Fanatic")));
     MediaDeckState->SetChildDecks();
-    if(!MediaPlayback) MediaPlayback=NewObject<URecoveredMediaPlayback>(this);
+    if(!MediaPlayback) {
+        MediaPlayback=NewObject<URecoveredMediaPlayback>(this);
+        MediaPlayback->SetLooping(bVideoLoopEnabled);
+        MediaPlayback->OnMediaError.AddUniqueDynamic(this, &ARecoveredGlobalManager::HandleMediaPlaybackError);
+    }
     return true;
 }
 bool ARecoveredGlobalManager::DrawPaceCard(uint8 Pace,bool bPlayMedia) {
@@ -343,4 +364,63 @@ bool ARecoveredGlobalManager::PrepareDrawState() {
     BeatContext.HeatCategory=URecoveredEventRuleLibrary::RefreshHeatCategory(HeatLevel,BeatContext.HeatCategory);
     bStopSequence=false;
     return true;
+}
+
+void ARecoveredGlobalManager::SetMediaPackEnabled(const FString& PackID, bool bEnabled) {
+    MediaPackEnabled.Add(PackID, bEnabled);
+    if (auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance())) {
+        if (Instance->CurrentSave) {
+            TArray<FString> Disabled;
+            for (const auto& Pair : MediaPackEnabled) {
+                if (!Pair.Value) Disabled.Add(Pair.Key);
+            }
+            if (Instance->CurrentSave->SetStringArraySetting(TEXT("DisabledMediaPacks"), Disabled)) {
+                Instance->SaveRecoveredState();
+            }
+        }
+    }
+}
+
+bool ARecoveredGlobalManager::IsMediaPackEnabled(const FString& PackID) const {
+    const bool* bEnabled = MediaPackEnabled.Find(PackID);
+    return bEnabled ? *bEnabled : true; // Default enabled.
+}
+
+void ARecoveredGlobalManager::SetMediaPackPriority(const FString& PackID, int32 Priority) {
+    MediaPackPriority.Add(PackID, Priority);
+}
+
+TArray<FString> ARecoveredGlobalManager::GetEnabledMediaPacks() const {
+    TArray<FString> Enabled;
+    for (const auto& Pair : MediaPackEnabled) {
+        if (Pair.Value) Enabled.Add(Pair.Key);
+    }
+    // Sort by priority (lower first).
+    Enabled.Sort([this](const FString& A, const FString& B) {
+        const int32* PA = MediaPackPriority.Find(A);
+        const int32* PB = MediaPackPriority.Find(B);
+        return (PA ? *PA : 0) < (PB ? *PB : 0);
+    });
+    return Enabled;
+}
+
+void ARecoveredGlobalManager::LaunchCalibrationFlow() {
+    APlayerController* Controller = UGameplayStatics::GetPlayerController(this, 0);
+    if (!Controller) return;
+    UClass* CalibClass = LoadClass<UUserWidget>(nullptr, TEXT("/Game/Recovery/UI/WBP_CalibrationUI.WBP_CalibrationUI_C"));
+    if (!CalibClass) return;
+    if (auto* Calib = CreateWidget<UUserWidget>(Controller, CalibClass)) {
+        Calib->AddToViewport(10);
+        EventOverlays.Add(Calib);
+        OnSessionAction.Broadcast(TEXT("CalibrationLaunched"));
+    }
+}
+
+void ARecoveredGlobalManager::SetVideoLoopEnabled(bool bEnabled) {
+    bVideoLoopEnabled = bEnabled;
+    if (MediaPlayback) MediaPlayback->SetLooping(bEnabled);
+}
+
+bool ARecoveredGlobalManager::IsVideoLoopEnabled() const {
+    return bVideoLoopEnabled;
 }

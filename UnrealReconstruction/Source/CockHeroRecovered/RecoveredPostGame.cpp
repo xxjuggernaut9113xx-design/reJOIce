@@ -1,6 +1,7 @@
 #include "RecoveredRules.h"
 #include "RecoveredRewards.h"
 #include "RecoveredProgression.h"
+#include "RecoveredChallengeTracker.h"
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
 #include "Components/PanelWidget.h"
@@ -23,6 +24,12 @@ void ARecoveredGlobalManager::BindPostGameResultsButton(UUserWidget* PostCumWidg
 
 void ARecoveredGlobalManager::OpenPostGameResults() {
     if (!GetWorld()) return;
+    // Deduplicate: don't open a second results screen if one is already up.
+    for (const auto& Overlay : EventOverlays) {
+        if (IsValid(Overlay) && Overlay->GetName().Contains(TEXT("PostGameFlow_Master"))) {
+            return;
+        }
+    }
     // Finalize first so the results screen presents finalized numbers.
     FinalizeRecoveredSession();
     // Hide the continue widget; it served its purpose once results open.
@@ -49,9 +56,14 @@ void ARecoveredGlobalManager::BindPostGameResultsData(UUserWidget* Results) {
     // Build the display texts from the native-confirmed builders.
     const int32 SessionXP = CalculateRecoveredSessionXP();
     const TArray<FRecoveredReward> Rewards = PrepareRecoveredSessionRewards(SessionXP);
+    FRecoveredSessionRewardData RewardData;
+    RewardData.XPGranted = SessionXP;
+    RewardData.Rewards = Rewards;
     const FText LifetimeText = URecoveredProgressionLibrary::GetLifetimeStatsText(LifetimeStats);
-    const FText RewardsText = URecoveredProgressionLibrary::GetRewardsText(Rewards);
+    const FText RewardsText = URecoveredProgressionLibrary::GetRewardsText(RewardData);
     const FText XPText = FText::AsNumber(SessionXP);
+    const FText DurationText = FText::FromString(FString::Printf(TEXT("%d:%02d"), SessionStats.SessionDuration / 60, SessionStats.SessionDuration % 60));
+    const FText ResultText = FText::FromString(SessionStats.bWon ? TEXT("Victory") : TEXT("Defeat"));
     // Bind defensively: set any text block whose name matches the data role.
     // Field names come from the native widget; only existing widgets are touched.
     TArray<UWidget*> AllWidgets;
@@ -61,9 +73,22 @@ void ARecoveredGlobalManager::BindPostGameResultsData(UUserWidget* Results) {
             const FString Name = Text->GetName();
             if (Name.Contains(TEXT("Lifetime")) || Name.Contains(TEXT("Stats"))) Text->SetText(LifetimeText);
             else if (Name.Contains(TEXT("Reward"))) Text->SetText(RewardsText);
+            else if (Name.Contains(TEXT("Duration")) || Name.Contains(TEXT("TimePlayed"))) Text->SetText(DurationText);
+            else if (Name.Contains(TEXT("Result")) || Name.Contains(TEXT("Outcome"))) Text->SetText(ResultText);
             else if (Name.Contains(TEXT("XP")) && !Name.Contains(TEXT("Lifetime"))) Text->SetText(XPText);
         }
+        // Wire return-to-menu buttons: the results screen's menu return control.
+        if (auto* Button = Cast<UButton>(W)) {
+            const FString Name = Button->GetName();
+            if (Name.Contains(TEXT("ReturnToMenu")) || Name.Contains(TEXT("MainMenu")) || Name.Contains(TEXT("MenuButton"))) {
+                Button->OnClicked.AddUniqueDynamic(this, &ARecoveredGlobalManager::HandleReturnToMenuClicked);
+            }
+        }
     }
+}
+
+void ARecoveredGlobalManager::HandleReturnToMenuClicked() {
+    ReturnToMainMenu();
 }
 
 int32 ARecoveredGlobalManager::CalculateRecoveredSessionXP() const {
@@ -71,7 +96,6 @@ int32 ARecoveredGlobalManager::CalculateRecoveredSessionXP() const {
 }
 
 TArray<FRecoveredReward> ARecoveredGlobalManager::PrepareRecoveredSessionRewards(int32 SessionXP) const {
-    // Verified XP only. Additional post-game rewards remain unresolved.
     TArray<FRecoveredReward> Rewards;
     if (SessionXP > 0) {
         FRecoveredReward XPReward;
@@ -79,7 +103,13 @@ TArray<FRecoveredReward> ARecoveredGlobalManager::PrepareRecoveredSessionRewards
         XPReward.Value = SessionXP;
         Rewards.Add(XPReward);
     }
-    // Additional reward quantities have not been verified; do not invent bonuses.
+    // Coins earned during the session (tracked separately from the spendable balance).
+    if (PlayerVariables.SessionCoinsEarned > 0) {
+        FRecoveredReward CoinReward;
+        CoinReward.RewardType = TEXT("Coins");
+        CoinReward.Value = PlayerVariables.SessionCoinsEarned;
+        Rewards.Add(CoinReward);
+    }
     return Rewards;
 }
 
@@ -94,7 +124,7 @@ void ARecoveredGlobalManager::UpdateRecoveredLifetimeStats(int32 SessionXP) {
     LifetimeStats.TotalSuccubiDefeated += S.SuccubiDefeated;
     LifetimeStats.TotalEnemiesDefeated += S.EnemiesDefeated;
     LifetimeStats.TotalXPEarned += SessionXP;
-    LifetimeStats.TotalCoinsEarned += PlayerVariables.PlayerCoins;
+    LifetimeStats.TotalCoinsEarned += PlayerVariables.SessionCoinsEarned;
     LifetimeStats.BestCombo = FMath::Max(LifetimeStats.BestCombo, S.MaxCombo);
     LifetimeStats.BestEdgeStreak = FMath::Max(LifetimeStats.BestEdgeStreak, S.EdgeStreak);
     LifetimeStats.LongestSessionSeconds = FMath::Max(LifetimeStats.LongestSessionSeconds, S.SessionDuration);
@@ -118,30 +148,46 @@ void ARecoveredGlobalManager::SaveLifetimeStats() {
     Save->SetNumberSetting(TEXT("Lifetime_BestEdgeStreak"), LifetimeStats.BestEdgeStreak);
     Save->SetNumberSetting(TEXT("Lifetime_LongestSessionSeconds"), LifetimeStats.LongestSessionSeconds);
     Save->SetNumberSetting(TEXT("Lifetime_MostStrokesInSession"), LifetimeStats.MostStrokesInSession);
-    Instance->SaveRecoveredState();
+    if (!Instance->SaveRecoveredState()) HandleSaveFailure(TEXT("Lifetime stats failed to persist"));
+}
+
+void ARecoveredGlobalManager::HandleSaveFailure(const FString& Context) {
+    LastSessionError = FString::Printf(TEXT("Save failed: %s"), *Context);
+    UE_LOG(LogTemp, Error, TEXT("Recovered save failure: %s"), *Context);
+    OnSessionAction.Broadcast(TEXT("SaveFailed"));
 }
 
 void ARecoveredGlobalManager::LoadLifetimeStats() {
     auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
     if (!Instance || !Instance->CurrentSave) return;
     URecoveredSaveGame* Save = Instance->CurrentSave;
-    LifetimeStats.TotalSessionsCompleted = (int32)Save->GetNumberSetting(TEXT("Lifetime_TotalSessionsCompleted"), 0);
-    LifetimeStats.TotalSessionsWon = (int32)Save->GetNumberSetting(TEXT("Lifetime_TotalSessionsWon"), 0);
-    LifetimeStats.TotalStrokes = (int32)Save->GetNumberSetting(TEXT("Lifetime_TotalStrokes"), 0);
-    LifetimeStats.TotalEdges = (int32)Save->GetNumberSetting(TEXT("Lifetime_TotalEdges"), 0);
-    LifetimeStats.TotalSuccubiDefeated = (int32)Save->GetNumberSetting(TEXT("Lifetime_TotalSuccubiDefeated"), 0);
-    LifetimeStats.TotalEnemiesDefeated = (int32)Save->GetNumberSetting(TEXT("Lifetime_TotalEnemiesDefeated"), 0);
-    LifetimeStats.TotalXPEarned = (int32)Save->GetNumberSetting(TEXT("Lifetime_TotalXPEarned"), 0);
-    LifetimeStats.TotalCoinsEarned = (int32)Save->GetNumberSetting(TEXT("Lifetime_TotalCoinsEarned"), 0);
-    LifetimeStats.BestCombo = (int32)Save->GetNumberSetting(TEXT("Lifetime_BestCombo"), 0);
-    LifetimeStats.BestEdgeStreak = (int32)Save->GetNumberSetting(TEXT("Lifetime_BestEdgeStreak"), 0);
-    LifetimeStats.LongestSessionSeconds = (int32)Save->GetNumberSetting(TEXT("Lifetime_LongestSessionSeconds"), 0);
-    LifetimeStats.MostStrokesInSession = (int32)Save->GetNumberSetting(TEXT("Lifetime_MostStrokesInSession"), 0);
+    auto ReadCounter=[Save](const TCHAR* Key) {
+        const double Value=Save->GetNumberSetting(Key,0);
+        return FMath::IsFinite(Value) && Value>=0 && Value<=MAX_int32 && Value==FMath::FloorToDouble(Value) ? static_cast<int32>(Value) : 0;
+    };
+    LifetimeStats.TotalSessionsCompleted = ReadCounter(TEXT("Lifetime_TotalSessionsCompleted"));
+    LifetimeStats.TotalSessionsWon = ReadCounter(TEXT("Lifetime_TotalSessionsWon"));
+    LifetimeStats.TotalStrokes = ReadCounter(TEXT("Lifetime_TotalStrokes"));
+    LifetimeStats.TotalEdges = ReadCounter(TEXT("Lifetime_TotalEdges"));
+    LifetimeStats.TotalSuccubiDefeated = ReadCounter(TEXT("Lifetime_TotalSuccubiDefeated"));
+    LifetimeStats.TotalEnemiesDefeated = ReadCounter(TEXT("Lifetime_TotalEnemiesDefeated"));
+    LifetimeStats.TotalXPEarned = ReadCounter(TEXT("Lifetime_TotalXPEarned"));
+    LifetimeStats.TotalCoinsEarned = ReadCounter(TEXT("Lifetime_TotalCoinsEarned"));
+    LifetimeStats.BestCombo = ReadCounter(TEXT("Lifetime_BestCombo"));
+    LifetimeStats.BestEdgeStreak = ReadCounter(TEXT("Lifetime_BestEdgeStreak"));
+    LifetimeStats.LongestSessionSeconds = ReadCounter(TEXT("Lifetime_LongestSessionSeconds"));
+    LifetimeStats.MostStrokesInSession = ReadCounter(TEXT("Lifetime_MostStrokesInSession"));
 }
 
 void ARecoveredGlobalManager::FinalizeRecoveredSession() {
     if (bRecoveredSessionFinalized || !GetWorld()) return;
     bRecoveredSessionFinalized = true;
+    // Populate derived session fields BEFORE accounting reads them.
+    // Use the recorded outcome; an untouched session is not a win.
+    SessionStats.bWon = SessionStats.SessionsWon > 0;
+    // The XP calculation reads SessionStats.ActiveModifiers; gameplay loads
+    // modifiers into BeatContext.ActiveModifiers. Connect them here.
+    SessionStats.ActiveModifiers = BeatContext.ActiveModifiers;
     // Session finalization, in order: stop the running session, compute the
     // session XP, roll lifetime accounting, grant rewards through the native
     // consumers, then persist. The results screen is presented separately by
@@ -157,12 +203,24 @@ void ARecoveredGlobalManager::FinalizeRecoveredSession() {
     auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
     URecoveredProgressionManager* Progression = Instance ? Instance->ProgressionManager : nullptr;
     if (Progression) {
+        // Subscribe to level-up for presentation before granting XP.
+        Progression->OnLevelUp.AddUniqueDynamic(this, &ARecoveredGlobalManager::HandleRecoveredLevelUp);
         Progression->AddXP(SessionXP, TEXT("Session Complete"));
         if (Instance) Instance->PersistRecoveredProgression();
     }
 
     SessionStats.SessionsCompleted += 1;
-    if (SessionStats.bWon) SessionStats.SessionsWon += 1;
+    // The outcome already recorded SessionsWon; do not count it twice.
+    // End-session challenge updates: push final metrics for all tracked stats.
+    if (Instance && Instance->ChallengeTracker) {
+        URecoveredChallengeTracker* Tracker = Instance ? Instance->ChallengeTracker.Get() : nullptr;
+        const int32 Elapsed = SessionStats.SessionDuration;
+        const float WorldSeconds = GetWorld() ? GetWorld()->GetTimeSeconds() : 0.0f;
+        // Per-event totals were already delivered to lifetime challenges during
+        // play. Replaying them here would double their accumulated progress.
+        Tracker->UpdateMetricWithConditions(ERecoveredMetric::SessionsCompleted, 1, SessionStats, SessionStats.ActiveModifiers, Elapsed, WorldSeconds);
+    }
+    if (Instance && !Instance->PersistRecoveredProgression()) HandleSaveFailure(TEXT("Final session state failed to persist"));
     OnSessionAction.Broadcast(TEXT("SessionFinalized"));
 }
 
@@ -200,5 +258,70 @@ void ARecoveredGlobalManager::PlayRecoveredSessionSound(FName SoundID) {
             UGameplayStatics::PlaySound2D(this, Sound, Volume, Pitch);
         }
         return;
+    }
+}
+
+void ARecoveredGlobalManager::HandleRecoveredLevelUp(int32 Level, int32 UnlockPoints, const TArray<FString>& ContentUnlocks) {
+    // Present the level-up screen with unlock points and content unlocks.
+    APlayerController* Controller = UGameplayStatics::GetPlayerController(this, 0);
+    UClass* LevelUpClass = LoadClass<UUserWidget>(nullptr, TEXT("/Game/Recovery/UI/WBP_LevelUpScreen.WBP_LevelUpScreen_C"));
+    if (!Controller || !LevelUpClass) return;
+    if (auto* LevelUp = CreateWidget<UUserWidget>(Controller, LevelUpClass)) {
+        LevelUp->AddToViewport(10);
+        EventOverlays.Add(LevelUp);
+        // Bind level, unlock points, and content unlocks to text fields.
+        TArray<UWidget*> AllWidgets;
+        if (LevelUp->WidgetTree) LevelUp->WidgetTree->GetAllWidgets(AllWidgets);
+        FString UnlocksStr = FString::Join(ContentUnlocks, TEXT("\n"));
+        for (UWidget* W : AllWidgets) {
+            if (auto* Text = Cast<UTextBlock>(W)) {
+                const FString Name = Text->GetName();
+                if (Name.Contains(TEXT("Level"))) Text->SetText(FText::AsNumber(Level));
+                else if (Name.Contains(TEXT("UnlockPoints"))) Text->SetText(FText::AsNumber(UnlockPoints));
+                else if (Name.Contains(TEXT("ContentUnlock"))) Text->SetText(FText::FromString(UnlocksStr));
+            }
+        }
+    }
+}
+
+void ARecoveredGlobalManager::SetBeatSoundBank(FName BankID) {
+    BeatSoundBank = BankID;
+    if (auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance())) {
+        if (Instance->CurrentSave) {
+            Instance->CurrentSave->SetStringSetting(TEXT("BeatSoundBank"), BankID.ToString());
+            Instance->SaveRecoveredState();
+        }
+    }
+}
+
+FName ARecoveredGlobalManager::GetBeatSoundBank() const {
+    return BeatSoundBank;
+}
+
+void ARecoveredGlobalManager::SetVoicePack(FName PackID) {
+    VoicePack = PackID;
+    if (auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance())) {
+        if (Instance->CurrentSave) {
+            Instance->CurrentSave->SetStringSetting(TEXT("VoicePack"), PackID.ToString());
+            Instance->SaveRecoveredState();
+        }
+    }
+}
+
+FName ARecoveredGlobalManager::GetVoicePack() const {
+    return VoicePack;
+}
+
+void ARecoveredGlobalManager::PlayDialogueLine(FName LineID) {
+    if (!GetWorld()) return;
+    // Voice-pack routing: pack ID selects the dialogue variant subdirectory.
+    const FString PackPath = FString::Printf(TEXT("/Game/Recovery/Resources/Audio/Dialogue/%s/%s.%s"),
+        *VoicePack.ToString(), *LineID.ToString(), *LineID.ToString());
+    const FString FallbackPath = FString::Printf(TEXT("/Game/Recovery/Resources/Audio/voiceline_sfx.voiceline_sfx"));
+    const FString UsePath = FPackageName::DoesPackageExist(FPackageName::ObjectPathToPackageName(PackPath)) ? PackPath : FallbackPath;
+    if (!FPackageName::DoesPackageExist(FPackageName::ObjectPathToPackageName(UsePath))) return;
+    if (USoundBase* Sound = LoadObject<USoundBase>(nullptr, *UsePath)) {
+        const float Volume = GetRecoveredVolume(TEXT("VoicelinesVolume"), 0.8f);
+        UGameplayStatics::PlaySound2D(this, Sound, Volume);
     }
 }

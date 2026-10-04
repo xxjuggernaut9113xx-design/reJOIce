@@ -21,6 +21,14 @@ struct COCKHERORECOVERED_API FRecoveredReward {
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") FString ItemIdentifier;
 };
 
+// Mirrors native FSessionRewardData: the bundle PrepareSessionRewards builds.
+USTRUCT(BlueprintType)
+struct COCKHERORECOVERED_API FRecoveredSessionRewardData {
+    GENERATED_BODY()
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") int32 XPGranted = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") TArray<FRecoveredReward> Rewards;
+};
+
 USTRUCT(BlueprintType)
 struct COCKHERORECOVERED_API FRecoveredXPSettings {
     GENERATED_BODY()
@@ -39,15 +47,17 @@ public:
     UFUNCTION(BlueprintPure, Category="Recovered|Progression") static int32 CalculateSessionXP(const FRecoveredSessionStats& Stats, const FRecoveredXPSettings& Settings);
     UFUNCTION(BlueprintPure, Category="Recovered|Progression") static int32 GetXPForNextLevel(int32 CurrentLevel);
     UFUNCTION(BlueprintPure, Category="Recovered|Progression") static float CalculateLevelProgress(int32 CurrentXP,int32 CurrentLevel);
-    // Native text builders confirmed by Ghidra analysis (UProgressionManager::GetLifetimeStatsText,
-    // GetRewardsText, GetStatValueText). Build display text for the results screen.
+    // Native text builders confirmed by Ghidra analysis (UProgressionManager::GetLifetimeStatsText
+    // at 0x1481c0730, GetRewardsText at 0x1481c26e0 taking FSessionRewardData,
+    // GetStatValueText at 0x1481c2b60 taking an enum metric).
     UFUNCTION(BlueprintPure, Category="Recovered|Progression") static FText GetLifetimeStatsText(const FRecoveredLifetimeStats& Stats);
-    UFUNCTION(BlueprintPure, Category="Recovered|Progression") static FText GetRewardsText(const TArray<FRecoveredReward>& Rewards);
-    UFUNCTION(BlueprintPure, Category="Recovered|Progression") static FText GetStatValueText(const FString& StatName, int32 SessionValue, int32 LifetimeValue, bool bUseLifetime);
+    UFUNCTION(BlueprintPure, Category="Recovered|Progression") static FText GetRewardsText(const FRecoveredSessionRewardData& RewardData);
+    UFUNCTION(BlueprintPure, Category="Recovered|Progression") static FText GetStatValueText(ERecoveredMetric Metric, const FRecoveredSessionStats& SessionStats, const FRecoveredLifetimeStats& LifetimeStats, bool bUseLifetime);
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRecoveredXPGained,int32,Amount,const FString&,Source);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FRecoveredLevelUp,int32,Level,int32,UnlockPoints,const TArray<FString>&,ContentUnlocks);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRecoveredContentUnlocked,FName,ContentID,const FString&,ContentName);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRecoveredProgressUpdated,float,Progress);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FRecoveredProgressionSaveRequest);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRecoveredPackRewardRequest,const FString&,PackID);
@@ -67,11 +77,13 @@ public:
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered") TSet<FName> UnlockedPlayerCards;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered") TObjectPtr<class UDataTable> ModifierDataTable;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered") TSet<FName> UnlockedModifiers;
+    UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered") TSet<FName> EnabledModifiers;
     UPROPERTY(BlueprintAssignable,Category="Recovered") FRecoveredProgressionSaveRequest OnSaveRequested;
     UPROPERTY(BlueprintAssignable,Category="Recovered") FRecoveredPackRewardRequest OnPackRewardRequested;
     UPROPERTY(BlueprintAssignable,Category="Recovered") FRecoveredStorePointsRequest OnStorePointsRequested;
     UPROPERTY(BlueprintAssignable,Category="Recovered") FRecoveredXPGained OnXPGained;
     UPROPERTY(BlueprintAssignable,Category="Recovered") FRecoveredLevelUp OnLevelUp;
+    UPROPERTY(BlueprintAssignable,Category="Recovered") FRecoveredContentUnlocked OnContentUnlocked;
     UPROPERTY(BlueprintAssignable,Category="Recovered") FRecoveredProgressUpdated OnProgressUpdate;
     UPROPERTY(BlueprintAssignable,Category="Recovered") FRecoveredMetricUpdateRequested OnMetricUpdateRequested;
     UFUNCTION(BlueprintCallable,Category="Recovered") void AddXP(int32 Amount,const FString& Source);

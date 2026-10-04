@@ -11,13 +11,17 @@ class COCKHERORECOVERED_API URecoveredVideoSettingsMenu : public URecoveredMenuW
     GENERATED_BODY()
 public:
     UFUNCTION(BlueprintCallable, Category="Recovered Video") void PopulateComboDefaults();
+    static bool WritePreference(class URecoveredSaveGame* Save,FName Name,const FString& Value);
+    static FString ReadPreference(class URecoveredSaveGame* Save,FName Name,const FString& Fallback);
 protected:
     virtual void NativeConstruct() override;
     virtual void NativeDestruct() override;
 private:
     TMap<FName, FString> LastSelections;
     void BindControls(bool bBind);
+    UFUNCTION() void OpenCalibration();
     UFUNCTION() void OnComboSelectionChanged(FString SelectedItem, ESelectInfo::Type SelectionType);
+    void ApplyGraphicsSetting(const FString& Key, const FString& Value);
     UFUNCTION() void OnClearFavoritesClicked();
     void CommitComboValue(FName ComboName, const FString& SelectedItem);
     static FString SettingNameForCombo(FName ComboName);

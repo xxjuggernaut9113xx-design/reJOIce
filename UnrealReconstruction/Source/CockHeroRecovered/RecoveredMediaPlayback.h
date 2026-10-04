@@ -21,6 +21,8 @@ public:
     UPROPERTY(BlueprintReadOnly) FRecoveredMediaEntry CurrentEntry;
     UPROPERTY(BlueprintAssignable) FRecoveredMediaReady OnMediaReady;
     UPROPERTY(BlueprintAssignable) FRecoveredMediaError OnMediaError;
+    UPROPERTY(BlueprintReadWrite) bool bLooping = true;
+    UFUNCTION(BlueprintCallable, Category="Recovered|Media") void SetLooping(bool bEnabled);
     UFUNCTION(BlueprintCallable, Category="Recovered|Media") bool OpenEntry(const FRecoveredMediaEntry& Entry);
     UFUNCTION(BlueprintCallable, Category="Recovered|Media") void StopPlayback();
     UFUNCTION(BlueprintCallable, Category="Recovered|Media") void SetPaused(bool bPaused);

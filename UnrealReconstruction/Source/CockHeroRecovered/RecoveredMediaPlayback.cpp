@@ -25,7 +25,7 @@ bool URecoveredMediaPlayback::OpenEntry(const FRecoveredMediaEntry& Entry) {
         VideoTexture->SetMediaPlayer(MediaPlayer);
         VideoTexture->UpdateResource();
     }
-    MediaPlayer->SetLooping(true);
+    MediaPlayer->SetLooping(bLooping);
     if (!MediaPlayer->OpenFile(Entry.FullPath)) { OnMediaError.Broadcast(TEXT("Video open request failed: ")+Entry.FullPath); return false; }
     return true;
 }
@@ -49,3 +49,5 @@ UMaterialInstanceDynamic* URecoveredMediaPlayback::GetVideoDisplayMaterial() {
     return VideoMaterial;
 }
 void URecoveredMediaPlayback::BeginDestroy() { StopPlayback(); Super::BeginDestroy(); }
+
+void URecoveredMediaPlayback::SetLooping(bool bEnabled) { bLooping=bEnabled; if (MediaPlayer) MediaPlayer->SetLooping(bEnabled); }

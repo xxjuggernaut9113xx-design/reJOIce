@@ -28,6 +28,9 @@ public:
     UFUNCTION(BlueprintCallable, Category="Recovered Tags") void SetTagExcluded(const FString& Tag, bool bExcluded);
     UFUNCTION(BlueprintPure, Category="Recovered Tags") bool IsTagExcluded(const FString& Tag) const;
     UFUNCTION(BlueprintCallable, Category="Recovered Tags") void ClearExcludedTags();
+    // Bulk operations: include or exclude all available tags.
+    UFUNCTION(BlueprintCallable, Category="Recovered Tags") void SelectAllTags();
+    UFUNCTION(BlueprintCallable, Category="Recovered Tags") void DeselectAllTags();
     // Builds tag entry widgets dynamically from the loaded media decks.
     // Entries are created under TagListContainer and wired to SetTagExcluded.
     UFUNCTION(BlueprintCallable, Category="Recovered Tags") void BuildTagEntries();

@@ -8,6 +8,7 @@
 #include "GameFramework/SaveGame.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "RecoveredGameplay.h"
+#include "RecoveredDeviceInterface.h"
 #include "RecoveredSession.h"
 #include "RecoveredBeatTimeline.h"
 #include "RecoveredCalibration.h"
@@ -210,6 +211,18 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") bool bStopSequence = false;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") bool bCanUseSlowdown = true;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") bool bCanUseBonerPill = true;
+    // Selected beat sound bank and voice pack IDs.
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Audio") FName BeatSoundBank = TEXT("Default");
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Audio") FName VoicePack = TEXT("Default");
+    // Media pack states: pack ID -> enabled; pack ID -> priority (lower draws first).
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Media") TMap<FString, bool> MediaPackEnabled;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Media") TMap<FString, int32> MediaPackPriority;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Media") bool bVideoLoopEnabled = true;
+    // Pending notification queue.
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Notifications") TArray<FString> PendingNotifications;
+    // Owned consumable inventory: item ID -> count. Purchases add to inventory;
+    // use is a separate step from acquisition.
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Inventory") TMap<FName, int32> OwnedItemCounts;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 ConsecutiveSuccubiSurvived = 0;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") TObjectPtr<UDataTable> HeatCategoryDataTable;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered Media") TObjectPtr<URecoveredDeckState> MediaDeckState;
@@ -247,6 +260,11 @@ public:
     UFUNCTION() void PresentRecoveredBeat(const FRecoveredBeatEvent& Event);
     UFUNCTION() void HandleBeatHitCenter(const FRecoveredBeatEvent& Event);
     UFUNCTION(BlueprintCallable, Category="Recovered|Media") bool LoadMediaPack(const FString& ManifestPath, const TArray<FString>& ExcludedTags);
+    // Media pack management: enable/disable packs and control their draw priority.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Media") void SetMediaPackEnabled(const FString& PackID, bool bEnabled);
+    UFUNCTION(BlueprintPure, Category="Recovered|Media") bool IsMediaPackEnabled(const FString& PackID) const;
+    UFUNCTION(BlueprintCallable, Category="Recovered|Media") void SetMediaPackPriority(const FString& PackID, int32 Priority);
+    UFUNCTION(BlueprintPure, Category="Recovered|Media") TArray<FString> GetEnabledMediaPacks() const;
     // Direct pace entry point; full DetermineCardV2 dispatch and UI state machine remain separate.
     UFUNCTION(BlueprintCallable, Category="Recovered|Session") bool DrawPaceCard(uint8 Pace, bool bPlayMedia = true);
     UFUNCTION(BlueprintCallable, Category="Recovered|Session") bool PrepareDrawState();
@@ -258,6 +276,62 @@ public:
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Events") FRecoveredEventRecord FoundEvent;
     UFUNCTION(BlueprintCallable,Category="Recovered Events") bool RequestNextRecoveredCard(bool bPlayMedia=true);
     UFUNCTION() void HandleRecoveredSessionAction(FName Action);
+    // Beat-presentation notification handlers (audit section 4).
+    UFUNCTION() void PlayMainImageBeatComplete();
+    UFUNCTION() void PlayComboTypeBeatComplete();
+    UFUNCTION() void PlayHeatGainBeatComplete();
+    UFUNCTION() void PlayBeatCompleteSFX();
+    UFUNCTION() void TriggerClothesBreaker();
+    UFUNCTION() void TriggerBrainMelter();
+    UFUNCTION() void SpawnTaskModifier();
+    UFUNCTION() void TriggerMeterOverride();
+    UFUNCTION() void ClearNotificationBoxes();
+    UFUNCTION() void RemoveAllActiveBeatWidgets();
+    UFUNCTION() void SpawnOnomatopoeia();
+    UFUNCTION() void PlayDrawButtonAnimation();
+    UFUNCTION() void CreateLootRewardWidget();
+    UFUNCTION() void RollAndGiveLootDrops();
+    UFUNCTION() void SetEdgeStreakCounterVisible(bool bVisible);
+    UFUNCTION() void UpdateEdgeStreakProgressBar();
+    UFUNCTION() void ClearIdleTimer();
+    UFUNCTION() void ResetIdleTimer();
+    UFUNCTION() void OnIdleTimeout();
+    UFUNCTION() void SyncVideoLoopToBeat();
+    UFUNCTION() void HandleMediaPlaybackError(const FString& ErrorMessage);
+    // Notification queue: enqueue, dequeue, and clear pending notifications.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Notifications") void EnqueueNotification(const FString& NotificationText);
+    UFUNCTION(BlueprintCallable, Category="Recovered|Notifications") bool DequeueNotification(FString& OutText);
+    UFUNCTION(BlueprintPure, Category="Recovered|Notifications") int32 GetPendingNotificationCount() const;
+    // Exports session-end statistics as a JSON string for external tools.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Session") FString ExportSessionStatsJson() const;
+    // Video-loop toggle: enables/disables automatic video looping.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Media") void SetVideoLoopEnabled(bool bEnabled);
+    UFUNCTION(BlueprintPure, Category="Recovered|Media") bool IsVideoLoopEnabled() const;
+    UFUNCTION() void AddLifetimeDrawAndSave();
+    UFUNCTION() void AddOneToLifetimeStrokesSave();
+    UFUNCTION() void OnSessionFinalizedBroadcast();
+    // Event family handlers (audit section 3).
+    UFUNCTION() void StartMercyEvent();
+    UFUNCTION() void AcceptMercy();
+    UFUNCTION() void DeclineMercy();
+    UFUNCTION() void StartTemptationEvent();
+    UFUNCTION() void AcceptTemptation();
+    UFUNCTION() void DeclineTemptation();
+    UFUNCTION() void StartPunishmentEvent();
+    UFUNCTION() void ExecuteTaunt();
+    UFUNCTION() void OnMercyCooldownExpired();
+    UFUNCTION() void OnTauntCooldownExpired();
+    // Grants coins and tracks session earnings separately from the spendable balance.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Session") void GrantPlayerCoins(int32 Amount);
+    // Inventory: acquire without immediate use, use from inventory, query counts.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") void AcquireStoreItem(FName ItemID);
+    UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") bool UseOwnedItem(FName ItemID, int32 Level);
+    UFUNCTION(BlueprintPure, Category="Recovered|Inventory") int32 GetOwnedItemCount(FName ItemID) const;
+    // Shows the defensive item use overlay with the item name and remaining count.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") void ShowDefensiveItemOverlay(FName ItemID);
+    // Dismisses all active event overlays.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Overlays") void DismissAllOverlays();
+    UFUNCTION(BlueprintCallable, Category="Recovered|Overlays") void DismissOverlay(UUserWidget* Overlay);
     UFUNCTION() void HandleRecoveredMetric(ERecoveredMetric Metric,int32 Amount);
     UFUNCTION(BlueprintCallable,Category="Recovered Events") class UUserWidget* SpawnRecoveredOverlay(FName ScreenName);
     UFUNCTION(BlueprintCallable,Category="Recovered Events") bool SpawnRecoveredStore();
@@ -270,6 +344,10 @@ public:
     UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void FinalizeRecoveredSession();
     UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void OpenPostGameResults();
     UFUNCTION() void BindPostGameResultsData(UUserWidget* Results);
+    UFUNCTION() void HandleReturnToMenuClicked();
+    UFUNCTION() void HandleRecoveredLevelUp(int32 Level, int32 UnlockPoints, const TArray<FString>& ContentUnlocks);
+    UFUNCTION() void HandleSaveFailure(const FString& Context);
+    UFUNCTION() void HandleProgressionMetric(ERecoveredMetric Metric, int32 Amount);
     UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") int32 CalculateRecoveredSessionXP() const;
     UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") TArray<FRecoveredReward> PrepareRecoveredSessionRewards(int32 SessionXP) const;
     UFUNCTION() void BindPostGameResultsButton(UUserWidget* PostCumWidget);
@@ -280,16 +358,29 @@ public:
     // offset to the beat timeline. Called at session start and at every beat
     // sequence start so recalibration takes effect without restarting.
     UFUNCTION(BlueprintCallable, Category="Recovered|Calibration") void ApplySavedCalibrationToTimeline();
+    // Launches the calibration flow UI.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Calibration") void LaunchCalibrationFlow();
     // Applies a purchased store item's effect to the live session. Called by
     // URecoveredStoreItemWidget after the coin deduction succeeds.
-    UFUNCTION(BlueprintCallable, Category="Recovered|Store") void ApplyStoreItemEffect(FName ItemID, int32 Level);
+    UFUNCTION(BlueprintCallable, Category="Recovered|Store") bool ApplyStoreItemEffect(FName ItemID, int32 Level);
     // Audio presentation: plays session sounds (beat SFX with contextual pitch,
     // outcome stingers) as 2D sounds scaled by the saved volume settings.
     UFUNCTION(BlueprintCallable, Category="Recovered|Audio") void PlayRecoveredSessionSound(FName SoundID);
+    // Dialogue/voiceline playback with voice-pack routing.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Audio") void PlayDialogueLine(FName LineID);
+    // Beat sound bank selection: switches the tick sound variant.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Audio") void SetBeatSoundBank(FName BankID);
+    UFUNCTION(BlueprintPure, Category="Recovered|Audio") FName GetBeatSoundBank() const;
+    // Voice pack selection: switches the dialogue voice set.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Audio") void SetVoicePack(FName PackID);
+    UFUNCTION(BlueprintPure, Category="Recovered|Audio") FName GetVoicePack() const;
     UFUNCTION(BlueprintCallable, Category="Recovered|Audio") float GetRecoveredVolume(const FString& SettingName, float Fallback) const;
     UPROPERTY(Transient) TArray<TObjectPtr<class UUserWidget>> EventOverlays;
     FTimerHandle StoreCooldownTimer;
     FTimerHandle OutcomeContinuationTimer;
+    FTimerHandle IdleTimer;
+    FTimerHandle MercyCooldownTimer;
+    FTimerHandle TauntCooldownTimer;
     bool StartPaceCard(uint8 Pace,bool bPlayMedia,bool bPrepare);
     UFUNCTION(BlueprintCallable,Category="Recovered|Session") bool DrawRecoveredSpecialCard(FName Event,bool bPlayMedia=true);
     FTimerHandle SessionDurationTimer;
@@ -308,6 +399,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") TObjectPtr<URecoveredDefinitionAsset> RecoveredDefinition;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Progression") TObjectPtr<URecoveredProgressionManager> ProgressionManager;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Progression") TObjectPtr<class URecoveredChallengeTracker> ChallengeTracker;
+    UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Devices") TObjectPtr<class URecoveredDeviceManager> DeviceManager;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Save") TObjectPtr<class URecoveredSaveGame> CurrentSave;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Save") FString LastSaveError;
     UPROPERTY(Transient,BlueprintReadOnly) bool bHasGameOpenedInSession=false;

@@ -80,30 +80,91 @@ FText URecoveredProgressionLibrary::GetLifetimeStatsText(const FRecoveredLifetim
         Stats.LongestSessionSeconds, Stats.MostStrokesInSession));
 }
 
-FText URecoveredProgressionLibrary::GetRewardsText(const TArray<FRecoveredReward>& Rewards) {
-    // Mirrors native UProgressionManager::GetRewardsText: lists granted rewards.
-    if (Rewards.Num() == 0) return FText::FromString(TEXT("No rewards earned."));
+FText URecoveredProgressionLibrary::GetRewardsText(const FRecoveredSessionRewardData& RewardData) {
+    // Mirrors native UProgressionManager::GetRewardsText (0x1481c26e0): builds
+    // the reward list text from the session reward bundle.
     FString Out;
-    for (const FRecoveredReward& R : Rewards) {
+    if (RewardData.XPGranted > 0) Out += FString::Printf(TEXT("+%d XP"), RewardData.XPGranted);
+    for (const FRecoveredReward& R : RewardData.Rewards) {
+        if (R.RewardType == TEXT("XP") && RewardData.XPGranted > 0) continue;
         if (!Out.IsEmpty()) Out += TEXT("\n");
         if (R.RewardType == TEXT("XP")) Out += FString::Printf(TEXT("+%d XP"), R.Value);
         else if (R.RewardType == TEXT("Coins")) Out += FString::Printf(TEXT("+%d Coins"), R.Value);
         else if (!R.ItemIdentifier.IsEmpty()) Out += FString::Printf(TEXT("%s x%d"), *R.ItemIdentifier, R.Value);
         else Out += FString::Printf(TEXT("%s: %d"), *R.RewardType, R.Value);
     }
+    if (Out.IsEmpty()) return FText::FromString(TEXT("No rewards earned."));
     return FText::FromString(Out);
 }
 
-FText URecoveredProgressionLibrary::GetStatValueText(const FString& StatName, int32 SessionValue, int32 LifetimeValue, bool bUseLifetime) {
-    // Mirrors native UProgressionManager::GetStatValueText: single stat line,
-    // lifetime or session value based on the toggle.
-    const int32 Value = bUseLifetime ? LifetimeValue : SessionValue;
-    return FText::FromString(FString::Printf(TEXT("%s: %d"), *StatName, Value));
+static int32 GetMetricSessionValue(ERecoveredMetric Metric, const FRecoveredSessionStats& S) {
+    switch (Metric) {
+        case ERecoveredMetric::Strokes: return S.Strokes;
+        case ERecoveredMetric::Edges: return S.Edges;
+        case ERecoveredMetric::SuccubiDefeated: return S.SuccubiDefeated;
+        case ERecoveredMetric::EnemiesDefeated: return S.EnemiesDefeated;
+        case ERecoveredMetric::MaxCombo: return S.MaxCombo;
+        case ERecoveredMetric::MissedCumWindows: return S.MissedCumWindows;
+        case ERecoveredMetric::TimesTaunted: return S.TimesTaunted;
+        case ERecoveredMetric::ItemsUsed: return S.ItemsUsed;
+        case ERecoveredMetric::DrawsAtMaxHeat: return S.DrawsAtMaxHeat;
+        case ERecoveredMetric::EarlyClimax: return S.EarlyClimax;
+        case ERecoveredMetric::SessionDuration: return S.SessionDuration;
+        case ERecoveredMetric::SessionsCompleted: return S.SessionsCompleted;
+        case ERecoveredMetric::SessionsWon: return S.SessionsWon;
+        case ERecoveredMetric::EdgeStreak: return S.EdgeStreak;
+        default: return 0;
+    }
+}
+
+static int32 GetMetricLifetimeValue(ERecoveredMetric Metric, const FRecoveredLifetimeStats& L) {
+    switch (Metric) {
+        case ERecoveredMetric::Strokes: return L.TotalStrokes;
+        case ERecoveredMetric::Edges: return L.TotalEdges;
+        case ERecoveredMetric::SuccubiDefeated: return L.TotalSuccubiDefeated;
+        case ERecoveredMetric::EnemiesDefeated: return L.TotalEnemiesDefeated;
+        case ERecoveredMetric::MaxCombo: return L.BestCombo;
+        case ERecoveredMetric::SessionDuration: return L.LongestSessionSeconds;
+        case ERecoveredMetric::SessionsCompleted: return L.TotalSessionsCompleted;
+        case ERecoveredMetric::SessionsWon: return L.TotalSessionsWon;
+        case ERecoveredMetric::TotalXPEarned: return L.TotalXPEarned;
+        case ERecoveredMetric::EdgeStreak: return L.BestEdgeStreak;
+        default: return 0;
+    }
+}
+
+static const TCHAR* GetMetricDisplayName(ERecoveredMetric Metric) {
+    switch (Metric) {
+        case ERecoveredMetric::Strokes: return TEXT("Strokes");
+        case ERecoveredMetric::Edges: return TEXT("Edges");
+        case ERecoveredMetric::SuccubiDefeated: return TEXT("Succubi Defeated");
+        case ERecoveredMetric::EnemiesDefeated: return TEXT("Enemies Defeated");
+        case ERecoveredMetric::MaxCombo: return TEXT("Best Combo");
+        case ERecoveredMetric::MissedCumWindows: return TEXT("Missed Cum Windows");
+        case ERecoveredMetric::TimesTaunted: return TEXT("Taunts");
+        case ERecoveredMetric::ItemsUsed: return TEXT("Items Used");
+        case ERecoveredMetric::DrawsAtMaxHeat: return TEXT("Draws at Max Heat");
+        case ERecoveredMetric::EarlyClimax: return TEXT("Early Climaxes");
+        case ERecoveredMetric::SessionDuration: return TEXT("Session Duration");
+        case ERecoveredMetric::SessionsCompleted: return TEXT("Sessions Completed");
+        case ERecoveredMetric::SessionsWon: return TEXT("Sessions Won");
+        case ERecoveredMetric::TotalXPEarned: return TEXT("Total XP Earned");
+        case ERecoveredMetric::MoneySpent: return TEXT("Coins Spent");
+        case ERecoveredMetric::EdgeStreak: return TEXT("Edge Streak");
+        default: return TEXT("Unknown");
+    }
+}
+
+FText URecoveredProgressionLibrary::GetStatValueText(ERecoveredMetric Metric, const FRecoveredSessionStats& SessionStats, const FRecoveredLifetimeStats& LifetimeStats, bool bUseLifetime) {
+    // Mirrors native UProgressionManager::GetStatValueText (0x1481c2b60): single
+    // stat line addressed by metric enum, lifetime or session value by toggle.
+    const int32 Value = bUseLifetime ? GetMetricLifetimeValue(Metric, LifetimeStats) : GetMetricSessionValue(Metric, SessionStats);
+    return FText::FromString(FString::Printf(TEXT("%s: %d"), GetMetricDisplayName(Metric), Value));
 }
 
 TArray<FRecoveredModifierRow> URecoveredProgressionManager::GetAllModifierData() const {
     TArray<FRecoveredModifierRow> Out;
-    if (!ModifierDataTable) return Out;
+    if (!ModifierDataTable || ModifierDataTable->GetRowStruct()!=FRecoveredModifierRow::StaticStruct()) return Out;
     for (const auto& Pair : ModifierDataTable->GetRowMap()) {
         if (const FRecoveredModifierRow* Row = reinterpret_cast<const FRecoveredModifierRow*>(Pair.Value)) {
             Out.Add(*Row);
@@ -126,9 +187,14 @@ bool URecoveredProgressionManager::IsModifierUnlocked(FName ModifierID) const {
 }
 
 bool URecoveredProgressionManager::CanEnableModifier(FName ModifierID) const {
-    // Native checks unlock state and conflicts; conflict data is not in the
-    // recovered modifier table schema, so only the unlock gate is enforced here.
-    return IsModifierUnlocked(ModifierID);
+    // Native CanEnableModifier (0x1481b4d00) checks unlock state AND conflicts
+    // against currently enabled modifiers.
+    if (!IsModifierUnlocked(ModifierID)) return false;
+    if (EnabledModifiers.Contains(ModifierID)) return true;
+    for (FName Conflict : GetConflictingModifiers(ModifierID)) {
+        if (EnabledModifiers.Contains(Conflict)) return false;
+    }
+    return true;
 }
 
 TArray<FName> URecoveredProgressionManager::GetUnlockedModifiers() const {
@@ -136,13 +202,35 @@ TArray<FName> URecoveredProgressionManager::GetUnlockedModifiers() const {
 }
 
 TArray<FName> URecoveredProgressionManager::GetConflictingModifiers(FName ModifierID) const {
-    // Conflict pairs are not present in the recovered modifier table schema
-    // (Title/Description/Icon only); returning empty until native data is available.
-    return TArray<FName>();
+    // Candidate pairs supplied by the patch, NOT yet verified against
+    // InitializeModifierConflicts (0x1481c4c00); canonicalization is still missing.
+    static const TMap<FString, TArray<FString>> Conflicts = {
+        { TEXT("Slow and Steady"), { TEXT("Succufrenzy"), TEXT("Sacrificial") } },
+        { TEXT("Succufrenzy"), { TEXT("Slow and Steady"), TEXT("Sacrificial"), TEXT("Pheromones") } },
+        { TEXT("Sacrificial"), { TEXT("Slow and Steady"), TEXT("Succufrenzy") } },
+        { TEXT("Pheromones"), { TEXT("Succufrenzy"), TEXT("Iron Man") } },
+        { TEXT("Iron Man"), { TEXT("Pheromones") } },
+        { TEXT("Raw Dog"), { TEXT("Hivemind") } },
+        { TEXT("Hivemind"), { TEXT("Raw Dog") } },
+    };
+    TArray<FName> Out;
+    const FString Key = ModifierID.ToString();
+    if (const TArray<FString>* Found = Conflicts.Find(Key)) {
+        for (const FString& C : *Found) Out.Add(FName(*C));
+    }
+    return Out;
 }
 
 FName URecoveredProgressionManager::GetChallengeForModifier(FName ModifierID) const {
-    // Challenge linkage is not present in the recovered modifier table schema;
-    // returning NAME_None until native data is available.
+    // Native GetChallengeForModifier (0x1481ba860) looks up the modifier's
+    // challenge via the data table. The recovered table schema
+    // (Title/Description/Icon only) does not carry the link field.
+    if (ModifierDataTable) {
+        // Check for a challenge-linked row naming convention.
+        const FName ChallengeKey(*(ModifierID.ToString() + TEXT("_Challenge")));
+        if (ModifierDataTable->FindRow<FRecoveredModifierRow>(ChallengeKey, TEXT("GetChallengeForModifier"), false)) {
+            return ChallengeKey;
+        }
+    }
     return NAME_None;
 }

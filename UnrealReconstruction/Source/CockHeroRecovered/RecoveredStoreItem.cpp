@@ -12,6 +12,7 @@ void URecoveredStoreItemWidget::BindControls(bool bBind) {
     }
     BIND("BuyButton", OnBuyClicked)
     BIND("UpgradeButton", OnUpgradeClicked)
+    BIND("UseButton", OnUseClicked)
 #undef BIND
 }
 
@@ -83,10 +84,20 @@ void URecoveredStoreItemWidget::RefreshPrices() {
     SetText(TEXT("UpgradeText"), GetUpgradeText());
     SetText(TEXT("LevelText"), FText::FromString(FString::Printf(TEXT("Lv.%d"), CurrentLevel)));
     SetText(TEXT("EffectDescriptionText"), GetEffectDescription());
-    // Disable buy when the player cannot afford it.
+    // Tooltip shows the full effect description on hover.
+    if (auto* Buy = Cast<UButton>(GetWidgetFromName(TEXT("BuyButton")))) {
+        Buy->SetToolTipText(GetEffectDescription());
+    }
+    if (auto* Use = Cast<UButton>(GetWidgetFromName(TEXT("UseButton")))) {
+        Use->SetToolTipText(GetEffectDescription());
+    }
     auto* Manager = GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
+    const int32 Owned = Manager ? Manager->GetOwnedItemCount(ItemID) : 0;
+    SetText(TEXT("OwnedCountText"), FText::AsNumber(Owned));
+    // Disable buy when the player cannot afford it; disable use when none owned.
     const bool bAfford = Manager && Manager->PlayerVariables.PlayerCoins >= GetBuyAmount();
     if (auto* Buy = Cast<UButton>(GetWidgetFromName(TEXT("BuyButton")))) Buy->SetIsEnabled(bAfford);
+    if (auto* Use = Cast<UButton>(GetWidgetFromName(TEXT("UseButton")))) Use->SetIsEnabled(Owned > 0);
 }
 
 bool URecoveredStoreItemWidget::TryBuy() {
@@ -94,9 +105,21 @@ bool URecoveredStoreItemWidget::TryBuy() {
     if (!Manager) return false;
     const int32 Cost = GetBuyAmount();
     if (Manager->PlayerVariables.PlayerCoins < Cost) return false;
+    // Existing reconstructed assets have no UseButton. Preserve their immediate
+    // use path; opt into owned inventory only on a widget with a use control.
+    const bool bSeparateUse = GetWidgetFromName(TEXT("UseButton")) != nullptr;
+    if (!bSeparateUse && !Manager->ApplyStoreItemEffect(ItemID, CurrentLevel)) return false;
     Manager->PlayerVariables.PlayerCoins -= Cost;
     URecoveredStateRuleLibrary::RecordSessionMetric(Manager->SessionStats, ERecoveredMetric::MoneySpent, Cost);
-    Manager->ApplyStoreItemEffect(ItemID, CurrentLevel);
+    if (bSeparateUse) Manager->AcquireStoreItem(ItemID);
+    RefreshPrices();
+    return true;
+}
+
+bool URecoveredStoreItemWidget::TryUse() {
+    auto* Manager = GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
+    if (!Manager) return false;
+    if (!Manager->UseOwnedItem(ItemID, CurrentLevel)) return false;
     RefreshPrices();
     return true;
 }
@@ -116,3 +139,4 @@ bool URecoveredStoreItemWidget::TryUpgrade() {
 
 void URecoveredStoreItemWidget::OnBuyClicked() { TryBuy(); }
 void URecoveredStoreItemWidget::OnUpgradeClicked() { TryUpgrade(); }
+void URecoveredStoreItemWidget::OnUseClicked() { TryUse(); }

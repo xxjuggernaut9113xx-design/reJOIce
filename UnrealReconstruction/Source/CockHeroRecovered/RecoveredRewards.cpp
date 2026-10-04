@@ -7,6 +7,7 @@ bool URecoveredProgressionManager::UnlockPlayerCard(FName CardID) {
         const auto* Row=reinterpret_cast<const FRecoveredPlayerCardRow*>(Pair.Value);
         if (FName(*Row->CardID)!=CardID) continue;
         UnlockedPlayerCards.Add(CardID);
+        OnContentUnlocked.Broadcast(CardID, Row->CardID);
         OnSaveRequested.Broadcast();
         return true;
     }

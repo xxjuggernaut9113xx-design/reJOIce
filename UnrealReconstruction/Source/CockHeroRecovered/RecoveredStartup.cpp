@@ -16,6 +16,21 @@ void ARecoveredGlobalManager::BeginPlay() {
     Super::BeginPlay();
     // Uses the reconstruction's isolated save. Original save slots are never loaded.
     LoadLifetimeStats();
+    // Restore audio selections.
+    if (auto* Inst = Cast<URecoveredGameInstance>(GetGameInstance())) {
+        if (Inst->CurrentSave) {
+            const FString Bank = Inst->CurrentSave->GetStringSetting(TEXT("BeatSoundBank"), TEXT("Default"));
+            BeatSoundBank = FName(*Bank);
+            const FString Pack = Inst->CurrentSave->GetStringSetting(TEXT("VoicePack"), TEXT("Default"));
+            VoicePack = FName(*Pack);
+        }
+    }
+    // Forward progression metric broadcasts to the challenge tracker.
+    if (auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance())) {
+        if (Instance->ProgressionManager && Instance->ChallengeTracker) {
+            Instance->ProgressionManager->OnMetricUpdateRequested.AddUniqueDynamic(this, &ARecoveredGlobalManager::HandleProgressionMetric);
+        }
+    }
     CreateMainMenuUI();
 #if WITH_DEV_AUTOMATION_TESTS
     if (FParse::Param(FCommandLine::Get(),TEXT("RecoveredSessionSmoke"))) {
@@ -79,7 +94,11 @@ bool ARecoveredGlobalManager::ReturnToMainMenu() {
     Timers.ClearTimer(SessionDurationTimer);
     Timers.ClearTimer(StoreCooldownTimer);
     Timers.ClearTimer(OutcomeContinuationTimer);
+    Timers.ClearTimer(IdleTimer);
+    Timers.ClearTimer(MercyCooldownTimer);
+    Timers.ClearTimer(TauntCooldownTimer);
     if (BeatTimeline) {
+        BeatTimeline->OnSequenceEnd.RemoveDynamic(this, &ARecoveredGlobalManager::CompleteBeatSequence);
         BeatTimeline->OnBeatFired.RemoveDynamic(this, &ARecoveredGlobalManager::PresentRecoveredBeat);
         BeatTimeline->OnBeatHitCenter.RemoveDynamic(this, &ARecoveredGlobalManager::HandleBeatHitCenter);
     }
@@ -94,14 +113,25 @@ bool ARecoveredGlobalManager::ReturnToMainMenu() {
         SessionScreen->RemoveFromParent();
         SessionScreen = nullptr;
     }
-    // Reset per-session state; lifetime stats and progression persist.
+    // Reset ALL per-session state; lifetime stats and progression persist.
     bRecoveredSessionFinalized = false;
     SessionStats = FRecoveredSessionStats();
     PlayerVariables = FRecoveredPlayerVariables();
+    BeatContext = FRecoveredBeatContext();
     HeatLevel = 10.0;
     CumMeterPercentage = 0;
     LootBarPercentage = 0;
     bStopSequence = false;
+    OwnedItemCounts.Reset();
+    PendingNotifications.Reset();
+    bStoreOnCooldown = false;
+    bBrainMelterEnabled = false;
+    SuccubusShields = 0;
+    bShieldToggled = false;
+    bCanUseSlowdown = true;
+    bCanUseBonerPill = true;
+    LastDispatchedEvent = NAME_None;
+    LastSessionError.Reset();
     return CreateMainMenuUI();
 }
 
@@ -132,10 +162,26 @@ bool ARecoveredGlobalManager::InitializeRecoveredSession() {
     OnSessionAction.AddUniqueDynamic(this,&ARecoveredGlobalManager::HandleRecoveredSessionAction);
     GetWorldTimerManager().SetTimer(SessionDurationTimer,this,&ARecoveredGlobalManager::SetSessionDuration,1.0f,true,1.0f);
     UE_LOG(LogTemp,Display,TEXT("Recovered session: media decks and gameplay screen initialized"));
-    // Event dispatch, dialogue, challenge tracking and device managers are reconstructed separately.
-    return RequestNextRecoveredCard(true);
+    const bool bStarted=RequestNextRecoveredCard(true);
+    if (!bStarted) {
+        const FString Failure=LastSessionError;
+        ReturnToMainMenu();
+        LastSessionError=Failure;
+    } else {
+        FInputModeGameAndUI Input;Input.SetWidgetToFocus(SessionScreen->TakeWidget());Controller->SetInputMode(Input);
+    }
+    return bStarted;
 }
 void ARecoveredGlobalManager::HandleRecoveredMetric(ERecoveredMetric Metric,int32 Amount) {
     auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
     if (Instance && Instance->ChallengeTracker) Instance->ChallengeTracker->UpdateMetricWithConditions(Metric,Amount,SessionStats,BeatContext.ActiveModifiers,PlayerVariables.SessionLength,GetWorld() ? GetWorld()->GetTimeSeconds() : 0);
+}
+
+void ARecoveredGlobalManager::HandleProgressionMetric(ERecoveredMetric Metric, int32 Amount) {
+    auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+    URecoveredChallengeTracker* Tracker = Instance ? Instance->ChallengeTracker.Get() : nullptr;
+    if (!Tracker) return;
+    const int32 Elapsed = SessionStats.SessionDuration;
+    const float WorldSeconds = GetWorld() ? GetWorld()->GetTimeSeconds() : 0.0f;
+    Tracker->UpdateMetricWithConditions(Metric, Amount, SessionStats, SessionStats.ActiveModifiers, Elapsed, WorldSeconds);
 }

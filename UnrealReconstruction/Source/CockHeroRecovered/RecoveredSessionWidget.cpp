@@ -4,8 +4,10 @@
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
 #include "Components/ProgressBar.h"
+#include "Components/Border.h"
 #include "Engine/Texture2D.h"
 #include "MediaTexture.h"
+#include "Input/Reply.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -22,6 +24,25 @@ void URecoveredSessionWidget::BindSession(bool bBind) {
         if(bBind) Button->OnClicked.AddUniqueDynamic(this,&URecoveredSessionWidget::OpenSessionSettings);
         else Button->OnClicked.RemoveDynamic(this,&URecoveredSessionWidget::OpenSessionSettings);
     }
+    // Pause-menu quit and return-to-menu buttons (audit items 126-127).
+    if (auto* Button=Cast<UButton>(GetWidgetFromName(TEXT("QuitSessionButton")))) {
+        if(bBind) Button->OnClicked.AddUniqueDynamic(this,&URecoveredSessionWidget::QuitSession);
+        else Button->OnClicked.RemoveDynamic(this,&URecoveredSessionWidget::QuitSession);
+    }
+    if (auto* Button=Cast<UButton>(GetWidgetFromName(TEXT("ReturnToMenuButton")))) {
+        if(bBind) Button->OnClicked.AddUniqueDynamic(this,&URecoveredSessionWidget::QuitSession);
+        else Button->OnClicked.RemoveDynamic(this,&URecoveredSessionWidget::QuitSession);
+    }
+    // Auto-draw toggle (audit item 128).
+    if (auto* Button=Cast<UButton>(GetWidgetFromName(TEXT("AutoDrawTextButton")))) {
+        if(bBind) Button->OnClicked.AddUniqueDynamic(this,&URecoveredSessionWidget::ToggleAutoDraw);
+        else Button->OnClicked.RemoveDynamic(this,&URecoveredSessionWidget::ToggleAutoDraw);
+    }
+    // Favorites toggle for the current media (audit item 94).
+    if (auto* Button=Cast<UButton>(GetWidgetFromName(TEXT("FavoriteButton")))) {
+        if(bBind) Button->OnClicked.AddUniqueDynamic(this,&URecoveredSessionWidget::ToggleFavorite);
+        else Button->OnClicked.RemoveDynamic(this,&URecoveredSessionWidget::ToggleFavorite);
+    }
     auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
     if (Manager && Manager->MediaPlayback) {
         if(bBind) Manager->MediaPlayback->OnMediaReady.AddUniqueDynamic(this,&URecoveredSessionWidget::DisplayMedia);
@@ -29,7 +50,7 @@ void URecoveredSessionWidget::BindSession(bool bBind) {
     }
 }
 void URecoveredSessionWidget::NativeConstruct() {
-    Super::NativeConstruct(); BindSession(true);
+    Super::NativeConstruct(); SetIsFocusable(true); BindSession(true);
     auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
     if (Manager && Manager->MediaPlayback && Manager->MediaPlayback->CurrentTexture) DisplayMedia(Manager->MediaPlayback->CurrentTexture);
 }
@@ -46,8 +67,24 @@ void URecoveredSessionWidget::DisplayMedia(UTexture* Texture) {
 void URecoveredSessionWidget::ResumeSession() {
     if (auto* Border=GetWidgetFromName(TEXT("PauseMenuMasterBorder"))) Border->SetVisibility(ESlateVisibility::Hidden);
     auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
-    if (Manager && Manager->BeatTimeline) Manager->BeatTimeline->ResumeSequence();
-    if (Manager && Manager->MediaPlayback) Manager->MediaPlayback->SetPaused(false);
+    if (!Manager) return;
+    if (Manager->BeatTimeline) Manager->BeatTimeline->ResumeSequence();
+    if (Manager->MediaPlayback) Manager->MediaPlayback->SetPaused(false);
+    // Reset the idle timer on resume; clear any pause-state flags.
+    Manager->ResetIdleTimer();
+    Manager->OnSessionAction.Broadcast(TEXT("SessionResumed"));
+}
+
+void URecoveredSessionWidget::PauseSession() {
+    if (auto* Border=Cast<UBorder>(GetWidgetFromName(TEXT("PauseMenuMasterBorder")))) {
+        Border->SetVisibility(ESlateVisibility::Visible);
+    }
+    auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
+    if (!Manager) return;
+    if (Manager->BeatTimeline) Manager->BeatTimeline->PauseSequence();
+    if (Manager->MediaPlayback) Manager->MediaPlayback->SetPaused(true);
+    Manager->ClearIdleTimer();
+    Manager->OnSessionAction.Broadcast(TEXT("SessionPaused"));
 }
 void URecoveredSessionWidget::OpenSessionSettings() {
     if (!GetWorld()) return;
@@ -80,4 +117,58 @@ void URecoveredSessionWidget::RefreshSessionDisplays(ARecoveredGlobalManager* Ma
     Percent(TEXT("HeatMeterBar"),Manager->HeatLevel/100.0);
     Percent(TEXT("CumMeterProgressBar"),Manager->CumMeterPercentage);
     Percent(TEXT("LootMeterProgressBar"),Manager->LootBarPercentage);
+}
+
+FReply URecoveredSessionWidget::NativeOnKeyDown(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent) {
+    const FKey Key = InKeyEvent.GetKey();
+    if (Key == EKeys::Escape) {
+        // Toggle pause menu.
+        if (auto* Border = Cast<UBorder>(GetWidgetFromName(TEXT("PauseMenuMasterBorder")))) {
+            const bool bHidden = Border->GetVisibility() == ESlateVisibility::Hidden;
+            if (bHidden) PauseSession(); else ResumeSession();
+            return FReply::Handled();
+        }
+    } else if (Key == EKeys::SpaceBar) {
+        DrawCard();
+        return FReply::Handled();
+    } else if (Key == EKeys::A) {
+        ToggleAutoDraw();
+        return FReply::Handled();
+    } else if (Key == EKeys::F) {
+        ToggleFavorite();
+        return FReply::Handled();
+    } else if (Key == EKeys::P) {
+        if (auto* Border=GetWidgetFromName(TEXT("PauseMenuMasterBorder"))) {
+            if (Border->IsVisible()) ResumeSession(); else PauseSession();
+            return FReply::Handled();
+        }
+    }
+
+    return Super::NativeOnKeyDown(InGeometry, InKeyEvent);
+}
+
+void URecoveredSessionWidget::QuitSession() {
+    auto* Manager = GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
+    if (Manager) Manager->ReturnToMainMenu();
+}
+
+void URecoveredSessionWidget::ToggleAutoDraw() {
+    bAutoDrawEnabled = !bAutoDrawEnabled;
+    // Auto-draw: automatically draw the next card when the current completes.
+    // The beat timeline completion will trigger DrawCard if enabled.
+}
+
+void URecoveredSessionWidget::ToggleFavorite() {
+    auto* Manager = GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
+    auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+    if (!Manager || !Instance || !Instance->CurrentSave) return;
+    // Toggle the current media path in the favorites list.
+    const FString CurrentMedia = Manager->SelectedRandomCard.FullPath;
+    if (CurrentMedia.IsEmpty()) return;
+    TArray<FString> Favorites = Instance->CurrentSave->GetStringArraySetting(TEXT("FavoriteMedia"));
+    if (Favorites.Contains(CurrentMedia)) Favorites.Remove(CurrentMedia);
+    else Favorites.Add(CurrentMedia);
+    if (Instance->CurrentSave->SetStringArraySetting(TEXT("FavoriteMedia"), Favorites)) {
+        Instance->SaveRecoveredState();
+    }
 }

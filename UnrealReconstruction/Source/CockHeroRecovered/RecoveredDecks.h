@@ -11,9 +11,15 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite) FRecoveredMediaDecks Child;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) FRecoveredMediaDecks MasterFavorites;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) FRecoveredMediaDecks ChildFavorites;
+    // Per-deck repeat flags (deck index -> repeat enabled).
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<uint8, bool> DeckRepeat;
     UFUNCTION(BlueprintCallable, Category="Recovered|Decks") void SetChildDecks();
     UFUNCTION(BlueprintCallable, Category="Recovered|Decks") void ReplaceEmptyDecks();
     UFUNCTION(BlueprintCallable, Category="Recovered|Decks") bool Draw(uint8 Deck, bool bFavorite, FRecoveredMediaEntry& Entry);
+    // Shuffle and repeat controls for media decks.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Decks") void ShuffleDeck(uint8 Deck);
+    UFUNCTION(BlueprintCallable, Category="Recovered|Decks") void SetDeckRepeat(uint8 Deck, bool bRepeat);
+    UFUNCTION(BlueprintPure, Category="Recovered|Decks") bool IsDeckRepeating(uint8 Deck) const;
     // Deterministic selection hook for validating native Array_RemoveItem semantics.
     static bool DrawAtIndex(TArray<FRecoveredMediaEntry>& Deck, int32 Index, FRecoveredMediaEntry& Entry);
 };

@@ -23,6 +23,7 @@ public:
     UFUNCTION(BlueprintPure, Category="Recovered Store") FText GetEffectDescription() const;
     UFUNCTION(BlueprintPure, Category="Recovered Store") FText GetUpgradeText() const;
     UFUNCTION(BlueprintCallable, Category="Recovered Store") bool TryBuy();
+    UFUNCTION(BlueprintCallable, Category="Recovered Store") bool TryUse();
     UFUNCTION(BlueprintCallable, Category="Recovered Store") bool TryUpgrade();
 protected:
     virtual void NativeConstruct() override;
@@ -31,6 +32,7 @@ private:
     void BindControls(bool bBind);
     UFUNCTION() void OnBuyClicked();
     UFUNCTION() void OnUpgradeClicked();
+    UFUNCTION() void OnUseClicked();
     int32 ReadLevelFromSave() const;
     void WriteLevelToSave(int32 Level) const;
     FString LevelSettingName() const;
