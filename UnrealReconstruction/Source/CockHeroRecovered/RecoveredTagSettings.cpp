@@ -1,30 +1,25 @@
 #include "RecoveredTagSettings.h"
 #include "RecoveredRules.h"
+#include "RecoveredMedia.h"
+#include "RecoveredDecks.h"
 #include "Components/CheckBox.h"
 #include "Components/PanelWidget.h"
+#include "Components/HorizontalBox.h"
+#include "Components/TextBlock.h"
+#include "Kismet/GameplayStatics.h"
 
 void URecoveredTagSettingsMenu::NativeConstruct() {
     Super::NativeConstruct();
+    BuildTagEntries();
     InitDefaultsFromSaveGame();
 }
 
 void URecoveredTagSettingsMenu::InitDefaultsFromSaveGame() {
-    auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
-    if (!Instance || !Instance->CurrentSave) return;
-    const TArray<FString> Excluded = Instance->CurrentSave->GetStringArraySetting(TEXT("ExcludedTags"));
-    // Sync every tag entry checkbox with the saved exclusion list.
-    TArray<UWidget*> Entries;
-    // Tag entries live under a named container; fall back to a full subtree scan.
-    if (auto* Container = Cast<UPanelWidget>(GetWidgetFromName(TEXT("TagListContainer")))) {
-        Entries = Container->GetAllChildren();
-    }
-    for (UWidget* Entry : Entries) {
-        auto* EntryWidget = Cast<UUserWidget>(Entry);
-        auto* Check = EntryWidget ? Cast<UCheckBox>(EntryWidget->GetWidgetFromName(TEXT("TagCheckBox"))) : nullptr;
-        if (!Check) Check = Cast<UCheckBox>(Entry);
-        if (!Check) continue;
-        const FString Tag = Entry->GetName();
-        if (!Tag.IsEmpty()) Check->SetCheckedState(Excluded.Contains(Tag) ? ECheckBoxState::Checked : ECheckBoxState::Unchecked);
+    for (URecoveredTagToggleForward* Forward : TagToggleForwarders) {
+        if (!Forward) continue;
+        if (UCheckBox* Check = Forward->Check) {
+            Check->SetIsChecked(!IsTagExcluded(Forward->Tag));
+        }
     }
 }
 
@@ -50,4 +45,56 @@ void URecoveredTagSettingsMenu::ClearExcludedTags() {
         Instance->SaveRecoveredState();
         InitDefaultsFromSaveGame();
     }
+}
+
+TArray<FString> URecoveredTagSettingsMenu::CollectAvailableTags() const {
+    TSet<FString> Unique;
+    auto* Manager = GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
+    if (Manager && Manager->MediaDeckState) {
+        const FRecoveredMediaDecks& Decks = Manager->MediaDeckState->Master;
+        const TArray<FRecoveredMediaEntry>* All[] = { &Decks.Slow, &Decks.Medium, &Decks.Fast, &Decks.Cum, &Decks.Succubus, &Decks.Ass };
+        for (const auto* Deck : All) {
+            for (const FRecoveredMediaEntry& Entry : *Deck) {
+                for (const FString& Tag : Entry.Tags) {
+                    if (!Tag.IsEmpty()) Unique.Add(Tag);
+                }
+            }
+        }
+    }
+    TArray<FString> Out = Unique.Array();
+    Out.Sort();
+    return Out;
+}
+
+void URecoveredTagSettingsMenu::BuildTagEntries() {
+    auto* Container = Cast<UPanelWidget>(GetWidgetFromName(TEXT("VertiBox1")));
+    if (!Container) return;
+    Container->ClearChildren();
+    TagToggleForwarders.Reset();
+    // Load the native tag entry widget class; fall back to a checkbox+label row.
+    const TArray<FString> Tags = CollectAvailableTags();
+    for (const FString& Tag : Tags) {
+        auto* Row = NewObject<UHorizontalBox>(this);
+        auto* Check = NewObject<UCheckBox>(this);
+        auto* Label = NewObject<UTextBlock>(this);
+        Label->SetText(FText::FromString(Tag));
+        Row->AddChildToHorizontalBox(Check);
+        Row->AddChildToHorizontalBox(Label);
+        Container->AddChild(Row);
+        if (Check) {
+            Check->SetCheckedState(IsTagExcluded(Tag) ? ECheckBoxState::Unchecked : ECheckBoxState::Checked);
+            // Dynamic delegates don't pass the sender, so each checkbox gets a
+            // forwarder holding its tag.
+            auto* Forward = NewObject<URecoveredTagToggleForward>(this);
+            Forward->Owner = this;
+            Forward->Tag = Tag;
+            Forward->Check = Check;
+            TagToggleForwarders.Add(Forward);
+            Check->OnCheckStateChanged.AddUniqueDynamic(Forward, &URecoveredTagToggleForward::ForwardToggle);
+        }
+    }
+}
+
+void URecoveredTagToggleForward::ForwardToggle(bool bChecked) {
+    if (Owner) Owner->SetTagExcluded(Tag, !bChecked);
 }

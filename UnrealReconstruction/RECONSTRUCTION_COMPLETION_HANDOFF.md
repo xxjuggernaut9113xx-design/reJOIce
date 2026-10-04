@@ -30,10 +30,11 @@ supported by a build or runtime test.
 
 ## Remaining reconstruction work
 
-- Full end-to-end session and post-game presentation is not validated. Results
-  screen data binding, lifetime-stat save/load, additional rewards, and complete
-  return-to-menu UI routing still need work. Lifetime counters currently live in
-  memory only. The duplicate-finalization regression does not establish full native parity.
+- Full end-to-end session and post-game presentation is not validated. The
+  2026-10-03 gap-fill patch adds lifetime-stat save/load and results-text
+  adapters, but the recovered results master screen has no direct text blocks,
+  so visible binding still needs verification. Additional rewards and complete
+  return-to-menu UI routing still need work. The duplicate-finalization regression does not establish full native parity.
 - Store effects, pricing, timing and several text bindings in the supplied patch
   remain approximations. Reparenting does not verify these mechanics against native code.
 - Tag exclusion storage is present, but dynamic tag-entry creation and user toggle
@@ -72,3 +73,18 @@ $script = (Resolve-Path '.\UnrealReconstruction\Scripts\integrate_supplied_patch
 The existing materials manifests and Ghidra coverage remain unchanged:
 712 matching PDB symbols, 390 eligible functions, 390 completed slice exports;
 full-image analysis is a saved partial checkpoint, not complete analysis.
+
+## Later gap-fill patch
+
+`ghidra-gap-fill.patch` was applied after the first 39-test run. It adds
+progression text helpers, modifier lookup stubs, lifetime-stat save/load,
+results text binding, tag list construction, and platform-specific compiler
+flags. The tag list now targets the recovered `VertiBox1` container; callback
+objects are retained and checked means shown. Tags are sourced from loaded media
+decks, so a menu opened before media initialization can still show an empty list.
+Modifier conflict and challenge
+linkage still return empty results. The text builders and results binding are
+approximations until tested against native evidence and live widget trees.
+
+See `RecoveryEvidence/ghidra-gap-fill-verification.json` for the build/test
+result for this patch. The earlier 39-test report applies to the previous commit.

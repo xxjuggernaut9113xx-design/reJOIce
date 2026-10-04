@@ -15,6 +15,7 @@
 void ARecoveredGlobalManager::BeginPlay() {
     Super::BeginPlay();
     // Uses the reconstruction's isolated save. Original save slots are never loaded.
+    LoadLifetimeStats();
     CreateMainMenuUI();
 #if WITH_DEV_AUTOMATION_TESTS
     if (FParse::Param(FCommandLine::Get(),TEXT("RecoveredSessionSmoke"))) {

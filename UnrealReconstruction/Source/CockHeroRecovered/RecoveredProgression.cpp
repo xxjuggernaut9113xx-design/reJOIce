@@ -1,5 +1,6 @@
 #include "RecoveredProgression.h"
 #include "RecoveredRules.h"
+#include "RecoveredGameplay.h"
 
 int32 URecoveredProgressionLibrary::CalculateSessionXP(const FRecoveredSessionStats& Stats,const FRecoveredXPSettings& Settings) {
     // Separate float operations preserve the recovered SSE arithmetic order.
@@ -64,4 +65,84 @@ void URecoveredProgressionManager::CheckLevelUp() {
         Required=URecoveredProgressionLibrary::GetXPForNextLevel(CurrentLevel);
     }
     OnProgressUpdate.Broadcast(URecoveredProgressionLibrary::CalculateLevelProgress(CurrentXP,CurrentLevel));
+}
+
+FText URecoveredProgressionLibrary::GetLifetimeStatsText(const FRecoveredLifetimeStats& Stats) {
+    // Mirrors native UProgressionManager::GetLifetimeStatsText: multi-line
+    // summary of accumulated lifetime counters and peaks for the results screen.
+    return FText::FromString(FString::Printf(
+        TEXT("Sessions: %d (Won: %d)\nStrokes: %d | Edges: %d\nSuccubi: %d | Enemies: %d\nXP Earned: %d | Coins: %d\nBest Combo: %d | Best Edge Streak: %d\nLongest Session: %ds | Most Strokes: %d"),
+        Stats.TotalSessionsCompleted, Stats.TotalSessionsWon,
+        Stats.TotalStrokes, Stats.TotalEdges,
+        Stats.TotalSuccubiDefeated, Stats.TotalEnemiesDefeated,
+        Stats.TotalXPEarned, Stats.TotalCoinsEarned,
+        Stats.BestCombo, Stats.BestEdgeStreak,
+        Stats.LongestSessionSeconds, Stats.MostStrokesInSession));
+}
+
+FText URecoveredProgressionLibrary::GetRewardsText(const TArray<FRecoveredReward>& Rewards) {
+    // Mirrors native UProgressionManager::GetRewardsText: lists granted rewards.
+    if (Rewards.Num() == 0) return FText::FromString(TEXT("No rewards earned."));
+    FString Out;
+    for (const FRecoveredReward& R : Rewards) {
+        if (!Out.IsEmpty()) Out += TEXT("\n");
+        if (R.RewardType == TEXT("XP")) Out += FString::Printf(TEXT("+%d XP"), R.Value);
+        else if (R.RewardType == TEXT("Coins")) Out += FString::Printf(TEXT("+%d Coins"), R.Value);
+        else if (!R.ItemIdentifier.IsEmpty()) Out += FString::Printf(TEXT("%s x%d"), *R.ItemIdentifier, R.Value);
+        else Out += FString::Printf(TEXT("%s: %d"), *R.RewardType, R.Value);
+    }
+    return FText::FromString(Out);
+}
+
+FText URecoveredProgressionLibrary::GetStatValueText(const FString& StatName, int32 SessionValue, int32 LifetimeValue, bool bUseLifetime) {
+    // Mirrors native UProgressionManager::GetStatValueText: single stat line,
+    // lifetime or session value based on the toggle.
+    const int32 Value = bUseLifetime ? LifetimeValue : SessionValue;
+    return FText::FromString(FString::Printf(TEXT("%s: %d"), *StatName, Value));
+}
+
+TArray<FRecoveredModifierRow> URecoveredProgressionManager::GetAllModifierData() const {
+    TArray<FRecoveredModifierRow> Out;
+    if (!ModifierDataTable) return Out;
+    for (const auto& Pair : ModifierDataTable->GetRowMap()) {
+        if (const FRecoveredModifierRow* Row = reinterpret_cast<const FRecoveredModifierRow*>(Pair.Value)) {
+            Out.Add(*Row);
+        }
+    }
+    return Out;
+}
+
+bool URecoveredProgressionManager::GetModifierData(FName ModifierID, FRecoveredModifierRow& OutData) const {
+    if (!ModifierDataTable) return false;
+    if (const FRecoveredModifierRow* Row = ModifierDataTable->FindRow<FRecoveredModifierRow>(ModifierID, TEXT("GetModifierData"))) {
+        OutData = *Row;
+        return true;
+    }
+    return false;
+}
+
+bool URecoveredProgressionManager::IsModifierUnlocked(FName ModifierID) const {
+    return UnlockedModifiers.Contains(ModifierID);
+}
+
+bool URecoveredProgressionManager::CanEnableModifier(FName ModifierID) const {
+    // Native checks unlock state and conflicts; conflict data is not in the
+    // recovered modifier table schema, so only the unlock gate is enforced here.
+    return IsModifierUnlocked(ModifierID);
+}
+
+TArray<FName> URecoveredProgressionManager::GetUnlockedModifiers() const {
+    return UnlockedModifiers.Array();
+}
+
+TArray<FName> URecoveredProgressionManager::GetConflictingModifiers(FName ModifierID) const {
+    // Conflict pairs are not present in the recovered modifier table schema
+    // (Title/Description/Icon only); returning empty until native data is available.
+    return TArray<FName>();
+}
+
+FName URecoveredProgressionManager::GetChallengeForModifier(FName ModifierID) const {
+    // Challenge linkage is not present in the recovered modifier table schema;
+    // returning NAME_None until native data is available.
+    return NAME_None;
 }

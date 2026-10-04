@@ -14,6 +14,14 @@ struct COCKHERORECOVERED_API FRecoveredModifierRow : public FTableRowBase {
 };
 
 USTRUCT(BlueprintType)
+struct COCKHERORECOVERED_API FRecoveredReward {
+    GENERATED_BODY()
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") FString RewardType;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") int32 Value = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") FString ItemIdentifier;
+};
+
+USTRUCT(BlueprintType)
 struct COCKHERORECOVERED_API FRecoveredXPSettings {
     GENERATED_BODY()
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float XPPerMinute=10.0f;
@@ -31,6 +39,11 @@ public:
     UFUNCTION(BlueprintPure, Category="Recovered|Progression") static int32 CalculateSessionXP(const FRecoveredSessionStats& Stats, const FRecoveredXPSettings& Settings);
     UFUNCTION(BlueprintPure, Category="Recovered|Progression") static int32 GetXPForNextLevel(int32 CurrentLevel);
     UFUNCTION(BlueprintPure, Category="Recovered|Progression") static float CalculateLevelProgress(int32 CurrentXP,int32 CurrentLevel);
+    // Native text builders confirmed by Ghidra analysis (UProgressionManager::GetLifetimeStatsText,
+    // GetRewardsText, GetStatValueText). Build display text for the results screen.
+    UFUNCTION(BlueprintPure, Category="Recovered|Progression") static FText GetLifetimeStatsText(const FRecoveredLifetimeStats& Stats);
+    UFUNCTION(BlueprintPure, Category="Recovered|Progression") static FText GetRewardsText(const TArray<FRecoveredReward>& Rewards);
+    UFUNCTION(BlueprintPure, Category="Recovered|Progression") static FText GetStatValueText(const FString& StatName, int32 SessionValue, int32 LifetimeValue, bool bUseLifetime);
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRecoveredXPGained,int32,Amount,const FString&,Source);
@@ -66,6 +79,16 @@ public:
     UFUNCTION(BlueprintCallable,Category="Recovered") void CheckLevelUp();
     UFUNCTION(BlueprintCallable,Category="Recovered") bool UnlockPlayerCard(FName CardID);
     UFUNCTION(BlueprintCallable,Category="Recovered") bool UnlockModifier(FName ModifierID);
+    // Native modifier data interface confirmed by Ghidra (UProgressionManager::GetAllModifierData,
+    // GetModifierData, CanEnableModifier, IsModifierUnlocked, GetUnlockedModifiers,
+    // GetConflictingModifiers, GetChallengeForModifier).
+    UFUNCTION(BlueprintPure,Category="Recovered") TArray<FRecoveredModifierRow> GetAllModifierData() const;
+    UFUNCTION(BlueprintPure,Category="Recovered") bool GetModifierData(FName ModifierID, FRecoveredModifierRow& OutData) const;
+    UFUNCTION(BlueprintPure,Category="Recovered") bool CanEnableModifier(FName ModifierID) const;
+    UFUNCTION(BlueprintPure,Category="Recovered") bool IsModifierUnlocked(FName ModifierID) const;
+    UFUNCTION(BlueprintPure,Category="Recovered") TArray<FName> GetUnlockedModifiers() const;
+    UFUNCTION(BlueprintPure,Category="Recovered") TArray<FName> GetConflictingModifiers(FName ModifierID) const;
+    UFUNCTION(BlueprintPure,Category="Recovered") FName GetChallengeForModifier(FName ModifierID) const;
     UFUNCTION(BlueprintPure,Category="Recovered Save") FString ExportRecoveryState() const;
     UFUNCTION(BlueprintCallable,Category="Recovered Save") bool ImportRecoveryState(const FString& Json);
 };

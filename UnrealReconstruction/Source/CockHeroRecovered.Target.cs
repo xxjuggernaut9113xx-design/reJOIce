@@ -6,6 +6,10 @@ public class CockHeroRecoveredTarget : TargetRules {
         IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_3;
         ExtraModuleNames.Add("CockHeroRecovered");
         bOverrideBuildEnvironment = true; // Project-local compatibility predicate; engine installation is unchanged.
-        AdditionalCompilerArguments = "/FI\"" + System.IO.Path.Combine(ProjectFile.Directory.FullName, "Source", "CompilerCompatibility.h") + "\"";
+        string CompatHeader = System.IO.Path.Combine(ProjectFile.Directory.FullName, "Source", "CompilerCompatibility.h");
+        // /FI is MSVC-only; clang treats it as an input file and breaks the link. Use -include on Linux.
+        AdditionalCompilerArguments = (Target.Platform == UnrealTargetPlatform.Win64)
+            ? "/FI\"" + CompatHeader + "\""
+            : "-include \"" + CompatHeader + "\"";
     }
 }

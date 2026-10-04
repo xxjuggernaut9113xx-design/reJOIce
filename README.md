@@ -14,3 +14,5 @@ Large databases, source materials and media are [private release assets](https:/
 The original files, saves and editable project were preserved. The shipping game has not been executed by this work. Tools and build caches are installed or regenerated separately.
 
 The 2026-10-03 supplied reconstruction patch has a separate [integration handoff](UnrealReconstruction/RECONSTRUCTION_COMPLETION_HANDOFF.md), which distinguishes compatibility repairs and verified checks from remaining placeholders.
+
+The later [Ghidra gap-fill handoff](UnrealReconstruction/RECONSTRUCTION_COMPLETION_HANDOFF.md) records the 2026-10-03 patch, a fresh 39-test run, and remaining limitations.

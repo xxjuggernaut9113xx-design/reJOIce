@@ -76,13 +76,6 @@ struct COCKHERORECOVERED_API FRecoveredCondition {
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") FString ConditionValue;
 };
 USTRUCT(BlueprintType)
-struct COCKHERORECOVERED_API FRecoveredReward {
-    GENERATED_BODY()
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") FString RewardType;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") int32 Value = 0;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") FString ItemIdentifier;
-};
-USTRUCT(BlueprintType)
 struct COCKHERORECOVERED_API FRecoveredChallengeRow : public FTableRowBase {
     GENERATED_BODY()
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") FString ChallengeID;
@@ -276,10 +269,13 @@ public:
     // binding below reproduces that routing.
     UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void FinalizeRecoveredSession();
     UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void OpenPostGameResults();
+    UFUNCTION() void BindPostGameResultsData(UUserWidget* Results);
     UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") int32 CalculateRecoveredSessionXP() const;
     UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") TArray<FRecoveredReward> PrepareRecoveredSessionRewards(int32 SessionXP) const;
     UFUNCTION() void BindPostGameResultsButton(UUserWidget* PostCumWidget);
     UFUNCTION() void UpdateRecoveredLifetimeStats(int32 SessionXP);
+    UFUNCTION() void SaveLifetimeStats();
+    UFUNCTION() void LoadLifetimeStats();
     // Reads the saved calibration profile (if any) and applies its compensated
     // offset to the beat timeline. Called at session start and at every beat
     // sequence start so recalibration takes effect without restarting.

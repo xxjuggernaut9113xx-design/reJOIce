@@ -2,6 +2,9 @@
 #include "RecoveredRewards.h"
 #include "RecoveredProgression.h"
 #include "Components/Button.h"
+#include "Components/TextBlock.h"
+#include "Components/PanelWidget.h"
+#include "Blueprint/WidgetTree.h"
 #include "Blueprint/UserWidget.h"
 #include "Kismet/GameplayStatics.h"
 #include "TimerManager.h"
@@ -37,6 +40,29 @@ void ARecoveredGlobalManager::OpenPostGameResults() {
     if (auto* Results = CreateWidget<UUserWidget>(Controller, ResultsClass)) {
         Results->AddToViewport(0);
         EventOverlays.Add(Results);
+        BindPostGameResultsData(Results);
+    }
+}
+
+void ARecoveredGlobalManager::BindPostGameResultsData(UUserWidget* Results) {
+    if (!Results) return;
+    // Build the display texts from the native-confirmed builders.
+    const int32 SessionXP = CalculateRecoveredSessionXP();
+    const TArray<FRecoveredReward> Rewards = PrepareRecoveredSessionRewards(SessionXP);
+    const FText LifetimeText = URecoveredProgressionLibrary::GetLifetimeStatsText(LifetimeStats);
+    const FText RewardsText = URecoveredProgressionLibrary::GetRewardsText(Rewards);
+    const FText XPText = FText::AsNumber(SessionXP);
+    // Bind defensively: set any text block whose name matches the data role.
+    // Field names come from the native widget; only existing widgets are touched.
+    TArray<UWidget*> AllWidgets;
+    if (Results->WidgetTree) Results->WidgetTree->GetAllWidgets(AllWidgets);
+    for (UWidget* W : AllWidgets) {
+        if (auto* Text = Cast<UTextBlock>(W)) {
+            const FString Name = Text->GetName();
+            if (Name.Contains(TEXT("Lifetime")) || Name.Contains(TEXT("Stats"))) Text->SetText(LifetimeText);
+            else if (Name.Contains(TEXT("Reward"))) Text->SetText(RewardsText);
+            else if (Name.Contains(TEXT("XP")) && !Name.Contains(TEXT("Lifetime"))) Text->SetText(XPText);
+        }
     }
 }
 
@@ -73,6 +99,44 @@ void ARecoveredGlobalManager::UpdateRecoveredLifetimeStats(int32 SessionXP) {
     LifetimeStats.BestEdgeStreak = FMath::Max(LifetimeStats.BestEdgeStreak, S.EdgeStreak);
     LifetimeStats.LongestSessionSeconds = FMath::Max(LifetimeStats.LongestSessionSeconds, S.SessionDuration);
     LifetimeStats.MostStrokesInSession = FMath::Max(LifetimeStats.MostStrokesInSession, S.Strokes);
+    SaveLifetimeStats();
+}
+
+void ARecoveredGlobalManager::SaveLifetimeStats() {
+    auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+    if (!Instance || !Instance->CurrentSave) return;
+    URecoveredSaveGame* Save = Instance->CurrentSave;
+    Save->SetNumberSetting(TEXT("Lifetime_TotalSessionsCompleted"), LifetimeStats.TotalSessionsCompleted);
+    Save->SetNumberSetting(TEXT("Lifetime_TotalSessionsWon"), LifetimeStats.TotalSessionsWon);
+    Save->SetNumberSetting(TEXT("Lifetime_TotalStrokes"), LifetimeStats.TotalStrokes);
+    Save->SetNumberSetting(TEXT("Lifetime_TotalEdges"), LifetimeStats.TotalEdges);
+    Save->SetNumberSetting(TEXT("Lifetime_TotalSuccubiDefeated"), LifetimeStats.TotalSuccubiDefeated);
+    Save->SetNumberSetting(TEXT("Lifetime_TotalEnemiesDefeated"), LifetimeStats.TotalEnemiesDefeated);
+    Save->SetNumberSetting(TEXT("Lifetime_TotalXPEarned"), LifetimeStats.TotalXPEarned);
+    Save->SetNumberSetting(TEXT("Lifetime_TotalCoinsEarned"), LifetimeStats.TotalCoinsEarned);
+    Save->SetNumberSetting(TEXT("Lifetime_BestCombo"), LifetimeStats.BestCombo);
+    Save->SetNumberSetting(TEXT("Lifetime_BestEdgeStreak"), LifetimeStats.BestEdgeStreak);
+    Save->SetNumberSetting(TEXT("Lifetime_LongestSessionSeconds"), LifetimeStats.LongestSessionSeconds);
+    Save->SetNumberSetting(TEXT("Lifetime_MostStrokesInSession"), LifetimeStats.MostStrokesInSession);
+    Instance->SaveRecoveredState();
+}
+
+void ARecoveredGlobalManager::LoadLifetimeStats() {
+    auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+    if (!Instance || !Instance->CurrentSave) return;
+    URecoveredSaveGame* Save = Instance->CurrentSave;
+    LifetimeStats.TotalSessionsCompleted = (int32)Save->GetNumberSetting(TEXT("Lifetime_TotalSessionsCompleted"), 0);
+    LifetimeStats.TotalSessionsWon = (int32)Save->GetNumberSetting(TEXT("Lifetime_TotalSessionsWon"), 0);
+    LifetimeStats.TotalStrokes = (int32)Save->GetNumberSetting(TEXT("Lifetime_TotalStrokes"), 0);
+    LifetimeStats.TotalEdges = (int32)Save->GetNumberSetting(TEXT("Lifetime_TotalEdges"), 0);
+    LifetimeStats.TotalSuccubiDefeated = (int32)Save->GetNumberSetting(TEXT("Lifetime_TotalSuccubiDefeated"), 0);
+    LifetimeStats.TotalEnemiesDefeated = (int32)Save->GetNumberSetting(TEXT("Lifetime_TotalEnemiesDefeated"), 0);
+    LifetimeStats.TotalXPEarned = (int32)Save->GetNumberSetting(TEXT("Lifetime_TotalXPEarned"), 0);
+    LifetimeStats.TotalCoinsEarned = (int32)Save->GetNumberSetting(TEXT("Lifetime_TotalCoinsEarned"), 0);
+    LifetimeStats.BestCombo = (int32)Save->GetNumberSetting(TEXT("Lifetime_BestCombo"), 0);
+    LifetimeStats.BestEdgeStreak = (int32)Save->GetNumberSetting(TEXT("Lifetime_BestEdgeStreak"), 0);
+    LifetimeStats.LongestSessionSeconds = (int32)Save->GetNumberSetting(TEXT("Lifetime_LongestSessionSeconds"), 0);
+    LifetimeStats.MostStrokesInSession = (int32)Save->GetNumberSetting(TEXT("Lifetime_MostStrokesInSession"), 0);
 }
 
 void ARecoveredGlobalManager::FinalizeRecoveredSession() {
