@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-06",
+  "source_game_executed": false,
+  "editor_build": {
+    "engine": "Unreal Engine 5.3.2",
+    "target": "CockHeroRecoveredEditor Win64 Development",
+    "result": "passed"
+  },
+  "asset_parent_readback": {
+    "commandlet": "Scripts/verify_supplied_patch.py",
+    "verified_count": 15,
+    "result": "passed",
+    "report": "Saved/patch-widget-readback.json"
+  },
+  "automation": {
+    "filter": "CockHero.Recovery",
+    "report": "Saved/RecoveryFinalValidation/index.json",
+    "succeeded": 42,
+    "succeeded_with_warnings": 0,
+    "failed": 0,
+    "widget_attachment_test": "CockHero.Recovery.WidgetAttachments"
+  },
+  "post_game_handoff": {
+    "filter": "CockHero.Recovery.PostGameHandoff",
+    "report": "Saved/RecoveryFinalValidation/index.json",
+    "succeeded": 1,
+    "failed": 0,
+    "verified": [
+      "Final strokes populate WBP_SessionSummaryWidget.TotalStrokesText",
+      "WBP_PostGameFlow_Master.WidgetSwitcher selects summary page 3"
+    ]
+  },
+  "attached_widgets": [
+    "/Game/Recovery/UI/ImportMenuWidget -> URecoveredImportWidget",
+    "/Game/Recovery/UI/ChallengesTabWidget -> URecoveredChallengeWidget",
+    "/Game/Recovery/UI/ModifiersTabWidget -> URecoveredModifierWidget"
+  ],
+  "limitations": [
+    "Original post-game animation/delegate lifecycle is not restored",
+    "Interactive and packaged importer validation remains outstanding",
+    "Original runtime parity is not verified",
+    "Full-image analysis is incomplete"
+  ]
+}

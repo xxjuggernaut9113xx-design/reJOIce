@@ -9,6 +9,11 @@
 #include "Components/ComboBoxString.h"
 #include "Blueprint/WidgetTree.h"
 #include "RecoveredSaveSlotWidget.h"
+#include "RecoveredImportWidget.h"
+#include "RecoveredChallengeWidget.h"
+#include "RecoveredModifierWidget.h"
+#include "Components/TextBlock.h"
+#include "Components/WidgetSwitcher.h"
 #if WITH_DEV_AUTOMATION_TESTS
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredPatchLifecycleTest,"CockHero.Recovery.PatchLifecycle",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
 bool FRecoveredPatchLifecycleTest::RunTest(const FString& Parameters) {
@@ -97,6 +102,64 @@ bool FRecoveredFinalPatchRegressionTest::RunTest(const FString& Parameters) {
     auto* Deck=NewObject<URecoveredDeckState>();FRecoveredMediaEntry Entry;Entry.FullPath=TEXT("example");Deck->Master.Slow.Add(Entry);
     Deck->ReplaceEmptyDecks();TestEqual(TEXT("Original deck refill preserved"),Deck->Child.Slow.Num(),1);
     Deck->Child.Slow.Reset();Deck->SetDeckRepeat(0,false);Deck->ReplaceEmptyDecks();TestEqual(TEXT("Explicit no-repeat is honored"),Deck->Child.Slow.Num(),0);
+    return true;
+}
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredWidgetAttachmentTest,"CockHero.Recovery.WidgetAttachments",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FRecoveredWidgetAttachmentTest::RunTest(const FString& Parameters) {
+    UClass* ImportClass=LoadClass<URecoveredImportWidget>(nullptr,TEXT("/Game/Recovery/UI/ImportMenuWidget.ImportMenuWidget_C"));
+    if (!TestNotNull(TEXT("Import widget native parent"),ImportClass)) return false;
+    auto* Import=NewObject<URecoveredImportWidget>(GetTransientPackage(),ImportClass);
+    if (!TestTrue(TEXT("Import widget initializes"),Import->Initialize())) return false;
+    Import->TakeWidget();
+    TestNotNull(TEXT("Import file list survives native attachment"),Import->GetWidgetFromName(TEXT("EntryScrollBox")));
+    TestNotNull(TEXT("Import directory action survives native attachment"),Import->GetWidgetFromName(TEXT("AddDirectoryButton")));
+
+    UClass* ChallengeClass=LoadClass<URecoveredChallengeWidget>(nullptr,TEXT("/Game/Recovery/UI/ChallengesTabWidget.ChallengesTabWidget_C"));
+    if (!TestNotNull(TEXT("Challenge widget native parent"),ChallengeClass)) return false;
+    auto* Challenges=NewObject<URecoveredChallengeWidget>(GetTransientPackage(),ChallengeClass);
+    if (!TestTrue(TEXT("Challenge widget initializes"),Challenges->Initialize())) return false;
+    Challenges->TakeWidget();
+    TestNotNull(TEXT("Challenge list survives native attachment"),Challenges->GetWidgetFromName(TEXT("ChallengesVerticalBox")));
+    TestNotNull(TEXT("Challenge interaction survives native attachment"),Challenges->GetWidgetFromName(TEXT("InteractionButton")));
+
+    UClass* ModifierClass=LoadClass<URecoveredModifierWidget>(nullptr,TEXT("/Game/Recovery/UI/ModifiersTabWidget.ModifiersTabWidget_C"));
+    if (!TestNotNull(TEXT("Modifier widget native parent"),ModifierClass)) return false;
+    auto* Modifiers=NewObject<URecoveredModifierWidget>(GetTransientPackage(),ModifierClass);
+    if (!TestTrue(TEXT("Modifier widget initializes"),Modifiers->Initialize())) return false;
+    Modifiers->TakeWidget();
+    TestNotNull(TEXT("Modifier grid survives native attachment"),Modifiers->GetWidgetFromName(TEXT("UniformGridPanel_94")));
+    return true;
+}
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredPostGameHandoffTest,"CockHero.Recovery.PostGameHandoff",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FRecoveredPostGameHandoffTest::RunTest(const FString& Parameters) {
+    const auto Initialization=UWorld::InitializationValues().AllowAudioPlayback(false).CreatePhysicsScene(false).CreateNavigation(false).CreateAISystem(false).ShouldSimulatePhysics(false).SetTransactional(false);
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false,NAME_None,nullptr,true,ERHIFeatureLevel::Num,&Initialization);
+    GEngine->CreateNewWorldContext(EWorldType::Game).SetCurrentWorld(World);
+    World->InitializeActorsForPlay(FURL());
+    auto* Manager=World->SpawnActor<ARecoveredGlobalManager>();
+    if (!TestNotNull(TEXT("Post-game manager"),Manager)) return false;
+    Manager->SessionStats.Strokes=42;
+    Manager->SessionStats.Edges=7;
+    Manager->SessionStats.MaxCombo=11;
+    Manager->SessionStats.EnemiesDefeated=3;
+    Manager->SessionStats.SuccubiDefeated=2;
+    Manager->SessionStats.SessionDuration=125;
+    Manager->SessionStats.bWon=true;
+    UClass* ResultsClass=LoadClass<UUserWidget>(nullptr,TEXT("/Game/Recovery/UI/WBP_PostGameFlow_Master.WBP_PostGameFlow_Master_C"));
+    if (!TestNotNull(TEXT("Post-game master class"),ResultsClass)) return false;
+    auto* Results=NewObject<UUserWidget>(GetTransientPackage(),ResultsClass);
+    if (!TestTrue(TEXT("Post-game master initializes"),Results->Initialize())) return false;
+    Results->TakeWidget();
+    Manager->BindPostGameResultsData(Results);
+    auto* Summary=Cast<UUserWidget>(Results->GetWidgetFromName(TEXT("WBP_SessionSummaryWidget")));
+    if (!TestNotNull(TEXT("Post-game summary child"),Summary)) return false;
+    auto* Strokes=Cast<UTextBlock>(Summary->GetWidgetFromName(TEXT("TotalStrokesText")));
+    if (!TestNotNull(TEXT("Post-game strokes field"),Strokes)) return false;
+    TestEqual(TEXT("Post-game summary receives final strokes"),Strokes->GetText().ToString(),FString(TEXT("42")));
+    auto* Switcher=Cast<UWidgetSwitcher>(Results->GetWidgetFromName(TEXT("WidgetSwitcher")));
+    if (!TestNotNull(TEXT("Post-game switcher"),Switcher)) return false;
+    TestEqual(TEXT("Post-game lands on summary"),Switcher->GetActiveWidgetIndex(),3);
+    World->DestroyWorld(false); GEngine->DestroyWorldContext(World);
     return true;
 }
 #endif

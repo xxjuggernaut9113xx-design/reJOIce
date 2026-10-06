@@ -5,12 +5,39 @@
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
 #include "Components/PanelWidget.h"
+#include "Components/WidgetSwitcher.h"
 #include "Blueprint/WidgetTree.h"
 #include "Blueprint/UserWidget.h"
 #include "Kismet/GameplayStatics.h"
 #include "TimerManager.h"
 #include "Sound/SoundBase.h"
 #include "Misc/PackageName.h"
+
+namespace {
+UWidget* FindNestedWidget(UUserWidget* Root, FName Name) {
+    if (!Root) return nullptr;
+    if (UWidget* Direct = Root->GetWidgetFromName(Name)) return Direct;
+    if (!Root->WidgetTree) return nullptr;
+    TArray<UWidget*> Widgets;
+    Root->WidgetTree->GetAllWidgets(Widgets);
+    for (UWidget* Widget : Widgets) {
+        if (!Widget) continue;
+        if (Widget->GetFName() == Name) return Widget;
+        if (auto* Nested = Cast<UUserWidget>(Widget)) {
+            if (UWidget* Found = FindNestedWidget(Nested, Name)) return Found;
+        }
+    }
+    return nullptr;
+}
+
+void SetNestedText(UUserWidget* Root, const TCHAR* Name, const FText& Value) {
+    if (auto* Text = Cast<UTextBlock>(FindNestedWidget(Root, FName(Name)))) Text->SetText(Value);
+}
+
+void BindNestedButton(UUserWidget* Root, const TCHAR* Name, ARecoveredGlobalManager* Manager) {
+    if (auto* Button = Cast<UButton>(FindNestedWidget(Root, FName(Name)))) Button->OnClicked.AddUniqueDynamic(Manager, &ARecoveredGlobalManager::HandleReturnToMenuClicked);
+}
+}
 
 void ARecoveredGlobalManager::BindPostGameResultsButton(UUserWidget* PostCumWidget) {
     if (!PostCumWidget) return;
@@ -53,7 +80,11 @@ void ARecoveredGlobalManager::OpenPostGameResults() {
 
 void ARecoveredGlobalManager::BindPostGameResultsData(UUserWidget* Results) {
     if (!Results) return;
-    // Build the display texts from the native-confirmed builders.
+    // The original master owns four nested screens: XP, optional level-up,
+    // unlock rewards, then the summary.  Its original Blueprint delegates
+    // require unavailable runtime classes, so populate their recovered trees
+    // directly and land on the usable summary rather than leaving a blank
+    // switcher page active.
     const int32 SessionXP = CalculateRecoveredSessionXP();
     const TArray<FRecoveredReward> Rewards = PrepareRecoveredSessionRewards(SessionXP);
     FRecoveredSessionRewardData RewardData;
@@ -63,28 +94,42 @@ void ARecoveredGlobalManager::BindPostGameResultsData(UUserWidget* Results) {
     const FText RewardsText = URecoveredProgressionLibrary::GetRewardsText(RewardData);
     const FText XPText = FText::AsNumber(SessionXP);
     const FText DurationText = FText::FromString(FString::Printf(TEXT("%d:%02d"), SessionStats.SessionDuration / 60, SessionStats.SessionDuration % 60));
-    const FText ResultText = FText::FromString(SessionStats.bWon ? TEXT("Victory") : TEXT("Defeat"));
-    // Bind defensively: set any text block whose name matches the data role.
-    // Field names come from the native widget; only existing widgets are touched.
-    TArray<UWidget*> AllWidgets;
-    if (Results->WidgetTree) Results->WidgetTree->GetAllWidgets(AllWidgets);
-    for (UWidget* W : AllWidgets) {
-        if (auto* Text = Cast<UTextBlock>(W)) {
-            const FString Name = Text->GetName();
-            if (Name.Contains(TEXT("Lifetime")) || Name.Contains(TEXT("Stats"))) Text->SetText(LifetimeText);
-            else if (Name.Contains(TEXT("Reward"))) Text->SetText(RewardsText);
-            else if (Name.Contains(TEXT("Duration")) || Name.Contains(TEXT("TimePlayed"))) Text->SetText(DurationText);
-            else if (Name.Contains(TEXT("Result")) || Name.Contains(TEXT("Outcome"))) Text->SetText(ResultText);
-            else if (Name.Contains(TEXT("XP")) && !Name.Contains(TEXT("Lifetime"))) Text->SetText(XPText);
-        }
-        // Wire return-to-menu buttons: the results screen's menu return control.
-        if (auto* Button = Cast<UButton>(W)) {
-            const FString Name = Button->GetName();
-            if (Name.Contains(TEXT("ReturnToMenu")) || Name.Contains(TEXT("MainMenu")) || Name.Contains(TEXT("MenuButton"))) {
-                Button->OnClicked.AddUniqueDynamic(this, &ARecoveredGlobalManager::HandleReturnToMenuClicked);
-            }
-        }
-    }
+    const FText ResultText = FText::FromString(SessionStats.bWon ? TEXT("Victory") : TEXT("Defeat (-50% Rewards)"));
+    const FString DetailString = FString::Printf(TEXT("Strokes: %d\nEdges: %d\nHighest Combo: %d\nEnemies Defeated: %d\nSuccubi Defeated: %d"),
+        SessionStats.Strokes, SessionStats.Edges, SessionStats.MaxCombo, SessionStats.EnemiesDefeated, SessionStats.SuccubiDefeated);
+
+    // WBP_SessionSummaryWidget fields recovered from its Initialize body.
+    SetNestedText(Results, TEXT("VictoryText"), ResultText);
+    SetNestedText(Results, TEXT("RewardsString"), RewardsText);
+    SetNestedText(Results, TEXT("DurationText"), DurationText);
+    SetNestedText(Results, TEXT("TotalStrokesText"), FText::AsNumber(SessionStats.Strokes));
+    SetNestedText(Results, TEXT("EdgeAmountText"), FText::AsNumber(SessionStats.Edges));
+    SetNestedText(Results, TEXT("HighestComboText"), FText::AsNumber(SessionStats.MaxCombo));
+    SetNestedText(Results, TEXT("DetailedStatsString"), FText::FromString(DetailString));
+
+    // WBP_XPScreen and its nested XBP_XPSourceText.
+    SetNestedText(Results, TEXT("XPAmountText"), XPText);
+    SetNestedText(Results, TEXT("XPDetailText"), FText::FromString(TEXT("Session Complete")));
+
+    // WBP_UPRewardScreen receives the current recovered unlock-point total.
+    const auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+    const int32 UnlockPoints = Instance && Instance->ProgressionManager ? Instance->ProgressionManager->UnlockPoints : 0;
+    SetNestedText(Results, TEXT("UPTotalText"), FText::AsNumber(UnlockPoints));
+    SetNestedText(Results, TEXT("UPAmountText"), FText::AsNumber(PendingPostGameUnlockPoints));
+    SetNestedText(Results, TEXT("DetailText"), FText::FromString(PendingPostGameUnlockPoints > 0 ? TEXT("Level-up reward") : TEXT("No unlock-point reward")));
+
+    // WBP_LevelUpScreen fields are populated even when the summary is the
+    // initial page.  This retains verified level-up data for its recovered UI.
+    const int32 DisplayLevel = PendingPostGameLevel != INDEX_NONE ? PendingPostGameLevel : (Instance && Instance->ProgressionManager ? Instance->ProgressionManager->CurrentLevel : 1);
+    SetNestedText(Results, TEXT("LevelText"), FText::AsNumber(DisplayLevel));
+    SetNestedText(Results, TEXT("RankTitle"), PendingPostGameContentUnlocks.IsEmpty() ? FText::FromString(TEXT("Level Up")) : FText::FromString(FString::Join(PendingPostGameContentUnlocks, TEXT("\n"))));
+
+    BindNestedButton(Results, TEXT("ReturnToMenu"), this);
+    BindNestedButton(Results, TEXT("ReturnToMenuButton"), this);
+    if (auto* Switcher = Cast<UWidgetSwitcher>(Results->GetWidgetFromName(TEXT("WidgetSwitcher")))) Switcher->SetActiveWidgetIndex(3);
+    PendingPostGameLevel = INDEX_NONE;
+    PendingPostGameUnlockPoints = 0;
+    PendingPostGameContentUnlocks.Reset();
 }
 
 void ARecoveredGlobalManager::HandleReturnToMenuClicked() {
@@ -262,7 +307,14 @@ void ARecoveredGlobalManager::PlayRecoveredSessionSound(FName SoundID) {
 }
 
 void ARecoveredGlobalManager::HandleRecoveredLevelUp(int32 Level, int32 UnlockPoints, const TArray<FString>& ContentUnlocks) {
-    // Present the level-up screen with unlock points and content unlocks.
+    if (bRecoveredSessionFinalized) {
+        PendingPostGameLevel = Level;
+        PendingPostGameUnlockPoints = UnlockPoints;
+        PendingPostGameContentUnlocks = ContentUnlocks;
+        return;
+    }
+    // Non-session progression (for example a claimed challenge reward) still
+    // uses the standalone level-up overlay.
     APlayerController* Controller = UGameplayStatics::GetPlayerController(this, 0);
     UClass* LevelUpClass = LoadClass<UUserWidget>(nullptr, TEXT("/Game/Recovery/UI/WBP_LevelUpScreen.WBP_LevelUpScreen_C"));
     if (!Controller || !LevelUpClass) return;

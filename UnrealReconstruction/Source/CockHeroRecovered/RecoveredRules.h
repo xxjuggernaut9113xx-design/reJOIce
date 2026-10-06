@@ -376,6 +376,11 @@ public:
     UFUNCTION(BlueprintPure, Category="Recovered|Audio") FName GetVoicePack() const;
     UFUNCTION(BlueprintCallable, Category="Recovered|Audio") float GetRecoveredVolume(const FString& SettingName, float Fallback) const;
     UPROPERTY(Transient) TArray<TObjectPtr<class UUserWidget>> EventOverlays;
+    // During session finalization a level-up is presented by the post-game
+    // master instead of spawning an unconnected duplicate overlay.
+    UPROPERTY(Transient) int32 PendingPostGameLevel = INDEX_NONE;
+    UPROPERTY(Transient) int32 PendingPostGameUnlockPoints = 0;
+    UPROPERTY(Transient) TArray<FString> PendingPostGameContentUnlocks;
     FTimerHandle StoreCooldownTimer;
     FTimerHandle OutcomeContinuationTimer;
     FTimerHandle IdleTimer;

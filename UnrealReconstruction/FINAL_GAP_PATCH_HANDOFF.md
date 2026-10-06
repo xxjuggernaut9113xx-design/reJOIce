@@ -17,10 +17,29 @@ Input: `ghidra-gap-fill-final.patch` supplied by the user on 2026-10-04. Integra
 - Made shuffle actually shuffle the selected deck, honored explicit repeat-disable while preserving default refill, connected video-loop state to current/future media players, and avoided duplicate file-import counts.
 - Preserved immediate item use on existing assets without a separate use button, so new inventory scaffolding does not strand purchased items.
 
-## What this does not establish
+## 2026-10-06 recovery wiring
 
-The supplied patch contains approximations and scaffolding. New challenge, modifier, import, cheat, and save-slot classes are not automatically attached to existing assets. Candidate modifier-conflict pairs, reward rolls, event penalties/cooldowns, dialogue paths and most widget names still need evidence-driven reconstruction. A callable method, a saved setting, or a matching notification name is not proof that the full player flow works.
+- Reparented the existing `ImportMenuWidget`, `ChallengesTabWidget`, and `ModifiersTabWidget` assets to their recovered native classes. A fresh commandlet readback resolved all 15 expected widget parents, including the prior settings/store widgets.
+- Rebuilt import around the actual controls recovered from `ImportMenuWidget`: `AddButton`, `AddDirectoryButton`, `ScanButton`, `ClearButton`, `EntryScrollBox`, `PresetsComboBox`, and `PresetSaveNameTextBox`. The Windows recovery build now opens native file/directory pickers, retains watched directories, saves recovery-owned presets, creates a recovery-owned absolute-path manifest, and reloads the media deck without copying original media.
+- Extended `ReadPackManifest` to accept absolute paths only for recovery-generated manifests; original relative manifests retain their `manifest-directory/media` resolution.
+- Rebuilt the challenge tab against `ChallengesVerticalBox`, `InteractionButton`, and the recovered detail fields. It combines session/lifetime progress, persists tracker-backed tracking, presents requirements/rewards, and claims a completed reward once.
+- Rebuilt modifiers against `UniformGridPanel_94` and `ModifierCardEntryWidget`. It uses real data-table row names, preserves unlock state, removes reconstructed conflicts before enabling a modifier, persists enabled values, and synchronizes session modifier IDs for XP/session consumers.
+- Repaired the post-game handoff. It now writes the recovered XP, unlock-point, level-up, and session-summary fields to nested child widgets, suppresses the duplicate standalone level-up overlay during finalization, binds the nested return button, and lands the master switcher on its usable summary page.
 
-The results master still needs its child-screen lifecycle. Importing does not yet build playable packs. Auto-draw has no completion consumer. Hardware transports, original save compatibility, original editor graphs, complete native analysis, full GUI playtests and packaged/clean-machine validation remain outstanding. No full-game completion or original-runtime parity is claimed. The shipping game was not executed.
+## Verification
+
+- Windows Unreal Editor build completed successfully with Unreal Engine 5.3.2.
+- `CockHero.Recovery` automation: **42 succeeded, 0 warnings, 0 failures**. This includes `WidgetAttachments`, which initializes all three newly parented trees and verifies their actual recovered controls, and `PostGameHandoff`, which verifies finalized strokes reach `WBP_SessionSummaryWidget` and the master switcher selects page 3.
+- Fresh editor commandlet parent readback: **15 expected widgets verified**.
+
+The machine-readable record is [recovery-wiring-validation.json](RecoveryEvidence/recovery-wiring-validation.json). The shipping game was not executed.
+
+## Remaining limits
+
+- The original post-game animation/delegate sequence (XP animation, pause for level-up, unlock-point animation, then summary) is not reconstructed. The recovery master presents its populated summary directly because the original child delegates require unavailable runtime classes.
+- Importer file/directory picker behavior is Windows-specific and was validated by build, widget initialization, manifest/deck code, and parent readback. It still needs an interactive GUI and packaged-build check with representative user media. Playback support is limited by the existing recovered media backend.
+- Recovered challenge and modifier lists use the original container/card assets and the recovered state models, but do not restore every original entry Blueprint animation, icon rule, conflict pair, reward roll, or data-table mapping.
+- Auto-draw still has no verified completion consumer. Hardware transports, original save compatibility, original editor graphs, complete native analysis, full GUI playtests, packaged validation, and clean-machine validation remain outstanding.
+- The complete-image checkpoint is still partial, and the original runtime has not been used for behavioral comparison. No full-game completion or original-runtime parity is claimed.
 
 Build/test details and input hashes are recorded in [final-gap-patch-verification.json](RecoveryEvidence/final-gap-patch-verification.json). The comprehensive missing/partial-feature audit is updated separately after pushing this integration.

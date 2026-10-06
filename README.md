@@ -7,7 +7,7 @@ Saved static analysis and an editable partial Unreal reconstruction of the suppl
 - **Targeted slice:** complete at 712 matching PDB symbols, 390 eligible functions and 390 exported records. This work has not been repeated.
 - **Full-image checkpoint:** 573,011 functions and 43,658,219 instructions saved in `CockHeroFullImageResumed`. The run timed out and encountered a Java heap-memory error; code analysis is still incomplete. The database and logs are available for continuation with more memory.
 - **Blueprint coverage:** 134 assets in the function-analysis reports, with 1,225 decoded UFunctions. Original cooked containers and derived decoding files are included.
-- **Reconstruction:** editable Unreal 5.3.2 source and assets, plus the media files referenced by the current project. The repaired patch passed a fresh 39-test run on 2026-10-03 (zero warnings/failures); the earlier 37-test report is historical. The game remains unfinished; see [handoff](UnrealReconstruction/HANDOFF.md).
+- **Reconstruction:** editable Unreal 5.3.2 source and assets, plus the media files referenced by the current project. A fresh 42-test recovery run passed on 2026-10-06 with zero warnings/failures. Import, challenge, modifier, and post-game summary wiring are now attached to recovered widgets; the game remains unfinished. See the [current handoff](UnrealReconstruction/FINAL_GAP_PATCH_HANDOFF.md).
 
 Large databases, source materials and media are [private release assets](https://github.com/xxjuggernaut9113xx-design/reJOIce/releases/tag/materials-v004). The [original materials manifest](Materials/materials-manifest.json) and [latest transfer manifest](Materials/transfer-manifest.json) record filenames, sizes and hashes. Downloaded archives are restored by `Materials/Scripts/restore_workspace.py`.
 
@@ -17,4 +17,4 @@ The 2026-10-03 supplied reconstruction patch has a separate [integration handoff
 
 The later [Ghidra gap-fill handoff](UnrealReconstruction/RECONSTRUCTION_COMPLETION_HANDOFF.md) records the 2026-10-03 patch, a fresh 39-test run, and remaining limitations.
 
-The 2026-10-04 final supplied patch was reviewed and repaired. The Windows editor build and **40 regression tests** passed (zero test warnings/failures). See the [final patch handoff](UnrealReconstruction/FINAL_GAP_PATCH_HANDOFF.md) for fixes and remaining scaffolding.
+The 2026-10-04 final supplied patch was reviewed and repaired. The 2026-10-06 continuation passed the Windows editor build, a **42-test** recovery run that includes the post-game handoff and widget-attachment checks, and a persisted 15-widget parent readback. See the [final patch handoff](UnrealReconstruction/FINAL_GAP_PATCH_HANDOFF.md) and [recovery wiring validation](UnrealReconstruction/RecoveryEvidence/recovery-wiring-validation.json).

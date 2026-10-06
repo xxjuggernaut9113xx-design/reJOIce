@@ -64,7 +64,9 @@ bool URecoveredMediaLibrary::ReadPackManifest(const FString& ManifestPath, TArra
         FRecoveredMediaEntry Entry;
         if (!Object.IsValid() || !Object->TryGetStringField(TEXT("file"), Entry.File)) { Entries.Reset(); Error = TEXT("Media entry has no file"); return false; }
         Object->TryGetStringField(TEXT("type"), Entry.Type);
-        Entry.FullPath = FPaths::ConvertRelativePathToFull(Directory / TEXT("media"), Entry.File);
+        Entry.FullPath = FPaths::IsRelative(Entry.File)
+            ? FPaths::ConvertRelativePathToFull(Directory / TEXT("media"), Entry.File)
+            : FPaths::ConvertRelativePathToFull(Entry.File);
         Entry.Tags = ParseFilenameTags(Entry.File);
         Entries.Add(MoveTemp(Entry));
     }
