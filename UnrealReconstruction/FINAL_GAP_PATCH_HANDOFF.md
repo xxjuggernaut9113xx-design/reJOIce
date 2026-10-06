@@ -28,6 +28,14 @@ Input: `ghidra-gap-fill-final.patch` supplied by the user on 2026-10-04. Integra
 
 ## Verification
 
+### Import failure handling follow-up (2026-10-06)
+
+The importer now preserves load errors when refreshing its rows, leaves the active manifest path unchanged when loading fails, and explicitly reports when clearing the list cannot restore unavailable base media. Base-manifest detection uses normalized path comparison, and its restore path is saved after a successful import. Reopening the importer reapplies an existing persisted selection. Preset save/delete messages now include the actual disk-save result. Windows headers are guarded for other build targets.
+
+`CockHero.Recovery.ImportFailureVisibility` checks unavailable-session errors, status preservation across list refresh, rejected empty input, and the empty-directory scan prerequisite using the recovered importer asset. This does not validate native dialogs, successful media playback, disk-failure injection, or packaged behavior. Full-game completion remains unverified.
+
+Follow-up validation: editor build passed; **43 tests passed, zero warnings/failures/not-run**, including the new importer regression. See [import-failure-validation.json](RecoveryEvidence/import-failure-validation.json). The 42-test results below describe the preceding wiring checkpoint.
+
 - Windows Unreal Editor build completed successfully with Unreal Engine 5.3.2.
 - `CockHero.Recovery` automation: **42 succeeded, 0 warnings, 0 failures**. This includes `WidgetAttachments`, which initializes all three newly parented trees and verifies their actual recovered controls, and `PostGameHandoff`, which verifies finalized strokes reach `WBP_SessionSummaryWidget` and the master switcher selects page 3.
 - Fresh editor commandlet parent readback: **15 expected widgets verified**.

@@ -22,6 +22,7 @@ public:
 UCLASS(Blueprintable)
 class COCKHERORECOVERED_API URecoveredImportWidget : public URecoveredMenuWidget {
     GENERATED_BODY()
+    friend class FRecoveredImportFailureTest;
 public:
     UFUNCTION(BlueprintCallable, Category="Recovered Import") bool AddMediaFile(const FString& FilePath);
     UFUNCTION(BlueprintCallable, Category="Recovered Import") int32 ScanMediaDirectory(const FString& DirPath);

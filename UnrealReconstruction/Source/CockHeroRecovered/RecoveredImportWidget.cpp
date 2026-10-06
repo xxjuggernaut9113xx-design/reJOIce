@@ -13,8 +13,8 @@
 #include "HAL/FileManager.h"
 #include "Serialization/JsonWriter.h"
 #include "Serialization/JsonSerializer.h"
-#include "Windows/WindowsHWrapper.h"
 #if PLATFORM_WINDOWS
+#include "Windows/WindowsHWrapper.h"
 #include <commdlg.h>
 #include <ShlObj.h>
 #endif
@@ -80,6 +80,7 @@ void URecoveredImportWidget::NativeConstruct() {
     LoadPersistedImportState();
     RefreshPresetDropdown();
     RefreshImportedFileList();
+    if (!ImportedFiles.IsEmpty()) RebuildImportedMediaDeck();
 }
 
 void URecoveredImportWidget::NativeDestruct() {
@@ -203,7 +204,7 @@ void URecoveredImportWidget::RefreshImportedFileList() {
         Row->AddChildToHorizontalBox(Remove);
         Entries->AddChild(Row);
     }
-    SetImportStatus(FString::Printf(TEXT("%d media file%s found"), ImportedFiles.Num(), ImportedFiles.Num() == 1 ? TEXT("") : TEXT("s")));
+    if (LastImportStatus.IsEmpty()) SetImportStatus(FString::Printf(TEXT("%d media file%s found"), ImportedFiles.Num(), ImportedFiles.Num() == 1 ? TEXT("") : TEXT("s")));
 }
 
 void URecoveredImportWidget::RefreshPresetDropdown() {
@@ -243,15 +244,18 @@ bool URecoveredImportWidget::WriteImportedManifest(FString& OutManifestPath) con
 bool URecoveredImportWidget::RebuildImportedMediaDeck() {
     auto* Manager = GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
     auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
-    if (!Manager || !Instance || !Instance->CurrentSave) return false;
+    if (!Manager || !Instance || !Instance->CurrentSave) {
+        SetImportStatus(TEXT("Media import is unavailable until the recovery session is initialized"));
+        return false;
+    }
     if (ImportedFiles.IsEmpty()) {
         const FString BaseManifest = Instance->CurrentSave->GetStringSetting(BaseManifestKey, TEXT(""));
         if (BaseManifest.IsEmpty() || !FPaths::FileExists(BaseManifest)) {
-            SetImportStatus(TEXT("Import list cleared"));
-            return true;
+            SetImportStatus(TEXT("Import list cleared, but base media is unavailable; current media remains loaded"));
+            return false;
         }
-        Manager->MediaManifestPath = BaseManifest;
         const bool bLoaded = Manager->LoadMediaPack(BaseManifest, Instance->CurrentSave->GetStringArraySetting(TEXT("ExcludedTags")));
+        if (bLoaded) Manager->MediaManifestPath = BaseManifest;
         SetImportStatus(bLoaded ? TEXT("Import list cleared; base media restored") : Manager->LastSessionError);
         return bLoaded;
     }
@@ -261,11 +265,17 @@ bool URecoveredImportWidget::RebuildImportedMediaDeck() {
         return false;
     }
     const FString PreviousManifest = Manager->MediaManifestPath;
-    if (!PreviousManifest.IsEmpty() && !PreviousManifest.Contains(TEXT("RecoveryImports/imported-media-manifest.json"))) {
-        Instance->CurrentSave->SetStringSetting(BaseManifestKey, PreviousManifest);
-    }
-    Manager->MediaManifestPath = ManifestPath;
     const bool bLoaded = Manager->LoadMediaPack(ManifestPath, Instance->CurrentSave->GetStringArraySetting(TEXT("ExcludedTags")));
+    if (bLoaded) {
+        Manager->MediaManifestPath = ManifestPath;
+        if (!PreviousManifest.IsEmpty() && !FPaths::IsSamePath(PreviousManifest, ManifestPath)) {
+            Instance->CurrentSave->SetStringSetting(BaseManifestKey, PreviousManifest);
+            if (!Instance->SaveRecoveredState()) {
+                SetImportStatus(TEXT("Imported media loaded, but the base-media restore path could not be saved"));
+                return false;
+            }
+        }
+    }
     SetImportStatus(bLoaded ? FString::Printf(TEXT("%d imported media file%s ready"), ImportedFiles.Num(), ImportedFiles.Num() == 1 ? TEXT("") : TEXT("s")) : Manager->LastSessionError);
     return bLoaded;
 }
@@ -281,9 +291,9 @@ void URecoveredImportWidget::OnAddFileClicked() {
     int32 Added = 0;
     for (const FString& FilePath : Selected) Added += AddMediaFile(FilePath) ? 1 : 0;
     PersistImportState();
-    RebuildImportedMediaDeck();
+    const bool bLoaded = RebuildImportedMediaDeck();
     RefreshImportedFileList();
-    if (Added == 0) SetImportStatus(TEXT("No new supported media files were selected"));
+    if (bLoaded && Added == 0) SetImportStatus(TEXT("No new supported media files were selected"));
 }
 
 void URecoveredImportWidget::OnAddDirectoryClicked() {
@@ -298,19 +308,22 @@ void URecoveredImportWidget::OnAddDirectoryClicked() {
     WatchedDirectories.AddUnique(Directory);
     const int32 Added = ScanMediaDirectory(Directory);
     PersistImportState();
-    RebuildImportedMediaDeck();
+    const bool bLoaded = RebuildImportedMediaDeck();
     RefreshImportedFileList();
-    if (Added == 0) SetImportStatus(TEXT("No supported media files found in selected directory"));
+    if (bLoaded && Added == 0) SetImportStatus(TEXT("No supported media files found in selected directory"));
 }
 
 void URecoveredImportWidget::OnScanClicked() {
+    if (WatchedDirectories.IsEmpty()) {
+        SetImportStatus(TEXT("Add a media directory before scanning"));
+        return;
+    }
     int32 Added = 0;
     for (const FString& Directory : WatchedDirectories) Added += ScanMediaDirectory(Directory);
     PersistImportState();
-    RebuildImportedMediaDeck();
+    const bool bLoaded = RebuildImportedMediaDeck();
     RefreshImportedFileList();
-    if (WatchedDirectories.IsEmpty()) SetImportStatus(TEXT("Add a media directory before scanning"));
-    else if (Added == 0) SetImportStatus(TEXT("Scan completed with no new supported media files"));
+    if (bLoaded && Added == 0) SetImportStatus(TEXT("Scan completed with no new supported media files"));
 }
 
 void URecoveredImportWidget::OnClearClicked() {
@@ -328,10 +341,10 @@ void URecoveredImportWidget::OnSavePresetClicked() {
     }
     TArray<FString> Names = Instance->CurrentSave->GetStringArraySetting(PresetNamesKey);
     Names.AddUnique(Name);
-    const bool bSaved = Instance->CurrentSave->SetStringArraySetting(PresetNamesKey, Names)
+    bool bSaved = Instance->CurrentSave->SetStringArraySetting(PresetNamesKey, Names)
         && Instance->CurrentSave->SetStringArraySetting(PresetKey(PresetFilesPrefix, Name), ImportedFiles)
         && Instance->CurrentSave->SetStringArraySetting(PresetKey(PresetDirectoriesPrefix, Name), WatchedDirectories);
-    if (bSaved) Instance->SaveRecoveredState();
+    if (bSaved) bSaved = Instance->SaveRecoveredState();
     RefreshPresetDropdown();
     if (auto* Presets = Cast<UComboBoxString>(GetWidgetFromName(TEXT("PresetsComboBox")))) Presets->SetSelectedOption(Name);
     SetImportStatus(bSaved ? TEXT("Import preset saved") : TEXT("Failed to save import preset"));
@@ -348,10 +361,10 @@ void URecoveredImportWidget::OnDeletePresetClicked() {
     }
     TArray<FString> Names = Instance->CurrentSave->GetStringArraySetting(PresetNamesKey);
     Names.Remove(Name);
-    const bool bSaved = Instance->CurrentSave->SetStringArraySetting(PresetNamesKey, Names)
+    bool bSaved = Instance->CurrentSave->SetStringArraySetting(PresetNamesKey, Names)
         && Instance->CurrentSave->SetStringArraySetting(PresetKey(PresetFilesPrefix, Name), {})
         && Instance->CurrentSave->SetStringArraySetting(PresetKey(PresetDirectoriesPrefix, Name), {});
-    if (bSaved) Instance->SaveRecoveredState();
+    if (bSaved) bSaved = Instance->SaveRecoveredState();
     RefreshPresetDropdown();
     SetImportStatus(bSaved ? TEXT("Import preset deleted") : TEXT("Failed to delete import preset"));
 }
