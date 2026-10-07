@@ -22,6 +22,8 @@ bool FRecoveredPaceFlowTest::RunTest(const FString& Parameters) {
     Manager->InitializeDifficultyVariables(0,0);
     Manager->UpdateMinimumBeatInterval(FRecoveredDeviceState());
     TestTrue(TEXT("Load source media pack"),Manager->LoadMediaPack(TEXT("C:/Users/webma/Downloads/Cock_Hero_Shipping_Build_V0.04_-_Exclusive/PrepV2/Windows/Extracted/Base_Game_CG/manifest.json"),{}));
+    TestTrue(TEXT("Source auto-draw defaults enabled"),Manager->IsAutoDrawEnabled);
+    Manager->IsAutoDrawEnabled=false;
     for(uint8 Pace=0;Pace<3;++Pace) {
         Manager->PlayerVariables.CurrentComboCount=99;
         Manager->DetermineComboType();
@@ -41,6 +43,33 @@ bool FRecoveredPaceFlowTest::RunTest(const FString& Parameters) {
         TestEqual(TEXT("Combo tier advances through bound callbacks"),Manager->CurrentComboTypeEnum,static_cast<uint8>(1));
         TestFalse(TEXT("Timeline completes"),Manager->BeatTimeline->bIsRunning);
     }
+    auto* AutoRules=NewObject<URecoveredRulesAsset>(GetTransientPackage());
+    AutoRules->SlowBeatPatterns=Rules->SlowBeatPatterns;
+    AutoRules->MediumBeatPatterns=Rules->MediumBeatPatterns;
+    AutoRules->FastBeatPatterns=Rules->FastBeatPatterns;
+    FRecoveredEventRecord AutoDrawRecord;
+    AutoDrawRecord.EventName=3;
+    AutoDrawRecord.BaseWeight=100;
+    AutoRules->EventRecords={AutoDrawRecord};
+    Manager->Rules=AutoRules;
+    Manager->IsAutoDrawEnabled=true;
+    Manager->PlayerVariables.bHasCame=false;
+    Manager->PlayerVariables.bHasEdged=false;
+    Manager->PlayerVariables.bIsAllowedToCum=false;
+    Manager->BeatContext.ActiveModifiers.Reset();
+    TestTrue(TEXT("Start deterministic auto-draw card"),Manager->RequestNextRecoveredCard(false));
+    const int32 BeforeAutoDraw=Manager->PlayerVariables.TotalDrawCount;
+    const int32 BeforeAutoCompletion=Manager->SessionStats.EnemiesDefeated;
+    TestTrue(TEXT("Auto-draw completion delegate is bound"),Manager->BeatTimeline->OnSequenceEnd.IsBound());
+    const double CompletedCardTime=Manager->BeatTimeline->BeatQueue.Last().TargetHitTime+1;
+    Manager->BeatTimeline->AdvanceTo(CompletedCardTime);
+    TestEqual(TEXT("Auto-draw completes the source card before dispatch"),Manager->SessionStats.EnemiesDefeated,BeforeAutoCompletion+1);
+    TestEqual(TEXT("Auto-draw advances exactly one completed card"),Manager->PlayerVariables.TotalDrawCount,BeforeAutoDraw+1);
+    TestEqual(TEXT("Auto-draw dispatch retains source pace identity"),Manager->LastDispatchedEvent,FName(TEXT("SlowStrokeEvent")));
+    TestTrue(TEXT("Auto-draw starts the following beat sequence"),Manager->BeatTimeline->bIsRunning);
+    Manager->BeatTimeline->StopSequence();
+    Manager->Rules=Rules;
+    Manager->IsAutoDrawEnabled=false;
     const FName SpecialEvents[]={TEXT("SpawnSuccubus"),TEXT("AssFrenzyEvent"),TEXT("BoobFrenzyEvent")};
     const uint8 ExpectedTypes[]={3,7,8};
     for (int32 I=0;I<3;++I) {
@@ -91,11 +120,16 @@ bool FRecoveredPaceFlowTest::RunTest(const FString& Parameters) {
         auto* Combo=Cast<UTextBlock>(Screen->GetWidgetFromName(TEXT("ComboText")));
         auto* Coins=Cast<UTextBlock>(Screen->GetWidgetFromName(TEXT("CoinCounterText")));
         auto* Duration=Cast<UTextBlock>(Screen->GetWidgetFromName(TEXT("SessionDurationText")));
+        auto* AutoDraw=Cast<UTextBlock>(Screen->GetWidgetFromName(TEXT("TextBlock_1")));
         auto* Heat=Cast<UProgressBar>(Screen->GetWidgetFromName(TEXT("HeatMeterBar")));
         if (TestNotNull(TEXT("Live combo display"),Combo)) TestEqual(TEXT("Exact source combo suffix"),Combo->GetText().ToString(),FString(TEXT("42X COMBO")));
         if (TestNotNull(TEXT("Live coin display"),Coins)) TestEqual(TEXT("Current coins displayed"),Coins->GetText().ToString(),FString(TEXT("123")));
         if (TestNotNull(TEXT("Live duration display"),Duration)) TestEqual(TEXT("Source duration formatting"),Duration->GetText().ToString(),FString(TEXT("01:01:01")));
         if (TestNotNull(TEXT("Live heat meter"),Heat)) TestEqual(TEXT("Heat normalized to fraction"),Heat->GetPercent(),.25f);
+        if (TestNotNull(TEXT("Source auto-draw text"),AutoDraw)) TestEqual(TEXT("Disabled auto-draw text follows source binding"),AutoDraw->GetText().ToString(),FString(TEXT("AutoDraw(False)")));
+        Manager->IsAutoDrawEnabled=true;
+        Screen->RefreshSessionDisplays(Manager);
+        if (TestNotNull(TEXT("Enabled source auto-draw text"),AutoDraw)) TestEqual(TEXT("Enabled auto-draw text follows source binding"),AutoDraw->GetText().ToString(),FString(TEXT("AutoDraw(True)")));
     }
     World->DestroyWorld(false);
     GEngine->DestroyWorldContext(World);

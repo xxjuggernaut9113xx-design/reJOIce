@@ -252,6 +252,7 @@ bool ARecoveredGlobalManager::StartRecoveredBeatSequence(const FRecoveredBeatPat
     return true;
 }
 void ARecoveredGlobalManager::CompleteBeatSequence() {
+    if (!IsAutoDrawEnabled) return;
     bCanUseSlowdown = true;
     bCanUseBonerPill = true;
     if (bStopSequence || BeatTimeline->GetBeatsRemaining() > 0 || BeatContext.CardType > 8) return;
@@ -267,7 +268,7 @@ void ARecoveredGlobalManager::CompleteBeatSequence() {
     URecoveredStateRuleLibrary::SetSessionMetric(SessionStats, ERecoveredMetric::ConsecutiveSuccubiSurvived, ConsecutiveSuccubiSurvived);
     OnMetricUpdateRequested.Broadcast(ERecoveredMetric::ConsecutiveSuccubiSurvived, ConsecutiveSuccubiSurvived);
     OnSessionAction.Broadcast(TEXT("PlayDrawButtonAnimation"));
-    if (BeatContext.CardType != 5) OnSessionAction.Broadcast(TEXT("DetermineCardV2"));
+    if (BeatContext.CardType != 5) RequestNextRecoveredCard(true);
 }
 
 bool ARecoveredGlobalManager::LoadMediaPack(const FString& ManifestPath,const TArray<FString>& ExcludedTags) {

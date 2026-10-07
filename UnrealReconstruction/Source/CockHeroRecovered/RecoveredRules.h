@@ -209,6 +209,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") bool bLootBarEnabled = false;
     UPROPERTY(BlueprintAssignable, Category="Recovered Events") FRecoveredSessionAction OnSessionAction;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered Session") TObjectPtr<URecoveredBeatTimeline> BeatTimeline;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") bool IsAutoDrawEnabled = true;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") bool bStopSequence = false;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") bool bCanUseSlowdown = true;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") bool bCanUseBonerPill = true;

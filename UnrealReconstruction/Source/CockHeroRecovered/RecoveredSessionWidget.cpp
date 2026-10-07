@@ -33,11 +33,6 @@ void URecoveredSessionWidget::BindSession(bool bBind) {
         if(bBind) Button->OnClicked.AddUniqueDynamic(this,&URecoveredSessionWidget::QuitSession);
         else Button->OnClicked.RemoveDynamic(this,&URecoveredSessionWidget::QuitSession);
     }
-    // Auto-draw toggle (audit item 128).
-    if (auto* Button=Cast<UButton>(GetWidgetFromName(TEXT("AutoDrawTextButton")))) {
-        if(bBind) Button->OnClicked.AddUniqueDynamic(this,&URecoveredSessionWidget::ToggleAutoDraw);
-        else Button->OnClicked.RemoveDynamic(this,&URecoveredSessionWidget::ToggleAutoDraw);
-    }
     // Favorites toggle for the current media (audit item 94).
     if (auto* Button=Cast<UButton>(GetWidgetFromName(TEXT("FavoriteButton")))) {
         if(bBind) Button->OnClicked.AddUniqueDynamic(this,&URecoveredSessionWidget::ToggleFavorite);
@@ -110,6 +105,7 @@ void URecoveredSessionWidget::RefreshSessionDisplays(ARecoveredGlobalManager* Ma
     Text(TEXT("StrokeCounter"),FText::AsNumber(FMath::Clamp(Manager->BeatTimeline ? Manager->BeatTimeline->GetBeatsRemaining() : 0,0,999),&IntegerFormat));
     Text(TEXT("CoinCounterText"),FText::AsNumber(Manager->PlayerVariables.PlayerCoins,&IntegerFormat));
     Text(TEXT("ComboText"),FText::FromString(FString::FromInt(Manager->PlayerVariables.CurrentComboCount)+TEXT("X COMBO")));
+    Text(TEXT("TextBlock_1"),FText::FromString(FString::Printf(TEXT("AutoDraw(%s)"),Manager->IsAutoDrawEnabled ? TEXT("True") : TEXT("False"))));
     const int32 Seconds=Manager->PlayerVariables.SessionLength;
     FNumberFormattingOptions TimeFormat=IntegerFormat;TimeFormat.MinimumIntegralDigits=2;TimeFormat.MaximumIntegralDigits=2;
     const FString Duration=FText::AsNumber(Seconds/3600,&TimeFormat).ToString()+TEXT(":")+FText::AsNumber((Seconds%3600)/60,&TimeFormat).ToString()+TEXT(":")+FText::AsNumber(Seconds%60,&TimeFormat).ToString();
@@ -131,9 +127,6 @@ FReply URecoveredSessionWidget::NativeOnKeyDown(const FGeometry& InGeometry, con
     } else if (Key == EKeys::SpaceBar) {
         DrawCard();
         return FReply::Handled();
-    } else if (Key == EKeys::A) {
-        ToggleAutoDraw();
-        return FReply::Handled();
     } else if (Key == EKeys::F) {
         ToggleFavorite();
         return FReply::Handled();
@@ -150,12 +143,6 @@ FReply URecoveredSessionWidget::NativeOnKeyDown(const FGeometry& InGeometry, con
 void URecoveredSessionWidget::QuitSession() {
     auto* Manager = GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
     if (Manager) Manager->ReturnToMainMenu();
-}
-
-void URecoveredSessionWidget::ToggleAutoDraw() {
-    bAutoDrawEnabled = !bAutoDrawEnabled;
-    // Auto-draw: automatically draw the next card when the current completes.
-    // The beat timeline completion will trigger DrawCard if enabled.
 }
 
 void URecoveredSessionWidget::ToggleFavorite() {
