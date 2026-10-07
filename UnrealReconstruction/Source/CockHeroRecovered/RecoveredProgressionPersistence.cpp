@@ -56,6 +56,5 @@ bool URecoveredGameInstance::PersistRecoveredProgression() {
     if (!bProgressionStateValid || !bChallengeStateValid || !CurrentSave || !ProgressionManager) { LastSaveError=TEXT("Cannot save invalid or unavailable recovery progression"); return false; }
     if (ChallengeTracker && !CurrentSave->SetStringSetting(TEXT("RecoveryChallengeState"),ChallengeTracker->ExportRecoveryState())) { LastSaveError=TEXT("Could not update recovery challenge state");return false; }
     if (!CurrentSave->SetStringSetting(TEXT("RecoveryProgressionState"),ProgressionManager->ExportRecoveryState())) { LastSaveError=TEXT("Could not update recovery progression state"); return false; }
-    if (!CurrentSave->SetNumberSetting(TEXT("UnlockPoints"),ProgressionManager->UnlockPoints)) { LastSaveError=TEXT("Could not update the recovery unlock balance"); return false; }
     return SaveRecoveredState();
 }

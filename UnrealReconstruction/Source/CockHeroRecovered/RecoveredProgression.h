@@ -21,10 +21,58 @@ struct COCKHERORECOVERED_API FRecoveredReward {
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") FString ItemIdentifier;
 };
 
+// Mirrors native FXPSourceData.  The post-game XP screen presents these in
+// order before moving on to the level-up and unlock-point stages.
+USTRUCT(BlueprintType)
+struct COCKHERORECOVERED_API FRecoveredXPSourceData {
+    GENERATED_BODY()
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") FText Label;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") int32 XPAmount = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") FText DetailText;
+};
+
+// Mirrors native FUPSourceData.  Level-up points are already committed by
+// progression; the remaining sources are committed as the post-game flow
+// presents them, matching the original screen sequence.
+USTRUCT(BlueprintType)
+struct COCKHERORECOVERED_API FRecoveredUPSourceData {
+    GENERATED_BODY()
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") FText Label;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") int32 UPAmount = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") FText DetailText;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") bool bFromLevelUp = false;
+};
+
+// Mirrors native FLevelUpEventData.  Native evidence establishes the exact
+// fields consumed by WBP_XPScreen and WBP_LevelUpScreen.
+USTRUCT(BlueprintType)
+struct COCKHERORECOVERED_API FRecoveredLevelUpEventData {
+    GENERATED_BODY()
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") int32 NewLevel = 1;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") FName Title;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") int32 UPReward = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") int32 XPThresholdCrossed = 100;
+};
+
 // Mirrors native FSessionRewardData: the bundle PrepareSessionRewards builds.
 USTRUCT(BlueprintType)
 struct COCKHERORECOVERED_API FRecoveredSessionRewardData {
     GENERATED_BODY()
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") int32 StartingXP = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") int32 StartingLevel = 1;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") int32 XPToNextLevel = 100;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") TArray<FRecoveredXPSourceData> XPSources;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") int32 TotalXPEarned = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") TArray<FRecoveredUPSourceData> UPSources;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") int32 StartingUP = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") int32 TotalUPEarned = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") TArray<FRecoveredLevelUpEventData> LevelUpEvents;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") FRecoveredSessionStats SessionStats;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") bool bWon = false;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") int32 EndingXP = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") int32 EndingLevel = 1;
+    // Retained for existing recovered callers that render the compact reward
+    // summary instead of the staged post-game flow.
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") int32 XPGranted = 0;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") TArray<FRecoveredReward> Rewards;
 };

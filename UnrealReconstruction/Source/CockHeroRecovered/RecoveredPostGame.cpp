@@ -1,6 +1,7 @@
 #include "RecoveredRules.h"
 #include "RecoveredRewards.h"
 #include "RecoveredProgression.h"
+#include "RecoveredPostGameSequence.h"
 #include "RecoveredChallengeTracker.h"
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
@@ -36,6 +37,41 @@ void SetNestedText(UUserWidget* Root, const TCHAR* Name, const FText& Value) {
 
 void BindNestedButton(UUserWidget* Root, const TCHAR* Name, ARecoveredGlobalManager* Manager) {
     if (auto* Button = Cast<UButton>(FindNestedWidget(Root, FName(Name)))) Button->OnClicked.AddUniqueDynamic(Manager, &ARecoveredGlobalManager::HandleReturnToMenuClicked);
+}
+
+void AddXPSource(FRecoveredSessionRewardData& Data, const TCHAR* Label, int32 Amount, const FString& Detail) {
+    if (Amount <= 0) return;
+    FRecoveredXPSourceData Source;
+    Source.Label = FText::FromString(Label);
+    Source.XPAmount = Amount;
+    Source.DetailText = FText::FromString(Detail);
+    Data.XPSources.Add(MoveTemp(Source));
+}
+
+void AddUPSource(FRecoveredSessionRewardData& Data, const TCHAR* Label, int32 Amount, const FString& Detail, bool bFromLevelUp = false) {
+    if (Amount <= 0) return;
+    FRecoveredUPSourceData Source;
+    Source.Label = FText::FromString(Label);
+    Source.UPAmount = Amount;
+    Source.DetailText = FText::FromString(Detail);
+    Source.bFromLevelUp = bFromLevelUp;
+    Data.UPSources.Add(MoveTemp(Source));
+    Data.TotalUPEarned += Amount;
+}
+
+float GetRecoveredModifierMultiplier(const FRecoveredSessionStats& Stats) {
+    float Multiplier = 1.0f;
+    if (Stats.ActiveModifiers.ContainsByPredicate([](const FString& Tag) { return Tag.Equals(TEXT("ironman"), ESearchCase::IgnoreCase); })) Multiplier = 1.2f;
+    if (Stats.ActiveModifiers.ContainsByPredicate([](const FString& Tag) { return Tag.Equals(TEXT("hardcore"), ESearchCase::IgnoreCase); })) Multiplier += 0.15f;
+    return Multiplier;
+}
+
+int32 GetRecoveredStoreUnlockPoints(const URecoveredGameInstance* Instance, const URecoveredProgressionManager* FallbackProgression) {
+    if (Instance && Instance->CurrentSave) {
+        const double SavedPoints = Instance->CurrentSave->GetNumberSetting(TEXT("UnlockPoints"), 0.0);
+        if (FMath::IsFinite(SavedPoints)) return static_cast<int32>(FMath::Clamp(SavedPoints, static_cast<double>(MIN_int32), static_cast<double>(MAX_int32)));
+    }
+    return FallbackProgression ? FallbackProgression->UnlockPoints : 0;
 }
 }
 
@@ -80,21 +116,12 @@ void ARecoveredGlobalManager::OpenPostGameResults() {
 
 void ARecoveredGlobalManager::BindPostGameResultsData(UUserWidget* Results) {
     if (!Results) return;
-    // The original master owns four nested screens: XP, optional level-up,
-    // unlock rewards, then the summary.  Its original Blueprint delegates
-    // require unavailable runtime classes, so populate their recovered trees
-    // directly and land on the usable summary rather than leaving a blank
-    // switcher page active.
-    const int32 SessionXP = CalculateRecoveredSessionXP();
-    const TArray<FRecoveredReward> Rewards = PrepareRecoveredSessionRewards(SessionXP);
-    FRecoveredSessionRewardData RewardData;
-    RewardData.XPGranted = SessionXP;
-    RewardData.Rewards = Rewards;
-    const FText LifetimeText = URecoveredProgressionLibrary::GetLifetimeStatsText(LifetimeStats);
+    FRecoveredSessionRewardData RewardData = bRecoveredSessionFinalized
+        ? PendingPostGameRewardData
+        : BuildRecoveredSessionRewardData(CalculateRecoveredSessionXP());
     const FText RewardsText = URecoveredProgressionLibrary::GetRewardsText(RewardData);
-    const FText XPText = FText::AsNumber(SessionXP);
     const FText DurationText = FText::FromString(FString::Printf(TEXT("%d:%02d"), SessionStats.SessionDuration / 60, SessionStats.SessionDuration % 60));
-    const FText ResultText = FText::FromString(SessionStats.bWon ? TEXT("Victory") : TEXT("Defeat (-50% Rewards)"));
+    const FText ResultText = FText::FromString(RewardData.bWon ? TEXT("Victory") : TEXT("Defeat (-50% Rewards)"));
     const FString DetailString = FString::Printf(TEXT("Strokes: %d\nEdges: %d\nHighest Combo: %d\nEnemies Defeated: %d\nSuccubi Defeated: %d"),
         SessionStats.Strokes, SessionStats.Edges, SessionStats.MaxCombo, SessionStats.EnemiesDefeated, SessionStats.SuccubiDefeated);
 
@@ -107,29 +134,10 @@ void ARecoveredGlobalManager::BindPostGameResultsData(UUserWidget* Results) {
     SetNestedText(Results, TEXT("HighestComboText"), FText::AsNumber(SessionStats.MaxCombo));
     SetNestedText(Results, TEXT("DetailedStatsString"), FText::FromString(DetailString));
 
-    // WBP_XPScreen and its nested XBP_XPSourceText.
-    SetNestedText(Results, TEXT("XPAmountText"), XPText);
-    SetNestedText(Results, TEXT("XPDetailText"), FText::FromString(TEXT("Session Complete")));
-
-    // WBP_UPRewardScreen receives the current recovered unlock-point total.
-    const auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
-    const int32 UnlockPoints = Instance && Instance->ProgressionManager ? Instance->ProgressionManager->UnlockPoints : 0;
-    SetNestedText(Results, TEXT("UPTotalText"), FText::AsNumber(UnlockPoints));
-    SetNestedText(Results, TEXT("UPAmountText"), FText::AsNumber(PendingPostGameUnlockPoints));
-    SetNestedText(Results, TEXT("DetailText"), FText::FromString(PendingPostGameUnlockPoints > 0 ? TEXT("Level-up reward") : TEXT("No unlock-point reward")));
-
-    // WBP_LevelUpScreen fields are populated even when the summary is the
-    // initial page.  This retains verified level-up data for its recovered UI.
-    const int32 DisplayLevel = PendingPostGameLevel != INDEX_NONE ? PendingPostGameLevel : (Instance && Instance->ProgressionManager ? Instance->ProgressionManager->CurrentLevel : 1);
-    SetNestedText(Results, TEXT("LevelText"), FText::AsNumber(DisplayLevel));
-    SetNestedText(Results, TEXT("RankTitle"), PendingPostGameContentUnlocks.IsEmpty() ? FText::FromString(TEXT("Level Up")) : FText::FromString(FString::Join(PendingPostGameContentUnlocks, TEXT("\n"))));
-
     BindNestedButton(Results, TEXT("ReturnToMenu"), this);
     BindNestedButton(Results, TEXT("ReturnToMenuButton"), this);
-    if (auto* Switcher = Cast<UWidgetSwitcher>(Results->GetWidgetFromName(TEXT("WidgetSwitcher")))) Switcher->SetActiveWidgetIndex(3);
-    PendingPostGameLevel = INDEX_NONE;
-    PendingPostGameUnlockPoints = 0;
-    PendingPostGameContentUnlocks.Reset();
+    if (!PostGameSequence) PostGameSequence = NewObject<URecoveredPostGameSequence>(this);
+    PostGameSequence->Begin(this, Results, RewardData);
 }
 
 void ARecoveredGlobalManager::HandleReturnToMenuClicked() {
@@ -138,6 +146,90 @@ void ARecoveredGlobalManager::HandleReturnToMenuClicked() {
 
 int32 ARecoveredGlobalManager::CalculateRecoveredSessionXP() const {
     return URecoveredProgressionLibrary::CalculateSessionXP(SessionStats, FRecoveredXPSettings());
+}
+
+FRecoveredSessionRewardData ARecoveredGlobalManager::BuildRecoveredSessionRewardData(int32 /*SessionXP*/) const {
+    FRecoveredSessionRewardData Data;
+    const auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+    const URecoveredProgressionManager* Progression = Instance ? Instance->ProgressionManager.Get() : nullptr;
+    const FRecoveredXPSettings Settings;
+    Data.StartingXP = Progression ? Progression->CurrentXP : 0;
+    Data.StartingLevel = Progression ? Progression->CurrentLevel : 1;
+    Data.XPToNextLevel = URecoveredProgressionLibrary::GetXPForNextLevel(Data.StartingLevel);
+    Data.StartingUP = GetRecoveredStoreUnlockPoints(Instance, Progression);
+    Data.SessionStats = SessionStats;
+    Data.bWon = SessionStats.SessionsWon > 0;
+
+    const float RewardScale = Data.bWon ? 1.0f : 0.5f;
+    const int32 Minutes = FMath::FloorToInt(static_cast<float>(SessionStats.SessionDuration) * (1.0f / 60.0f));
+    const int32 TimeXP = FMath::FloorToInt(static_cast<float>(Minutes) * Settings.XPPerMinute * RewardScale);
+    const int32 StrokeRaw = FMath::Min(FMath::FloorToInt(static_cast<float>(SessionStats.Strokes) * Settings.XPPerStroke), Settings.StrokeXPCap);
+    const int32 StrokeXP = FMath::FloorToInt(static_cast<float>(StrokeRaw) * RewardScale);
+    const int32 EnemyRaw = FMath::Min(URecoveredStateRuleLibrary::AddInt32Wrapping(SessionStats.EnemiesDefeated, SessionStats.SuccubiDefeated), Settings.EnemyXPCap);
+    const int32 EnemyXP = FMath::FloorToInt(static_cast<float>(EnemyRaw) * RewardScale);
+    const int32 EdgeXP = FMath::FloorToInt(static_cast<float>(SessionStats.Edges) * Settings.XPPerEdge * RewardScale);
+    const int32 VictoryXP = Data.bWon ? FMath::TruncToInt(Settings.WinBonus) : 0;
+
+    AddXPSource(Data, TEXT("TIME PLAYED"), TimeXP, FString::Printf(TEXT("%d MIN"), Minutes));
+    AddXPSource(Data, TEXT("STROKES"), StrokeXP, StrokeRaw < Settings.StrokeXPCap
+        ? FString::Printf(TEXT("%d STROKES"), SessionStats.Strokes)
+        : FString::Printf(TEXT("%d STROKES (MAX)"), SessionStats.Strokes));
+    const int32 EnemyCount = URecoveredStateRuleLibrary::AddInt32Wrapping(SessionStats.EnemiesDefeated, SessionStats.SuccubiDefeated);
+    AddXPSource(Data, TEXT("ENEMIES"), EnemyXP, EnemyCount < Settings.EnemyXPCap
+        ? FString::Printf(TEXT("%d DEFEATED"), EnemyCount)
+        : FString::Printf(TEXT("%d DEFEATED (MAX)"), EnemyCount));
+    AddXPSource(Data, TEXT("EDGES"), EdgeXP, FString::Printf(TEXT("%d EDGES"), SessionStats.Edges));
+    AddXPSource(Data, TEXT("VICTORY BONUS"), VictoryXP, TEXT("WIN"));
+
+    int32 BaseXP = 0;
+    for (const FRecoveredXPSourceData& Source : Data.XPSources) BaseXP = URecoveredStateRuleLibrary::AddInt32Wrapping(BaseXP, Source.XPAmount);
+    const float ModifierMultiplier = GetRecoveredModifierMultiplier(SessionStats);
+    const int32 ModifierXP = FMath::FloorToInt(static_cast<float>(BaseXP) * (ModifierMultiplier - 1.0f));
+    if (ModifierXP > 0) AddXPSource(Data, TEXT("MODIFIER BONUS"), ModifierXP, FString::Printf(TEXT("+%d%%"), FMath::FloorToInt((ModifierMultiplier - 1.0f) * 100.0f)));
+    Data.TotalXPEarned = URecoveredStateRuleLibrary::AddInt32Wrapping(BaseXP, ModifierXP);
+    Data.XPGranted = Data.TotalXPEarned;
+
+    int32 SimulatedXP = URecoveredStateRuleLibrary::AddInt32Wrapping(Data.StartingXP, Data.TotalXPEarned);
+    int32 SimulatedLevel = Data.StartingLevel;
+    while (SimulatedLevel < 20) {
+        const int32 Threshold = URecoveredProgressionLibrary::GetXPForNextLevel(SimulatedLevel);
+        if (SimulatedXP < Threshold) break;
+        SimulatedXP = URecoveredStateRuleLibrary::AddInt32Wrapping(SimulatedXP, -Threshold);
+        ++SimulatedLevel;
+        FRecoveredLevelUpEventData Event;
+        Event.NewLevel = SimulatedLevel;
+        Event.XPThresholdCrossed = Threshold;
+        int32 LevelUP = 0;
+        if (Progression && Progression->LevelDataTable && Progression->LevelDataTable->GetRowStruct() == FRecoveredLevelRow::StaticStruct()) {
+            const FName RowName(*FString::Printf(TEXT("Level_%d"), SimulatedLevel));
+            if (const FRecoveredLevelRow* Row = Progression->LevelDataTable->FindRow<FRecoveredLevelRow>(RowName, TEXT("Recovered post-game level event"), false)) {
+                Event.Title = FName(*Row->TitleUnlock.ToString());
+                LevelUP = Row->UnlockPointsReward;
+            }
+        }
+        if (Event.Title.IsNone()) Event.Title = FName(*FString::Printf(TEXT("LEVEL %d"), SimulatedLevel));
+        Event.UPReward = LevelUP;
+        Data.LevelUpEvents.Add(Event);
+        AddUPSource(Data, TEXT("LEVEL UP"), LevelUP, FString::Printf(TEXT("LVL %d"), SimulatedLevel), true);
+    }
+
+    const int32 StrokeUP = FMath::FloorToInt(static_cast<float>(SessionStats.Strokes / 300) * RewardScale);
+    const int32 ComboUP = FMath::FloorToInt(static_cast<float>(SessionStats.MaxCombo / 400) * RewardScale);
+    const int32 EdgeUP = FMath::FloorToInt(static_cast<float>(SessionStats.Edges / 2) * RewardScale);
+    const int32 TimeUP = FMath::FloorToInt(static_cast<float>(Minutes / 3) * RewardScale);
+    const int32 HeatUP = FMath::FloorToInt(static_cast<float>(SessionStats.DrawsAtMaxHeat / 10) * RewardScale);
+    AddUPSource(Data, TEXT("STROKES"), StrokeUP, FString::Printf(TEXT("%d STROKES"), SessionStats.Strokes));
+    AddUPSource(Data, TEXT("MAX COMBO"), ComboUP, FString::Printf(TEXT("%d COMBO"), SessionStats.MaxCombo));
+    AddUPSource(Data, TEXT("EDGES"), EdgeUP, FString::Printf(TEXT("%d EDGES"), SessionStats.Edges));
+    AddUPSource(Data, TEXT("TIME PLAYED"), TimeUP, FString::Printf(TEXT("%d MIN"), Minutes));
+    AddUPSource(Data, TEXT("MAX HEAT DRAWS"), HeatUP, FString::Printf(TEXT("%d DRAWS"), SessionStats.DrawsAtMaxHeat));
+    if (Data.bWon) AddUPSource(Data, TEXT("VICTORY"), 5, TEXT("CAME ON TIME"));
+    if (SessionStats.ItemsUsed == 0) AddUPSource(Data, TEXT("PURIST"), FMath::FloorToInt(5.0f * RewardScale), TEXT("NO ITEMS"));
+
+    Data.EndingXP = SimulatedXP;
+    Data.EndingLevel = SimulatedLevel;
+    Data.Rewards = PrepareRecoveredSessionRewards(Data.XPGranted);
+    return Data;
 }
 
 TArray<FRecoveredReward> ARecoveredGlobalManager::PrepareRecoveredSessionRewards(int32 SessionXP) const {
@@ -156,6 +248,19 @@ TArray<FRecoveredReward> ARecoveredGlobalManager::PrepareRecoveredSessionRewards
         Rewards.Add(CoinReward);
     }
     return Rewards;
+}
+
+void ARecoveredGlobalManager::ApplyRecoveredPostGameStorePoints(int32 Amount) {
+    if (Amount <= 0) return;
+    auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+    if (!Instance || !Instance->CurrentSave) return;
+    const int32 Previous = GetRecoveredStoreUnlockPoints(Instance, nullptr);
+    const int32 Updated = URecoveredStateRuleLibrary::AddInt32Wrapping(Previous, Amount);
+    if (!Instance->CurrentSave->SetNumberSetting(TEXT("UnlockPoints"), Updated) || !Instance->SaveRecoveredState()) {
+        HandleSaveFailure(TEXT("Post-game store points failed to persist"));
+        return;
+    }
+    if (Instance->ProgressionManager) Instance->ProgressionManager->OnStorePointsRequested.Broadcast(Amount);
 }
 
 void ARecoveredGlobalManager::UpdateRecoveredLifetimeStats(int32 SessionXP) {
@@ -243,6 +348,10 @@ void ARecoveredGlobalManager::FinalizeRecoveredSession() {
     GetWorldTimerManager().ClearTimer(OutcomeContinuationTimer);
 
     const int32 SessionXP = CalculateRecoveredSessionXP();
+    PendingPostGameLevel = INDEX_NONE;
+    PendingPostGameUnlockPoints = 0;
+    PendingPostGameContentUnlocks.Reset();
+    PendingPostGameRewardData = BuildRecoveredSessionRewardData(SessionXP);
     UpdateRecoveredLifetimeStats(SessionXP);
 
     auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());

@@ -24,7 +24,7 @@ Input: `ghidra-gap-fill-final.patch` supplied by the user on 2026-10-04. Integra
 - Extended `ReadPackManifest` to accept absolute paths only for recovery-generated manifests; original relative manifests retain their `manifest-directory/media` resolution.
 - Rebuilt the challenge tab against `ChallengesVerticalBox`, `InteractionButton`, and the recovered detail fields. It combines session/lifetime progress, persists tracker-backed tracking, presents requirements/rewards, and claims a completed reward once.
 - Rebuilt modifiers against `UniformGridPanel_94` and `ModifierCardEntryWidget`. It uses real data-table row names, preserves unlock state, removes reconstructed conflicts before enabling a modifier, persists enabled values, and synchronizes session modifier IDs for XP/session consumers.
-- Repaired the post-game handoff. It now writes the recovered XP, unlock-point, level-up, and session-summary fields to nested child widgets, suppresses the duplicate standalone level-up overlay during finalization, binds the nested return button, and lands the master switcher on its usable summary page.
+- Recovered the original four-stage post-game flow. It snapshots presentation data before `EndSession`, starts at XP, waits for each source slam before animating the bar, pauses at level boundaries and resumes overflow, awards every staged unlock-point source to the recovery-owned store ledger after its slam, then reaches the summary. It retains nested return binding and suppresses duplicate standalone level-up overlays during finalization.
 
 ## 2026-10-07 named profile recovery
 
@@ -55,12 +55,18 @@ The Windows Unreal Editor build passed. `CockHero.Recovery` completed **45 tests
 
 The one warning-bearing test, `WidgetArtwork`, carried 13 blocked EOS SDK HTTP messages from the sandboxed network; it completed successfully and the new named-profile tests had zero warnings. The machine-readable record is [named-save-profile-validation.json](RecoveryEvidence/named-save-profile-validation.json).
 
+### Staged post-game recovery (2026-10-07)
+
+The post-game master now follows the recovered source/delegate order: XP source slam, 0.65-second bar, level-boundary pause and overflow resume, 1.0-second page changes, unlock-point source slam, store-ledger award, 0.35-second next-source delay, then summary. Native `UProgressionManager` level points and the `CHPackStoreController` ledger are kept separate; progression persistence no longer overwrites the store balance.
+
+The Windows Unreal Editor build passed. Focused `CockHero.Recovery.PostGame` automation completed **3 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. Full `CockHero.Recovery` completed **47 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The source sequence test covers the XP source/bar handoff, threshold pause, overflow resume, unlock-point stage, and summary.
+
 ## Remaining limits
 
-- The original post-game animation/delegate sequence (XP animation, pause for level-up, unlock-point animation, then summary) is not reconstructed. The recovery master presents its populated summary directly because the original child delegates require unavailable runtime classes.
+- The staged post-game controller follows recovered graph order and timings, but interactive side-by-side original-runtime comparison of every animation curve, sound cue, and transient visual state remains outstanding.
 - Importer file/directory picker behavior is Windows-specific and was validated by build, widget initialization, manifest/deck code, and parent readback. It still needs an interactive GUI and packaged-build check with representative user media. Playback support is limited by the existing recovered media backend.
 - Recovered challenge and modifier lists use the original container/card assets and the recovered state models, but do not restore every original entry Blueprint animation, icon rule, conflict pair, reward roll, or data-table mapping.
 - Auto-draw still has no verified completion consumer. Hardware transports, original save compatibility, original editor graphs, complete native analysis, full GUI playtests, packaged validation, and clean-machine validation remain outstanding.
 - The complete-image checkpoint is still partial, and the original runtime has not been used for behavioral comparison. No full-game completion or original-runtime parity is claimed.
 
-Build/test details and input hashes are recorded in [final-gap-patch-verification.json](RecoveryEvidence/final-gap-patch-verification.json). The comprehensive missing/partial-feature audit is updated separately after pushing this integration.
+Build/test details and input hashes are recorded in [final-gap-patch-verification.json](RecoveryEvidence/final-gap-patch-verification.json). The comprehensive missing/partial-feature audit is updated separately after this integration.

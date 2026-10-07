@@ -351,7 +351,9 @@ public:
     UFUNCTION() void HandleSaveFailure(const FString& Context);
     UFUNCTION() void HandleProgressionMetric(ERecoveredMetric Metric, int32 Amount);
     UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") int32 CalculateRecoveredSessionXP() const;
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") FRecoveredSessionRewardData BuildRecoveredSessionRewardData(int32 SessionXP) const;
     UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") TArray<FRecoveredReward> PrepareRecoveredSessionRewards(int32 SessionXP) const;
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void ApplyRecoveredPostGameStorePoints(int32 Amount);
     UFUNCTION() void BindPostGameResultsButton(UUserWidget* PostCumWidget);
     UFUNCTION() void UpdateRecoveredLifetimeStats(int32 SessionXP);
     UFUNCTION() void SaveLifetimeStats();
@@ -383,6 +385,8 @@ public:
     UPROPERTY(Transient) int32 PendingPostGameLevel = INDEX_NONE;
     UPROPERTY(Transient) int32 PendingPostGameUnlockPoints = 0;
     UPROPERTY(Transient) TArray<FString> PendingPostGameContentUnlocks;
+    UPROPERTY(Transient) FRecoveredSessionRewardData PendingPostGameRewardData;
+    UPROPERTY(Transient) TObjectPtr<class URecoveredPostGameSequence> PostGameSequence;
     FTimerHandle StoreCooldownTimer;
     FTimerHandle OutcomeContinuationTimer;
     FTimerHandle IdleTimer;

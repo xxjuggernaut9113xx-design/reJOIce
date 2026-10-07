@@ -14,6 +14,7 @@
 #include "RecoveredModifierWidget.h"
 #include "Components/TextBlock.h"
 #include "Components/WidgetSwitcher.h"
+#include "RecoveredPostGameSequence.h"
 #if WITH_DEV_AUTOMATION_TESTS
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredPatchLifecycleTest,"CockHero.Recovery.PatchLifecycle",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
 bool FRecoveredPatchLifecycleTest::RunTest(const FString& Parameters) {
@@ -158,7 +159,91 @@ bool FRecoveredPostGameHandoffTest::RunTest(const FString& Parameters) {
     TestEqual(TEXT("Post-game summary receives final strokes"),Strokes->GetText().ToString(),FString(TEXT("42")));
     auto* Switcher=Cast<UWidgetSwitcher>(Results->GetWidgetFromName(TEXT("WidgetSwitcher")));
     if (!TestNotNull(TEXT("Post-game switcher"),Switcher)) return false;
-    TestEqual(TEXT("Post-game lands on summary"),Switcher->GetActiveWidgetIndex(),3);
+    TestEqual(TEXT("Post-game begins on XP source stage"),Switcher->GetActiveWidgetIndex(),0);
+    TestNotNull(TEXT("Post-game sequence controller"),Manager->PostGameSequence.Get());
+    World->DestroyWorld(false); GEngine->DestroyWorldContext(World);
+    return true;
+}
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredPostGameSequenceTest,"CockHero.Recovery.PostGameSourceSequence",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FRecoveredPostGameSequenceTest::RunTest(const FString& Parameters) {
+    const auto Initialization=UWorld::InitializationValues().AllowAudioPlayback(false).CreatePhysicsScene(false).CreateNavigation(false).CreateAISystem(false).ShouldSimulatePhysics(false).SetTransactional(false);
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false,NAME_None,nullptr,true,ERHIFeatureLevel::Num,&Initialization);
+    GEngine->CreateNewWorldContext(EWorldType::Game).SetCurrentWorld(World);
+    World->InitializeActorsForPlay(FURL());
+    auto* Manager=World->SpawnActor<ARecoveredGlobalManager>();
+    if (!TestNotNull(TEXT("Sequence manager"),Manager)) return false;
+    Manager->SessionStats.Strokes=42;
+    Manager->SessionStats.SessionsWon=1;
+    FRecoveredSessionRewardData Data;
+    Data.StartingXP=95;Data.StartingLevel=1;Data.XPToNextLevel=100;Data.StartingUP=3;Data.bWon=true;
+    FRecoveredXPSourceData XP;XP.Label=FText::FromString(TEXT("TIME PLAYED"));XP.XPAmount=10;XP.DetailText=FText::FromString(TEXT("1 MIN"));Data.XPSources.Add(XP);
+    FRecoveredLevelUpEventData Level;Level.NewLevel=2;Level.Title=TEXT("Rookie");Level.UPReward=2;Level.XPThresholdCrossed=100;Data.LevelUpEvents.Add(Level);
+    FRecoveredUPSourceData LevelUP;LevelUP.Label=FText::FromString(TEXT("LEVEL UP"));LevelUP.UPAmount=2;LevelUP.DetailText=FText::FromString(TEXT("LVL 2"));LevelUP.bFromLevelUp=true;Data.UPSources.Add(LevelUP);
+    FRecoveredUPSourceData StatsUP;StatsUP.Label=FText::FromString(TEXT("STROKES"));StatsUP.UPAmount=1;StatsUP.DetailText=FText::FromString(TEXT("42 STROKES"));Data.UPSources.Add(StatsUP);
+    Manager->bRecoveredSessionFinalized=true;
+    Manager->PendingPostGameRewardData=Data;
+    UClass* ResultsClass=LoadClass<UUserWidget>(nullptr,TEXT("/Game/Recovery/UI/WBP_PostGameFlow_Master.WBP_PostGameFlow_Master_C"));
+    if (!TestNotNull(TEXT("Sequence master class"),ResultsClass)) return false;
+    auto* Results=NewObject<UUserWidget>(GetTransientPackage(),ResultsClass);
+    if (!TestTrue(TEXT("Sequence master initializes"),Results->Initialize())) return false;
+    Results->TakeWidget();
+    Manager->BindPostGameResultsData(Results);
+    auto* Switcher=Cast<UWidgetSwitcher>(Results->GetWidgetFromName(TEXT("WidgetSwitcher")));
+    auto* Sequence=Manager->PostGameSequence.Get();
+    if (!TestNotNull(TEXT("Sequence controller"),Sequence) || !TestNotNull(TEXT("Sequence switcher"),Switcher)) return false;
+    TestEqual(TEXT("Sequence begins on XP"),Sequence->GetStage(),ERecoveredPostGameStage::XP);
+    Sequence->AdvanceForTesting();
+    TestEqual(TEXT("Source text completes before the XP bar"),Sequence->GetStage(),ERecoveredPostGameStage::XP);
+    Sequence->AdvanceForTesting();
+    TestEqual(TEXT("Threshold crossing opens level screen"),Sequence->GetStage(),ERecoveredPostGameStage::LevelUp);
+    TestEqual(TEXT("Level screen is active"),Switcher->GetActiveWidgetIndex(),1);
+    Sequence->AdvanceForTesting();
+    TestEqual(TEXT("Level completion resumes XP"),Sequence->GetStage(),ERecoveredPostGameStage::XP);
+    TestEqual(TEXT("XP screen resumes after level"),Switcher->GetActiveWidgetIndex(),0);
+    Sequence->AdvanceForTesting();
+    Sequence->AdvanceForTesting();
+    Sequence->AdvanceForTesting();
+    Sequence->AdvanceForTesting();
+    TestEqual(TEXT("XP sources advance to unlock points"),Sequence->GetStage(),ERecoveredPostGameStage::UnlockPoints);
+    TestEqual(TEXT("Unlock-point screen is active"),Switcher->GetActiveWidgetIndex(),2);
+    Sequence->AdvanceForTesting();
+    Sequence->AdvanceForTesting();
+    Sequence->AdvanceForTesting();
+    Sequence->AdvanceForTesting();
+    Sequence->AdvanceForTesting();
+    Sequence->AdvanceForTesting();
+    Sequence->AdvanceForTesting();
+    TestEqual(TEXT("Unlock-point sources advance to summary"),Sequence->GetStage(),ERecoveredPostGameStage::Summary);
+    TestEqual(TEXT("Summary is active after source flow"),Switcher->GetActiveWidgetIndex(),3);
+    TestEqual(TEXT("Unlock-point display includes staged sources"),Sequence->GetDisplayedUP(),6);
+    World->DestroyWorld(false); GEngine->DestroyWorldContext(World);
+    return true;
+}
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredPostGameRewardBundleTest,"CockHero.Recovery.PostGameRewardBundle",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FRecoveredPostGameRewardBundleTest::RunTest(const FString& Parameters) {
+    const auto Initialization=UWorld::InitializationValues().AllowAudioPlayback(false).CreatePhysicsScene(false).CreateNavigation(false).CreateAISystem(false).ShouldSimulatePhysics(false).SetTransactional(false);
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false,NAME_None,nullptr,true,ERHIFeatureLevel::Num,&Initialization);
+    GEngine->CreateNewWorldContext(EWorldType::Game).SetCurrentWorld(World);
+    World->InitializeActorsForPlay(FURL());
+    auto* Manager=World->SpawnActor<ARecoveredGlobalManager>();
+    if (!TestNotNull(TEXT("Reward bundle manager"),Manager)) return false;
+    Manager->SessionStats.SessionDuration=600;
+    Manager->SessionStats.Strokes=1000;
+    Manager->SessionStats.EnemiesDefeated=40;
+    Manager->SessionStats.SuccubiDefeated=30;
+    Manager->SessionStats.Edges=4;
+    Manager->SessionStats.MaxCombo=800;
+    Manager->SessionStats.DrawsAtMaxHeat=20;
+    Manager->SessionStats.SessionsWon=1;
+    Manager->SessionStats.ActiveModifiers={TEXT("ironman"),TEXT("hardcore")};
+    const FRecoveredSessionRewardData Data=Manager->BuildRecoveredSessionRewardData(Manager->CalculateRecoveredSessionXP());
+    TestEqual(TEXT("Native presentation XP total"),Data.TotalXPEarned,621);
+    TestEqual(TEXT("Presentation XP sources retain six source categories"),Data.XPSources.Num(),6);
+    TestEqual(TEXT("Post-game visual level events preserve threshold crossings"),Data.LevelUpEvents.Num(),4);
+    TestEqual(TEXT("Post-game simulated level"),Data.EndingLevel,5);
+    TestEqual(TEXT("Post-game simulated XP remainder"),Data.EndingXP,81);
+    TestEqual(TEXT("Native UP sources preserve reward total"),Data.TotalUPEarned,22);
+    TestEqual(TEXT("UP sources include victory and purist rewards"),Data.UPSources.Last().Label.ToString(),FString(TEXT("PURIST")));
     World->DestroyWorld(false); GEngine->DestroyWorldContext(World);
     return true;
 }
