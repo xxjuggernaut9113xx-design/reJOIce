@@ -1,4 +1,5 @@
 #include "RecoveredRules.h"
+#include "RecoveredChallengeTracker.h"
 #include "Kismet/GameplayStatics.h"
 #include "Dom/JsonObject.h"
 #include "Serialization/JsonReader.h"
@@ -6,6 +7,100 @@
 
 namespace {
 const FString RecoverySlot=TEXT("CockHeroRecovered_Standalone_v1");
+const FString RecoverySlotIndex=TEXT("CockHeroRecovered_SaveSlotIndex_v1");
+const FString NamedRecoverySlotPrefix=TEXT("CockHeroRecovered_Named_");
+constexpr int32 MaxNamedSlots=128;
+constexpr int32 MaxNamedSlotSuffixLength=64;
+
+bool IsNamedRecoverySlot(const FString& SlotName) {
+    if (!SlotName.StartsWith(NamedRecoverySlotPrefix,ESearchCase::CaseSensitive)) return false;
+    const FString Suffix=SlotName.RightChop(NamedRecoverySlotPrefix.Len());
+    if (Suffix.IsEmpty() || Suffix.Len()>MaxNamedSlotSuffixLength) return false;
+    for (const TCHAR Character:Suffix) if (!FChar::IsAlnum(Character) && Character!=TEXT('_') && Character!=TEXT('-')) return false;
+    return true;
+}
+
+bool ContainsSlot(const TArray<FString>& Slots,const FString& SlotName) {
+    return Slots.ContainsByPredicate([&SlotName](const FString& Candidate) {
+        return Candidate.Equals(SlotName,ESearchCase::IgnoreCase);
+    });
+}
+
+bool IsValidSlotIndexPayload(const TArray<FString>& NamedSlots,const FString& ActiveSlot) {
+    if (NamedSlots.Num()>MaxNamedSlots || !URecoveredGameInstance::IsRecoverySlotNameValid(ActiveSlot)) return false;
+    TArray<FString> Seen;
+    Seen.Reserve(NamedSlots.Num());
+    for (const FString& SlotName:NamedSlots) {
+        if (!IsNamedRecoverySlot(SlotName) || ContainsSlot(Seen,SlotName)) return false;
+        Seen.Add(SlotName);
+    }
+    return ActiveSlot==RecoverySlot || ContainsSlot(NamedSlots,ActiveSlot);
+}
+
+bool BuildRecoveredRuntimeState(
+    URecoveredGameInstance* Instance,
+    URecoveredSaveGame* Save,
+    URecoveredProgressionManager*& OutProgression,
+    URecoveredChallengeTracker*& OutChallenges,
+    URecoveredCalibrationManager*& OutCalibration,
+    FString& OutError) {
+    if (!Save || !Save->IsStateValid()) {
+        OutError=TEXT("The selected recovery save is unreadable or has an unsupported format");
+        return false;
+    }
+
+    auto* Progression=NewObject<URecoveredProgressionManager>(Instance);
+    Progression->LevelDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_LevelData.DT_LevelData"));
+    Progression->PlayerCardDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_PlayerCards.DT_PlayerCards"));
+    Progression->ModifierDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_Modifiers.DT_Modifiers"));
+
+    const bool bHasProgressionState=Save->HasSetting(TEXT("RecoveryProgressionState"));
+    const FString ProgressionState=Save->GetStringSetting(TEXT("RecoveryProgressionState"),TEXT(""));
+    if (bHasProgressionState && (ProgressionState.IsEmpty() || !Progression->ImportRecoveryState(ProgressionState))) {
+        OutError=TEXT("Recovery progression state is invalid; the active profile was left unchanged");
+        return false;
+    }
+    if (!bHasProgressionState) {
+        Progression->UnlockPoints=static_cast<int32>(FMath::Clamp(Save->GetNumberSetting(TEXT("UnlockPoints"),0),double(MIN_int32),double(MAX_int32)));
+    }
+    const TArray<FString> SavedModifiers=Save->HasSetting(TEXT("EnabledModifiers"))
+        ? Save->GetStringArraySetting(TEXT("EnabledModifiers"))
+        : Save->GetStringArraySetting(TEXT("ActiveModifiers"));
+    for (const FString& ModifierName:SavedModifiers) {
+        if (ModifierName.Len()>256) continue;
+        const FName ModifierID(*ModifierName);
+        FRecoveredModifierRow Modifier;
+        if (!ModifierID.IsNone() && Progression->IsModifierUnlocked(ModifierID) && Progression->GetModifierData(ModifierID,Modifier) && Progression->CanEnableModifier(ModifierID)) {
+            Progression->EnabledModifiers.Add(ModifierID);
+        }
+    }
+
+    auto* Challenges=NewObject<URecoveredChallengeTracker>(Instance);
+    Challenges->RewardManager=Progression;
+    Challenges->ChallengeTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_Challenges.DT_Challenges"));
+    const bool bHasChallengeState=Save->HasSetting(TEXT("RecoveryChallengeState"));
+    const FString ChallengeState=Save->GetStringSetting(TEXT("RecoveryChallengeState"),TEXT(""));
+    if (bHasChallengeState && (ChallengeState.IsEmpty() || !Challenges->ImportRecoveryState(ChallengeState))) {
+        OutError=TEXT("Recovery challenge state is invalid; the active profile was left unchanged");
+        return false;
+    }
+    if (!Challenges->InitializeChallenges()) {
+        OutError=TEXT("Recovered challenge definitions are unavailable");
+        return false;
+    }
+
+    auto* Calibration=NewObject<URecoveredCalibrationManager>(Instance);
+    if (Save->HasSetting(TEXT("LatencyProfile")) && !Save->GetLatencyProfile(Calibration->CurrentProfile)) {
+        OutError=TEXT("Recovery calibration state is invalid; the active profile was left unchanged");
+        return false;
+    }
+
+    OutProgression=Progression;
+    OutChallenges=Challenges;
+    OutCalibration=Calibration;
+    return true;
+}
+
 bool ReadState(const FString& Text,TSharedPtr<FJsonObject>& Object) {
     return Text.Len()<=16*1024*1024 && FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Text),Object) && Object.IsValid();
 }
@@ -68,22 +163,132 @@ bool URecoveredSaveGame::SetStringArraySetting(const FString& Name,const TArray<
     return WriteSetting(StateJson,Name,MakeShared<FJsonValueArray>(JsonValues));
 }
 
-bool URecoveredGameInstance::LoadRecoveredSave() {
-    LastSaveError.Reset();
-    URecoveredSaveGame* Loaded=nullptr;
-    if (UGameplayStatics::DoesSaveGameExist(RecoverySlot,0)) {
-        Loaded=Cast<URecoveredSaveGame>(UGameplayStatics::LoadGameFromSlot(RecoverySlot,0));
-        if (!Loaded || !Loaded->IsStateValid()) { LastSaveError=TEXT("The separate recovery save is unreadable or has an unsupported format"); return false; }
-    } else {
-        Loaded=NewObject<URecoveredSaveGame>(this);
-        if (!Loaded->InitializeRecoveredDefaults()) { LastSaveError=TEXT("Verified source save defaults are unavailable"); return false; }
-    }
-    CurrentSave=Loaded;
-    return true; // Loading does not write a file.
+FString URecoveredGameInstance::GetDefaultRecoverySlotName() { return RecoverySlot; }
+FString URecoveredGameInstance::GetRecoverySlotIndexName() { return RecoverySlotIndex; }
+FString URecoveredGameInstance::GetNamedRecoverySlotPrefix() { return NamedRecoverySlotPrefix; }
+bool URecoveredGameInstance::IsRecoverySlotNameValid(const FString& SlotName) {
+    return SlotName==RecoverySlot || IsNamedRecoverySlot(SlotName);
 }
+
+bool URecoveredGameInstance::ReadRecoverySlotIndex(TArray<FString>& OutNamedSlots,FString& OutActiveSlot,const FString& IndexSlotName) {
+    OutNamedSlots.Reset();
+    OutActiveSlot=RecoverySlot;
+    const FString ResolvedIndexSlot=IndexSlotName.IsEmpty() ? RecoverySlotIndex : IndexSlotName;
+    if (!UGameplayStatics::DoesSaveGameExist(ResolvedIndexSlot,0)) return true;
+    const auto* Index=Cast<URecoveredSaveSlotIndex>(UGameplayStatics::LoadGameFromSlot(ResolvedIndexSlot,0));
+    if (!Index || Index->RecoverySlotIndexVersion!=1) return false;
+    const FString Active=Index->ActiveSlot.IsEmpty() ? RecoverySlot : Index->ActiveSlot;
+    if (!IsValidSlotIndexPayload(Index->NamedSlots,Active)) return false;
+    OutNamedSlots=Index->NamedSlots;
+    OutNamedSlots.Sort();
+    OutActiveSlot=Active;
+    return true;
+}
+
+bool URecoveredGameInstance::WriteRecoverySlotIndex(const TArray<FString>& NamedSlots,const FString& ActiveSlot,const FString& IndexSlotName) {
+    const FString ResolvedIndexSlot=IndexSlotName.IsEmpty() ? RecoverySlotIndex : IndexSlotName;
+    if (!IsValidSlotIndexPayload(NamedSlots,ActiveSlot)) return false;
+    auto* Index=NewObject<URecoveredSaveSlotIndex>();
+    Index->RecoverySlotIndexVersion=1;
+    Index->NamedSlots=NamedSlots;
+    Index->NamedSlots.Sort();
+    Index->ActiveSlot=ActiveSlot;
+    return UGameplayStatics::SaveGameToSlot(Index,ResolvedIndexSlot,0);
+}
+
+bool URecoveredGameInstance::LoadRecoveredSave() {
+    TArray<FString> NamedSlots;
+    FString IndexedActiveSlot=RecoverySlot;
+    FString IndexError;
+    if (!ReadRecoverySlotIndex(NamedSlots,IndexedActiveSlot,RecoverySlotIndex)) {
+        IndexError=TEXT("Recovery profile index is unreadable; the default profile was loaded without replacing it");
+    } else if (IndexedActiveSlot!=RecoverySlot) {
+        if (ContainsSlot(NamedSlots,IndexedActiveSlot) && UGameplayStatics::DoesSaveGameExist(IndexedActiveSlot,0)) {
+            if (LoadRecoveredSaveSlotInternal(IndexedActiveSlot,false)) return true;
+            IndexError=TEXT("Selected recovery profile could not be restored: ")+LastSaveError;
+        } else {
+            IndexError=TEXT("Selected recovery profile is unavailable; the default profile was loaded without replacing it");
+        }
+    }
+    const bool bLoaded=LoadRecoveredSaveSlotInternal(RecoverySlot,false);
+    if (bLoaded && !IndexError.IsEmpty()) LastSaveError=IndexError;
+    return bLoaded;
+}
+
+bool URecoveredGameInstance::LoadRecoveredSaveSlot(const FString& SlotName) {
+    if (!IsRecoverySlotNameValid(SlotName)) {
+        LastSaveError=TEXT("Recovery profile name is invalid");
+        return false;
+    }
+    TArray<FString> NamedSlots;
+    FString ActiveSlot;
+    if (!ReadRecoverySlotIndex(NamedSlots,ActiveSlot,RecoverySlotIndex)) {
+        LastSaveError=TEXT("Recovery profile index is unreadable");
+        return false;
+    }
+    if (SlotName!=RecoverySlot && (!ContainsSlot(NamedSlots,SlotName) || !UGameplayStatics::DoesSaveGameExist(SlotName,0))) {
+        LastSaveError=TEXT("Selected recovery profile is unavailable");
+        return false;
+    }
+    return LoadRecoveredSaveSlotInternal(SlotName,true);
+}
+
+bool URecoveredGameInstance::LoadRecoveredSaveSlotInternal(const FString& SlotName,bool bPersistActiveSlot) {
+    URecoveredSaveGame* Loaded=nullptr;
+    if (UGameplayStatics::DoesSaveGameExist(SlotName,0)) {
+        Loaded=Cast<URecoveredSaveGame>(UGameplayStatics::LoadGameFromSlot(SlotName,0));
+        if (!Loaded || !Loaded->IsStateValid()) {
+            LastSaveError=TEXT("The selected recovery save is unreadable or has an unsupported format");
+            return false;
+        }
+    } else if (SlotName==RecoverySlot) {
+        Loaded=NewObject<URecoveredSaveGame>(this);
+        if (!Loaded->InitializeRecoveredDefaults()) {
+            LastSaveError=TEXT("Verified source save defaults are unavailable");
+            return false;
+        }
+    } else {
+        LastSaveError=TEXT("Selected recovery profile is unavailable");
+        return false;
+    }
+
+    URecoveredProgressionManager* NewProgression=nullptr;
+    URecoveredChallengeTracker* NewChallenges=nullptr;
+    URecoveredCalibrationManager* NewCalibration=nullptr;
+    FString RehydrationError;
+    if (!BuildRecoveredRuntimeState(this,Loaded,NewProgression,NewChallenges,NewCalibration,RehydrationError)) {
+        LastSaveError=RehydrationError;
+        return false;
+    }
+
+    if (bPersistActiveSlot) {
+        TArray<FString> NamedSlots;
+        FString IndexedActiveSlot;
+        if (!ReadRecoverySlotIndex(NamedSlots,IndexedActiveSlot,RecoverySlotIndex) || !WriteRecoverySlotIndex(NamedSlots,SlotName,RecoverySlotIndex)) {
+            LastSaveError=TEXT("Recovery profile index could not record the active profile");
+            return false;
+        }
+    }
+
+    CurrentSave=Loaded;
+    ActiveRecoverySlot=SlotName;
+    ProgressionManager=NewProgression;
+    ChallengeTracker=NewChallenges;
+    CalibrationManager=NewCalibration;
+    bProgressionStateValid=true;
+    bChallengeStateValid=true;
+    ProgressionManager->OnSaveRequested.AddUniqueDynamic(this,&URecoveredGameInstance::HandleProgressionSaveRequest);
+    if (UWorld* World=GetWorld()) {
+        if (auto* Manager=Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(World))) Manager->ReloadRecoveredProfile();
+    }
+    LastSaveError.Reset();
+    return true;
+}
+
 bool URecoveredGameInstance::SaveRecoveredState() {
     if (!CurrentSave || !CurrentSave->IsStateValid()) { LastSaveError=TEXT("No valid recovery state to save"); return false; }
-    if (!UGameplayStatics::SaveGameToSlot(CurrentSave,RecoverySlot,0)) { LastSaveError=TEXT("Could not write the separate recovery save"); return false; }
+    const FString TargetSlot=IsRecoverySlotNameValid(ActiveRecoverySlot) ? ActiveRecoverySlot : RecoverySlot;
+    if (!UGameplayStatics::SaveGameToSlot(CurrentSave,TargetSlot,0)) { LastSaveError=TEXT("Could not write the active recovery save"); return false; }
     LastSaveError.Reset(); return true;
 }
 

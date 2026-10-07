@@ -94,7 +94,8 @@ bool URecoveredModifierWidget::ToggleModifier(FName ModifierID) {
     if (Instance->CurrentSave) {
         TArray<FString> Enabled;
         for (FName M : Progression->EnabledModifiers) Enabled.Add(M.ToString());
-        if (Instance->CurrentSave->SetStringArraySetting(TEXT("EnabledModifiers"), Enabled)) {
+        if (Instance->CurrentSave->SetStringArraySetting(TEXT("EnabledModifiers"), Enabled)
+            && Instance->CurrentSave->SetStringArraySetting(TEXT("ActiveModifiers"), Enabled)) {
             Instance->SaveRecoveredState();
         }
     }

@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-07",
+  "source_game_executed": false,
+  "editor_build": {
+    "engine": "Unreal Engine 5.3.2",
+    "target": "CockHeroRecoveredEditor Win64 Development",
+    "result": "passed"
+  },
+  "automation": {
+    "filter": "CockHero.Recovery",
+    "report": "Saved/AutomationNamedProfileRecoveryFinal/index.json",
+    "performed": 45,
+    "succeeded": 44,
+    "succeeded_with_warnings": 1,
+    "failed": 0,
+    "not_run": 0,
+    "warning_source": "WidgetArtwork recorded 13 blocked EOS SDK HTTP messages; named-profile tests reported no warnings"
+  },
+  "named_profile_recovery": {
+    "slot_namespace": "CockHeroRecovered_Named_",
+    "registry_slot": "CockHeroRecovered_SaveSlotIndex_v1",
+    "tests": [
+      "CockHero.Recovery.NamedSaveSlotIndexRoundTrip",
+      "CockHero.Recovery.NamedSaveProfileSwitch"
+    ],
+    "verified": [
+      "bounded profile names reject traversal and case-insensitive duplicates",
+      "registry serialization preserves the active profile",
+      "profile switching rehydrates progression, challenge tracking, and calibration",
+      "active-profile persistence writes only to the selected recovery slot",
+      "invalid profile selection leaves the active target unchanged",
+      "automation restores its pre-existing registry and removes its randomized test profile"
+    ]
+  },
+  "preservation": {
+    "original_save_loaded": false,
+    "original_save_modified": false,
+    "shipping_game_executed": false
+  }
+}

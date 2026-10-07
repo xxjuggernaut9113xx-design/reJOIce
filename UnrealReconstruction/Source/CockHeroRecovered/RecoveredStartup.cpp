@@ -14,23 +14,7 @@
 
 void ARecoveredGlobalManager::BeginPlay() {
     Super::BeginPlay();
-    // Uses the reconstruction's isolated save. Original save slots are never loaded.
-    LoadLifetimeStats();
-    // Restore audio selections.
-    if (auto* Inst = Cast<URecoveredGameInstance>(GetGameInstance())) {
-        if (Inst->CurrentSave) {
-            const FString Bank = Inst->CurrentSave->GetStringSetting(TEXT("BeatSoundBank"), TEXT("Default"));
-            BeatSoundBank = FName(*Bank);
-            const FString Pack = Inst->CurrentSave->GetStringSetting(TEXT("VoicePack"), TEXT("Default"));
-            VoicePack = FName(*Pack);
-        }
-    }
-    // Forward progression metric broadcasts to the challenge tracker.
-    if (auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance())) {
-        if (Instance->ProgressionManager && Instance->ChallengeTracker) {
-            Instance->ProgressionManager->OnMetricUpdateRequested.AddUniqueDynamic(this, &ARecoveredGlobalManager::HandleProgressionMetric);
-        }
-    }
+    ReloadRecoveredProfile();
     CreateMainMenuUI();
 #if WITH_DEV_AUTOMATION_TESTS
     if (FParse::Param(FCommandLine::Get(),TEXT("RecoveredSessionSmoke"))) {
@@ -59,6 +43,26 @@ void ARecoveredGlobalManager::BeginPlay() {
         },0.25f,false);
     }
 #endif
+}
+
+void ARecoveredGlobalManager::ReloadRecoveredProfile() {
+    // Uses the reconstruction's isolated save. Original save slots are never loaded.
+    LoadLifetimeStats();
+    if (auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance())) {
+        if (Instance->CurrentSave) {
+            BeatSoundBank=FName(*Instance->CurrentSave->GetStringSetting(TEXT("BeatSoundBank"),TEXT("Default")));
+            VoicePack=FName(*Instance->CurrentSave->GetStringSetting(TEXT("VoicePack"),TEXT("Default")));
+            BeatContext.ActiveModifiers.Reset();
+            if (Instance->CurrentSave->HasSetting(TEXT("EnabledModifiers")) && Instance->ProgressionManager) {
+                for (const FName ModifierID:Instance->ProgressionManager->EnabledModifiers) BeatContext.ActiveModifiers.Add(ModifierID.ToString());
+            } else {
+                BeatContext.ActiveModifiers=Instance->CurrentSave->GetStringArraySetting(TEXT("ActiveModifiers"));
+            }
+        }
+        if (Instance->ProgressionManager && Instance->ChallengeTracker) {
+            Instance->ProgressionManager->OnMetricUpdateRequested.AddUniqueDynamic(this,&ARecoveredGlobalManager::HandleProgressionMetric);
+        }
+    }
 }
 
 bool ARecoveredGlobalManager::CreateMainMenuUI() {

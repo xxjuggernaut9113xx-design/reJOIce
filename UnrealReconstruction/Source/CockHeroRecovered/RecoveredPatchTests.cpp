@@ -73,7 +73,7 @@ bool FRecoveredFinalPatchRegressionTest::RunTest(const FString& Parameters) {
     auto* Slots=NewObject<URecoveredSaveSlotWidget>();
     TestFalse(TEXT("Cannot create path-like save slot"),Slots->CreateSaveSlot(TEXT("../original")));
     TestFalse(TEXT("Cannot delete path-like save slot"),Slots->DeleteSaveSlot(TEXT("../original")));
-    TestFalse(TEXT("Incomplete slot switching does not replace live state"),Slots->LoadSaveSlot(TEXT("test")));
+    TestFalse(TEXT("Slot switching requires an active recovered game instance"),Slots->LoadSaveSlot(TEXT("test")));
     auto* Progression=NewObject<URecoveredProgressionManager>();
     Progression->ModifierDataTable=NewObject<UDataTable>();
     Progression->ModifierDataTable->RowStruct=FRecoveredReward::StaticStruct();

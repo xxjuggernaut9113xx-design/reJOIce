@@ -8,31 +8,8 @@
 
 void URecoveredGameInstance::Init() {
     Super::Init();
-    // Reconstruction plumbing; original loading/challenge initialization is still separate.
-    ProgressionManager=NewObject<URecoveredProgressionManager>(this);
     DeviceManager=NewObject<URecoveredDeviceManager>(this);
-    ProgressionManager->LevelDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_LevelData.DT_LevelData"));
-    ProgressionManager->PlayerCardDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_PlayerCards.DT_PlayerCards"));
-    ProgressionManager->ModifierDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_Modifiers.DT_Modifiers"));
     LoadRecoveredSave();
-    CalibrationManager=NewObject<URecoveredCalibrationManager>(this);
-    if (CurrentSave) CurrentSave->GetLatencyProfile(CalibrationManager->CurrentProfile);
-    if (CurrentSave) {
-        const FString State=CurrentSave->GetStringSetting(TEXT("RecoveryProgressionState"),TEXT(""));
-        const bool bHasState=CurrentSave->HasSetting(TEXT("RecoveryProgressionState"));
-        bProgressionStateValid=!bHasState || (!State.IsEmpty() && ProgressionManager->ImportRecoveryState(State));
-        if (!bHasState) ProgressionManager->UnlockPoints=static_cast<int32>(FMath::Clamp(CurrentSave->GetNumberSetting(TEXT("UnlockPoints"),0),double(MIN_int32),double(MAX_int32)));
-        if (!bProgressionStateValid) LastSaveError=TEXT("Recovery progression state is invalid; it has been retained without overwriting");
-        ChallengeTracker=NewObject<URecoveredChallengeTracker>(this);
-        ChallengeTracker->RewardManager=ProgressionManager;
-        ChallengeTracker->ChallengeTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_Challenges.DT_Challenges"));
-        const bool bHasChallenges=CurrentSave->HasSetting(TEXT("RecoveryChallengeState"));
-        const FString Challenges=CurrentSave->GetStringSetting(TEXT("RecoveryChallengeState"),TEXT(""));
-        bChallengeStateValid=!bHasChallenges || (!Challenges.IsEmpty() && ChallengeTracker->ImportRecoveryState(Challenges));
-        if (bChallengeStateValid) bChallengeStateValid=ChallengeTracker->InitializeChallenges();
-        if (!bChallengeStateValid) LastSaveError=TEXT("Recovery challenge state is invalid; it has been retained without overwriting");
-        if (bProgressionStateValid && bChallengeStateValid) ProgressionManager->OnSaveRequested.AddUniqueDynamic(this,&URecoveredGameInstance::HandleProgressionSaveRequest);
-    }
 }
 
 void ARecoveredGlobalManager::SuccessfulCum() {

@@ -176,6 +176,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") TObjectPtr<URecoveredRulesAsset> Rules;
     ARecoveredGlobalManager();
     virtual void BeginPlay() override;
+    UFUNCTION(BlueprintCallable, Category="Recovered Save") void ReloadRecoveredProfile();
     UPROPERTY(Transient, BlueprintReadOnly, Category="Recovered Menu") TObjectPtr<class UUserWidget> MainMenu;
     UPROPERTY(Transient, BlueprintReadOnly, Category="Recovered Menu") FString StartupError;
     UFUNCTION(BlueprintCallable, Category="Recovered Menu") bool CreateMainMenuUI();
@@ -406,6 +407,7 @@ public:
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Progression") TObjectPtr<class URecoveredChallengeTracker> ChallengeTracker;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Devices") TObjectPtr<class URecoveredDeviceManager> DeviceManager;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Save") TObjectPtr<class URecoveredSaveGame> CurrentSave;
+    UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Save") FString ActiveRecoverySlot;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Save") FString LastSaveError;
     UPROPERTY(Transient,BlueprintReadOnly) bool bHasGameOpenedInSession=false;
     UPROPERTY(Transient,BlueprintReadOnly) TObjectPtr<URecoveredCalibrationManager> CalibrationManager;
@@ -419,8 +421,18 @@ public:
     UFUNCTION(BlueprintCallable,Category="Recovered Save") bool PersistRecoveredProgression();
     UFUNCTION() void HandleProgressionSaveRequest();
     UFUNCTION(BlueprintCallable,Category="Recovered Save") bool LoadRecoveredSave();
+    UFUNCTION(BlueprintCallable,Category="Recovered Save") bool LoadRecoveredSaveSlot(const FString& SlotName);
     UFUNCTION(BlueprintCallable,Category="Recovered Save") bool SaveRecoveredState();
+    UFUNCTION(BlueprintPure,Category="Recovered Save") FString GetActiveRecoverySlot() const { return ActiveRecoverySlot; }
+    static FString GetDefaultRecoverySlotName();
+    static FString GetRecoverySlotIndexName();
+    static FString GetNamedRecoverySlotPrefix();
+    static bool IsRecoverySlotNameValid(const FString& SlotName);
+    static bool ReadRecoverySlotIndex(TArray<FString>& OutNamedSlots,FString& OutActiveSlot,const FString& IndexSlotName);
+    static bool WriteRecoverySlotIndex(const TArray<FString>& NamedSlots,const FString& ActiveSlot,const FString& IndexSlotName);
     virtual void Init() override;
+private:
+    bool LoadRecoveredSaveSlotInternal(const FString& SlotName,bool bPersistActiveSlot);
 };
 
 UCLASS(Blueprintable)
@@ -446,4 +458,13 @@ public:
     UFUNCTION(BlueprintCallable,Category="Recovered Save") bool SetStringSetting(const FString& Name,const FString& Value);
     UFUNCTION(BlueprintCallable,Category="Recovered Save") bool SetStringArraySetting(const FString& Name,const TArray<FString>& Values);
     // This does not implement original GVAS migration or restore original saves.
+};
+
+UCLASS()
+class COCKHERORECOVERED_API URecoveredSaveSlotIndex : public USaveGame {
+    GENERATED_BODY()
+public:
+    UPROPERTY() int32 RecoverySlotIndexVersion=1;
+    UPROPERTY() TArray<FString> NamedSlots;
+    UPROPERTY() FString ActiveSlot;
 };

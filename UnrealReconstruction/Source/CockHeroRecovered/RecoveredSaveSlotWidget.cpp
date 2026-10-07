@@ -8,9 +8,20 @@
 
 namespace {
 FString IsolatedSlot(const FString& Name) {
-    if (Name.IsEmpty() || Name.Len()>64) return FString();
-    for (TCHAR Ch : Name) if (!FChar::IsAlnum(Ch) && Ch!=TEXT('_') && Ch!=TEXT('-')) return FString();
-    return TEXT("CockHeroRecovered_Named_") + Name;
+    const FString Slot=URecoveredGameInstance::GetNamedRecoverySlotPrefix()+Name;
+    return URecoveredGameInstance::IsRecoverySlotNameValid(Slot) ? Slot : FString();
+}
+
+bool ContainsSlot(const TArray<FString>& Slots,const FString& SlotName) {
+    return Slots.ContainsByPredicate([&SlotName](const FString& Candidate) {
+        return Candidate.Equals(SlotName,ESearchCase::IgnoreCase);
+    });
+}
+
+void RemoveUnavailableSlots(TArray<FString>& Slots) {
+    Slots.RemoveAll([](const FString& SlotName) {
+        return !UGameplayStatics::DoesSaveGameExist(SlotName,0);
+    });
 }
 }
 
@@ -21,8 +32,15 @@ void URecoveredSaveSlotWidget::NativeConstruct() {
 
 TArray<FString> URecoveredSaveSlotWidget::GetSaveSlotNames() const {
     TArray<FString> Slots;
-    // Save slots are stored as separate save game objects.
-    // The reconstruction uses a single active slot; this lists named variants.
+    TArray<FString> StoredSlots;
+    FString ActiveSlot;
+    if (!URecoveredGameInstance::ReadRecoverySlotIndex(StoredSlots,ActiveSlot,URecoveredGameInstance::GetRecoverySlotIndexName())) return Slots;
+    const FString Prefix=URecoveredGameInstance::GetNamedRecoverySlotPrefix();
+    for (const FString& StoredSlot:StoredSlots) {
+        if (!UGameplayStatics::DoesSaveGameExist(StoredSlot,0)) continue;
+        Slots.Add(StoredSlot.RightChop(Prefix.Len()));
+    }
+    Slots.Sort();
     return Slots;
 }
 
@@ -42,31 +60,50 @@ void URecoveredSaveSlotWidget::RefreshSlotList() {
 bool URecoveredSaveSlotWidget::CreateSaveSlot(const FString& SlotName) {
     const FString SafeSlot=IsolatedSlot(SlotName);
     if (SafeSlot.IsEmpty()) return false;
-    auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
-    if (!Instance) return false;
-    if (UGameplayStatics::DoesSaveGameExist(SafeSlot, 0)) return false;
-    // Never overwrite an existing named reconstruction snapshot.
+    TArray<FString> StoredSlots;
+    FString ActiveSlot;
+    if (!URecoveredGameInstance::ReadRecoverySlotIndex(StoredSlots,ActiveSlot,URecoveredGameInstance::GetRecoverySlotIndexName())) return false;
+    RemoveUnavailableSlots(StoredSlots);
+    if (ContainsSlot(StoredSlots,SafeSlot) || UGameplayStatics::DoesSaveGameExist(SafeSlot,0)) return false;
     if (auto* NewSave = Cast<URecoveredSaveGame>(UGameplayStatics::CreateSaveGameObject(URecoveredSaveGame::StaticClass()))) {
         if (!NewSave->InitializeRecoveredDefaults()) return false;
         if (UGameplayStatics::SaveGameToSlot(NewSave, SafeSlot, 0)) {
-            RefreshSlotList();
-            return true;
+            StoredSlots.Add(SafeSlot);
+            if (ActiveSlot!=URecoveredGameInstance::GetDefaultRecoverySlotName() && !UGameplayStatics::DoesSaveGameExist(ActiveSlot,0)) {
+                ActiveSlot=URecoveredGameInstance::GetDefaultRecoverySlotName();
+            }
+            if (URecoveredGameInstance::WriteRecoverySlotIndex(StoredSlots,ActiveSlot,URecoveredGameInstance::GetRecoverySlotIndexName())) {
+                RefreshSlotList();
+                return true;
+            }
+            UGameplayStatics::DeleteGameInSlot(SafeSlot,0);
         }
     }
     return false;
 }
 
 bool URecoveredSaveSlotWidget::LoadSaveSlot(const FString& SlotName) {
-    // Incomplete: loading must switch the active persistence target and rehydrate
-    // progression, challenges and settings together. Do not replace CurrentSave
-    // while saves still target the default slot.
-    return false;
+    const FString SafeSlot=IsolatedSlot(SlotName);
+    if (SafeSlot.IsEmpty()) return false;
+    auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
+    if (!Instance || !UGameplayStatics::DoesSaveGameExist(SafeSlot,0)) return false;
+    if (!Instance->LoadRecoveredSaveSlot(SafeSlot)) return false;
+    RefreshSlotList();
+    return true;
 }
 
 bool URecoveredSaveSlotWidget::DeleteSaveSlot(const FString& SlotName) {
     const FString SafeSlot=IsolatedSlot(SlotName);
     if (SafeSlot.IsEmpty()) return false;
+    TArray<FString> StoredSlots;
+    FString ActiveSlot;
+    if (!URecoveredGameInstance::ReadRecoverySlotIndex(StoredSlots,ActiveSlot,URecoveredGameInstance::GetRecoverySlotIndexName())) return false;
+    if (!ContainsSlot(StoredSlots,SafeSlot) || ActiveSlot.Equals(SafeSlot,ESearchCase::IgnoreCase)) return false;
     if (UGameplayStatics::DeleteGameInSlot(SafeSlot, 0)) {
+        StoredSlots.RemoveAll([&SafeSlot](const FString& Candidate) {
+            return Candidate.Equals(SafeSlot,ESearchCase::IgnoreCase);
+        });
+        URecoveredGameInstance::WriteRecoverySlotIndex(StoredSlots,ActiveSlot,URecoveredGameInstance::GetRecoverySlotIndexName());
         RefreshSlotList();
         return true;
     }

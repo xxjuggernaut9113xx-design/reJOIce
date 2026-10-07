@@ -6,7 +6,7 @@ Input: `ghidra-gap-fill-final.patch` supplied by the user on 2026-10-04. Integra
 
 - Removed the store-completion callback recursion and synchronous media-failure redraw recursion.
 - Made the unimplemented device transport report failure, rather than a successful connection.
-- Isolated named save operations under `CockHeroRecovered_Named_`, rejected path-like names and existing-slot overwrite, initialized new snapshot defaults. Loading remains explicitly disabled until target switching and rehydration are implemented; listing is still a stub.
+- Isolated named save operations under `CockHeroRecovered_Named_`, rejected path-like names and existing-slot overwrite, and initialized new snapshot defaults. The later named-profile continuation adds recovery-owned listing, switching, and rehydration while original save loading remains disabled.
 - Removed duplicate challenge reward grants and duplicate XP text; the existing challenge tracker already grants rewards. Removed replay of per-event cumulative metrics at settlement and the second win-counter increment. Win state now comes from the recorded outcome rather than absence of a loss.
 - Recorded regular coin awards in session earnings, connected active modifiers to XP, validated lifetime-load values before casting, and report failure from the final progression save. Settlement still needs transaction/retry work.
 - Recovered all 27 preference widget names, actual save keys, and bool/string/enum/count conversions from the original `VideoSettingsMenu/InitDefaultsFromSaveGame` instructions. Fixed Borderless mapping; graphics setters apply resolution, screen mode and FPS. Removed the incorrect interpretation of stroke multiplier as a visibility setting.
@@ -26,6 +26,13 @@ Input: `ghidra-gap-fill-final.patch` supplied by the user on 2026-10-04. Integra
 - Rebuilt modifiers against `UniformGridPanel_94` and `ModifierCardEntryWidget`. It uses real data-table row names, preserves unlock state, removes reconstructed conflicts before enabling a modifier, persists enabled values, and synchronizes session modifier IDs for XP/session consumers.
 - Repaired the post-game handoff. It now writes the recovered XP, unlock-point, level-up, and session-summary fields to nested child widgets, suppresses the duplicate standalone level-up overlay during finalization, binds the nested return button, and lands the master switcher on its usable summary page.
 
+## 2026-10-07 named profile recovery
+
+- Added a versioned recovery-owned index for `CockHeroRecovered_Named_` profiles. It accepts only bounded alphanumeric, underscore, and hyphen identifiers; rejects path-like targets and case-insensitive duplicates; and never reads an original save slot.
+- Completed named profile listing, creation, loading, and deletion. The active profile cannot be deleted. A profile is loaded and rehydrated before the index changes, so an unreadable progression, challenge, or calibration state leaves the active profile untouched.
+- Routed ordinary persistence to the active recovery profile. Startup resolves the indexed active profile across restarts and falls back to the default recovery profile without overwriting a missing or malformed selected profile.
+- Rehydrated progression, challenge tracking, calibration, lifetime counters, audio routing, modifier state, and metric forwarding for an active game manager after a profile switch. Modifier toggles now persist both the editor-facing enabled set and the session-facing active set.
+
 ## Verification
 
 ### Import failure handling follow-up (2026-10-06)
@@ -41,6 +48,12 @@ Follow-up validation: editor build passed; **43 tests passed, zero warnings/fail
 - Fresh editor commandlet parent readback: **15 expected widgets verified**.
 
 The machine-readable record is [recovery-wiring-validation.json](RecoveryEvidence/recovery-wiring-validation.json). The shipping game was not executed.
+
+### Named save profile recovery (2026-10-07)
+
+The Windows Unreal Editor build passed. `CockHero.Recovery` completed **45 tests**: **44 succeeded**, **1 succeeded with warnings**, **0 failed**, and **0 were not run**. `NamedSaveSlotIndexRoundTrip` verifies registry validation and serialization. `NamedSaveProfileSwitch` creates an isolated randomized profile, restores progression/challenge/calibration state into a game instance, persists back to that profile, rejects an invalid target, and restores the pre-existing registry after the test.
+
+The one warning-bearing test, `WidgetArtwork`, carried 13 blocked EOS SDK HTTP messages from the sandboxed network; it completed successfully and the new named-profile tests had zero warnings. The machine-readable record is [named-save-profile-validation.json](RecoveryEvidence/named-save-profile-validation.json).
 
 ## Remaining limits
 
