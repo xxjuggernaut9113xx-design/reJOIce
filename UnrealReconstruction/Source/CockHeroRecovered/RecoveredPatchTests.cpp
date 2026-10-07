@@ -17,6 +17,9 @@
 #include "Components/TextBlock.h"
 #include "Components/WidgetSwitcher.h"
 #include "RecoveredPostGameSequence.h"
+#include "RecoveredNotificationWidget.h"
+#include "RecoveredSessionWidget.h"
+#include "Components/VerticalBox.h"
 #if WITH_DEV_AUTOMATION_TESTS
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredPatchLifecycleTest,"CockHero.Recovery.PatchLifecycle",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
 bool FRecoveredPatchLifecycleTest::RunTest(const FString& Parameters) {
@@ -156,6 +159,53 @@ bool FRecoveredIronManStorePenaltyTest::RunTest(const FString& Parameters) {
     if (!TestNotNull(TEXT("Iron Man penalty persists the active recovery profile"),Persisted)) return false;
     TestEqual(TEXT("Persisted Iron Man point balance"),Persisted->GetNumberSetting(TEXT("UnlockPoints"),-1),0.0);
     TestEqual(TEXT("Persisted Iron Man unlocked pack count"),Persisted->GetStringArraySetting(TEXT("UnlockedPacks")).Num(),1);
+    return true;
+}
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredNotificationWidgetTest,"CockHero.Recovery.OutcomeNotifications",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FRecoveredNotificationWidgetTest::RunTest(const FString& Parameters) {
+    UClass* Class=LoadClass<URecoveredNotificationWidget>(nullptr,TEXT("/Game/Recovery/UI/NotificationBoxWidget.NotificationBoxWidget_C"));
+    if (!TestNotNull(TEXT("Notification widget native parent"),Class)) return false;
+    auto* Widget=NewObject<URecoveredNotificationWidget>(GetTransientPackage(),Class);
+    if (!TestTrue(TEXT("Notification widget initializes"),Widget->Initialize())) return false;
+    Widget->TakeWidget();
+    Widget->SetNotifBoxParams(nullptr,TEXT("Perfect Finish"),TEXT("Full Rewards Unlocked — Victory Achieved"));
+    auto* Title=Cast<UTextBlock>(Widget->GetWidgetFromName(TEXT("Title")));
+    auto* Description=Cast<UTextBlock>(Widget->GetWidgetFromName(TEXT("Description")));
+    if (!TestNotNull(TEXT("Notification title field"),Title) || !TestNotNull(TEXT("Notification description field"),Description)) return false;
+    TestEqual(TEXT("Notification title mirrors source outcome text"),Title->GetText().ToString(),FString(TEXT("Perfect Finish")));
+    TestEqual(TEXT("Notification body mirrors source outcome text"),Description->GetText().ToString(),FString(TEXT("Full Rewards Unlocked — Victory Achieved")));
+
+    const auto Initialization=UWorld::InitializationValues().AllowAudioPlayback(false).CreatePhysicsScene(false).CreateNavigation(false).CreateAISystem(false).ShouldSimulatePhysics(false).SetTransactional(false);
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false,NAME_None,nullptr,true,ERHIFeatureLevel::Num,&Initialization);
+    FWorldContext& Context=GEngine->CreateNewWorldContext(EWorldType::Game);
+    Context.SetCurrentWorld(World);
+    ON_SCOPE_EXIT { World->DestroyWorld(false); GEngine->DestroyWorldContext(World); };
+    auto* Instance=NewObject<URecoveredGameInstance>();
+    auto* Save=NewObject<URecoveredSaveGame>(Instance);
+    if (!TestTrue(TEXT("Notification session save initializes"),Save->InitializeRecoveredDefaults())) return false;
+    if (!TestTrue(TEXT("Notification setting enables source boxes"),Save->SetBoolSetting(TEXT("AreNotificationBoxesEnabled?"),true))) return false;
+    Instance->CurrentSave=Save;
+    World->SetGameInstance(Instance);
+    World->InitializeActorsForPlay(FURL());
+    auto* Manager=World->SpawnActor<ARecoveredGlobalManager>();
+    if (!TestNotNull(TEXT("Notification manager"),Manager)) return false;
+    UClass* SessionClass=LoadClass<URecoveredSessionWidget>(nullptr,TEXT("/Game/Recovery/UI/UI_Manager.UI_Manager_C"));
+    if (!TestNotNull(TEXT("Notification session class"),SessionClass)) return false;
+    auto* Session=NewObject<URecoveredSessionWidget>(GetTransientPackage(),SessionClass);
+    if (!TestTrue(TEXT("Notification session initializes"),Session->Initialize())) return false;
+    Session->TakeWidget();
+    auto* Panel=Cast<UVerticalBox>(Session->GetWidgetFromName(TEXT("NotifVerticalBox")));
+    if (!TestNotNull(TEXT("Notification source panel"),Panel)) return false;
+    Manager->SessionScreen=Session;
+    const int32 CountBefore=Panel->GetChildrenCount();
+    if (!TestTrue(TEXT("Outcome notification mounts into the recovered panel"),Manager->CreateRecoveredNotification(TEXT("PrematureCumIcon"),TEXT("Early Climax"),TEXT("Post-Game Rewards Cut in Half")))) return false;
+    TestEqual(TEXT("Outcome notification adds one recovered panel child"),Panel->GetChildrenCount(),CountBefore+1);
+    auto* Mounted=Cast<URecoveredNotificationWidget>(Panel->GetChildAt(CountBefore));
+    if (!TestNotNull(TEXT("Mounted outcome notification uses native parent"),Mounted)) return false;
+    auto* MountedTitle=Cast<UTextBlock>(Mounted->GetWidgetFromName(TEXT("Title")));
+    if (!TestNotNull(TEXT("Mounted outcome title field"),MountedTitle)) return false;
+    TestEqual(TEXT("Mounted outcome notification preserves source text"),MountedTitle->GetText().ToString(),FString(TEXT("Early Climax")));
+    TestTrue(TEXT("Mounted outcome notification remains lifecycle-tracked"),Manager->EventOverlays.Contains(Mounted));
     return true;
 }
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredWidgetAttachmentTest,"CockHero.Recovery.WidgetAttachments",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)

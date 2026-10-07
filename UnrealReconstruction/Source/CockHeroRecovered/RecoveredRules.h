@@ -16,6 +16,7 @@
 #include "RecoveredMediaPlayback.h"
 #include "RecoveredProgression.h"
 #include "RecoveredOutcomes.h"
+#include "RecoveredNotificationWidget.h"
 #include "RecoveredRules.generated.h"
 
 UENUM(BlueprintType)
@@ -304,6 +305,8 @@ public:
     UFUNCTION(BlueprintCallable, Category="Recovered|Notifications") void EnqueueNotification(const FString& NotificationText);
     UFUNCTION(BlueprintCallable, Category="Recovered|Notifications") bool DequeueNotification(FString& OutText);
     UFUNCTION(BlueprintPure, Category="Recovered|Notifications") int32 GetPendingNotificationCount() const;
+    UFUNCTION(BlueprintCallable, Category="Recovered|Notifications") bool CreateRecoveredNotification(FName IconName,const FString& Title,const FString& Description);
+    UFUNCTION() void HandleRecoveredNotificationExpired(URecoveredNotificationWidget* Notification);
     // Exports session-end statistics as a JSON string for external tools.
     UFUNCTION(BlueprintCallable, Category="Recovered|Session") FString ExportSessionStatsJson() const;
     // Video-loop toggle: enables/disables automatic video looping.

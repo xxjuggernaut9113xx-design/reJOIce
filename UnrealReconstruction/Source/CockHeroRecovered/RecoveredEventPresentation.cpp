@@ -1,7 +1,10 @@
 #include "RecoveredRules.h"
+#include "RecoveredNotificationWidget.h"
 #include "Blueprint/UserWidget.h"
 #include "Blueprint/WidgetBlueprintGeneratedClass.h"
 #include "Animation/WidgetAnimation.h"
+#include "Components/VerticalBox.h"
+#include "Engine/Texture2D.h"
 #include "Kismet/GameplayStatics.h"
 #include "TimerManager.h"
 #include "Misc/PackageName.h"
@@ -30,17 +33,41 @@ bool ARecoveredGlobalManager::SpawnRecoveredStore() {
     return true;
 }
 void ARecoveredGlobalManager::CompleteRecoveredStoreCooldown() { bStoreOnCooldown=false; }
+bool ARecoveredGlobalManager::CreateRecoveredNotification(FName IconName,const FString& Title,const FString& Description) {
+    auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
+    if (!IsValid(SessionScreen) || !Instance || !Instance->CurrentSave || !Instance->CurrentSave->GetBoolSetting(TEXT("AreNotificationBoxesEnabled?"),true)) return false;
+    auto* Panel=Cast<UVerticalBox>(SessionScreen->GetWidgetFromName(TEXT("NotifVerticalBox")));
+    UClass* Class=LoadClass<URecoveredNotificationWidget>(nullptr,TEXT("/Game/Recovery/UI/NotificationBoxWidget.NotificationBoxWidget_C"));
+    if (!Panel || !GetWorld() || !Class) return false;
+    auto* Notification=CreateWidget<URecoveredNotificationWidget>(GetWorld(),Class);
+    if (!Notification) return false;
+    UTexture2D* Icon=nullptr;
+    if (IconName==TEXT("PunishmentIcon")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/NotifBoxIcons/PunishmentIcon.PunishmentIcon"));
+    Panel->AddChildToVerticalBox(Notification);
+    Notification->OnNotificationExpired.AddUniqueDynamic(this,&ARecoveredGlobalManager::HandleRecoveredNotificationExpired);
+    Notification->SetNotifBoxParams(Icon,Title,Description);
+    EventOverlays.Add(Notification);
+    return true;
+}
+void ARecoveredGlobalManager::HandleRecoveredNotificationExpired(URecoveredNotificationWidget* Notification) {
+    EventOverlays.Remove(Notification);
+}
 void ARecoveredGlobalManager::HandleRecoveredOutcome(const FRecoveredOutcomeEffects& Effects) {
-    if (BeatTimeline) { BeatTimeline->ApplySpeedModifier(Effects.SpeedModifier);BeatTimeline->ApplyStrokeCountModifier(Effects.StrokeCountModifier); }
+    const bool bSuccessful=Effects.OutcomeOverlaySourceIndex==-4047;
+    CreateRecoveredNotification(bSuccessful ? TEXT("SuccessfulCumIcon") : TEXT("PrematureCumIcon"),bSuccessful ? TEXT("Perfect Finish") : TEXT("Early Climax"),bSuccessful ? TEXT("Full Rewards Unlocked — Victory Achieved") : TEXT("Post-Game Rewards Cut in Half"));
     FName Overlay;
     if (Effects.OutcomeOverlaySourceIndex==-4047) Overlay=TEXT("CummingOnTimeOverlay_Widget");
     else if (Effects.OutcomeOverlaySourceIndex==-4046) Overlay=TEXT("CummingEarlySuccubus_Overlay_Widget");
     else if (Effects.OutcomeOverlaySourceIndex==-4045) Overlay=TEXT("CummingEarlyOverlay_Widget");
     SpawnRecoveredOverlay(Overlay);
+    if (BeatTimeline) { BeatTimeline->ApplySpeedModifier(Effects.SpeedModifier);BeatTimeline->ApplyStrokeCountModifier(Effects.StrokeCountModifier); }
     if (UUserWidget* PostCum = SpawnRecoveredOverlay(TEXT("PostCumContinue_Widget"))) {
         BindPostGameResultsButton(PostCum);
     }
-    if (Effects.bApplyIronManPenalty) ApplyRecoveredIronManStorePenalty();
+    if (Effects.bApplyIronManPenalty) {
+        ApplyRecoveredIronManStorePenalty();
+        CreateRecoveredNotification(TEXT("PunishmentIcon"),TEXT("Iron Man Penalty"),TEXT("All packs locked. Unlock Points reset to 0."));
+    }
     // Outcome stinger: success for on-time, fail for early.
     PlayRecoveredSessionSound(Effects.OutcomeOverlaySourceIndex == -4047 ? TEXT("Success") : TEXT("Fail"));
     if (Effects.bDelayedContinuationRequested && GetWorld()) {

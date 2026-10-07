@@ -26,6 +26,7 @@ Input: `ghidra-gap-fill-final.patch` supplied by the user on 2026-10-04. Integra
 - Rebuilt modifiers against `UniformGridPanel_94` and `ModifierCardEntryWidget`. It uses real data-table row names, preserves unlock state, removes reconstructed conflicts before enabling a modifier, persists enabled values, and synchronizes session modifier IDs for XP/session consumers.
 - Recovered the original four-stage post-game flow. It snapshots presentation data before `EndSession`, starts at XP, waits for each source slam before animating the bar, pauses at level boundaries and resumes overflow, awards every staged unlock-point source to the recovery-owned store ledger after its slam, then reaches the summary. It retains nested return binding and suppresses duplicate standalone level-up overlays during finalization.
 - Recovered the native Iron Man loss penalty. The no-argument outcome entry now derives modifier state from the active session, reduces `UnlockedPacks` and `EnabledPacks` to `Base_Game_CG`, zeros the separate store `UnlockPoints` ledger, and persists the active recovery profile without altering progression-level points.
+- Recovered the outcome-notification path. `NotificationBoxWidget` is parented to a native lifecycle controller, honors `AreNotificationBoxesEnabled?`, mounts in `NotifVerticalBox`, plays its recovered fade animations, and removes itself after the original four-second hold.
 
 ## 2026-10-07 named profile recovery
 
@@ -60,7 +61,7 @@ The one warning-bearing test, `WidgetArtwork`, carried 13 blocked EOS SDK HTTP m
 
 The post-game master now follows the recovered source/delegate order: XP source slam, 0.65-second bar, level-boundary pause and overflow resume, 1.0-second page changes, unlock-point source slam, store-ledger award, 0.35-second next-source delay, then summary. Native `UProgressionManager` level points and the `CHPackStoreController` ledger are kept separate; progression persistence no longer overwrites the store balance.
 
-The Windows Unreal Editor build passed. Focused `CockHero.Recovery.PostGame` automation completed **3 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. Full `CockHero.Recovery` completed **48 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The source sequence test covers the XP source/bar handoff, threshold pause, overflow resume, unlock-point stage, and summary.
+The Windows Unreal Editor build passed. Focused `CockHero.Recovery.PostGame` automation completed **3 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The current full `CockHero.Recovery` run completed **49 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The source sequence test covers the XP source/bar handoff, threshold pause, overflow resume, unlock-point stage, and summary.
 
 ### Iron Man store-penalty recovery (2026-10-07)
 
@@ -68,9 +69,16 @@ The decoded premature-outcome branch invokes `UCHPackStoreController::ApplyIronM
 
 Focused `CockHero.Recovery.IronManStorePenalty` automation completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The test reaches the native-shaped no-argument `PrematureCum` entry through active modifier state, validates the in-memory and persisted ledgers, and verifies progression-level points remain untouched.
 
+### Outcome notification recovery (2026-10-07)
+
+The recovered outcome branch now creates the source-message boxes before its outcome overlay: `Perfect Finish` / `Full Rewards Unlocked — Victory Achieved` for success, `Early Climax` / `Post-Game Rewards Cut in Half` for early completion, and the original Iron Man penalty text after the store reset. The reparented `NotificationBoxWidget` applies its title, description, and icon fields; plays `FadeIn`; holds for four seconds; plays `FadeOut`; removes itself; and clears the global manager's lifecycle tracking entry. The recovered widget mounts through the original `UI_Manager.NotifVerticalBox` only when `AreNotificationBoxesEnabled?` permits it.
+
+Focused `CockHero.Recovery.OutcomeNotifications` completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. It verifies native parenting, source text, panel mounting, and lifecycle tracking. The current full `CockHero.Recovery` run completed **49 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
+
 ## Remaining limits
 
 - The staged post-game controller follows recovered graph order and timings, but interactive side-by-side original-runtime comparison of every animation curve, sound cue, and transient visual state remains outstanding.
+- The notification path now has its source text, placement, animation names, and hold timing. The original successful- and premature-outcome notification textures and notification sound asset are still not restored, so those two visual/audio details are not claimed exact.
 - Importer file/directory picker behavior is Windows-specific and was validated by build, widget initialization, manifest/deck code, and parent readback. It still needs an interactive GUI and packaged-build check with representative user media. Playback support is limited by the existing recovered media backend.
 - Recovered challenge and modifier lists use the original container/card assets and the recovered state models, but do not restore every original entry Blueprint animation, icon rule, conflict pair, reward roll, or data-table mapping.
 - Auto-draw still has no verified completion consumer. Hardware transports, original save compatibility, original editor graphs, complete native analysis, full GUI playtests, packaged validation, and clean-machine validation remain outstanding.
