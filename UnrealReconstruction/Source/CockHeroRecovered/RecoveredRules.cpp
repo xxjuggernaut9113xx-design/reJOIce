@@ -18,7 +18,8 @@ void ARecoveredGlobalManager::SuccessfulCum() {
     OnOutcomeRequested.Broadcast(LastOutcomeEffects);
 }
 
-void ARecoveredGlobalManager::PrematureCum(bool bIronManActive) {
+void ARecoveredGlobalManager::PrematureCum() {
+    const bool bIronManActive=BeatContext.ActiveModifiers.ContainsByPredicate([](const FString& Tag) { return Tag.Equals(TEXT("Iron Man"),ESearchCase::IgnoreCase); });
     LastOutcomeEffects=URecoveredOutcomeLibrary::ApplyOutcome(PlayerVariables,SessionStats,BeatContext.CardType,false,bHasTaunted,bIronManActive);
     for(const auto Metric:LastOutcomeEffects.MetricRequests) OnMetricUpdateRequested.Broadcast(Metric,1);
     OnOutcomeRequested.Broadcast(LastOutcomeEffects);

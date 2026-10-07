@@ -40,6 +40,7 @@ void ARecoveredGlobalManager::HandleRecoveredOutcome(const FRecoveredOutcomeEffe
     if (UUserWidget* PostCum = SpawnRecoveredOverlay(TEXT("PostCumContinue_Widget"))) {
         BindPostGameResultsButton(PostCum);
     }
+    if (Effects.bApplyIronManPenalty) ApplyRecoveredIronManStorePenalty();
     // Outcome stinger: success for on-time, fail for early.
     PlayRecoveredSessionSound(Effects.OutcomeOverlaySourceIndex == -4047 ? TEXT("Success") : TEXT("Fail"));
     if (Effects.bDelayedContinuationRequested && GetWorld()) {

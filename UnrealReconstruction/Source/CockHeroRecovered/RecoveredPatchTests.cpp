@@ -1,7 +1,9 @@
 #include "RecoveredRules.h"
 #include "Engine/World.h"
 #include "Engine/Engine.h"
+#include "Kismet/GameplayStatics.h"
 #include "Misc/AutomationTest.h"
+#include "Misc/ScopeExit.h"
 #include "RecoveredAudioSettings.h"
 #include "Components/Slider.h"
 #include "RecoveredDeviceInterface.h"
@@ -103,6 +105,57 @@ bool FRecoveredFinalPatchRegressionTest::RunTest(const FString& Parameters) {
     auto* Deck=NewObject<URecoveredDeckState>();FRecoveredMediaEntry Entry;Entry.FullPath=TEXT("example");Deck->Master.Slow.Add(Entry);
     Deck->ReplaceEmptyDecks();TestEqual(TEXT("Original deck refill preserved"),Deck->Child.Slow.Num(),1);
     Deck->Child.Slow.Reset();Deck->SetDeckRepeat(0,false);Deck->ReplaceEmptyDecks();TestEqual(TEXT("Explicit no-repeat is honored"),Deck->Child.Slow.Num(),0);
+    return true;
+}
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredIronManStorePenaltyTest,"CockHero.Recovery.IronManStorePenalty",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FRecoveredIronManStorePenaltyTest::RunTest(const FString& Parameters) {
+    const FString Slot=URecoveredGameInstance::GetNamedRecoverySlotPrefix()+TEXT("AutomationIronMan_")+FGuid::NewGuid().ToString(EGuidFormats::Digits);
+    bool bSlotWritten=false;
+    ON_SCOPE_EXIT { if (bSlotWritten) UGameplayStatics::DeleteGameInSlot(Slot,0); };
+
+    auto* Save=NewObject<URecoveredSaveGame>();
+    if (!TestTrue(TEXT("Iron Man test save initializes"),Save->InitializeRecoveredDefaults())) return false;
+    if (!TestTrue(TEXT("Iron Man test unlock ledger writes"),Save->SetStringArraySetting(TEXT("UnlockedPacks"),{TEXT("Base_Game_CG"),TEXT("PremiumPack")}))) return false;
+    if (!TestTrue(TEXT("Iron Man test enabled ledger writes"),Save->SetStringArraySetting(TEXT("EnabledPacks"),{TEXT("Base_Game_CG"),TEXT("PremiumPack")}))) return false;
+    if (!TestTrue(TEXT("Iron Man test point ledger writes"),Save->SetNumberSetting(TEXT("UnlockPoints"),73))) return false;
+    bSlotWritten=UGameplayStatics::SaveGameToSlot(Save,Slot,0);
+    if (!TestTrue(TEXT("Iron Man test save persists"),bSlotWritten)) return false;
+
+    const auto Initialization=UWorld::InitializationValues().AllowAudioPlayback(false).CreatePhysicsScene(false).CreateNavigation(false).CreateAISystem(false).ShouldSimulatePhysics(false).SetTransactional(false);
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false,NAME_None,nullptr,true,ERHIFeatureLevel::Num,&Initialization);
+    FWorldContext& Context=GEngine->CreateNewWorldContext(EWorldType::Game);
+    Context.SetCurrentWorld(World);
+    ON_SCOPE_EXIT { World->DestroyWorld(false); GEngine->DestroyWorldContext(World); };
+    auto* Instance=NewObject<URecoveredGameInstance>();
+    Instance->CurrentSave=Save;
+    Instance->ActiveRecoverySlot=Slot;
+    Instance->ProgressionManager=NewObject<URecoveredProgressionManager>(Instance);
+    Instance->ProgressionManager->UnlockPoints=19;
+    World->SetGameInstance(Instance);
+    World->InitializeActorsForPlay(FURL());
+    auto* Manager=World->SpawnActor<ARecoveredGlobalManager>();
+    if (!TestNotNull(TEXT("Iron Man manager"),Manager)) return false;
+    Manager->MediaPackEnabled.Add(TEXT("Base_Game_CG"),true);
+    Manager->MediaPackEnabled.Add(TEXT("PremiumPack"),true);
+    Manager->MediaPackEnabled.Add(TEXT("RetiredPack"),false);
+    Manager->BeatContext.ActiveModifiers.Add(TEXT("Iron Man"));
+    Manager->OnOutcomeRequested.AddUniqueDynamic(Manager,&ARecoveredGlobalManager::HandleRecoveredOutcome);
+    Manager->PrematureCum();
+
+    const TArray<FString> Unlocked=Save->GetStringArraySetting(TEXT("UnlockedPacks"));
+    const TArray<FString> Enabled=Save->GetStringArraySetting(TEXT("EnabledPacks"));
+    TestEqual(TEXT("Iron Man retains exactly the base unlocked pack"),Unlocked.Num(),1);
+    if (Unlocked.Num()==1) TestEqual(TEXT("Iron Man base unlocked pack"),Unlocked[0],FString(TEXT("Base_Game_CG")));
+    TestEqual(TEXT("Iron Man retains exactly the base enabled pack"),Enabled.Num(),1);
+    if (Enabled.Num()==1) TestEqual(TEXT("Iron Man base enabled pack"),Enabled[0],FString(TEXT("Base_Game_CG")));
+    TestEqual(TEXT("Iron Man clears the store point ledger"),Save->GetNumberSetting(TEXT("UnlockPoints"),-1),0.0);
+    TestFalse(TEXT("Iron Man disables prior unlocked media"),Manager->IsMediaPackEnabled(TEXT("PremiumPack")));
+    TestTrue(TEXT("Iron Man preserves base media"),Manager->IsMediaPackEnabled(TEXT("Base_Game_CG")));
+    TestEqual(TEXT("Iron Man leaves progression-level points separate"),Instance->ProgressionManager->UnlockPoints,19);
+    auto* Persisted=Cast<URecoveredSaveGame>(UGameplayStatics::LoadGameFromSlot(Slot,0));
+    if (!TestNotNull(TEXT("Iron Man penalty persists the active recovery profile"),Persisted)) return false;
+    TestEqual(TEXT("Persisted Iron Man point balance"),Persisted->GetNumberSetting(TEXT("UnlockPoints"),-1),0.0);
+    TestEqual(TEXT("Persisted Iron Man unlocked pack count"),Persisted->GetStringArraySetting(TEXT("UnlockedPacks")).Num(),1);
     return true;
 }
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredWidgetAttachmentTest,"CockHero.Recovery.WidgetAttachments",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)

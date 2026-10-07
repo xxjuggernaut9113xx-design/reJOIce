@@ -263,6 +263,38 @@ void ARecoveredGlobalManager::ApplyRecoveredPostGameStorePoints(int32 Amount) {
     if (Instance->ProgressionManager) Instance->ProgressionManager->OnStorePointsRequested.Broadcast(Amount);
 }
 
+bool ARecoveredGlobalManager::ApplyRecoveredIronManStorePenalty() {
+    auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+    if (!Instance || !Instance->CurrentSave) {
+        LastSessionError = TEXT("Recovered Iron Man penalty requires an active store ledger");
+        return false;
+    }
+
+    URecoveredSaveGame* Save = Instance->CurrentSave;
+    const TArray<FString> PreviousUnlockedPacks = Save->GetStringArraySetting(TEXT("UnlockedPacks"));
+    const TArray<FString> PreviousEnabledPacks = Save->GetStringArraySetting(TEXT("EnabledPacks"));
+    const TArray<FString> BasePack = {TEXT("Base_Game_CG")};
+    if (!Save->SetStringArraySetting(TEXT("UnlockedPacks"), BasePack) ||
+        !Save->SetStringArraySetting(TEXT("EnabledPacks"), BasePack) ||
+        !Save->SetNumberSetting(TEXT("UnlockPoints"), 0) ||
+        !Instance->SaveRecoveredState()) {
+        LastSessionError = TEXT("Recovered Iron Man penalty could not persist the store ledger");
+        return false;
+    }
+
+    for (TPair<FString, bool>& Entry : MediaPackEnabled) {
+        Entry.Value = Entry.Key.Equals(TEXT("Base_Game_CG"), ESearchCase::CaseSensitive);
+    }
+    for (const FString& PackID : PreviousUnlockedPacks) {
+        if (!PackID.Equals(TEXT("Base_Game_CG"), ESearchCase::CaseSensitive)) MediaPackEnabled.Add(PackID, false);
+    }
+    for (const FString& PackID : PreviousEnabledPacks) {
+        if (!PackID.Equals(TEXT("Base_Game_CG"), ESearchCase::CaseSensitive)) MediaPackEnabled.Add(PackID, false);
+    }
+    MediaPackEnabled.Add(TEXT("Base_Game_CG"), true);
+    return true;
+}
+
 void ARecoveredGlobalManager::UpdateRecoveredLifetimeStats(int32 SessionXP) {
     // Mirrors the native RecordSessionMetric lifetime behavior: counters
     // accumulate, peaks keep the maximum ever observed.

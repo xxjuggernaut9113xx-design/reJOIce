@@ -354,6 +354,7 @@ public:
     UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") FRecoveredSessionRewardData BuildRecoveredSessionRewardData(int32 SessionXP) const;
     UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") TArray<FRecoveredReward> PrepareRecoveredSessionRewards(int32 SessionXP) const;
     UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void ApplyRecoveredPostGameStorePoints(int32 Amount);
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") bool ApplyRecoveredIronManStorePenalty();
     UFUNCTION() void BindPostGameResultsButton(UUserWidget* PostCumWidget);
     UFUNCTION() void UpdateRecoveredLifetimeStats(int32 SessionXP);
     UFUNCTION() void SaveLifetimeStats();
@@ -399,7 +400,7 @@ public:
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Outcomes") FRecoveredOutcomeEffects LastOutcomeEffects;
     UPROPERTY(BlueprintAssignable,Category="Recovered Outcomes") FRecoveredOutcomeRequested OnOutcomeRequested;
     UFUNCTION(BlueprintCallable,Category="Recovered Outcomes") void SuccessfulCum();
-    UFUNCTION(BlueprintCallable,Category="Recovered Outcomes") void PrematureCum(bool bIronManActive);
+    UFUNCTION(BlueprintCallable,Category="Recovered Outcomes") void PrematureCum();
     // The original startup/session/outcome graph is not reconstructed here.
 };
 

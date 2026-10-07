@@ -25,6 +25,7 @@ Input: `ghidra-gap-fill-final.patch` supplied by the user on 2026-10-04. Integra
 - Rebuilt the challenge tab against `ChallengesVerticalBox`, `InteractionButton`, and the recovered detail fields. It combines session/lifetime progress, persists tracker-backed tracking, presents requirements/rewards, and claims a completed reward once.
 - Rebuilt modifiers against `UniformGridPanel_94` and `ModifierCardEntryWidget`. It uses real data-table row names, preserves unlock state, removes reconstructed conflicts before enabling a modifier, persists enabled values, and synchronizes session modifier IDs for XP/session consumers.
 - Recovered the original four-stage post-game flow. It snapshots presentation data before `EndSession`, starts at XP, waits for each source slam before animating the bar, pauses at level boundaries and resumes overflow, awards every staged unlock-point source to the recovery-owned store ledger after its slam, then reaches the summary. It retains nested return binding and suppresses duplicate standalone level-up overlays during finalization.
+- Recovered the native Iron Man loss penalty. The no-argument outcome entry now derives modifier state from the active session, reduces `UnlockedPacks` and `EnabledPacks` to `Base_Game_CG`, zeros the separate store `UnlockPoints` ledger, and persists the active recovery profile without altering progression-level points.
 
 ## 2026-10-07 named profile recovery
 
@@ -59,7 +60,13 @@ The one warning-bearing test, `WidgetArtwork`, carried 13 blocked EOS SDK HTTP m
 
 The post-game master now follows the recovered source/delegate order: XP source slam, 0.65-second bar, level-boundary pause and overflow resume, 1.0-second page changes, unlock-point source slam, store-ledger award, 0.35-second next-source delay, then summary. Native `UProgressionManager` level points and the `CHPackStoreController` ledger are kept separate; progression persistence no longer overwrites the store balance.
 
-The Windows Unreal Editor build passed. Focused `CockHero.Recovery.PostGame` automation completed **3 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. Full `CockHero.Recovery` completed **47 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The source sequence test covers the XP source/bar handoff, threshold pause, overflow resume, unlock-point stage, and summary.
+The Windows Unreal Editor build passed. Focused `CockHero.Recovery.PostGame` automation completed **3 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. Full `CockHero.Recovery` completed **48 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The source sequence test covers the XP source/bar handoff, threshold pause, overflow resume, unlock-point stage, and summary.
+
+### Iron Man store-penalty recovery (2026-10-07)
+
+The decoded premature-outcome branch invokes `UCHPackStoreController::ApplyIronManPenalty` only when the live `Iron Man` modifier is active. The reconstructed branch now follows that call: it preserves only `Base_Game_CG` in the unlocked and enabled pack ledgers, sets the controller-compatible `UnlockPoints` balance to zero, writes the active isolated profile, and leaves `UProgressionManager` level points separate.
+
+Focused `CockHero.Recovery.IronManStorePenalty` automation completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The test reaches the native-shaped no-argument `PrematureCum` entry through active modifier state, validates the in-memory and persisted ledgers, and verifies progression-level points remain untouched.
 
 ## Remaining limits
 
