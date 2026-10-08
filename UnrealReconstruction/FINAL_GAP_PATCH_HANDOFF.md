@@ -15,7 +15,7 @@ Input: `ghidra-gap-fill-final.patch` supplied by the user on 2026-10-04. Integra
 - Added failed-session-start cleanup, sequence delegate teardown and inventory/notification reset. Fixed Escape/P pause consistency and removed the patch's incorrect Q-to-quit mapping. Remaining shortcuts are not certified as original mappings.
 - Corrected animation object lookup and selected names, checked optional overlay packages before loading, guarded the meter threshold and disabled-state media effect, removed duplicate loot presentation notification, and made the defensive overlay dismissal callback weak.
 - Made shuffle actually shuffle the selected deck, honored explicit repeat-disable while preserving default refill, connected video-loop state to current/future media players, and avoided duplicate file-import counts.
-- Preserved immediate item use on existing assets without a separate use button, so new inventory scaffolding does not strand purchased items.
+- Routed recovered store purchases into source-aligned owned inventory so every PG1 action consumes the acquired item through its original-use path.
 - Made staged post-game and named-save widget helpers unique under Unreal's Unity build aggregation, preserving their existing behavior while restoring full editor build correctness.
 
 ## 2026-10-06 recovery wiring
@@ -98,12 +98,18 @@ The original `/Game/SoundFX/872025/new-notification-020-352772` Bink payload was
 
 Focused `CockHero.Recovery.PG2Resupply` automation completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The Windows Unreal Editor build passed. The full `CockHero.Recovery` run completed **50 succeeded**, **1 succeeded with warnings**, **0 failed**, and **0 not run**. Its one warning is the pre-existing external-sampler mismatch in `Background_Video_Texture_Mat`; the PG2 test had zero warnings.
 
+### PG1 defensive item recovery (2026-10-08)
+
+`/Game/Recovery/UI/PG1TabbedInventory_Widget` now binds the original `DecreaseHeatButton`, `10SecBreakButton`, `SlowdownItemButton`, and `CumChanceIncreaseButton` controls through `URecoveredTabbedInventoryWidget`. The recovered paths preserve the source availability checks, `All or Nothing` and taunt punishment order, item-usage metrics, source count limits, source animation events, delayed final-item presentation, and source upgrade values: heat reductions of 15/25/35/45/60, cum-meter gains of .05/.08/.12/.18/.35, and slowdown multipliers of x2 through x6. Heat, break, slowdown, and cum-chance inputs are routed from the original inventory key paths; break initiates the source break presentation, and slowdown maintains the source task-level gate and elapsed-defense timer.
+
+The source control-name recovery is recorded in [pg1-defensive-items-recovery.json](RecoveryEvidence/pg1-defensive-items-recovery.json). Focused `CockHero.Recovery.PG1DefensiveItems` automation completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The Windows Unreal Editor build passed. The full `CockHero.Recovery` run completed **52 succeeded**, **0 failures**, and **0 not run**.
+
 ## Remaining limits
 
 - The staged post-game controller follows recovered graph order and timings, but interactive side-by-side original-runtime comparison of every animation curve, sound cue, and transient visual state remains outstanding.
 - Importer file/directory picker behavior is Windows-specific and was validated by build, widget initialization, manifest/deck code, and parent readback. It still needs an interactive GUI and packaged-build check with representative user media. Playback support is limited by the existing recovered media backend.
 - Recovered challenge and modifier lists use the original container/card assets and the recovered state models, but do not restore every original entry Blueprint animation, icon rule, conflict pair, reward roll, or data-table mapping.
-- The current inventory recovery covers PG1's Edge action, tab switching, and the PG2 resupply action. PG1's other item actions, the remaining PG2 actions, and interactive original-runtime timing still need side-by-side recovery.
+- The current inventory recovery covers PG1's Edge action, tab switching, heat, break initiation, slowdown, cum chance, and the PG2 resupply action. The break `RestWidget` duration/cancel lifecycle, remaining PG2 actions, and interactive original-runtime timing still need side-by-side recovery.
 - Auto-draw still has no verified completion consumer. Hardware transports, original save compatibility, original editor graphs, complete native analysis, full GUI playtests, packaged validation, and clean-machine validation remain outstanding.
 - The complete-image checkpoint is still partial, and the original runtime has not been used for behavioral comparison. No full-game completion or original-runtime parity is claimed.
 

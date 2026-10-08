@@ -1,0 +1,48 @@
+{
+  "recovery_area": "PG1 defensive inventory actions",
+  "source_widget_analysis": "C:\\Users\\webma\\analysis\\cockhero-v004\\decoded-ui\\CockHero\\Content\\Widgets\\PG1TabbedInventory_Widget.json",
+  "source_rule_analysis": [
+    "C:\\Users\\webma\\analysis\\cockhero-v004\\blueprint-functions\\BP_GlobalManager\\UseSlowdown.json",
+    "C:\\Users\\webma\\analysis\\cockhero-v004\\blueprint-functions\\BP_GlobalManager\\SpawnBreak.json",
+    "C:\\Users\\webma\\analysis\\cockhero-v004\\blueprint-functions\\BP_GlobalManager\\UpdateTimeSinceLastDefenseItem.json"
+  ],
+  "recovered_widget": "/Game/Recovery/UI/PG1TabbedInventory_Widget.PG1TabbedInventory_Widget",
+  "native_parent": "URecoveredTabbedInventoryWidget",
+  "verified_control_names": {
+    "decrease_heat": "DecreaseHeatButton",
+    "break": "10SecBreakButton",
+    "slowdown": "SlowdownItemButton",
+    "cum_chance": "CumChanceIncreaseButton"
+  },
+  "source_values": {
+    "heat_reduction_by_upgrade_level": [15, 25, 35, 45, 60],
+    "cum_chance_gain_by_upgrade_level": [0.05, 0.08, 0.12, 0.18, 0.35],
+    "slowdown_multiplier_by_upgrade_level": [2, 3, 4, 5, 6],
+    "action_cum_meter_gain": 0.01,
+    "maximum_owned_counts": {
+      "DecreaseHeat": 3,
+      "Break": 2,
+      "Slowdown": 3,
+      "XCumChance": 1
+    }
+  },
+  "validation": {
+    "editor_build": "CockHeroRecoveredEditor Win64 Development",
+    "focused_automation": {
+      "name": "CockHero.Recovery.PG1DefensiveItems",
+      "result": "success",
+      "succeeded": 1,
+      "failed": 0,
+      "warnings": 0
+    },
+    "full_automation": {
+      "name": "CockHero.Recovery",
+      "result": "success",
+      "succeeded": 52,
+      "failed": 0,
+      "not_run": 0
+    }
+  },
+  "result": "passed",
+  "remaining_recovery": "Break RestWidget duration and cancel lifecycle require interactive original-runtime comparison."
+}

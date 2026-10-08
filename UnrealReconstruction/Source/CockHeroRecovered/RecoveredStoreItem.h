@@ -14,7 +14,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Store") FName ItemID;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Store") int32 BasePurchaseCost = 50;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Store") int32 BaseUpgradeCost = 100;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Store") int32 MaxLevel = 3;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Store") int32 MaxLevel = 4;
     UPROPERTY(BlueprintReadOnly, Category="Recovered Store") int32 CurrentLevel = 0;
 
     UFUNCTION(BlueprintCallable, Category="Recovered Store") void RefreshPrices();

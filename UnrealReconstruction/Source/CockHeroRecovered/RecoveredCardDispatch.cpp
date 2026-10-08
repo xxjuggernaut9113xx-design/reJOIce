@@ -10,6 +10,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundBase.h"
 #include "TimerManager.h"
+#include "Engine/World.h"
 
 void ARecoveredGlobalManager::HandleRecoveredSessionAction(FName Action) {
     if (Action==TEXT("DetermineCardV2")) RequestNextRecoveredCard(true);
@@ -319,18 +320,28 @@ void ARecoveredGlobalManager::GrantPlayerCoins(int32 Amount) {
 
 void ARecoveredGlobalManager::AcquireStoreItem(FName ItemID) {
     int32& Count = OwnedItemCounts.FindOrAdd(ItemID);
-    Count += 1;
+    const int32 PreviousCount=Count;
+    const int32 Maximum=GetRecoveredItemMaximum(ItemID);
+    Count=Maximum>0 ? FMath::Min(Count+1,Maximum) : Count+1;
+    if (Count==PreviousCount) return;
+    PlayerVariables.bHasItems=true;
     OnSessionAction.Broadcast(FName(*FString::Printf(TEXT("InventoryAcquired_%s"),*ItemID.ToString())));
 }
 
 bool ARecoveredGlobalManager::UseOwnedItem(FName ItemID, int32 Level) {
     if (ItemID==TEXT("Edge")) return UseRecoveredEdgeItem()==ERecoveredEdgeItemUseResult::Triggered;
     if (ItemID==TEXT("Resupply")) return UseRecoveredResupplyItem()==ERecoveredResupplyItemUseResult::Triggered;
+    if (!ItemUpgradeLevels.Contains(ItemID)) SetRecoveredItemUpgradeLevel(ItemID,Level);
+    if (ItemID==TEXT("DecreaseHeat")) return UseRecoveredDecreaseHeatItem()==ERecoveredDefensiveItemUseResult::Triggered;
+    if (ItemID==TEXT("Break")) return UseRecoveredBreakItem()==ERecoveredDefensiveItemUseResult::Triggered;
+    if (ItemID==TEXT("Slowdown")) return UseRecoveredSlowdownItem()==ERecoveredDefensiveItemUseResult::Triggered;
+    if (ItemID==TEXT("XCumChance")) return UseRecoveredCumChanceItem()==ERecoveredDefensiveItemUseResult::Triggered;
     int32* Count = OwnedItemCounts.Find(ItemID);
     if (!Count || *Count <= 0) return false;
     if (!ApplyStoreItemEffect(ItemID, Level)) return false;
     *Count -= 1;
     if (*Count <= 0) OwnedItemCounts.Remove(ItemID);
+    PlayerVariables.bHasItems=!OwnedItemCounts.IsEmpty();
     OnSessionAction.Broadcast(FName(*FString::Printf(TEXT("InventoryUsed_%s"),*ItemID.ToString())));
     ShowDefensiveItemOverlay(ItemID);
     return true;
@@ -339,6 +350,196 @@ bool ARecoveredGlobalManager::UseOwnedItem(FName ItemID, int32 Level) {
 int32 ARecoveredGlobalManager::GetOwnedItemCount(FName ItemID) const {
     const int32* Count = OwnedItemCounts.Find(ItemID);
     return Count ? *Count : 0;
+}
+
+int32 ARecoveredGlobalManager::GetRecoveredItemMaximum(FName ItemID) const {
+    if (ItemID==TEXT("XCumChance")) return 1;
+    if (ItemID==TEXT("DecreaseHeat")) return 3;
+    if (ItemID==TEXT("Edge")) return 10;
+    if (ItemID==TEXT("Slowdown")) return 3;
+    if (ItemID==TEXT("Break")) return 2;
+    if (ItemID==TEXT("BonerPill")) return 5;
+    if (ItemID==TEXT("SuccuShield")) return 15;
+    return 0;
+}
+
+int32 ARecoveredGlobalManager::GetRecoveredItemUpgradeLevel(FName ItemID) const {
+    if (const int32* Level=ItemUpgradeLevels.Find(ItemID)) return FMath::Clamp(*Level,0,4);
+    const auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
+    if (!Instance || !Instance->CurrentSave) return 0;
+    return FMath::Clamp(static_cast<int32>(Instance->CurrentSave->GetNumberSetting(TEXT("StoreItemLevel_")+ItemID.ToString(),0)),0,4);
+}
+
+void ARecoveredGlobalManager::SetRecoveredItemUpgradeLevel(FName ItemID, int32 Level) {
+    ItemUpgradeLevels.Add(ItemID,FMath::Clamp(Level,0,4));
+}
+
+namespace {
+void RecordRecoveredDefensiveItemUse(ARecoveredGlobalManager& Manager, bool bCountDefensiveUse) {
+    if (bCountDefensiveUse) ++Manager.PlayerVariables.TotalDefenseItemUses;
+    ++Manager.PlayerVariables.UsedDefensiveItemsInLast2Minutes;
+    Manager.PlayerVariables.bHasUsedDefensiveItems=true;
+    URecoveredStateRuleLibrary::RecordSessionMetric(Manager.SessionStats,ERecoveredMetric::ItemsUsed,1);
+    Manager.OnMetricUpdateRequested.Broadcast(ERecoveredMetric::ItemsUsed,1);
+}
+
+void ConsumeRecoveredDefensiveItem(ARecoveredGlobalManager& Manager, FName ItemID, float LastItemDelay, FTimerHandle& LastItemTimer) {
+    if (int32* Count=Manager.OwnedItemCounts.Find(ItemID)) {
+        --*Count;
+        if (*Count<=0) Manager.OwnedItemCounts.Remove(ItemID);
+    }
+    Manager.PlayerVariables.bHasItems=!Manager.OwnedItemCounts.IsEmpty();
+    Manager.OnSessionAction.Broadcast(FName(*FString::Printf(TEXT("InventoryUsed_%s"),*ItemID.ToString())));
+    if (Manager.GetOwnedItemCount(ItemID)>0) return;
+    const FName ExhaustedAction(*FString::Printf(TEXT("InventoryExhausted_%s"),*ItemID.ToString()));
+    if (UWorld* World=Manager.GetWorld()) {
+        const TWeakObjectPtr<ARecoveredGlobalManager> WeakManager(&Manager);
+        World->GetTimerManager().SetTimer(LastItemTimer,FTimerDelegate::CreateLambda([WeakManager,ExhaustedAction]() {
+            if (ARecoveredGlobalManager* LiveManager=WeakManager.Get()) LiveManager->OnSessionAction.Broadcast(ExhaustedAction);
+        }),LastItemDelay,false);
+    } else {
+        Manager.OnSessionAction.Broadcast(ExhaustedAction);
+    }
+}
+
+int32 GetRecoveredHeatReduction(int32 UpgradeLevel) {
+    static constexpr int32 Amounts[]={15,25,35,45,60};
+    return Amounts[FMath::Clamp(UpgradeLevel,0,UE_ARRAY_COUNT(Amounts)-1)];
+}
+
+double GetRecoveredCumChanceGain(int32 UpgradeLevel) {
+    static constexpr double Amounts[]={.05,.08,.12,.18,.35};
+    return Amounts[FMath::Clamp(UpgradeLevel,0,UE_ARRAY_COUNT(Amounts)-1)];
+}
+}
+
+ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::UseRecoveredDecreaseHeatItem() {
+    const FName ItemID=TEXT("DecreaseHeat");
+    PlayDialogueLine(TEXT("Generic_DefensiveItemUse_DLS"));
+    if (!PlayerVariables.bCanUseItems) {
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::CannotUseItems;
+        return LastDefensiveItemUseResult;
+    }
+    if (GetOwnedItemCount(ItemID)<=0) {
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::NoItemAvailable;
+        return LastDefensiveItemUseResult;
+    }
+    ApplyRecoveredAllOrNothingModifierEffects();
+    RecordRecoveredDefensiveItemUse(*this,false);
+    if (RollRecoveredPunishmentChance()) {
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::PunishmentTriggered;
+        StartPunishmentEvent();
+        return LastDefensiveItemUseResult;
+    }
+    AddToCumMeter(.01);
+    OnSessionAction.Broadcast(TEXT("InventoryUseInitiated_DecreaseHeat"));
+    SpawnRecoveredOverlay(TEXT("UseDecreaseHeatOverlay_Widget"));
+    const int32 HeatReduction=GetRecoveredHeatReduction(GetRecoveredItemUpgradeLevel(ItemID));
+    AddHeat(-HeatReduction);
+    CreateRecoveredNotification(TEXT("DecreaseHealthBarItem"),TEXT("Heat Reduced"),FString::Printf(TEXT("Heat Decreased by %d"),HeatReduction));
+    ConsumeRecoveredDefensiveItem(*this,ItemID,.3f,DecreaseHeatLastItemTimerHandle);
+    LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::Triggered;
+    return LastDefensiveItemUseResult;
+}
+
+ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::UseRecoveredBreakItem() {
+    const FName ItemID=TEXT("Break");
+    if (!PlayerVariables.bCanUseItems) {
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::CannotUseItems;
+        return LastDefensiveItemUseResult;
+    }
+    if (GetOwnedItemCount(ItemID)<=0) {
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::NoItemAvailable;
+        return LastDefensiveItemUseResult;
+    }
+    RecordRecoveredDefensiveItemUse(*this,false);
+    if (RollRecoveredPunishmentChance()) {
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::PunishmentTriggered;
+        StartPunishmentEvent();
+        return LastDefensiveItemUseResult;
+    }
+    PlayDialogueLine(TEXT("SpecialEvent_12"));
+    AddToCumMeter(.01);
+    OnSessionAction.Broadcast(TEXT("InventoryUseInitiated_Break"));
+    if (BeatTimeline) BeatTimeline->PauseSequence();
+    ClearIdleTimer();
+    SpawnRecoveredOverlay(TEXT("RestWidget"));
+    BreakCombo();
+    bStopSequence=true;
+    ConsumeRecoveredDefensiveItem(*this,ItemID,.2f,BreakLastItemTimerHandle);
+    LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::Triggered;
+    return LastDefensiveItemUseResult;
+}
+
+ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::UseRecoveredSlowdownItem() {
+    const FName ItemID=TEXT("Slowdown");
+    if (!PlayerVariables.bCanUseItems) {
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::CannotUseItems;
+        return LastDefensiveItemUseResult;
+    }
+    if (GetOwnedItemCount(ItemID)<=0) {
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::NoItemAvailable;
+        return LastDefensiveItemUseResult;
+    }
+    if (!bCanUseSlowdown || !bCanUseBonerPill) {
+        CreateRecoveredNotification(TEXT("SlowdownItem"),TEXT("Can't Use Slowdown"),TEXT("Can only be used once per task"));
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::CooldownActive;
+        return LastDefensiveItemUseResult;
+    }
+    RecordRecoveredDefensiveItemUse(*this,false);
+    if (RollRecoveredPunishmentChance()) {
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::PunishmentTriggered;
+        StartPunishmentEvent();
+        return LastDefensiveItemUseResult;
+    }
+    const double Multiplier=static_cast<double>(GetRecoveredItemUpgradeLevel(ItemID)+2);
+    bCanUseSlowdown=false;
+    PlayDialogueLine(TEXT("SpecialEvent_12"));
+    AddToCumMeter(.01);
+    OnSessionAction.Broadcast(TEXT("InventoryUseInitiated_Slowdown"));
+    SpawnRecoveredOverlay(TEXT("SlowdownItemUseOverlay_Widget"));
+    PlayerVariables.BeatSpawnInterval*=Multiplier;
+    if (BeatTimeline) BeatTimeline->ApplySpeedModifier(static_cast<float>(1.0/Multiplier));
+    PlayerVariables.LastDefensiveItemUsageTime=PlayerVariables.SessionLength;
+    if (UWorld* World=GetWorld()) {
+        World->GetTimerManager().SetTimer(DefensiveItemUsageTimerHandle,this,&ARecoveredGlobalManager::UpdateRecoveredTimeSinceLastDefenseItem,1.0f,true);
+    }
+    CreateRecoveredNotification(TEXT("SlowdownItem"),TEXT("Slowdown Applied"),FString::Printf(TEXT("Stroking Slowed by x%d"),static_cast<int32>(Multiplier)));
+    ConsumeRecoveredDefensiveItem(*this,ItemID,.3f,SlowdownLastItemTimerHandle);
+    LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::Triggered;
+    return LastDefensiveItemUseResult;
+}
+
+ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::UseRecoveredCumChanceItem() {
+    const FName ItemID=TEXT("XCumChance");
+    if (!PlayerVariables.bCanUseItems) {
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::CannotUseItems;
+        return LastDefensiveItemUseResult;
+    }
+    if (GetOwnedItemCount(ItemID)<=0) {
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::NoItemAvailable;
+        return LastDefensiveItemUseResult;
+    }
+    ApplyRecoveredAllOrNothingModifierEffects();
+    RecordRecoveredDefensiveItemUse(*this,true);
+    if (RollRecoveredPunishmentChance()) {
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::PunishmentTriggered;
+        StartPunishmentEvent();
+        return LastDefensiveItemUseResult;
+    }
+    const double Gain=GetRecoveredCumChanceGain(GetRecoveredItemUpgradeLevel(ItemID));
+    PlayerVariables.LastDefensiveItemUsageTime=PlayerVariables.SessionLength;
+    AddToCumMeter(Gain);
+    OnSessionAction.Broadcast(TEXT("InventoryUseInitiated_XCumChance"));
+    SpawnRecoveredOverlay(TEXT("PlusCumChanceOverlay_Widget"));
+    CreateRecoveredNotification(TEXT("CumChangeItem"),TEXT("Cum Meter Increased"),FString::Printf(TEXT("+%d%% Cum Meter"),FMath::RoundToInt(Gain*100.0)));
+    ConsumeRecoveredDefensiveItem(*this,ItemID,.3f,CumChanceLastItemTimerHandle);
+    LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::Triggered;
+    return LastDefensiveItemUseResult;
+}
+
+void ARecoveredGlobalManager::UpdateRecoveredTimeSinceLastDefenseItem() {
+    PlayerVariables.TimeSinceLastDefensiveItem=static_cast<double>(PlayerVariables.SessionLength)-PlayerVariables.LastDefensiveItemUsageTime;
 }
 
 bool ARecoveredGlobalManager::CanUseRecoveredEdgeItem() const {
@@ -366,6 +567,7 @@ bool ARecoveredGlobalManager::CommitRecoveredEdgeItemUse() {
     }
     *Count-=1;
     if (*Count<=0) OwnedItemCounts.Remove(TEXT("Edge"));
+    PlayerVariables.bHasItems=!OwnedItemCounts.IsEmpty();
     LastEdgeItemUseResult=ERecoveredEdgeItemUseResult::Triggered;
     OnSessionAction.Broadcast(TEXT("InventoryUsed_Edge"));
     return true;
@@ -442,6 +644,7 @@ void ARecoveredGlobalManager::CompleteRecoveredResupplyItemUse() {
         --*Count;
         if (*Count<=0) OwnedItemCounts.Remove(TEXT("Resupply"));
     }
+    PlayerVariables.bHasItems=!OwnedItemCounts.IsEmpty();
     OnSessionAction.Broadcast(TEXT("InventoryUsed_Resupply"));
     if (GetOwnedItemCount(TEXT("Resupply"))>0) return;
     if (GetWorld()) {

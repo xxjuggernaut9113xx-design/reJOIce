@@ -255,4 +255,133 @@ bool FRecoveredPG2ResupplyTest::RunTest(const FString& Parameters) {
     TestEqual(TEXT("Generic resupply dispatch completes the delayed source spend"),Manager->GetOwnedItemCount(TEXT("Resupply")),0);
     return true;
 }
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredPG1DefensiveItemsTest,"CockHero.Recovery.PG1DefensiveItems",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FRecoveredPG1DefensiveItemsTest::RunTest(const FString& Parameters) {
+    UClass* InventoryBlueprintClass=LoadClass<URecoveredTabbedInventoryWidget>(nullptr,TEXT("/Game/Recovery/UI/PG1TabbedInventory_Widget.PG1TabbedInventory_Widget_C"));
+    if (!TestNotNull(TEXT("Recovered PG1 defensive inventory widget"),InventoryBlueprintClass)) return false;
+    TestTrue(TEXT("Recovered PG1 defensive inventory uses its native owner"),InventoryBlueprintClass->IsChildOf(URecoveredTabbedInventoryWidget::StaticClass()));
+    TestNotNull(TEXT("Recovered heat notification icon"),LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/DecreaseHealthBarItem.DecreaseHealthBarItem")));
+    TestNotNull(TEXT("Recovered cum chance notification icon"),LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/CumChangeItem.CumChangeItem")));
+    TestNotNull(TEXT("Recovered slowdown notification icon"),LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/SlowdownItem.SlowdownItem")));
+    TestNotNull(TEXT("Recovered heat item overlay"),LoadClass<UUserWidget>(nullptr,TEXT("/Game/Recovery/UI/UseDecreaseHeatOverlay_Widget.UseDecreaseHeatOverlay_Widget_C")));
+    TestNotNull(TEXT("Recovered slowdown item overlay"),LoadClass<UUserWidget>(nullptr,TEXT("/Game/Recovery/UI/SlowdownItemUseOverlay_Widget.SlowdownItemUseOverlay_Widget_C")));
+    TestNotNull(TEXT("Recovered cum chance item overlay"),LoadClass<UUserWidget>(nullptr,TEXT("/Game/Recovery/UI/PlusCumChanceOverlay_Widget.PlusCumChanceOverlay_Widget_C")));
+    TestNotNull(TEXT("Recovered source break rest widget"),LoadClass<UUserWidget>(nullptr,TEXT("/Game/Recovery/UI/RestWidget.RestWidget_C")));
+
+    const auto Initialization=UWorld::InitializationValues().AllowAudioPlayback(false).CreatePhysicsScene(false).CreateNavigation(false).CreateAISystem(false).ShouldSimulatePhysics(false).SetTransactional(false);
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false,NAME_None,nullptr,true,ERHIFeatureLevel::Num,&Initialization);
+    FWorldContext& Context=GEngine->CreateNewWorldContext(EWorldType::Game);
+    Context.SetCurrentWorld(World);
+    ON_SCOPE_EXIT { World->DestroyWorld(false); GEngine->DestroyWorldContext(World); };
+    World->InitializeActorsForPlay(FURL());
+
+    auto* Inventory=CreateWidget<URecoveredTabbedInventoryWidget>(World,InventoryBlueprintClass);
+    if (!TestNotNull(TEXT("Recovered PG1 defensive widget instantiates"),Inventory)) return false;
+    TestNotNull(TEXT("Recovered PG1 heat button survives reparenting"),Cast<UButton>(Inventory->GetWidgetFromName(TEXT("DecreaseHeatButton"))));
+    TestNotNull(TEXT("Recovered PG1 break button survives reparenting"),Cast<UButton>(Inventory->GetWidgetFromName(TEXT("10SecBreakButton"))));
+    TestNotNull(TEXT("Recovered PG1 slowdown button survives reparenting"),Cast<UButton>(Inventory->GetWidgetFromName(TEXT("SlowdownItemButton"))));
+    TestNotNull(TEXT("Recovered PG1 cum chance button survives reparenting"),Cast<UButton>(Inventory->GetWidgetFromName(TEXT("CumChanceIncreaseButton"))));
+    TestNotNull(TEXT("Recovered PG1 heat count label survives reparenting"),Cast<UTextBlock>(Inventory->GetWidgetFromName(TEXT("QuantityAmount"))));
+    TestNotNull(TEXT("Recovered PG1 break count label survives reparenting"),Cast<UTextBlock>(Inventory->GetWidgetFromName(TEXT("QuantityAmount_1"))));
+    TestNotNull(TEXT("Recovered PG1 slowdown count label survives reparenting"),Cast<UTextBlock>(Inventory->GetWidgetFromName(TEXT("QuantityAmount_3"))));
+    TestNotNull(TEXT("Recovered PG1 cum chance count label survives reparenting"),Cast<UTextBlock>(Inventory->GetWidgetFromName(TEXT("QuantityAmount_4"))));
+
+    ARecoveredGlobalManager* Manager=World->SpawnActor<ARecoveredGlobalManager>();
+    if (!TestNotNull(TEXT("Recovered PG1 defensive manager"),Manager)) return false;
+
+    Manager->PlayerVariables=FRecoveredPlayerVariables();
+    Manager->SessionStats=FRecoveredSessionStats();
+    Manager->OwnedItemCounts.Empty();
+    Manager->OwnedItemCounts.Add(TEXT("DecreaseHeat"),1);
+    Manager->PlayerVariables.bCanUseItems=false;
+    TestEqual(TEXT("Source heat gate rejects disabled item use"),Manager->UseRecoveredDecreaseHeatItem(),ERecoveredDefensiveItemUseResult::CannotUseItems);
+    TestEqual(TEXT("Source heat disabled gate retains inventory"),Manager->GetOwnedItemCount(TEXT("DecreaseHeat")),1);
+    TestEqual(TEXT("Source heat disabled gate does not record item use"),Manager->SessionStats.ItemsUsed,0);
+
+    Manager->PlayerVariables=FRecoveredPlayerVariables();
+    Manager->SessionStats=FRecoveredSessionStats();
+    Manager->OwnedItemCounts.Empty();
+    Manager->OwnedItemCounts.Add(TEXT("DecreaseHeat"),1);
+    Manager->HeatLevel=80;
+    Manager->CumMeterPercentage=0;
+    Manager->SetRecoveredItemUpgradeLevel(TEXT("DecreaseHeat"),0);
+    TestEqual(TEXT("Source heat item triggers"),Manager->UseRecoveredDecreaseHeatItem(),ERecoveredDefensiveItemUseResult::Triggered);
+    TestEqual(TEXT("Source heat level zero reduces heat by fifteen"),Manager->HeatLevel,65.0);
+    TestEqual(TEXT("Source heat action adds the source meter amount"),Manager->CumMeterPercentage,0.01);
+    TestEqual(TEXT("Source heat action records item use"),Manager->SessionStats.ItemsUsed,1);
+    TestEqual(TEXT("Source heat action spends one item"),Manager->GetOwnedItemCount(TEXT("DecreaseHeat")),0);
+
+    Manager->PlayerVariables=FRecoveredPlayerVariables();
+    Manager->SessionStats=FRecoveredSessionStats();
+    Manager->OwnedItemCounts.Empty();
+    Manager->OwnedItemCounts.Add(TEXT("DecreaseHeat"),1);
+    Manager->PlayerVariables.TotalTauntsUsed=25;
+    Manager->HeatLevel=20;
+    TestEqual(TEXT("Source heat punishment resolves after accounting"),Manager->UseRecoveredDecreaseHeatItem(),ERecoveredDefensiveItemUseResult::PunishmentTriggered);
+    TestEqual(TEXT("Source heat punishment retains inventory"),Manager->GetOwnedItemCount(TEXT("DecreaseHeat")),1);
+    TestEqual(TEXT("Source heat punishment records the source item metric"),Manager->SessionStats.ItemsUsed,1);
+    TestEqual(TEXT("Source heat punishment applies its heat penalty"),Manager->HeatLevel,35.0);
+
+    Manager->PlayerVariables=FRecoveredPlayerVariables();
+    Manager->SessionStats=FRecoveredSessionStats();
+    Manager->OwnedItemCounts.Empty();
+    Manager->OwnedItemCounts.Add(TEXT("XCumChance"),1);
+    Manager->PlayerVariables.SessionLength=42;
+    Manager->CumMeterPercentage=0;
+    Manager->SetRecoveredItemUpgradeLevel(TEXT("XCumChance"),4);
+    TestEqual(TEXT("Source cum chance item triggers"),Manager->UseRecoveredCumChanceItem(),ERecoveredDefensiveItemUseResult::Triggered);
+    TestEqual(TEXT("Source cum chance level four adds thirty-five percent"),Manager->CumMeterPercentage,0.35);
+    TestEqual(TEXT("Source cum chance increments defensive item count"),Manager->PlayerVariables.TotalDefenseItemUses,1);
+    TestEqual(TEXT("Source cum chance records its session time"),Manager->PlayerVariables.LastDefensiveItemUsageTime,42.0);
+    TestEqual(TEXT("Source cum chance records item use"),Manager->SessionStats.ItemsUsed,1);
+    TestEqual(TEXT("Source cum chance spends one item"),Manager->GetOwnedItemCount(TEXT("XCumChance")),0);
+
+    Manager->PlayerVariables=FRecoveredPlayerVariables();
+    Manager->SessionStats=FRecoveredSessionStats();
+    Manager->OwnedItemCounts.Empty();
+    Manager->OwnedItemCounts.Add(TEXT("Break"),1);
+    Manager->PlayerVariables.CurrentComboCount=13;
+    Manager->CumMeterPercentage=0;
+    Manager->bStopSequence=false;
+    TestEqual(TEXT("Source break item triggers"),Manager->UseRecoveredBreakItem(),ERecoveredDefensiveItemUseResult::Triggered);
+    TestEqual(TEXT("Source break action adds the source meter amount"),Manager->CumMeterPercentage,0.01);
+    TestTrue(TEXT("Source break stops the active sequence"),Manager->bStopSequence);
+    TestEqual(TEXT("Source break resets the combo"),Manager->PlayerVariables.CurrentComboCount,0);
+    TestTrue(TEXT("Source break stores the broken combo"),Manager->PlayerVariables.BrokenComboArray.Contains(13));
+    TestEqual(TEXT("Source break spends one item"),Manager->GetOwnedItemCount(TEXT("Break")),0);
+
+    Manager->PlayerVariables=FRecoveredPlayerVariables();
+    Manager->SessionStats=FRecoveredSessionStats();
+    Manager->OwnedItemCounts.Empty();
+    Manager->OwnedItemCounts.Add(TEXT("Slowdown"),1);
+    Manager->PlayerVariables.BeatSpawnInterval=1;
+    Manager->PlayerVariables.SessionLength=53;
+    Manager->CumMeterPercentage=0;
+    Manager->bCanUseSlowdown=true;
+    Manager->bCanUseBonerPill=true;
+    Manager->SetRecoveredItemUpgradeLevel(TEXT("Slowdown"),2);
+    TestEqual(TEXT("Source slowdown item triggers"),Manager->UseRecoveredSlowdownItem(),ERecoveredDefensiveItemUseResult::Triggered);
+    TestEqual(TEXT("Source slowdown level two uses the x4 multiplier"),Manager->PlayerVariables.BeatSpawnInterval,4.0);
+    TestEqual(TEXT("Source slowdown action adds the source meter amount"),Manager->CumMeterPercentage,0.01);
+    TestFalse(TEXT("Source slowdown locks the item for the task"),Manager->bCanUseSlowdown);
+    TestTrue(TEXT("Source slowdown leaves boner pill availability unchanged"),Manager->bCanUseBonerPill);
+    TestEqual(TEXT("Source slowdown records its session time"),Manager->PlayerVariables.LastDefensiveItemUsageTime,53.0);
+    TestEqual(TEXT("Source slowdown spends one item"),Manager->GetOwnedItemCount(TEXT("Slowdown")),0);
+
+    Manager->PlayerVariables=FRecoveredPlayerVariables();
+    Manager->SessionStats=FRecoveredSessionStats();
+    Manager->OwnedItemCounts.Empty();
+    Manager->OwnedItemCounts.Add(TEXT("Slowdown"),1);
+    Manager->bCanUseSlowdown=false;
+    TestEqual(TEXT("Source slowdown cooldown blocks a second item"),Manager->UseRecoveredSlowdownItem(),ERecoveredDefensiveItemUseResult::CooldownActive);
+    TestEqual(TEXT("Source slowdown cooldown retains inventory"),Manager->GetOwnedItemCount(TEXT("Slowdown")),1);
+    TestEqual(TEXT("Source slowdown cooldown does not record item use"),Manager->SessionStats.ItemsUsed,0);
+
+    Manager->PlayerVariables=FRecoveredPlayerVariables();
+    Manager->OwnedItemCounts.Empty();
+    for (int32 Index=0;Index<4;++Index) Manager->AcquireStoreItem(TEXT("DecreaseHeat"));
+    TestEqual(TEXT("Source heat inventory caps at three items"),Manager->GetOwnedItemCount(TEXT("DecreaseHeat")),3);
+    return true;
+}
 #endif

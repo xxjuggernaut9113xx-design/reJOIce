@@ -105,6 +105,11 @@ bool ARecoveredGlobalManager::ReturnToMainMenu() {
     Timers.ClearTimer(StoreCooldownTimer);
     Timers.ClearTimer(ResupplyStoreTimerHandle);
     Timers.ClearTimer(ResupplyLastItemTimerHandle);
+    Timers.ClearTimer(DecreaseHeatLastItemTimerHandle);
+    Timers.ClearTimer(BreakLastItemTimerHandle);
+    Timers.ClearTimer(SlowdownLastItemTimerHandle);
+    Timers.ClearTimer(CumChanceLastItemTimerHandle);
+    Timers.ClearTimer(DefensiveItemUsageTimerHandle);
     Timers.ClearTimer(OutcomeContinuationTimer);
     Timers.ClearTimer(IdleTimer);
     Timers.ClearTimer(MercyCooldownTimer);

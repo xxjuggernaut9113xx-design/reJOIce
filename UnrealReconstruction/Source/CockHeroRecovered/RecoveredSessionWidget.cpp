@@ -153,6 +153,18 @@ FReply URecoveredSessionWidget::NativeOnKeyDown(const FGeometry& InGeometry, con
             Manager->PlayDialogueLine(TEXT("SpecialEvent_12"));
         }
         return FReply::Handled();
+    } else if (Key == EKeys::Four) {
+        auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
+        if (Manager && Manager->CurrentInventoryTab==0) {
+            if (auto* Inventory=Cast<URecoveredTabbedInventoryWidget>(GetWidgetFromName(TEXT("PG1TabbedInventory_Widget")))) Inventory->TabbedInventorySlowdownTrigger();
+        }
+        return FReply::Handled();
+    } else if (Key == EKeys::Five) {
+        auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
+        if (Manager && Manager->CurrentInventoryTab==0) {
+            if (auto* Inventory=Cast<URecoveredTabbedInventoryWidget>(GetWidgetFromName(TEXT("PG1TabbedInventory_Widget")))) Inventory->TabbedInventoryBreakTrigger();
+        }
+        return FReply::Handled();
     } else if (Key == EKeys::F) {
         ToggleFavorite();
         return FReply::Handled();

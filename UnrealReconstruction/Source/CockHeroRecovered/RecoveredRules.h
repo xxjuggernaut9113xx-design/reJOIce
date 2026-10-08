@@ -38,6 +38,15 @@ enum class ERecoveredResupplyItemUseResult : uint8 {
     NoResupplyAvailable,
     PunishmentTriggered,
 };
+
+UENUM(BlueprintType)
+enum class ERecoveredDefensiveItemUseResult : uint8 {
+    Triggered,
+    CannotUseItems,
+    NoItemAvailable,
+    PunishmentTriggered,
+    CooldownActive,
+};
 USTRUCT(BlueprintType)
 struct COCKHERORECOVERED_API FRecoveredHeatCategoryRow : public FTableRowBase {
     GENERATED_BODY()
@@ -248,6 +257,7 @@ public:
     // Owned consumable inventory: item ID -> count. Purchases add to inventory;
     // use is a separate step from acquisition.
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Inventory") TMap<FName, int32> OwnedItemCounts;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Inventory") TMap<FName, int32> ItemUpgradeLevels;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 ConsecutiveSuccubiSurvived = 0;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") TObjectPtr<UDataTable> HeatCategoryDataTable;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered Media") TObjectPtr<URecoveredDeckState> MediaDeckState;
@@ -354,6 +364,9 @@ public:
     UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") void AcquireStoreItem(FName ItemID);
     UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") bool UseOwnedItem(FName ItemID, int32 Level);
     UFUNCTION(BlueprintPure, Category="Recovered|Inventory") int32 GetOwnedItemCount(FName ItemID) const;
+    UFUNCTION(BlueprintPure, Category="Recovered|Inventory") int32 GetRecoveredItemMaximum(FName ItemID) const;
+    UFUNCTION(BlueprintPure, Category="Recovered|Inventory") int32 GetRecoveredItemUpgradeLevel(FName ItemID) const;
+    UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") void SetRecoveredItemUpgradeLevel(FName ItemID, int32 Level);
     UFUNCTION(BlueprintPure, Category="Recovered|Inventory") bool CanUseRecoveredEdgeItem() const;
     UFUNCTION(BlueprintPure, Category="Recovered|Inventory") double GetRecoveredPunishmentChance() const;
     UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") bool RollRecoveredPunishmentChance();
@@ -367,6 +380,12 @@ public:
     UFUNCTION() void CompleteRecoveredResupplyItemUse();
     UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") void ApplyRecoveredAllOrNothingModifierEffects();
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|Inventory") ERecoveredResupplyItemUseResult LastResupplyItemUseResult=ERecoveredResupplyItemUseResult::NoResupplyAvailable;
+    UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") ERecoveredDefensiveItemUseResult UseRecoveredDecreaseHeatItem();
+    UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") ERecoveredDefensiveItemUseResult UseRecoveredBreakItem();
+    UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") ERecoveredDefensiveItemUseResult UseRecoveredSlowdownItem();
+    UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") ERecoveredDefensiveItemUseResult UseRecoveredCumChanceItem();
+    UFUNCTION() void UpdateRecoveredTimeSinceLastDefenseItem();
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|Inventory") ERecoveredDefensiveItemUseResult LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::NoItemAvailable;
     // Shows the defensive item use overlay with the item name and remaining count.
     UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") void ShowDefensiveItemOverlay(FName ItemID);
     // Dismisses all active event overlays.
@@ -430,6 +449,11 @@ public:
     FTimerHandle StoreCooldownTimer;
     FTimerHandle ResupplyStoreTimerHandle;
     FTimerHandle ResupplyLastItemTimerHandle;
+    FTimerHandle DecreaseHeatLastItemTimerHandle;
+    FTimerHandle BreakLastItemTimerHandle;
+    FTimerHandle SlowdownLastItemTimerHandle;
+    FTimerHandle CumChanceLastItemTimerHandle;
+    FTimerHandle DefensiveItemUsageTimerHandle;
     FTimerHandle OutcomeContinuationTimer;
     FTimerHandle IdleTimer;
     FTimerHandle MercyCooldownTimer;

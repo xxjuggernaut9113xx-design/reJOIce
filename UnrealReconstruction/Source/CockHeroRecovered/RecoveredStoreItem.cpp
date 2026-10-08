@@ -19,7 +19,10 @@ void URecoveredStoreItemWidget::BindControls(bool bBind) {
 void URecoveredStoreItemWidget::NativeConstruct() {
     Super::NativeConstruct();
     BindControls(true);
-    CurrentLevel = ReadLevelFromSave();
+    CurrentLevel = FMath::Clamp(ReadLevelFromSave(),0,MaxLevel);
+    if (auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr) {
+        Manager->SetRecoveredItemUpgradeLevel(ItemID,CurrentLevel);
+    }
     RefreshPrices();
 }
 
@@ -105,13 +108,10 @@ bool URecoveredStoreItemWidget::TryBuy() {
     if (!Manager) return false;
     const int32 Cost = GetBuyAmount();
     if (Manager->PlayerVariables.PlayerCoins < Cost) return false;
-    // Existing reconstructed assets have no UseButton. Preserve their immediate
-    // use path; opt into owned inventory only on a widget with a use control.
-    const bool bSeparateUse = GetWidgetFromName(TEXT("UseButton")) != nullptr;
-    if (!bSeparateUse && !Manager->ApplyStoreItemEffect(ItemID, CurrentLevel)) return false;
+    Manager->SetRecoveredItemUpgradeLevel(ItemID,CurrentLevel);
     Manager->PlayerVariables.PlayerCoins -= Cost;
     URecoveredStateRuleLibrary::RecordSessionMetric(Manager->SessionStats, ERecoveredMetric::MoneySpent, Cost);
-    if (bSeparateUse) Manager->AcquireStoreItem(ItemID);
+    Manager->AcquireStoreItem(ItemID);
     RefreshPrices();
     return true;
 }
@@ -132,6 +132,7 @@ bool URecoveredStoreItemWidget::TryUpgrade() {
     if (Manager->PlayerVariables.PlayerCoins < Cost) return false;
     Manager->PlayerVariables.PlayerCoins -= Cost;
     CurrentLevel += 1;
+    Manager->SetRecoveredItemUpgradeLevel(ItemID,CurrentLevel);
     WriteLevelToSave(CurrentLevel);
     RefreshPrices();
     return true;
