@@ -80,11 +80,22 @@ Focused `CockHero.Recovery.OutcomeNotifications` completed **1 succeeded**, **0 
 
 Recovered the original `PrematureCumIcon` and `SuccessfulCumIcon` from their cooked `Widgets/NotificationBoxIcons` packages through the matching Unreal serializer. Both 256×256 DXT5 source mips were decoded to editable PNG assets, imported at `/Game/Recovery/Resources/Widgets/NotificationBoxIcons`, and mapped into the live early and successful outcome branches. The focused notification test verifies both mounted image brushes point to their recovered source assets and confirms the notification preference prevents panel insertion when disabled. The recovery record includes source-package and mip SHA-256 values in [outcome-notification-icon-recovery-report.json](RecoveryEvidence/outcome-notification-icon-recovery-report.json).
 
+### Edge lifecycle and inventory action recovery (2026-10-08)
+
+`/Game/NewSetup/BP_EdgeManager` now extends `ARecoveredEdgeManager`. The native owner restores the decoded `TriggerEdgeV2` flow: first, normal, and perfect edge branches; source meter increments and reward banks; break-duration adjustment; edge-streak state; persistence; the recovered `EdgedAnimation`; and the delayed rest-or-mercy handoff. Its one-second hold timer follows the original card-six guard, countdown truncation, cancellation, and `CurrentEdgesUntillNextMercy` behavior. The early-climax outcome clears that hold handle before it opens its notification.
+
+The hold overlay uses the recovered source icon, source countdown images, and `/Game/Recovery/Resources/Audio/1sec_clocktick`. The original Bink payload was reconstructed from its cooked bulk data, imported into the live recovery asset, and recorded with source and output hashes in [edge-hold-audio-recovery.json](RecoveryEvidence/edge-hold-audio-recovery.json).
+
+`/Game/Recovery/UI/PG1TabbedInventory_Widget` now extends `URecoveredTabbedInventoryWidget`. The restored PG1 Edge action preserves its original sequence: source availability gate including card type 5, taunt-based punishment roll, `EdgeItemKeyPress`, edge-owner trigger, one-item spend, count refresh, and last-item visual. It also restores `ReceiveEdgeItem`, `CantUseEdgeItem`, `UsedLastEdgeItem`, and `GetEdgeAvailableText` against the original `EdgeItemButton`/`QuantityAmount_2` control tree. `UI_Manager` key `3` enters the PG1 edge route on inventory tab zero; `Q` and `Tab` switch the recovered tab state and play the matching PG1/PG2 tab animation.
+
+Focused `CockHero.Recovery.EdgeHoldLifecycle` automation completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The Windows Unreal Editor build passed. The full `CockHero.Recovery` run completed **50 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
+
 ## Remaining limits
 
 - The staged post-game controller follows recovered graph order and timings, but interactive side-by-side original-runtime comparison of every animation curve, sound cue, and transient visual state remains outstanding.
 - Importer file/directory picker behavior is Windows-specific and was validated by build, widget initialization, manifest/deck code, and parent readback. It still needs an interactive GUI and packaged-build check with representative user media. Playback support is limited by the existing recovered media backend.
 - Recovered challenge and modifier lists use the original container/card assets and the recovered state models, but do not restore every original entry Blueprint animation, icon rule, conflict pair, reward roll, or data-table mapping.
+- The current inventory recovery covers PG1's Edge action and tab switching. PG1's other item actions, the PG2 resupply action, and interactive original-runtime timing still need side-by-side recovery.
 - Auto-draw still has no verified completion consumer. Hardware transports, original save compatibility, original editor graphs, complete native analysis, full GUI playtests, packaged validation, and clean-machine validation remain outstanding.
 - The complete-image checkpoint is still partial, and the original runtime has not been used for behavioral comparison. No full-game completion or original-runtime parity is claimed.
 

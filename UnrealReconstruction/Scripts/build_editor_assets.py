@@ -128,6 +128,8 @@ for cls in rules['serialized_class_defaults']:
     parent = unreal.RecoveredManager
     if name == 'BP_GlobalManager':
         parent = unreal.RecoveredGlobalManager
+    elif name == 'BP_EdgeManager':
+        parent = unreal.RecoveredEdgeManager
     elif name == 'BP_CHGameInstance':
         parent = unreal.RecoveredGameInstance
     elif name == 'BP_CHSaveGame':

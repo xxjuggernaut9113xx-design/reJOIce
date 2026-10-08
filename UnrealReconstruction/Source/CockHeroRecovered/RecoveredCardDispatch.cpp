@@ -1,4 +1,5 @@
 #include "RecoveredRules.h"
+#include "RecoveredEdgeManager.h"
 #include "RecoveredEventRules.h"
 #include "RecoveredMenu.h"
 #include "Blueprint/UserWidget.h"
@@ -317,14 +318,17 @@ void ARecoveredGlobalManager::GrantPlayerCoins(int32 Amount) {
 void ARecoveredGlobalManager::AcquireStoreItem(FName ItemID) {
     int32& Count = OwnedItemCounts.FindOrAdd(ItemID);
     Count += 1;
+    OnSessionAction.Broadcast(FName(*FString::Printf(TEXT("InventoryAcquired_%s"),*ItemID.ToString())));
 }
 
 bool ARecoveredGlobalManager::UseOwnedItem(FName ItemID, int32 Level) {
+    if (ItemID==TEXT("Edge")) return UseRecoveredEdgeItem()==ERecoveredEdgeItemUseResult::Triggered;
     int32* Count = OwnedItemCounts.Find(ItemID);
     if (!Count || *Count <= 0) return false;
     if (!ApplyStoreItemEffect(ItemID, Level)) return false;
     *Count -= 1;
     if (*Count <= 0) OwnedItemCounts.Remove(ItemID);
+    OnSessionAction.Broadcast(FName(*FString::Printf(TEXT("InventoryUsed_%s"),*ItemID.ToString())));
     ShowDefensiveItemOverlay(ItemID);
     return true;
 }
@@ -332,6 +336,53 @@ bool ARecoveredGlobalManager::UseOwnedItem(FName ItemID, int32 Level) {
 int32 ARecoveredGlobalManager::GetOwnedItemCount(FName ItemID) const {
     const int32* Count = OwnedItemCounts.Find(ItemID);
     return Count ? *Count : 0;
+}
+
+bool ARecoveredGlobalManager::CanUseRecoveredEdgeItem() const {
+    return GetOwnedItemCount(TEXT("Edge"))>0 && (PlayerVariables.bCanUseItems || BeatContext.CardType==5);
+}
+
+double ARecoveredGlobalManager::GetRecoveredPunishmentChance() const {
+    return static_cast<double>((PlayerVariables.TotalTauntsUsed/5)*20);
+}
+
+bool ARecoveredGlobalManager::RollRecoveredPunishmentChance() {
+    return FMath::FRandRange(0.0f,100.0f)<=GetRecoveredPunishmentChance();
+}
+
+void ARecoveredGlobalManager::TriggerRecoveredEdgeItemPunishment() {
+    LastEdgeItemUseResult=ERecoveredEdgeItemUseResult::PunishmentTriggered;
+    StartPunishmentEvent();
+}
+
+bool ARecoveredGlobalManager::CommitRecoveredEdgeItemUse() {
+    int32* Count=OwnedItemCounts.Find(TEXT("Edge"));
+    if (!Count || *Count<=0 || !IsValid(EdgingManager) || !EdgingManager->TriggerRecoveredEdgeV2()) {
+        LastEdgeItemUseResult=ERecoveredEdgeItemUseResult::EdgeManagerUnavailable;
+        return false;
+    }
+    *Count-=1;
+    if (*Count<=0) OwnedItemCounts.Remove(TEXT("Edge"));
+    LastEdgeItemUseResult=ERecoveredEdgeItemUseResult::Triggered;
+    OnSessionAction.Broadcast(TEXT("InventoryUsed_Edge"));
+    return true;
+}
+
+ERecoveredEdgeItemUseResult ARecoveredGlobalManager::UseRecoveredEdgeItem() {
+    if (!(PlayerVariables.bCanUseItems || BeatContext.CardType==5)) {
+        LastEdgeItemUseResult=ERecoveredEdgeItemUseResult::CannotUseItems;
+        return LastEdgeItemUseResult;
+    }
+    if (GetOwnedItemCount(TEXT("Edge"))<=0) {
+        LastEdgeItemUseResult=ERecoveredEdgeItemUseResult::NoEdgesAvailable;
+        return LastEdgeItemUseResult;
+    }
+    if (RollRecoveredPunishmentChance()) {
+        TriggerRecoveredEdgeItemPunishment();
+        return LastEdgeItemUseResult;
+    }
+    CommitRecoveredEdgeItemUse();
+    return LastEdgeItemUseResult;
 }
 
 void ARecoveredGlobalManager::ShowDefensiveItemOverlay(FName ItemID) {

@@ -1,6 +1,7 @@
 #include "RecoveredWidgetRecovery.h"
 #include "RecoveredMenu.h"
 #include "RecoveredSessionWidget.h"
+#include "RecoveredTabbedInventoryWidget.h"
 #include "RecoveredEventWidgets.h"
 #include "RecoveredCalibrationWidget.h"
 #include "RecoveredAudioSettings.h"
@@ -172,6 +173,7 @@ FString URecoveredWidgetRecovery::BuildWidgetAssets(const FString& EvidencePath)
             if(Screen.Key==TEXT("CustomToolTip_Widget")) ParentClass=URecoveredTooltip::StaticClass();
             if(Screen.Key==TEXT("MainMenu")) ParentClass=URecoveredMainMenu::StaticClass();
             if(Screen.Key==TEXT("UI_Manager")) ParentClass=URecoveredSessionWidget::StaticClass();
+            if(Screen.Key==TEXT("PG1TabbedInventory_Widget")) ParentClass=URecoveredTabbedInventoryWidget::StaticClass();
             if(URecoveredAnimatedOverlay::SupportsAsset(FName(*Screen.Key))) ParentClass=URecoveredAnimatedOverlay::StaticClass();
             if(Screen.Key==TEXT("UMG_BeatIcon")) ParentClass=URecoveredBeatWidget::StaticClass();
             if(Screen.Key==TEXT("WBP_CalibrationUI")) ParentClass=URecoveredCalibrationWidget::StaticClass();

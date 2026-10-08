@@ -21,6 +21,15 @@
 
 UENUM(BlueprintType)
 enum class ERecoveredDifficulty : uint8 { EasyMode = 0, NormalMode = 1, InsaneMode = 2 };
+
+UENUM(BlueprintType)
+enum class ERecoveredEdgeItemUseResult : uint8 {
+    Triggered,
+    CannotUseItems,
+    NoEdgesAvailable,
+    PunishmentTriggered,
+    EdgeManagerUnavailable,
+};
 USTRUCT(BlueprintType)
 struct COCKHERORECOVERED_API FRecoveredHeatCategoryRow : public FTableRowBase {
     GENERATED_BODY()
@@ -183,6 +192,7 @@ public:
     UFUNCTION(BlueprintCallable, Category="Recovered Menu") bool CreateMainMenuUI();
     UFUNCTION(BlueprintCallable, Category="Recovered Menu") bool ReturnToMainMenu();
     UPROPERTY(Transient, BlueprintReadOnly, Category="Recovered Session") TObjectPtr<class UUserWidget> SessionScreen;
+    UPROPERTY(Transient, BlueprintReadOnly, Category="Recovered Edge") TObjectPtr<class ARecoveredEdgeManager> EdgingManager;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Media") FString MediaManifestPath=TEXT("C:/Users/webma/Downloads/Cock_Hero_Shipping_Build_V0.04_-_Exclusive/PrepV2/Windows/Extracted/Base_Game_CG/manifest.json");
     UFUNCTION(BlueprintCallable, Category="Recovered Session") bool InitializeRecoveredSession();
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") ERecoveredDifficulty CurrentDifficulty = ERecoveredDifficulty::NormalMode;
@@ -200,7 +210,11 @@ public:
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered State") double EdgeStrokeMultiplier=1.1;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered State") double LastEdgeInterval=1.0;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered State") int32 LastEdgeStrokeCount=25;
+    UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered State") int32 EdgeStreak=0;
+    UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered State") double MasterEdgeBreakDuration=10.0;
+    UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered State") double EdgeBreakDurationScaled=1.0;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered State") bool bPlayerEdgedLastDraw=false;
+    UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered State") int32 CurrentInventoryTab=0;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered State") double UserStrokeCountMultiplier = 0;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered State") uint8 CurrentComboTypeEnum = 0;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered State") double MinimumBeatInterval = 0;
@@ -332,6 +346,13 @@ public:
     UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") void AcquireStoreItem(FName ItemID);
     UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") bool UseOwnedItem(FName ItemID, int32 Level);
     UFUNCTION(BlueprintPure, Category="Recovered|Inventory") int32 GetOwnedItemCount(FName ItemID) const;
+    UFUNCTION(BlueprintPure, Category="Recovered|Inventory") bool CanUseRecoveredEdgeItem() const;
+    UFUNCTION(BlueprintPure, Category="Recovered|Inventory") double GetRecoveredPunishmentChance() const;
+    UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") bool RollRecoveredPunishmentChance();
+    UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") void TriggerRecoveredEdgeItemPunishment();
+    UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") bool CommitRecoveredEdgeItemUse();
+    UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") ERecoveredEdgeItemUseResult UseRecoveredEdgeItem();
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|Inventory") ERecoveredEdgeItemUseResult LastEdgeItemUseResult=ERecoveredEdgeItemUseResult::NoEdgesAvailable;
     // Shows the defensive item use overlay with the item name and remaining count.
     UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") void ShowDefensiveItemOverlay(FName ItemID);
     // Dismisses all active event overlays.
@@ -339,6 +360,7 @@ public:
     UFUNCTION(BlueprintCallable, Category="Recovered|Overlays") void DismissOverlay(UUserWidget* Overlay);
     UFUNCTION() void HandleRecoveredMetric(ERecoveredMetric Metric,int32 Amount);
     UFUNCTION(BlueprintCallable,Category="Recovered Events") class UUserWidget* SpawnRecoveredOverlay(FName ScreenName);
+    UFUNCTION(BlueprintCallable,Category="Recovered Events") class UUserWidget* SpawnRecoveredEdgeBreak(int32 EdgesUntilNextMercy);
     UFUNCTION(BlueprintCallable,Category="Recovered Events") bool SpawnRecoveredStore();
     UFUNCTION() void CompleteRecoveredStoreCooldown();
     UFUNCTION() void HandleRecoveredOutcome(const FRecoveredOutcomeEffects& Effects);

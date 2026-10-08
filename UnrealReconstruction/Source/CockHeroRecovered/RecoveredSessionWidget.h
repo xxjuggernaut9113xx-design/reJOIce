@@ -12,6 +12,7 @@ public:
     UFUNCTION(BlueprintCallable,Category="Recovered Session") void PauseSession();
     UFUNCTION(BlueprintCallable,Category="Recovered Session") void OpenSessionSettings();
     UFUNCTION(BlueprintCallable,Category="Recovered Session") void DrawCard();
+    UFUNCTION(BlueprintCallable,Category="Recovered Session") void SwitchInventoryTabs();
     UFUNCTION(BlueprintCallable,Category="Recovered Session") void RefreshSessionDisplays(class ARecoveredGlobalManager* Manager);
     UFUNCTION(BlueprintCallable,Category="Recovered Session") void QuitSession();
     UFUNCTION(BlueprintCallable,Category="Recovered Session") void ToggleFavorite();

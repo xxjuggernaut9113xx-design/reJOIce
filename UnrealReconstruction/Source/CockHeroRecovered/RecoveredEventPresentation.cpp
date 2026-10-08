@@ -4,10 +4,12 @@
 #include "Blueprint/WidgetBlueprintGeneratedClass.h"
 #include "Animation/WidgetAnimation.h"
 #include "Components/VerticalBox.h"
+#include "Components/TextBlock.h"
 #include "Engine/Texture2D.h"
 #include "Kismet/GameplayStatics.h"
 #include "TimerManager.h"
 #include "Misc/PackageName.h"
+#include "RecoveredEdgeManager.h"
 
 UUserWidget* ARecoveredGlobalManager::SpawnRecoveredOverlay(FName ScreenName) {
     if (ScreenName.IsNone() || !GetWorld()) return nullptr;
@@ -43,6 +45,7 @@ bool ARecoveredGlobalManager::CreateRecoveredNotification(FName IconName,const F
     if (!Notification) return false;
     UTexture2D* Icon=nullptr;
     if (IconName==TEXT("PunishmentIcon")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/NotifBoxIcons/PunishmentIcon.PunishmentIcon"));
+    else if (IconName==TEXT("EdgeItem")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/EdgeItem.EdgeItem"));
     else if (IconName==TEXT("PrematureCumIcon") || IconName==TEXT("SuccessfulCumIcon")) {
         const FString Name=IconName.ToString();
         Icon=LoadObject<UTexture2D>(nullptr,*FString::Printf(TEXT("/Game/Recovery/Resources/Widgets/NotificationBoxIcons/%s.%s"),*Name,*Name));
@@ -53,10 +56,19 @@ bool ARecoveredGlobalManager::CreateRecoveredNotification(FName IconName,const F
     EventOverlays.Add(Notification);
     return true;
 }
+UUserWidget* ARecoveredGlobalManager::SpawnRecoveredEdgeBreak(int32 EdgesUntilNextMercy) {
+    if (BeatTimeline) BeatTimeline->PauseSequence();
+    UUserWidget* Widget=SpawnRecoveredOverlay(TEXT("EdgeRestWidget"));
+    if (UTextBlock* EdgesLeft=Widget ? Cast<UTextBlock>(Widget->GetWidgetFromName(TEXT("EdgesLeftText"))) : nullptr) {
+        EdgesLeft->SetText(FText::FromString(EdgesUntilNextMercy==1 ? TEXT("1 Edge Left Until Mercy") : FString::Printf(TEXT("%d Edges Left Until Mercy"),EdgesUntilNextMercy)));
+    }
+    return Widget;
+}
 void ARecoveredGlobalManager::HandleRecoveredNotificationExpired(URecoveredNotificationWidget* Notification) {
     EventOverlays.Remove(Notification);
 }
 void ARecoveredGlobalManager::HandleRecoveredOutcome(const FRecoveredOutcomeEffects& Effects) {
+    if (Effects.bClearEdgeHoldTimer && IsValid(EdgingManager)) EdgingManager->ClearRecoveredEdgeHold();
     const bool bSuccessful=Effects.OutcomeOverlaySourceIndex==-4047;
     CreateRecoveredNotification(bSuccessful ? TEXT("SuccessfulCumIcon") : TEXT("PrematureCumIcon"),bSuccessful ? TEXT("Perfect Finish") : TEXT("Early Climax"),bSuccessful ? TEXT("Full Rewards Unlocked — Victory Achieved") : TEXT("Post-Game Rewards Cut in Half"));
     FName Overlay;

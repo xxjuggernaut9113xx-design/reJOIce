@@ -8,6 +8,7 @@
 #include "Components/Image.h"
 #include "RecoveredChallengeTracker.h"
 #include "RecoveredEventWidgets.h"
+#include "RecoveredEdgeManager.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Blueprint/WidgetBlueprintGeneratedClass.h"
 #include "Animation/WidgetAnimation.h"
@@ -94,6 +95,11 @@ bool ARecoveredGlobalManager::ReturnToMainMenu() {
     // delegates survive the menu return and duplicate on the next session.
     if (BeatTimeline) BeatTimeline->StopSequence();
     if (MediaPlayback) MediaPlayback->SetPaused(true);
+    if (IsValid(EdgingManager)) {
+        EdgingManager->ClearRecoveredEdgeHold();
+        EdgingManager->Destroy();
+        EdgingManager=nullptr;
+    }
     FTimerManager& Timers = GetWorldTimerManager();
     Timers.ClearTimer(SessionDurationTimer);
     Timers.ClearTimer(StoreCooldownTimer);
@@ -134,6 +140,11 @@ bool ARecoveredGlobalManager::ReturnToMainMenu() {
     bShieldToggled = false;
     bCanUseSlowdown = true;
     bCanUseBonerPill = true;
+    EdgeStreak = 0;
+    MasterEdgeBreakDuration = 10.0;
+    EdgeBreakDurationScaled = 1.0;
+    CurrentInventoryTab = 0;
+    LastEdgeItemUseResult = ERecoveredEdgeItemUseResult::NoEdgesAvailable;
     LastDispatchedEvent = NAME_None;
     LastSessionError.Reset();
     return CreateMainMenuUI();
@@ -158,6 +169,15 @@ bool ARecoveredGlobalManager::InitializeRecoveredSession() {
     SessionScreen=CreateWidget<UUserWidget>(Controller,ScreenClass);
     if (!SessionScreen) { LastSessionError=TEXT("Could not construct the recovered gameplay screen"); return false; }
     SessionScreen->AddToViewport(0);
+    UClass* EdgeClass=LoadClass<ARecoveredEdgeManager>(nullptr,TEXT("/Game/NewSetup/BP_EdgeManager.BP_EdgeManager_C"));
+    EdgingManager=GetWorld()->SpawnActor<ARecoveredEdgeManager>(EdgeClass && EdgeClass->IsChildOf(ARecoveredEdgeManager::StaticClass()) ? EdgeClass : ARecoveredEdgeManager::StaticClass());
+    if (!IsValid(EdgingManager)) {
+        SessionScreen->RemoveFromParent();
+        SessionScreen=nullptr;
+        LastSessionError=TEXT("Recovered edge manager could not be constructed");
+        return false;
+    }
+    EdgingManager->SetRecoveredGlobalManager(this);
     if (Instance->ChallengeTracker) Instance->ChallengeTracker->StartNewSession();
     ApplySavedCalibrationToTimeline();
     BeatTimeline->OnBeatFired.AddUniqueDynamic(this,&ARecoveredGlobalManager::PresentRecoveredBeat);

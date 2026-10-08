@@ -1,5 +1,6 @@
 #include "RecoveredSessionWidget.h"
 #include "RecoveredRules.h"
+#include "RecoveredTabbedInventoryWidget.h"
 #include "Components/Image.h"
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
@@ -92,6 +93,18 @@ void URecoveredSessionWidget::DrawCard() {
     if (!Manager || Manager->BeatContext.CardType==3 || !Manager->PlayerVariables.bCanDraw) return;
     Manager->RequestNextRecoveredCard(true);
 }
+
+void URecoveredSessionWidget::SwitchInventoryTabs() {
+    auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
+    if (!Manager) return;
+    if (Manager->CurrentInventoryTab==0) {
+        Manager->CurrentInventoryTab=1;
+        if (auto* Page=Cast<URecoveredMenuWidget>(GetWidgetFromName(TEXT("PG2TabbedInventory_Widget")))) Page->PlayRecoveredAnimation(TEXT("SwitchInventoryTabAnimation"));
+    } else if (Manager->CurrentInventoryTab==1) {
+        Manager->CurrentInventoryTab=0;
+        if (auto* Page=Cast<URecoveredMenuWidget>(GetWidgetFromName(TEXT("PG1TabbedInventory_Widget")))) Page->PlayRecoveredAnimation(TEXT("SwitchInventoryTabAnimation"));
+    }
+}
 void URecoveredSessionWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds) {
     Super::NativeTick(Geometry,DeltaSeconds);
     RefreshSessionDisplays(GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr);
@@ -126,6 +139,15 @@ FReply URecoveredSessionWidget::NativeOnKeyDown(const FGeometry& InGeometry, con
         }
     } else if (Key == EKeys::SpaceBar) {
         DrawCard();
+        return FReply::Handled();
+    } else if (Key == EKeys::Tab || Key == EKeys::Q) {
+        SwitchInventoryTabs();
+        return FReply::Handled();
+    } else if (Key == EKeys::Three) {
+        auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
+        if (Manager && Manager->CurrentInventoryTab==0) {
+            if (auto* Inventory=Cast<URecoveredTabbedInventoryWidget>(GetWidgetFromName(TEXT("PG1TabbedInventory_Widget")))) Inventory->TabbedInventoryEdgeTrigger();
+        }
         return FReply::Handled();
     } else if (Key == EKeys::F) {
         ToggleFavorite();
