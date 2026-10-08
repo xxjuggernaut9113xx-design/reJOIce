@@ -371,7 +371,12 @@ int32 ARecoveredGlobalManager::GetRecoveredItemUpgradeLevel(FName ItemID) const 
 }
 
 void ARecoveredGlobalManager::SetRecoveredItemUpgradeLevel(FName ItemID, int32 Level) {
-    ItemUpgradeLevels.Add(ItemID,FMath::Clamp(Level,0,4));
+    const int32 ClampedLevel=FMath::Clamp(Level,0,4);
+    ItemUpgradeLevels.Add(ItemID,ClampedLevel);
+    if (ItemID==TEXT("Break")) {
+        static constexpr double Durations[]={5.0,10.0,15.0,25.0,50.0};
+        MasterBreakDuration=Durations[ClampedLevel];
+    }
 }
 
 namespace {
@@ -461,6 +466,7 @@ ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::UseRecoveredBreakItem(
     PlayDialogueLine(TEXT("SpecialEvent_12"));
     AddToCumMeter(.01);
     OnSessionAction.Broadcast(TEXT("InventoryUseInitiated_Break"));
+    SetRecoveredItemUpgradeLevel(ItemID,GetRecoveredItemUpgradeLevel(ItemID));
     if (BeatTimeline) BeatTimeline->PauseSequence();
     ClearIdleTimer();
     SpawnRecoveredOverlay(TEXT("RestWidget"));

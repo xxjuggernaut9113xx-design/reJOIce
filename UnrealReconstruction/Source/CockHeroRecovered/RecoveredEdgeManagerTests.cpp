@@ -2,9 +2,11 @@
 #include "RecoveredPG2TabbedInventoryWidget.h"
 #include "Sound/SoundBase.h"
 #include "RecoveredRules.h"
+#include "RecoveredRestWidget.h"
 #include "RecoveredTabbedInventoryWidget.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/Button.h"
+#include "Components/ProgressBar.h"
 #include "Components/TextBlock.h"
 #include "Engine/Engine.h"
 #include "Engine/Texture2D.h"
@@ -382,6 +384,54 @@ bool FRecoveredPG1DefensiveItemsTest::RunTest(const FString& Parameters) {
     Manager->OwnedItemCounts.Empty();
     for (int32 Index=0;Index<4;++Index) Manager->AcquireStoreItem(TEXT("DecreaseHeat"));
     TestEqual(TEXT("Source heat inventory caps at three items"),Manager->GetOwnedItemCount(TEXT("DecreaseHeat")),3);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredRestWidgetLifecycleTest,"CockHero.Recovery.RestWidgetLifecycle",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FRecoveredRestWidgetLifecycleTest::RunTest(const FString& Parameters) {
+    UClass* RestBlueprintClass=LoadClass<URecoveredRestWidget>(nullptr,TEXT("/Game/Recovery/UI/RestWidget.RestWidget_C"));
+    if (!TestNotNull(TEXT("Recovered RestWidget"),RestBlueprintClass)) return false;
+    TestTrue(TEXT("Recovered RestWidget uses its native lifecycle owner"),RestBlueprintClass->IsChildOf(URecoveredRestWidget::StaticClass()));
+
+    const auto Initialization=UWorld::InitializationValues().AllowAudioPlayback(false).CreatePhysicsScene(false).CreateNavigation(false).CreateAISystem(false).ShouldSimulatePhysics(false).SetTransactional(false);
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false,NAME_None,nullptr,true,ERHIFeatureLevel::Num,&Initialization);
+    FWorldContext& Context=GEngine->CreateNewWorldContext(EWorldType::Game);
+    Context.SetCurrentWorld(World);
+    ON_SCOPE_EXIT { World->DestroyWorld(false); GEngine->DestroyWorldContext(World); };
+    World->InitializeActorsForPlay(FURL());
+
+    auto* Manager=World->SpawnActor<ARecoveredGlobalManager>();
+    auto* Rest=CreateWidget<URecoveredRestWidget>(World,RestBlueprintClass);
+    if (!TestNotNull(TEXT("Recovered RestWidget instantiates"),Rest) || !TestNotNull(TEXT("Recovered RestWidget manager"),Manager)) return false;
+    auto* CancelButton=Cast<UButton>(Rest->GetWidgetFromName(TEXT("CancelBreakButton")));
+    auto* ProgressBar=Cast<UProgressBar>(Rest->GetWidgetFromName(TEXT("ProgressBar_0")));
+    if (!TestNotNull(TEXT("Recovered RestWidget preserves source cancel control"),CancelButton) || !TestNotNull(TEXT("Recovered RestWidget preserves source progress control"),ProgressBar)) return false;
+
+    Manager->SetRecoveredItemUpgradeLevel(TEXT("Break"),4);
+    TestEqual(TEXT("Source break level four lasts fifty seconds"),Manager->MasterBreakDuration,50.0);
+    Manager->SetRecoveredItemUpgradeLevel(TEXT("Break"),0);
+    TestEqual(TEXT("Source break level zero lasts five seconds"),Manager->MasterBreakDuration,5.0);
+    Manager->PlayerVariables=FRecoveredPlayerVariables();
+    Manager->PlayerVariables.bCanUseItems=true;
+    Manager->PlayerVariables.bCanDraw=true;
+    Rest->BeginRecoveredBreak(Manager);
+    TestTrue(TEXT("Recovered RestWidget accepts cancel input during break"),Rest->bIsButtonInputAllowed);
+    TestTrue(TEXT("Recovered RestWidget starts the source break lifecycle"),Rest->IsRecoveredBreakActive());
+    TestEqual(TEXT("Recovered RestWidget reads the source master break duration"),Rest->BreakDuration,5.0);
+    TestFalse(TEXT("Recovered RestWidget disables item use during break"),Manager->PlayerVariables.bCanUseItems);
+    TestFalse(TEXT("Recovered RestWidget disables draw during break"),Manager->PlayerVariables.bCanDraw);
+    Rest->StartTime=World->GetUnpausedTimeSeconds()-2.5;
+    Rest->UpdateProgress();
+    TestTrue(TEXT("Recovered RestWidget derives progress from unpaused time"),FMath::IsNearlyEqual(Rest->CurrentProgress,0.5,0.05));
+    TestTrue(TEXT("Recovered RestWidget writes source progress to its control"),FMath::IsNearlyEqual(ProgressBar->GetPercent(),0.5f,0.05f));
+    Rest->CancelRecoveredBreak();
+    TestFalse(TEXT("Recovered RestWidget cancels only once"),Rest->bIsButtonInputAllowed);
+    TestFalse(TEXT("Recovered RestWidget clears the active break on cancel"),Rest->IsRecoveredBreakActive());
+    Rest->BeginRecoveredBreak(Manager);
+    Rest->StartTime=World->GetUnpausedTimeSeconds()-Rest->BreakDuration;
+    Rest->UpdateProgress();
+    TestEqual(TEXT("Recovered RestWidget clamps completed progress"),Rest->CurrentProgress,1.0);
+    TestFalse(TEXT("Recovered RestWidget completes the active break at its source duration"),Rest->IsRecoveredBreakActive());
     return true;
 }
 #endif

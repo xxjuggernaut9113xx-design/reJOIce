@@ -1,0 +1,48 @@
+{
+  "recovery_area": "RestWidget break lifecycle",
+  "source_widget_analysis": "C:\\Users\\webma\\analysis\\cockhero-v004\\decoded-ui\\CockHero\\Content\\Widgets\\RestWidget.json",
+  "source_function_analysis": [
+    "C:\\Users\\webma\\analysis\\cockhero-v004\\widget-functions\\RestWidget\\ExecuteUbergraph_RestWidget.json",
+    "C:\\Users\\webma\\analysis\\cockhero-v004\\widget-functions\\RestWidget\\UpdateProgress.json",
+    "C:\\Users\\webma\\analysis\\cockhero-v004\\widget-functions\\RestWidget\\InpActEvt_G_K2Node_InputKeyEvent_0.json",
+    "C:\\Users\\webma\\analysis\\cockhero-v004\\widget-functions\\BreakStoreItem\\ExecuteUbergraph_BreakStoreItem.json"
+  ],
+  "source_default_analysis": "C:\\Users\\webma\\analysis\\cockhero-v004\\blueprint-default-values.json",
+  "recovered_widget": "/Game/Recovery/UI/RestWidget.RestWidget",
+  "native_parent": "URecoveredRestWidget",
+  "verified_controls": {
+    "cancel": "CancelBreakButton",
+    "progress": "ProgressBar_0",
+    "background": "BackgroundImage"
+  },
+  "source_lifecycle": {
+    "duration_seconds_by_upgrade_level": [5, 10, 15, 25, 50],
+    "progress_interval_seconds": 0.01,
+    "clock": "unpaused world time",
+    "completion": "DetermineCardV2 then RemoveFromParent",
+    "cancel_inputs": ["G", "CancelBreakButton"],
+    "background_media": "backgroundmenuloop"
+  },
+  "validation": {
+    "editor_build": "CockHeroRecoveredEditor Win64 Development",
+    "asset_reparent": {
+      "asset": "/Game/Recovery/UI/RestWidget",
+      "parent": "/Script/CockHeroRecovered.RecoveredRestWidget",
+      "changed": true
+    },
+    "focused_automation": {
+      "name": "CockHero.Recovery.RestWidgetLifecycle",
+      "result": "success",
+      "succeeded": 1,
+      "failed": 0
+    },
+    "full_automation": {
+      "name": "CockHero.Recovery",
+      "result": "success",
+      "succeeded": 53,
+      "failed": 0,
+      "not_run": 0
+    }
+  },
+  "result": "passed"
+}

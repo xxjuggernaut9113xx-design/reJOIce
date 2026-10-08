@@ -228,6 +228,7 @@ public:
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered State") double LastEdgeInterval=1.0;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered State") int32 LastEdgeStrokeCount=25;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered State") int32 EdgeStreak=0;
+    UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered State") double MasterBreakDuration=5.0;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered State") double MasterEdgeBreakDuration=10.0;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered State") double EdgeBreakDurationScaled=1.0;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered State") bool bPlayerEdgedLastDraw=false;
