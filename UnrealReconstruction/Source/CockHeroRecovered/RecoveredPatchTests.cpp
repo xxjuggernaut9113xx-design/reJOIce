@@ -22,6 +22,7 @@
 #include "Components/Image.h"
 #include "Components/VerticalBox.h"
 #include "Engine/Texture2D.h"
+#include "Sound/SoundBase.h"
 #if WITH_DEV_AUTOMATION_TESTS
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredPatchLifecycleTest,"CockHero.Recovery.PatchLifecycle",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
 bool FRecoveredPatchLifecycleTest::RunTest(const FString& Parameters) {
@@ -174,6 +175,7 @@ bool FRecoveredNotificationWidgetTest::RunTest(const FString& Parameters) {
     auto* Title=Cast<UTextBlock>(Widget->GetWidgetFromName(TEXT("Title")));
     auto* Description=Cast<UTextBlock>(Widget->GetWidgetFromName(TEXT("Description")));
     if (!TestNotNull(TEXT("Notification title field"),Title) || !TestNotNull(TEXT("Notification description field"),Description)) return false;
+    TestNotNull(TEXT("Notification source UI sound"),LoadObject<USoundBase>(nullptr,TEXT("/Engine/VREditor/Sounds/UI/Dockable_Window_Pick_Up.Dockable_Window_Pick_Up")));
     TestEqual(TEXT("Notification title mirrors source outcome text"),Title->GetText().ToString(),FString(TEXT("Perfect Finish")));
     TestEqual(TEXT("Notification body mirrors source outcome text"),Description->GetText().ToString(),FString(TEXT("Full Rewards Unlocked — Victory Achieved")));
 

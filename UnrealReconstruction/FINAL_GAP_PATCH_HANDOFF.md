@@ -72,7 +72,7 @@ Focused `CockHero.Recovery.IronManStorePenalty` automation completed **1 succeed
 
 ### Outcome notification recovery (2026-10-07)
 
-The recovered outcome branch now creates the source-message boxes before its outcome overlay: `Perfect Finish` / `Full Rewards Unlocked — Victory Achieved` for success, `Early Climax` / `Post-Game Rewards Cut in Half` for early completion, and the original Iron Man penalty text after the store reset. The reparented `NotificationBoxWidget` applies its title, description, and icon fields; plays `FadeIn`; holds for four seconds; plays `FadeOut`; removes itself; and clears the global manager's lifecycle tracking entry. The recovered widget mounts through the original `UI_Manager.NotifVerticalBox` only when `AreNotificationBoxesEnabled?` permits it.
+The recovered outcome branch now creates the source-message boxes before its outcome overlay: `Perfect Finish` / `Full Rewards Unlocked — Victory Achieved` for success, `Early Climax` / `Post-Game Rewards Cut in Half` for early completion, and the original Iron Man penalty text after the store reset. The reparented `NotificationBoxWidget` applies its title, description, and icon fields; plays the original `/Engine/VREditor/Sounds/UI/Dockable_Window_Pick_Up` UI sound at unity volume and pitch; plays `FadeIn`; holds for four seconds; plays `FadeOut`; removes itself; and clears the global manager's lifecycle tracking entry. The recovered widget mounts through the original `UI_Manager.NotifVerticalBox` only when `AreNotificationBoxesEnabled?` permits it.
 
 Focused `CockHero.Recovery.OutcomeNotifications` completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. It verifies native parenting, source text, panel mounting, and lifecycle tracking. The current full `CockHero.Recovery` run completed **49 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
 
@@ -83,7 +83,6 @@ Recovered the original `PrematureCumIcon` and `SuccessfulCumIcon` from their coo
 ## Remaining limits
 
 - The staged post-game controller follows recovered graph order and timings, but interactive side-by-side original-runtime comparison of every animation curve, sound cue, and transient visual state remains outstanding.
-- The notification path now has its source text, placement, animation names, hold timing, and original successful- and premature-outcome textures. The notification sound asset remains unrecovered, so that audio detail is not claimed exact.
 - Importer file/directory picker behavior is Windows-specific and was validated by build, widget initialization, manifest/deck code, and parent readback. It still needs an interactive GUI and packaged-build check with representative user media. Playback support is limited by the existing recovered media backend.
 - Recovered challenge and modifier lists use the original container/card assets and the recovered state models, but do not restore every original entry Blueprint animation, icon rule, conflict pair, reward roll, or data-table mapping.
 - Auto-draw still has no verified completion consumer. Hardware transports, original save compatibility, original editor graphs, complete native analysis, full GUI playtests, packaged validation, and clean-machine validation remain outstanding.
