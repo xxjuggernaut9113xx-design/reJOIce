@@ -43,6 +43,10 @@ bool ARecoveredGlobalManager::CreateRecoveredNotification(FName IconName,const F
     if (!Notification) return false;
     UTexture2D* Icon=nullptr;
     if (IconName==TEXT("PunishmentIcon")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/NotifBoxIcons/PunishmentIcon.PunishmentIcon"));
+    else if (IconName==TEXT("PrematureCumIcon") || IconName==TEXT("SuccessfulCumIcon")) {
+        const FString Name=IconName.ToString();
+        Icon=LoadObject<UTexture2D>(nullptr,*FString::Printf(TEXT("/Game/Recovery/Resources/Widgets/NotificationBoxIcons/%s.%s"),*Name,*Name));
+    }
     Panel->AddChildToVerticalBox(Notification);
     Notification->OnNotificationExpired.AddUniqueDynamic(this,&ARecoveredGlobalManager::HandleRecoveredNotificationExpired);
     Notification->SetNotifBoxParams(Icon,Title,Description);

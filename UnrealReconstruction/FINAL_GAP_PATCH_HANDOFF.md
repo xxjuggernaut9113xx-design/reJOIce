@@ -16,6 +16,7 @@ Input: `ghidra-gap-fill-final.patch` supplied by the user on 2026-10-04. Integra
 - Corrected animation object lookup and selected names, checked optional overlay packages before loading, guarded the meter threshold and disabled-state media effect, removed duplicate loot presentation notification, and made the defensive overlay dismissal callback weak.
 - Made shuffle actually shuffle the selected deck, honored explicit repeat-disable while preserving default refill, connected video-loop state to current/future media players, and avoided duplicate file-import counts.
 - Preserved immediate item use on existing assets without a separate use button, so new inventory scaffolding does not strand purchased items.
+- Made staged post-game and named-save widget helpers unique under Unreal's Unity build aggregation, preserving their existing behavior while restoring full editor build correctness.
 
 ## 2026-10-06 recovery wiring
 
@@ -75,10 +76,14 @@ The recovered outcome branch now creates the source-message boxes before its out
 
 Focused `CockHero.Recovery.OutcomeNotifications` completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. It verifies native parenting, source text, panel mounting, and lifecycle tracking. The current full `CockHero.Recovery` run completed **49 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
 
+### Outcome notification artwork recovery (2026-10-07)
+
+Recovered the original `PrematureCumIcon` and `SuccessfulCumIcon` from their cooked `Widgets/NotificationBoxIcons` packages through the matching Unreal serializer. Both 256×256 DXT5 source mips were decoded to editable PNG assets, imported at `/Game/Recovery/Resources/Widgets/NotificationBoxIcons`, and mapped into the live early and successful outcome branches. The focused notification test verifies both mounted image brushes point to their recovered source assets and confirms the notification preference prevents panel insertion when disabled. The recovery record includes source-package and mip SHA-256 values in [outcome-notification-icon-recovery-report.json](RecoveryEvidence/outcome-notification-icon-recovery-report.json).
+
 ## Remaining limits
 
 - The staged post-game controller follows recovered graph order and timings, but interactive side-by-side original-runtime comparison of every animation curve, sound cue, and transient visual state remains outstanding.
-- The notification path now has its source text, placement, animation names, and hold timing. The original successful- and premature-outcome notification textures and notification sound asset are still not restored, so those two visual/audio details are not claimed exact.
+- The notification path now has its source text, placement, animation names, hold timing, and original successful- and premature-outcome textures. The notification sound asset remains unrecovered, so that audio detail is not claimed exact.
 - Importer file/directory picker behavior is Windows-specific and was validated by build, widget initialization, manifest/deck code, and parent readback. It still needs an interactive GUI and packaged-build check with representative user media. Playback support is limited by the existing recovered media backend.
 - Recovered challenge and modifier lists use the original container/card assets and the recovered state models, but do not restore every original entry Blueprint animation, icon rule, conflict pair, reward roll, or data-table mapping.
 - Auto-draw still has no verified completion consumer. Hardware transports, original save compatibility, original editor graphs, complete native analysis, full GUI playtests, packaged validation, and clean-machine validation remain outstanding.

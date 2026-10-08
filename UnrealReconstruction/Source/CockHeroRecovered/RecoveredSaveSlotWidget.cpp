@@ -12,7 +12,7 @@ FString IsolatedSlot(const FString& Name) {
     return URecoveredGameInstance::IsRecoverySlotNameValid(Slot) ? Slot : FString();
 }
 
-bool ContainsSlot(const TArray<FString>& Slots,const FString& SlotName) {
+bool ContainsRecoverySaveSlot(const TArray<FString>& Slots,const FString& SlotName) {
     return Slots.ContainsByPredicate([&SlotName](const FString& Candidate) {
         return Candidate.Equals(SlotName,ESearchCase::IgnoreCase);
     });
@@ -64,7 +64,7 @@ bool URecoveredSaveSlotWidget::CreateSaveSlot(const FString& SlotName) {
     FString ActiveSlot;
     if (!URecoveredGameInstance::ReadRecoverySlotIndex(StoredSlots,ActiveSlot,URecoveredGameInstance::GetRecoverySlotIndexName())) return false;
     RemoveUnavailableSlots(StoredSlots);
-    if (ContainsSlot(StoredSlots,SafeSlot) || UGameplayStatics::DoesSaveGameExist(SafeSlot,0)) return false;
+    if (ContainsRecoverySaveSlot(StoredSlots,SafeSlot) || UGameplayStatics::DoesSaveGameExist(SafeSlot,0)) return false;
     if (auto* NewSave = Cast<URecoveredSaveGame>(UGameplayStatics::CreateSaveGameObject(URecoveredSaveGame::StaticClass()))) {
         if (!NewSave->InitializeRecoveredDefaults()) return false;
         if (UGameplayStatics::SaveGameToSlot(NewSave, SafeSlot, 0)) {
@@ -98,7 +98,7 @@ bool URecoveredSaveSlotWidget::DeleteSaveSlot(const FString& SlotName) {
     TArray<FString> StoredSlots;
     FString ActiveSlot;
     if (!URecoveredGameInstance::ReadRecoverySlotIndex(StoredSlots,ActiveSlot,URecoveredGameInstance::GetRecoverySlotIndexName())) return false;
-    if (!ContainsSlot(StoredSlots,SafeSlot) || ActiveSlot.Equals(SafeSlot,ESearchCase::IgnoreCase)) return false;
+    if (!ContainsRecoverySaveSlot(StoredSlots,SafeSlot) || ActiveSlot.Equals(SafeSlot,ESearchCase::IgnoreCase)) return false;
     if (UGameplayStatics::DeleteGameInSlot(SafeSlot, 0)) {
         StoredSlots.RemoveAll([&SafeSlot](const FString& Candidate) {
             return Candidate.Equals(SafeSlot,ESearchCase::IgnoreCase);

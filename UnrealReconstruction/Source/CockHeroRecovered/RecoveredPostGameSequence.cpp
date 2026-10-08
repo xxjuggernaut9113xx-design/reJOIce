@@ -16,7 +16,7 @@ constexpr float XPAnimationDuration = 0.65f;
 constexpr float UPSettleDelay = 0.35f;
 constexpr float ScreenSwitchDelay = 1.0f;
 
-UWidget* FindNestedWidget(UUserWidget* Root, FName Name) {
+UWidget* FindPostGameSequenceWidget(UUserWidget* Root, FName Name) {
     if (!Root) return nullptr;
     if (UWidget* Direct = Root->GetWidgetFromName(Name)) return Direct;
     if (!Root->WidgetTree) return nullptr;
@@ -26,22 +26,22 @@ UWidget* FindNestedWidget(UUserWidget* Root, FName Name) {
         if (!Widget) continue;
         if (Widget->GetFName() == Name) return Widget;
         if (UUserWidget* Nested = Cast<UUserWidget>(Widget)) {
-            if (UWidget* Found = FindNestedWidget(Nested, Name)) return Found;
+            if (UWidget* Found = FindPostGameSequenceWidget(Nested, Name)) return Found;
         }
     }
     return nullptr;
 }
 
 UUserWidget* FindNestedUserWidget(UUserWidget* Root, FName Name) {
-    return Cast<UUserWidget>(FindNestedWidget(Root, Name));
+    return Cast<UUserWidget>(FindPostGameSequenceWidget(Root, Name));
 }
 
-void SetNestedText(UUserWidget* Root, const TCHAR* Name, const FText& Value) {
-    if (UTextBlock* Text = Cast<UTextBlock>(FindNestedWidget(Root, FName(Name)))) Text->SetText(Value);
+void SetPostGameSequenceText(UUserWidget* Root, const TCHAR* Name, const FText& Value) {
+    if (UTextBlock* Text = Cast<UTextBlock>(FindPostGameSequenceWidget(Root, FName(Name)))) Text->SetText(Value);
 }
 
-void SetNestedTextAny(UUserWidget* Root, std::initializer_list<const TCHAR*> Names, const FText& Value) {
-    for (const TCHAR* Name : Names) SetNestedText(Root, Name, Value);
+void SetPostGameSequenceTextAny(UUserWidget* Root, std::initializer_list<const TCHAR*> Names, const FText& Value) {
+    for (const TCHAR* Name : Names) SetPostGameSequenceText(Root, Name, Value);
 }
 
 void SetIntProperty(UObject* Object, FName Name, int32 Value) {
@@ -90,7 +90,7 @@ void UpdateXPBar(UUserWidget* XPPage, int32 Level, int32 CurrentXP, int32 Target
 void UpdateUPTotal(UUserWidget* UPPage, int32 DisplayedUP) {
     if (!UPPage) return;
     SetIntProperty(UPPage, TEXT("DisplayedUP"), DisplayedUP);
-    SetNestedText(UPPage, TEXT("UPTotalText"), FText::AsNumber(DisplayedUP));
+    SetPostGameSequenceText(UPPage, TEXT("UPTotalText"), FText::AsNumber(DisplayedUP));
 }
 }
 
@@ -192,8 +192,8 @@ void URecoveredPostGameSequence::ShowNextXPSource() {
     UUserWidget* XPPage = FindNestedUserWidget(Root, TEXT("WBP_XPScreen"));
     UUserWidget* SourceWidget = FindNestedUserWidget(XPPage, TEXT("XBP_XPSourceText"));
     SetIntProperty(XPPage, TEXT("CurrentSourceIndex"), CurrentXPSourceIndex - 1);
-    SetNestedTextAny(SourceWidget, { TEXT("XPAmountText") }, FText::FromString(FString::Printf(TEXT("+%d XP"), Source.XPAmount)));
-    SetNestedTextAny(SourceWidget, { TEXT("XPDetailText") }, FText::FromString(FString::Printf(TEXT("(%s)"), *Source.DetailText.ToString())));
+    SetPostGameSequenceTextAny(SourceWidget, { TEXT("XPAmountText") }, FText::FromString(FString::Printf(TEXT("+%d XP"), Source.XPAmount)));
+    SetPostGameSequenceTextAny(SourceWidget, { TEXT("XPDetailText") }, FText::FromString(FString::Printf(TEXT("(%s)"), *Source.DetailText.ToString())));
     if (SourceWidget) SourceWidget->SetVisibility(ESlateVisibility::Visible);
     const float SourceDuration = PlayNamedAnimation(SourceWidget, TEXT("SpawnAndSlam"));
     ScheduleAdvance(FMath::Max(SourceDuration, KINDA_SMALL_NUMBER), ERecoveredPostGameAdvance::XPSourceAnimation);
@@ -223,7 +223,7 @@ void URecoveredPostGameSequence::ApplyXPAmount(int32 Amount) {
             PendingOverflowXP = Amount - ToThreshold;
             if (UUserWidget* XPPage = FindNestedUserWidget(Root, TEXT("WBP_XPScreen"))) {
                 UpdateXPBar(XPPage, DisplayedLevel, DisplayedXP, DisplayedXP, false);
-                if (UWidget* SourceWidget = FindNestedWidget(XPPage, TEXT("XBP_XPSourceText"))) SourceWidget->SetVisibility(ESlateVisibility::Hidden);
+                if (UWidget* SourceWidget = FindPostGameSequenceWidget(XPPage, TEXT("XBP_XPSourceText"))) SourceWidget->SetVisibility(ESlateVisibility::Hidden);
             }
             PresentLevelUp();
             return;
@@ -244,8 +244,8 @@ void URecoveredPostGameSequence::PresentLevelUp() {
     SetPage(1);
     const FRecoveredLevelUpEventData& Event = RewardData.LevelUpEvents[CurrentLevelEventIndex];
     UUserWidget* LevelPage = FindNestedUserWidget(Root, TEXT("WBP_LevelUpScreen"));
-    SetNestedText(LevelPage, TEXT("LevelText"), FText::AsNumber(Event.NewLevel));
-    SetNestedText(LevelPage, TEXT("RankTitle"), FText::FromName(Event.Title));
+    SetPostGameSequenceText(LevelPage, TEXT("LevelText"), FText::AsNumber(Event.NewLevel));
+    SetPostGameSequenceText(LevelPage, TEXT("RankTitle"), FText::FromName(Event.Title));
     if (UUserWidget* XPPage = FindNestedUserWidget(Root, TEXT("WBP_XPScreen"))) {
         SetBoolProperty(XPPage, TEXT("bWaitingForLevelUp"), true);
         SetIntProperty(XPPage, TEXT("CurrentLevelUpIndex"), CurrentLevelEventIndex + 1);
@@ -309,8 +309,8 @@ void URecoveredPostGameSequence::ShowNextUPSource() {
     UUserWidget* UPPage = FindNestedUserWidget(Root, TEXT("WBP_UPRewardScreen"));
     UUserWidget* SourceWidget = FindNestedUserWidget(UPPage, TEXT("WBP_UPSourceText"));
     SetIntProperty(UPPage, TEXT("CurrentSourceIndex"), CurrentUPSourceIndex);
-    SetNestedText(SourceWidget, TEXT("UPAmountText"), FText::FromString(FString::Printf(TEXT("+%d UP"), Source.UPAmount)));
-    SetNestedText(SourceWidget, TEXT("DetailText"), FText::FromString(FString::Printf(TEXT("(%s)"), *Source.DetailText.ToString())));
+    SetPostGameSequenceText(SourceWidget, TEXT("UPAmountText"), FText::FromString(FString::Printf(TEXT("+%d UP"), Source.UPAmount)));
+    SetPostGameSequenceText(SourceWidget, TEXT("DetailText"), FText::FromString(FString::Printf(TEXT("(%s)"), *Source.DetailText.ToString())));
     if (SourceWidget) SourceWidget->SetVisibility(ESlateVisibility::Visible);
     const float SourceDuration = PlayNamedAnimation(SourceWidget, TEXT("AnimSlam"));
     ScheduleAdvance(FMath::Max(SourceDuration, KINDA_SMALL_NUMBER), ERecoveredPostGameAdvance::UnlockPointSourceAnimation);
@@ -336,7 +336,7 @@ void URecoveredPostGameSequence::ShowSummary() {
 }
 
 void URecoveredPostGameSequence::SetPage(int32 Index) const {
-    if (UWidgetSwitcher* Switcher = Cast<UWidgetSwitcher>(FindNestedWidget(Root, TEXT("WidgetSwitcher")))) Switcher->SetActiveWidgetIndex(Index);
+    if (UWidgetSwitcher* Switcher = Cast<UWidgetSwitcher>(FindPostGameSequenceWidget(Root, TEXT("WidgetSwitcher")))) Switcher->SetActiveWidgetIndex(Index);
 }
 
 int32 URecoveredPostGameSequence::GetCurrentXPThreshold() const {

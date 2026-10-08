@@ -19,7 +19,9 @@
 #include "RecoveredPostGameSequence.h"
 #include "RecoveredNotificationWidget.h"
 #include "RecoveredSessionWidget.h"
+#include "Components/Image.h"
 #include "Components/VerticalBox.h"
+#include "Engine/Texture2D.h"
 #if WITH_DEV_AUTOMATION_TESTS
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredPatchLifecycleTest,"CockHero.Recovery.PatchLifecycle",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
 bool FRecoveredPatchLifecycleTest::RunTest(const FString& Parameters) {
@@ -196,6 +198,9 @@ bool FRecoveredNotificationWidgetTest::RunTest(const FString& Parameters) {
     Session->TakeWidget();
     auto* Panel=Cast<UVerticalBox>(Session->GetWidgetFromName(TEXT("NotifVerticalBox")));
     if (!TestNotNull(TEXT("Notification source panel"),Panel)) return false;
+    auto* EarlyIcon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/Widgets/NotificationBoxIcons/PrematureCumIcon.PrematureCumIcon"));
+    auto* SuccessIcon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/Widgets/NotificationBoxIcons/SuccessfulCumIcon.SuccessfulCumIcon"));
+    if (!TestNotNull(TEXT("Recovered premature outcome icon"),EarlyIcon) || !TestNotNull(TEXT("Recovered successful outcome icon"),SuccessIcon)) return false;
     Manager->SessionScreen=Session;
     const int32 CountBefore=Panel->GetChildrenCount();
     if (!TestTrue(TEXT("Outcome notification mounts into the recovered panel"),Manager->CreateRecoveredNotification(TEXT("PrematureCumIcon"),TEXT("Early Climax"),TEXT("Post-Game Rewards Cut in Half")))) return false;
@@ -205,7 +210,21 @@ bool FRecoveredNotificationWidgetTest::RunTest(const FString& Parameters) {
     auto* MountedTitle=Cast<UTextBlock>(Mounted->GetWidgetFromName(TEXT("Title")));
     if (!TestNotNull(TEXT("Mounted outcome title field"),MountedTitle)) return false;
     TestEqual(TEXT("Mounted outcome notification preserves source text"),MountedTitle->GetText().ToString(),FString(TEXT("Early Climax")));
+    auto* MountedEarlyIcon=Cast<UImage>(Mounted->GetWidgetFromName(TEXT("NotificationIcon")));
+    if (!TestNotNull(TEXT("Mounted early outcome icon field"),MountedEarlyIcon)) return false;
+    TestTrue(TEXT("Mounted early outcome uses recovered source icon"),MountedEarlyIcon->GetBrush().GetResourceObject()==EarlyIcon);
+    if (!TestTrue(TEXT("Successful outcome notification mounts into the recovered panel"),Manager->CreateRecoveredNotification(TEXT("SuccessfulCumIcon"),TEXT("Perfect Finish"),TEXT("Full Rewards Unlocked — Victory Achieved")))) return false;
+    TestEqual(TEXT("Successful outcome notification adds one recovered panel child"),Panel->GetChildrenCount(),CountBefore+2);
+    auto* MountedSuccess=Cast<URecoveredNotificationWidget>(Panel->GetChildAt(CountBefore+1));
+    if (!TestNotNull(TEXT("Mounted successful outcome notification"),MountedSuccess)) return false;
+    auto* MountedSuccessIcon=Cast<UImage>(MountedSuccess->GetWidgetFromName(TEXT("NotificationIcon")));
+    if (!TestNotNull(TEXT("Mounted successful outcome icon field"),MountedSuccessIcon)) return false;
+    TestTrue(TEXT("Mounted successful outcome uses recovered source icon"),MountedSuccessIcon->GetBrush().GetResourceObject()==SuccessIcon);
     TestTrue(TEXT("Mounted outcome notification remains lifecycle-tracked"),Manager->EventOverlays.Contains(Mounted));
+    TestTrue(TEXT("Successful outcome notification remains lifecycle-tracked"),Manager->EventOverlays.Contains(MountedSuccess));
+    if (!TestTrue(TEXT("Notification setting disables source boxes"),Save->SetBoolSetting(TEXT("AreNotificationBoxesEnabled?"),false))) return false;
+    TestFalse(TEXT("Disabled source notification does not mount"),Manager->CreateRecoveredNotification(TEXT("PrematureCumIcon"),TEXT("Early Climax"),TEXT("Post-Game Rewards Cut in Half")));
+    TestEqual(TEXT("Disabled source notification preserves panel child count"),Panel->GetChildrenCount(),CountBefore+2);
     return true;
 }
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredWidgetAttachmentTest,"CockHero.Recovery.WidgetAttachments",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
