@@ -1,4 +1,6 @@
 #include "RecoveredEdgeManager.h"
+#include "RecoveredPG2TabbedInventoryWidget.h"
+#include "Sound/SoundBase.h"
 #include "RecoveredRules.h"
 #include "RecoveredTabbedInventoryWidget.h"
 #include "Blueprint/UserWidget.h"
@@ -169,6 +171,88 @@ bool FRecoveredEdgeHoldLifecycleTest::RunTest(const FString& Parameters) {
     TestTrue(TEXT("Source edge commit triggers the native edge owner"),Manager->CommitRecoveredEdgeItemUse());
     TestEqual(TEXT("Source edge commit grants then spends one edge"),Manager->GetOwnedItemCount(TEXT("Edge")),1);
     TestEqual(TEXT("Source edge commit records the edge"),Manager->SessionStats.Edges,1);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredPG2ResupplyTest,"CockHero.Recovery.PG2Resupply",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FRecoveredPG2ResupplyTest::RunTest(const FString& Parameters) {
+    UClass* InventoryBlueprintClass=LoadClass<URecoveredPG2TabbedInventoryWidget>(nullptr,TEXT("/Game/Recovery/UI/PG2TabbedInventory_Widget.PG2TabbedInventory_Widget_C"));
+    if (!TestNotNull(TEXT("Recovered PG2 inventory widget"),InventoryBlueprintClass)) return false;
+    TestTrue(TEXT("Recovered PG2 inventory widget uses native owner"),InventoryBlueprintClass->IsChildOf(URecoveredPG2TabbedInventoryWidget::StaticClass()));
+    TestNotNull(TEXT("Recovered PG2 source notification cue"),LoadObject<USoundBase>(nullptr,TEXT("/Game/Recovery/Resources/Audio/new-notification-020-352772.new-notification-020-352772")));
+
+    const auto Initialization=UWorld::InitializationValues().AllowAudioPlayback(false).CreatePhysicsScene(false).CreateNavigation(false).CreateAISystem(false).ShouldSimulatePhysics(false).SetTransactional(false);
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false,NAME_None,nullptr,true,ERHIFeatureLevel::Num,&Initialization);
+    FWorldContext& Context=GEngine->CreateNewWorldContext(EWorldType::Game);
+    Context.SetCurrentWorld(World);
+    ON_SCOPE_EXIT { World->DestroyWorld(false); GEngine->DestroyWorldContext(World); };
+    World->InitializeActorsForPlay(FURL());
+
+    auto* Inventory=CreateWidget<URecoveredPG2TabbedInventoryWidget>(World,InventoryBlueprintClass);
+    if (!TestNotNull(TEXT("Recovered PG2 widget instantiates"),Inventory)) return false;
+    TestNotNull(TEXT("Recovered PG2 resupply button survives reparenting"),Cast<UButton>(Inventory->GetWidgetFromName(TEXT("ResupplyButton"))));
+    UTextBlock* ResupplyQuantity=Cast<UTextBlock>(Inventory->GetWidgetFromName(TEXT("QuantityAmount")));
+    if (!ResupplyQuantity) {
+        if (auto* Item=Cast<UUserWidget>(Inventory->GetWidgetFromName(TEXT("ItemButton")))) ResupplyQuantity=Cast<UTextBlock>(Item->GetWidgetFromName(TEXT("QuantityAmount")));
+    }
+    TestNotNull(TEXT("Recovered PG2 source resupply count label survives reparenting"),ResupplyQuantity);
+    TestEqual(TEXT("Recovered PG2 source resupply count format"),Inventory->GetResupplyCount().ToString(),FString(TEXT("(0)")));
+
+    ARecoveredGlobalManager* Manager=World->SpawnActor<ARecoveredGlobalManager>();
+    if (!TestNotNull(TEXT("Recovered PG2 global manager"),Manager)) return false;
+    Manager->PlayerVariables=FRecoveredPlayerVariables();
+    Manager->PlayerVariables.bCanUseItems=false;
+    Manager->SessionStats=FRecoveredSessionStats();
+    Manager->OwnedItemCounts.Empty();
+    Manager->OwnedItemCounts.Add(TEXT("Resupply"),1);
+    TestFalse(TEXT("Source resupply blocks when item use is disabled"),Manager->CanUseRecoveredResupplyItem());
+    TestEqual(TEXT("Source resupply disabled gate returns its original result"),Manager->UseRecoveredResupplyItem(),ERecoveredResupplyItemUseResult::CannotUseItems);
+    TestEqual(TEXT("Source resupply disabled gate does not record item use"),Manager->SessionStats.ItemsUsed,0);
+    TestEqual(TEXT("Source resupply disabled gate retains the item"),Manager->GetOwnedItemCount(TEXT("Resupply")),1);
+
+    Manager->PlayerVariables.bCanUseItems=true;
+    Manager->OwnedItemCounts.Empty();
+    TestEqual(TEXT("Source resupply empty gate returns its original result"),Manager->UseRecoveredResupplyItem(),ERecoveredResupplyItemUseResult::NoResupplyAvailable);
+
+    Manager->SessionStats=FRecoveredSessionStats();
+    Manager->PlayerVariables=FRecoveredPlayerVariables();
+    Manager->PlayerVariables.bCanUseItems=true;
+    Manager->PlayerVariables.TotalTauntsUsed=25;
+    Manager->OwnedItemCounts.Empty();
+    Manager->OwnedItemCounts.Add(TEXT("Resupply"),1);
+    TestEqual(TEXT("Source resupply punishment resolves before presentation or spend"),Manager->UseRecoveredResupplyItem(),ERecoveredResupplyItemUseResult::PunishmentTriggered);
+    TestEqual(TEXT("Source resupply records item use before punishment"),Manager->SessionStats.ItemsUsed,1);
+    TestEqual(TEXT("Source resupply punishment retains the item"),Manager->GetOwnedItemCount(TEXT("Resupply")),1);
+
+    Manager->SessionStats=FRecoveredSessionStats();
+    Manager->PlayerVariables=FRecoveredPlayerVariables();
+    Manager->PlayerVariables.bCanUseItems=true;
+    Manager->PlayerVariables.PlayerCoins=250;
+    Manager->CumMeterPercentage=0.75;
+    Manager->BeatContext.ActiveModifiers.Reset();
+    Manager->BeatContext.ActiveModifiers.Add(TEXT("All or Nothing"));
+    Manager->OwnedItemCounts.Empty();
+    Manager->OwnedItemCounts.Add(TEXT("Resupply"),1);
+    TestEqual(TEXT("Source resupply starts its two-second store continuation"),Manager->UseRecoveredResupplyItem(),ERecoveredResupplyItemUseResult::Triggered);
+    TestEqual(TEXT("Source resupply records the source item metric"),Manager->SessionStats.ItemsUsed,1);
+    TestEqual(TEXT("All or Nothing clears source coins before presentation"),Manager->PlayerVariables.PlayerCoins,0);
+    TestEqual(TEXT("All or Nothing clears the source cum meter before presentation"),Manager->CumMeterPercentage,0.0);
+    TestEqual(TEXT("Source resupply retains inventory until the delayed store handoff"),Manager->GetOwnedItemCount(TEXT("Resupply")),1);
+    TestTrue(TEXT("Source resupply schedules its two-second store handoff"),Manager->IsRecoveredResupplyPending());
+    Manager->CompleteRecoveredResupplyItemUse();
+    TestFalse(TEXT("Source resupply clears its store handoff after completion"),Manager->IsRecoveredResupplyPending());
+    TestEqual(TEXT("Source resupply spends only after the store handoff"),Manager->GetOwnedItemCount(TEXT("Resupply")),0);
+
+    Manager->SessionStats=FRecoveredSessionStats();
+    Manager->PlayerVariables=FRecoveredPlayerVariables();
+    Manager->PlayerVariables.bCanUseItems=true;
+    Manager->BeatContext.ActiveModifiers.Reset();
+    Manager->OwnedItemCounts.Empty();
+    Manager->OwnedItemCounts.Add(TEXT("Resupply"),1);
+    TestTrue(TEXT("Generic recovered inventory dispatches resupply to its source action"),Manager->UseOwnedItem(TEXT("Resupply"),0));
+    TestEqual(TEXT("Generic resupply dispatch keeps the item during its source delay"),Manager->GetOwnedItemCount(TEXT("Resupply")),1);
+    Manager->CompleteRecoveredResupplyItemUse();
+    TestEqual(TEXT("Generic resupply dispatch completes the delayed source spend"),Manager->GetOwnedItemCount(TEXT("Resupply")),0);
     return true;
 }
 #endif

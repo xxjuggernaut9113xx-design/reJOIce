@@ -8,6 +8,8 @@
 #include "Animation/WidgetAnimation.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/GameplayStatics.h"
+#include "Sound/SoundBase.h"
+#include "TimerManager.h"
 
 void ARecoveredGlobalManager::HandleRecoveredSessionAction(FName Action) {
     if (Action==TEXT("DetermineCardV2")) RequestNextRecoveredCard(true);
@@ -323,6 +325,7 @@ void ARecoveredGlobalManager::AcquireStoreItem(FName ItemID) {
 
 bool ARecoveredGlobalManager::UseOwnedItem(FName ItemID, int32 Level) {
     if (ItemID==TEXT("Edge")) return UseRecoveredEdgeItem()==ERecoveredEdgeItemUseResult::Triggered;
+    if (ItemID==TEXT("Resupply")) return UseRecoveredResupplyItem()==ERecoveredResupplyItemUseResult::Triggered;
     int32* Count = OwnedItemCounts.Find(ItemID);
     if (!Count || *Count <= 0) return false;
     if (!ApplyStoreItemEffect(ItemID, Level)) return false;
@@ -383,6 +386,71 @@ ERecoveredEdgeItemUseResult ARecoveredGlobalManager::UseRecoveredEdgeItem() {
     }
     CommitRecoveredEdgeItemUse();
     return LastEdgeItemUseResult;
+}
+
+bool ARecoveredGlobalManager::CanUseRecoveredResupplyItem() const {
+    return PlayerVariables.bCanUseItems && GetOwnedItemCount(TEXT("Resupply"))>0;
+}
+
+void ARecoveredGlobalManager::ApplyRecoveredAllOrNothingModifierEffects() {
+    const bool bActive=BeatContext.ActiveModifiers.ContainsByPredicate([](const FString& Modifier) {
+        return Modifier.Equals(TEXT("All or Nothing"),ESearchCase::IgnoreCase);
+    });
+    if (!bActive) return;
+    PlayerVariables.PlayerCoins=0;
+    CumMeterPercentage=0.0;
+}
+
+bool ARecoveredGlobalManager::IsRecoveredResupplyPending() const {
+    return GetWorld() && GetWorld()->GetTimerManager().IsTimerActive(ResupplyStoreTimerHandle);
+}
+
+ERecoveredResupplyItemUseResult ARecoveredGlobalManager::UseRecoveredResupplyItem() {
+    if (!PlayerVariables.bCanUseItems) {
+        LastResupplyItemUseResult=ERecoveredResupplyItemUseResult::CannotUseItems;
+        return LastResupplyItemUseResult;
+    }
+    if (GetOwnedItemCount(TEXT("Resupply"))<=0) {
+        LastResupplyItemUseResult=ERecoveredResupplyItemUseResult::NoResupplyAvailable;
+        return LastResupplyItemUseResult;
+    }
+    URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats,ERecoveredMetric::ItemsUsed,1);
+    OnMetricUpdateRequested.Broadcast(ERecoveredMetric::ItemsUsed,1);
+    if (RollRecoveredPunishmentChance()) {
+        LastResupplyItemUseResult=ERecoveredResupplyItemUseResult::PunishmentTriggered;
+        StartPunishmentEvent();
+        return LastResupplyItemUseResult;
+    }
+    ApplyRecoveredAllOrNothingModifierEffects();
+    OnSessionAction.Broadcast(TEXT("InventoryUseInitiated_Resupply"));
+    SpawnRecoveredOverlay(TEXT("ResupplyItem_OverlayWidget"));
+    CreateRecoveredNotification(TEXT("ResupplyItem"),TEXT("Resupply Used"),TEXT("Store Will Open Shortly"));
+    if (USoundBase* NotificationSound=LoadObject<USoundBase>(nullptr,TEXT("/Game/Recovery/Resources/Audio/new-notification-020-352772.new-notification-020-352772"))) {
+        UGameplayStatics::PlaySound2D(this,NotificationSound);
+    }
+    LastResupplyItemUseResult=ERecoveredResupplyItemUseResult::Triggered;
+    if (GetWorld()) GetWorldTimerManager().SetTimer(ResupplyStoreTimerHandle,this,&ARecoveredGlobalManager::CompleteRecoveredResupplyItemUse,2.0f,false);
+    else CompleteRecoveredResupplyItemUse();
+    return LastResupplyItemUseResult;
+}
+
+void ARecoveredGlobalManager::CompleteRecoveredResupplyItemUse() {
+    if (GetWorld()) GetWorldTimerManager().ClearTimer(ResupplyStoreTimerHandle);
+    ResupplyStoreTimerHandle.Invalidate();
+    SpawnRecoveredStore();
+    if (int32* Count=OwnedItemCounts.Find(TEXT("Resupply"))) {
+        --*Count;
+        if (*Count<=0) OwnedItemCounts.Remove(TEXT("Resupply"));
+    }
+    OnSessionAction.Broadcast(TEXT("InventoryUsed_Resupply"));
+    if (GetOwnedItemCount(TEXT("Resupply"))>0) return;
+    if (GetWorld()) {
+        GetWorldTimerManager().SetTimer(ResupplyLastItemTimerHandle,FTimerDelegate::CreateWeakLambda(this,[this]() {
+            if (IsValid(this)) OnSessionAction.Broadcast(TEXT("InventoryExhausted_Resupply"));
+        }),0.3f,false);
+    } else {
+        OnSessionAction.Broadcast(TEXT("InventoryExhausted_Resupply"));
+    }
 }
 
 void ARecoveredGlobalManager::ShowDefensiveItemOverlay(FName ItemID) {

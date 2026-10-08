@@ -30,6 +30,14 @@ enum class ERecoveredEdgeItemUseResult : uint8 {
     PunishmentTriggered,
     EdgeManagerUnavailable,
 };
+
+UENUM(BlueprintType)
+enum class ERecoveredResupplyItemUseResult : uint8 {
+    Triggered,
+    CannotUseItems,
+    NoResupplyAvailable,
+    PunishmentTriggered,
+};
 USTRUCT(BlueprintType)
 struct COCKHERORECOVERED_API FRecoveredHeatCategoryRow : public FTableRowBase {
     GENERATED_BODY()
@@ -353,6 +361,12 @@ public:
     UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") bool CommitRecoveredEdgeItemUse();
     UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") ERecoveredEdgeItemUseResult UseRecoveredEdgeItem();
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|Inventory") ERecoveredEdgeItemUseResult LastEdgeItemUseResult=ERecoveredEdgeItemUseResult::NoEdgesAvailable;
+    UFUNCTION(BlueprintPure, Category="Recovered|Inventory") bool CanUseRecoveredResupplyItem() const;
+    UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") ERecoveredResupplyItemUseResult UseRecoveredResupplyItem();
+    UFUNCTION(BlueprintPure, Category="Recovered|Inventory") bool IsRecoveredResupplyPending() const;
+    UFUNCTION() void CompleteRecoveredResupplyItemUse();
+    UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") void ApplyRecoveredAllOrNothingModifierEffects();
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|Inventory") ERecoveredResupplyItemUseResult LastResupplyItemUseResult=ERecoveredResupplyItemUseResult::NoResupplyAvailable;
     // Shows the defensive item use overlay with the item name and remaining count.
     UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") void ShowDefensiveItemOverlay(FName ItemID);
     // Dismisses all active event overlays.
@@ -414,6 +428,8 @@ public:
     UPROPERTY(Transient) FRecoveredSessionRewardData PendingPostGameRewardData;
     UPROPERTY(Transient) TObjectPtr<class URecoveredPostGameSequence> PostGameSequence;
     FTimerHandle StoreCooldownTimer;
+    FTimerHandle ResupplyStoreTimerHandle;
+    FTimerHandle ResupplyLastItemTimerHandle;
     FTimerHandle OutcomeContinuationTimer;
     FTimerHandle IdleTimer;
     FTimerHandle MercyCooldownTimer;

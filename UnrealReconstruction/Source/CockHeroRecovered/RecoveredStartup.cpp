@@ -103,6 +103,8 @@ bool ARecoveredGlobalManager::ReturnToMainMenu() {
     FTimerManager& Timers = GetWorldTimerManager();
     Timers.ClearTimer(SessionDurationTimer);
     Timers.ClearTimer(StoreCooldownTimer);
+    Timers.ClearTimer(ResupplyStoreTimerHandle);
+    Timers.ClearTimer(ResupplyLastItemTimerHandle);
     Timers.ClearTimer(OutcomeContinuationTimer);
     Timers.ClearTimer(IdleTimer);
     Timers.ClearTimer(MercyCooldownTimer);
@@ -145,6 +147,7 @@ bool ARecoveredGlobalManager::ReturnToMainMenu() {
     EdgeBreakDurationScaled = 1.0;
     CurrentInventoryTab = 0;
     LastEdgeItemUseResult = ERecoveredEdgeItemUseResult::NoEdgesAvailable;
+    LastResupplyItemUseResult = ERecoveredResupplyItemUseResult::NoResupplyAvailable;
     LastDispatchedEvent = NAME_None;
     LastSessionError.Reset();
     return CreateMainMenuUI();

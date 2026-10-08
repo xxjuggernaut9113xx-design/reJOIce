@@ -1,6 +1,7 @@
 #include "RecoveredSessionWidget.h"
 #include "RecoveredRules.h"
 #include "RecoveredTabbedInventoryWidget.h"
+#include "RecoveredPG2TabbedInventoryWidget.h"
 #include "Components/Image.h"
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
@@ -147,6 +148,9 @@ FReply URecoveredSessionWidget::NativeOnKeyDown(const FGeometry& InGeometry, con
         auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
         if (Manager && Manager->CurrentInventoryTab==0) {
             if (auto* Inventory=Cast<URecoveredTabbedInventoryWidget>(GetWidgetFromName(TEXT("PG1TabbedInventory_Widget")))) Inventory->TabbedInventoryEdgeTrigger();
+        } else if (Manager && Manager->CurrentInventoryTab==1) {
+            if (auto* Inventory=Cast<URecoveredPG2TabbedInventoryWidget>(GetWidgetFromName(TEXT("PG2TabbedInventory_Widget")))) Inventory->TabbedInventoryResupplyTrigger();
+            Manager->PlayDialogueLine(TEXT("SpecialEvent_12"));
         }
         return FReply::Handled();
     } else if (Key == EKeys::F) {

@@ -90,12 +90,20 @@ The hold overlay uses the recovered source icon, source countdown images, and `/
 
 Focused `CockHero.Recovery.EdgeHoldLifecycle` automation completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The Windows Unreal Editor build passed. The full `CockHero.Recovery` run completed **50 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
 
+### PG2 resupply recovery (2026-10-08)
+
+`/Game/Recovery/UI/PG2TabbedInventory_Widget` now extends `URecoveredPG2TabbedInventoryWidget`. The owner restores the decoded resupply route: it blocks unavailable item use, records `ItemsUsed` before the punishment roll, preserves the item on punishment, applies `All or Nothing` to coins and the cum meter, plays `ResupplyKeyPress`, presents the source overlay and `Resupply Used` / `Store Will Open Shortly` notification, then waits two seconds before opening the store and spending one resupply. A final source item schedules `UsedLastStoreItem` after 0.3 seconds. The original key-three path now invokes this route on tab one and follows it with special-event dialogue.
+
+The original `/Game/SoundFX/872025/new-notification-020-352772` Bink payload was reconstructed from its cooked package and imported at `/Game/Recovery/Resources/Audio/new-notification-020-352772`. The evidence record includes source, bulk, encoded hashes, a verified 48 kHz stereo decode, and the recovered resource alias in [resupply-audio-recovery.json](RecoveryEvidence/resupply-audio-recovery.json).
+
+Focused `CockHero.Recovery.PG2Resupply` automation completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The Windows Unreal Editor build passed. The full `CockHero.Recovery` run completed **50 succeeded**, **1 succeeded with warnings**, **0 failed**, and **0 not run**. Its one warning is the pre-existing external-sampler mismatch in `Background_Video_Texture_Mat`; the PG2 test had zero warnings.
+
 ## Remaining limits
 
 - The staged post-game controller follows recovered graph order and timings, but interactive side-by-side original-runtime comparison of every animation curve, sound cue, and transient visual state remains outstanding.
 - Importer file/directory picker behavior is Windows-specific and was validated by build, widget initialization, manifest/deck code, and parent readback. It still needs an interactive GUI and packaged-build check with representative user media. Playback support is limited by the existing recovered media backend.
 - Recovered challenge and modifier lists use the original container/card assets and the recovered state models, but do not restore every original entry Blueprint animation, icon rule, conflict pair, reward roll, or data-table mapping.
-- The current inventory recovery covers PG1's Edge action and tab switching. PG1's other item actions, the PG2 resupply action, and interactive original-runtime timing still need side-by-side recovery.
+- The current inventory recovery covers PG1's Edge action, tab switching, and the PG2 resupply action. PG1's other item actions, the remaining PG2 actions, and interactive original-runtime timing still need side-by-side recovery.
 - Auto-draw still has no verified completion consumer. Hardware transports, original save compatibility, original editor graphs, complete native analysis, full GUI playtests, packaged validation, and clean-machine validation remain outstanding.
 - The complete-image checkpoint is still partial, and the original runtime has not been used for behavioral comparison. No full-game completion or original-runtime parity is claimed.
 
