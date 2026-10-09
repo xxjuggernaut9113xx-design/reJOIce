@@ -17,6 +17,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Sound/SoundBase.h"
+#include "GameFramework/PlayerController.h"
 
 namespace {
 USoundBase* GetRecoveredInventorySwitchSound() {
@@ -26,7 +27,19 @@ USoundBase* GetRecoveredInventorySwitchSound() {
 }
 
 void PlayRecoveredInventorySwitchSound(UObject* WorldContextObject) {
+    if (!WorldContextObject || !WorldContextObject->GetWorld()) return;
     if (USoundBase* Sound=GetRecoveredInventorySwitchSound()) UGameplayStatics::PlaySound2D(WorldContextObject,Sound,0.25f,0.7f,0.0f,nullptr,nullptr,true);
+}
+
+USoundBase* GetRecoveredSettingsMenuSound() {
+    static TWeakObjectPtr<USoundBase> Sound;
+    if (!Sound.IsValid()) Sound=LoadObject<USoundBase>(nullptr,TEXT("/Engine/VREditor/Sounds/VR_ungrab.VR_ungrab"));
+    return Sound.Get();
+}
+
+void PlayRecoveredSettingsMenuSound(UObject* WorldContextObject,float Pitch) {
+    if (!WorldContextObject || !WorldContextObject->GetWorld()) return;
+    if (USoundBase* Sound=GetRecoveredSettingsMenuSound()) UGameplayStatics::PlaySound2D(WorldContextObject,Sound,0.2f,Pitch,0.0f,nullptr,nullptr,true);
 }
 }
 
@@ -36,12 +49,12 @@ void URecoveredSessionWidget::BindSession(bool bBind) {
         else Button->OnClicked.RemoveDynamic(this,&URecoveredSessionWidget::DrawCard);
     }
     if (auto* Button=Cast<UButton>(GetWidgetFromName(TEXT("ResumeButton")))) {
-        if(bBind) Button->OnClicked.AddUniqueDynamic(this,&URecoveredSessionWidget::ResumeSession);
-        else Button->OnClicked.RemoveDynamic(this,&URecoveredSessionWidget::ResumeSession);
+        if(bBind) Button->OnClicked.AddUniqueDynamic(this,&URecoveredSessionWidget::ToggleRecoveredSettingsMenu);
+        else Button->OnClicked.RemoveDynamic(this,&URecoveredSessionWidget::ToggleRecoveredSettingsMenu);
     }
     if (auto* Button=Cast<UButton>(GetWidgetFromName(TEXT("SettingsMenuButton")))) {
-        if(bBind) Button->OnClicked.AddUniqueDynamic(this,&URecoveredSessionWidget::OpenSessionSettings);
-        else Button->OnClicked.RemoveDynamic(this,&URecoveredSessionWidget::OpenSessionSettings);
+        if(bBind) Button->OnClicked.AddUniqueDynamic(this,&URecoveredSessionWidget::ToggleRecoveredSettingsMenu);
+        else Button->OnClicked.RemoveDynamic(this,&URecoveredSessionWidget::ToggleRecoveredSettingsMenu);
     }
     // Pause-menu quit and return-to-menu buttons (audit items 126-127).
     if (auto* Button=Cast<UButton>(GetWidgetFromName(TEXT("QuitSessionButton")))) {
@@ -88,26 +101,34 @@ void URecoveredSessionWidget::DisplayMedia(UTexture* Texture) {
     }
 }
 void URecoveredSessionWidget::ResumeSession() {
-    if (auto* Border=GetWidgetFromName(TEXT("PauseMenuMasterBorder"))) Border->SetVisibility(ESlateVisibility::Hidden);
-    auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
-    if (!Manager) return;
-    if (Manager->BeatTimeline) Manager->BeatTimeline->ResumeSequence();
-    if (Manager->MediaPlayback) Manager->MediaPlayback->SetPaused(false);
-    // Reset the idle timer on resume; clear any pause-state flags.
-    Manager->ResetIdleTimer();
-    Manager->OnSessionAction.Broadcast(TEXT("SessionResumed"));
+    SetRecoveredSettingsMenuVisible(false);
+    PlayRecoveredSettingsMenuSound(this,1.0f);
+    ShowRecoveredSettingsCursor();
 }
 
 void URecoveredSessionWidget::PauseSession() {
+    SetRecoveredSettingsMenuVisible(true);
+    PlayRecoveredSettingsMenuSound(this,4.0f);
+    ShowRecoveredSettingsCursor();
+}
+
+void URecoveredSessionWidget::ToggleRecoveredSettingsMenu() {
+    const auto* Border=Cast<UBorder>(GetWidgetFromName(TEXT("PauseMenuMasterBorder")));
+    if (Border && Border->GetVisibility()==ESlateVisibility::Visible) ResumeSession();
+    else PauseSession();
+}
+
+void URecoveredSessionWidget::SetRecoveredSettingsMenuVisible(bool bVisible) {
     if (auto* Border=Cast<UBorder>(GetWidgetFromName(TEXT("PauseMenuMasterBorder")))) {
-        Border->SetVisibility(ESlateVisibility::Visible);
+        const ESlateVisibility TargetVisibility=bVisible ? ESlateVisibility::Visible : ESlateVisibility::Collapsed;
+        Border->SetVisibility(TargetVisibility);
+        if (UWidget* Content=Border->GetContent()) Content->SetVisibility(TargetVisibility);
     }
-    auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
-    if (!Manager) return;
-    if (Manager->BeatTimeline) Manager->BeatTimeline->PauseSequence();
-    if (Manager->MediaPlayback) Manager->MediaPlayback->SetPaused(true);
-    Manager->ClearIdleTimer();
-    Manager->OnSessionAction.Broadcast(TEXT("SessionPaused"));
+}
+
+void URecoveredSessionWidget::ShowRecoveredSettingsCursor() {
+    if (!GetWorld()) return;
+    if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->bShowMouseCursor=true;
 }
 void URecoveredSessionWidget::OpenSessionSettings() {
     if (!GetWorld()) return;
@@ -167,12 +188,8 @@ void URecoveredSessionWidget::RefreshSessionDisplays(ARecoveredGlobalManager* Ma
 FReply URecoveredSessionWidget::NativeOnKeyDown(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent) {
     const FKey Key = InKeyEvent.GetKey();
     if (Key == EKeys::Escape) {
-        // Toggle pause menu.
-        if (auto* Border = Cast<UBorder>(GetWidgetFromName(TEXT("PauseMenuMasterBorder")))) {
-            const bool bHidden = Border->GetVisibility() == ESlateVisibility::Hidden;
-            if (bHidden) PauseSession(); else ResumeSession();
-            return FReply::Handled();
-        }
+        ToggleRecoveredSettingsMenu();
+        return FReply::Handled();
     } else if (Key == EKeys::SpaceBar) {
         PlayRecoveredAnimation(TEXT("DrawButtonKeyPress"));
         DrawCard();

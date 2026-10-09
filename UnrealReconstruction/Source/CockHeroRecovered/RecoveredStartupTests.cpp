@@ -41,7 +41,7 @@ bool FRecoveredSessionWidgetTest::RunTest(const FString& Parameters) {
     Screen->DisplayMedia(nullptr);
     TestTrue(TEXT("Missing media preserves the displayed image"),Image->GetBrush().GetResourceObject()==Still);
     const TCHAR* Buttons[]={TEXT("ResumeButton"),TEXT("SettingsMenuButton"),TEXT("DrawButtonTextButton")};
-    const TCHAR* Methods[]={TEXT("ResumeSession"),TEXT("OpenSessionSettings"),TEXT("DrawCard")};
+    const TCHAR* Methods[]={TEXT("ToggleRecoveredSettingsMenu"),TEXT("ToggleRecoveredSettingsMenu"),TEXT("DrawCard")};
     for (int32 I=0;I<3;++I) {
         auto* Button=Cast<UButton>(Screen->GetWidgetFromName(Buttons[I]));
         if (TestNotNull(Buttons[I],Button)) TestTrue(Methods[I],Button->OnClicked.Contains(Screen,FName(Methods[I])));

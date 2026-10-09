@@ -140,6 +140,14 @@ The two page widgets use different source animation names. PG1 uses `SwitchInven
 
 The source entrypoints, call offsets, page-specific animation names, decoded audio hashes, and runtime mapping are recorded in [input-control-parity-recovery.json](RecoveryEvidence/input-control-parity-recovery.json). `CockHero.Recovery.InventoryTabInputParity` passed. The Windows Unreal Editor build passed. The full `CockHero.Recovery` run completed **57 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
 
+### Settings-menu input parity recovery (2026-10-09)
+
+The decoded `UI_Manager` routes `Escape`, `ToggleSettingsMenu`, and the `SettingsMenuButton` through entries 13976, 13981, and 12730 into the shared toggle at offset 2414. `ResumeButton` enters the same path through `ToggleSettingsMenu`. Opening sets `PauseMenuMasterBorder` and its direct child visible, plays `/Engine/VREditor/Sounds/VR_ungrab.VR_ungrab` as a UI sound at 0.2 volume and 4.0 pitch, and shows the mouse cursor. Closing collapses both widgets, retains the cursor, and plays the same cue at 0.2 volume and 1.0 pitch.
+
+The source route does not pause the beat timeline or media player. The recovered session widget now uses the source visibility state rather than treating a hidden state as the only closed state, binds both source buttons to the shared toggle, and leaves session transport untouched.
+
+The source offsets, visibility states, sound parameters, and runtime mapping are recorded in [settings-menu-input-recovery.json](RecoveryEvidence/settings-menu-input-recovery.json). `CockHero.Recovery.SettingsMenuInputParity` passed. The Windows Unreal Editor build passed. The full `CockHero.Recovery` run completed **58 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
+
 ### Modifier conflict and challenge-link recovery (2026-10-09)
 
 `DT_Modifiers` serializes generic row keys, while the native manager looks up modifier records by `ModifierTitle`. The recovered manager now uses that title identity for lookup, unlocks, active-set persistence, and session-facing modifier IDs. The complete native conflict registry from `InitializeModifierConflicts` is restored. `GetAllConflictsForModifier` returns its registered targets; `GetConflictingModifiers` filters those targets against the active set; and `CanEnableModifier` follows the native conflict-only predicate.
