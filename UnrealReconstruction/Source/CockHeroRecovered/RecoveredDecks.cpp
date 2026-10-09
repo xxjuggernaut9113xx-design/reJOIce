@@ -12,6 +12,21 @@ static TArray<FRecoveredMediaEntry>* SelectDeck(FRecoveredMediaDecks& Decks,uint
         default:return nullptr;
     }
 }
+static const TArray<FRecoveredMediaEntry>* SelectDeck(const FRecoveredMediaDecks& Decks,uint8 Deck) {
+    switch(Deck) {
+        case 0:return &Decks.Slow;
+        case 1:return &Decks.Medium;
+        case 2:return &Decks.Fast;
+        case 3:return &Decks.Succubus;
+        case 4:return &Decks.Cum;
+        case 5:return &Decks.Ass;
+        case 6:return &Decks.Boobs;
+        default:return nullptr;
+    }
+}
+static bool EntriesMatch(const FRecoveredMediaEntry& Left,const FRecoveredMediaEntry& Right) {
+    return FRecoveredMediaEntry::StaticStruct()->CompareScriptStruct(&Left,&Right,0);
+}
 void URecoveredDeckState::SetChildDecks() { Child=Master; }
 void URecoveredDeckState::ReplaceEmptyDecks() {
     for(uint8 Deck=0;Deck<7;++Deck) {
@@ -68,4 +83,83 @@ void URecoveredDeckState::SetDeckRepeat(uint8 Deck, bool bRepeat) {
 bool URecoveredDeckState::IsDeckRepeating(uint8 Deck) const {
     const bool* bRepeat = DeckRepeat.Find(Deck);
     return bRepeat ? *bRepeat : true; // Preserve original automatic refill unless explicitly disabled.
+}
+
+int32 URecoveredDeckState::FavoriteDeckForCardType(uint8 CardType) {
+    switch (CardType) {
+        case 0:return 0;
+        case 1:return 1;
+        case 2:
+        case 4:
+        case 5:
+        case 7:
+        case 8:return 2;
+        case 3:return 3;
+        case 6:return 4;
+        default:return INDEX_NONE;
+    }
+}
+
+FString URecoveredDeckState::FavoriteSaveKey(uint8 Deck) {
+    switch (Deck) {
+        case 0:return TEXT("RecoveryFavoriteMediaSlow");
+        case 1:return TEXT("RecoveryFavoriteMediaMedium");
+        case 2:return TEXT("RecoveryFavoriteMediaFast");
+        case 3:return TEXT("RecoveryFavoriteMediaSuccubus");
+        case 4:return TEXT("RecoveryFavoriteMediaCum");
+        default:return FString();
+    }
+}
+
+bool URecoveredDeckState::ToggleFavorite(uint8 Deck,const FRecoveredMediaEntry& Entry,bool& bNowFavorite) {
+    bNowFavorite=false;
+    if (Entry.FullPath.IsEmpty()) return false;
+    TArray<FRecoveredMediaEntry>* MasterDeck=SelectDeck(MasterFavorites,Deck);
+    TArray<FRecoveredMediaEntry>* ChildDeck=SelectDeck(ChildFavorites,Deck);
+    if (!MasterDeck || !ChildDeck) return false;
+    const bool bWasFavorite=MasterDeck->ContainsByPredicate([&Entry](const FRecoveredMediaEntry& Candidate) { return EntriesMatch(Candidate,Entry); });
+    if (bWasFavorite) {
+        MasterDeck->RemoveAll([&Entry](const FRecoveredMediaEntry& Candidate) { return EntriesMatch(Candidate,Entry); });
+        ChildDeck->RemoveAll([&Entry](const FRecoveredMediaEntry& Candidate) { return EntriesMatch(Candidate,Entry); });
+        return true;
+    }
+    MasterDeck->Add(Entry);
+    ChildDeck->Add(Entry);
+    bNowFavorite=true;
+    return true;
+}
+
+void URecoveredDeckState::RestoreFavoritePaths(uint8 Deck,const TArray<FString>& Paths) {
+    TArray<FRecoveredMediaEntry>* MasterDeck=SelectDeck(MasterFavorites,Deck);
+    TArray<FRecoveredMediaEntry>* ChildDeck=SelectDeck(ChildFavorites,Deck);
+    const TArray<FRecoveredMediaEntry>* SourceDeck=SelectDeck(Master,Deck);
+    if (!MasterDeck || !ChildDeck || !SourceDeck) return;
+    MasterDeck->Reset();
+    ChildDeck->Reset();
+    for (const FRecoveredMediaEntry& Entry : *SourceDeck) {
+        if (Paths.Contains(Entry.FullPath)) {
+            MasterDeck->Add(Entry);
+            ChildDeck->Add(Entry);
+        }
+    }
+}
+
+TArray<FString> URecoveredDeckState::GetFavoritePaths(uint8 Deck) const {
+    TArray<FString> Paths;
+    const TArray<FRecoveredMediaEntry>* FavoriteDeck=SelectDeck(MasterFavorites,Deck);
+    if (!FavoriteDeck) return Paths;
+    for (const FRecoveredMediaEntry& Entry : *FavoriteDeck) {
+        if (!Entry.FullPath.IsEmpty()) Paths.AddUnique(Entry.FullPath);
+    }
+    return Paths;
+}
+
+bool URecoveredDeckState::ChooseRandom(uint8 Deck,bool bFavorite,FRecoveredMediaEntry& Entry,bool bShuffle) {
+    TArray<FRecoveredMediaEntry>* Target=SelectDeck(bFavorite ? ChildFavorites : Child,Deck);
+    if (!Target || Target->IsEmpty()) { Entry=FRecoveredMediaEntry();return false; }
+    if (bShuffle) {
+        for (int32 Index=0;Index<Target->Num();++Index) Target->Swap(Index,FMath::RandRange(Index,Target->Num()-1));
+    }
+    Entry=(*Target)[FMath::RandRange(0,Target->Num()-1)];
+    return true;
 }

@@ -1,5 +1,7 @@
 #include "RecoveredSessionWidget.h"
 #include "RecoveredRules.h"
+#include "RecoveredEdgeManager.h"
+#include "RecoveredChallengeTracker.h"
 #include "RecoveredTabbedInventoryWidget.h"
 #include "RecoveredPG2TabbedInventoryWidget.h"
 #include "Components/Image.h"
@@ -7,6 +9,7 @@
 #include "Components/TextBlock.h"
 #include "Components/ProgressBar.h"
 #include "Components/Border.h"
+#include "Components/ScaleBox.h"
 #include "Engine/Texture2D.h"
 #include "MediaTexture.h"
 #include "Input/Reply.h"
@@ -40,6 +43,14 @@ void URecoveredSessionWidget::BindSession(bool bBind) {
         if(bBind) Button->OnClicked.AddUniqueDynamic(this,&URecoveredSessionWidget::ToggleFavorite);
         else Button->OnClicked.RemoveDynamic(this,&URecoveredSessionWidget::ToggleFavorite);
     }
+    if (auto* Button=Cast<UButton>(GetWidgetFromName(TEXT("CumTextButton_1")))) {
+        if(bBind) Button->OnClicked.AddUniqueDynamic(this,&URecoveredSessionWidget::RequestRecoveredCumMediaFromButton);
+        else Button->OnClicked.RemoveDynamic(this,&URecoveredSessionWidget::RequestRecoveredCumMediaFromButton);
+    }
+    if (auto* Button=Cast<UButton>(GetWidgetFromName(TEXT("TauntButton")))) {
+        if(bBind) Button->OnClicked.AddUniqueDynamic(this,&URecoveredSessionWidget::RequestRecoveredTaunt);
+        else Button->OnClicked.RemoveDynamic(this,&URecoveredSessionWidget::RequestRecoveredTaunt);
+    }
     auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
     if (Manager && Manager->MediaPlayback) {
         if(bBind) Manager->MediaPlayback->OnMediaReady.AddUniqueDynamic(this,&URecoveredSessionWidget::DisplayMedia);
@@ -49,6 +60,7 @@ void URecoveredSessionWidget::BindSession(bool bBind) {
 void URecoveredSessionWidget::NativeConstruct() {
     Super::NativeConstruct(); SetIsFocusable(true); BindSession(true);
     auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
+    if (Manager && Manager->MediaPlayback) Manager->MediaPlayback->SetScaleBoxReference(Cast<UScaleBox>(GetWidgetFromName(TEXT("ScaleBox_416"))));
     if (Manager && Manager->MediaPlayback && Manager->MediaPlayback->CurrentTexture) DisplayMedia(Manager->MediaPlayback->CurrentTexture);
 }
 void URecoveredSessionWidget::NativeDestruct() { BindSession(false); Super::NativeDestruct(); }
@@ -139,6 +151,7 @@ FReply URecoveredSessionWidget::NativeOnKeyDown(const FGeometry& InGeometry, con
             return FReply::Handled();
         }
     } else if (Key == EKeys::SpaceBar) {
+        PlayRecoveredAnimation(TEXT("DrawButtonKeyPress"));
         DrawCard();
         return FReply::Handled();
     } else if (Key == EKeys::Tab || Key == EKeys::Q) {
@@ -182,14 +195,47 @@ FReply URecoveredSessionWidget::NativeOnKeyDown(const FGeometry& InGeometry, con
             if (auto* Inventory=Cast<URecoveredTabbedInventoryWidget>(GetWidgetFromName(TEXT("PG1TabbedInventory_Widget")))) Inventory->TabbedInventoryBreakTrigger();
         }
         return FReply::Handled();
-    } else if (Key == EKeys::F) {
+    } else if (Key == EKeys::B) {
         ToggleFavorite();
         return FReply::Handled();
-    } else if (Key == EKeys::P) {
-        if (auto* Border=GetWidgetFromName(TEXT("PauseMenuMasterBorder"))) {
-            if (Border->IsVisible()) ResumeSession(); else PauseSession();
-            return FReply::Handled();
+    } else if (Key == EKeys::C) {
+        ToggleRecoveredUI();
+        return FReply::Handled();
+    } else if (Key == EKeys::E) {
+        RequestRecoveredCumMedia();
+        return FReply::Handled();
+    } else if (Key == EKeys::V) {
+        ToggleRecoveredChallengeTracker();
+        return FReply::Handled();
+    } else if (Key == EKeys::W) {
+        RequestRecoveredTaunt();
+        return FReply::Handled();
+    } else if (Key == EKeys::X) {
+        if (auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr) Manager->ToggleRecoveredBrainMelter();
+        return FReply::Handled();
+    } else if (Key == EKeys::Z) {
+        CycleRecoveredCropMode();
+        return FReply::Handled();
+    } else if (Key == EKeys::Up) {
+        if (auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr) {
+            Manager->PlayerVariables.CurrentComboCount=URecoveredStateRuleLibrary::AddInt32Wrapping(Manager->PlayerVariables.CurrentComboCount,100);
+            Manager->PlayerVariables.TotalStrokeCount=URecoveredStateRuleLibrary::AddInt32Wrapping(Manager->PlayerVariables.TotalStrokeCount,100);
+            Manager->LootBarPercentage=1.0;
+            Manager->OnMetricUpdateRequested.Broadcast(ERecoveredMetric::Strokes,100);
+            Manager->OnMetricUpdateRequested.Broadcast(ERecoveredMetric::MaxCombo,100);
         }
+        return FReply::Handled();
+    } else if (Key == EKeys::K) {
+        if (auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr) {
+            Manager->PlayerVariables.PlayerCoins=9999999;
+            const FName Items[]={TEXT("XCumChance"),TEXT("DecreaseHeat"),TEXT("Edge"),TEXT("SuccuShield"),TEXT("Break"),TEXT("Slowdown"),TEXT("BonerPill"),TEXT("Resupply"),TEXT("SpawnSuccubus"),TEXT("MinusPercentHeatGain")};
+            for (const FName Item : Items) Manager->OwnedItemCounts.Add(Item,99);
+            const FName Upgrades[]={TEXT("XCumChance"),TEXT("DecreaseHeat"),TEXT("SuccuShield"),TEXT("Break"),TEXT("Slowdown"),TEXT("BonerPill"),TEXT("Resupply"),TEXT("SpawnSuccubus"),TEXT("MinusPercentHeatGain")};
+            for (const FName Item : Upgrades) Manager->SetRecoveredItemUpgradeLevel(Item,4);
+            Manager->SetRecoveredItemUpgradeLevel(TEXT("Edge"),3);
+            Manager->SpawnRecoveredStore();
+        }
+        return FReply::Handled();
     }
 
     return Super::NativeOnKeyDown(InGeometry, InKeyEvent);
@@ -203,14 +249,105 @@ void URecoveredSessionWidget::QuitSession() {
 void URecoveredSessionWidget::ToggleFavorite() {
     auto* Manager = GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
     auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
-    if (!Manager || !Instance || !Instance->CurrentSave) return;
-    // Toggle the current media path in the favorites list.
-    const FString CurrentMedia = Manager->SelectedRandomCard.FullPath;
-    if (CurrentMedia.IsEmpty()) return;
-    TArray<FString> Favorites = Instance->CurrentSave->GetStringArraySetting(TEXT("FavoriteMedia"));
-    if (Favorites.Contains(CurrentMedia)) Favorites.Remove(CurrentMedia);
-    else Favorites.Add(CurrentMedia);
-    if (Instance->CurrentSave->SetStringArraySetting(TEXT("FavoriteMedia"), Favorites)) {
-        Instance->SaveRecoveredState();
+    if (!Manager || !Manager->MediaDeckState || !Instance || !Instance->CurrentSave) return;
+    const int32 Deck=URecoveredDeckState::FavoriteDeckForCardType(Manager->BeatContext.CardType);
+    if (Deck==INDEX_NONE || Manager->SelectedRandomCard.FullPath.IsEmpty()) return;
+    bool bNowFavorite=false;
+    if (!Manager->MediaDeckState->ToggleFavorite(static_cast<uint8>(Deck),Manager->SelectedRandomCard,bNowFavorite)) return;
+    const FString Key=URecoveredDeckState::FavoriteSaveKey(static_cast<uint8>(Deck));
+    bool bSaved=Instance->CurrentSave->SetStringArraySetting(Key,Manager->MediaDeckState->GetFavoritePaths(static_cast<uint8>(Deck)));
+    TArray<FString> AllFavorites;
+    for (uint8 FavoriteDeck=0;FavoriteDeck<5;++FavoriteDeck) AllFavorites.Append(Manager->MediaDeckState->GetFavoritePaths(FavoriteDeck));
+    AllFavorites.Sort();
+    for (int32 Index=AllFavorites.Num()-1;Index>0;--Index) if (AllFavorites[Index]==AllFavorites[Index-1]) AllFavorites.RemoveAt(Index);
+    bSaved|=Instance->CurrentSave->SetStringArraySetting(TEXT("FavoriteMedia"),AllFavorites);
+    if (bSaved) Instance->SaveRecoveredState();
+    static const TCHAR* Categories[]={TEXT("Slow"),TEXT("Medium"),TEXT("Fast"),TEXT("Succubus"),TEXT("Cum")};
+    const FString Description=FString(Categories[Deck])+TEXT(" Media ")+(bNowFavorite ? TEXT("added to your favorites.") : TEXT("removed from your favorites."));
+    Manager->CreateRecoveredNotification(NAME_None,bNowFavorite ? TEXT("Media Favorited") : TEXT("Media Unfavorited"),Description);
+}
+
+void URecoveredSessionWidget::ToggleRecoveredUI() {
+    static const FName Widgets[]={TEXT("CoinsStoreVertiBox"),TEXT("DealerText_UI"),TEXT("BeatBarBackground_UI"),TEXT("HeatMeterBar"),TEXT("ComboTextBoxInvalidation"),TEXT("TabbedInventorySizeBox"),TEXT("HealthMeter"),TEXT("CumMeterSplashBackground"),TEXT("TauntCumInvalidationBox"),TEXT("CumMeterHeader"),TEXT("CumMeterTop"),TEXT("CumMeterProgressBar"),TEXT("LootMeterProgressBar"),TEXT("NotificationInvalidationBox"),TEXT("CoinAddText"),TEXT("CoinIcon")};
+    bUIHidden=!bUIHidden;
+    for (const FName Name : Widgets) if (UWidget* Widget=GetWidgetFromName(Name)) Widget->SetVisibility(bUIHidden ? ESlateVisibility::Hidden : ESlateVisibility::Visible);
+}
+
+void URecoveredSessionWidget::ToggleRecoveredChallengeTracker() {
+    const auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
+    if (!Instance || !Instance->ChallengeTracker || Instance->ChallengeTracker->TrackedChallenges.IsEmpty()) return;
+    UWidget* Container=GetWidgetFromName(TEXT("ChallengeTrackerContainer"));
+    if (!Container) return;
+    PlayRecoveredAnimation(Container->IsVisible() ? TEXT("HideChallengeTrackerUIAnim") : TEXT("UnHideChallengeTrackerUIAnim"));
+}
+
+void URecoveredSessionWidget::CycleRecoveredCropMode() {
+    auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
+    if (!Manager || !Manager->MediaPlayback) return;
+    FName Title;
+    FString Description;
+    if (CurrentContentStretchState==0) {
+        CurrentContentStretchState=1;
+        Manager->MediaPlayback->SetCropMode(ERecoveredCropMode::Fill);
+        Title=TEXT("Crop Mode: Fill");
+        Description=TEXT("Stretches to cover the screen");
+    } else if (CurrentContentStretchState==1) {
+        CurrentContentStretchState=2;
+        Manager->MediaPlayback->SetCropMode(ERecoveredCropMode::Fit);
+        Title=TEXT("Crop Mode: Fit");
+        Description=TEXT("Scales to fit inside the frame");
+    } else {
+        CurrentContentStretchState=0;
+        Manager->MediaPlayback->SetCropMode(ERecoveredCropMode::Auto);
+        Title=TEXT("Crop Mode: Auto");
+        Description=TEXT("Chooses the best option automatically");
     }
+    Manager->CreateRecoveredNotification(TEXT("CropIcon"),Title.ToString(),Description);
+}
+
+void URecoveredSessionWidget::RequestRecoveredCumMedia() {
+    RequestRecoveredCumMediaWithAnimation(TEXT("CumButtonKeyPress"));
+}
+
+void URecoveredSessionWidget::RequestRecoveredCumMediaFromButton() {
+    RequestRecoveredCumMediaWithAnimation(TEXT("CumButtonClick"));
+}
+
+void URecoveredSessionWidget::RequestRecoveredCumMediaWithAnimation(FName AnimationName) {
+    auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
+    if (!Manager) return;
+    if (Manager->EdgingManager) Manager->EdgingManager->ClearRecoveredEdgeHold();
+    PlayRecoveredAnimation(AnimationName);
+    Manager->OpenRecoveredCumMedia();
+}
+
+void URecoveredSessionWidget::RequestRecoveredTaunt() {
+    auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
+    if (!Manager) return;
+    if (Manager->BeatContext.CardType==6) {
+        Manager->CreateRecoveredNotification(TEXT("TauntIcon"),TEXT("Cannot Taunt"),TEXT("Cannot taunt during cum events."));
+        return;
+    }
+    if (Manager->BeatContext.CardType==5) {
+        Manager->CreateRecoveredNotification(TEXT("TauntIcon"),TEXT("Cannot Taunt"),TEXT("Cannot taunt during edging events."));
+        return;
+    }
+    if (Manager->bIsTauntOnCooldown) {
+        Manager->CreateRecoveredNotification(TEXT("TauntIcon"),TEXT("Taunt on Cooldown"),FString::Printf(TEXT("Try again in %d seconds."),FMath::TruncToInt(Manager->TauntCooldownTimerDuration)));
+        return;
+    }
+    if (Manager->bHasTaunted) {
+        Manager->CreateRecoveredNotification(TEXT("TauntIcon"),TEXT("Already Taunted"),TEXT("Wait until the next task to taunt."));
+        return;
+    }
+    PlayRecoveredAnimation(TEXT("TauntButtonKeyPress"));
+    if (Manager->BeatContext.CardType==3) {
+        Manager->CreateRecoveredNotification(TEXT("TauntIcon"),TEXT("Succubus Taunt!"),TEXT("Succubi Spawn Chance Permanently Increased. "));
+        Manager->AddRecoveredPermanentSuccubusWeight();
+        Manager->SpawnRecoveredOverlay(TEXT("UseSuccubusTauntOverlay_Widget"));
+    } else {
+        Manager->CreateRecoveredNotification(TEXT("TauntIcon"),TEXT("Taunt!"),TEXT("Increased Stroke Speed & Count"));
+        Manager->SpawnRecoveredOverlay(TEXT("UseTauntOverlay_Widget"));
+    }
+    Manager->ExecuteTaunt();
 }

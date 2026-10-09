@@ -1,0 +1,51 @@
+{
+  "recovery_scope": "UI_Manager session controls",
+  "source": {
+    "analysis_root": "C:\\Users\\webma\\analysis\\cockhero-v004",
+    "widget": "UI_Manager",
+    "input_entries": {
+      "B": 12088,
+      "C": 14398,
+      "E": 14324,
+      "V": 13682,
+      "W": 14393,
+      "X": 9955,
+      "Z": 16526,
+      "Up": 14468,
+      "K": 14473
+    },
+    "source_functions": [
+      "BP_GlobalManager/AddFavoriteMedia",
+      "BP_DrawManager/AddFavoriteCardToArray",
+      "BP_GlobalManager/OpenAndPlayCumMedia",
+      "BP_GlobalManager/Taunt",
+      "BP_GlobalManager/StartTauntCooldown",
+      "BP_GlobalManager/AddPermanentSuccubusWeight",
+      "UI_Manager/Toggle Hide UI"
+    ],
+    "native_crop_controller": "UMediaPlaybackController::SetCropMode"
+  },
+  "recovered_routes": {
+    "B": "Maps card type 0/1/2,4,5,7,8/3/6 into the source slow, medium, fast, succubus, or cum favorite collection; persists each recovered collection and emits the decoded notification text.",
+    "C": "Toggles the sixteen decoded HUD widgets between Visible and Hidden.",
+    "E": "Clears the edge-hold timer, plays CumButtonKeyPress, selects a cum-deck entry without beginning an outcome card, and opens its media. The CumTextButton_1 mouse route preserves its distinct CumButtonClick animation.",
+    "V": "Plays HideChallengeTrackerUIAnim or UnHideChallengeTrackerUIAnim only when tracked challenges exist.",
+    "W": "Rejects cum, edging, cooldown, and per-task-repeat paths with the decoded notification text before its keypress animation. The succubus route adds +15 permanent event weight and then rejoins the common taunt chain, including the decoded active-timeline 4x stroke and 5x speed modifiers. Every accepted route starts the recovered fast taunt card with 25 heat, 2x count, 0.75x interval, a 0.01 meter increment, source dialogue/background, and a five-tick source cooldown.",
+    "X": "Synchronizes Brain Melter enable and override state, instantiates BrainMelterToggleUI_Widget, and invokes PlayBMToggleAnim with the recovered bool parameter.",
+    "Z": "Cycles Auto -> Fill -> Fit -> Auto, binds ScaleBox_416, and maps manual modes to EStretch::Fill and EStretch::ScaleToFit. Auto reproduces the decoded aspect categories for 16:9, portrait, 4:3, ultrawide, and general media.",
+    "Up": "Restores the decoded developer metric increment, combo/stroke increment, and full loot bar path.",
+    "K": "Restores the decoded developer coins, item counts, upgrades, and store route."
+  },
+  "intentional_input_corrections": {
+    "removed": [
+      "F favorite binding",
+      "P pause binding"
+    ],
+    "reason": "Neither key is an input entry in the decoded UI_Manager graph or the packaged Input.ini."
+  },
+  "validation": {
+    "build": "CockHeroRecoveredEditor Win64 Development completed successfully with Unreal Engine 5.3.2.",
+    "focused_test": "CockHero.Recovery.SessionControlHotkeys completed successfully.",
+    "full_suite": "CockHero.Recovery completed 55 successful tests with exit code 0 on 2026-10-09."
+  }
+}

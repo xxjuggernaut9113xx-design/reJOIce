@@ -190,6 +190,25 @@ void ARecoveredGlobalManager::TriggerBrainMelter() {
     PlayRecoveredSessionSound(TEXT("BrainMelter"));
 }
 
+void ARecoveredGlobalManager::ToggleRecoveredBrainMelter() {
+    bBrainMelterEnabled=!bBrainMelterEnabled;
+    bBrainMelterOverrideEnabled=bBrainMelterEnabled;
+    if (UUserWidget* Toggle=SpawnRecoveredOverlay(TEXT("BrainMelterToggleUI_Widget"))) {
+        if (UFunction* Function=Toggle->FindFunction(TEXT("PlayBMToggleAnim"))) {
+            struct FToggleStatusParameters { bool ToggleStatus; } Parameters{bBrainMelterEnabled};
+            Toggle->ProcessEvent(Function,&Parameters);
+        }
+    }
+    OnSessionAction.Broadcast(bBrainMelterEnabled ? TEXT("BrainMelterEnabled") : TEXT("BrainMelterDisabled"));
+}
+
+void ARecoveredGlobalManager::AddRecoveredPermanentSuccubusWeight() {
+    if (!Rules) return;
+    for (FRecoveredEventRecord& Event : Rules->EventRecords) {
+        if (Event.EventName==8) Event.BaseWeight+=15.0;
+    }
+}
+
 void ARecoveredGlobalManager::SpawnTaskModifier() {
     // Selects and presents a task modifier for the current beat.
     if (!Rules) return;
@@ -261,7 +280,7 @@ void ARecoveredGlobalManager::UpdateEdgeStreakProgressBar() {
 }
 
 void ARecoveredGlobalManager::ClearIdleTimer() {
-    GetWorldTimerManager().ClearTimer(IdleTimer);
+    if (UWorld* World=GetWorld()) World->GetTimerManager().ClearTimer(IdleTimer);
 }
 
 void ARecoveredGlobalManager::ResetIdleTimer() {
@@ -352,16 +371,77 @@ void ARecoveredGlobalManager::StartPunishmentEvent() {
 }
 
 void ARecoveredGlobalManager::ExecuteTaunt() {
-    if (PlayerVariables.bHasTaunted) return;
-    PlayerVariables.bHasTaunted = true;
-    URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats, ERecoveredMetric::TimesTaunted, 1);
-    SpawnRecoveredOverlay(TEXT("UseTauntOverlay_Widget"));
-    PlayRecoveredSessionSound(TEXT("Taunt"));
-    GetWorldTimerManager().SetTimer(TauntCooldownTimer, this, &ARecoveredGlobalManager::OnTauntCooldownExpired, 30.0f, false);
+    URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats,ERecoveredMetric::TimesTaunted,1);
+    OnMetricUpdateRequested.Broadcast(ERecoveredMetric::TimesTaunted,1);
+    bIsTauntOnCooldown=true;
+    if (bHasTaunted) return;
+    bHasTaunted=true;
+    PlayerVariables.bHasTaunted=true;
+    if (BeatContext.CardType==3 && BeatTimeline) {
+        BeatTimeline->ApplyStrokeCountModifier(4);
+        BeatTimeline->ApplySpeedModifier(5.0f);
+    }
+    ClearIdleTimer();
+    AddHeat(25.0);
+    if (StartRecoveredTauntCard()) {
+        PlayerVariables.TotalTauntsUsed=URecoveredStateRuleLibrary::AddInt32Wrapping(PlayerVariables.TotalTauntsUsed,1);
+        PlayDialogueLine(TEXT("SpecialEvent_1"));
+        ChangeRecoveredBeatBackground(8);
+    }
+    StartRecoveredTauntCooldown();
+    AddToCumMeter(.01);
+}
+
+void ARecoveredGlobalManager::StartRecoveredTauntCooldown() {
+    bIsTauntOnCooldown=true;
+    TauntCooldownTimerDuration=5.0;
+    if (UWorld* World=GetWorld()) World->GetTimerManager().SetTimer(TauntCooldownTimer,this,&ARecoveredGlobalManager::OnTauntCooldownExpired,1.0f,true);
 }
 
 void ARecoveredGlobalManager::OnTauntCooldownExpired() {
-    PlayerVariables.bHasTaunted = false;
+    TauntCooldownTimerDuration=FMath::Max(0.0,TauntCooldownTimerDuration-1.0);
+    if (TauntCooldownTimerDuration<=0.0) {
+        bIsTauntOnCooldown=false;
+        if (UWorld* World=GetWorld()) World->GetTimerManager().ClearTimer(TauntCooldownTimer);
+        TauntCooldownTimer.Invalidate();
+    }
+}
+
+bool ARecoveredGlobalManager::StartRecoveredTauntCard() {
+    LastSessionError.Reset();
+    if (!Rules || !HeatCategoryDataTable || !MediaDeckState || !BeatTimeline) {
+        LastSessionError=TEXT("Taunt card requires recovered rules, timing, media, and beat timeline");
+        return false;
+    }
+    const FRecoveredHeatCategoryRow* Row=HeatCategoryDataTable->FindRow<FRecoveredHeatCategoryRow>(TEXT("HighHeat"),TEXT("Recovered taunt card"));
+    if (!Row || Rules->FastBeatPatterns.IsEmpty()) {
+        LastSessionError=TEXT("Taunt timing row or pattern bank is unavailable");
+        return false;
+    }
+    MediaDeckState->ReplaceEmptyDecks();
+    if (!MediaDeckState->Draw(2,false,SelectedRandomCard)) {
+        LastSessionError=TEXT("Taunt media deck is empty");
+        return false;
+    }
+    if (MediaPlayback && !MediaPlayback->OpenEntry(SelectedRandomCard)) {
+        LastSessionError=TEXT("Taunt media could not be opened");
+        return false;
+    }
+    const auto Timing=URecoveredCardRuleLibrary::CalculateCardTiming(
+        UKismetMathLibrary::RandomIntegerInRange(Row->MinStrokeCount,Row->MaxStrokeCount),
+        UKismetMathLibrary::RandomFloatInRange(.18,Row->MaxIntervalSeconds),
+        2.0,
+        UserStrokeCountMultiplier,
+        .75);
+    PlayerVariables.BeatSpawnInterval=Timing.BeatInterval;
+    const auto Pattern=URecoveredSessionRuleLibrary::CheckIntervalMultipliers(Rules->FastBeatPatterns[UKismetMathLibrary::RandomIntegerInRange(0,Rules->FastBeatPatterns.Num()-1)],BeatTimeline->GetCurrentInterval());
+    if (!StartRecoveredBeatSequence(Pattern,Timing.BeatInterval,Timing.StrokeCount,1.0f,BeatTravelTime)) {
+        LastSessionError=TEXT("Taunt beat timeline rejected source timing");
+        return false;
+    }
+    BeatContext.CardType=2;
+    MediaDeckState->ReplaceEmptyDecks();
+    return true;
 }
 
 void ARecoveredGlobalManager::GrantPlayerCoins(int32 Amount) {

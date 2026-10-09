@@ -36,8 +36,9 @@ bool ARecoveredGlobalManager::SpawnRecoveredStore() {
 }
 void ARecoveredGlobalManager::CompleteRecoveredStoreCooldown() { bStoreOnCooldown=false; }
 bool ARecoveredGlobalManager::CreateRecoveredNotification(FName IconName,const FString& Title,const FString& Description) {
+    if (!GetWorld() || !IsValid(SessionScreen)) return false;
     auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
-    if (!IsValid(SessionScreen) || !Instance || !Instance->CurrentSave || !Instance->CurrentSave->GetBoolSetting(TEXT("AreNotificationBoxesEnabled?"),true)) return false;
+    if (!Instance || !Instance->CurrentSave || !Instance->CurrentSave->GetBoolSetting(TEXT("AreNotificationBoxesEnabled?"),true)) return false;
     auto* Panel=Cast<UVerticalBox>(SessionScreen->GetWidgetFromName(TEXT("NotifVerticalBox")));
     UClass* Class=LoadClass<URecoveredNotificationWidget>(nullptr,TEXT("/Game/Recovery/UI/NotificationBoxWidget.NotificationBoxWidget_C"));
     if (!Panel || !GetWorld() || !Class) return false;
@@ -51,6 +52,8 @@ bool ARecoveredGlobalManager::CreateRecoveredNotification(FName IconName,const F
     else if (IconName==TEXT("SlowdownItem")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/SlowdownItem.SlowdownItem"));
     else if (IconName==TEXT("BonerPillItem")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/BonerPillItem.BonerPillItem"));
     else if (IconName==TEXT("SuccuShield")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/SuccubusShields_On.SuccubusShields_On"));
+    else if (IconName==TEXT("CropIcon")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/NotifBoxIcons/CropIcon.CropIcon"));
+    else if (IconName==TEXT("TauntIcon")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/Widgets/NotificationBoxIcons/TauntIcon.TauntIcon"));
     else if (IconName==TEXT("PrematureCumIcon") || IconName==TEXT("SuccessfulCumIcon")) {
         const FString Name=IconName.ToString();
         Icon=LoadObject<UTexture2D>(nullptr,*FString::Printf(TEXT("/Game/Recovery/Resources/Widgets/NotificationBoxIcons/%s.%s"),*Name,*Name));

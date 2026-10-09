@@ -124,13 +124,21 @@ The decoded `UI_Manager` input entries recover a three-key dispatch matrix that 
 
 The Windows Unreal Editor build passed. The full `CockHero.Recovery` run completed **54 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
 
+### Session-control keyboard recovery (2026-10-09)
+
+The decoded `UI_Manager` control surface now routes `B`, `C`, `E`, `V`, `W`, `X`, `Z`, `Up`, and `K` through recovered native equivalents. `B` restores card-type-specific favorites and persistence; `E` selects a cum media entry without incorrectly invoking an outcome; the keyboard route plays `CumButtonKeyPress` while `CumTextButton_1` preserves the source mouse-click `CumButtonClick` animation; `C` restores all sixteen source HUD visibility targets; `V` preserves the tracked-challenge gate; and `Z` drives `ScaleBox_416` through the source Auto/Fill/Fit cycle. The media controller now implements manual `EStretch::Fill` and `EStretch::ScaleToFit`, with native-derived automatic aspect handling.
+
+`W` restores the decoded taunt gates and messages before its source keypress animation. The card-three route applies its permanent succubus weight increase of 15 and rejoins the common taunt chain, including the decoded active-timeline 4x stroke and 5x speed modifiers. Every accepted route retains the 25 heat, two-times stroke count, 0.75 timing multiplier, 0.01 cum-meter increase, dialogue/background, and five-tick cooldown. `X` synchronizes the Brain Melter override and invokes the imported `PlayBMToggleAnim` Blueprint function. The original graph contains neither the prior reconstructed `F` favorite binding nor the prior reconstructed `P` pause binding, so both were removed. `Up` and `K` retain their source development-only routes.
+
+The source entrypoints, implementation mapping, and validation are recorded in [session-control-hotkeys-recovery.json](RecoveryEvidence/session-control-hotkeys-recovery.json). `CockHero.Recovery.SessionControlHotkeys` passed. The Windows Unreal Editor build passed. The full `CockHero.Recovery` run completed **55 succeeded**, **0 failures**, and **0 not run**.
+
 ## Remaining limits
 
 - The staged post-game controller follows recovered graph order and timings, but interactive side-by-side original-runtime comparison of every animation curve, sound cue, and transient visual state remains outstanding.
 - Importer file/directory picker behavior is Windows-specific and was validated by build, widget initialization, manifest/deck code, and parent readback. It still needs an interactive GUI and packaged-build check with representative user media. Playback support is limited by the existing recovered media backend.
 - Recovered challenge and modifier lists use the original container/card assets and the recovered state models, but do not restore every original entry Blueprint animation, icon rule, conflict pair, reward roll, or data-table mapping.
 - The current inventory recovery covers PG1's Edge action, tab switching, heat, break, slowdown, cum chance, PG2 resupply, Boner Pill, and SuccuShield. Interactive original-runtime timing and full-session behavior still need side-by-side recovery.
-- Auto-draw still has no verified completion consumer. Hardware transports, original save compatibility, original editor graphs, complete native analysis, full GUI playtests, packaged validation, and clean-machine validation remain outstanding.
+- Hardware transports, original save compatibility, original editor graphs, complete native analysis, full GUI playtests, packaged validation, and clean-machine validation remain outstanding.
 - The complete-image checkpoint is still partial, and the original runtime has not been used for behavioral comparison. No full-game completion or original-runtime parity is claimed.
 
 Build/test details and input hashes are recorded in [final-gap-patch-verification.json](RecoveryEvidence/final-gap-patch-verification.json). The comprehensive missing/partial-feature audit is updated separately after this integration.

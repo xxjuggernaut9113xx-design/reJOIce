@@ -272,11 +272,40 @@ bool ARecoveredGlobalManager::LoadMediaPack(const FString& ManifestPath,const TA
     if(!MediaDeckState) MediaDeckState=NewObject<URecoveredDeckState>(this);
     MediaDeckState->Master=URecoveredMediaLibrary::FilterMedia(Entries,ExcludedTags,BeatContext.ActiveModifiers.Contains(TEXT("Ass Fanatic")),BeatContext.ActiveModifiers.Contains(TEXT("Boobs Fanatic")),BeatContext.ActiveModifiers.Contains(TEXT("Feet Fanatic")));
     MediaDeckState->SetChildDecks();
+    if (const auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance())) {
+        if (const URecoveredSaveGame* Save=Instance->CurrentSave) {
+            for (uint8 Deck=0;Deck<5;++Deck) {
+                const FString Key=URecoveredDeckState::FavoriteSaveKey(Deck);
+                TArray<FString> Paths=Save->GetStringArraySetting(Key);
+                // Preserve favorites created before categories were recovered.
+                if (Paths.IsEmpty() && !Save->HasSetting(Key)) Paths=Save->GetStringArraySetting(TEXT("FavoriteMedia"));
+                MediaDeckState->RestoreFavoritePaths(Deck,Paths);
+            }
+        }
+    }
     if(!MediaPlayback) {
         MediaPlayback=NewObject<URecoveredMediaPlayback>(this);
         MediaPlayback->SetLooping(bVideoLoopEnabled);
         MediaPlayback->OnMediaError.AddUniqueDynamic(this, &ARecoveredGlobalManager::HandleMediaPlaybackError);
     }
+    return true;
+}
+
+bool ARecoveredGlobalManager::OpenRecoveredCumMedia(bool bPlayMedia) {
+    LastSessionError.Reset();
+    if (!MediaDeckState) {
+        LastSessionError=TEXT("Cum media deck is unavailable");
+        return false;
+    }
+    if (!MediaDeckState->ChooseRandom(4,false,SelectedRandomCard,true)) {
+        LastSessionError=TEXT("Cum media deck is empty");
+        return false;
+    }
+    if (bPlayMedia && MediaPlayback && !MediaPlayback->OpenEntry(SelectedRandomCard)) {
+        LastSessionError=TEXT("Cum media could not be opened");
+        return false;
+    }
+    OnSessionAction.Broadcast(TEXT("CumMediaOpened"));
     return true;
 }
 bool ARecoveredGlobalManager::DrawPaceCard(uint8 Pace,bool bPlayMedia) {
@@ -315,6 +344,7 @@ bool ARecoveredGlobalManager::PrepareDrawState() {
         return false;
     }
     bHasTaunted=false;
+    PlayerVariables.bHasTaunted=false;
     if(HeatLevel>=100) {
         URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats,ERecoveredMetric::DrawsAtMaxHeat,1);
         OnMetricUpdateRequested.Broadcast(ERecoveredMetric::DrawsAtMaxHeat,1);

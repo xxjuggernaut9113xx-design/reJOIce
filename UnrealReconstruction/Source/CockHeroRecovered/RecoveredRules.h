@@ -270,6 +270,8 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") double BeatTravelTime = 1.75;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered Session") FString LastSessionError;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") bool bHasTaunted = false;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered Session") bool bIsTauntOnCooldown = false;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered Session") double TauntCooldownTimerDuration = 0.0;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered Session") TArray<int32> RecentDrawTimestamps;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered Session") int32 SessionDrawsAtMaxHeat = 0;
     UPROPERTY(BlueprintAssignable, Category="Recovered Events") FRecoveredCoinsAdded OnCoinsAdded;
@@ -297,6 +299,7 @@ public:
     UFUNCTION() void PresentRecoveredBeat(const FRecoveredBeatEvent& Event);
     UFUNCTION() void HandleBeatHitCenter(const FRecoveredBeatEvent& Event);
     UFUNCTION(BlueprintCallable, Category="Recovered|Media") bool LoadMediaPack(const FString& ManifestPath, const TArray<FString>& ExcludedTags);
+    UFUNCTION(BlueprintCallable, Category="Recovered|Media") bool OpenRecoveredCumMedia(bool bPlayMedia = true);
     // Media pack management: enable/disable packs and control their draw priority.
     UFUNCTION(BlueprintCallable, Category="Recovered|Media") void SetMediaPackEnabled(const FString& PackID, bool bEnabled);
     UFUNCTION(BlueprintPure, Category="Recovered|Media") bool IsMediaPackEnabled(const FString& PackID) const;
@@ -306,6 +309,7 @@ public:
     UFUNCTION(BlueprintCallable, Category="Recovered|Session") bool DrawPaceCard(uint8 Pace, bool bPlayMedia = true);
     UFUNCTION(BlueprintCallable, Category="Recovered|Session") bool PrepareDrawState();
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered Events") bool bBrainMelterEnabled=false;
+    UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered Events") bool bBrainMelterOverrideEnabled=false;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered Events") bool bStoreOnCooldown=false;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered Events") int32 SuccubusShields=0;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered Events") bool bShieldToggled=false;
@@ -321,6 +325,8 @@ public:
     UFUNCTION() void PlayBeatCompleteSFX();
     UFUNCTION() void TriggerClothesBreaker();
     UFUNCTION() void TriggerBrainMelter();
+    UFUNCTION(BlueprintCallable,Category="Recovered Events") void ToggleRecoveredBrainMelter();
+    UFUNCTION(BlueprintCallable,Category="Recovered Events") void AddRecoveredPermanentSuccubusWeight();
     UFUNCTION() void SpawnTaskModifier();
     UFUNCTION() void TriggerMeterOverride();
     UFUNCTION() void ClearNotificationBoxes();
@@ -469,6 +475,8 @@ public:
     FTimerHandle MercyCooldownTimer;
     FTimerHandle TauntCooldownTimer;
     bool StartPaceCard(uint8 Pace,bool bPlayMedia,bool bPrepare);
+    bool StartRecoveredTauntCard();
+    void StartRecoveredTauntCooldown();
     UFUNCTION(BlueprintCallable,Category="Recovered|Session") bool DrawRecoveredSpecialCard(FName Event,bool bPlayMedia=true);
     FTimerHandle SessionDurationTimer;
     bool bRecoveredSessionFinalized = false;
