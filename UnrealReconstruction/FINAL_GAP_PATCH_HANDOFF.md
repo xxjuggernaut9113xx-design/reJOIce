@@ -118,6 +118,12 @@ The Boner Pill path preserves its source gates, metrics 8 and 27, all-or-nothing
 
 The source graph and validation record are in [pg2-defensive-items-recovery.json](RecoveryEvidence/pg2-defensive-items-recovery.json). The Windows Unreal Editor build passed. Focused `CockHero.Recovery.PG2` automation passed. The full `CockHero.Recovery` run completed **54 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
 
+### Inventory keyboard recovery (2026-10-09)
+
+The decoded `UI_Manager` input entries recover a three-key dispatch matrix that switches on `CurrentInventoryTab`. Key `One` calls PG1 Cum Chance on tab zero and PG2 Boner Pill on tab one. Key `Two` calls PG1 Heat Reduction on tab zero and PG2 SuccuShield on tab one, followed by source special-event dialogue 12. Key `Three` retains its existing PG1 Edge and PG2 Resupply routes; its tab-one route also plays source dialogue 12. The recovered branch order is recorded with the original entrypoint offsets and statement indices in [inventory-hotkey-recovery.json](RecoveryEvidence/inventory-hotkey-recovery.json).
+
+The Windows Unreal Editor build passed. The full `CockHero.Recovery` run completed **54 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
+
 ## Remaining limits
 
 - The staged post-game controller follows recovered graph order and timings, but interactive side-by-side original-runtime comparison of every animation curve, sound cue, and transient visual state remains outstanding.

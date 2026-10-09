@@ -144,6 +144,23 @@ FReply URecoveredSessionWidget::NativeOnKeyDown(const FGeometry& InGeometry, con
     } else if (Key == EKeys::Tab || Key == EKeys::Q) {
         SwitchInventoryTabs();
         return FReply::Handled();
+    } else if (Key == EKeys::One) {
+        auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
+        if (Manager && Manager->CurrentInventoryTab==0) {
+            if (auto* Inventory=Cast<URecoveredTabbedInventoryWidget>(GetWidgetFromName(TEXT("PG1TabbedInventory_Widget")))) Inventory->UseCumChanceItem();
+        } else if (Manager && Manager->CurrentInventoryTab==1) {
+            if (auto* Inventory=Cast<URecoveredPG2TabbedInventoryWidget>(GetWidgetFromName(TEXT("PG2TabbedInventory_Widget")))) Inventory->UseBonerPillItem();
+        }
+        return FReply::Handled();
+    } else if (Key == EKeys::Two) {
+        auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
+        if (Manager && Manager->CurrentInventoryTab==0) {
+            if (auto* Inventory=Cast<URecoveredTabbedInventoryWidget>(GetWidgetFromName(TEXT("PG1TabbedInventory_Widget")))) Inventory->UseReduceHeatItem();
+        } else if (Manager && Manager->CurrentInventoryTab==1) {
+            if (auto* Inventory=Cast<URecoveredPG2TabbedInventoryWidget>(GetWidgetFromName(TEXT("PG2TabbedInventory_Widget")))) Inventory->ToggleSuccuShields();
+            Manager->PlayDialogueLine(TEXT("SpecialEvent_12"));
+        }
+        return FReply::Handled();
     } else if (Key == EKeys::Three) {
         auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
         if (Manager && Manager->CurrentInventoryTab==0) {

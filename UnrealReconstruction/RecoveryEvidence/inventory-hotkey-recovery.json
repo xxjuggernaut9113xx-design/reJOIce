@@ -1,0 +1,45 @@
+{
+  "recovery_area": "session inventory hotkeys",
+  "source_analysis": [
+    "C:\\Users\\webma\\analysis\\cockhero-v004\\decoded\\UI_Manager-functions.json",
+    "D:\\reJOice\\UnrealReconstruction\\RecoveryEvidence\\blueprint-functions\\UI_Manager\\ExecuteUbergraph_UI_Manager.json"
+  ],
+  "source_input_entrypoints": {
+    "One": 13463,
+    "Two": 12735,
+    "Three": 11131
+  },
+  "source_dispatch_by_inventory_tab": {
+    "tab_0": {
+      "One": "PG1TabbedInventory_Widget.UseCumChanceItem",
+      "Two": "PG1TabbedInventory_Widget.UseReduceHeatItem",
+      "Three": "PG1TabbedInventory_Widget.TabbedInventoryEdgeTrigger"
+    },
+    "tab_1": {
+      "One": "PG2TabbedInventory_Widget.UseBonerPillItem",
+      "Two": "PG2TabbedInventory_Widget.ToggleSuccuShields then PlaySpecialEventDialogue(12)",
+      "Three": "PG2TabbedInventory_Widget.TabbedInventoryResupplyTrigger then PlaySpecialEventDialogue(12)"
+    }
+  },
+  "source_statement_indices": {
+    "resupply": 321,
+    "edge": 324,
+    "succu_shield": 375,
+    "decrease_heat": 378,
+    "boner_pill": 398,
+    "cum_chance": 400
+  },
+  "implementation": "URecoveredSessionWidget.NativeOnKeyDown dispatches One and Two using the recovered page-specific matrix. The pre-existing source-aligned Three route remains unchanged.",
+  "validation": {
+    "editor_build": "CockHeroRecoveredEditor Win64 Development",
+    "full_automation": {
+      "name": "CockHero.Recovery",
+      "result": "success",
+      "succeeded": 54,
+      "warnings": 0,
+      "failed": 0,
+      "not_run": 0
+    }
+  },
+  "result": "passed"
+}
