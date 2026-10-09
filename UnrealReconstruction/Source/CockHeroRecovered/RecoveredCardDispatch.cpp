@@ -5,12 +5,71 @@
 #include "Blueprint/UserWidget.h"
 #include "Components/ProgressBar.h"
 #include "Components/TextBlock.h"
+#include "Components/Image.h"
 #include "Animation/WidgetAnimation.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundBase.h"
 #include "TimerManager.h"
 #include "Engine/World.h"
+
+namespace {
+struct FRecoveredBonerPillEffect {
+    double StrokeMultiplier;
+    double IntervalDivisor;
+    double CoinMultiplier;
+    float TimelineSpeedMultiplier;
+    int32 TimelineStrokeMultiplier;
+    const TCHAR* NotificationDescription;
+};
+
+const FRecoveredBonerPillEffect GRecoveredBonerPillEffects[] = {
+    {2.0,2.0,2.0,2.0f,2,TEXT("X2 Coins | X2 Strokes | X2 Speed")},
+    {2.5,2.0,2.0,2.0f,2,TEXT("X2 Coins | X2 Strokes | X2 Speed")},
+    {3.0,2.0,2.0,3.0f,3,TEXT("X2 Coins | X3 Strokes | X3 Speed")},
+    {3.0,3.0,3.0,5.0f,3,TEXT("X2 Coins | X3 Strokes | X5 Speed")},
+    {4.0,5.0,3.0,6.0f,4,TEXT("X3 Coins | X4 Strokes | X6 Speed")},
+};
+
+const FRecoveredBonerPillEffect& GetRecoveredBonerPillEffect(int32 UpgradeLevel) {
+    return GRecoveredBonerPillEffects[FMath::Clamp(UpgradeLevel,0,UE_ARRAY_COUNT(GRecoveredBonerPillEffects)-1)];
+}
+
+int32 GetRecoveredSuccuShieldPurchaseAmount(int32 UpgradeLevel) {
+    static constexpr int32 Amounts[]={1,4,7,10,15};
+    return Amounts[FMath::Clamp(UpgradeLevel,0,UE_ARRAY_COUNT(Amounts)-1)];
+}
+
+FRecoveredEligibilityState BuildRecoveredEligibilityState(const ARecoveredGlobalManager& Manager) {
+    FRecoveredEligibilityState State;
+    State.HeatCategory=Manager.BeatContext.HeatCategory;
+    State.Combo=Manager.PlayerVariables.CurrentComboCount;
+    State.Coins=Manager.PlayerVariables.PlayerCoins;
+    State.bCanSuccubiSpawn=Manager.PlayerVariables.bCanSuccubiSpawn;
+    State.bBrainMelterEnabled=Manager.bBrainMelterEnabled;
+    State.bStoreOnCooldown=Manager.bStoreOnCooldown;
+    State.Shields=Manager.GetOwnedItemCount(TEXT("SuccuShield"));
+    State.bShieldToggled=Manager.bShieldToggled;
+    State.Modifiers=Manager.BeatContext.ActiveModifiers;
+    return State;
+}
+
+void CommitRecoveredSuccuShieldEligibility(ARecoveredGlobalManager& Manager,const FRecoveredEligibilityState& State) {
+    Manager.SyncRecoveredSuccuShieldInventory(State.Shields);
+    Manager.bShieldToggled=State.bShieldToggled;
+    if (State.ShieldsConsumed<=0) return;
+    URecoveredStateRuleLibrary::RecordSessionMetric(Manager.SessionStats,ERecoveredMetric::ItemsUsed,State.ShieldsConsumed);
+    Manager.OnMetricUpdateRequested.Broadcast(ERecoveredMetric::ItemsUsed,State.ShieldsConsumed);
+    Manager.OnSessionAction.Broadcast(TEXT("InventoryUsed_SuccuShield"));
+    if (State.Shields<=0) {
+        Manager.SpawnRecoveredOverlay(TEXT("NoShieldsLeft_OverlayWidget"));
+        Manager.OnSessionAction.Broadcast(TEXT("InventoryExhausted_SuccuShield"));
+        Manager.CreateRecoveredNotification(TEXT("SuccuShield"),TEXT("No SuccuShields Left"),TEXT("No Shields Left. Succubi May Appear"));
+        return;
+    }
+    Manager.CreateRecoveredNotification(TEXT("SuccuShield"),TEXT("SuccuShield Active"),TEXT("1 Shield Consumed This Draw"));
+}
+}
 
 void ARecoveredGlobalManager::HandleRecoveredSessionAction(FName Action) {
     if (Action==TEXT("DetermineCardV2")) RequestNextRecoveredCard(true);
@@ -68,17 +127,10 @@ bool ARecoveredGlobalManager::RequestNextRecoveredCard(bool bPlayMedia) {
         LastDispatchedEvent=PlayerVariables.bHasEdged ? TEXT("EdgingEventV2") : TEXT("CumEventOverride");
         return DrawRecoveredSpecialCard(LastDispatchedEvent,bPlayMedia);
     }
-    FRecoveredEligibilityState State;
-    State.HeatCategory=BeatContext.HeatCategory;
-    State.Combo=PlayerVariables.CurrentComboCount;
-    State.Coins=PlayerVariables.PlayerCoins;
-    State.bCanSuccubiSpawn=PlayerVariables.bCanSuccubiSpawn;
-    State.bBrainMelterEnabled=bBrainMelterEnabled;
-    State.bStoreOnCooldown=bStoreOnCooldown;
-    State.Shields=SuccubusShields; State.bShieldToggled=bShieldToggled;
-    State.Modifiers=BeatContext.ActiveModifiers;
+    if (GetOwnedItemCount(TEXT("SuccuShield"))==0 && SuccubusShields>0) SyncRecoveredSuccuShieldInventory(SuccubusShields);
+    FRecoveredEligibilityState State=BuildRecoveredEligibilityState(*this);
     const auto Eligible=URecoveredEventRuleLibrary::BuildEligibleEvents(Rules->EventRecords,State);
-    SuccubusShields=State.Shields; bShieldToggled=State.bShieldToggled;
+    CommitRecoveredSuccuShieldEligibility(*this,State);
     const auto Weighted=URecoveredEventRuleLibrary::ApplyDrawEventWeights(Eligible,State.HeatCategory,CurrentComboTypeEnum);
     const double Total=URecoveredEventRuleLibrary::GetTotalWeight(Weighted);
     const int32 Index=URecoveredEventRuleLibrary::ChooseEventAtRoll(Weighted,UKismetMathLibrary::RandomFloatInRange(0,Total));
@@ -322,8 +374,10 @@ void ARecoveredGlobalManager::AcquireStoreItem(FName ItemID) {
     int32& Count = OwnedItemCounts.FindOrAdd(ItemID);
     const int32 PreviousCount=Count;
     const int32 Maximum=GetRecoveredItemMaximum(ItemID);
-    Count=Maximum>0 ? FMath::Min(Count+1,Maximum) : Count+1;
+    const int32 AcquiredAmount=ItemID==TEXT("SuccuShield") ? GetRecoveredSuccuShieldPurchaseAmount(GetRecoveredItemUpgradeLevel(ItemID)) : 1;
+    Count=Maximum>0 ? FMath::Min(Count+AcquiredAmount,Maximum) : Count+AcquiredAmount;
     if (Count==PreviousCount) return;
+    if (ItemID==TEXT("SuccuShield")) SuccubusShields=Count;
     PlayerVariables.bHasItems=true;
     OnSessionAction.Broadcast(FName(*FString::Printf(TEXT("InventoryAcquired_%s"),*ItemID.ToString())));
 }
@@ -336,6 +390,8 @@ bool ARecoveredGlobalManager::UseOwnedItem(FName ItemID, int32 Level) {
     if (ItemID==TEXT("Break")) return UseRecoveredBreakItem()==ERecoveredDefensiveItemUseResult::Triggered;
     if (ItemID==TEXT("Slowdown")) return UseRecoveredSlowdownItem()==ERecoveredDefensiveItemUseResult::Triggered;
     if (ItemID==TEXT("XCumChance")) return UseRecoveredCumChanceItem()==ERecoveredDefensiveItemUseResult::Triggered;
+    if (ItemID==TEXT("BonerPill")) return UseRecoveredBonerPillItem()==ERecoveredDefensiveItemUseResult::Triggered;
+    if (ItemID==TEXT("SuccuShield")) return ToggleRecoveredSuccuShields()==ERecoveredDefensiveItemUseResult::Triggered;
     int32* Count = OwnedItemCounts.Find(ItemID);
     if (!Count || *Count <= 0) return false;
     if (!ApplyStoreItemEffect(ItemID, Level)) return false;
@@ -542,6 +598,114 @@ ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::UseRecoveredCumChanceI
     ConsumeRecoveredDefensiveItem(*this,ItemID,.3f,CumChanceLastItemTimerHandle);
     LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::Triggered;
     return LastDefensiveItemUseResult;
+}
+
+ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::UseRecoveredBonerPillItem() {
+    const FName ItemID=TEXT("BonerPill");
+    if (!PlayerVariables.bCanUseItems) {
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::CannotUseItems;
+        return LastDefensiveItemUseResult;
+    }
+    if (GetOwnedItemCount(ItemID)<=0) {
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::NoItemAvailable;
+        return LastDefensiveItemUseResult;
+    }
+    if (!bCanUseBonerPill) {
+        CreateRecoveredNotification(TEXT("BonerPillItem"),TEXT("Can't Use Boner Pill"),TEXT("Can only be used once per task"));
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::CooldownActive;
+        return LastDefensiveItemUseResult;
+    }
+
+    ApplyRecoveredAllOrNothingModifierEffects();
+    RecordRecoveredDefensiveItemUse(*this,true);
+    URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats,ERecoveredMetric::BonerPillsUsed,1);
+    OnMetricUpdateRequested.Broadcast(ERecoveredMetric::BonerPillsUsed,1);
+
+    bCanUseBonerPill=false;
+    bIsTemptationOnCooldown=true;
+    BeatContext.CardType=2;
+    PlayDialogueLine(TEXT("SpecialEvent_13"));
+    OnSessionAction.Broadcast(TEXT("InventoryUseInitiated_BonerPill"));
+    SpawnRecoveredOverlay(TEXT("BonerPillItemUseOverlay_Widget"));
+    PlayRecoveredSessionSound(TEXT("BonerPill"));
+
+    const FRecoveredBonerPillEffect& Effect=GetRecoveredBonerPillEffect(GetRecoveredItemUpgradeLevel(ItemID));
+    PlayerVariables.CurrentStrokeCount=static_cast<int32>(static_cast<double>(PlayerVariables.CurrentStrokeCount)*Effect.StrokeMultiplier);
+    PlayerVariables.BeatSpawnInterval=FMath::Clamp(PlayerVariables.BeatSpawnInterval/Effect.IntervalDivisor,MinimumBeatInterval,1.0);
+    PlayerVariables.CoinEarnMultiplier=Effect.CoinMultiplier;
+    if (BeatTimeline) {
+        BeatTimeline->ApplySpeedModifier(Effect.TimelineSpeedMultiplier);
+        BeatTimeline->ApplyStrokeCountModifier(Effect.TimelineStrokeMultiplier);
+    }
+    CreateRecoveredNotification(TEXT("BonerPillItem"),TEXT("Boner Pill"),Effect.NotificationDescription);
+    ChangeRecoveredBeatBackground(9);
+
+    if (int32* Count=OwnedItemCounts.Find(ItemID)) {
+        --*Count;
+        if (*Count<=0) OwnedItemCounts.Remove(ItemID);
+    }
+    PlayerVariables.bHasItems=!OwnedItemCounts.IsEmpty();
+    OnSessionAction.Broadcast(TEXT("InventoryUsed_BonerPill"));
+    if (GetOwnedItemCount(ItemID)<=0) OnSessionAction.Broadcast(TEXT("InventoryExhausted_BonerPill"));
+
+    if (UWorld* World=GetWorld()) World->GetTimerManager().SetTimer(BonerPillCooldownTimerHandle,this,&ARecoveredGlobalManager::CompleteRecoveredBonerPillCooldown,60.0f,false);
+    LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::Triggered;
+    return LastDefensiveItemUseResult;
+}
+
+ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::ToggleRecoveredSuccuShields() {
+    const FName ItemID=TEXT("SuccuShield");
+    if (!PlayerVariables.bCanUseItems) {
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::CannotUseItems;
+        return LastDefensiveItemUseResult;
+    }
+    if (GetOwnedItemCount(ItemID)==0 && SuccubusShields>0) SyncRecoveredSuccuShieldInventory(SuccubusShields);
+    if (GetOwnedItemCount(ItemID)<=0) {
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::NoItemAvailable;
+        return LastDefensiveItemUseResult;
+    }
+    if (RollRecoveredPunishmentChance()) {
+        StartPunishmentEvent();
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::PunishmentTriggered;
+        return LastDefensiveItemUseResult;
+    }
+
+    bShieldToggled=!bShieldToggled;
+    OnSessionAction.Broadcast(bShieldToggled ? TEXT("SuccuShieldToggledOn") : TEXT("SuccuShieldToggledOff"));
+    SpawnRecoveredOverlay(bShieldToggled ? TEXT("ShieldOn_OverlayWidget") : TEXT("ShieldOff_OverlayWidget"));
+    CreateRecoveredNotification(TEXT("SuccuShield"),bShieldToggled ? TEXT("SuccuShield On") : TEXT("SuccuShield Off"),bShieldToggled ? TEXT("All Succubi Spawns Blocked") : TEXT("Succubus Threat Active"));
+    PlayRecoveredSessionSound(TEXT("Click"));
+    LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::Triggered;
+    return LastDefensiveItemUseResult;
+}
+
+bool ARecoveredGlobalManager::CheckRecoveredSuccubusEligibility() {
+    if (GetOwnedItemCount(TEXT("SuccuShield"))==0 && SuccubusShields>0) SyncRecoveredSuccuShieldInventory(SuccubusShields);
+    FRecoveredEligibilityState State=BuildRecoveredEligibilityState(*this);
+    const bool bEligible=URecoveredEventRuleLibrary::CheckSuccubusEligibility(State);
+    CommitRecoveredSuccuShieldEligibility(*this,State);
+    return bEligible;
+}
+
+void ARecoveredGlobalManager::SyncRecoveredSuccuShieldInventory(int32 Count) {
+    const int32 SanitizedCount=FMath::Max(0,Count);
+    if (SanitizedCount>0) OwnedItemCounts.Add(TEXT("SuccuShield"),SanitizedCount);
+    else OwnedItemCounts.Remove(TEXT("SuccuShield"));
+    SuccubusShields=SanitizedCount;
+    PlayerVariables.bHasItems=!OwnedItemCounts.IsEmpty();
+}
+
+void ARecoveredGlobalManager::ChangeRecoveredBeatBackground(int32 Style) {
+    CurrentBeatBackgroundStyle=Style;
+    if (Style!=9 || !IsValid(SessionScreen)) return;
+    auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
+    if (Instance) Instance->PlayRecoveredBackgroundMedia(TEXT("temptationbackgroundloop"),Cast<UImage>(SessionScreen->GetWidgetFromName(TEXT("BackgroundImage"))));
+}
+
+void ARecoveredGlobalManager::CompleteRecoveredBonerPillCooldown() {
+    if (GetWorld()) GetWorldTimerManager().ClearTimer(BonerPillCooldownTimerHandle);
+    BonerPillCooldownTimerHandle.Invalidate();
+    bIsTemptationOnCooldown=false;
 }
 
 void ARecoveredGlobalManager::UpdateRecoveredTimeSinceLastDefenseItem() {

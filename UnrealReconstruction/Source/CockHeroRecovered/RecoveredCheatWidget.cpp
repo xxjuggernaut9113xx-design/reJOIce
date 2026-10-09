@@ -32,7 +32,7 @@ bool URecoveredCheatWidget::SubmitCheatCode(const FString& Code) {
         Manager->AddHeat(-100.0);
         bValid = true;
     } else if (Upper == TEXT("GODMODE")) {
-        Manager->SuccubusShields = 99;
+        Manager->SyncRecoveredSuccuShieldInventory(99);
         bValid = true;
     }
     if (auto* Feedback = Cast<UTextBlock>(GetWidgetFromName(TEXT("CheatFeedbackText")))) {

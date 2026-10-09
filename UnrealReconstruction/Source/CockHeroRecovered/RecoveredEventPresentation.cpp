@@ -49,6 +49,8 @@ bool ARecoveredGlobalManager::CreateRecoveredNotification(FName IconName,const F
     else if (IconName==TEXT("CumChangeItem")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/CumChangeItem.CumChangeItem"));
     else if (IconName==TEXT("DecreaseHealthBarItem")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/DecreaseHealthBarItem.DecreaseHealthBarItem"));
     else if (IconName==TEXT("SlowdownItem")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/SlowdownItem.SlowdownItem"));
+    else if (IconName==TEXT("BonerPillItem")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/BonerPillItem.BonerPillItem"));
+    else if (IconName==TEXT("SuccuShield")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/SuccubusShields_On.SuccubusShields_On"));
     else if (IconName==TEXT("PrematureCumIcon") || IconName==TEXT("SuccessfulCumIcon")) {
         const FString Name=IconName.ToString();
         Icon=LoadObject<UTexture2D>(nullptr,*FString::Printf(TEXT("/Game/Recovery/Resources/Widgets/NotificationBoxIcons/%s.%s"),*Name,*Name));

@@ -110,12 +110,20 @@ The source control-name recovery is recorded in [pg1-defensive-items-recovery.js
 
 The graph inputs and validation result are recorded in [rest-widget-lifecycle-recovery.json](RecoveryEvidence/rest-widget-lifecycle-recovery.json). Focused `CockHero.Recovery.RestWidgetLifecycle` automation completed **1 succeeded**, **0 failures**, and **0 not run**. The Windows Unreal Editor build passed. The full `CockHero.Recovery` run completed **53 succeeded**, **0 failures**, and **0 not run**.
 
+### PG2 Boner Pill and SuccuShield recovery (2026-10-09)
+
+`/Game/Recovery/UI/PG2TabbedInventory_Widget` now binds the original `BonerPillItemButton` and `SuccubusShieldButton` routes through `URecoveredPG2TabbedInventoryWidget`, along with the recovered hover and unhover animation paths for every native PG2 control. The count labels now follow the source tree: Boner Pill at `QuantityAmount`, SuccuShield at `_1`, resupply at `_2`, slowdown at `_3`, and break at `_4`.
+
+The Boner Pill path preserves its source gates, metrics 8 and 27, all-or-nothing adjustment, five gameplay-level multiplier rows, card type 2, special dialogue 13, temptation background style 9, source overlay/sound/notification, one-per-task gate, and the separate sixty-second temptation cooldown. The SuccuShield path preserves its original toggle semantics: a toggle checks availability and punishment but does not spend inventory; the source eligibility path consumes a shield, records the item metric, clears protection on the final shield, and presents the source overlays and notifications. Store acquisition uses the recovered shield quantities of 1/4/7/10/15 by upgrade level. The exact source tooltip is `Toggle to stop succubi from spawning`.
+
+The source graph and validation record are in [pg2-defensive-items-recovery.json](RecoveryEvidence/pg2-defensive-items-recovery.json). The Windows Unreal Editor build passed. Focused `CockHero.Recovery.PG2` automation passed. The full `CockHero.Recovery` run completed **54 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
+
 ## Remaining limits
 
 - The staged post-game controller follows recovered graph order and timings, but interactive side-by-side original-runtime comparison of every animation curve, sound cue, and transient visual state remains outstanding.
 - Importer file/directory picker behavior is Windows-specific and was validated by build, widget initialization, manifest/deck code, and parent readback. It still needs an interactive GUI and packaged-build check with representative user media. Playback support is limited by the existing recovered media backend.
 - Recovered challenge and modifier lists use the original container/card assets and the recovered state models, but do not restore every original entry Blueprint animation, icon rule, conflict pair, reward roll, or data-table mapping.
-- The current inventory recovery covers PG1's Edge action, tab switching, heat, break, slowdown, cum chance, and the PG2 resupply action. Remaining PG2 actions and interactive original-runtime timing still need side-by-side recovery.
+- The current inventory recovery covers PG1's Edge action, tab switching, heat, break, slowdown, cum chance, PG2 resupply, Boner Pill, and SuccuShield. Interactive original-runtime timing and full-session behavior still need side-by-side recovery.
 - Auto-draw still has no verified completion consumer. Hardware transports, original save compatibility, original editor graphs, complete native analysis, full GUI playtests, packaged validation, and clean-machine validation remain outstanding.
 - The complete-image checkpoint is still partial, and the original runtime has not been used for behavioral comparison. No full-game completion or original-runtime parity is claimed.
 

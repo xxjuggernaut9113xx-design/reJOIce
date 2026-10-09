@@ -193,10 +193,7 @@ bool FRecoveredPG2ResupplyTest::RunTest(const FString& Parameters) {
     auto* Inventory=CreateWidget<URecoveredPG2TabbedInventoryWidget>(World,InventoryBlueprintClass);
     if (!TestNotNull(TEXT("Recovered PG2 widget instantiates"),Inventory)) return false;
     TestNotNull(TEXT("Recovered PG2 resupply button survives reparenting"),Cast<UButton>(Inventory->GetWidgetFromName(TEXT("ResupplyButton"))));
-    UTextBlock* ResupplyQuantity=Cast<UTextBlock>(Inventory->GetWidgetFromName(TEXT("QuantityAmount")));
-    if (!ResupplyQuantity) {
-        if (auto* Item=Cast<UUserWidget>(Inventory->GetWidgetFromName(TEXT("ItemButton")))) ResupplyQuantity=Cast<UTextBlock>(Item->GetWidgetFromName(TEXT("QuantityAmount")));
-    }
+    UTextBlock* ResupplyQuantity=Cast<UTextBlock>(Inventory->GetWidgetFromName(TEXT("QuantityAmount_2")));
     TestNotNull(TEXT("Recovered PG2 source resupply count label survives reparenting"),ResupplyQuantity);
     TestEqual(TEXT("Recovered PG2 source resupply count format"),Inventory->GetResupplyCount().ToString(),FString(TEXT("(0)")));
 
@@ -255,6 +252,104 @@ bool FRecoveredPG2ResupplyTest::RunTest(const FString& Parameters) {
     TestEqual(TEXT("Generic resupply dispatch keeps the item during its source delay"),Manager->GetOwnedItemCount(TEXT("Resupply")),1);
     Manager->CompleteRecoveredResupplyItemUse();
     TestEqual(TEXT("Generic resupply dispatch completes the delayed source spend"),Manager->GetOwnedItemCount(TEXT("Resupply")),0);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredPG2DefensiveItemsTest,"CockHero.Recovery.PG2DefensiveItems",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FRecoveredPG2DefensiveItemsTest::RunTest(const FString& Parameters) {
+    UClass* InventoryBlueprintClass=LoadClass<URecoveredPG2TabbedInventoryWidget>(nullptr,TEXT("/Game/Recovery/UI/PG2TabbedInventory_Widget.PG2TabbedInventory_Widget_C"));
+    if (!TestNotNull(TEXT("Recovered PG2 defensive inventory widget"),InventoryBlueprintClass)) return false;
+    TestTrue(TEXT("Recovered PG2 defensive inventory uses its native owner"),InventoryBlueprintClass->IsChildOf(URecoveredPG2TabbedInventoryWidget::StaticClass()));
+    TestNotNull(TEXT("Recovered boner pill overlay"),LoadClass<UUserWidget>(nullptr,TEXT("/Game/Recovery/UI/BonerPillItemUseOverlay_Widget.BonerPillItemUseOverlay_Widget_C")));
+    TestNotNull(TEXT("Recovered shield-on overlay"),LoadClass<UUserWidget>(nullptr,TEXT("/Game/Recovery/UI/ShieldOn_OverlayWidget.ShieldOn_OverlayWidget_C")));
+    TestNotNull(TEXT("Recovered shield-off overlay"),LoadClass<UUserWidget>(nullptr,TEXT("/Game/Recovery/UI/ShieldOff_OverlayWidget.ShieldOff_OverlayWidget_C")));
+    TestNotNull(TEXT("Recovered final-shield overlay"),LoadClass<UUserWidget>(nullptr,TEXT("/Game/Recovery/UI/NoShieldsLeft_OverlayWidget.NoShieldsLeft_OverlayWidget_C")));
+    TestNotNull(TEXT("Recovered boner pill sound"),LoadObject<USoundBase>(nullptr,TEXT("/Game/Recovery/Resources/Audio/boner_pill_use_sound_effect.boner_pill_use_sound_effect")));
+    TestNotNull(TEXT("Recovered boner pill notification icon"),LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/BonerPillItem.BonerPillItem")));
+    TestNotNull(TEXT("Recovered shield notification icon"),LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/SuccubusShields_On.SuccubusShields_On")));
+
+    const auto Initialization=UWorld::InitializationValues().AllowAudioPlayback(false).CreatePhysicsScene(false).CreateNavigation(false).CreateAISystem(false).ShouldSimulatePhysics(false).SetTransactional(false);
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false,NAME_None,nullptr,true,ERHIFeatureLevel::Num,&Initialization);
+    FWorldContext& Context=GEngine->CreateNewWorldContext(EWorldType::Game);
+    Context.SetCurrentWorld(World);
+    ON_SCOPE_EXIT { World->DestroyWorld(false); GEngine->DestroyWorldContext(World); };
+    World->InitializeActorsForPlay(FURL());
+
+    auto* Inventory=CreateWidget<URecoveredPG2TabbedInventoryWidget>(World,InventoryBlueprintClass);
+    if (!TestNotNull(TEXT("Recovered PG2 defensive widget instantiates"),Inventory)) return false;
+    TestNotNull(TEXT("Recovered PG2 boner pill button survives reparenting"),Cast<UButton>(Inventory->GetWidgetFromName(TEXT("BonerPillItemButton"))));
+    TestNotNull(TEXT("Recovered PG2 shield button survives reparenting"),Cast<UButton>(Inventory->GetWidgetFromName(TEXT("SuccubusShieldButton"))));
+    TestNotNull(TEXT("Recovered PG2 resupply button survives reparenting"),Cast<UButton>(Inventory->GetWidgetFromName(TEXT("ResupplyButton"))));
+    TestNotNull(TEXT("Recovered PG2 slowdown button survives reparenting"),Cast<UButton>(Inventory->GetWidgetFromName(TEXT("SlowdownItemButton"))));
+    TestNotNull(TEXT("Recovered PG2 break button survives reparenting"),Cast<UButton>(Inventory->GetWidgetFromName(TEXT("10SecBreakButton"))));
+    TestNotNull(TEXT("Recovered PG2 boner count label survives reparenting"),Cast<UTextBlock>(Inventory->GetWidgetFromName(TEXT("QuantityAmount"))));
+    TestNotNull(TEXT("Recovered PG2 shield count label survives reparenting"),Cast<UTextBlock>(Inventory->GetWidgetFromName(TEXT("QuantityAmount_1"))));
+    TestNotNull(TEXT("Recovered PG2 resupply count label survives reparenting"),Cast<UTextBlock>(Inventory->GetWidgetFromName(TEXT("QuantityAmount_2"))));
+    TestNotNull(TEXT("Recovered PG2 slowdown count label survives reparenting"),Cast<UTextBlock>(Inventory->GetWidgetFromName(TEXT("QuantityAmount_3"))));
+    TestNotNull(TEXT("Recovered PG2 break count label survives reparenting"),Cast<UTextBlock>(Inventory->GetWidgetFromName(TEXT("QuantityAmount_4"))));
+
+    ARecoveredGlobalManager* Manager=World->SpawnActor<ARecoveredGlobalManager>();
+    if (!TestNotNull(TEXT("Recovered PG2 defensive manager"),Manager)) return false;
+
+    Manager->PlayerVariables=FRecoveredPlayerVariables();
+    Manager->PlayerVariables.bCanUseItems=true;
+    Manager->PlayerVariables.CurrentStrokeCount=10;
+    Manager->PlayerVariables.BeatSpawnInterval=.5;
+    Manager->PlayerVariables.CoinEarnMultiplier=1;
+    Manager->PlayerVariables.SessionLength=27;
+    Manager->MinimumBeatInterval=.05;
+    Manager->SessionStats=FRecoveredSessionStats();
+    Manager->OwnedItemCounts.Empty();
+    Manager->bCanUseBonerPill=true;
+    Manager->SetRecoveredItemUpgradeLevel(TEXT("BonerPill"),4);
+    Manager->OwnedItemCounts.Add(TEXT("BonerPill"),1);
+    TestEqual(TEXT("Source boner pill triggers"),Manager->UseRecoveredBonerPillItem(),ERecoveredDefensiveItemUseResult::Triggered);
+    TestEqual(TEXT("Source boner pill level four multiplies strokes by four"),Manager->PlayerVariables.CurrentStrokeCount,40);
+    TestEqual(TEXT("Source boner pill level four divides interval by five"),Manager->PlayerVariables.BeatSpawnInterval,.1);
+    TestEqual(TEXT("Source boner pill level four sets x3 coins"),Manager->PlayerVariables.CoinEarnMultiplier,3.0);
+    TestEqual(TEXT("Source boner pill switches the current card type"),Manager->BeatContext.CardType,uint8(2));
+    TestEqual(TEXT("Source boner pill changes to temptation background"),Manager->CurrentBeatBackgroundStyle,9);
+    TestFalse(TEXT("Source boner pill locks further use for this task"),Manager->bCanUseBonerPill);
+    TestTrue(TEXT("Source boner pill starts its sixty-second cooldown"),Manager->bIsTemptationOnCooldown);
+    TestEqual(TEXT("Source boner pill records the generic item metric"),Manager->SessionStats.ItemsUsed,1);
+    TestEqual(TEXT("Source boner pill records metric twenty-seven"),Manager->SessionStats.BonerPillsUsed,1);
+    TestEqual(TEXT("Source boner pill spends its final item"),Manager->GetOwnedItemCount(TEXT("BonerPill")),0);
+
+    Manager->PlayerVariables=FRecoveredPlayerVariables();
+    Manager->PlayerVariables.bCanUseItems=true;
+    Manager->PlayerVariables.CurrentStrokeCount=7;
+    Manager->PlayerVariables.BeatSpawnInterval=.5;
+    Manager->PlayerVariables.CoinEarnMultiplier=1;
+    Manager->OwnedItemCounts.Empty();
+    Manager->OwnedItemCounts.Add(TEXT("BonerPill"),1);
+    Manager->bCanUseBonerPill=true;
+    Manager->SetRecoveredItemUpgradeLevel(TEXT("BonerPill"),1);
+    TestTrue(TEXT("Generic inventory dispatches boner pill to its source action"),Manager->UseOwnedItem(TEXT("BonerPill"),1));
+    TestEqual(TEXT("Source boner pill level one truncates two-and-a-half strokes"),Manager->PlayerVariables.CurrentStrokeCount,17);
+
+    Manager->PlayerVariables=FRecoveredPlayerVariables();
+    Manager->PlayerVariables.bCanUseItems=true;
+    Manager->SessionStats=FRecoveredSessionStats();
+    Manager->OwnedItemCounts.Empty();
+    Manager->SetRecoveredItemUpgradeLevel(TEXT("SuccuShield"),4);
+    Manager->AcquireStoreItem(TEXT("SuccuShield"));
+    TestEqual(TEXT("Source shield level four purchase grants fifteen shields"),Manager->GetOwnedItemCount(TEXT("SuccuShield")),15);
+    TestEqual(TEXT("Source shield mirror tracks owned shields"),Manager->SuccubusShields,15);
+
+    Manager->OwnedItemCounts.Empty();
+    Manager->SyncRecoveredSuccuShieldInventory(1);
+    Manager->bShieldToggled=false;
+    TestEqual(TEXT("Source shield toggle activates"),Manager->ToggleRecoveredSuccuShields(),ERecoveredDefensiveItemUseResult::Triggered);
+    TestTrue(TEXT("Source shield toggle enables protection"),Manager->bShieldToggled);
+    TestEqual(TEXT("Source shield toggle preserves inventory"),Manager->GetOwnedItemCount(TEXT("SuccuShield")),1);
+    TestEqual(TEXT("Source shield toggle does not count as item use"),Manager->SessionStats.ItemsUsed,0);
+    Manager->PlayerVariables.bCanSuccubiSpawn=false;
+    Manager->BeatContext.HeatCategory=0;
+    Manager->BeatContext.ActiveModifiers.Reset();
+    TestFalse(TEXT("Source shield consumes when the eligibility path reaches protection"),Manager->CheckRecoveredSuccubusEligibility());
+    TestEqual(TEXT("Source shield eligibility path consumes one shield"),Manager->GetOwnedItemCount(TEXT("SuccuShield")),0);
+    TestFalse(TEXT("Source final shield disables protection"),Manager->bShieldToggled);
+    TestEqual(TEXT("Source shield consumption records item metric eight"),Manager->SessionStats.ItemsUsed,1);
     return true;
 }
 

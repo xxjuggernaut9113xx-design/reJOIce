@@ -64,12 +64,24 @@ FText URecoveredStoreItemWidget::GetEffectDescription() const {
     // Per-item effect text mirrors the native Get_EffectDescription bindings.
     const FString ID = ItemID.ToString();
     if (ID == TEXT("Slowdown")) return FText::FromString(TEXT("Slows the beat timeline for 15 seconds."));
-    if (ID == TEXT("BonerPill")) return FText::FromString(TEXT("Restores full hardness and clears the edge lockout."));
-    if (ID == TEXT("Break")) return FText::FromString(TEXT("Pauses the session for a 60 second break."));
+    if (ID == TEXT("BonerPill")) {
+        static const TCHAR* Descriptions[]={
+            TEXT("x2.0 Stroking | x2.0 Speed |\nx2.0 Coins | Use to Boost Rewards"),
+            TEXT("x2.5 Stroking | x2.0 Speed |\nx2.0 Coins | Use to Boost Rewards"),
+            TEXT("x3.0 Stroking | x3.0 Speed |\nx2.0 Coins | Use to Boost Rewards"),
+            TEXT("x4.0 Stroking | x5.0 Speed |\nx3.0 Coins | Use to Boost Rewards"),
+            TEXT("x6.0 Stroking | x6.0 Speed |\nx3.0 Coins | Use to Boost Rewards"),
+        };
+        return FText::FromString(Descriptions[FMath::Clamp(CurrentLevel,0,UE_ARRAY_COUNT(Descriptions)-1)]);
+    }
+    if (ID == TEXT("Break")) {
+        static constexpr int32 Durations[]={5,10,15,25,50};
+        return FText::FromString(FString::Printf(TEXT("Pauses the session for %d seconds."),Durations[FMath::Clamp(CurrentLevel,0,UE_ARRAY_COUNT(Durations)-1)]));
+    }
     if (ID == TEXT("DecreaseHeat")) return FText::FromString(TEXT("Immediately reduces heat by 25."));
     if (ID == TEXT("Edge")) return FText::FromString(TEXT("Forces an edge attempt on the next beat window."));
     if (ID == TEXT("Resupply")) return FText::FromString(TEXT("Restores one use of every consumable item."));
-    if (ID == TEXT("SuccuShield")) return FText::FromString(TEXT("Blocks the next succubus special attack."));
+    if (ID == TEXT("SuccuShield")) return FText::FromString(TEXT("Toggle to stop succubi from spawning"));
     if (ID == TEXT("XCumChance")) return FText::FromString(TEXT("Grants an extra cum-window chance this session."));
     return FText::FromString(TEXT("Unknown store item."));
 }

@@ -207,18 +207,12 @@ bool ARecoveredGlobalManager::ApplyStoreItemEffect(FName ItemID, int32 Level) {
             bApplied = true;
         }
     } else if (ID == TEXT("BonerPill")) {
-        if (bCanUseBonerPill) {
-            PlayerVariables.bHasEdged = false;
-            bCanUseBonerPill = false;
-            URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats, ERecoveredMetric::BonerPillsUsed, 1);
-            bApplied = true;
-        }
+        return UseRecoveredBonerPillItem()==ERecoveredDefensiveItemUseResult::Triggered;
     } else if (ID == TEXT("DecreaseHeat")) {
         AddHeat(-25.0 * Potency);
         bApplied = true;
     } else if (ID == TEXT("SuccuShield")) {
-        SuccubusShields += 1;
-        bApplied = true;
+        return ToggleRecoveredSuccuShields()==ERecoveredDefensiveItemUseResult::Triggered;
     } else if (ID == TEXT("Edge")) {
         PlayerVariables.bIsPlayerEdgeable = true;
         bApplied = true;

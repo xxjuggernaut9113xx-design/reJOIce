@@ -1,0 +1,76 @@
+{
+  "recovery_area": "PG2 Boner Pill and SuccuShield actions",
+  "source_widget_analysis": "C:\\Users\\webma\\analysis\\cockhero-v004\\decoded-ui\\CockHero\\Content\\Widgets\\PG2TabbedInventory_Widget.json",
+  "source_function_probe": "D:\\reJOice\\UnrealReconstruction\\Saved\\pg2-function-probe-3.json",
+  "recovered_widget": "/Game/Recovery/UI/PG2TabbedInventory_Widget.PG2TabbedInventory_Widget",
+  "native_parent": "URecoveredPG2TabbedInventoryWidget",
+  "verified_control_names": {
+    "boner_pill": "BonerPillItemButton",
+    "succu_shield": "SuccubusShieldButton",
+    "resupply": "ResupplyButton",
+    "slowdown": "SlowdownItemButton",
+    "break": "10SecBreakButton"
+  },
+  "verified_count_labels": {
+    "boner_pill": "QuantityAmount",
+    "succu_shield": "QuantityAmount_1",
+    "resupply": "QuantityAmount_2",
+    "slowdown": "QuantityAmount_3",
+    "break": "QuantityAmount_4"
+  },
+  "source_boner_pill_effects_by_upgrade_level": [
+    {"stroke_multiplier": 2.0, "interval_divisor": 2.0, "coin_multiplier": 2.0, "timeline_speed_multiplier": 2.0, "timeline_stroke_multiplier": 2},
+    {"stroke_multiplier": 2.5, "interval_divisor": 2.0, "coin_multiplier": 2.0, "timeline_speed_multiplier": 2.0, "timeline_stroke_multiplier": 2},
+    {"stroke_multiplier": 3.0, "interval_divisor": 2.0, "coin_multiplier": 2.0, "timeline_speed_multiplier": 3.0, "timeline_stroke_multiplier": 3},
+    {"stroke_multiplier": 3.0, "interval_divisor": 3.0, "coin_multiplier": 3.0, "timeline_speed_multiplier": 5.0, "timeline_stroke_multiplier": 3},
+    {"stroke_multiplier": 4.0, "interval_divisor": 5.0, "coin_multiplier": 3.0, "timeline_speed_multiplier": 6.0, "timeline_stroke_multiplier": 4}
+  ],
+  "source_boner_pill_lifecycle": {
+    "gates": ["CanUseItems", "CanUseBonerPill", "owned count greater than zero"],
+    "metric_indices": {"items_used": 8, "boner_pills_used": 27},
+    "card_type": 2,
+    "dialogue": "SpecialEvent_13",
+    "background_style": 9,
+    "cooldown_seconds": 60,
+    "exhaustion_animation": "UsedLastBonerPillItem"
+  },
+  "source_succu_shield_lifecycle": {
+    "purchase_amount_by_upgrade_level": [1, 4, 7, 10, 15],
+    "toggle_gates": ["CanUseItems", "owned count greater than zero", "RollPunishmentChance"],
+    "toggle_spends_inventory": false,
+    "eligibility_path_spends_shield": true,
+    "final_shield_clears_toggle": true,
+    "tooltip": "Toggle to stop succubi from spawning"
+  },
+  "source_hover_animations": {
+    "boner_pill": ["BonerPillItemHover", "BonerPillItemUnhover"],
+    "succu_shield": ["SuccushieldItemsHover", "SuccushieldItemsUnhover"],
+    "resupply": ["ResupplyItemHover", "ResupplyItemUnhover"],
+    "slowdown": ["SlowdownHover", "SlowdownUnhover"],
+    "break": ["BreakHover", "BreakUnhover"]
+  },
+  "recovered_assets": {
+    "boner_overlay": "/Game/Recovery/UI/BonerPillItemUseOverlay_Widget",
+    "shield_on_overlay": "/Game/Recovery/UI/ShieldOn_OverlayWidget",
+    "shield_off_overlay": "/Game/Recovery/UI/ShieldOff_OverlayWidget",
+    "shield_empty_overlay": "/Game/Recovery/UI/NoShieldsLeft_OverlayWidget",
+    "boner_sound": "/Game/Recovery/Resources/Audio/boner_pill_use_sound_effect"
+  },
+  "validation": {
+    "editor_build": "CockHeroRecoveredEditor Win64 Development",
+    "focused_automation": {
+      "name": "CockHero.Recovery.PG2",
+      "result": "success"
+    },
+    "full_automation": {
+      "name": "CockHero.Recovery",
+      "result": "success",
+      "succeeded": 54,
+      "warnings": 0,
+      "failed": 0,
+      "not_run": 0
+    }
+  },
+  "result": "passed",
+  "remaining_recovery": "Interactive original-runtime comparison of PG2 animation timing and full-session behavior remains outstanding."
+}

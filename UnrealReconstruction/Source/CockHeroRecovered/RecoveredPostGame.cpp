@@ -429,6 +429,7 @@ void ARecoveredGlobalManager::PlayRecoveredSessionSound(FName SoundID) {
         { TEXT("Success"), TEXT("/Game/Recovery/Resources/Audio/success_sfx.success_sfx"), TEXT("SFXVolume"), 0.8f },
         { TEXT("Fail"), TEXT("/Game/Recovery/Resources/Audio/fail_sfx.fail_sfx"), TEXT("SFXVolume"), 0.8f },
         { TEXT("Click"), TEXT("/Game/Recovery/Resources/Audio/click3_sfx.click3_sfx"), TEXT("SFXVolume"), 0.8f },
+        { TEXT("BonerPill"), TEXT("/Game/Recovery/Resources/Audio/boner_pill_use_sound_effect.boner_pill_use_sound_effect"), TEXT("SFXVolume"), 0.8f },
     };
     const FString ID = SoundID.ToString();
     for (const auto& Def : Sounds) {

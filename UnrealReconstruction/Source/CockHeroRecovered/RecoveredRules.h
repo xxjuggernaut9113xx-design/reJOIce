@@ -246,6 +246,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") bool bStopSequence = false;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") bool bCanUseSlowdown = true;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") bool bCanUseBonerPill = true;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered Session") bool bIsTemptationOnCooldown = false;
     // Selected beat sound bank and voice pack IDs.
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Audio") FName BeatSoundBank = TEXT("Default");
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Audio") FName VoicePack = TEXT("Default");
@@ -308,6 +309,7 @@ public:
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered Events") bool bStoreOnCooldown=false;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered Events") int32 SuccubusShields=0;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered Events") bool bShieldToggled=false;
+    UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Events") int32 CurrentBeatBackgroundStyle=0;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Events") FName LastDispatchedEvent;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Events") FRecoveredEventRecord FoundEvent;
     UFUNCTION(BlueprintCallable,Category="Recovered Events") bool RequestNextRecoveredCard(bool bPlayMedia=true);
@@ -385,6 +387,12 @@ public:
     UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") ERecoveredDefensiveItemUseResult UseRecoveredBreakItem();
     UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") ERecoveredDefensiveItemUseResult UseRecoveredSlowdownItem();
     UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") ERecoveredDefensiveItemUseResult UseRecoveredCumChanceItem();
+    UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") ERecoveredDefensiveItemUseResult UseRecoveredBonerPillItem();
+    UFUNCTION(BlueprintCallable, Category="Recovered|Inventory") ERecoveredDefensiveItemUseResult ToggleRecoveredSuccuShields();
+    UFUNCTION(BlueprintCallable, Category="Recovered|Events") bool CheckRecoveredSuccubusEligibility();
+    UFUNCTION(BlueprintCallable, Category="Recovered|Session") void ChangeRecoveredBeatBackground(int32 Style);
+    UFUNCTION() void CompleteRecoveredBonerPillCooldown();
+    void SyncRecoveredSuccuShieldInventory(int32 Count);
     UFUNCTION() void UpdateRecoveredTimeSinceLastDefenseItem();
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|Inventory") ERecoveredDefensiveItemUseResult LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::NoItemAvailable;
     // Shows the defensive item use overlay with the item name and remaining count.
@@ -454,6 +462,7 @@ public:
     FTimerHandle BreakLastItemTimerHandle;
     FTimerHandle SlowdownLastItemTimerHandle;
     FTimerHandle CumChanceLastItemTimerHandle;
+    FTimerHandle BonerPillCooldownTimerHandle;
     FTimerHandle DefensiveItemUsageTimerHandle;
     FTimerHandle OutcomeContinuationTimer;
     FTimerHandle IdleTimer;
