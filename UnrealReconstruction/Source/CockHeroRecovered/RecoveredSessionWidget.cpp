@@ -15,6 +15,20 @@
 #include "Input/Reply.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Kismet/GameplayStatics.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
+#include "Sound/SoundBase.h"
+
+namespace {
+USoundBase* GetRecoveredInventorySwitchSound() {
+    static TWeakObjectPtr<USoundBase> Sound;
+    if (!Sound.IsValid()) Sound=LoadObject<USoundBase>(nullptr,TEXT("/Game/Recovery/Resources/Audio/swapitem.swapitem"));
+    return Sound.Get();
+}
+
+void PlayRecoveredInventorySwitchSound(UObject* WorldContextObject) {
+    if (USoundBase* Sound=GetRecoveredInventorySwitchSound()) UGameplayStatics::PlaySound2D(WorldContextObject,Sound,0.25f,0.7f,0.0f,nullptr,nullptr,true);
+}
+}
 
 void URecoveredSessionWidget::BindSession(bool bBind) {
     if (auto* Button=Cast<UButton>(GetWidgetFromName(TEXT("DrawButtonTextButton")))) {
@@ -107,16 +121,25 @@ void URecoveredSessionWidget::DrawCard() {
     Manager->RequestNextRecoveredCard(true);
 }
 
+int32 URecoveredSessionWidget::GetSwitchedInventoryTab(int32 CurrentInventoryTab) {
+    if (CurrentInventoryTab==0) return 1;
+    if (CurrentInventoryTab==1) return 0;
+    return CurrentInventoryTab;
+}
+
 void URecoveredSessionWidget::SwitchInventoryTabs() {
+    PlayRecoveredInventorySwitchSound(this);
     auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
     if (!Manager) return;
-    if (Manager->CurrentInventoryTab==0) {
-        Manager->CurrentInventoryTab=1;
-        if (auto* Page=Cast<URecoveredMenuWidget>(GetWidgetFromName(TEXT("PG2TabbedInventory_Widget")))) Page->PlayRecoveredAnimation(TEXT("SwitchInventoryTabAnimation"));
-    } else if (Manager->CurrentInventoryTab==1) {
-        Manager->CurrentInventoryTab=0;
-        if (auto* Page=Cast<URecoveredMenuWidget>(GetWidgetFromName(TEXT("PG1TabbedInventory_Widget")))) Page->PlayRecoveredAnimation(TEXT("SwitchInventoryTabAnimation"));
+    const int32 NextInventoryTab=GetSwitchedInventoryTab(Manager->CurrentInventoryTab);
+    if (NextInventoryTab==Manager->CurrentInventoryTab) return;
+    Manager->CurrentInventoryTab=NextInventoryTab;
+    if (NextInventoryTab==1) {
+        if (auto* Page=Cast<URecoveredPG2TabbedInventoryWidget>(GetWidgetFromName(TEXT("PG2TabbedInventory_Widget")))) Page->PlayRecoveredAnimation(TEXT("SwitchTabAnimation"));
+    } else {
+        if (auto* Page=Cast<URecoveredTabbedInventoryWidget>(GetWidgetFromName(TEXT("PG1TabbedInventory_Widget")))) Page->PlayRecoveredAnimation(TEXT("SwitchInventoryTabAnimation"));
     }
+    UWidgetBlueprintLibrary::SetFocusToGameViewport();
 }
 void URecoveredSessionWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds) {
     Super::NativeTick(Geometry,DeltaSeconds);

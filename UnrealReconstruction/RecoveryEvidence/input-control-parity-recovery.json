@@ -1,0 +1,88 @@
+{
+  "source_executed": false,
+  "sources": {
+    "ui_manager_graph": "C:\\Users\\webma\\analysis\\cockhero-v004\\blueprint-functions\\UI_Manager\\ExecuteUbergraph_UI_Manager.json",
+    "ui_manager_graph_sha256": "a05ff71a7325e956dd9b0cf943d402854b4449f4b56f92906abb4758753040a9",
+    "pg1_widget": "C:\\Users\\webma\\analysis\\cockhero-v004\\decoded-ui\\CockHero\\Content\\Widgets\\PG1TabbedInventory_Widget.json",
+    "pg2_widget": "C:\\Users\\webma\\analysis\\cockhero-v004\\decoded-ui\\CockHero\\Content\\Widgets\\PG2TabbedInventory_Widget.json"
+  },
+  "entrypoints": {
+    "One": 13463,
+    "Two": 12735,
+    "Three": 11131,
+    "Q": 13672,
+    "Tab": 13677
+  },
+  "inventory_key_dispatch": {
+    "One": {
+      "tab_0": "UseCumChanceItem",
+      "tab_1": "UseBonerPillItem"
+    },
+    "Two": {
+      "tab_0": "UseReduceHeatItem",
+      "tab_1": "ToggleSuccuShields",
+      "tab_1_dialogue": 12
+    },
+    "Three": {
+      "tab_0": "TabbedInventoryEdgeTrigger",
+      "tab_1": "TabbedInventoryResupplyTrigger",
+      "tab_1_dialogue": 12
+    }
+  },
+  "tab_switch": {
+    "keys": [
+      "Q",
+      "Tab"
+    ],
+    "shared_route_offset": 12986,
+    "sound": {
+      "source": "/Game/SoundFX/swapitem.swapitem",
+      "volume_multiplier": 0.25,
+      "pitch_multiplier": 0.7,
+      "ui_sound": true
+    },
+    "routes": {
+      "tab_0_to_1": {
+        "next_tab": 1,
+        "widget": "PG2TabbedInventory_Widget",
+        "animation": "SwitchTabAnimation",
+        "source_animation_function": "TriggerInventorySwitchAnimation"
+      },
+      "tab_1_to_0": {
+        "next_tab": 0,
+        "widget": "PG1TabbedInventory_Widget",
+        "animation": "SwitchInventoryTabAnimation",
+        "source_animation_function": "TriggerInventorySwitchAnimation"
+      }
+    },
+    "focus": "SetFocusToGameViewport",
+    "invalid_tab_preserves_state": true
+  },
+  "audio": {
+    "original": "/Game/SoundFX/swapitem.swapitem",
+    "name": "swapitem",
+    "source_package": "C:\\Users\\webma\\analysis\\cockhero-v004\\cooked-animation-audio\\CockHero\\Content\\SoundFX\\swapitem.uexp",
+    "source_package_sha256": "d5819231eb18b127d5e18b405eea7552112ad4a80287989741e25b01fa52b845",
+    "source_bulk_sha256": "88bc55edfb57c8a718d8eff5afb72347e471e36a058c2807b231d5817ada271b",
+    "encoded": "D:\\reJOIce\\UnrealReconstruction\\RecoveryEvidence\\AudioEncoded\\swapitem.binka",
+    "encoded_sha256": "7738e8108e0bef88d9318b1ee5b53733f75646e0001a8766ded280bbd9b505aa",
+    "sample_rate": 44100,
+    "channels": 2,
+    "frames": 24192,
+    "stream_chunks": 1,
+    "source_executed": false,
+    "decoded": {
+      "success": true,
+      "file": "../../../../../../reJOIce/UnrealReconstruction/RecoveryEvidence/AudioSource/swapitem.wav",
+      "sample_rate": 44100,
+      "channels": 2,
+      "frames": 24192,
+      "pcm_bytes": 96768
+    }
+  },
+  "runtime_mapping": {
+    "implementation": "URecoveredSessionWidget::SwitchInventoryTabs",
+    "state_helper": "URecoveredSessionWidget::GetSwitchedInventoryTab",
+    "sound_asset": "/Game/Recovery/Resources/Audio/swapitem.swapitem"
+  }
+}

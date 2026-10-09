@@ -132,6 +132,14 @@ The decoded `UI_Manager` control surface now routes `B`, `C`, `E`, `V`, `W`, `X`
 
 The source entrypoints, implementation mapping, and validation are recorded in [session-control-hotkeys-recovery.json](RecoveryEvidence/session-control-hotkeys-recovery.json). `CockHero.Recovery.SessionControlHotkeys` passed. The Windows Unreal Editor build passed. The full `CockHero.Recovery` run completed **55 succeeded**, **0 failures**, and **0 not run**.
 
+### Inventory tab input parity recovery (2026-10-09)
+
+The decoded `UI_Manager` routes both `Q` and `Tab` through entry offsets 13672 and 13677 into the same tab-switch tail at 12986. That tail plays `/Game/SoundFX/swapitem.swapitem` as a UI sound at 0.25 volume and 0.7 pitch, switches only tab zero to one or tab one to zero, invokes the target page's `TriggerInventorySwitchAnimation`, then returns focus to the game viewport. The recovered session widget now follows that order and leaves unsupported tab values unchanged.
+
+The two page widgets use different source animation names. PG1 uses `SwitchInventoryTabAnimation`; PG2 uses `SwitchTabAnimation`. The former reconstructed PG2 route requested the PG1 animation name and therefore could not find the PG2 runtime sequence. The recovered `swapitem` Bink stream was rebuilt from its cooked package and bulk payload, verified at 44.1 kHz stereo with 24,192 frames, imported as `/Game/Recovery/Resources/Audio/swapitem`, and registered in the resource alias ledger.
+
+The source entrypoints, call offsets, page-specific animation names, decoded audio hashes, and runtime mapping are recorded in [input-control-parity-recovery.json](RecoveryEvidence/input-control-parity-recovery.json). `CockHero.Recovery.InventoryTabInputParity` passed. The Windows Unreal Editor build passed. The full `CockHero.Recovery` run completed **57 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
+
 ### Modifier conflict and challenge-link recovery (2026-10-09)
 
 `DT_Modifiers` serializes generic row keys, while the native manager looks up modifier records by `ModifierTitle`. The recovered manager now uses that title identity for lookup, unlocks, active-set persistence, and session-facing modifier IDs. The complete native conflict registry from `InitializeModifierConflicts` is restored. `GetAllConflictsForModifier` returns its registered targets; `GetConflictingModifiers` filters those targets against the active set; and `CanEnableModifier` follows the native conflict-only predicate.
