@@ -53,6 +53,7 @@ bool BuildRecoveredRuntimeState(
     Progression->LevelDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_LevelData.DT_LevelData"));
     Progression->PlayerCardDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_PlayerCards.DT_PlayerCards"));
     Progression->ModifierDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_Modifiers.DT_Modifiers"));
+    Progression->ChallengeDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_Challenges.DT_Challenges"));
 
     const bool bHasProgressionState=Save->HasSetting(TEXT("RecoveryProgressionState"));
     const FString ProgressionState=Save->GetStringSetting(TEXT("RecoveryProgressionState"),TEXT(""));
@@ -68,7 +69,7 @@ bool BuildRecoveredRuntimeState(
         : Save->GetStringArraySetting(TEXT("ActiveModifiers"));
     for (const FString& ModifierName:SavedModifiers) {
         if (ModifierName.Len()>256) continue;
-        const FName ModifierID(*ModifierName);
+        const FName ModifierID=Progression->GetCanonicalModifierID(FName(*ModifierName));
         FRecoveredModifierRow Modifier;
         if (!ModifierID.IsNone() && Progression->IsModifierUnlocked(ModifierID) && Progression->GetModifierData(ModifierID,Modifier) && Progression->CanEnableModifier(ModifierID)) {
             Progression->EnabledModifiers.Add(ModifierID);
@@ -77,7 +78,7 @@ bool BuildRecoveredRuntimeState(
 
     auto* Challenges=NewObject<URecoveredChallengeTracker>(Instance);
     Challenges->RewardManager=Progression;
-    Challenges->ChallengeTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_Challenges.DT_Challenges"));
+    Challenges->ChallengeTable=Progression->ChallengeDataTable;
     const bool bHasChallengeState=Save->HasSetting(TEXT("RecoveryChallengeState"));
     const FString ChallengeState=Save->GetStringSetting(TEXT("RecoveryChallengeState"),TEXT(""));
     if (bHasChallengeState && (ChallengeState.IsEmpty() || !Challenges->ImportRecoveryState(ChallengeState))) {

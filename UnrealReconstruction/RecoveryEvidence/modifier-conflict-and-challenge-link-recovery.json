@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "recovery_scope": "Modifier identity, native conflict registry, active-conflict filtering, confirmation flow, and modifier-linked challenge lookup.",
+  "native_evidence": {
+    "InitializeModifierConflicts": "0x1481c4c00",
+    "GetAllConflictsForModifier": "0x1481b9250",
+    "GetConflictingModifiers": "0x1481bbc40",
+    "CanEnableModifier": "0x1481b4d00",
+    "GetChallengeForModifier": "0x1481ba860",
+    "GetModifierData": "0x1481c1380"
+  },
+  "recovered_behavior": {
+    "modifier_identity": "ModifierTitle is the public modifier identity. Serialized DT_Modifiers row keys are not used for lookup, unlock, active-state persistence, or session modifier IDs.",
+    "conflict_queries": "GetAllConflictsForModifier returns the complete native registry edge list. GetConflictingModifiers returns only entries from that list that are active. CanEnableModifier is a conflict-only predicate.",
+    "ui_resolution": "An unlocked modifier with active conflicts opens ConflictingWidgetOverlayWidget. Confirm removes the displayed active conflicts, adds the selected modifier, persists state, and refreshes the recovered list. Cancel leaves active state intact.",
+    "challenge_link": "GetChallengeForModifier scans DT_Challenges for a condition whose type is modifier and whose value equals the canonical modifier title, then returns that row's ChallengeID."
+  },
+  "conflict_registry": {
+    "Pheromones": ["Slow and Steady", "Succufrenzy"],
+    "Mr. Money Bandz": ["Succufrenzy", "Sacrificial"],
+    "Ass Fanatic": ["Boobs Fanatic", "Feet Fanatic"],
+    "Boobs Fanatic": ["Ass Fanatic", "Feet Fanatic"],
+    "Hungry Succubi": ["Succufrenzy", "Slow and Steady", "Demon Proof", "Deal With The Devil"],
+    "Succufrenzy": ["Slow and Steady", "Sacrificial", "Hungry Succubi", "Raw Dog", "Demon Proof", "All or Nothing", "Double Time", "Pheromones", "Mr. Money Bandz", "Deal With The Devil"],
+    "Slow and Steady": ["Hungry Succubi", "Succufrenzy", "Hivemind", "Deal With The Devil", "Double Time", "Pheromones", "Iron Man"],
+    "Sacrificial": ["Mr. Money Bandz", "Deal With The Devil", "Succufrenzy"],
+    "Feet Fanatic": ["Ass Fanatic", "Boobs Fanatic"],
+    "Iron Man": ["Slow and Steady"],
+    "Raw Dog": ["Succufrenzy", "All or Nothing"],
+    "Demon Proof": ["Deal With The Devil", "Hivemind", "Succufrenzy", "Hungry Succubi"],
+    "All or Nothing": ["Succufrenzy", "Raw Dog"],
+    "Hivemind": ["Demon Proof", "Slow and Steady"],
+    "Deal With The Devil": ["Demon Proof", "Hungry Succubi", "Sacrificial", "Slow and Steady", "Succufrenzy"],
+    "Double Time": ["Succufrenzy", "Slow and Steady"]
+  },
+  "validation": {
+    "focused_test": "CockHero.Recovery.ModifierConflictAndChallengeLinks",
+    "focused_result": "1 succeeded, 0 warnings, 0 failed, 0 not run",
+    "full_suite_result": "56 succeeded, 0 warnings, 0 failed, 0 not run",
+    "build_result": "CockHeroRecoveredEditor Win64 Development passed"
+  }
+}

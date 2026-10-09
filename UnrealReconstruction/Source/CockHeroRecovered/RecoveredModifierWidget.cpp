@@ -34,9 +34,12 @@ void URecoveredModifierWidget::RefreshModifierList() {
     UClass* EntryClass = LoadClass<UUserWidget>(nullptr, TEXT("/Game/Recovery/UI/ModifierCardEntryWidget.ModifierCardEntryWidget_C"));
     TArray<FName> IDs;
     Progression->ModifierDataTable->GetRowMap().GetKeys(IDs);
-    IDs.Sort([](const FName& A, const FName& B) { return A.LexicalLess(B); });
     int32 Index = 0;
-    for (const FName ModifierID : IDs) {
+    for (const FName RowID : IDs) {
+        const auto* SourceRow = reinterpret_cast<const FRecoveredModifierRow*>(Progression->ModifierDataTable->GetRowMap().FindRef(RowID));
+        if (!SourceRow) continue;
+        const FName ModifierID = Progression->GetCanonicalModifierID(FName(*SourceRow->ModifierTitle.ToString()));
+        if (ModifierID.IsNone()) continue;
         FRecoveredModifierRow Row;
         if (!Progression->GetModifierData(ModifierID, Row)) continue;
         UUserWidget* Entry = EntryClass && GetWorld() ? CreateWidget<UUserWidget>(GetWorld(), EntryClass) : nullptr;
@@ -49,22 +52,21 @@ void URecoveredModifierWidget::RefreshModifierList() {
             Toggle->SetContent(ToggleText);
             Fallback->AddChildToHorizontalBox(Title);
             Fallback->AddChildToHorizontalBox(Toggle);
-            Container->AddChildToUniformGrid(Fallback, Index / 2, Index % 2);
+            Container->AddChildToUniformGrid(Fallback, Index / 4, Index % 4);
             ++Index;
             continue;
         }
         const bool bEnabled = Progression->EnabledModifiers.Contains(ModifierID);
         const bool bUnlocked = Progression->IsModifierUnlocked(ModifierID);
-        const bool bCanEnable = Progression->CanEnableModifier(ModifierID);
         SetEntryText(Entry, TEXT("ModifierTitle"), Row.ModifierTitle);
         SetEntryText(Entry, TEXT("ModifierDescription"), Row.ModifierDescription);
         SetEntryText(Entry, TEXT("ChallengeRequiredText"), bUnlocked ? FText::GetEmpty() : FText::FromString(TEXT("Complete the linked challenge to unlock")));
-        SetEntryText(Entry, TEXT("ButtonText"), FText::FromString(bEnabled ? TEXT("Enabled") : bUnlocked ? TEXT("Enable") : TEXT("Locked")));
+        SetEntryText(Entry, TEXT("ButtonText"), FText::FromString(bEnabled ? TEXT("Enabled") : TEXT("Disabled")));
         if (auto* Icon = Cast<UImage>(Entry->GetWidgetFromName(TEXT("ModifierIcon")))) Icon->SetBrushFromTexture(Row.ModifierIcon);
         if (auto* Lock = Entry->GetWidgetFromName(TEXT("LockOverlay"))) Lock->SetVisibility(bUnlocked ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
         for (const TCHAR* ButtonName : {TEXT("ToggleModifierButton"), TEXT("BackgroundButton")}) {
             if (UButton* Button = FindEntryButton(Entry, ButtonName)) {
-                Button->SetIsEnabled(bEnabled || (bUnlocked && bCanEnable));
+                Button->SetIsEnabled(bEnabled || bUnlocked);
                 auto* Forward = NewObject<URecoveredModifierToggleForward>(this);
                 Forward->Owner = this;
                 Forward->ModifierID = ModifierID;
@@ -72,7 +74,7 @@ void URecoveredModifierWidget::RefreshModifierList() {
                 ToggleForwarders.Add(Forward);
             }
         }
-        Container->AddChildToUniformGrid(Entry, Index / 2, Index % 2);
+        Container->AddChildToUniformGrid(Entry, Index / 4, Index % 4);
         ++Index;
     }
 }
@@ -80,17 +82,53 @@ void URecoveredModifierWidget::RefreshModifierList() {
 bool URecoveredModifierWidget::ToggleModifier(FName ModifierID) {
     auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
     URecoveredProgressionManager* Progression = Instance ? Instance->ProgressionManager.Get() : nullptr;
-    if (!Progression) return false;
+    if (!Progression || HasPendingModifierConflicts()) return false;
+    ModifierID = Progression->GetCanonicalModifierID(ModifierID);
+    if (ModifierID.IsNone() || !Progression->IsModifierUnlocked(ModifierID)) return false;
     if (Progression->EnabledModifiers.Contains(ModifierID)) {
         Progression->EnabledModifiers.Remove(ModifierID);
     } else {
-        if (!Progression->CanEnableModifier(ModifierID)) return false;
-        // The original tab queries conflicts before enabling a modifier.  The
-        // reconstructed manager supplies the same explicit conflict list.
-        for (const FName Conflict : Progression->GetConflictingModifiers(ModifierID)) Progression->EnabledModifiers.Remove(Conflict);
+        const TArray<FName> Conflicts = Progression->GetConflictingModifiers(ModifierID);
+        if (!Conflicts.IsEmpty()) {
+            FRecoveredModifierRow Modifier;
+            if (Progression->GetModifierData(ModifierID, Modifier)) ShowModifierConflictOverlay(Modifier, Conflicts);
+            PendingModifierID = ModifierID;
+            PendingConflictingModifiers = Conflicts;
+            return false;
+        }
         Progression->EnabledModifiers.Add(ModifierID);
     }
-    // Persist the enabled set.
+    PersistAndRefreshModifierState();
+    return true;
+}
+
+bool URecoveredModifierWidget::ConfirmModifierConflicts() {
+    auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+    URecoveredProgressionManager* Progression = Instance ? Instance->ProgressionManager.Get() : nullptr;
+    if (!Progression || PendingModifierID.IsNone()) return false;
+    for (const FName Conflict : PendingConflictingModifiers) Progression->EnabledModifiers.Remove(Conflict);
+    Progression->EnabledModifiers.Add(PendingModifierID);
+    CloseModifierConflictOverlay();
+    PendingModifierID = NAME_None;
+    PendingConflictingModifiers.Reset();
+    PersistAndRefreshModifierState();
+    return true;
+}
+
+void URecoveredModifierWidget::CancelModifierConflicts() {
+    CloseModifierConflictOverlay();
+    PendingModifierID = NAME_None;
+    PendingConflictingModifiers.Reset();
+}
+
+bool URecoveredModifierWidget::HasPendingModifierConflicts() const {
+    return !PendingModifierID.IsNone();
+}
+
+void URecoveredModifierWidget::PersistAndRefreshModifierState() {
+    auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+    URecoveredProgressionManager* Progression = Instance ? Instance->ProgressionManager.Get() : nullptr;
+    if (!Progression) return;
     if (Instance->CurrentSave) {
         TArray<FString> Enabled;
         for (FName M : Progression->EnabledModifiers) Enabled.Add(M.ToString());
@@ -104,9 +142,42 @@ bool URecoveredModifierWidget::ToggleModifier(FName ModifierID) {
         for (const FName Enabled : Progression->EnabledModifiers) Manager->BeatContext.ActiveModifiers.Add(Enabled.ToString());
     }
     RefreshModifierList();
-    return true;
+}
+
+void URecoveredModifierWidget::ShowModifierConflictOverlay(const FRecoveredModifierRow& Modifier, const TArray<FName>& Conflicts) {
+    CloseModifierConflictOverlay();
+    UClass* OverlayClass = LoadClass<UUserWidget>(nullptr, TEXT("/Game/Recovery/UI/ConflictingWidgetOverlayWidget.ConflictingWidgetOverlayWidget_C"));
+    if (!OverlayClass || !GetWorld()) return;
+    ConflictOverlay = CreateWidget<UUserWidget>(GetWorld(), OverlayClass);
+    if (!ConflictOverlay) return;
+    if (auto* Title = Cast<UTextBlock>(ConflictOverlay->GetWidgetFromName(TEXT("ConflictTitle")))) {
+        Title->SetText(FText::FromString(FString::Printf(TEXT("\"%s\" Conflicts With:"), *Modifier.ModifierTitle.ToString())));
+    }
+    if (auto* Icon = Cast<UImage>(ConflictOverlay->GetWidgetFromName(TEXT("ModifierIcon")))) Icon->SetBrushFromTexture(Modifier.ModifierIcon);
+    FString ConflictText;
+    for (const FName Conflict : Conflicts) ConflictText += FString::Printf(TEXT("\"%s\"\r\n"), *Conflict.ToString());
+    if (auto* Text = Cast<UTextBlock>(ConflictOverlay->GetWidgetFromName(TEXT("ConflictingModifiersText")))) Text->SetText(FText::FromString(ConflictText));
+    ConflictForwarder = NewObject<URecoveredModifierConflictForward>(this);
+    ConflictForwarder->Owner = this;
+    if (auto* Confirm = FindEntryButton(ConflictOverlay, TEXT("RemoveConflictsButton"))) Confirm->OnClicked.AddUniqueDynamic(ConflictForwarder, &URecoveredModifierConflictForward::Confirm);
+    if (auto* Cancel = FindEntryButton(ConflictOverlay, TEXT("CancelButton"))) Cancel->OnClicked.AddUniqueDynamic(ConflictForwarder, &URecoveredModifierConflictForward::Cancel);
+    ConflictOverlay->AddToViewport(0);
+}
+
+void URecoveredModifierWidget::CloseModifierConflictOverlay() {
+    if (ConflictOverlay) ConflictOverlay->RemoveFromParent();
+    ConflictOverlay = nullptr;
+    ConflictForwarder = nullptr;
 }
 
 void URecoveredModifierToggleForward::Toggle() {
     if (Owner) Owner->ToggleModifier(ModifierID);
+}
+
+void URecoveredModifierConflictForward::Confirm() {
+    if (Owner) Owner->ConfirmModifierConflicts();
+}
+
+void URecoveredModifierConflictForward::Cancel() {
+    if (Owner) Owner->CancelModifierConflicts();
 }

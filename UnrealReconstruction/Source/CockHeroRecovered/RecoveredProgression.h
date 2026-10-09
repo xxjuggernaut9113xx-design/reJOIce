@@ -124,6 +124,7 @@ public:
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered") TObjectPtr<class UDataTable> PlayerCardDataTable;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered") TSet<FName> UnlockedPlayerCards;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered") TObjectPtr<class UDataTable> ModifierDataTable;
+    UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered") TObjectPtr<class UDataTable> ChallengeDataTable;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered") TSet<FName> UnlockedModifiers;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered") TSet<FName> EnabledModifiers;
     UPROPERTY(BlueprintAssignable,Category="Recovered") FRecoveredProgressionSaveRequest OnSaveRequested;
@@ -141,14 +142,16 @@ public:
     UFUNCTION(BlueprintCallable,Category="Recovered") bool UnlockModifier(FName ModifierID);
     // Native modifier data interface confirmed by Ghidra (UProgressionManager::GetAllModifierData,
     // GetModifierData, CanEnableModifier, IsModifierUnlocked, GetUnlockedModifiers,
-    // GetConflictingModifiers, GetChallengeForModifier).
+    // GetAllConflictsForModifier, GetConflictingModifiers, GetChallengeForModifier).
     UFUNCTION(BlueprintPure,Category="Recovered") TArray<FRecoveredModifierRow> GetAllModifierData() const;
     UFUNCTION(BlueprintPure,Category="Recovered") bool GetModifierData(FName ModifierID, FRecoveredModifierRow& OutData) const;
     UFUNCTION(BlueprintPure,Category="Recovered") bool CanEnableModifier(FName ModifierID) const;
     UFUNCTION(BlueprintPure,Category="Recovered") bool IsModifierUnlocked(FName ModifierID) const;
     UFUNCTION(BlueprintPure,Category="Recovered") TArray<FName> GetUnlockedModifiers() const;
+    UFUNCTION(BlueprintPure,Category="Recovered") TArray<FName> GetAllConflictsForModifier(FName ModifierID) const;
     UFUNCTION(BlueprintPure,Category="Recovered") TArray<FName> GetConflictingModifiers(FName ModifierID) const;
     UFUNCTION(BlueprintPure,Category="Recovered") FName GetChallengeForModifier(FName ModifierID) const;
+    FName GetCanonicalModifierID(FName ModifierID) const;
     UFUNCTION(BlueprintPure,Category="Recovered Save") FString ExportRecoveryState() const;
     UFUNCTION(BlueprintCallable,Category="Recovered Save") bool ImportRecoveryState(const FString& Json);
 };

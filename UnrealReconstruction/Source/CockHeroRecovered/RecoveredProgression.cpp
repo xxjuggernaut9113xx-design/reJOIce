@@ -162,6 +162,44 @@ FText URecoveredProgressionLibrary::GetStatValueText(ERecoveredMetric Metric, co
     return FText::FromString(FString::Printf(TEXT("%s: %d"), GetMetricDisplayName(Metric), Value));
 }
 
+namespace {
+const FRecoveredModifierRow* FindModifierRowByTitle(const UDataTable* Table, FName ModifierID, FName* OutCanonicalID = nullptr) {
+    if (!Table || ModifierID.IsNone() || Table->GetRowStruct() != FRecoveredModifierRow::StaticStruct()) return nullptr;
+    for (const auto& Pair : Table->GetRowMap()) {
+        const auto* Row = reinterpret_cast<const FRecoveredModifierRow*>(Pair.Value);
+        if (!Row) continue;
+        const FString Title = Row->ModifierTitle.ToString();
+        if (Title.IsEmpty() || FName(*Title) != ModifierID) continue;
+        if (OutCanonicalID) *OutCanonicalID = FName(*Title);
+        return Row;
+    }
+    return nullptr;
+}
+
+const TMap<FString, TArray<FString>>& GetRecoveredModifierConflicts() {
+    // UProgressionManager::InitializeModifierConflicts at 0x1481c4c00.
+    static const TMap<FString, TArray<FString>> Conflicts = {
+        { TEXT("Pheromones"), { TEXT("Slow and Steady"), TEXT("Succufrenzy") } },
+        { TEXT("Mr. Money Bandz"), { TEXT("Succufrenzy"), TEXT("Sacrificial") } },
+        { TEXT("Ass Fanatic"), { TEXT("Boobs Fanatic"), TEXT("Feet Fanatic") } },
+        { TEXT("Boobs Fanatic"), { TEXT("Ass Fanatic"), TEXT("Feet Fanatic") } },
+        { TEXT("Hungry Succubi"), { TEXT("Succufrenzy"), TEXT("Slow and Steady"), TEXT("Demon Proof"), TEXT("Deal With The Devil") } },
+        { TEXT("Succufrenzy"), { TEXT("Slow and Steady"), TEXT("Sacrificial"), TEXT("Hungry Succubi"), TEXT("Raw Dog"), TEXT("Demon Proof"), TEXT("All or Nothing"), TEXT("Double Time"), TEXT("Pheromones"), TEXT("Mr. Money Bandz"), TEXT("Deal With The Devil") } },
+        { TEXT("Slow and Steady"), { TEXT("Hungry Succubi"), TEXT("Succufrenzy"), TEXT("Hivemind"), TEXT("Deal With The Devil"), TEXT("Double Time"), TEXT("Pheromones"), TEXT("Iron Man") } },
+        { TEXT("Sacrificial"), { TEXT("Mr. Money Bandz"), TEXT("Deal With The Devil"), TEXT("Succufrenzy") } },
+        { TEXT("Feet Fanatic"), { TEXT("Ass Fanatic"), TEXT("Boobs Fanatic") } },
+        { TEXT("Iron Man"), { TEXT("Slow and Steady") } },
+        { TEXT("Raw Dog"), { TEXT("Succufrenzy"), TEXT("All or Nothing") } },
+        { TEXT("Demon Proof"), { TEXT("Deal With The Devil"), TEXT("Hivemind"), TEXT("Succufrenzy"), TEXT("Hungry Succubi") } },
+        { TEXT("All or Nothing"), { TEXT("Succufrenzy"), TEXT("Raw Dog") } },
+        { TEXT("Hivemind"), { TEXT("Demon Proof"), TEXT("Slow and Steady") } },
+        { TEXT("Deal With The Devil"), { TEXT("Demon Proof"), TEXT("Hungry Succubi"), TEXT("Sacrificial"), TEXT("Slow and Steady"), TEXT("Succufrenzy") } },
+        { TEXT("Double Time"), { TEXT("Succufrenzy"), TEXT("Slow and Steady") } },
+    };
+    return Conflicts;
+}
+}
+
 TArray<FRecoveredModifierRow> URecoveredProgressionManager::GetAllModifierData() const {
     TArray<FRecoveredModifierRow> Out;
     if (!ModifierDataTable || ModifierDataTable->GetRowStruct()!=FRecoveredModifierRow::StaticStruct()) return Out;
@@ -174,12 +212,17 @@ TArray<FRecoveredModifierRow> URecoveredProgressionManager::GetAllModifierData()
 }
 
 bool URecoveredProgressionManager::GetModifierData(FName ModifierID, FRecoveredModifierRow& OutData) const {
-    if (!ModifierDataTable) return false;
-    if (const FRecoveredModifierRow* Row = ModifierDataTable->FindRow<FRecoveredModifierRow>(ModifierID, TEXT("GetModifierData"))) {
+    if (const FRecoveredModifierRow* Row = FindModifierRowByTitle(ModifierDataTable, ModifierID)) {
         OutData = *Row;
         return true;
     }
     return false;
+}
+
+FName URecoveredProgressionManager::GetCanonicalModifierID(FName ModifierID) const {
+    FName CanonicalID;
+    FindModifierRowByTitle(ModifierDataTable, ModifierID, &CanonicalID);
+    return CanonicalID.IsNone() ? ModifierID : CanonicalID;
 }
 
 bool URecoveredProgressionManager::IsModifierUnlocked(FName ModifierID) const {
@@ -187,49 +230,44 @@ bool URecoveredProgressionManager::IsModifierUnlocked(FName ModifierID) const {
 }
 
 bool URecoveredProgressionManager::CanEnableModifier(FName ModifierID) const {
-    // Native CanEnableModifier (0x1481b4d00) checks unlock state AND conflicts
-    // against currently enabled modifiers.
-    if (!IsModifierUnlocked(ModifierID)) return false;
-    if (EnabledModifiers.Contains(ModifierID)) return true;
-    for (FName Conflict : GetConflictingModifiers(ModifierID)) {
-        if (EnabledModifiers.Contains(Conflict)) return false;
-    }
-    return true;
+    // Native CanEnableModifier (0x1481b4d00) is a conflict-only predicate.
+    return GetConflictingModifiers(ModifierID).IsEmpty();
 }
 
 TArray<FName> URecoveredProgressionManager::GetUnlockedModifiers() const {
     return UnlockedModifiers.Array();
 }
 
-TArray<FName> URecoveredProgressionManager::GetConflictingModifiers(FName ModifierID) const {
-    // Candidate pairs supplied by the patch, NOT yet verified against
-    // InitializeModifierConflicts (0x1481c4c00); canonicalization is still missing.
-    static const TMap<FString, TArray<FString>> Conflicts = {
-        { TEXT("Slow and Steady"), { TEXT("Succufrenzy"), TEXT("Sacrificial") } },
-        { TEXT("Succufrenzy"), { TEXT("Slow and Steady"), TEXT("Sacrificial"), TEXT("Pheromones") } },
-        { TEXT("Sacrificial"), { TEXT("Slow and Steady"), TEXT("Succufrenzy") } },
-        { TEXT("Pheromones"), { TEXT("Succufrenzy"), TEXT("Iron Man") } },
-        { TEXT("Iron Man"), { TEXT("Pheromones") } },
-        { TEXT("Raw Dog"), { TEXT("Hivemind") } },
-        { TEXT("Hivemind"), { TEXT("Raw Dog") } },
-    };
+TArray<FName> URecoveredProgressionManager::GetAllConflictsForModifier(FName ModifierID) const {
     TArray<FName> Out;
-    const FString Key = ModifierID.ToString();
-    if (const TArray<FString>* Found = Conflicts.Find(Key)) {
+    const FString Key = GetCanonicalModifierID(ModifierID).ToString();
+    if (const TArray<FString>* Found = GetRecoveredModifierConflicts().Find(Key)) {
         for (const FString& C : *Found) Out.Add(FName(*C));
     }
     return Out;
 }
 
+TArray<FName> URecoveredProgressionManager::GetConflictingModifiers(FName ModifierID) const {
+    TArray<FName> Out;
+    for (const FName Conflict : GetAllConflictsForModifier(ModifierID)) {
+        if (EnabledModifiers.Contains(Conflict)) Out.Add(Conflict);
+    }
+    return Out;
+}
+
 FName URecoveredProgressionManager::GetChallengeForModifier(FName ModifierID) const {
-    // Native GetChallengeForModifier (0x1481ba860) looks up the modifier's
-    // challenge via the data table. The recovered table schema
-    // (Title/Description/Icon only) does not carry the link field.
-    if (ModifierDataTable) {
-        // Check for a challenge-linked row naming convention.
-        const FName ChallengeKey(*(ModifierID.ToString() + TEXT("_Challenge")));
-        if (ModifierDataTable->FindRow<FRecoveredModifierRow>(ChallengeKey, TEXT("GetChallengeForModifier"), false)) {
-            return ChallengeKey;
+    // Native GetChallengeForModifier (0x1481ba860) scans challenge conditions
+    // for a type-4 modifier condition and returns the first matching challenge.
+    if (!ChallengeDataTable || ChallengeDataTable->GetRowStruct() != FRecoveredChallengeRow::StaticStruct()) return NAME_None;
+    const FString CanonicalModifier = GetCanonicalModifierID(ModifierID).ToString();
+    if (CanonicalModifier.IsEmpty()) return NAME_None;
+    for (const auto& Pair : ChallengeDataTable->GetRowMap()) {
+        const auto* Challenge = reinterpret_cast<const FRecoveredChallengeRow*>(Pair.Value);
+        if (!Challenge) continue;
+        for (const FRecoveredCondition& Condition : Challenge->Conditions) {
+            if (Condition.ConditionType == TEXT("modifier") && Condition.ConditionValue == CanonicalModifier) {
+                return FName(*Challenge->ChallengeID);
+            }
         }
     }
     return NAME_None;

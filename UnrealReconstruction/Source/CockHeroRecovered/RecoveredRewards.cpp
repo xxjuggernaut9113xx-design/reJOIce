@@ -16,12 +16,12 @@ bool URecoveredProgressionManager::UnlockPlayerCard(FName CardID) {
 
 bool URecoveredProgressionManager::UnlockModifier(FName ModifierID) {
     if (ModifierID.IsNone() || UnlockedModifiers.Contains(ModifierID) || !ModifierDataTable || ModifierDataTable->GetRowStruct()!=FRecoveredModifierRow::StaticStruct()) return false;
-    const FString Requested=ModifierID.ToString();
     for (const auto& Pair:ModifierDataTable->GetRowMap()) {
         const auto* Row=reinterpret_cast<const FRecoveredModifierRow*>(Pair.Value);
         const FString Title=Row->ModifierTitle.ToString();
-        if (Title.IsEmpty() || !Title.Equals(Requested,ESearchCase::IgnoreCase)) continue;
-        UnlockedModifiers.Add(ModifierID);
+        const FName CanonicalID(*Title);
+        if (CanonicalID.IsNone() || CanonicalID!=ModifierID) continue;
+        UnlockedModifiers.Add(CanonicalID);
         OnSaveRequested.Broadcast();
         return true;
     }
