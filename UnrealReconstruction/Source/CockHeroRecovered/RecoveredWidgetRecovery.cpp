@@ -7,6 +7,7 @@
 #include "RecoveredEventWidgets.h"
 #include "RecoveredPostCumContinueWidget.h"
 #include "RecoveredStatsWidget.h"
+#include "RecoveredChallengesMenu.h"
 #include "RecoveredCalibrationWidget.h"
 #include "RecoveredAudioSettings.h"
 #include "RecoveredVideoSettings.h"
@@ -182,6 +183,7 @@ FString URecoveredWidgetRecovery::BuildWidgetAssets(const FString& EvidencePath)
             if(Screen.Key==TEXT("RestWidget")) ParentClass=URecoveredRestWidget::StaticClass();
             if(Screen.Key==TEXT("PostCumContinue_Widget")) ParentClass=URecoveredPostCumContinueWidget::StaticClass();
             if(Screen.Key==TEXT("StatsScreenWidget")) ParentClass=URecoveredStatsScreenWidget::StaticClass();
+            if(Screen.Key==TEXT("ChallengesMenuWidget")) ParentClass=URecoveredChallengesMenu::StaticClass();
             if(URecoveredAnimatedOverlay::SupportsAsset(FName(*Screen.Key))) ParentClass=URecoveredAnimatedOverlay::StaticClass();
             if(Screen.Key==TEXT("UMG_BeatIcon")) ParentClass=URecoveredBeatWidget::StaticClass();
             if(Screen.Key==TEXT("WBP_CalibrationUI")) ParentClass=URecoveredCalibrationWidget::StaticClass();
