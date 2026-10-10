@@ -5,6 +5,7 @@
 #include "RecoveredPG2TabbedInventoryWidget.h"
 #include "RecoveredRestWidget.h"
 #include "RecoveredEventWidgets.h"
+#include "RecoveredPostCumContinueWidget.h"
 #include "RecoveredCalibrationWidget.h"
 #include "RecoveredAudioSettings.h"
 #include "RecoveredVideoSettings.h"
@@ -178,6 +179,7 @@ FString URecoveredWidgetRecovery::BuildWidgetAssets(const FString& EvidencePath)
             if(Screen.Key==TEXT("PG1TabbedInventory_Widget")) ParentClass=URecoveredTabbedInventoryWidget::StaticClass();
             if(Screen.Key==TEXT("PG2TabbedInventory_Widget")) ParentClass=URecoveredPG2TabbedInventoryWidget::StaticClass();
             if(Screen.Key==TEXT("RestWidget")) ParentClass=URecoveredRestWidget::StaticClass();
+            if(Screen.Key==TEXT("PostCumContinue_Widget")) ParentClass=URecoveredPostCumContinueWidget::StaticClass();
             if(URecoveredAnimatedOverlay::SupportsAsset(FName(*Screen.Key))) ParentClass=URecoveredAnimatedOverlay::StaticClass();
             if(Screen.Key==TEXT("UMG_BeatIcon")) ParentClass=URecoveredBeatWidget::StaticClass();
             if(Screen.Key==TEXT("WBP_CalibrationUI")) ParentClass=URecoveredCalibrationWidget::StaticClass();

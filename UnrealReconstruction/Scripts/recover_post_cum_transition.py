@@ -6,6 +6,7 @@ from pathlib import Path
 analysis = Path(r"C:\Users\webma\analysis\cockhero-v004")
 project = Path(__file__).resolve().parents[1]
 widget_functions = analysis / "widget-functions" / "PostCumContinue_Widget"
+recovered_widget = project / "Content" / "Recovery" / "UI" / "PostCumContinue_Widget.uasset"
 shipping_executable = Path(
     r"C:\Users\webma\Downloads\Cock_Hero_Shipping_Build_V0.04_-_Exclusive"
     r"\PrepV2\Windows\CockHero\Binaries\Win64\CockHero.exe"
@@ -49,8 +50,10 @@ handler_path = widget_functions / (
     "BndEvt__PostCumContinue_Widget_ViewResultsButton_"
     "K2Node_ComponentBoundEvent_0_OnButtonClickedEvent__DelegateSignature.json"
 )
+construct_path = widget_functions / "Construct.json"
 graph_path = widget_functions / "ExecuteUbergraph_PostCumContinue_Widget.json"
 handler = read_json(handler_path)
+construct = read_json(construct_path)
 graph = read_json(graph_path)
 
 handler_call = handler["statements"][0]
@@ -60,6 +63,14 @@ if (
     or handler_call.get("Parameters", [{}])[0].get("Value") != 67
 ):
     raise RuntimeError("ViewResultsButton no longer routes to ExecuteUbergraph entry 67")
+
+construct_call = construct["statements"][0]
+if (
+    construct_call.get("op") != "EX_LocalFinalFunction"
+    or construct_call.get("StackNode") != "ExecuteUbergraph_PostCumContinue_Widget"
+    or construct_call.get("Parameters", [{}])[0].get("Value") != 62
+):
+    raise RuntimeError("Post-cum Construct no longer routes to ExecuteUbergraph entry 62")
 
 required_calls = {"PauseSequence", "Create", "AddToViewport", "Array_Add"}
 calls = set(graph["function"]["calls"])
@@ -90,22 +101,41 @@ if not includes_field(statements[13], "EdgeStreak"):
     raise RuntimeError("Post-cum graph no longer clears EdgeStreak")
 if not includes_field(statements[14], "CurrentComboCount"):
     raise RuntimeError("Post-cum graph no longer clears CurrentComboCount")
+if set(stack_nodes(statements[1])) != {"PlayAnimation"}:
+    raise RuntimeError("Post-cum construct entry no longer plays the idle animation")
+if not includes_field(statements[1], "IdleButton"):
+    raise RuntimeError("Post-cum construct no longer targets IdleButton")
 
 report = {
     "source_executed": False,
     "sources": {
         "view_results_handler": str(handler_path),
         "view_results_handler_sha256": sha256(handler_path),
+        "construct": str(construct_path),
+        "construct_sha256": sha256(construct_path),
         "post_cum_graph": str(graph_path),
         "post_cum_graph_sha256": sha256(graph_path),
         "shipping_executable": str(shipping_executable),
         "shipping_executable_sha256": sha256(shipping_executable),
+    },
+    "reconstructed_asset": {
+        "post_cum_continue_widget": str(recovered_widget),
+        "post_cum_continue_widget_sha256": sha256(recovered_widget),
     },
     "handler": {
         "widget": "PostCumContinue_Widget",
         "control": "ViewResultsButton",
         "function": "ExecuteUbergraph_PostCumContinue_Widget",
         "entry_point": 67,
+    },
+    "construct": {
+        "function": "Construct",
+        "entry_point": 62,
+        "animation": "IdleButton",
+        "start_time_seconds": 0.0,
+        "loop_count": 0,
+        "playback_speed": 1.0,
+        "restore_state": False,
     },
     "source_operation_order": [
         {"statement_index": 8, "operation": "PauseSequence"},
@@ -123,6 +153,7 @@ report = {
     "runtime_mapping": {
         "source_handler": "ARecoveredGlobalManager::OpenPostGameResults",
         "pause": "BeatTimeline->PauseSequence()",
+        "construct_animation": "URecoveredPostCumContinueWidget::NativeConstruct",
         "results_widget": "/Game/Recovery/UI/WBP_PostGameFlow_Master",
         "combo_history": "PlayerVariables.BrokenComboArray.Add(PlayerVariables.CurrentComboCount)",
         "state_clear": [

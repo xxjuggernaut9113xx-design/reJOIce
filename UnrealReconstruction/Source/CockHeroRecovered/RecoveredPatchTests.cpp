@@ -17,6 +17,7 @@
 #include "Components/TextBlock.h"
 #include "Components/WidgetSwitcher.h"
 #include "RecoveredPostGameSequence.h"
+#include "RecoveredPostCumContinueWidget.h"
 #include "RecoveredNotificationWidget.h"
 #include "RecoveredSessionWidget.h"
 #include "Components/Image.h"
@@ -317,6 +318,18 @@ bool FRecoveredPostCumResultsTransitionTest::RunTest(const FString& Parameters) 
     Manager->ReturnToMainMenu();
     TestNull(TEXT("Return-to-menu releases the post-game sequence"),Manager->PostGameSequence.Get());
     World->DestroyWorld(false); GEngine->DestroyWorldContext(World);
+    return true;
+}
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredPostCumWidgetLifecycleTest,"CockHero.Recovery.PostCumWidgetLifecycle",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FRecoveredPostCumWidgetLifecycleTest::RunTest(const FString& Parameters) {
+    UClass* Class=LoadClass<URecoveredPostCumContinueWidget>(nullptr,TEXT("/Game/Recovery/UI/PostCumContinue_Widget.PostCumContinue_Widget_C"));
+    if (!TestNotNull(TEXT("Post-cum widget class"),Class)) return false;
+    TestTrue(TEXT("Post-cum widget uses its recovered construct parent"),Class->IsChildOf(URecoveredPostCumContinueWidget::StaticClass()));
+    auto* Widget=NewObject<URecoveredPostCumContinueWidget>(GetTransientPackage(),Class);
+    if (!TestTrue(TEXT("Post-cum widget initializes"),Widget->Initialize())) return false;
+    Widget->TakeWidget();
+    Widget->StartRecoveredIdleAnimation();
+    TestTrue(TEXT("Post-cum construct starts the source idle animation"),Widget->IsRecoveredIdleAnimationPlaying());
     return true;
 }
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredPostGameSequenceTest,"CockHero.Recovery.PostGameSourceSequence",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
