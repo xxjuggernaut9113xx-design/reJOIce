@@ -74,8 +74,9 @@ bool FRecoveredPatchAudioTest::RunTest(const FString& Parameters) {
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredFinalPatchRegressionTest,"CockHero.Recovery.FinalPatchRegressions",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
 bool FRecoveredFinalPatchRegressionTest::RunTest(const FString& Parameters) {
     auto* Device=NewObject<URecoveredDeviceManager>();
-    TestFalse(TEXT("Unimplemented transport cannot claim connection"),Device->ConnectDevice(ERecoveredDeviceKind::Handy,TEXT("test")));
-    TestFalse(TEXT("Connection remains unavailable"),Device->IsDeviceConnected(ERecoveredDeviceKind::Handy));
+    TestFalse(TEXT("Invalid transport configuration cannot claim connection"),Device->ConnectDevice(ERecoveredDeviceKind::Handy,TEXT(" ")));
+    TestFalse(TEXT("Connection remains unavailable before a verified handshake"),Device->IsDeviceConnected(ERecoveredDeviceKind::Handy));
+    TestEqual(TEXT("Invalid transport configuration is explicit"),Device->GetDeviceConnectionStatus(ERecoveredDeviceKind::Handy),ERecoveredDeviceConnectionStatus::Error);
     FRecoveredSessionRewardData Bundle;Bundle.XPGranted=123;
     FRecoveredReward XP;XP.RewardType=TEXT("XP");XP.Value=123;Bundle.Rewards.Add(XP);
     TestEqual(TEXT("XP appears once in session reward text"),URecoveredProgressionLibrary::GetRewardsText(Bundle).ToString(),FString(TEXT("+123 XP")));

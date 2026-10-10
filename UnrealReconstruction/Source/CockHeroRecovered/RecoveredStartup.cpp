@@ -117,7 +117,11 @@ bool ARecoveredGlobalManager::ReturnToMainMenu() {
     if (BeatTimeline) {
         BeatTimeline->OnSequenceEnd.RemoveDynamic(this, &ARecoveredGlobalManager::CompleteBeatSequence);
         BeatTimeline->OnBeatFired.RemoveDynamic(this, &ARecoveredGlobalManager::PresentRecoveredBeat);
+        BeatTimeline->OnBeatFired.RemoveDynamic(this, &ARecoveredGlobalManager::HandleRecoveredDeviceBeat);
         BeatTimeline->OnBeatHitCenter.RemoveDynamic(this, &ARecoveredGlobalManager::HandleBeatHitCenter);
+    }
+    if (auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance())) {
+        if (Instance->DeviceManager) Instance->DeviceManager->OnDeviceStateChanged.RemoveDynamic(this, &ARecoveredGlobalManager::HandleRecoveredDeviceStateChanged);
     }
     OnMetricUpdateRequested.RemoveDynamic(this, &ARecoveredGlobalManager::HandleRecoveredMetric);
     OnOutcomeRequested.RemoveDynamic(this, &ARecoveredGlobalManager::HandleRecoveredOutcome);
@@ -165,7 +169,7 @@ bool ARecoveredGlobalManager::InitializeRecoveredSession() {
     if (!Instance || !Instance->CurrentSave) { LastSessionError=TEXT("Recovered session requires a valid isolated save"); return false; }
     URecoveredSaveGame* Save=Instance->CurrentSave;
     InitializeDifficultyVariables(static_cast<uint8>(Save->GetNumberSetting(TEXT("EdgePacingMultiplierEnum"),0)),static_cast<uint8>(Save->GetNumberSetting(TEXT("StrokeMultiplierEnum"),0)));
-    UpdateMinimumBeatInterval(FRecoveredDeviceState());
+    UpdateMinimumBeatInterval(Instance->DeviceManager ? Instance->DeviceManager->GetGameplayDeviceState() : FRecoveredDeviceState());
     BeatContext.ActiveModifiers=Save->GetStringArraySetting(TEXT("ActiveModifiers"));
     Rules=LoadObject<URecoveredRulesAsset>(nullptr,TEXT("/Game/Recovery/Definitions/DA_GameRules.DA_GameRules"));
     HeatCategoryDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_HeatCategories.DT_HeatCategories"));
@@ -189,6 +193,8 @@ bool ARecoveredGlobalManager::InitializeRecoveredSession() {
     if (Instance->ChallengeTracker) Instance->ChallengeTracker->StartNewSession();
     ApplySavedCalibrationToTimeline();
     BeatTimeline->OnBeatFired.AddUniqueDynamic(this,&ARecoveredGlobalManager::PresentRecoveredBeat);
+    BeatTimeline->OnBeatFired.AddUniqueDynamic(this,&ARecoveredGlobalManager::HandleRecoveredDeviceBeat);
+    if (Instance->DeviceManager) Instance->DeviceManager->OnDeviceStateChanged.AddUniqueDynamic(this,&ARecoveredGlobalManager::HandleRecoveredDeviceStateChanged);
     OnMetricUpdateRequested.AddUniqueDynamic(this,&ARecoveredGlobalManager::HandleRecoveredMetric);
     OnOutcomeRequested.AddUniqueDynamic(this,&ARecoveredGlobalManager::HandleRecoveredOutcome);
     OnSessionAction.AddUniqueDynamic(this,&ARecoveredGlobalManager::HandleRecoveredSessionAction);

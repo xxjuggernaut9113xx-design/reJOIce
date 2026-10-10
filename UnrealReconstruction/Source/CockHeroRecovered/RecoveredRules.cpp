@@ -185,7 +185,22 @@ void ARecoveredGlobalManager::BeatComplete() {
     OnSessionAction.Broadcast(TEXT("UpdateEdgeStreakProgressBar"));
     UpdateBeatCompleteMetrics();
 }
-void ARecoveredGlobalManager::HandleBeatHitCenter(const FRecoveredBeatEvent& Event) { BeatComplete(); }
+void ARecoveredGlobalManager::HandleBeatHitCenter(const FRecoveredBeatEvent& Event) {
+    if (URecoveredGameInstance* Instance = Cast<URecoveredGameInstance>(GetGameInstance())) {
+        if (Instance->DeviceManager) Instance->DeviceManager->DispatchBeatHitCenter(Event);
+    }
+    BeatComplete();
+}
+void ARecoveredGlobalManager::HandleRecoveredDeviceBeat(const FRecoveredBeatEvent& Event) {
+    if (URecoveredGameInstance* Instance = Cast<URecoveredGameInstance>(GetGameInstance())) {
+        if (Instance->DeviceManager) Instance->DeviceManager->DispatchBeat(Event);
+    }
+}
+void ARecoveredGlobalManager::HandleRecoveredDeviceStateChanged(ERecoveredDeviceKind DeviceType, bool bConnected) {
+    if (URecoveredGameInstance* Instance = Cast<URecoveredGameInstance>(GetGameInstance())) {
+        if (Instance->DeviceManager) UpdateMinimumBeatInterval(Instance->DeviceManager->GetGameplayDeviceState());
+    }
+}
 void ARecoveredGlobalManager::ApplySavedCalibrationToTimeline() {
     if (!BeatTimeline) return;
     double OffsetSeconds = 0;
@@ -237,8 +252,12 @@ bool ARecoveredGlobalManager::ApplyStoreItemEffect(FName ItemID, int32 Level) {
 }
 bool ARecoveredGlobalManager::StartRecoveredBeatSequence(const FRecoveredBeatPattern& Pattern, double BaseInterval, int32 StrokeCount, float SpeedModifier, double TravelTime) {
     // Bind to the live actor after subobject instancing, rather than the class-default actor.
+    BeatTimeline->OnBeatFired.AddUniqueDynamic(this, &ARecoveredGlobalManager::HandleRecoveredDeviceBeat);
     BeatTimeline->OnBeatHitCenter.AddUniqueDynamic(this, &ARecoveredGlobalManager::HandleBeatHitCenter);
     BeatTimeline->OnSequenceEnd.AddUniqueDynamic(this, &ARecoveredGlobalManager::CompleteBeatSequence);
+    if (URecoveredGameInstance* Instance = Cast<URecoveredGameInstance>(GetGameInstance())) {
+        if (Instance->DeviceManager) UpdateMinimumBeatInterval(Instance->DeviceManager->GetGameplayDeviceState());
+    }
     ApplySavedCalibrationToTimeline();
     if (!BeatTimeline->StartPattern(Pattern, BaseInterval, StrokeCount, SpeedModifier, TravelTime)) return false;
     PlayerVariables.CurrentStrokeCount = StrokeCount;

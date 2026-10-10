@@ -298,6 +298,8 @@ public:
     UFUNCTION(BlueprintCallable, Category="Recovered") bool StartRecoveredBeatSequence(const FRecoveredBeatPattern& Pattern, double BaseInterval, int32 StrokeCount, float SpeedModifier, double TravelTime);
     UFUNCTION() void PresentRecoveredBeat(const FRecoveredBeatEvent& Event);
     UFUNCTION() void HandleBeatHitCenter(const FRecoveredBeatEvent& Event);
+    UFUNCTION() void HandleRecoveredDeviceBeat(const FRecoveredBeatEvent& Event);
+    UFUNCTION() void HandleRecoveredDeviceStateChanged(ERecoveredDeviceKind DeviceType, bool bConnected);
     UFUNCTION(BlueprintCallable, Category="Recovered|Media") bool LoadMediaPack(const FString& ManifestPath, const TArray<FString>& ExcludedTags);
     UFUNCTION(BlueprintCallable, Category="Recovered|Media") bool OpenRecoveredCumMedia(bool bPlayMedia = true);
     // Media pack management: enable/disable packs and control their draw priority.

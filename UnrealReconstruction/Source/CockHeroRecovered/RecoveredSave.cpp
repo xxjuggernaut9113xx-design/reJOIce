@@ -272,6 +272,7 @@ bool URecoveredGameInstance::LoadRecoveredSaveSlotInternal(const FString& SlotNa
     }
 
     CurrentSave=Loaded;
+    if (DeviceManager) DeviceManager->LoadDeviceSettings(CurrentSave);
     ActiveRecoverySlot=SlotName;
     ProgressionManager=NewProgression;
     ChallengeTracker=NewChallenges;

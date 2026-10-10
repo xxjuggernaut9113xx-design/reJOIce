@@ -156,6 +156,14 @@ The modifier tab now retains the source four-column layout and opens the importe
 
 The recovered native addresses, full registry, and validation evidence are recorded in [modifier-conflict-and-challenge-link-recovery.json](RecoveryEvidence/modifier-conflict-and-challenge-link-recovery.json). `CockHero.Recovery.ModifierConflictAndChallengeLinks` passed. The Windows Unreal Editor build passed. The full `CockHero.Recovery` run completed **56 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
 
+### Toy transport and settings recovery (2026-10-10)
+
+URecoveredDeviceManager now follows the recovered hardware transport contracts behind the 27-control Toy Settings menu and its nine source animations. The manager persists the source save keys, routes Handy through HTTPS v2, discovers active Lovense HTTP toys from the recovered type=OK / data.toys response, and restricts Intiface commands to advertised Buttplug WebSocket v3 capabilities.
+
+The native recovery restores the source timing and message shapes: Intiface uses a 0.25-second vibrator pulse, StopAllDevices, a 0.1-second scan restart, linear test return after the complete 500 ms move, and five reconnect attempts with a two-second step. Lovense beat dispatch sends a per-active-vibrator Function command with Vibrate:15, timeSec: 0, stopPrevious: true, and apiVer: 1; fast beats enter the recovered continuous mode below 0.5 seconds, then stop and defer the next discrete pulse by 0.1 seconds. Test actions restore the vibrator, stroker, thrusting, and fallback command forms from the native dispatcher.
+
+[toy-settings-parity-recovery.json](RecoveryEvidence/toy-settings-parity-recovery.json) records the widget inventory, source save fields, static-native contract markers, and SHA-256 values for the decompile and shipping executable. The original executable was not run. CockHero.Recovery.ToySettingsTransportParity completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The Windows Unreal Editor build passed. The full CockHero.Recovery suite completed **59 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
+
 ## Remaining limits
 
 - The staged post-game controller follows recovered graph order and timings, but interactive side-by-side original-runtime comparison of every animation curve, sound cue, and transient visual state remains outstanding.
@@ -163,6 +171,7 @@ The recovered native addresses, full registry, and validation evidence are recor
 - Recovered challenge and modifier lists use the original container/card assets, title-based modifier identity, source conflict registry, challenge-condition mapping, and recovered state models. Original entry Blueprint animation, tooltip/icon rules, reward-roll presentation, and interactive original-runtime comparison remain incomplete.
 - The current inventory recovery covers PG1's Edge action, tab switching, heat, break, slowdown, cum chance, PG2 resupply, Boner Pill, and SuccuShield. Interactive original-runtime timing and full-session behavior still need side-by-side recovery.
 - Hardware transports, original save compatibility, original editor graphs, complete native analysis, full GUI playtests, packaged validation, and clean-machine validation remain outstanding.
+- The recovered Lovense HTTP flow covers the mobile LAN contract. The original desktop SDK route remains represented by the local HTTP adapter until its proprietary runtime can be exercised against a compatible device.
 - The complete-image checkpoint is still partial, and the original runtime has not been used for behavioral comparison. No full-game completion or original-runtime parity is claimed.
 
 Build/test details and input hashes are recorded in [final-gap-patch-verification.json](RecoveryEvidence/final-gap-patch-verification.json). The comprehensive missing/partial-feature audit is updated separately after this integration.
