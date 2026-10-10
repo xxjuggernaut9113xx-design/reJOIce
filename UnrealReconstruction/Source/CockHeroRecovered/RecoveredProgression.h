@@ -5,6 +5,8 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "RecoveredProgression.generated.h"
 
+struct FRecoveredPlayerCardRow;
+
 USTRUCT(BlueprintType)
 struct COCKHERORECOVERED_API FRecoveredModifierRow : public FTableRowBase {
     GENERATED_BODY()
@@ -123,6 +125,7 @@ public:
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered") TObjectPtr<class UDataTable> LevelDataTable;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered") TObjectPtr<class UDataTable> PlayerCardDataTable;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered") TSet<FName> UnlockedPlayerCards;
+    UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered") FName EquippedPlayerCard=NAME_None;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered") TObjectPtr<class UDataTable> ModifierDataTable;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered") TObjectPtr<class UDataTable> ChallengeDataTable;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered") TSet<FName> UnlockedModifiers;
@@ -139,6 +142,11 @@ public:
     UFUNCTION(BlueprintCallable,Category="Recovered") void AddUnlockPoints(int32 Amount);
     UFUNCTION(BlueprintCallable,Category="Recovered") void CheckLevelUp();
     UFUNCTION(BlueprintCallable,Category="Recovered") bool UnlockPlayerCard(FName CardID);
+    UFUNCTION(BlueprintCallable,Category="Recovered") bool EquipPlayerCard(FName CardID);
+    UFUNCTION(BlueprintPure,Category="Recovered") FName GetEquippedPlayerCard() const;
+    UFUNCTION(BlueprintPure,Category="Recovered") bool IsPlayerCardUnlocked(FName CardID) const;
+    bool GetPlayerCardData(FName CardID,FRecoveredPlayerCardRow& OutData) const;
+    UFUNCTION(BlueprintPure,Category="Recovered") TArray<FName> GetUnlockedPlayerCards() const;
     UFUNCTION(BlueprintCallable,Category="Recovered") bool UnlockModifier(FName ModifierID);
     // Native modifier data interface confirmed by Ghidra (UProgressionManager::GetAllModifierData,
     // GetModifierData, CanEnableModifier, IsModifierUnlocked, GetUnlockedModifiers,

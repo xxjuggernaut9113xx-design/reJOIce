@@ -194,12 +194,20 @@ The decoded BP_EdgeManager path writes CurrentComboCount to AllStrokesPerEdge be
 
 Back restores the main-menu background before removing the menu. Hover and unhover restore HoverBackButton and UnhoverBackButton. [challenges-menu-navigation-recovery.json](RecoveryEvidence/challenges-menu-navigation-recovery.json) records the decoded entrypoints, graph calls, switcher order, styles, tooltips, source hashes, and reconstructed artifact hashes. CockHero.Recovery.ChallengesMenuNavigation completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The Windows Unreal Editor build passed. The full CockHero.Recovery suite completed **64 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The original executable was not run.
 
+### Statistics tab and player-card identity recovery (2026-10-10)
+
+/Game/Recovery/UI/StatsTabWidget now extends URecoveredStatsTabWidget. Its recovered InitializeStats route uses the source lifetime ledger, highscore ledger, average duration, average edges, average strokes per minute, average strokes, equipped player card, XP progress, and level helpers. It restores the source field contract, including Level {level} ({currentxp}XP/{neededXP}XP), a MM:SS longest-session display below one hour, and a selected-card brush when the referenced reconstructed texture is available.
+
+/Game/Recovery/UI/EditUsernameOverlay now extends URecoveredEditUsernameOverlay. It initializes from Playercard_Name, clamps submitted identity text to 14 characters, saves it through the recovery-owned persistence path, broadcasts its close delegate, and refreshes StatsTabWidget after dismissal. Equipped player-card state is persisted through the reconstructed progression state and is restricted to unlocked cards.
+
+[stats-tab-recovery.json](RecoveryEvidence/stats-tab-recovery.json) records the decoded source entrypoints, source calls, field inventory, overlay behavior, and SHA-256 values. CockHero.Recovery.StatsTabWidget completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The Windows Unreal Editor build passed. The full CockHero.Recovery suite completed **65 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The original executable was not run.
+
 ## Remaining limits
 
 - The staged post-game controller follows recovered graph order and timings, but interactive side-by-side original-runtime comparison of every animation curve, sound cue, and transient visual state remains outstanding.
 - Importer file/directory picker behavior is Windows-specific and was validated by build, widget initialization, manifest/deck code, and parent readback. It still needs an interactive GUI and packaged-build check with representative user media. Playback support is limited by the existing recovered media backend.
 - Recovered challenge and modifier lists use the original container/card assets, title-based modifier identity, source conflict registry, challenge-condition mapping, and recovered state models. Original entry Blueprint animation, tooltip/icon rules, reward-roll presentation, and interactive original-runtime comparison remain incomplete.
-- The recovered ChallengesMenu shell follows its four decoded tab routes, source styles, background handoff, and back animations. PlayerCardsTabWidget and StatsTabWidget still need their source data-population routines reconstructed.
+- The recovered ChallengesMenu shell follows its four decoded tab routes, source styles, background handoff, and back animations. StatsTabWidget now restores its source data-population and identity-edit routes. PlayerCardsTabWidget still needs its source data-population routine reconstructed.
 - The current inventory recovery covers PG1's Edge action, tab switching, heat, break, slowdown, cum chance, PG2 resupply, Boner Pill, and SuccuShield. Interactive original-runtime timing and full-session behavior still need side-by-side recovery.
 - Hardware transports, original save compatibility, original editor graphs, complete native analysis, full GUI playtests, packaged validation, and clean-machine validation remain outstanding.
 - The recovered Lovense HTTP flow covers the mobile LAN contract. The original desktop SDK route remains represented by the local HTTP adapter until its proprietary runtime can be exercised against a compatible device.

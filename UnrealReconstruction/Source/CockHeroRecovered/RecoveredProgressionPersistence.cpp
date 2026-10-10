@@ -37,6 +37,7 @@ FString URecoveredProgressionManager::ExportRecoveryState() const {
     Object->SetNumberField(TEXT("TotalXPEarned"),TotalXPEarned);
     Object->SetNumberField(TEXT("UnlockPoints"),UnlockPoints);
     Object->SetArrayField(TEXT("UnlockedPlayerCards"),WriteNames(UnlockedPlayerCards));
+    Object->SetStringField(TEXT("EquippedPlayerCard"),EquippedPlayerCard.IsNone() ? TEXT("") : EquippedPlayerCard.ToString());
     Object->SetArrayField(TEXT("UnlockedModifiers"),WriteNames(UnlockedModifiers));
     FString Json; FJsonSerializer::Serialize(Object,TJsonWriterFactory<>::Create(&Json)); return Json;
 }
@@ -47,8 +48,17 @@ bool URecoveredProgressionManager::ImportRecoveryState(const FString& Json) {
     int32 Version,XP,Level,Total,Points;
     TSet<FName> Cards,Modifiers;
     if (!ReadInt(Object,TEXT("Version"),Version) || Version!=1 || !ReadInt(Object,TEXT("CurrentXP"),XP) || !ReadInt(Object,TEXT("CurrentLevel"),Level) || Level<1 || Level>20 || !ReadInt(Object,TEXT("TotalXPEarned"),Total) || !ReadInt(Object,TEXT("UnlockPoints"),Points) || !ReadNames(Object,TEXT("UnlockedPlayerCards"),Cards) || !ReadNames(Object,TEXT("UnlockedModifiers"),Modifiers)) return false;
+    FName Equipped=NAME_None;
+    if (Object->HasField(TEXT("EquippedPlayerCard"))) {
+        FString EquippedText;
+        if (!Object->TryGetStringField(TEXT("EquippedPlayerCard"),EquippedText) || EquippedText.Len()>256) return false;
+        if (!EquippedText.IsEmpty()) {
+            Equipped=FName(*EquippedText);
+            if (Equipped.IsNone() || !Cards.Contains(Equipped)) return false;
+        }
+    }
     CurrentXP=XP; CurrentLevel=Level; TotalXPEarned=Total; UnlockPoints=Points;
-    UnlockedPlayerCards=MoveTemp(Cards); UnlockedModifiers=MoveTemp(Modifiers);
+    UnlockedPlayerCards=MoveTemp(Cards); EquippedPlayerCard=Equipped; UnlockedModifiers=MoveTemp(Modifiers);
     return true;
 }
 void URecoveredGameInstance::HandleProgressionSaveRequest() { PersistRecoveredProgression(); }

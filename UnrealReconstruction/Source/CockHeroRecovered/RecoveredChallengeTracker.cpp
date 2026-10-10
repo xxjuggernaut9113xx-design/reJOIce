@@ -105,6 +105,14 @@ void URecoveredChallengeTracker::StartNewSession() {
     // Native StartNewSession resets current values only for unfinished session challenges.
     for (auto& Pair:SessionProgress) if (!Pair.Value.bCompleted) for (auto& Requirement:Pair.Value.Requirements) Requirement.CurrentValue=0;
 }
+int32 URecoveredChallengeTracker::GetCompletedChallengeCount() const {
+    return CompletedChallenges.Num();
+}
+int32 URecoveredChallengeTracker::GetTotalChallengeCount() const {
+    return ChallengeTable && ChallengeTable->GetRowStruct()==FRecoveredChallengeRow::StaticStruct()
+        ? ChallengeTable->GetRowMap().Num()
+        : 0;
+}
 void URecoveredChallengeTracker::UpdateMetricWithConditions(ERecoveredMetric Metric,int32 Amount,const FRecoveredSessionStats& Stats,const TArray<FString>& ActiveModifiers,int32 ElapsedSeconds,float WorldSeconds) {
     if (!ChallengeTable || ChallengeTable->GetRowStruct()!=FRecoveredChallengeRow::StaticStruct()) return;
     TArray<FName> IDs;

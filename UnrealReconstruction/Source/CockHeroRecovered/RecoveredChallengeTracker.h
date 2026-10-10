@@ -33,6 +33,8 @@ public:
     UFUNCTION(BlueprintCallable,Category="Recovered Challenges") TArray<FRecoveredReward> ClaimChallengeRewards(FName ChallengeID);
     UFUNCTION(BlueprintCallable,Category="Recovered Challenges") void StartNewSession();
     UFUNCTION(BlueprintCallable,Category="Recovered Challenges") void UpdateMetricWithConditions(ERecoveredMetric Metric,int32 Amount,const FRecoveredSessionStats& Stats,const TArray<FString>& ActiveModifiers,int32 ElapsedSeconds,float WorldSeconds);
+    UFUNCTION(BlueprintPure,Category="Recovered Challenges") int32 GetCompletedChallengeCount() const;
+    UFUNCTION(BlueprintPure,Category="Recovered Challenges") int32 GetTotalChallengeCount() const;
     UFUNCTION(BlueprintPure,Category="Recovered Save") FString ExportRecoveryState() const;
     UFUNCTION(BlueprintCallable,Category="Recovered Save") bool ImportRecoveryState(const FString& Json);
 private:

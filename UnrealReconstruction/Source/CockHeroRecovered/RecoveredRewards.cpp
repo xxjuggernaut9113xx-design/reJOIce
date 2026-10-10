@@ -14,6 +14,50 @@ bool URecoveredProgressionManager::UnlockPlayerCard(FName CardID) {
     return false;
 }
 
+bool URecoveredProgressionManager::EquipPlayerCard(FName CardID) {
+    if (CardID.IsNone()) {
+        EquippedPlayerCard=NAME_None;
+        OnSaveRequested.Broadcast();
+        return true;
+    }
+    if (!IsPlayerCardUnlocked(CardID)) return false;
+    EquippedPlayerCard=CardID;
+    OnSaveRequested.Broadcast();
+    return true;
+}
+
+FName URecoveredProgressionManager::GetEquippedPlayerCard() const {
+    return EquippedPlayerCard;
+}
+
+bool URecoveredProgressionManager::IsPlayerCardUnlocked(FName CardID) const {
+    return !CardID.IsNone() && UnlockedPlayerCards.Contains(CardID);
+}
+
+bool URecoveredProgressionManager::GetPlayerCardData(FName CardID,FRecoveredPlayerCardRow& OutData) const {
+    OutData=FRecoveredPlayerCardRow();
+    if (CardID.IsNone() || !PlayerCardDataTable || PlayerCardDataTable->GetRowStruct()!=FRecoveredPlayerCardRow::StaticStruct()) return false;
+    for (const TPair<FName,uint8*>& Pair:PlayerCardDataTable->GetRowMap()) {
+        const auto* Row=reinterpret_cast<const FRecoveredPlayerCardRow*>(Pair.Value);
+        if (Row && FName(*Row->CardID)==CardID) {
+            OutData=*Row;
+            return true;
+        }
+    }
+    return false;
+}
+
+TArray<FName> URecoveredProgressionManager::GetUnlockedPlayerCards() const {
+    TArray<FName> Result;
+    if (!PlayerCardDataTable || PlayerCardDataTable->GetRowStruct()!=FRecoveredPlayerCardRow::StaticStruct()) return Result;
+    for (const TPair<FName,uint8*>& Pair:PlayerCardDataTable->GetRowMap()) {
+        const auto* Row=reinterpret_cast<const FRecoveredPlayerCardRow*>(Pair.Value);
+        if (Row && IsPlayerCardUnlocked(FName(*Row->CardID))) Result.Add(FName(*Row->CardID));
+    }
+    Result.Sort([](const FName& Left,const FName& Right) { return Left.LexicalLess(Right); });
+    return Result;
+}
+
 bool URecoveredProgressionManager::UnlockModifier(FName ModifierID) {
     if (ModifierID.IsNone() || UnlockedModifiers.Contains(ModifierID) || !ModifierDataTable || ModifierDataTable->GetRowStruct()!=FRecoveredModifierRow::StaticStruct()) return false;
     for (const auto& Pair:ModifierDataTable->GetRowMap()) {
