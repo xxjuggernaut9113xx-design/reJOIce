@@ -1,5 +1,6 @@
 #include "RecoveredMenu.h"
 #include "RecoveredRules.h"
+#include "RecoveredStatsWidget.h"
 #include "Components/Button.h"
 #include "Kismet/GameplayStatics.h"
 #include "Components/AudioComponent.h"
@@ -45,6 +46,7 @@ void URecoveredMainMenu::BindNavigation(bool bBind) {
     }
     BIND_ROUTE("StartGameButton",OpenDifficulty)
     BIND_ROUTE("StatsButton",OpenChallenges)
+    BIND_ROUTE("StatsDebugButton",OpenStatsDebug)
     BIND_ROUTE("Settings",OpenSettings)
     BIND_ROUTE("UnlockStoreButton",OpenUnlockStore)
     BIND_ROUTE("AdultContentWarningSplashButton",CloseAdultWarning)
@@ -102,6 +104,9 @@ void URecoveredMainMenu::OpenScreen(const TCHAR* ScreenName) {
     if (!ScreenClass || !GetWorld()) { LastNavigationError=TEXT("Recovered screen or world unavailable: ")+Path; return; }
     UUserWidget* Screen=CreateWidget<UUserWidget>(GetWorld(),ScreenClass);
     if (!Screen) { LastNavigationError=TEXT("Could not create recovered screen: ")+Path; return; }
+    if (auto* StatsScreen=Cast<URecoveredStatsScreenWidget>(Screen)) {
+        StatsScreen->SetRecoveredStatisticsGameInstance(Cast<URecoveredGameInstance>(GetGameInstance()));
+    }
     LastOpenedScreen=Screen;
     Screen->AddToViewport(0);
     // Source handlers keep the main menu behind the new screen.
@@ -111,11 +116,22 @@ void URecoveredMainMenu::OpenDifficulty() {
     if (!Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this))) {
         LastNavigationError=TEXT("Start requires the recovered global game mode"); return;
     }
+    PlayRecoveredAnimation(TEXT("StartGameClick"));
     OpenScreen(TEXT("DifficultySelectScreen_Widget"));
 }
-void URecoveredMainMenu::OpenChallenges() { OpenScreen(TEXT("ChallengesMenuWidget")); }
-void URecoveredMainMenu::OpenSettings() { OpenScreen(TEXT("SettingsMenuWidget")); }
-void URecoveredMainMenu::OpenUnlockStore() { OpenScreen(TEXT("UnlockStoreWidget")); }
+void URecoveredMainMenu::OpenChallenges() {
+    PlayRecoveredAnimation(TEXT("StatsClick"));
+    OpenScreen(TEXT("ChallengesMenuWidget"));
+}
+void URecoveredMainMenu::OpenStatsDebug() { OpenScreen(TEXT("StatsScreenWidget")); }
+void URecoveredMainMenu::OpenSettings() {
+    PlayRecoveredAnimation(TEXT("SettingsClick"));
+    OpenScreen(TEXT("SettingsMenuWidget"));
+}
+void URecoveredMainMenu::OpenUnlockStore() {
+    PlayRecoveredAnimation(TEXT("UnlocksClick"));
+    OpenScreen(TEXT("UnlockStoreWidget"));
+}
 
 void URecoveredDifficultyMenu::BindNavigation(bool bBind) {
 #define BIND_DIFFICULTY(Name, Method) \

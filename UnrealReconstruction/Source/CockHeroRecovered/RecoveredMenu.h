@@ -45,6 +45,7 @@ public:
     UPROPERTY(Transient, BlueprintReadOnly, Category="Recovered Menu") FString LastNavigationError;
     UFUNCTION(BlueprintCallable, Category="Recovered Menu") void OpenDifficulty();
     UFUNCTION(BlueprintCallable, Category="Recovered Menu") void OpenChallenges();
+    UFUNCTION(BlueprintCallable, Category="Recovered Menu") void OpenStatsDebug();
     UFUNCTION(BlueprintCallable, Category="Recovered Menu") void OpenSettings();
     UFUNCTION(BlueprintCallable, Category="Recovered Menu") void OpenUnlockStore();
     UFUNCTION() void CloseAdultWarning();

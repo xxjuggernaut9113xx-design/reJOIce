@@ -96,8 +96,14 @@ bool ARecoveredEdgeManager::TriggerRecoveredEdgeV2() {
     GlobalManagerRef->PlayerVariables.TotalEdgeCount=URecoveredStateRuleLibrary::AddInt32Wrapping(GlobalManagerRef->PlayerVariables.TotalEdgeCount,1);
     GlobalManagerRef->PlayerVariables.LastEdgeTime=static_cast<double>(GlobalManagerRef->PlayerVariables.SessionLength);
     GlobalManagerRef->PlayerVariables.PerPdgeStrokeCountArray.Add(GlobalManagerRef->PlayerVariables.CurrentComboCount);
+    URecoveredGameInstance* Instance=Cast<URecoveredGameInstance>(GlobalManagerRef->GetGameInstance());
+    if (Instance && Instance->CurrentSave) {
+        TArray<int32> AllStrokesPerEdge=Instance->CurrentSave->GetIntArraySetting(TEXT("AllStrokesPerEdge"));
+        AllStrokesPerEdge.Add(GlobalManagerRef->PlayerVariables.CurrentComboCount);
+        Instance->CurrentSave->SetIntArraySetting(TEXT("AllStrokesPerEdge"),AllStrokesPerEdge);
+    }
     GlobalManagerRef->PlayerVariables.BrokenComboArray.Add(GlobalManagerRef->PlayerVariables.CurrentComboCount);
-    if (URecoveredGameInstance* Instance=Cast<URecoveredGameInstance>(GlobalManagerRef->GetGameInstance())) Instance->SaveRecoveredState();
+    if (Instance) Instance->SaveRecoveredState();
     if (auto* Menu=Cast<URecoveredMenuWidget>(GlobalManagerRef->SessionScreen)) Menu->PlayRecoveredAnimation(TEXT("EdgedAnimation"));
     GlobalManagerRef->SetEdgeStreakCounterVisible(true);
     GlobalManagerRef->UpdateEdgeStreakProgressBar();

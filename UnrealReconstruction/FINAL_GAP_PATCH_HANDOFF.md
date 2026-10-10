@@ -180,6 +180,14 @@ PrepareDrawState now advances PlayerVariables.SessionDrawsAtMaxHeat, the exact f
 
 [session-completion-persistence-recovery.json](RecoveryEvidence/session-completion-persistence-recovery.json) records source statement order, source and shipping hashes, and the native mapping. The original executable was not run. CockHero.Recovery.SessionCompletionPersistence completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**; it verifies both outcome ledgers and disk persistence. The Windows Unreal Editor build passed. The full CockHero.Recovery suite completed **62 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
 
+### Statistics-screen and edge-history recovery (2026-10-10)
+
+Decoded MainMenu routing shows StatsButton opens ChallengesMenuWidget_C; it does not open the statistics screen. The existing route remains intact and now plays the recovered StatsClick sequence. StatsDebugButton is the source route to StatsScreenWidget_C. The reconstructed menu binds that control and restores the source StartGameClick, SettingsClick, and UnlocksClick sequences on their corresponding routes.
+
+/Game/Recovery/UI/StatsScreenWidget now extends URecoveredStatsScreenWidget. Its construct path computes the recovered maxima from AllSessionCombos, AllSessionTimes, AllSessionEdges, and AllSessionStrokeCounts, and computes truncating averages from those histories plus AllStrokesPerEdge. It applies the exact recovered text layout, formats duration as HH:MM:SS, loads backgroundmenuloop, restores the main-menu background before closing, and binds the source back-button hover and unhover sequences.
+
+The decoded BP_EdgeManager path writes CurrentComboCount to AllStrokesPerEdge before it appends the broken-combo history and saves. The reconstructed edge route now persists that sample in the same position. CockHero.Recovery.StatisticsScreen verifies source maxima, averages, display text, controls, edge-sample persistence, disk round-trip, and refreshed averages. The Windows Unreal Editor build passed. The focused test completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The full CockHero.Recovery suite completed **63 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. [statistics-screen-recovery.json](RecoveryEvidence/statistics-screen-recovery.json) records the decoded entrypoints, bindings, source hashes, and reconstructed artifact hashes. The original executable was not run.
+
 ## Remaining limits
 
 - The staged post-game controller follows recovered graph order and timings, but interactive side-by-side original-runtime comparison of every animation curve, sound cue, and transient visual state remains outstanding.
