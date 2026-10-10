@@ -47,6 +47,16 @@ bool URecoveredProgressionManager::GetPlayerCardData(FName CardID,FRecoveredPlay
     return false;
 }
 
+void URecoveredProgressionManager::GetAllPlayerCardData(TArray<FRecoveredPlayerCardRow>& OutData) const {
+    OutData.Reset();
+    if (!PlayerCardDataTable || PlayerCardDataTable->GetRowStruct()!=FRecoveredPlayerCardRow::StaticStruct()) return;
+    const TArray<FName> RowNames=PlayerCardDataTable->GetRowNames();
+    OutData.Reserve(RowNames.Num());
+    for (const FName RowName:RowNames) {
+        if (const auto* Row=PlayerCardDataTable->FindRow<FRecoveredPlayerCardRow>(RowName,TEXT("Recovered player-card data"),false)) OutData.Add(*Row);
+    }
+}
+
 TArray<FName> URecoveredProgressionManager::GetUnlockedPlayerCards() const {
     TArray<FName> Result;
     if (!PlayerCardDataTable || PlayerCardDataTable->GetRowStruct()!=FRecoveredPlayerCardRow::StaticStruct()) return Result;
@@ -56,6 +66,15 @@ TArray<FName> URecoveredProgressionManager::GetUnlockedPlayerCards() const {
     }
     Result.Sort([](const FName& Left,const FName& Right) { return Left.LexicalLess(Right); });
     return Result;
+}
+
+FName URecoveredProgressionManager::GetCurrentPlayerTitle() const {
+    if (!LevelDataTable || LevelDataTable->GetRowStruct()!=FRecoveredLevelRow::StaticStruct()) return NAME_None;
+    for (const TPair<FName,uint8*>& Pair:LevelDataTable->GetRowMap()) {
+        const auto* Row=reinterpret_cast<const FRecoveredLevelRow*>(Pair.Value);
+        if (Row && Row->Level==CurrentLevel) return FName(*Row->TitleUnlock.ToString());
+    }
+    return NAME_None;
 }
 
 bool URecoveredProgressionManager::UnlockModifier(FName ModifierID) {

@@ -146,7 +146,9 @@ public:
     UFUNCTION(BlueprintPure,Category="Recovered") FName GetEquippedPlayerCard() const;
     UFUNCTION(BlueprintPure,Category="Recovered") bool IsPlayerCardUnlocked(FName CardID) const;
     bool GetPlayerCardData(FName CardID,FRecoveredPlayerCardRow& OutData) const;
+    void GetAllPlayerCardData(TArray<FRecoveredPlayerCardRow>& OutData) const;
     UFUNCTION(BlueprintPure,Category="Recovered") TArray<FName> GetUnlockedPlayerCards() const;
+    FName GetCurrentPlayerTitle() const;
     UFUNCTION(BlueprintCallable,Category="Recovered") bool UnlockModifier(FName ModifierID);
     // Native modifier data interface confirmed by Ghidra (UProgressionManager::GetAllModifierData,
     // GetModifierData, CanEnableModifier, IsModifierUnlocked, GetUnlockedModifiers,

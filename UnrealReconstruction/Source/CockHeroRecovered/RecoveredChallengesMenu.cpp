@@ -1,5 +1,6 @@
 #include "RecoveredChallengesMenu.h"
 #include "RecoveredStatsTabWidget.h"
+#include "RecoveredPlayerCardsTabWidget.h"
 
 #include "Components/Button.h"
 #include "Components/Image.h"
@@ -149,6 +150,7 @@ void URecoveredChallengesMenu::OpenChallengesTab() {
 
 void URecoveredChallengesMenu::OpenPlayerCardsTab() {
     SelectTab(1,TEXT("PlayerCardButton"));
+    if (auto* PlayerCards=Cast<URecoveredPlayerCardsTabWidget>(GetWidgetFromName(TEXT("PlayerCardsTabWidget")))) PlayerCards->InitializePlayerCards();
 }
 
 void URecoveredChallengesMenu::OpenStatsTab() {
