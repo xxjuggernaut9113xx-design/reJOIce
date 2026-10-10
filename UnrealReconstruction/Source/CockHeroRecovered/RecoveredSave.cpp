@@ -138,6 +138,19 @@ TArray<FString> URecoveredSaveGame::GetStringArraySetting(const FString& Name) c
     for (const auto& Value:*Values) { FString Item; if (Value && Value->TryGetString(Item)) Result.Add(Item); }
     return Result;
 }
+TArray<int32> URecoveredSaveGame::GetIntArraySetting(const FString& Name) const {
+    TArray<int32> Result;
+    TSharedPtr<FJsonObject> Object;
+    if (!ReadState(StateJson,Object)) return Result;
+    const TArray<TSharedPtr<FJsonValue>>* Values=nullptr;
+    if (!Object->TryGetArrayField(Name,Values)) return Result;
+    for (const auto& Value:*Values) {
+        double Item=0;
+        if (!Value || !Value->TryGetNumber(Item) || !FMath::IsFinite(Item) || Item<MIN_int32 || Item>MAX_int32 || Item!=FMath::FloorToDouble(Item)) continue;
+        Result.Add(static_cast<int32>(Item));
+    }
+    return Result;
+}
 bool URecoveredSaveGame::GetBoolSetting(const FString& Name,bool Fallback) const {
     TSharedPtr<FJsonObject> Object;
     if (!ReadState(StateJson,Object)) return Fallback;
@@ -161,6 +174,12 @@ bool URecoveredSaveGame::SetStringSetting(const FString& Name,const FString& Val
 bool URecoveredSaveGame::SetStringArraySetting(const FString& Name,const TArray<FString>& Values) {
     TArray<TSharedPtr<FJsonValue>> JsonValues;
     for (const FString& Value : Values) JsonValues.Add(MakeShared<FJsonValueString>(Value));
+    return WriteSetting(StateJson,Name,MakeShared<FJsonValueArray>(JsonValues));
+}
+bool URecoveredSaveGame::SetIntArraySetting(const FString& Name,const TArray<int32>& Values) {
+    TArray<TSharedPtr<FJsonValue>> JsonValues;
+    JsonValues.Reserve(Values.Num());
+    for (int32 Value : Values) JsonValues.Add(MakeShared<FJsonValueNumber>(static_cast<double>(Value)));
     return WriteSetting(StateJson,Name,MakeShared<FJsonValueArray>(JsonValues));
 }
 

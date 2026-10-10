@@ -415,4 +415,88 @@ bool FRecoveredPostGameRewardBundleTest::RunTest(const FString& Parameters) {
     World->DestroyWorld(false); GEngine->DestroyWorldContext(World);
     return true;
 }
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredSessionCompletionPersistenceTest,"CockHero.Recovery.SessionCompletionPersistence",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FRecoveredSessionCompletionPersistenceTest::RunTest(const FString& Parameters) {
+    const FString Slot=URecoveredGameInstance::GetNamedRecoverySlotPrefix()+TEXT("AutomationCompletion_")+FGuid::NewGuid().ToString(EGuidFormats::Digits);
+    ON_SCOPE_EXIT { UGameplayStatics::DeleteGameInSlot(Slot,0); };
+
+    auto* Save=NewObject<URecoveredSaveGame>();
+    if (!TestTrue(TEXT("Completion persistence save initializes"),Save->InitializeRecoveredDefaults())) return false;
+    if (!TestTrue(TEXT("Completion persistence writes source counters"),
+        Save->SetNumberSetting(TEXT("TotalLifetimeItemUses"),7) &&
+        Save->SetNumberSetting(TEXT("LifetimeTauntCount"),3) &&
+        Save->SetNumberSetting(TEXT("LifetimeMaxHeatDraws"),11) &&
+        Save->SetNumberSetting(TEXT("SessionsWon"),5) &&
+        Save->SetNumberSetting(TEXT("SessionsLost"),4))) return false;
+    if (!TestTrue(TEXT("Completion persistence writes source history"),
+        Save->SetIntArraySetting(TEXT("AllSessionStrokeCounts"),{9}) &&
+        Save->SetIntArraySetting(TEXT("AllSessionEdges"),{3}) &&
+        Save->SetIntArraySetting(TEXT("AllSessionCombos"),{8}) &&
+        Save->SetIntArraySetting(TEXT("AllSessionTimes"),{60}))) return false;
+
+    const auto Initialization=UWorld::InitializationValues().AllowAudioPlayback(false).CreatePhysicsScene(false).CreateNavigation(false).CreateAISystem(false).ShouldSimulatePhysics(false).SetTransactional(false);
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false,NAME_None,nullptr,true,ERHIFeatureLevel::Num,&Initialization);
+    FWorldContext& Context=GEngine->CreateNewWorldContext(EWorldType::Game);
+    Context.SetCurrentWorld(World);
+    ON_SCOPE_EXIT { World->DestroyWorld(false); GEngine->DestroyWorldContext(World); };
+    auto* Instance=NewObject<URecoveredGameInstance>();
+    Instance->CurrentSave=Save;
+    Instance->ActiveRecoverySlot=Slot;
+    Instance->ProgressionManager=NewObject<URecoveredProgressionManager>(Instance);
+    World->SetGameInstance(Instance);
+    World->InitializeActorsForPlay(FURL());
+    auto* Manager=World->SpawnActor<ARecoveredGlobalManager>();
+    if (!TestNotNull(TEXT("Completion persistence manager"),Manager)) return false;
+
+    Manager->PlayerVariables.TotalDefenseItemUses=2;
+    Manager->PlayerVariables.TotalStrokeCount=120;
+    Manager->PlayerVariables.TotalEdgeCount=7;
+    Manager->PlayerVariables.BrokenComboArray={11};
+    Manager->PlayerVariables.CurrentComboCount=13;
+    Manager->PlayerVariables.SessionLength=225;
+    Manager->PlayerVariables.TotalTauntsUsed=4;
+    Manager->PlayerVariables.SessionDrawsAtMaxHeat=9;
+    Manager->PlayerVariables.bIsAllowedToCum=true;
+    Manager->SessionStats.SessionsWon=1;
+    Manager->OpenPostGameResults();
+
+    TestTrue(TEXT("Completion source history writes once"),Manager->bRecoveredSessionCompletionStatsPersisted);
+    TestEqual(TEXT("Completion source item uses accumulate"),Save->GetNumberSetting(TEXT("TotalLifetimeItemUses"),-1),9.0);
+    TestEqual(TEXT("Completion source taunts accumulate"),Save->GetNumberSetting(TEXT("LifetimeTauntCount"),-1),7.0);
+    TestEqual(TEXT("Completion source max-heat draws accumulate"),Save->GetNumberSetting(TEXT("LifetimeMaxHeatDraws"),-1),20.0);
+    TestEqual(TEXT("Completion source win increments"),Save->GetNumberSetting(TEXT("SessionsWon"),-1),6.0);
+    TestEqual(TEXT("Completion source loss remains unchanged"),Save->GetNumberSetting(TEXT("SessionsLost"),-1),4.0);
+    const TArray<int32> Strokes=Save->GetIntArraySetting(TEXT("AllSessionStrokeCounts"));
+    const TArray<int32> Edges=Save->GetIntArraySetting(TEXT("AllSessionEdges"));
+    const TArray<int32> Combos=Save->GetIntArraySetting(TEXT("AllSessionCombos"));
+    const TArray<int32> Times=Save->GetIntArraySetting(TEXT("AllSessionTimes"));
+    TestEqual(TEXT("Completion source stroke history appends"),Strokes.Num(),2);
+    if (Strokes.Num()==2) TestEqual(TEXT("Completion source stroke value"),Strokes[1],120);
+    TestEqual(TEXT("Completion source edge history appends"),Edges.Num(),2);
+    if (Edges.Num()==2) TestEqual(TEXT("Completion source edge value"),Edges[1],7);
+    TestEqual(TEXT("Completion source combo history appends prior and active combos"),Combos.Num(),3);
+    if (Combos.Num()==3) {
+        TestEqual(TEXT("Completion source prior combo value"),Combos[1],11);
+        TestEqual(TEXT("Completion source active combo value"),Combos[2],13);
+    }
+    TestEqual(TEXT("Completion source time history appends"),Times.Num(),2);
+    if (Times.Num()==2) TestEqual(TEXT("Completion source time value"),Times[1],225);
+    TestTrue(TEXT("Completion persistence remains idempotent"),Manager->PersistRecoveredSessionCompletionStats());
+    TestEqual(TEXT("Completion persistence does not duplicate history"),Save->GetIntArraySetting(TEXT("AllSessionCombos")).Num(),3);
+
+    auto* LossManager=World->SpawnActor<ARecoveredGlobalManager>();
+    if (!TestNotNull(TEXT("Completion loss manager"),LossManager)) return false;
+    TestTrue(TEXT("Completion source loss path persists"),LossManager->PersistRecoveredSessionCompletionStats());
+    TestEqual(TEXT("Completion source loss increments"),Save->GetNumberSetting(TEXT("SessionsLost"),-1),5.0);
+    TestEqual(TEXT("Completion source win survives loss path"),Save->GetNumberSetting(TEXT("SessionsWon"),-1),6.0);
+
+    auto* Persisted=Cast<URecoveredSaveGame>(UGameplayStatics::LoadGameFromSlot(Slot,0));
+    if (!TestNotNull(TEXT("Completion source ledger reaches disk"),Persisted)) return false;
+    TestEqual(TEXT("Completion disk win counter"),Persisted->GetNumberSetting(TEXT("SessionsWon"),-1),6.0);
+    TestEqual(TEXT("Completion disk loss counter"),Persisted->GetNumberSetting(TEXT("SessionsLost"),-1),5.0);
+    const TArray<int32> PersistedCombos=Persisted->GetIntArraySetting(TEXT("AllSessionCombos"));
+    TestEqual(TEXT("Completion disk combo count"),PersistedCombos.Num(),3);
+    if (PersistedCombos.Num()==3) TestEqual(TEXT("Completion disk active combo"),PersistedCombos.Last(),13);
+    return true;
+}
 #endif

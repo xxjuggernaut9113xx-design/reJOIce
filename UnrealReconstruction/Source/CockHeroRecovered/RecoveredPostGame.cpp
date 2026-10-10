@@ -120,6 +120,7 @@ void ARecoveredGlobalManager::OpenPostGameResults() {
     // The recovered runtime keeps the active edge streak in this mirror too.
     // SessionStats retains its completed-session maximum for the results view.
     EdgeStreak = 0;
+    PersistRecoveredSessionCompletionStats();
     if (Results) {
         BindPostGameResultsData(Results);
     }
@@ -342,6 +343,52 @@ void ARecoveredGlobalManager::SaveLifetimeStats() {
     Save->SetNumberSetting(TEXT("Lifetime_LongestSessionSeconds"), LifetimeStats.LongestSessionSeconds);
     Save->SetNumberSetting(TEXT("Lifetime_MostStrokesInSession"), LifetimeStats.MostStrokesInSession);
     if (!Instance->SaveRecoveredState()) HandleSaveFailure(TEXT("Lifetime stats failed to persist"));
+}
+
+bool ARecoveredGlobalManager::PersistRecoveredSessionCompletionStats() {
+    if (bRecoveredSessionCompletionStatsPersisted) return true;
+    auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+    if (!Instance || !Instance->CurrentSave) return false;
+
+    URecoveredSaveGame* Save = Instance->CurrentSave;
+    const auto ReadInt=[Save](const TCHAR* Key) {
+        const double Value=Save->GetNumberSetting(Key,0);
+        return FMath::IsFinite(Value) && Value>=MIN_int32 && Value<=MAX_int32 && Value==FMath::FloorToDouble(Value)
+            ? static_cast<int32>(Value)
+            : 0;
+    };
+    const auto AddToCounter=[&](const TCHAR* Key,int32 Amount) {
+        return Save->SetNumberSetting(Key,URecoveredStateRuleLibrary::AddInt32Wrapping(ReadInt(Key),Amount));
+    };
+    TArray<int32> StrokeCounts=Save->GetIntArraySetting(TEXT("AllSessionStrokeCounts"));
+    TArray<int32> Edges=Save->GetIntArraySetting(TEXT("AllSessionEdges"));
+    TArray<int32> Combos=Save->GetIntArraySetting(TEXT("AllSessionCombos"));
+    TArray<int32> Times=Save->GetIntArraySetting(TEXT("AllSessionTimes"));
+    StrokeCounts.Add(PlayerVariables.TotalStrokeCount);
+    Edges.Add(PlayerVariables.TotalEdgeCount);
+    Combos.Append(PlayerVariables.BrokenComboArray);
+    Times.Add(PlayerVariables.SessionLength);
+
+    const bool bUpdated=
+        AddToCounter(TEXT("TotalLifetimeItemUses"),PlayerVariables.TotalDefenseItemUses) &&
+        Save->SetIntArraySetting(TEXT("AllSessionStrokeCounts"),StrokeCounts) &&
+        Save->SetIntArraySetting(TEXT("AllSessionEdges"),Edges) &&
+        Save->SetIntArraySetting(TEXT("AllSessionCombos"),Combos) &&
+        Save->SetIntArraySetting(TEXT("AllSessionTimes"),Times) &&
+        AddToCounter(TEXT("LifetimeTauntCount"),PlayerVariables.TotalTauntsUsed) &&
+        AddToCounter(TEXT("LifetimeMaxHeatDraws"),PlayerVariables.SessionDrawsAtMaxHeat) &&
+        AddToCounter(PlayerVariables.bIsAllowedToCum ? TEXT("SessionsWon") : TEXT("SessionsLost"),1);
+    if (!bUpdated) {
+        HandleSaveFailure(TEXT("Session completion statistics could not be updated"));
+        return false;
+    }
+
+    bRecoveredSessionCompletionStatsPersisted = true;
+    if (!Instance->SaveRecoveredState()) {
+        HandleSaveFailure(TEXT("Session completion statistics failed to persist"));
+        return false;
+    }
+    return true;
 }
 
 void ARecoveredGlobalManager::HandleSaveFailure(const FString& Context) {

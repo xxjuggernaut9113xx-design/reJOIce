@@ -379,7 +379,8 @@ bool ARecoveredGlobalManager::PrepareDrawState() {
     PlayerVariables.DrawsLast5Sec=URecoveredSessionRuleLibrary::UpdateRecentDrawCount(RecentDrawTimestamps,PlayerVariables.SessionLength);
     if(HeatLevel>=100) {
         PlayerVariables.ConsecutiveHighHeatDraws=URecoveredStateRuleLibrary::AddInt32Wrapping(PlayerVariables.ConsecutiveHighHeatDraws,1);
-        SessionDrawsAtMaxHeat=URecoveredStateRuleLibrary::AddInt32Wrapping(SessionDrawsAtMaxHeat,1);
+        PlayerVariables.SessionDrawsAtMaxHeat=URecoveredStateRuleLibrary::AddInt32Wrapping(PlayerVariables.SessionDrawsAtMaxHeat,1);
+        SessionDrawsAtMaxHeat=PlayerVariables.SessionDrawsAtMaxHeat;
     } else PlayerVariables.ConsecutiveHighHeatDraws=0;
     PlayerVariables.TotalDrawCount=URecoveredStateRuleLibrary::AddInt32Wrapping(PlayerVariables.TotalDrawCount,1);
     OnSessionAction.Broadcast(TEXT("ClearIdleTimer"));

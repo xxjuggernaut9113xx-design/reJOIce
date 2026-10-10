@@ -172,6 +172,14 @@ URecoveredPostCumContinueWidget restores the Construct animation against the pre
 
 [post-cum-transition-recovery.json](RecoveryEvidence/post-cum-transition-recovery.json) records both source entrypoints, graph statement order, source and reconstructed-asset hashes, shipping executable hash, and native mapping. The original executable was not run. CockHero.Recovery.PostCumResultsTransition and CockHero.Recovery.PostCumWidgetLifecycle each completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The Windows Unreal Editor build passed. The full CockHero.Recovery suite completed **61 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
 
+### Session-completion persistence recovery (2026-10-10)
+
+SessionCompletionScreen.AddStatstoSave was decoded as the missing source-owned history write: it accumulates defensive item uses, taunts, and maximum-heat draws; appends stroke, edge, combo, and time histories; then increments either SessionsWon or SessionsLost from PlayerVariablesStruct.IsAllowedToCum? before saving. The reconstructed post-cum route now appends the active combo first, then invokes PersistRecoveredSessionCompletionStats exactly once. The recovery save format now supports validated integer arrays, so the recovered fields preserve their original numeric form.
+
+PrepareDrawState now advances PlayerVariables.SessionDrawsAtMaxHeat, the exact field read by the source completion graph, and synchronizes the prior runtime mirror. Returning to the main menu clears both the completion-write guard and that mirror for the next session.
+
+[session-completion-persistence-recovery.json](RecoveryEvidence/session-completion-persistence-recovery.json) records source statement order, source and shipping hashes, and the native mapping. The original executable was not run. CockHero.Recovery.SessionCompletionPersistence completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**; it verifies both outcome ledgers and disk persistence. The Windows Unreal Editor build passed. The full CockHero.Recovery suite completed **62 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
+
 ## Remaining limits
 
 - The staged post-game controller follows recovered graph order and timings, but interactive side-by-side original-runtime comparison of every animation curve, sound cue, and transient visual state remains outstanding.

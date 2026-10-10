@@ -431,6 +431,7 @@ public:
     UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void ApplyRecoveredPostGameStorePoints(int32 Amount);
     UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") bool ApplyRecoveredIronManStorePenalty();
     UFUNCTION() void BindPostGameResultsButton(UUserWidget* PostCumWidget);
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") bool PersistRecoveredSessionCompletionStats();
     UFUNCTION() void UpdateRecoveredLifetimeStats(int32 SessionXP);
     UFUNCTION() void SaveLifetimeStats();
     UFUNCTION() void LoadLifetimeStats();
@@ -482,6 +483,7 @@ public:
     UFUNCTION(BlueprintCallable,Category="Recovered|Session") bool DrawRecoveredSpecialCard(FName Event,bool bPlayMedia=true);
     FTimerHandle SessionDurationTimer;
     bool bRecoveredSessionFinalized = false;
+    bool bRecoveredSessionCompletionStatsPersisted = false;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Outcomes") FRecoveredOutcomeEffects LastOutcomeEffects;
     UPROPERTY(BlueprintAssignable,Category="Recovered Outcomes") FRecoveredOutcomeRequested OnOutcomeRequested;
     UFUNCTION(BlueprintCallable,Category="Recovered Outcomes") void SuccessfulCum();
@@ -540,6 +542,7 @@ public:
     UFUNCTION(BlueprintPure,Category="Recovered Save") double GetNumberSetting(const FString& Name,double Fallback=0) const;
     UFUNCTION(BlueprintPure,Category="Recovered Save") FString GetStringSetting(const FString& Name,const FString& Fallback) const;
     UFUNCTION(BlueprintPure,Category="Recovered Save") TArray<FString> GetStringArraySetting(const FString& Name) const;
+    UFUNCTION(BlueprintPure,Category="Recovered Save") TArray<int32> GetIntArraySetting(const FString& Name) const;
     UFUNCTION(BlueprintPure,Category="Recovered Save") bool HasSetting(const FString& Name) const;
     UFUNCTION(BlueprintPure,Category="Recovered Save") FText GetTextSetting(const FString& Name,const FText& Fallback) const;
     UFUNCTION(BlueprintPure) bool GetLatencyProfile(FRecoveredLatencyProfile& Profile) const;
@@ -548,6 +551,7 @@ public:
     UFUNCTION(BlueprintCallable,Category="Recovered Save") bool SetNumberSetting(const FString& Name,double Value);
     UFUNCTION(BlueprintCallable,Category="Recovered Save") bool SetStringSetting(const FString& Name,const FString& Value);
     UFUNCTION(BlueprintCallable,Category="Recovered Save") bool SetStringArraySetting(const FString& Name,const TArray<FString>& Values);
+    UFUNCTION(BlueprintCallable,Category="Recovered Save") bool SetIntArraySetting(const FString& Name,const TArray<int32>& Values);
     // This does not implement original GVAS migration or restore original saves.
 };
 

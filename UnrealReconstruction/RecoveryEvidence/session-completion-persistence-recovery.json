@@ -1,0 +1,104 @@
+{
+  "source_executed": false,
+  "sources": {
+    "session_completion_add_stats": "C:\\Users\\webma\\analysis\\cockhero-v004\\widget-functions\\SessionCompletionScreen\\AddStatstoSave.json",
+    "session_completion_add_stats_sha256": "0e5894391111e7f509a2f4b49b891001b11bd2409028c4d5e49436f5590711ec",
+    "shipping_executable": "C:\\Users\\webma\\Downloads\\Cock_Hero_Shipping_Build_V0.04_-_Exclusive\\PrepV2\\Windows\\CockHero\\Binaries\\Win64\\CockHero.exe",
+    "shipping_executable_sha256": "c645757d1112491952b67bf29502b4721133ba6940a9cfb08358f0dde127560f"
+  },
+  "reconstruction_sources": {
+    "post_game": {
+      "path": "D:\\reJOIce\\UnrealReconstruction\\Source\\CockHeroRecovered\\RecoveredPostGame.cpp",
+      "sha256": "9c35587e567211c862f53d930eae4c1b3f5a22dd0fa934a841615e56fcb3fe4b"
+    },
+    "save": {
+      "path": "D:\\reJOIce\\UnrealReconstruction\\Source\\CockHeroRecovered\\RecoveredSave.cpp",
+      "sha256": "b103e2e4c0853a40d60a39efc7012cff31530a67439cec4ef801c56e5ae81b47"
+    },
+    "rules": {
+      "path": "D:\\reJOIce\\UnrealReconstruction\\Source\\CockHeroRecovered\\RecoveredRules.cpp",
+      "sha256": "63bde116e0777977a3f13763c87503e1aa281f812ad82ecb01014a9b01f094f5"
+    },
+    "rules_header": {
+      "path": "D:\\reJOIce\\UnrealReconstruction\\Source\\CockHeroRecovered\\RecoveredRules.h",
+      "sha256": "a0580a8e81c8ecda3720f1673b399e440993e87468b3d355624c26fec2c4dd2d"
+    }
+  },
+  "source_operation_order": [
+    {
+      "statement_index": 4,
+      "operation": "Add_IntInt",
+      "target": "CurrentSave.TotalLifetimeItemUses",
+      "value": "PlayerVariablesStruct.TotalDefenseItemUses"
+    },
+    {
+      "statement_index": 6,
+      "operation": "Array_Add",
+      "target": "CurrentSave.AllSessionStrokeCounts",
+      "value": "PlayerVariablesStruct.TotalStrokeCount"
+    },
+    {
+      "statement_index": 7,
+      "operation": "Array_Add",
+      "target": "CurrentSave.AllSessionEdges",
+      "value": "PlayerVariablesStruct.TotalEdgeCount"
+    },
+    {
+      "statement_index": 8,
+      "operation": "Array_Append",
+      "target": "CurrentSave.AllSessionCombos",
+      "value": "PlayerVariablesStruct.BrokenComboArray"
+    },
+    {
+      "statement_index": 9,
+      "operation": "Array_Add",
+      "target": "CurrentSave.AllSessionTimes",
+      "value": "PlayerVariablesStruct.SessionLength"
+    },
+    {
+      "statement_index": 10,
+      "operation": "Add_IntInt",
+      "target": "CurrentSave.LifetimeTauntCount",
+      "value": "PlayerVariablesStruct.TotalTauntsUsed"
+    },
+    {
+      "statement_index": 12,
+      "operation": "Add_IntInt",
+      "target": "CurrentSave.LifetimeMaxHeatDraws",
+      "value": "PlayerVariablesStruct.SessionDrawsAtMaxHeat"
+    },
+    {
+      "statement_index": 14,
+      "operation": "Branch",
+      "condition": "PlayerVariablesStruct.IsAllowedToCum?"
+    },
+    {
+      "statement_index": 15,
+      "operation": "Add_IntInt",
+      "target": "CurrentSave.SessionsWon",
+      "value": 1
+    },
+    {
+      "statement_index": 20,
+      "operation": "Add_IntInt",
+      "target": "CurrentSave.SessionsLost",
+      "value": 1
+    },
+    {
+      "statement_index": 18,
+      "operation": "SaveAllData"
+    }
+  ],
+  "runtime_mapping": {
+    "entry": "ARecoveredGlobalManager::OpenPostGameResults",
+    "post_cum_combo_order": "append active combo before persistence",
+    "completion_write": "ARecoveredGlobalManager::PersistRecoveredSessionCompletionStats",
+    "numeric_arrays": [
+      "URecoveredSaveGame::GetIntArraySetting",
+      "URecoveredSaveGame::SetIntArraySetting"
+    ],
+    "max_heat_source_field": "PlayerVariables.SessionDrawsAtMaxHeat",
+    "save": "URecoveredGameInstance::SaveRecoveredState",
+    "idempotency": "bRecoveredSessionCompletionStatsPersisted"
+  }
+}

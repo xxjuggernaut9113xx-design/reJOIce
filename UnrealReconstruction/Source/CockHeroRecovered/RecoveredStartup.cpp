@@ -141,6 +141,7 @@ bool ARecoveredGlobalManager::ReturnToMainMenu() {
     }
     // Reset ALL per-session state; lifetime stats and progression persist.
     bRecoveredSessionFinalized = false;
+    bRecoveredSessionCompletionStatsPersisted = false;
     SessionStats = FRecoveredSessionStats();
     PlayerVariables = FRecoveredPlayerVariables();
     BeatContext = FRecoveredBeatContext();
@@ -157,6 +158,7 @@ bool ARecoveredGlobalManager::ReturnToMainMenu() {
     bCanUseSlowdown = true;
     bCanUseBonerPill = true;
     EdgeStreak = 0;
+    SessionDrawsAtMaxHeat = 0;
     MasterEdgeBreakDuration = 10.0;
     EdgeBreakDurationScaled = 1.0;
     CurrentInventoryTab = 0;
