@@ -9,6 +9,7 @@
 #include "RecoveredChallengeTracker.h"
 #include "RecoveredEventWidgets.h"
 #include "RecoveredEdgeManager.h"
+#include "RecoveredPostGameSequence.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Blueprint/WidgetBlueprintGeneratedClass.h"
 #include "Animation/WidgetAnimation.h"
@@ -95,6 +96,10 @@ bool ARecoveredGlobalManager::ReturnToMainMenu() {
     // delegates survive the menu return and duplicate on the next session.
     if (BeatTimeline) BeatTimeline->StopSequence();
     if (MediaPlayback) MediaPlayback->SetPaused(true);
+    if (PostGameSequence) {
+        PostGameSequence->Stop();
+        PostGameSequence = nullptr;
+    }
     if (IsValid(EdgingManager)) {
         EdgingManager->ClearRecoveredEdgeHold();
         EdgingManager->Destroy();

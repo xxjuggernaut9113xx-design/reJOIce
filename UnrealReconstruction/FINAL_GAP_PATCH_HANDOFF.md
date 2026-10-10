@@ -164,6 +164,14 @@ The native recovery restores the source timing and message shapes: Intiface uses
 
 [toy-settings-parity-recovery.json](RecoveryEvidence/toy-settings-parity-recovery.json) records the widget inventory, source save fields, static-native contract markers, and SHA-256 values for the decompile and shipping executable. The original executable was not run. CockHero.Recovery.ToySettingsTransportParity completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The Windows Unreal Editor build passed. The full CockHero.Recovery suite completed **59 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
 
+### Post-cum results transition recovery (2026-10-10)
+
+PostCumContinue_Widget.ViewResultsButton dispatches ExecuteUbergraph_PostCumContinue_Widget entry 67. That source branch pauses the beat sequence, creates and adds WBP_PostGameFlow_Master at viewport layer zero, appends the active combo to PlayerVariablesStruct.BrokenComboArray, then clears the player edge streak and current combo count.
+
+OpenPostGameResults now preserves that ordering around the recovered session-finalization step. It pauses the timeline before constructing the results master, keeps the source continue overlay in the viewport stack, records the active combo after the results master is added, clears the player and native runtime edge-streak state, and leaves SessionStats.EdgeStreak intact for the completed-session result. Returning to the main menu stops and releases the staged post-game sequence so its timers cannot survive the next session.
+
+[post-cum-transition-recovery.json](RecoveryEvidence/post-cum-transition-recovery.json) records the source button entrypoint, graph statement order, source hashes, shipping executable hash, and native mapping. The original executable was not run. CockHero.Recovery.PostCumResultsTransition completed **1 succeeded**, **0 warnings**, **0 failures**, and **0 not run**. The Windows Unreal Editor build passed. The full CockHero.Recovery suite completed **60 succeeded**, **0 warnings**, **0 failures**, and **0 not run**.
+
 ## Remaining limits
 
 - The staged post-game controller follows recovered graph order and timings, but interactive side-by-side original-runtime comparison of every animation curve, sound cue, and transient visual state remains outstanding.

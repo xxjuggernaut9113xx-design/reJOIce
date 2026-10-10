@@ -95,21 +95,32 @@ void ARecoveredGlobalManager::OpenPostGameResults() {
     }
     // Finalize first so the results screen presents finalized numbers.
     FinalizeRecoveredSession();
-    // Hide the continue widget; it served its purpose once results open.
-    for (const auto& Overlay : EventOverlays) {
-        if (IsValid(Overlay) && Overlay->GetName().Contains(TEXT("PostCumContinue"))) {
-            Overlay->RemoveFromParent();
-        }
-    }
+    // ExecuteUbergraph_PostCumContinue_Widget entry 67 pauses the source
+    // beat spawner before it constructs the post-game master widget.
+    if (BeatTimeline) BeatTimeline->PauseSequence();
     APlayerController* Controller = UGameplayStatics::GetPlayerController(this, 0);
     UClass* ResultsClass = LoadClass<UUserWidget>(nullptr, TEXT("/Game/Recovery/UI/WBP_PostGameFlow_Master.WBP_PostGameFlow_Master_C"));
+    UUserWidget* Results = nullptr;
     if (!Controller || !ResultsClass) {
         LastSessionError = TEXT("Recovered post-game master screen is unavailable");
-        return;
+    } else {
+        Results = CreateWidget<UUserWidget>(Controller, ResultsClass);
+        if (Results) {
+            Results->AddToViewport(0);
+            EventOverlays.Add(Results);
+        } else {
+            LastSessionError = TEXT("Recovered post-game master screen could not be constructed");
+        }
     }
-    if (auto* Results = CreateWidget<UUserWidget>(Controller, ResultsClass)) {
-        Results->AddToViewport(0);
-        EventOverlays.Add(Results);
+    // The source leaves PostCumContinue in the viewport stack, adds the
+    // results master, then records and clears the active combo state.
+    PlayerVariables.BrokenComboArray.Add(PlayerVariables.CurrentComboCount);
+    PlayerVariables.EdgeStreak = 0;
+    PlayerVariables.CurrentComboCount = 0;
+    // The recovered runtime keeps the active edge streak in this mirror too.
+    // SessionStats retains its completed-session maximum for the results view.
+    EdgeStreak = 0;
+    if (Results) {
         BindPostGameResultsData(Results);
     }
 }

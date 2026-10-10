@@ -1,0 +1,63 @@
+{
+  "source_executed": false,
+  "sources": {
+    "view_results_handler": "C:\\Users\\webma\\analysis\\cockhero-v004\\widget-functions\\PostCumContinue_Widget\\BndEvt__PostCumContinue_Widget_ViewResultsButton_K2Node_ComponentBoundEvent_0_OnButtonClickedEvent__DelegateSignature.json",
+    "view_results_handler_sha256": "52a00f6fb270c744acdc9ad734389c4003b2e5998b270db857a5d39208837414",
+    "post_cum_graph": "C:\\Users\\webma\\analysis\\cockhero-v004\\widget-functions\\PostCumContinue_Widget\\ExecuteUbergraph_PostCumContinue_Widget.json",
+    "post_cum_graph_sha256": "5de0cdfbb62782ad287250d4956bf00538759fca952cb8ebc28feee0dac1156e",
+    "shipping_executable": "C:\\Users\\webma\\Downloads\\Cock_Hero_Shipping_Build_V0.04_-_Exclusive\\PrepV2\\Windows\\CockHero\\Binaries\\Win64\\CockHero.exe",
+    "shipping_executable_sha256": "c645757d1112491952b67bf29502b4721133ba6940a9cfb08358f0dde127560f"
+  },
+  "handler": {
+    "widget": "PostCumContinue_Widget",
+    "control": "ViewResultsButton",
+    "function": "ExecuteUbergraph_PostCumContinue_Widget",
+    "entry_point": 67
+  },
+  "source_operation_order": [
+    {
+      "statement_index": 8,
+      "operation": "PauseSequence"
+    },
+    {
+      "statement_index": 9,
+      "operation": "Create",
+      "class": "WBP_PostGameFlow_Master"
+    },
+    {
+      "statement_index": 10,
+      "operation": "AddToViewport",
+      "z_order": 0
+    },
+    {
+      "statement_index": 11,
+      "operation": "Array_Add",
+      "target": "PlayerVariablesStruct.BrokenComboArray",
+      "value": "PlayerVariablesStruct.CurrentComboCount"
+    },
+    {
+      "statement_index": 13,
+      "operation": "Set",
+      "target": "PlayerVariablesStruct.EdgeStreak",
+      "value": 0
+    },
+    {
+      "statement_index": 14,
+      "operation": "Set",
+      "target": "PlayerVariablesStruct.CurrentComboCount",
+      "value": 0
+    }
+  ],
+  "runtime_mapping": {
+    "source_handler": "ARecoveredGlobalManager::OpenPostGameResults",
+    "pause": "BeatTimeline->PauseSequence()",
+    "results_widget": "/Game/Recovery/UI/WBP_PostGameFlow_Master",
+    "combo_history": "PlayerVariables.BrokenComboArray.Add(PlayerVariables.CurrentComboCount)",
+    "state_clear": [
+      "PlayerVariables.EdgeStreak = 0",
+      "PlayerVariables.CurrentComboCount = 0",
+      "EdgeStreak = 0"
+    ],
+    "return_cleanup": "PostGameSequence->Stop(); PostGameSequence = nullptr"
+  }
+}

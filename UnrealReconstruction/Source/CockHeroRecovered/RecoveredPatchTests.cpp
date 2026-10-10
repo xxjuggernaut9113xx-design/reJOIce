@@ -289,6 +289,36 @@ bool FRecoveredPostGameHandoffTest::RunTest(const FString& Parameters) {
     World->DestroyWorld(false); GEngine->DestroyWorldContext(World);
     return true;
 }
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredPostCumResultsTransitionTest,"CockHero.Recovery.PostCumResultsTransition",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FRecoveredPostCumResultsTransitionTest::RunTest(const FString& Parameters) {
+    const auto Initialization=UWorld::InitializationValues().AllowAudioPlayback(false).CreatePhysicsScene(false).CreateNavigation(false).CreateAISystem(false).ShouldSimulatePhysics(false).SetTransactional(false);
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false,NAME_None,nullptr,true,ERHIFeatureLevel::Num,&Initialization);
+    GEngine->CreateNewWorldContext(EWorldType::Game).SetCurrentWorld(World);
+    World->InitializeActorsForPlay(FURL());
+    auto* Manager=World->SpawnActor<ARecoveredGlobalManager>();
+    if (!TestNotNull(TEXT("Post-cum transition manager"),Manager)) return false;
+    FRecoveredBeatPattern Pattern; Pattern.IntervalMultipliers={1.0};
+    if (!TestTrue(TEXT("Post-cum transition starts a beat sequence"),Manager->BeatTimeline->StartPattern(Pattern,1.0,3,1.0f,1.0))) return false;
+    Manager->PlayerVariables.BrokenComboArray={4};
+    Manager->PlayerVariables.CurrentComboCount=37;
+    Manager->PlayerVariables.EdgeStreak=5;
+    Manager->EdgeStreak=5;
+    Manager->SessionStats.EdgeStreak=9;
+    Manager->OpenPostGameResults();
+    TestTrue(TEXT("Post-cum transition finalizes the session"),Manager->bRecoveredSessionFinalized);
+    TestFalse(TEXT("Post-cum transition leaves the beat sequence paused"),Manager->BeatTimeline->bIsRunning);
+    TestEqual(TEXT("Post-cum transition preserves prior broken combos"),Manager->PlayerVariables.BrokenComboArray.Num(),2);
+    TestEqual(TEXT("Post-cum transition appends the active combo"),Manager->PlayerVariables.BrokenComboArray.Last(),37);
+    TestEqual(TEXT("Post-cum transition clears the active combo"),Manager->PlayerVariables.CurrentComboCount,0);
+    TestEqual(TEXT("Post-cum transition clears the player edge streak"),Manager->PlayerVariables.EdgeStreak,0);
+    TestEqual(TEXT("Post-cum transition clears the runtime edge streak mirror"),Manager->EdgeStreak,0);
+    TestEqual(TEXT("Post-cum transition retains the completed-session edge metric"),Manager->SessionStats.EdgeStreak,9);
+    Manager->PostGameSequence=NewObject<URecoveredPostGameSequence>(Manager);
+    Manager->ReturnToMainMenu();
+    TestNull(TEXT("Return-to-menu releases the post-game sequence"),Manager->PostGameSequence.Get());
+    World->DestroyWorld(false); GEngine->DestroyWorldContext(World);
+    return true;
+}
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredPostGameSequenceTest,"CockHero.Recovery.PostGameSourceSequence",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
 bool FRecoveredPostGameSequenceTest::RunTest(const FString& Parameters) {
     const auto Initialization=UWorld::InitializationValues().AllowAudioPlayback(false).CreatePhysicsScene(false).CreateNavigation(false).CreateAISystem(false).ShouldSimulatePhysics(false).SetTransactional(false);
