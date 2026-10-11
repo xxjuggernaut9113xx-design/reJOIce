@@ -1,6 +1,7 @@
 #include "RecoveredModifierWidget.h"
 #include "RecoveredProgression.h"
 #include "RecoveredRules.h"
+#include "RecoveredModifierCardEntryWidget.h"
 #include "Components/HorizontalBox.h"
 #include "Components/TextBlock.h"
 #include "Components/Button.h"
@@ -58,12 +59,24 @@ void URecoveredModifierWidget::RefreshModifierList() {
         }
         const bool bEnabled = Progression->EnabledModifiers.Contains(ModifierID);
         const bool bUnlocked = Progression->IsModifierUnlocked(ModifierID);
-        SetEntryText(Entry, TEXT("ModifierTitle"), Row.ModifierTitle);
-        SetEntryText(Entry, TEXT("ModifierDescription"), Row.ModifierDescription);
-        SetEntryText(Entry, TEXT("ChallengeRequiredText"), bUnlocked ? FText::GetEmpty() : FText::FromString(TEXT("Complete the linked challenge to unlock")));
-        SetEntryText(Entry, TEXT("ButtonText"), FText::FromString(bEnabled ? TEXT("Enabled") : TEXT("Disabled")));
-        if (auto* Icon = Cast<UImage>(Entry->GetWidgetFromName(TEXT("ModifierIcon")))) Icon->SetBrushFromTexture(Row.ModifierIcon);
-        if (auto* Lock = Entry->GetWidgetFromName(TEXT("LockOverlay"))) Lock->SetVisibility(bUnlocked ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
+        FRecoveredChallengeRow Challenge;
+        const FName ChallengeID=Progression->GetChallengeForModifier(ModifierID);
+        if (!ChallengeID.IsNone() && Progression->ChallengeDataTable && Progression->ChallengeDataTable->GetRowStruct()==FRecoveredChallengeRow::StaticStruct()) {
+            for (const TPair<FName,uint8*>& Pair:Progression->ChallengeDataTable->GetRowMap()) {
+                const auto* Candidate=reinterpret_cast<const FRecoveredChallengeRow*>(Pair.Value);
+                if (Candidate && Candidate->ChallengeID==ChallengeID.ToString()) { Challenge=*Candidate; break; }
+            }
+        }
+        if (auto* SourceEntry=Cast<URecoveredModifierCardEntryWidget>(Entry)) {
+            SourceEntry->PopulateDetails(bUnlocked,bEnabled,Row.ModifierTitle,Row.ModifierIcon,Row.ModifierDescription,Challenge.DisplayName,Challenge.Description);
+        } else {
+            SetEntryText(Entry, TEXT("ModifierTitle"), Row.ModifierTitle);
+            SetEntryText(Entry, TEXT("ModifierDescription"), Row.ModifierDescription);
+            SetEntryText(Entry, TEXT("ChallengeRequiredText"), bUnlocked ? FText::GetEmpty() : FText::FromString(TEXT("Complete the linked challenge to unlock")));
+            SetEntryText(Entry, TEXT("ButtonText"), FText::FromString(bEnabled ? TEXT("Enabled") : TEXT("Disabled")));
+            if (auto* Icon = Cast<UImage>(Entry->GetWidgetFromName(TEXT("ModifierIcon")))) Icon->SetBrushFromTexture(Row.ModifierIcon);
+            if (auto* Lock = Entry->GetWidgetFromName(TEXT("LockOverlay"))) Lock->SetVisibility(bUnlocked ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
+        }
         for (const TCHAR* ButtonName : {TEXT("ToggleModifierButton"), TEXT("BackgroundButton")}) {
             if (UButton* Button = FindEntryButton(Entry, ButtonName)) {
                 Button->SetIsEnabled(bEnabled || bUnlocked);
