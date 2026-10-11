@@ -1,0 +1,542 @@
+{
+  "recovery": "player-card-entry-widget",
+  "source_executed": false,
+  "source_asset": "/Game/PlayerCards/PlayerCardEntryWidget",
+  "source_package": {
+    "raw_uheader_sha256": "15597fc5207c1ec9879c7534d22014c4a86a1193580a990f197abe7f1e2b5eef",
+    "raw_uexp_sha256": "dd47ee21af3cc937bf62ca7317e861389dc45a880921161584627647502d6dfa",
+    "legacy_uasset_sha256": "27030f8cd1768f2ae0d4d999046ee9f26e9a62a7939f114079c3128cb7cae1ef",
+    "legacy_uexp_sha256": "dd47ee21af3cc937bf62ca7317e861389dc45a880921161584627647502d6dfa"
+  },
+  "functions": [
+    {
+      "name": "BndEvt__PlayerCardEntryWidget_PlayerCardButton_K2Node_ComponentBoundEvent_0_OnButtonHoverEvent__DelegateSignature",
+      "statements": 3,
+      "raw_fallback": false,
+      "calls": [
+        "ExecuteUbergraph_PlayerCardEntryWidget"
+      ],
+      "fields": []
+    },
+    {
+      "name": "BndEvt__PlayerCardEntryWidget_PlayerCardButton_K2Node_ComponentBoundEvent_1_OnButtonHoverEvent__DelegateSignature",
+      "statements": 3,
+      "raw_fallback": false,
+      "calls": [
+        "ExecuteUbergraph_PlayerCardEntryWidget"
+      ],
+      "fields": []
+    },
+    {
+      "name": "BndEvt__PlayerCardEntryWidget_PlayerCardButton_K2Node_ComponentBoundEvent_2_OnButtonClickedEvent__DelegateSignature",
+      "statements": 3,
+      "raw_fallback": false,
+      "calls": [
+        "ExecuteUbergraph_PlayerCardEntryWidget"
+      ],
+      "fields": []
+    },
+    {
+      "name": "ExecuteUbergraph_PlayerCardEntryWidget",
+      "statements": 17,
+      "raw_fallback": false,
+      "calls": [
+        "OnClicked__DelegateSignature",
+        "PlayAnimation",
+        "PlaySound2D"
+      ],
+      "fields": []
+    },
+    {
+      "name": "GetToolTipWidget",
+      "statements": 20,
+      "raw_fallback": false,
+      "calls": [
+        "Create",
+        "Format",
+        "Set Title & Description"
+      ],
+      "fields": []
+    },
+    {
+      "name": "OnClicked__DelegateSignature",
+      "statements": 2,
+      "raw_fallback": false,
+      "calls": [],
+      "fields": []
+    },
+    {
+      "name": "PopulatePlayerCard",
+      "statements": 49,
+      "raw_fallback": false,
+      "calls": [
+        "Conv_NameToString",
+        "Conv_StringToText",
+        "Format",
+        "Replace",
+        "SetStyle",
+        "SetText",
+        "SetVisibility"
+      ],
+      "fields": []
+    }
+  ],
+  "source_entrypoints": {
+    "Hover": 75,
+    "Unhover": 187,
+    "Click": 239
+  },
+  "source_contract": {
+    "button_style": {
+      "draw_as": "Image",
+      "image_size": [
+        32.0,
+        32.0
+      ],
+      "normal_hovered_pressed_share_card_art": true,
+      "source_button_slate_sounds_cleared_on_population": true
+    },
+    "lock_overlay": {
+      "unlocked_visibility": "Collapsed",
+      "locked_visibility": "Visible",
+      "opacity": 0.5,
+      "locked_artwork": "LockedPlayerCard",
+      "lock_scale": [
+        1.5,
+        1.5
+      ],
+      "requirement_format": "Complete Challenge: \\r\\n\\\"{challenge}\\\"",
+      "challenge_identifier_replaces_underscores": true
+    },
+    "tooltip": {
+      "unlocked_title": "Card Name",
+      "unlocked_description": "Unlocked",
+      "locked_title": "{card name} - locked",
+      "locked_description_format": "ChallengeDescription with {card name}"
+    },
+    "interaction": {
+      "hover": {
+        "animation": "Hover",
+        "sound": "click4_sfx",
+        "volume": 1.0,
+        "pitch": 1.0
+      },
+      "unhover": {
+        "animation": "Unhover"
+      },
+      "unlocked_click": {
+        "animation": "Click",
+        "sound": "Juice_SFX__12_",
+        "volume": 2.0,
+        "pitch": 1.3
+      },
+      "locked_click": {
+        "animation": "UnsuccessfulClick",
+        "sound": "anime-46068",
+        "volume": 0.8,
+        "pitch": 0.9
+      },
+      "click_broadcasts_before_unlock_branch": true
+    }
+  },
+  "layout": {
+    "components": 26,
+    "root": "SizeBox_60",
+    "root_size": [
+      613.0,
+      136.0
+    ],
+    "lock_content_width": 600.0,
+    "requirement_content_width": 586.0,
+    "requirement_font_size": 16.5,
+    "required_components": [
+      "Border_0",
+      "Border_122",
+      "HorizontalBox_76",
+      "Image_257",
+      "Image_86",
+      "LockOverlay",
+      "PlayerCardButton",
+      "ScaleBox_0",
+      "ScaleBox_1",
+      "SizeBox_0",
+      "SizeBox_1",
+      "SizeBox_60",
+      "UnlockRequirementText",
+      "WidgetTree"
+    ],
+    "byte_identical_component_payloads": true
+  },
+  "animation_source": {
+    "names": [
+      "Hover",
+      "Unhover",
+      "Click",
+      "UnsuccessfulClick"
+    ],
+    "count": 4,
+    "source_animation_payloads_decoded": true
+  },
+  "reconstruction": {
+    "asset": "/Game/Recovery/UI/PlayerCardEntryWidget.PlayerCardEntryWidget",
+    "widget_tree_restored": true,
+    "animations_restored": true,
+    "layout_build": {
+      "asset": "/Game/Recovery/UI/PlayerCardEntryWidget",
+      "widgets": 13,
+      "linked_slots": 12,
+      "warnings": []
+    },
+    "animation_restore": {
+      "saved_assets": true,
+      "complete_references": true,
+      "animation_count": 4,
+      "objects": [
+        {
+          "export_index": 20,
+          "name": "Click",
+          "class": "MovieScene",
+          "bytes": 145,
+          "consumed": 145,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 21,
+          "name": "Hover",
+          "class": "MovieScene",
+          "bytes": 145,
+          "consumed": 145,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 22,
+          "name": "Unhover",
+          "class": "MovieScene",
+          "bytes": 145,
+          "consumed": 145,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 23,
+          "name": "UnsuccessfulClick",
+          "class": "MovieScene",
+          "bytes": 244,
+          "consumed": 244,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 24,
+          "name": "MovieScene2DTransformSection_0",
+          "class": "MovieScene2DTransformSection",
+          "bytes": 730,
+          "consumed": 730,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 25,
+          "name": "MovieScene2DTransformSection_0",
+          "class": "MovieScene2DTransformSection",
+          "bytes": 602,
+          "consumed": 602,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 26,
+          "name": "MovieScene2DTransformSection_0",
+          "class": "MovieScene2DTransformSection",
+          "bytes": 602,
+          "consumed": 602,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 27,
+          "name": "MovieScene2DTransformSection_0",
+          "class": "MovieScene2DTransformSection",
+          "bytes": 890,
+          "consumed": 890,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 28,
+          "name": "MovieScene2DTransformSection_0",
+          "class": "MovieScene2DTransformSection",
+          "bytes": 666,
+          "consumed": 666,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 29,
+          "name": "MovieScene2DTransformTrack_0",
+          "class": "MovieScene2DTransformTrack",
+          "bytes": 100,
+          "consumed": 100,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 30,
+          "name": "MovieScene2DTransformTrack_0",
+          "class": "MovieScene2DTransformTrack",
+          "bytes": 100,
+          "consumed": 100,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 31,
+          "name": "MovieScene2DTransformTrack_0",
+          "class": "MovieScene2DTransformTrack",
+          "bytes": 100,
+          "consumed": 100,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 32,
+          "name": "MovieScene2DTransformTrack_0",
+          "class": "MovieScene2DTransformTrack",
+          "bytes": 100,
+          "consumed": 100,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 33,
+          "name": "MovieScene2DTransformTrack_1",
+          "class": "MovieScene2DTransformTrack",
+          "bytes": 100,
+          "consumed": 100,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 34,
+          "name": "EaseInFunction",
+          "class": "MovieSceneBuiltInEasingFunction",
+          "bytes": 6,
+          "consumed": 6,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 35,
+          "name": "EaseOutFunction",
+          "class": "MovieSceneBuiltInEasingFunction",
+          "bytes": 6,
+          "consumed": 6,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 36,
+          "name": "EaseInFunction",
+          "class": "MovieSceneBuiltInEasingFunction",
+          "bytes": 6,
+          "consumed": 6,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 37,
+          "name": "EaseOutFunction",
+          "class": "MovieSceneBuiltInEasingFunction",
+          "bytes": 6,
+          "consumed": 6,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 38,
+          "name": "EaseInFunction",
+          "class": "MovieSceneBuiltInEasingFunction",
+          "bytes": 6,
+          "consumed": 6,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 39,
+          "name": "EaseOutFunction",
+          "class": "MovieSceneBuiltInEasingFunction",
+          "bytes": 6,
+          "consumed": 6,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 40,
+          "name": "EaseInFunction",
+          "class": "MovieSceneBuiltInEasingFunction",
+          "bytes": 6,
+          "consumed": 6,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 41,
+          "name": "EaseOutFunction",
+          "class": "MovieSceneBuiltInEasingFunction",
+          "bytes": 6,
+          "consumed": 6,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 42,
+          "name": "EaseInFunction",
+          "class": "MovieSceneBuiltInEasingFunction",
+          "bytes": 6,
+          "consumed": 6,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 43,
+          "name": "EaseOutFunction",
+          "class": "MovieSceneBuiltInEasingFunction",
+          "bytes": 6,
+          "consumed": 6,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 44,
+          "name": "EaseInFunction",
+          "class": "MovieSceneBuiltInEasingFunction",
+          "bytes": 6,
+          "consumed": 6,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 45,
+          "name": "EaseOutFunction",
+          "class": "MovieSceneBuiltInEasingFunction",
+          "bytes": 6,
+          "consumed": 6,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 46,
+          "name": "MovieSceneColorSection_0",
+          "class": "MovieSceneColorSection",
+          "bytes": 456,
+          "consumed": 456,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 47,
+          "name": "MovieSceneColorTrack_0",
+          "class": "MovieSceneColorTrack",
+          "bytes": 100,
+          "consumed": 100,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 48,
+          "name": "CompiledData",
+          "class": "MovieSceneCompiledData",
+          "bytes": 199,
+          "consumed": 199,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 49,
+          "name": "CompiledData",
+          "class": "MovieSceneCompiledData",
+          "bytes": 199,
+          "consumed": 199,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 50,
+          "name": "CompiledData",
+          "class": "MovieSceneCompiledData",
+          "bytes": 199,
+          "consumed": 199,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 51,
+          "name": "CompiledData",
+          "class": "MovieSceneCompiledData",
+          "bytes": 330,
+          "consumed": 330,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 67,
+          "name": "Click_INST",
+          "class": "WidgetAnimation",
+          "bytes": 75,
+          "consumed": 75,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 68,
+          "name": "Hover_INST",
+          "class": "WidgetAnimation",
+          "bytes": 75,
+          "consumed": 75,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 69,
+          "name": "Unhover_INST",
+          "class": "WidgetAnimation",
+          "bytes": 77,
+          "consumed": 77,
+          "decoded": true,
+          "unresolved_references": []
+        },
+        {
+          "export_index": 70,
+          "name": "UnsuccessfulClick_INST",
+          "class": "WidgetAnimation",
+          "bytes": 114,
+          "consumed": 114,
+          "decoded": true,
+          "unresolved_references": []
+        }
+      ]
+    },
+    "asset_sha256": "b598c35e0b4aba47260cb222adf6661eaf367d3f7b10c5e1a7caa70b635716fe"
+  },
+  "source_sha256": {
+    "C:\\Users\\webma\\analysis\\cockhero-v004\\player-cards-extract\\CockHero\\Content\\PlayerCards\\PlayerCardEntryWidget.uheader": "15597fc5207c1ec9879c7534d22014c4a86a1193580a990f197abe7f1e2b5eef",
+    "C:\\Users\\webma\\analysis\\cockhero-v004\\player-cards-extract\\CockHero\\Content\\PlayerCards\\PlayerCardEntryWidget.uexp": "dd47ee21af3cc937bf62ca7317e861389dc45a880921161584627647502d6dfa",
+    "C:\\Users\\webma\\analysis\\cockhero-v004\\player-cards-legacy-v2\\CockHero\\Content\\PlayerCards\\PlayerCardEntryWidget.uasset": "27030f8cd1768f2ae0d4d999046ee9f26e9a62a7939f114079c3128cb7cae1ef",
+    "C:\\Users\\webma\\analysis\\cockhero-v004\\player-cards-legacy-v2\\CockHero\\Content\\PlayerCards\\PlayerCardEntryWidget.uexp": "dd47ee21af3cc937bf62ca7317e861389dc45a880921161584627647502d6dfa",
+    "D:\\reJOIce\\UnrealReconstruction\\Saved\\SourceDecode\\PlayerCardEntryWidget\\PlayerCardEntryWidget.json": "10724f2823b8bfff478f9721a50248b9ecfd22341352483172dae3a4d3f694c6",
+    "D:\\reJOIce\\UnrealReconstruction\\Saved\\SourceDecode\\PlayerCardEntryWidget\\PlayerCardEntryWidget-functions.json": "a8da895ef3e1039220be08fdfad187fc9fc7f06b60486b50e48fdf38a6db468e"
+  },
+  "reconstruction_sha256": {
+    "Source\\CockHeroRecovered\\RecoveredPlayerCardEntryWidget.h": "9a77b637f22e8e06ef9f73fd8245e0f774773fba3d5f4878e127703cc373149c",
+    "Source\\CockHeroRecovered\\RecoveredPlayerCardEntryWidget.cpp": "732ae6593339fa5f2f61906ae70d83053e1c176a5b87cd6ef4cbc21ba78bdf00",
+    "Source\\CockHeroRecovered\\RecoveredPlayerCardsTabWidget.cpp": "c0f1ef8f3af44a6f08a1ebbb491f895e9f2a4007e5aba32509bedea77c27a05d",
+    "Source\\CockHeroRecovered\\RecoveredWidgetRecovery.cpp": "ba47bbd2e4d0f15c4cef1363eae53021158793dcffc88fb2137669ce74afd30d",
+    "Scripts\\recover_player_card_entry_widget.py": "ef7986cc4741f51463679044578e18894109d827dc1ae8d674e425ae8992bc2e",
+    "Scripts\\build_player_card_entry_widget.py": "57fbf51a63c2d4775d56de65b3202fc24b0234318ae5e1d691cd078380072bf8",
+    "Scripts\\import_player_card_textures.py": "1fbfd462d8882ac02c4feab96b178e447922e8f9bae4cf4eeffd899f22a5de08",
+    "RecoveryEvidence\\player-card-entry-widget-layout-values.json": "63f230ffc48f4de476731bd1d1a1088ff7d837297aa62b4ff0e2a1442603ffe9",
+    "Content\\Recovery\\UI\\PlayerCardEntryWidget.uasset": "b598c35e0b4aba47260cb222adf6661eaf367d3f7b10c5e1a7caa70b635716fe"
+  }
+}

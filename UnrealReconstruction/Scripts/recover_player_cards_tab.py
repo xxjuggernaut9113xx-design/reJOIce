@@ -9,6 +9,13 @@ PROJECT = Path(__file__).resolve().parents[1]
 ANALYSIS = Path(r"C:\Users\webma\analysis\cockhero-v004")
 EVIDENCE = PROJECT / "RecoveryEvidence"
 FUNCTIONS = EVIDENCE / "widget-functions" / "PlayerCardsTabWidget"
+TEXTURE_REPORT = EVIDENCE / "player-card-texture-recovery.json"
+ENTRY_WIDGET_REPORT = EVIDENCE / "player-card-entry-widget-recovery.json"
+ENTRY_WIDGET_LAYOUT = EVIDENCE / "player-card-entry-widget-layout-values.json"
+RAW_ENTRY_WIDGET = ANALYSIS / "player-cards-extract" / "CockHero" / "Content" / "PlayerCards" / "PlayerCardEntryWidget.uheader"
+RAW_ENTRY_WIDGET_EXPORTS = RAW_ENTRY_WIDGET.with_suffix(".uexp")
+LEGACY_ENTRY_WIDGET = ANALYSIS / "player-cards-legacy-v2" / "CockHero" / "Content" / "PlayerCards" / "PlayerCardEntryWidget.uasset"
+LEGACY_ENTRY_WIDGET_EXPORTS = LEGACY_ENTRY_WIDGET.with_suffix(".uexp")
 
 
 def load_json(path: Path) -> dict:
@@ -113,15 +120,46 @@ require([card["CardID"] for card in free_cards] == ["cybergirls_pc_2"], "Player-
 require(cards[0]["CardID"] == "catgirl_booties_pc_1", "Player-card source first row changed")
 require(cards[3]["CardID"] == "hypnoboobs_pc_1", "Player-card source fourth row changed")
 
+texture_report = load_json(TEXTURE_REPORT)
+require(texture_report["expected_card_images"] == 36, "Player-card texture source count changed")
+require(texture_report["exported_images"] == 37, "Player-card texture export is incomplete")
+textures = texture_report["textures"]
+require(len(textures) == 37, "Player-card texture evidence row count changed")
+require(all(row.get("decoded") for row in textures), "Player-card texture decode evidence is incomplete")
+require(all(row.get("recovered_asset") for row in textures), "Player-card texture import evidence is incomplete")
+require(len({row["recovered_asset"] for row in textures}) == 37, "Player-card recovered texture names are not unique")
+require({row["original"] for row in textures} == {card["CardImage"] for card in cards} | {"/Game/PlayerCards/LockedPlayerCard.LockedPlayerCard"}, "Player-card texture source set changed")
+for path in (RAW_ENTRY_WIDGET, RAW_ENTRY_WIDGET_EXPORTS, LEGACY_ENTRY_WIDGET, LEGACY_ENTRY_WIDGET_EXPORTS, ENTRY_WIDGET_REPORT, ENTRY_WIDGET_LAYOUT):
+    require(path.exists(), f"Missing recovered source PlayerCardEntryWidget component: {path}")
+
+entry_recovery = load_json(ENTRY_WIDGET_REPORT)
+require(entry_recovery["source_asset"] == "/Game/PlayerCards/PlayerCardEntryWidget", "PlayerCardEntryWidget source asset changed")
+require(entry_recovery["source_entrypoints"] == {"Hover": 75, "Unhover": 187, "Click": 239}, "PlayerCardEntryWidget source event entrypoints changed")
+require(len(entry_recovery["functions"]) == 7, "PlayerCardEntryWidget function recovery is incomplete")
+require(not any(function["raw_fallback"] for function in entry_recovery["functions"]), "PlayerCardEntryWidget function recovery fell back to raw bytecode")
+require(entry_recovery["layout"]["components"] == 26, "PlayerCardEntryWidget layout recovery is incomplete")
+require(entry_recovery["layout"]["byte_identical_component_payloads"], "PlayerCardEntryWidget layout payloads are not byte verified")
+require(entry_recovery["reconstruction"]["widget_tree_restored"], "PlayerCardEntryWidget tree was not restored")
+require(entry_recovery["reconstruction"]["animations_restored"], "PlayerCardEntryWidget animations were not restored")
+require(entry_recovery["reconstruction"]["animation_restore"]["animation_count"] == 4, "PlayerCardEntryWidget animation recovery is incomplete")
+
 source_paths = [
     *entrypoint_paths.values(),
     FUNCTIONS / "ExecuteUbergraph_PlayerCardsTabWidget.json",
     FUNCTIONS / "PopulateDetailsPanel.json",
     EVIDENCE / "game-rules-draft.json",
     ANALYSIS / "ghidra-native" / "integration-decompiled.c",
+    TEXTURE_REPORT,
+    RAW_ENTRY_WIDGET,
+    RAW_ENTRY_WIDGET_EXPORTS,
+    LEGACY_ENTRY_WIDGET,
+    LEGACY_ENTRY_WIDGET_EXPORTS,
+    ENTRY_WIDGET_REPORT,
+    ENTRY_WIDGET_LAYOUT,
 ]
 reconstruction_paths = [
     PROJECT / "Content" / "Recovery" / "UI" / "PlayerCardsTabWidget.uasset",
+    PROJECT / "Content" / "Recovery" / "UI" / "PlayerCardEntryWidget.uasset",
     PROJECT / "Source" / "CockHeroRecovered" / "RecoveredPlayerCardsTabWidget.h",
     PROJECT / "Source" / "CockHeroRecovered" / "RecoveredPlayerCardsTabWidget.cpp",
     PROJECT / "Source" / "CockHeroRecovered" / "RecoveredPlayerCardEntryWidget.h",
@@ -130,6 +168,12 @@ reconstruction_paths = [
     PROJECT / "Source" / "CockHeroRecovered" / "RecoveredRewards.cpp",
     PROJECT / "Source" / "CockHeroRecovered" / "RecoveredChallengesMenu.cpp",
     PROJECT / "Scripts" / "reparent_player_cards_tab.py",
+    PROJECT / "Scripts" / "export_player_card_textures.py",
+    PROJECT / "Scripts" / "decode_player_card_textures.py",
+    PROJECT / "Scripts" / "import_player_card_textures.py",
+    PROJECT / "Scripts" / "recover_player_card_entry_widget.py",
+    PROJECT / "Scripts" / "build_player_card_entry_widget.py",
+    PROJECT / "Source" / "CockHeroRecovered" / "RecoveredWidgetRecovery.cpp",
     PROJECT / "Source" / "CockHeroRecovered" / "RecoveredPlayerCardsTabWidgetTests.cpp",
 ]
 for path in reconstruction_paths:
@@ -160,7 +204,21 @@ report = {
     "entry_widget": {
         "source_asset": "/Game/PlayerCards/PlayerCardEntryWidget",
         "reconstruction": "URecoveredPlayerCardEntryWidget",
-        "source_asset_recovered": False,
+        "source_asset_recovered": True,
+        "raw_uheader_sha256": sha256(RAW_ENTRY_WIDGET),
+        "raw_uexp_sha256": sha256(RAW_ENTRY_WIDGET_EXPORTS),
+        "legacy_uasset_sha256": sha256(LEGACY_ENTRY_WIDGET),
+        "legacy_uexp_sha256": sha256(LEGACY_ENTRY_WIDGET_EXPORTS),
+        "source_layout_recovered": entry_recovery["layout"]["components"] == 26,
+        "source_animation_payloads_restored": entry_recovery["reconstruction"]["animations_restored"],
+        "runtime_asset": entry_recovery["reconstruction"]["asset"],
+        "runtime_animation_count": entry_recovery["reconstruction"]["animation_restore"]["animation_count"],
+    },
+    "texture_recovery": {
+        "source_card_images": texture_report["expected_card_images"],
+        "recovered_texture_assets": texture_report["exported_images"],
+        "locked_placeholder_recovered": True,
+        "all_source_card_art_imported": True,
     },
     "source_sha256": {str(path): sha256(path) for path in source_paths},
     "reconstruction_sha256": {str(path.relative_to(PROJECT)): sha256(path) for path in reconstruction_paths},

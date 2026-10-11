@@ -1,0 +1,1718 @@
+{
+  "function": {
+    "name": "PopulatePlayerCard",
+    "statements": 49,
+    "raw_fallback": false,
+    "calls": [
+      "Conv_NameToString",
+      "Conv_StringToText",
+      "Format",
+      "Replace",
+      "SetStyle",
+      "SetText",
+      "SetVisibility"
+    ],
+    "fields": []
+  },
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SpecifiedColor",
+        "owner": "SlateColor"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "SpecifiedColor",
+          "owner": "SlateColor"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateColor",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -85,
+        "StructSize": 16,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ColorUseRule",
+        "owner": "SlateColor"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ColorUseRule",
+          "owner": "SlateColor"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateColor",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "DrawAs",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "DrawAs",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 3
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Tiling",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Tiling",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Mirroring",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Mirroring",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ImageSize",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ImageSize",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -91,
+        "StructSize": 8,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": 32.0
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": 32.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Margin",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Margin",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -92,
+        "StructSize": 16,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "TintColor",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "TintColor",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeStruct_SlateColor",
+          "owner": "PopulatePlayerCard"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "OutlineSettings",
+        "owner": "SlateBrush"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "OutlineSettings",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -94,
+        "StructSize": 64,
+        "Value": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -87,
+            "StructSize": 32,
+            "Value": [
+              {
+                "op": "EX_DoubleConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_DoubleConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_DoubleConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_DoubleConst",
+                "Value": 1.0
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -95,
+            "StructSize": 20,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -85,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              }
+            ]
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetObj",
+      "VariableExpression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ResourceObject",
+          "owner": "SlateBrush"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_SlateBrush",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Card Image",
+          "owner": "PopulatePlayerCard"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Normal",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Normal",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeStruct_SlateBrush",
+          "owner": "PopulatePlayerCard"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Hovered",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Hovered",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeStruct_SlateBrush",
+          "owner": "PopulatePlayerCard"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Pressed",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Pressed",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeStruct_SlateBrush",
+          "owner": "PopulatePlayerCard"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Disabled",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "Disabled",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -93,
+        "StructSize": 224,
+        "Value": [
+          {
+            "op": "EX_BitFieldConst",
+            "Property": {
+              "field": "bIsDynamicallyLoaded",
+              "owner": "SlateBrush"
+            },
+            "Value": 0
+          },
+          {
+            "op": "EX_BitFieldConst",
+            "Property": {
+              "field": "bHasUObject",
+              "owner": "SlateBrush"
+            },
+            "Value": 0
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -91,
+            "StructSize": 8,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -92,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -95,
+            "StructSize": 20,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -85,
+                "StructSize": 16,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": 1.0
+                  }
+                ]
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 0
+              }
+            ]
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -94,
+            "StructSize": 64,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -87,
+                "StructSize": 32,
+                "Value": [
+                  {
+                    "op": "EX_DoubleConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_DoubleConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_DoubleConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_DoubleConst",
+                    "Value": 1.0
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -95,
+                "StructSize": 20,
+                "Value": [
+                  {
+                    "op": "EX_StructConst",
+                    "Struct": -85,
+                    "StructSize": 16,
+                    "Value": [
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      },
+                      {
+                        "op": "EX_FloatConst",
+                        "Value": "+0"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "EX_ByteConst",
+                    "Value": 0
+                  }
+                ]
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_ByteConst",
+                "Value": 1
+              },
+              {
+                "op": "EX_False"
+              }
+            ]
+          },
+          {
+            "op": "EX_NoObject"
+          },
+          {
+            "op": "EX_NameConst",
+            "Value": "None"
+          },
+          {
+            "op": "EX_StructConst",
+            "Struct": -84,
+            "StructSize": 20,
+            "Value": [
+              {
+                "op": "EX_StructConst",
+                "Struct": -86,
+                "StructSize": 8,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_StructConst",
+                "Struct": -86,
+                "StructSize": 8,
+                "Value": [
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  },
+                  {
+                    "op": "EX_FloatConst",
+                    "Value": "+0"
+                  }
+                ]
+              },
+              {
+                "op": "EX_False"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "NormalForeground",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "NormalForeground",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -95,
+        "StructSize": 20,
+        "Value": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -85,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              }
+            ]
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "HoveredForeground",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "HoveredForeground",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -95,
+        "StructSize": 20,
+        "Value": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -85,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              }
+            ]
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "PressedForeground",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "PressedForeground",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -95,
+        "StructSize": 20,
+        "Value": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -85,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              }
+            ]
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "DisabledForeground",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "DisabledForeground",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -95,
+        "StructSize": 20,
+        "Value": [
+          {
+            "op": "EX_StructConst",
+            "Struct": -85,
+            "StructSize": 16,
+            "Value": [
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": "+0"
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              },
+              {
+                "op": "EX_FloatConst",
+                "Value": 1.0
+              }
+            ]
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "NormalPadding",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "NormalPadding",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -92,
+        "StructSize": 16,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "PressedPadding",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "PressedPadding",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -92,
+        "StructSize": 16,
+        "Value": [
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_FloatConst",
+            "Value": "+0"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "PressedSlateSound",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "PressedSlateSound",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -96,
+        "StructSize": 32,
+        "Value": [
+          {
+            "op": "EX_NoObject"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "HoveredSlateSound",
+        "owner": "ButtonStyle"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "HoveredSlateSound",
+          "owner": "ButtonStyle"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_ButtonStyle",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructConst",
+        "Struct": -96,
+        "StructSize": 32,
+        "Value": [
+          {
+            "op": "EX_NoObject"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "PlayerCardButton",
+          "owner": "PlayerCardEntryWidget_C"
+        }
+      },
+      "Offset": 19,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetStyle",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeStruct_ButtonStyle",
+              "owner": "PopulatePlayerCard"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Is Unlocked?",
+          "owner": "PlayerCardEntryWidget_C"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "IsUnlocked?",
+          "owner": "PopulatePlayerCard"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Card Name",
+        "owner": "PlayerCardEntryWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Card Name",
+          "owner": "PlayerCardEntryWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CardName",
+          "owner": "PopulatePlayerCard"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CardID",
+        "owner": "PlayerCardEntryWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "CardID",
+          "owner": "PlayerCardEntryWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CardID",
+          "owner": "PopulatePlayerCard"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "RequiredChallengeID",
+        "owner": "PlayerCardEntryWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "RequiredChallengeID",
+          "owner": "PlayerCardEntryWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Required Challenge ID",
+          "owner": "PopulatePlayerCard"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "RequiredLevel",
+        "owner": "PlayerCardEntryWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "RequiredLevel",
+          "owner": "PlayerCardEntryWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Required Level",
+          "owner": "PopulatePlayerCard"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ChallengeDescription",
+        "owner": "PlayerCardEntryWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "ChallengeDescription",
+          "owner": "PlayerCardEntryWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Challenge Description",
+          "owner": "PopulatePlayerCard"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Challenge Name",
+        "owner": "PlayerCardEntryWidget_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Challenge Name",
+          "owner": "PlayerCardEntryWidget_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "ChallengeName",
+          "owner": "PopulatePlayerCard"
+        }
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1779,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "IsUnlocked?",
+          "owner": "PopulatePlayerCard"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "LockOverlay",
+          "owner": "PlayerCardEntryWidget_C"
+        }
+      },
+      "Offset": 16,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetVisibility",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 2349
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "LockOverlay",
+          "owner": "PlayerCardEntryWidget_C"
+        }
+      },
+      "Offset": 16,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetVisibility",
+        "Parameters": [
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_NameToString_ReturnValue",
+        "owner": "PopulatePlayerCard"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_NameToString_ReturnValue",
+          "owner": "PopulatePlayerCard"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_NameToString",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "Required Challenge ID",
+              "owner": "PopulatePlayerCard"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Replace_ReturnValue",
+        "owner": "PopulatePlayerCard"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Replace_ReturnValue",
+          "owner": "PopulatePlayerCard"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Replace",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Conv_NameToString_ReturnValue",
+              "owner": "PopulatePlayerCard"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "_"
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": " "
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Conv_StringToText_ReturnValue",
+        "owner": "PopulatePlayerCard"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "PopulatePlayerCard"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Conv_StringToText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Replace_ReturnValue",
+              "owner": "PopulatePlayerCard"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentName",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentName",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StringConst",
+        "Value": "challenge"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueType",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueType",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 4
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValue",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValue",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Conv_StringToText_ReturnValue",
+          "owner": "PopulatePlayerCard"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueInt",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueInt",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_Int64Const",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueFloat",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueFloat",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_FloatConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueDouble",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueDouble",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "ArgumentValueGender",
+        "owner": "FormatArgumentData"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ArgumentValueGender",
+          "owner": "FormatArgumentData"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_ByteConst",
+        "Value": 0
+      }
+    },
+    {
+      "op": "EX_SetArray",
+      "AssigningProperty": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_MakeArray_Array",
+          "owner": "PopulatePlayerCard"
+        }
+      },
+      "ArrayInnerProp": null,
+      "Elements": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "K2Node_MakeStruct_FormatArgumentData",
+            "owner": "PopulatePlayerCard"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Format_ReturnValue",
+        "owner": "PopulatePlayerCard"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Format_ReturnValue",
+          "owner": "PopulatePlayerCard"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Format",
+        "Parameters": [
+          {
+            "op": "EX_TextConst",
+            "Value": {
+              "op": "FScriptText",
+              "TextLiteralType": "LocalizedText",
+              "LocalizedSource": {
+                "op": "EX_StringConst",
+                "Value": "Complete Challenge: \r\n\"{challenge}\""
+              },
+              "LocalizedKey": {
+                "op": "EX_StringConst",
+                "Value": "75521A914A83BAB1C28D09A10CFCECF7"
+              },
+              "LocalizedNamespace": {
+                "op": "EX_StringConst",
+                "Value": ""
+              },
+              "InvariantLiteralString": null,
+              "LiteralString": null,
+              "StringTableAsset": null,
+              "StringTableId": null,
+              "StringTableKey": null
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "K2Node_MakeArray_Array",
+              "owner": "PopulatePlayerCard"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "UnlockRequirementText",
+          "owner": "PlayerCardEntryWidget_C"
+        }
+      },
+      "Offset": 23,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_VirtualFunction",
+        "VirtualFunctionName": "SetText",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Format_ReturnValue",
+              "owner": "PopulatePlayerCard"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

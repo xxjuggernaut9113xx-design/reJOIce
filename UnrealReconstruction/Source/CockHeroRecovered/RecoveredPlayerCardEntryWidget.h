@@ -28,19 +28,29 @@ public:
 protected:
     virtual TSharedRef<SWidget> RebuildWidget() override;
     virtual void NativeConstruct() override;
+    virtual void NativeDestruct() override;
 
 private:
+    UFUNCTION() void HandleCardHovered();
+    UFUNCTION() void HandleCardUnhovered();
     UFUNCTION() void HandleCardClicked();
+
     void BuildWidgetTree();
+    void BindRecoveredWidgetTree();
+    void BindSourceInteractions();
     void ApplyPresentation();
+    void ApplySourceCardStyle();
+    void ApplySourceTooltip();
+    void PlaySourceAnimation(FName AnimationName);
+    void PlaySourceSound(const TCHAR* AssetPath,float VolumeMultiplier,float PitchMultiplier) const;
 
     UPROPERTY(Transient) TObjectPtr<class USizeBox> RootSize;
-    UPROPERTY(Transient) TObjectPtr<class UButton> CardButton;
-    UPROPERTY(Transient) TObjectPtr<class UImage> CardImage;
-    UPROPERTY(Transient) TObjectPtr<class UTextBlock> CardCaption;
+    UPROPERTY(Transient) TObjectPtr<class UButton> SourceCardButton;
+    UPROPERTY(Transient) TObjectPtr<class UOverlay> SourceLockOverlay;
     UPROPERTY(Transient) TObjectPtr<class UTextBlock> RequirementCaption;
     UPROPERTY(Transient) TObjectPtr<class UTexture2D> SourceTexture;
     UPROPERTY(Transient) TObjectPtr<class UTexture2D> LockedTexture;
+    UPROPERTY(Transient) TObjectPtr<class URecoveredTooltip> CardTooltip;
     FString RequiredChallengeID;
     int32 RequiredLevel=0;
     FText ChallengeDescription;

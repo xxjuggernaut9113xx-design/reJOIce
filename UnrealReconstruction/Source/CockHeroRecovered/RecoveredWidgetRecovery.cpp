@@ -9,6 +9,7 @@
 #include "RecoveredStatsWidget.h"
 #include "RecoveredStatsTabWidget.h"
 #include "RecoveredPlayerCardsTabWidget.h"
+#include "RecoveredPlayerCardEntryWidget.h"
 #include "RecoveredChallengesMenu.h"
 #include "RecoveredEditUsernameOverlay.h"
 #include "RecoveredCalibrationWidget.h"
@@ -188,6 +189,7 @@ FString URecoveredWidgetRecovery::BuildWidgetAssets(const FString& EvidencePath)
             if(Screen.Key==TEXT("StatsScreenWidget")) ParentClass=URecoveredStatsScreenWidget::StaticClass();
             if(Screen.Key==TEXT("StatsTabWidget")) ParentClass=URecoveredStatsTabWidget::StaticClass();
             if(Screen.Key==TEXT("PlayerCardsTabWidget")) ParentClass=URecoveredPlayerCardsTabWidget::StaticClass();
+            if(Screen.Key==TEXT("PlayerCardEntryWidget")) ParentClass=URecoveredPlayerCardEntryWidget::StaticClass();
             if(Screen.Key==TEXT("ChallengesMenuWidget")) ParentClass=URecoveredChallengesMenu::StaticClass();
             if(Screen.Key==TEXT("EditUsernameOverlay")) ParentClass=URecoveredEditUsernameOverlay::StaticClass();
             if(URecoveredAnimatedOverlay::SupportsAsset(FName(*Screen.Key))) ParentClass=URecoveredAnimatedOverlay::StaticClass();

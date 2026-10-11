@@ -114,6 +114,8 @@ void URecoveredPlayerCardsTabWidget::PopulatePlayerCards() {
 
     TArray<FRecoveredPlayerCardRow> Cards;
     Progression->GetAllPlayerCardData(Cards);
+    UClass* EntryClass=LoadClass<URecoveredPlayerCardEntryWidget>(nullptr,TEXT("/Game/Recovery/UI/PlayerCardEntryWidget.PlayerCardEntryWidget_C"));
+    if (!EntryClass) EntryClass=URecoveredPlayerCardEntryWidget::StaticClass();
     for (int32 Index=0;Index<Cards.Num();++Index) {
         const FRecoveredPlayerCardRow& Card=Cards[Index];
         const FName CardID(*Card.CardID);
@@ -122,7 +124,7 @@ void URecoveredPlayerCardsTabWidget::PopulatePlayerCards() {
 
         FRecoveredChallengeRow Challenge;
         GetRecoveredChallengeData(Progression,Card.RequiredChallengeID,Challenge);
-        auto* Entry=CreateWidget<URecoveredPlayerCardEntryWidget>(this,URecoveredPlayerCardEntryWidget::StaticClass());
+        auto* Entry=CreateWidget<URecoveredPlayerCardEntryWidget>(this,EntryClass);
         if (!Entry) continue;
         Entry->PopulatePlayerCard(
             CardID,

@@ -1,8 +1,12 @@
 #include "RecoveredPlayerCardsTabWidget.h"
 
+#include "Animation/WidgetAnimation.h"
+#include "Blueprint/WidgetBlueprintGeneratedClass.h"
 #include "Components/Button.h"
 #include "Components/Image.h"
+#include "Components/Overlay.h"
 #include "Components/ProgressBar.h"
+#include "Components/SizeBox.h"
 #include "Components/TextBlock.h"
 #include "Components/UniformGridPanel.h"
 #include "Components/UniformGridSlot.h"
@@ -14,7 +18,9 @@
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
 #include "Misc/ScopeExit.h"
+#include "MovieScene.h"
 #include "RecoveredPlayerCardEntryWidget.h"
+#include "RecoveredMenu.h"
 #include "RecoveredProgression.h"
 #include "RecoveredRules.h"
 #include "Serialization/JsonSerializer.h"
@@ -40,6 +46,31 @@ bool FRecoveredPlayerCardsTabWidgetTest::RunTest(const FString& Parameters) {
     const TSharedPtr<FJsonObject> Population=Evidence->GetObjectField(TEXT("population_contract"));
     TestEqual(TEXT("Source player-card count"),Population->GetIntegerField(TEXT("source_card_count")),36);
     TestEqual(TEXT("Source player-card columns"),Population->GetIntegerField(TEXT("columns")),3);
+    const TSharedPtr<FJsonObject> TextureRecovery=Evidence->GetObjectField(TEXT("texture_recovery"));
+    TestEqual(TEXT("Source player-card artwork count"),TextureRecovery->GetIntegerField(TEXT("source_card_images")),36);
+    TestEqual(TEXT("Recovered player-card artwork count"),TextureRecovery->GetIntegerField(TEXT("recovered_texture_assets")),37);
+    TestTrue(TEXT("Source locked-card placeholder restored"),TextureRecovery->GetBoolField(TEXT("locked_placeholder_recovered")));
+
+    FString EntryEvidenceText;
+    TSharedPtr<FJsonObject> EntryEvidence;
+    const FString EntryEvidencePath=FPaths::ProjectDir()/TEXT("RecoveryEvidence/player-card-entry-widget-recovery.json");
+    if (!FFileHelper::LoadFileToString(EntryEvidenceText,*EntryEvidencePath) || !FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(EntryEvidenceText),EntryEvidence)) {
+        AddError(TEXT("Missing player-card entry recovery evidence"));
+        return false;
+    }
+    TestFalse(TEXT("Player-card entry source execution remains unclaimed"),EntryEvidence->GetBoolField(TEXT("source_executed")));
+    const TSharedPtr<FJsonObject> EntryEntrypoints=EntryEvidence->GetObjectField(TEXT("source_entrypoints"));
+    TestEqual(TEXT("Source entry hover entrypoint"),EntryEntrypoints->GetIntegerField(TEXT("Hover")),75);
+    TestEqual(TEXT("Source entry unhover entrypoint"),EntryEntrypoints->GetIntegerField(TEXT("Unhover")),187);
+    TestEqual(TEXT("Source entry click entrypoint"),EntryEntrypoints->GetIntegerField(TEXT("Click")),239);
+    TestEqual(TEXT("Source entry function count"),EntryEvidence->GetArrayField(TEXT("functions")).Num(),7);
+    const TSharedPtr<FJsonObject> EntryLayout=EntryEvidence->GetObjectField(TEXT("layout"));
+    TestEqual(TEXT("Source entry layout component count"),EntryLayout->GetIntegerField(TEXT("components")),26);
+    TestTrue(TEXT("Source entry payload layout round-trips"),EntryLayout->GetBoolField(TEXT("byte_identical_component_payloads")));
+    const TSharedPtr<FJsonObject> EntryReconstruction=EntryEvidence->GetObjectField(TEXT("reconstruction"));
+    TestTrue(TEXT("Source entry widget tree restored"),EntryReconstruction->GetBoolField(TEXT("widget_tree_restored")));
+    TestTrue(TEXT("Source entry animations restored"),EntryReconstruction->GetBoolField(TEXT("animations_restored")));
+    TestEqual(TEXT("Source entry animation count"),EntryReconstruction->GetObjectField(TEXT("animation_restore"))->GetIntegerField(TEXT("animation_count")),4);
 
     auto* Save=NewObject<URecoveredSaveGame>();
     if (!TestTrue(TEXT("Player card save initializes"),Save->InitializeRecoveredDefaults())) return false;
@@ -63,8 +94,95 @@ bool FRecoveredPlayerCardsTabWidgetTest::RunTest(const FString& Parameters) {
     if (!TestNotNull(TEXT("Player cards source data table"),Progression->PlayerCardDataTable.Get())) return false;
     if (!TestNotNull(TEXT("Player cards source level table"),Progression->LevelDataTable.Get())) return false;
     if (!TestNotNull(TEXT("Player cards source challenge table"),Progression->ChallengeDataTable.Get())) return false;
+
+    TArray<FRecoveredPlayerCardRow> SourceCards;
+    Progression->GetAllPlayerCardData(SourceCards);
+    TestEqual(TEXT("Player-card table feeds every restored image"),SourceCards.Num(),36);
+    for (const FRecoveredPlayerCardRow& Card:SourceCards) {
+        FString AssetName=Card.CardImage;
+        int32 Dot=INDEX_NONE;
+        if (!AssetName.FindLastChar(TEXT('.'),Dot) || Dot==AssetName.Len()-1) {
+            AddError(FString::Printf(TEXT("Invalid source player-card image path: %s"),*Card.CardImage));
+            continue;
+        }
+        AssetName=AssetName.Mid(Dot+1);
+        const FString RecoveredPath=FString::Printf(TEXT("/Game/Recovery/Resources/PlayerCards/%s.%s"),*AssetName,*AssetName);
+        UTexture2D* Texture=LoadObject<UTexture2D>(nullptr,*RecoveredPath);
+        if (TestNotNull(*FString::Printf(TEXT("Recovered artwork exists: %s"),*AssetName),Texture)) {
+            const FIntPoint ImportedSize=Texture->GetImportedSize();
+            TestEqual(*FString::Printf(TEXT("Recovered artwork width: %s"),*AssetName),ImportedSize.X,900);
+            TestEqual(*FString::Printf(TEXT("Recovered artwork height: %s"),*AssetName),ImportedSize.Y,200);
+        }
+    }
+    UTexture2D* LockedTexture=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/PlayerCards/LockedPlayerCard.LockedPlayerCard"));
+    if (TestNotNull(TEXT("Recovered locked player-card placeholder exists"),LockedTexture)) {
+        const FIntPoint ImportedSize=LockedTexture->GetImportedSize();
+        TestEqual(TEXT("Recovered locked player-card placeholder width"),ImportedSize.X,512);
+        TestEqual(TEXT("Recovered locked player-card placeholder height"),ImportedSize.Y,512);
+    }
     World->SetGameInstance(Instance);
     World->InitializeActorsForPlay(FURL());
+
+    UClass* EntryClass=LoadClass<URecoveredPlayerCardEntryWidget>(nullptr,TEXT("/Game/Recovery/UI/PlayerCardEntryWidget.PlayerCardEntryWidget_C"));
+    if (!TestNotNull(TEXT("Player-card entry recovered class"),EntryClass)) return false;
+    TestTrue(TEXT("Player-card entry uses its recovered native owner"),EntryClass->IsChildOf(URecoveredPlayerCardEntryWidget::StaticClass()));
+    if (auto* Generated=Cast<UWidgetBlueprintGeneratedClass>(EntryClass)) {
+        TestEqual(TEXT("Source entry restored animation count"),Generated->Animations.Num(),4);
+        const auto HasSourceAnimation=[Generated](FName ExpectedName) {
+            for (const TObjectPtr<UWidgetAnimation>& Animation:Generated->Animations) {
+                if (!Animation) continue;
+                const UMovieScene* MovieScene=Animation->GetMovieScene();
+                if (
+                    Animation->GetFName()==ExpectedName ||
+                    (MovieScene && MovieScene->GetFName()==ExpectedName) ||
+                    Animation->GetDisplayLabel().Equals(ExpectedName.ToString(),ESearchCase::CaseSensitive)
+                ) return true;
+            }
+            return false;
+        };
+        for (const TCHAR* Name:{TEXT("Hover"),TEXT("Unhover"),TEXT("Click"),TEXT("UnsuccessfulClick")} ) {
+            TestTrue(*FString::Printf(TEXT("Source entry animation restored: %s"),Name),HasSourceAnimation(FName(Name)));
+        }
+    } else AddError(TEXT("Player-card entry class lacks a recovered widget animation container"));
+
+    auto* SourceEntry=CreateWidget<URecoveredPlayerCardEntryWidget>(World,EntryClass);
+    if (!TestNotNull(TEXT("Source player-card entry instantiates"),SourceEntry)) return false;
+    SourceEntry->TakeWidget();
+    UTexture2D* SourceCardTexture=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/PlayerCards/Hypno_Boobs_-_Vol__1.Hypno_Boobs_-_Vol__1"));
+    if (!TestNotNull(TEXT("Source player-card entry artwork"),SourceCardTexture)) return false;
+    SourceEntry->PopulatePlayerCard(
+        FName(TEXT("source_card")),SourceCardTexture,TEXT("source_challenge"),1,false,
+        FText::FromString(TEXT("Inspect {card name}")),FText::FromString(TEXT("Ignored Source Title")),
+        FText::FromString(TEXT("Source Card")),FLinearColor::Red);
+    auto* EntryRoot=Cast<USizeBox>(SourceEntry->GetWidgetFromName(TEXT("SizeBox_60")));
+    auto* EntryButton=Cast<UButton>(SourceEntry->GetWidgetFromName(TEXT("PlayerCardButton")));
+    auto* EntryLock=Cast<UOverlay>(SourceEntry->GetWidgetFromName(TEXT("LockOverlay")));
+    auto* EntryRequirement=Cast<UTextBlock>(SourceEntry->GetWidgetFromName(TEXT("UnlockRequirementText")));
+    if (!TestNotNull(TEXT("Source entry root"),EntryRoot) || !TestNotNull(TEXT("Source entry button"),EntryButton) || !TestNotNull(TEXT("Source entry lock overlay"),EntryLock) || !TestNotNull(TEXT("Source entry requirement label"),EntryRequirement)) return false;
+    TestEqual(TEXT("Source entry width"),EntryRoot->GetWidthOverride(),613.0f);
+    TestEqual(TEXT("Source entry height"),EntryRoot->GetHeightOverride(),136.0f);
+    TestEqual(TEXT("Source entry normal card art"),EntryButton->GetStyle().Normal.GetResourceObject(),static_cast<UObject*>(SourceCardTexture));
+    TestEqual(TEXT("Source entry hovered card art"),EntryButton->GetStyle().Hovered.GetResourceObject(),static_cast<UObject*>(SourceCardTexture));
+    TestEqual(TEXT("Source entry pressed card art"),EntryButton->GetStyle().Pressed.GetResourceObject(),static_cast<UObject*>(SourceCardTexture));
+    TestEqual(TEXT("Source entry brush draw mode"),int32(EntryButton->GetStyle().Normal.DrawAs),int32(ESlateBrushDrawType::Image));
+    TestEqual(TEXT("Source entry lock is visible when locked"),uint8(EntryLock->GetVisibility()),uint8(ESlateVisibility::Visible));
+    TestEqual(TEXT("Source entry requirement format"),EntryRequirement->GetText().ToString(),FString(TEXT("Complete Challenge: \r\n\"source challenge\"")));
+    TestTrue(TEXT("Source entry hover binding"),EntryButton->OnHovered.IsBound());
+    TestTrue(TEXT("Source entry unhover binding"),EntryButton->OnUnhovered.IsBound());
+    TestTrue(TEXT("Source entry click binding"),EntryButton->OnClicked.IsBound());
+    if (auto* Tooltip=Cast<URecoveredTooltip>(EntryButton->GetToolTip())) {
+        TestEqual(TEXT("Source locked tooltip title"),Tooltip->TooltipTitle.ToString(),FString(TEXT("Source Card - locked")));
+        TestEqual(TEXT("Source locked tooltip description"),Tooltip->TooltipDescription.ToString(),FString(TEXT("Inspect Source Card")));
+    } else AddError(TEXT("Source locked tooltip is missing"));
+    SourceEntry->PopulatePlayerCard(
+        FName(TEXT("source_card")),SourceCardTexture,TEXT("source_challenge"),1,true,
+        FText::FromString(TEXT("Inspect {card name}")),FText::FromString(TEXT("Ignored Source Title")),
+        FText::FromString(TEXT("Source Card")),FLinearColor::Red);
+    TestEqual(TEXT("Source entry lock collapses when unlocked"),uint8(EntryLock->GetVisibility()),uint8(ESlateVisibility::Collapsed));
+    if (auto* Tooltip=Cast<URecoveredTooltip>(EntryButton->GetToolTip())) {
+        TestEqual(TEXT("Source unlocked tooltip title"),Tooltip->TooltipTitle.ToString(),FString(TEXT("Source Card")));
+        TestEqual(TEXT("Source unlocked tooltip description"),Tooltip->TooltipDescription.ToString(),FString(TEXT("Unlocked")));
+    } else AddError(TEXT("Source unlocked tooltip is missing"));
 
     UClass* TabClass=LoadClass<URecoveredPlayerCardsTabWidget>(nullptr,TEXT("/Game/Recovery/UI/PlayerCardsTabWidget.PlayerCardsTabWidget_C"));
     if (!TestNotNull(TEXT("Player cards recovered class"),TabClass)) return false;
@@ -83,6 +201,9 @@ bool FRecoveredPlayerCardsTabWidgetTest::RunTest(const FString& Parameters) {
     TestEqual(TEXT("Source player-card grid left padding"),GridPadding.Left,8.0f);
     TestEqual(TEXT("Source player-card grid top padding"),GridPadding.Top,8.0f);
     if (Tab->RecoveredCardEntries.Num()>=4) {
+        for (const TObjectPtr<URecoveredPlayerCardEntryWidget>& Entry:Tab->RecoveredCardEntries) {
+            TestEqual(TEXT("Source tab instantiates the restored entry class"),Entry->GetClass(),EntryClass);
+        }
         TestEqual(TEXT("Source first card stays first"),Tab->RecoveredCardEntries[0]->CardID,FName(TEXT("catgirl_booties_pc_1")));
         TestEqual(TEXT("Source fourth card stays fourth"),Tab->RecoveredCardEntries[3]->CardID,FName(TEXT("hypnoboobs_pc_1")));
         TestFalse(TEXT("Source challenge-gated card stays locked"),Tab->RecoveredCardEntries[0]->bUnlocked);
