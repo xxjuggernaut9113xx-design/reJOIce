@@ -1,0 +1,84 @@
+{
+  "source_executed": false,
+  "source": {
+    "entry_graph": "RecoveryEvidence\\widget-functions\\ModifierCardEntryWidget",
+    "tab_graph": "RecoveryEvidence\\widget-functions\\ModifiersTabWidget\\ExecuteUbergraph_ModifiersTabWidget.json",
+    "class_defaults": "RecoveryEvidence\\widget-class-defaults.json"
+  },
+  "entry_contract": {
+    "toggle_click_events": [
+      "BndEvt__ModifierCardEntryWidget_ToggleModifierButton_K2Node_ComponentBoundEvent_4_OnButtonClickedEvent__DelegateSignature"
+    ],
+    "hover_events": [
+      "BndEvt__ModifierCardEntryWidget_BackgroundButton_K2Node_ComponentBoundEvent_0_OnButtonHoverEvent__DelegateSignature",
+      "BndEvt__ModifierCardEntryWidget_BackgroundButton_K2Node_ComponentBoundEvent_1_OnButtonHoverEvent__DelegateSignature",
+      "BndEvt__ModifierCardEntryWidget_ToggleModifierButton_K2Node_ComponentBoundEvent_2_OnButtonHoverEvent__DelegateSignature",
+      "BndEvt__ModifierCardEntryWidget_ToggleModifierButton_K2Node_ComponentBoundEvent_3_OnButtonHoverEvent__DelegateSignature"
+    ],
+    "on_clicked_delegate_parameters": [
+      "ModifierTitle_Text",
+      "Self"
+    ],
+    "click_animation": "ClickButton",
+    "hover_animations": [
+      "HoverModifier",
+      "UnHoverModifier",
+      "HoverButton",
+      "UnHoverButton"
+    ],
+    "toggle_labels": [
+      "Enabled",
+      "Disabled"
+    ],
+    "toggle_colors": {
+      "enabled": [
+        0.0,
+        0.5209959745407104,
+        0.12477199733257294,
+        1.0
+      ],
+      "disabled": [
+        1.0,
+        0.015208999626338482,
+        0.01298299990594387,
+        1.0
+      ]
+    }
+  },
+  "tooltip_contract": {
+    "targets": [
+      "SizeBox_15",
+      "VerticalBox_149",
+      "LockOverlay",
+      "Overlay_388"
+    ],
+    "unlocked_title": "{modifier title} - Unlocked",
+    "locked_title": "{modifier title} - Locked",
+    "unlocked_description_source": "ModifierDescription_Text",
+    "locked_description_source": "Challenge Description"
+  },
+  "tab_contract": {
+    "delegate_owner": "ModifierCardEntryWidget_C.OnClicked",
+    "delegate_handler": "ToggleModifier",
+    "grid_columns": 4,
+    "direct_toggle_updates_entry": "SetButtonToggleWSound",
+    "conflict_confirmation": [
+      "remove conflicts",
+      "add selected modifier",
+      "PopulateModifiers",
+      "PlayToggleSound"
+    ]
+  },
+  "verification": {
+    "single_toggle_click_event": true,
+    "background_has_no_click_event": true,
+    "source_broadcasts_click_delegate": true,
+    "source_populates_entry": true,
+    "tooltip_targets_exact": true,
+    "tooltip_branches_exact": true,
+    "tab_binds_card_delegate": true,
+    "tab_uses_source_grid_math": true,
+    "tab_direct_toggle_contract": true,
+    "all_verified": true
+  }
+}

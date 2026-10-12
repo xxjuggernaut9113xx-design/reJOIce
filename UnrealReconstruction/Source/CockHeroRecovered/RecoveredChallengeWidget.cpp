@@ -22,8 +22,8 @@
 
 namespace {
 
-const FLinearColor CompletedColor(0.0f,0.5209959745407104f,0.12477199733257294f,1.0f);
-const FLinearColor IncompleteColor(1.0f,0.015208999626338482f,0.01298299990594387f,1.0f);
+const FLinearColor ChallengeTabCompletedColor(0.0f,0.5209959745407104f,0.12477199733257294f,1.0f);
+const FLinearColor ChallengeTabIncompleteColor(1.0f,0.015208999626338482f,0.01298299990594387f,1.0f);
 constexpr TCHAR ChallengeClaimSoundPath[]=TEXT("/Game/Recovery/Resources/Audio/Juice_SFX__16_.Juice_SFX__16_");
 constexpr TCHAR CameraShutterSoundPath[]=TEXT("/Engine/VREditor/Sounds/UI/Camera_Shutter.Camera_Shutter");
 constexpr TCHAR XPRewardIconPath[]=TEXT("/Game/Recovery/Resources/UI/Rewards/XPRewardIcon.XPRewardIcon");
@@ -272,7 +272,7 @@ FString DescribeChallengeProgress(const FRecoveredChallengeProgress& Progress) {
     return DescribeMetricProgress(Metric,CurrentValue,Requirement.TargetValue);
 }
 
-UWidgetAnimation* FindSourceAnimation(const UUserWidget* Widget,FName AnimationName) {
+UWidgetAnimation* FindChallengeTabSourceAnimation(const UUserWidget* Widget,FName AnimationName) {
     const auto* Generated=Cast<UWidgetBlueprintGeneratedClass>(Widget ? Widget->GetClass() : nullptr);
     if (!Generated) return nullptr;
     const FName RuntimeName(*FString::Printf(TEXT("%s_INST"),*AnimationName.ToString()));
@@ -285,7 +285,7 @@ UWidgetAnimation* FindSourceAnimation(const UUserWidget* Widget,FName AnimationN
 }
 
 void PlaySourceAnimation(UUserWidget* Widget,FName AnimationName) {
-    if (Widget) if (UWidgetAnimation* Animation=FindSourceAnimation(Widget,AnimationName)) Widget->PlayAnimation(Animation,0.0f,1,EUMGSequencePlayMode::Forward,1.0f,false);
+    if (Widget) if (UWidgetAnimation* Animation=FindChallengeTabSourceAnimation(Widget,AnimationName)) Widget->PlayAnimation(Animation,0.0f,1,EUMGSequencePlayMode::Forward,1.0f,false);
 }
 
 void PlaySourceSound(const UObject* WorldContext,const TCHAR* AssetPath,float Volume,float Pitch) {
@@ -479,7 +479,7 @@ void URecoveredChallengeWidget::RefreshDetailsPanel() {
     SetNamedText(this,TEXT("RequirementDescription"),Definition->Description);
     SetNamedText(this,TEXT("RewardsBody"),FText::FromString(DescribeRewards(Definition,GetProgressionManager(this))));
     SetNamedText(this,TEXT("CompletionStatusText"),FText::FromString(Progress->bCompleted ? TEXT("Completed") : TEXT("Incomplete")));
-    SetNamedColor(this,TEXT("CompletionStatusText"),Progress->bCompleted ? CompletedColor : IncompleteColor);
+    SetNamedColor(this,TEXT("CompletionStatusText"),Progress->bCompleted ? ChallengeTabCompletedColor : ChallengeTabIncompleteColor);
     if (auto* Icon=Cast<UImage>(GetWidgetFromName(TEXT("ChallengeIcon")))) Icon->SetBrushFromTexture(LoadRecoveredChallengeIcon(Definition->Icon),false);
     if (auto* Interaction=Cast<UButton>(GetWidgetFromName(TEXT("InteractionButton")))) {
         Interaction->SetIsEnabled(true);

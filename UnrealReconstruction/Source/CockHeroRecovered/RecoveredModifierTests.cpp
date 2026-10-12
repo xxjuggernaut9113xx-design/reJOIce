@@ -1,6 +1,19 @@
 #include "RecoveredProgression.h"
 #include "RecoveredRules.h"
+#include "RecoveredMenu.h"
+#include "RecoveredModifierCardEntryWidget.h"
+#include "RecoveredModifierWidget.h"
+#include "Animation/WidgetAnimation.h"
+#include "Blueprint/WidgetBlueprintGeneratedClass.h"
+#include "Components/Button.h"
+#include "Components/TextBlock.h"
+#include "Components/UniformGridPanel.h"
+#include "Components/Widget.h"
+#include "Engine/Engine.h"
+#include "Engine/World.h"
 #include "Misc/AutomationTest.h"
+#include "Misc/ScopeExit.h"
+#include "MovieScene.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 namespace {
@@ -128,6 +141,116 @@ bool FRecoveredModifierLinksTest::RunTest(const FString& Parameters) {
     Manager->ChallengeDataTable = IsolatedChallenges;
     TestEqual(TEXT("Modifier challenge link returns ChallengeID rather than row name"), Manager->GetChallengeForModifier(TEXT("Slow and Steady")), FName(TEXT("slow_and_steady_challenge")));
     TestTrue(TEXT("Unlinked modifier returns no challenge"), Manager->GetChallengeForModifier(TEXT("Raw Dog")).IsNone());
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredModifierCardContractTest,"CockHero.Recovery.ModifierCardContract",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FRecoveredModifierCardContractTest::RunTest(const FString& Parameters) {
+    UClass* EntryClass=LoadClass<URecoveredModifierCardEntryWidget>(nullptr,TEXT("/Game/Recovery/UI/ModifierCardEntryWidget.ModifierCardEntryWidget_C"));
+    if (!TestNotNull(TEXT("Recovered modifier entry class"),EntryClass)) return false;
+    if (!TestTrue(TEXT("Modifier entry uses recovered native owner"),EntryClass->IsChildOf(URecoveredModifierCardEntryWidget::StaticClass()))) return false;
+    const UWidgetBlueprintGeneratedClass* EntryGenerated=Cast<UWidgetBlueprintGeneratedClass>(EntryClass);
+    if (!TestNotNull(TEXT("Modifier entry preserves generated animation container"),EntryGenerated)) return false;
+    TestEqual(TEXT("Modifier entry restores every source animation"),EntryGenerated->Animations.Num(),5);
+    for (const TCHAR* Name:{TEXT("ClickButton"),TEXT("HoverButton"),TEXT("HoverModifier"),TEXT("UnHoverButton"),TEXT("UnHoverModifier")}) {
+        const FName Expected(Name);
+        const FName Instance(*FString::Printf(TEXT("%s_INST"),Name));
+        const bool bFound=EntryGenerated->Animations.ContainsByPredicate([Expected,Instance](const UWidgetAnimation* Animation) {
+            const UMovieScene* Scene=Animation ? Animation->GetMovieScene() : nullptr;
+            return Animation && (Animation->GetFName()==Expected || Animation->GetFName()==Instance || (Scene && (Scene->GetFName()==Expected || Scene->GetFName()==Instance)));
+        });
+        TestTrue(*FString::Printf(TEXT("Modifier source animation restored: %s"),Name),bFound);
+    }
+
+    const auto Initialization=UWorld::InitializationValues().AllowAudioPlayback(false).CreatePhysicsScene(false).CreateNavigation(false).CreateAISystem(false).ShouldSimulatePhysics(false).SetTransactional(false);
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false,NAME_None,nullptr,true,ERHIFeatureLevel::Num,&Initialization);
+    FWorldContext& Context=GEngine->CreateNewWorldContext(EWorldType::Game);
+    Context.SetCurrentWorld(World);
+    ON_SCOPE_EXIT { World->DestroyWorld(false); GEngine->DestroyWorldContext(World); };
+
+    auto* Instance=NewObject<URecoveredGameInstance>();
+    auto* Save=NewObject<URecoveredSaveGame>(Instance);
+    if (!TestTrue(TEXT("Modifier test save initializes"),Save->InitializeRecoveredDefaults())) return false;
+    auto* Progression=NewObject<URecoveredProgressionManager>(Instance);
+    Progression->ModifierDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_Modifiers.DT_Modifiers"));
+    if (!TestNotNull(TEXT("Modifier source table"),Progression->ModifierDataTable.Get())) return false;
+    const FName PheromonesID(TEXT("Pheromones"));
+    const FName SuccufrenzyID(TEXT("Succufrenzy"));
+    Progression->UnlockedModifiers.Add(PheromonesID);
+    Progression->UnlockedModifiers.Add(SuccufrenzyID);
+    Instance->CurrentSave=Save;
+    Instance->ProgressionManager=Progression;
+    World->SetGameInstance(Instance);
+    World->InitializeActorsForPlay(FURL());
+
+    UClass* TabClass=LoadClass<URecoveredModifierWidget>(nullptr,TEXT("/Game/Recovery/UI/ModifiersTabWidget.ModifiersTabWidget_C"));
+    if (!TestNotNull(TEXT("Recovered modifier tab class"),TabClass)) return false;
+    if (!TestTrue(TEXT("Modifier tab uses recovered native owner"),TabClass->IsChildOf(URecoveredModifierWidget::StaticClass()))) return false;
+    auto* Tab=CreateWidget<URecoveredModifierWidget>(World,TabClass);
+    if (!TestNotNull(TEXT("Modifier tab instantiates"),Tab)) return false;
+    Tab->SetRecoveredModifierGameInstance(Instance);
+    Tab->TakeWidget();
+    Tab->RefreshModifierList();
+    auto* Grid=Cast<UUniformGridPanel>(Tab->GetWidgetFromName(TEXT("UniformGridPanel_94")));
+    if (!TestNotNull(TEXT("Modifier source grid"),Grid)) return false;
+    TestEqual(TEXT("Modifier source grid entry count"),Grid->GetChildrenCount(),16);
+
+    URecoveredModifierCardEntryWidget* Entry=nullptr;
+    int32 EntryIndex=INDEX_NONE;
+    for (int32 Index=0;Index<Grid->GetChildrenCount();++Index) {
+        auto* Candidate=Cast<URecoveredModifierCardEntryWidget>(Grid->GetChildAt(Index));
+        if (Candidate) Candidate->TakeWidget();
+        auto* Title=Candidate ? Cast<UTextBlock>(Candidate->GetWidgetFromName(TEXT("ModifierTitle"))) : nullptr;
+        if (Title && Title->GetText().ToString()==PheromonesID.ToString()) {
+            Entry=Candidate;
+            EntryIndex=Index;
+            break;
+        }
+    }
+    if (!TestNotNull(TEXT("Recovered Pheromones entry"),Entry)) return false;
+    auto* Toggle=Cast<UButton>(Entry->GetWidgetFromName(TEXT("ToggleModifierButton")));
+    auto* Background=Cast<UButton>(Entry->GetWidgetFromName(TEXT("BackgroundButton")));
+    auto* ToggleText=Cast<UTextBlock>(Entry->GetWidgetFromName(TEXT("ButtonText")));
+    if (!TestNotNull(TEXT("Modifier source toggle button"),Toggle) || !TestNotNull(TEXT("Modifier source background button"),Background) || !TestNotNull(TEXT("Modifier source toggle text"),ToggleText)) return false;
+    TestTrue(TEXT("Source modifier delegate is bound by its tab"),Entry->OnCardClicked.IsBound());
+    TestFalse(TEXT("Background button remains free of a state-toggle binding"),Background->OnClicked.IsBound());
+
+    Entry->PopulateDetails(true,false,FText::FromString(TEXT("Pheromones")),nullptr,FText::FromString(TEXT("Source modifier description")),FText::FromString(TEXT("Source challenge")),FText::FromString(TEXT("Source locked description")));
+    for (const TCHAR* TargetName:{TEXT("SizeBox_15"),TEXT("VerticalBox_149"),TEXT("LockOverlay"),TEXT("Overlay_388")}) {
+        UWidget* Target=Entry->GetWidgetFromName(TargetName);
+        if (!TestNotNull(*FString::Printf(TEXT("Source tooltip target: %s"),TargetName),Target)) continue;
+        auto* Tooltip=Cast<URecoveredTooltip>(Target->GetToolTip());
+        if (!TestNotNull(*FString::Printf(TEXT("Source tooltip mounted: %s"),TargetName),Tooltip)) continue;
+        TestEqual(*FString::Printf(TEXT("Source unlocked tooltip title: %s"),TargetName),Tooltip->TooltipTitle.ToString(),FString(TEXT("Pheromones - Unlocked")));
+        TestEqual(*FString::Printf(TEXT("Source unlocked tooltip description: %s"),TargetName),Tooltip->TooltipDescription.ToString(),FString(TEXT("Source modifier description")));
+    }
+    Entry->PopulateDetails(false,false,FText::FromString(TEXT("Pheromones")),nullptr,FText::FromString(TEXT("Source modifier description")),FText::FromString(TEXT("Source challenge")),FText::FromString(TEXT("Source locked description")));
+    if (auto* Tooltip=Cast<URecoveredTooltip>(Entry->GetWidgetFromName(TEXT("LockOverlay"))->GetToolTip())) {
+        TestEqual(TEXT("Source locked tooltip title"),Tooltip->TooltipTitle.ToString(),FString(TEXT("Pheromones - Locked")));
+        TestEqual(TEXT("Source locked tooltip description"),Tooltip->TooltipDescription.ToString(),FString(TEXT("Source locked description")));
+    } else AddError(TEXT("Source locked tooltip is missing"));
+    Entry->PopulateDetails(true,false,FText::FromString(TEXT("Pheromones")),nullptr,FText::FromString(TEXT("Source modifier description")),FText::FromString(TEXT("Source challenge")),FText::FromString(TEXT("Source locked description")));
+
+    UWidget* OriginalEntry=Grid->GetChildAt(EntryIndex);
+    Toggle->OnClicked.Broadcast();
+    TestTrue(TEXT("Source toggle enables selected modifier"),Progression->EnabledModifiers.Contains(PheromonesID));
+    TestEqual(TEXT("Source toggle changes label in place"),ToggleText->GetText().ToString(),FString(TEXT("Enabled")));
+    TestEqual(TEXT("Source direct toggle preserves entry instance"),Grid->GetChildAt(EntryIndex),OriginalEntry);
+    Toggle->OnClicked.Broadcast();
+    TestFalse(TEXT("Source toggle disables selected modifier"),Progression->EnabledModifiers.Contains(PheromonesID));
+    TestEqual(TEXT("Source toggle restores label in place"),ToggleText->GetText().ToString(),FString(TEXT("Disabled")));
+    TestEqual(TEXT("Source direct disable preserves entry instance"),Grid->GetChildAt(EntryIndex),OriginalEntry);
+
+    Progression->EnabledModifiers.Add(SuccufrenzyID);
+    Toggle->OnClicked.Broadcast();
+    TestTrue(TEXT("Source conflict leaves requested modifier disabled"),!Progression->EnabledModifiers.Contains(PheromonesID));
+    TestTrue(TEXT("Source conflict tracks pending confirmation"),Tab->HasPendingModifierConflicts());
+    TestEqual(TEXT("Source conflict retains the existing card until confirmation"),Grid->GetChildAt(EntryIndex),OriginalEntry);
+    TestTrue(TEXT("Source conflict confirmation completes"),Tab->ConfirmModifierConflicts());
+    TestTrue(TEXT("Source conflict removes active conflict"),!Progression->EnabledModifiers.Contains(SuccufrenzyID));
+    TestTrue(TEXT("Source conflict enables selected modifier"),Progression->EnabledModifiers.Contains(PheromonesID));
+    TestFalse(TEXT("Source conflict clears pending state"),Tab->HasPendingModifierConflicts());
+    TestNotEqual(TEXT("Source conflict confirmation repopulates modifier cards"),Grid->GetChildAt(EntryIndex),OriginalEntry);
     return true;
 }
 #endif

@@ -13,8 +13,9 @@ public:
     UPROPERTY(BlueprintAssignable,Category="Recovered Modifier") FRecoveredModifierCardClicked OnCardClicked;
     UFUNCTION(BlueprintCallable,Category="Recovered Modifier") void PopulateDetails(bool bInUnlocked,bool bInEnabled,const FText& InTitle,class UTexture2D* InIcon,const FText& InDescription,const FText& InChallengeTitle,const FText& InChallengeDescription);
     UFUNCTION(BlueprintCallable,Category="Recovered Modifier") void SetButtonToggle(bool bEnabled);
-    UFUNCTION(BlueprintCallable,Category="Recovered Modifier") void SetButtonToggleWithSound(bool bEnabled);
+    UFUNCTION(BlueprintCallable,Category="Recovered Modifier") void SetButtonToggleWithSound(bool bInEnabled);
 protected:
+    virtual void NativeOnInitialized() override;
     virtual void NativeConstruct() override;
     virtual void NativeDestruct() override;
 private:
@@ -25,6 +26,7 @@ private:
     UFUNCTION() void HandleToggleClick();
     void BindSourceTree();
     void BindSourceEvents();
+    void ApplyPresentation();
     void ApplyTooltip();
     void PlaySourceAnimation(FName Name);
     void PlaySourceSound(const TCHAR* Path,float Volume,float Pitch,float StartTime) const;
@@ -32,12 +34,15 @@ private:
     UPROPERTY(Transient) TObjectPtr<class UButton> SourceToggleButton;
     UPROPERTY(Transient) TObjectPtr<class UBorder> SourceLockOverlay;
     UPROPERTY(Transient) TObjectPtr<class UImage> SourceModifierIcon;
+    UPROPERTY(Transient) TObjectPtr<class UTexture2D> SourceModifierTexture;
     UPROPERTY(Transient) TObjectPtr<class UTextBlock> SourceModifierTitle;
     UPROPERTY(Transient) TObjectPtr<class UTextBlock> SourceModifierDescription;
     UPROPERTY(Transient) TObjectPtr<class UTextBlock> SourceChallengeRequirement;
     UPROPERTY(Transient) TObjectPtr<class UTextBlock> SourceButtonText;
-    UPROPERTY(Transient) TObjectPtr<class URecoveredTooltip> Tooltip;
+    UPROPERTY(Transient) TArray<TObjectPtr<class UWidget>> TooltipTargets;
+    UPROPERTY(Transient) TArray<TObjectPtr<class URecoveredTooltip>> Tooltips;
     bool bUnlocked=false;
+    bool bEnabled=false;
     FText StoredTitle;
     FText StoredDescription;
     FText StoredChallengeTitle;

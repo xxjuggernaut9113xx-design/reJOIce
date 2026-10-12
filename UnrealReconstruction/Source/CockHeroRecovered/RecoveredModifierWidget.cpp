@@ -8,6 +8,7 @@
 #include "Components/Image.h"
 #include "Components/UniformGridPanel.h"
 #include "Kismet/GameplayStatics.h"
+#include "Sound/SoundBase.h"
 
 namespace {
 void SetEntryText(UUserWidget* Entry, const TCHAR* Name, const FText& Value) {
@@ -24,12 +25,23 @@ void URecoveredModifierWidget::NativeConstruct() {
     RefreshModifierList();
 }
 
+void URecoveredModifierWidget::SetRecoveredModifierGameInstance(URecoveredGameInstance* Instance) {
+    RecoveredInstanceOverride=Instance;
+}
+
+URecoveredGameInstance* URecoveredModifierWidget::GetRecoveredModifierGameInstance() const {
+    if (RecoveredInstanceOverride) return RecoveredInstanceOverride;
+    if (auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance())) return Instance;
+    return GetWorld() ? Cast<URecoveredGameInstance>(GetWorld()->GetGameInstance()) : nullptr;
+}
+
 void URecoveredModifierWidget::RefreshModifierList() {
     auto* Container = Cast<UUniformGridPanel>(GetWidgetFromName(TEXT("UniformGridPanel_94")));
     if (!Container) return;
     Container->ClearChildren();
     ToggleForwarders.Reset();
-    auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+    RecoveredModifierEntries.Reset();
+    auto* Instance = GetRecoveredModifierGameInstance();
     URecoveredProgressionManager* Progression = Instance ? Instance->ProgressionManager.Get() : nullptr;
     if (!Progression || !Progression->ModifierDataTable || Progression->ModifierDataTable->GetRowStruct() != FRecoveredModifierRow::StaticStruct()) return;
     UClass* EntryClass = LoadClass<UUserWidget>(nullptr, TEXT("/Game/Recovery/UI/ModifierCardEntryWidget.ModifierCardEntryWidget_C"));
@@ -43,7 +55,7 @@ void URecoveredModifierWidget::RefreshModifierList() {
         if (ModifierID.IsNone()) continue;
         FRecoveredModifierRow Row;
         if (!Progression->GetModifierData(ModifierID, Row)) continue;
-        UUserWidget* Entry = EntryClass && GetWorld() ? CreateWidget<UUserWidget>(GetWorld(), EntryClass) : nullptr;
+        UUserWidget* Entry = EntryClass ? CreateWidget<UUserWidget>(this, EntryClass) : nullptr;
         if (!Entry) {
             auto* Fallback = NewObject<UHorizontalBox>(this);
             auto* Title = NewObject<UTextBlock>(this);
@@ -69,6 +81,12 @@ void URecoveredModifierWidget::RefreshModifierList() {
         }
         if (auto* SourceEntry=Cast<URecoveredModifierCardEntryWidget>(Entry)) {
             SourceEntry->PopulateDetails(bUnlocked,bEnabled,Row.ModifierTitle,Row.ModifierIcon,Row.ModifierDescription,Challenge.DisplayName,Challenge.Description);
+            RecoveredModifierEntries.Add(ModifierID,SourceEntry);
+            auto* Forward=NewObject<URecoveredModifierToggleForward>(this);
+            Forward->Owner=this;
+            Forward->ModifierID=ModifierID;
+            SourceEntry->OnCardClicked.AddUniqueDynamic(Forward,&URecoveredModifierToggleForward::ToggleSourceEntry);
+            ToggleForwarders.Add(Forward);
         } else {
             SetEntryText(Entry, TEXT("ModifierTitle"), Row.ModifierTitle);
             SetEntryText(Entry, TEXT("ModifierDescription"), Row.ModifierDescription);
@@ -76,10 +94,8 @@ void URecoveredModifierWidget::RefreshModifierList() {
             SetEntryText(Entry, TEXT("ButtonText"), FText::FromString(bEnabled ? TEXT("Enabled") : TEXT("Disabled")));
             if (auto* Icon = Cast<UImage>(Entry->GetWidgetFromName(TEXT("ModifierIcon")))) Icon->SetBrushFromTexture(Row.ModifierIcon);
             if (auto* Lock = Entry->GetWidgetFromName(TEXT("LockOverlay"))) Lock->SetVisibility(bUnlocked ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
-        }
-        for (const TCHAR* ButtonName : {TEXT("ToggleModifierButton"), TEXT("BackgroundButton")}) {
-            if (UButton* Button = FindEntryButton(Entry, ButtonName)) {
-                Button->SetIsEnabled(bEnabled || bUnlocked);
+            if (UButton* Button=FindEntryButton(Entry,TEXT("ToggleModifierButton"))) {
+                Button->SetIsEnabled(bUnlocked);
                 auto* Forward = NewObject<URecoveredModifierToggleForward>(this);
                 Forward->Owner = this;
                 Forward->ModifierID = ModifierID;
@@ -93,12 +109,26 @@ void URecoveredModifierWidget::RefreshModifierList() {
 }
 
 bool URecoveredModifierWidget::ToggleModifier(FName ModifierID) {
-    auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+    return ToggleModifierInternal(ModifierID,FindRecoveredModifierEntry(ModifierID));
+}
+
+void URecoveredModifierWidget::ToggleModifierFromSource(const FText& ModifierTitle,UUserWidget* Entry) {
+    ToggleModifierInternal(FName(*ModifierTitle.ToString()),Cast<URecoveredModifierCardEntryWidget>(Entry));
+}
+
+URecoveredModifierCardEntryWidget* URecoveredModifierWidget::FindRecoveredModifierEntry(FName ModifierID) const {
+    if (const TObjectPtr<URecoveredModifierCardEntryWidget>* Found=RecoveredModifierEntries.Find(ModifierID)) return Found->Get();
+    return nullptr;
+}
+
+bool URecoveredModifierWidget::ToggleModifierInternal(FName ModifierID,URecoveredModifierCardEntryWidget* SourceEntry) {
+    auto* Instance = GetRecoveredModifierGameInstance();
     URecoveredProgressionManager* Progression = Instance ? Instance->ProgressionManager.Get() : nullptr;
     if (!Progression || HasPendingModifierConflicts()) return false;
     ModifierID = Progression->GetCanonicalModifierID(ModifierID);
-    if (ModifierID.IsNone() || !Progression->IsModifierUnlocked(ModifierID)) return false;
+    if (ModifierID.IsNone()) return false;
     if (Progression->EnabledModifiers.Contains(ModifierID)) {
+        if (SourceEntry) SourceEntry->SetButtonToggleWithSound(false);
         Progression->EnabledModifiers.Remove(ModifierID);
     } else {
         const TArray<FName> Conflicts = Progression->GetConflictingModifiers(ModifierID);
@@ -109,14 +139,15 @@ bool URecoveredModifierWidget::ToggleModifier(FName ModifierID) {
             PendingConflictingModifiers = Conflicts;
             return false;
         }
+        if (SourceEntry) SourceEntry->SetButtonToggleWithSound(true);
         Progression->EnabledModifiers.Add(ModifierID);
     }
-    PersistAndRefreshModifierState();
+    PersistModifierState();
     return true;
 }
 
 bool URecoveredModifierWidget::ConfirmModifierConflicts() {
-    auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+    auto* Instance = GetRecoveredModifierGameInstance();
     URecoveredProgressionManager* Progression = Instance ? Instance->ProgressionManager.Get() : nullptr;
     if (!Progression || PendingModifierID.IsNone()) return false;
     for (const FName Conflict : PendingConflictingModifiers) Progression->EnabledModifiers.Remove(Conflict);
@@ -125,6 +156,7 @@ bool URecoveredModifierWidget::ConfirmModifierConflicts() {
     PendingModifierID = NAME_None;
     PendingConflictingModifiers.Reset();
     PersistAndRefreshModifierState();
+    PlaySourceToggleSound();
     return true;
 }
 
@@ -138,8 +170,8 @@ bool URecoveredModifierWidget::HasPendingModifierConflicts() const {
     return !PendingModifierID.IsNone();
 }
 
-void URecoveredModifierWidget::PersistAndRefreshModifierState() {
-    auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+void URecoveredModifierWidget::PersistModifierState() {
+    auto* Instance = GetRecoveredModifierGameInstance();
     URecoveredProgressionManager* Progression = Instance ? Instance->ProgressionManager.Get() : nullptr;
     if (!Progression) return;
     if (Instance->CurrentSave) {
@@ -154,7 +186,17 @@ void URecoveredModifierWidget::PersistAndRefreshModifierState() {
         Manager->BeatContext.ActiveModifiers.Reset();
         for (const FName Enabled : Progression->EnabledModifiers) Manager->BeatContext.ActiveModifiers.Add(Enabled.ToString());
     }
+}
+
+void URecoveredModifierWidget::PersistAndRefreshModifierState() {
+    PersistModifierState();
     RefreshModifierList();
+}
+
+void URecoveredModifierWidget::PlaySourceToggleSound() {
+    if (USoundBase* Sound=LoadObject<USoundBase>(nullptr,TEXT("/Game/Recovery/Resources/Audio/ontoggle2.ontoggle2"))) {
+        if (GetWorld()) UGameplayStatics::PlaySound2D(this,Sound,0.5f,1.5f,0.1f,nullptr,nullptr,true);
+    }
 }
 
 void URecoveredModifierWidget::ShowModifierConflictOverlay(const FRecoveredModifierRow& Modifier, const TArray<FName>& Conflicts) {
@@ -185,6 +227,10 @@ void URecoveredModifierWidget::CloseModifierConflictOverlay() {
 
 void URecoveredModifierToggleForward::Toggle() {
     if (Owner) Owner->ToggleModifier(ModifierID);
+}
+
+void URecoveredModifierToggleForward::ToggleSourceEntry(const FText& ModifierTitle,UUserWidget* Entry) {
+    if (Owner) Owner->ToggleModifierFromSource(ModifierTitle,Entry);
 }
 
 void URecoveredModifierConflictForward::Confirm() {
