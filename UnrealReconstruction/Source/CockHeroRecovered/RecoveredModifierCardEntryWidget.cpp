@@ -12,7 +12,7 @@
 #include "Sound/SoundBase.h"
 
 namespace {
-constexpr TCHAR TooltipClassPath[]=TEXT("/Game/Recovery/UI/CustomToolTip_Widget.CustomToolTip_Widget_C");
+constexpr TCHAR ModifierTooltipClassPath[]=TEXT("/Game/Recovery/UI/CustomToolTip_Widget.CustomToolTip_Widget_C");
 constexpr TCHAR OnSoundPath[]=TEXT("/Game/Recovery/Resources/Audio/ontoggle2.ontoggle2");
 constexpr TCHAR OffSoundPath[]=TEXT("/Game/Recovery/Resources/Audio/offtoggle.offtoggle");
 UWidgetAnimation* FindAnimation(const UUserWidget* Widget,FName Name) {
@@ -61,7 +61,7 @@ void URecoveredModifierCardEntryWidget::PopulateDetails(bool bInUnlocked,bool bI
 void URecoveredModifierCardEntryWidget::SetButtonToggle(bool bEnabled) { if (!SourceButtonText) { BindSourceTree(); if (!SourceButtonText) return; } SourceButtonText->SetText(FText::FromString(bEnabled?TEXT("Enabled"):TEXT("Disabled"))); SourceButtonText->SetColorAndOpacity(bEnabled?FLinearColor(0.0f,0.52099597f,0.12477199f,1.0f):FLinearColor(1.0f,0.015209f,0.012983f,1.0f)); }
 void URecoveredModifierCardEntryWidget::SetButtonToggleWithSound(bool bEnabled) { SetButtonToggle(bEnabled); PlaySourceSound(bEnabled?OnSoundPath:OffSoundPath,0.5f,bEnabled?1.5f:0.85f,bEnabled?0.1f:0.0f); }
 void URecoveredModifierCardEntryWidget::ApplyTooltip() {
-    if (!SourceBackgroundButton) return; UClass* Class=LoadClass<URecoveredTooltip>(nullptr,TooltipClassPath); if (!Class) return;
+    if (!SourceBackgroundButton) return; UClass* Class=LoadClass<URecoveredTooltip>(nullptr,ModifierTooltipClassPath); if (!Class) return;
     if (!Tooltip || !Tooltip->IsA(Class)) Tooltip=Cast<URecoveredTooltip>(UUserWidget::CreateWidgetInstance(*SourceBackgroundButton,Class,NAME_None));
     if (!Tooltip) return; Tooltip->SetTitleAndDescription(FText::FromString(StoredTitle.ToString()+(bUnlocked?TEXT(" - Unlocked"):TEXT(" - Locked"))),bUnlocked?StoredDescription:StoredChallengeDescription); SourceBackgroundButton->SetToolTip(Tooltip);
 }

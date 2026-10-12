@@ -1,39 +1,47 @@
 #pragma once
+
 #include "CoreMinimal.h"
 #include "RecoveredMenu.h"
+#include "RecoveredProgression.h"
 #include "RecoveredChallengeWidget.generated.h"
 
-class URecoveredChallengeWidget;
+class URecoveredChallengeEntryWidget;
+class UUserWidget;
 
-/** Dynamic UMG buttons do not carry their row identity; this forwards it safely. */
-UCLASS()
-class COCKHERORECOVERED_API URecoveredChallengeActionForward : public UObject {
-    GENERATED_BODY()
-public:
-    UPROPERTY() TObjectPtr<URecoveredChallengeWidget> Owner;
-    UPROPERTY() FName ChallengeID;
-    UPROPERTY() bool bPrimaryAction = false;
-    UFUNCTION() void Execute();
-};
-
-// Challenge list UI: populates the recovered ChallengesVerticalBox, supports
-// selection, tracking, progress display, and one-time reward claims.
 UCLASS(Blueprintable)
 class COCKHERORECOVERED_API URecoveredChallengeWidget : public URecoveredMenuWidget {
     GENERATED_BODY()
 public:
-    UFUNCTION(BlueprintCallable, Category="Recovered Challenges") void RefreshChallengeList();
-    UFUNCTION(BlueprintCallable, Category="Recovered Challenges") void SetChallengeTracked(FName ChallengeID, bool bTracked);
-    UFUNCTION(BlueprintPure, Category="Recovered Challenges") bool IsChallengeTracked(FName ChallengeID) const;
-    UFUNCTION(BlueprintCallable, Category="Recovered Challenges") bool ClaimChallengeRewards(FName ChallengeID);
-    UFUNCTION(BlueprintPure, Category="Recovered Challenges") TArray<FName> GetTrackedChallenges() const;
-    UFUNCTION(BlueprintCallable, Category="Recovered Challenges") void SelectChallenge(FName ChallengeID);
-    UFUNCTION(BlueprintCallable, Category="Recovered Challenges") void RunChallengeAction(FName ChallengeID);
+    UPROPERTY(Transient,BlueprintReadOnly,Category="Recovered Challenges") TObjectPtr<class URecoveredGameInstance> RecoveredInstanceOverride;
+    UPROPERTY(Transient,BlueprintReadOnly,Category="Recovered Challenges") TArray<TObjectPtr<URecoveredChallengeEntryWidget>> RecoveredChallengeEntries;
+    UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Challenges") FName SelectedChallengeID;
+
+    UFUNCTION(BlueprintCallable,Category="Recovered Challenges") void SetRecoveredChallengeGameInstance(class URecoveredGameInstance* Instance);
+    UFUNCTION(BlueprintPure,Category="Recovered Challenges") class URecoveredGameInstance* GetRecoveredChallengeGameInstance() const;
+    UFUNCTION(BlueprintCallable,Category="Recovered Challenges") void RefreshChallengeList();
+    UFUNCTION(BlueprintCallable,Category="Recovered Challenges") void SetChallengeTracked(FName ChallengeID,bool bTracked);
+    UFUNCTION(BlueprintPure,Category="Recovered Challenges") bool IsChallengeTracked(FName ChallengeID) const;
+    UFUNCTION(BlueprintCallable,Category="Recovered Challenges") bool ClaimChallengeRewards(FName ChallengeID);
+    UFUNCTION(BlueprintPure,Category="Recovered Challenges") TArray<FName> GetTrackedChallenges() const;
+    UFUNCTION(BlueprintCallable,Category="Recovered Challenges") void SelectChallenge(FName ChallengeID);
+    UFUNCTION(BlueprintCallable,Category="Recovered Challenges") void RunChallengeAction(FName ChallengeID);
+    UFUNCTION(BlueprintPure,Category="Recovered Challenges") int32 GetChallengeEntryCount() const;
+    UFUNCTION(BlueprintPure,Category="Recovered Challenges") UUserWidget* GetActiveRewardOverlay() const;
+
 protected:
+    virtual void NativeOnInitialized() override;
     virtual void NativeConstruct() override;
+    virtual void NativeDestruct() override;
+
+private:
     void RefreshDetailsPanel();
-    UPROPERTY(Transient) TArray<TObjectPtr<URecoveredChallengeActionForward>> ActionForwarders;
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered Challenges") FName SelectedChallengeID;
+    TArray<FRecoveredReward> ClaimChallengeRewardsInternal(FName ChallengeID);
+    void ShowClaimRewardOverlay(const TArray<FRecoveredReward>& Rewards);
+    UFUNCTION() void HandleChallengeEntrySelected(FName ChallengeID);
+    UFUNCTION() void HandleChallengeEntryTrackAction(FName ChallengeID,URecoveredChallengeEntryWidget* Entry);
     UFUNCTION() void HandleInteractionClicked();
+    UFUNCTION() void HandleRewardOverlayClose();
     UFUNCTION() void OnChallengeProgressNotification(FName ChallengeID);
+
+    UPROPERTY(Transient) TObjectPtr<UUserWidget> ActiveRewardOverlay;
 };
