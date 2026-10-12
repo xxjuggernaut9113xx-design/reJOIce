@@ -1,0 +1,307 @@
+{
+  "recovery": "session-summary-widget-contract",
+  "source_executed": false,
+  "source": {
+    "widget_asset": "/Game/UI/PostGameFlow/WBP_SessionSummaryWidget",
+    "widget_graphs": [
+      "RecoveryEvidence\\blueprint-functions\\WBP_SessionSummaryWidget\\BndEvt__WBP_SessionSummaryWidget_DiscordInvButton_K2Node_ComponentBoundEvent_4_OnButtonClickedEvent__DelegateSignature.json",
+      "RecoveryEvidence\\blueprint-functions\\WBP_SessionSummaryWidget\\BndEvt__WBP_SessionSummaryWidget_DiscordInvButton_K2Node_ComponentBoundEvent_5_OnButtonHoverEvent__DelegateSignature.json",
+      "RecoveryEvidence\\blueprint-functions\\WBP_SessionSummaryWidget\\BndEvt__WBP_SessionSummaryWidget_DiscordInvButton_K2Node_ComponentBoundEvent_6_OnButtonHoverEvent__DelegateSignature.json",
+      "RecoveryEvidence\\blueprint-functions\\WBP_SessionSummaryWidget\\BndEvt__WBP_SessionSummaryWidget_PatreonButton_K2Node_ComponentBoundEvent_1_OnButtonClickedEvent__DelegateSignature.json",
+      "RecoveryEvidence\\blueprint-functions\\WBP_SessionSummaryWidget\\BndEvt__WBP_SessionSummaryWidget_PatreonButton_K2Node_ComponentBoundEvent_2_OnButtonHoverEvent__DelegateSignature.json",
+      "RecoveryEvidence\\blueprint-functions\\WBP_SessionSummaryWidget\\BndEvt__WBP_SessionSummaryWidget_PatreonButton_K2Node_ComponentBoundEvent_3_OnButtonHoverEvent__DelegateSignature.json",
+      "RecoveryEvidence\\blueprint-functions\\WBP_SessionSummaryWidget\\BndEvt__WBP_SessionSummaryWidget_ReturnToMenu_K2Node_ComponentBoundEvent_0_OnButtonClickedEvent__DelegateSignature.json",
+      "RecoveryEvidence\\blueprint-functions\\WBP_SessionSummaryWidget\\BndEvt__WBP_SessionSummaryWidget_TwitterButton_K2Node_ComponentBoundEvent_10_OnButtonHoverEvent__DelegateSignature.json",
+      "RecoveryEvidence\\blueprint-functions\\WBP_SessionSummaryWidget\\BndEvt__WBP_SessionSummaryWidget_TwitterButton_K2Node_ComponentBoundEvent_11_OnButtonHoverEvent__DelegateSignature.json",
+      "RecoveryEvidence\\blueprint-functions\\WBP_SessionSummaryWidget\\BndEvt__WBP_SessionSummaryWidget_TwitterButton_K2Node_ComponentBoundEvent_7_OnButtonClickedEvent__DelegateSignature.json",
+      "RecoveryEvidence\\blueprint-functions\\WBP_SessionSummaryWidget\\Construct.json",
+      "RecoveryEvidence\\blueprint-functions\\WBP_SessionSummaryWidget\\ExecuteUbergraph_WBP_SessionSummaryWidget.json",
+      "RecoveryEvidence\\blueprint-functions\\WBP_SessionSummaryWidget\\Initialize.json",
+      "RecoveryEvidence\\blueprint-functions\\WBP_SessionSummaryWidget\\PlayPostGameVoicelines.json",
+      "RecoveryEvidence\\blueprint-functions\\WBP_SessionSummaryWidget\\RefreshDisplay.json"
+    ],
+    "master_graph": "RecoveryEvidence\\blueprint-functions\\WBP_PostGameFlow_Master\\ExecuteUbergraph_WBP_PostGameFlow_Master.json",
+    "class_defaults": "RecoveryEvidence\\widget-class-defaults.json",
+    "original_executable": "C:\\Users\\webma\\Downloads\\Cock_Hero_Shipping_Build_V0.04_-_Exclusive\\PrepV2\\Windows\\CockHero\\Binaries\\Win64\\CockHero.exe",
+    "original_executable_sha256": "c645757d1112491952b67bf29502b4721133ba6940a9cfb08358f0dde127560f",
+    "ghidra_decompiled": "C:\\Users\\webma\\analysis\\cockhero-v004\\ghidra\\integration-decompiled.c",
+    "ghidra_decompiled_sha256": "60275978cd513efa401dd6a0c8ec0c9283cc2cb0d247e47596e721262ac5f1d0"
+  },
+  "entrypoints": {
+    "construct": 807,
+    "return_to_menu": 1372,
+    "social_handlers": {
+      "BndEvt__WBP_SessionSummaryWidget_DiscordInvButton_K2Node_ComponentBoundEvent_4_OnButtonClickedEvent__DelegateSignature": 1632,
+      "BndEvt__WBP_SessionSummaryWidget_DiscordInvButton_K2Node_ComponentBoundEvent_5_OnButtonHoverEvent__DelegateSignature": 1721,
+      "BndEvt__WBP_SessionSummaryWidget_DiscordInvButton_K2Node_ComponentBoundEvent_6_OnButtonHoverEvent__DelegateSignature": 1769,
+      "BndEvt__WBP_SessionSummaryWidget_PatreonButton_K2Node_ComponentBoundEvent_1_OnButtonClickedEvent__DelegateSignature": 1440,
+      "BndEvt__WBP_SessionSummaryWidget_PatreonButton_K2Node_ComponentBoundEvent_2_OnButtonHoverEvent__DelegateSignature": 1536,
+      "BndEvt__WBP_SessionSummaryWidget_PatreonButton_K2Node_ComponentBoundEvent_3_OnButtonHoverEvent__DelegateSignature": 1584,
+      "BndEvt__WBP_SessionSummaryWidget_ReturnToMenu_K2Node_ComponentBoundEvent_0_OnButtonClickedEvent__DelegateSignature": 1372,
+      "BndEvt__WBP_SessionSummaryWidget_TwitterButton_K2Node_ComponentBoundEvent_10_OnButtonHoverEvent__DelegateSignature": 1903,
+      "BndEvt__WBP_SessionSummaryWidget_TwitterButton_K2Node_ComponentBoundEvent_11_OnButtonHoverEvent__DelegateSignature": 1951,
+      "BndEvt__WBP_SessionSummaryWidget_TwitterButton_K2Node_ComponentBoundEvent_7_OnButtonClickedEvent__DelegateSignature": 1817
+    }
+  },
+  "presentation_contract": {
+    "source_calls": [
+      "Conv_StringToText",
+      "GetComboText",
+      "GetDetailedStatsText",
+      "GetDurationText",
+      "GetEdgesText",
+      "GetRewardsText",
+      "GetStrokesText",
+      "GetXPForNextLevel",
+      "InitializeBar",
+      "SetColorAndOpacity",
+      "SetText"
+    ],
+    "text_targets": [
+      "DetailedStatsString",
+      "RewardsString",
+      "DurationText",
+      "EdgeAmountText",
+      "HighestComboText",
+      "TotalStrokesText",
+      "VictoryText",
+      "VictoryText"
+    ],
+    "labels": [
+      "Victory",
+      "Defeat (-50% Rewards)"
+    ],
+    "colors": {
+      "victory": [
+        0.0,
+        0.5209959745407104,
+        0.12477199733257294,
+        1.0
+      ],
+      "defeat": [
+        0.838798999786377,
+        0.0,
+        0.0006070000235922635,
+        1.0
+      ]
+    },
+    "native_formatter": {
+      "image_base": "0x140000000",
+      "functions": {
+        "GetDetailedStatsText": "0x1481bfc20",
+        "GetDurationText": "0x1481bfed0",
+        "GetEdgesText": "0x1481bff20",
+        "GetComboText": "0x1481bbaf0",
+        "GetStrokesText": "0x1481c2fd0"
+      },
+      "formats": {
+        "succubi_defeated": "SUCCUBI DEFEATED: %d\n",
+        "enemies_defeated": "ENEMIES DEFEATED: %d\n",
+        "times_taunted": "TIMES TAUNTED: %d\n",
+        "time_at_high_heat": "TIME AT HIGH HEAT: %d:%02d\n",
+        "draws_at_max_heat": "DRAWS AT MAX HEAT: %d\n",
+        "items_used": "ITEMS USED: %d\n",
+        "perfect_edges": "PERFECT EDGES: %d\n",
+        "best_edge_streak": "BEST EDGE STREAK: %d",
+        "integer": "%d"
+      },
+      "detailed_stat_offsets": {
+        "succubi_defeated": "0x08",
+        "enemies_defeated": [
+          "0x0c",
+          "0x08"
+        ],
+        "times_taunted": "0x18",
+        "time_at_high_heat": "0x58",
+        "draws_at_max_heat": "0x20",
+        "items_used": "0x1c",
+        "perfect_edges": "0x6c",
+        "best_edge_streak": "0x50"
+      },
+      "duration_seconds_offset": "0x28",
+      "integer_format": "%d"
+    }
+  },
+  "interaction_contract": {
+    "animations": [
+      "BeginDisplay",
+      "PatreonHover",
+      "PatreonUnhover",
+      "PatreonClick",
+      "DiscordHover",
+      "DiscordUnhover",
+      "DiscordClick",
+      "TwitterHover",
+      "TwitterUnhover",
+      "TwitterClick"
+    ],
+    "social_urls": [
+      "https://www.patreon.com/CockHeroGame",
+      "https://discord.gg/dQXRpF6Uhf",
+      "https://x.com/CockHeroGame"
+    ],
+    "return_sequence_calls": [
+      "Create",
+      "PauseSequence",
+      "ReinitGameVariables",
+      "RemoveFromParent"
+    ],
+    "master_summary_calls": [
+      "Initialize",
+      "PlayPostGameVoicelines"
+    ]
+  },
+  "voice_contract": {
+    "source_arrays": {
+      "VillainessPostGameVictoryLines": [
+        "Villainess_PostGame_Victory__1_",
+        "Villainess_PostGame_Victory__2_",
+        "Villainess_PostGame_Victory__3_",
+        "Villainess_PostGame_Victory__4_",
+        "Villainess_PostGame_Victory__5_",
+        "Villainess_PostGame_Victory__6_",
+        "Villainess_PostGame_Victory__7_",
+        "Villainess_PostGame_Victory__8_"
+      ],
+      "VillainessPostGameDefeatLines": [
+        "Villainess_PostGame_Defeat__1_",
+        "Villainess_PostGame_Defeat__2_",
+        "Villainess_PostGame_Defeat__3_",
+        "Villainess_PostGame_Defeat__4_",
+        "Villainess_PostGame_Defeat__5_",
+        "Villainess_PostGame_Defeat__6_",
+        "Villainess_PostGame_Defeat__7_",
+        "Villainess_PostGame_Defeat__8_"
+      ],
+      "BratPostGameVictoryLines": [
+        "Brat_PostGame_Victory__1_",
+        "Brat_PostGame_Victory__2_",
+        "Brat_PostGame_Victory__3_",
+        "Brat_PostGame_Victory__4_",
+        "Brat_PostGame_Victory__5_",
+        "Brat_PostGame_Victory__6_",
+        "Brat_PostGame_Victory__7_"
+      ],
+      "BratPostGameDefeatLines": [
+        "Brat_PostGame_Defeat__1_",
+        "Brat_PostGame_Defeat__2_",
+        "Brat_PostGame_Defeat__3_",
+        "Brat_PostGame_Defeat__4_",
+        "Brat_PostGame_Defeat__5_",
+        "Brat_PostGame_Defeat__6_",
+        "Brat_PostGame_Defeat__7_",
+        "Brat_PostGame_Defeat__8_"
+      ],
+      "DommyMommyPostGameVictoryLines": [
+        "Line_1",
+        "Line_2",
+        "Line_3",
+        "Line_4",
+        "Line_5",
+        "Line_6",
+        "Line_7",
+        "Line_8",
+        "Line_9",
+        "Line_10"
+      ],
+      "DommyMommyPostGameDefeatLines": [
+        "Line_1",
+        "Line_2",
+        "Line_3",
+        "Line_4",
+        "Line_5",
+        "Line_6",
+        "Line_7",
+        "Line_8",
+        "Line_9",
+        "Line_10"
+      ],
+      "SweetheartPostGameVictoryLines": [
+        "Line_1",
+        "Line_2",
+        "Line_3",
+        "Line_4",
+        "Line_5",
+        "Line_6",
+        "Line_7",
+        "Line_8",
+        "Line_9",
+        "Line_10"
+      ],
+      "SweetheartPostGameDefeatLines": [
+        "Line_1",
+        "Line_2",
+        "Line_3",
+        "Line_4",
+        "Line_5",
+        "Line_6",
+        "Line_7",
+        "Line_8",
+        "Line_9"
+      ]
+    },
+    "source_counts": {
+      "VillainessPostGameVictoryLines": 8,
+      "VillainessPostGameDefeatLines": 8,
+      "BratPostGameVictoryLines": 7,
+      "BratPostGameDefeatLines": 8,
+      "DommyMommyPostGameVictoryLines": 10,
+      "DommyMommyPostGameDefeatLines": 10,
+      "SweetheartPostGameVictoryLines": 10,
+      "SweetheartPostGameDefeatLines": 9
+    },
+    "source_calls": [
+      "Array_Random",
+      "NotEqual_ByteByte",
+      "PlaySound2D"
+    ],
+    "play_sound_2d_persistent": true,
+    "stream_report": "RecoveryEvidence\\session-summary-audio-stream-catalog.json",
+    "decode_report": "RecoveryEvidence\\session-summary-audio-decoding-report.json",
+    "import_report": "RecoveryEvidence\\session-summary-audio-import-recovery.json",
+    "imported_asset_count": 70
+  },
+  "recovery_artifacts": {
+    "widget": "Content/Recovery/UI/WBP_SessionSummaryWidget.uasset",
+    "native_parent": "/Script/CockHeroRecovered.RecoveredSessionSummaryWidget",
+    "native_widget": "Source/CockHeroRecovered/RecoveredSessionSummaryWidget.cpp",
+    "native_formatter": "Source/CockHeroRecovered/RecoveredProgression.cpp",
+    "automation_test": "Source/CockHeroRecovered/RecoveredSessionSummaryWidgetTests.cpp",
+    "audio_assets": "Content/Recovery/Resources/PostGameVoicelines",
+    "encoded_audio": "RecoveryEvidence/AudioEncoded/PostGame",
+    "decoded_audio": "RecoveryEvidence/AudioSource"
+  },
+  "verification": {
+    "source_defaults_are_static_artifacts": true,
+    "source_default_roundtrip_is_exact": true,
+    "construct_routes_to_source_entrypoint": true,
+    "return_click_routes_to_source_entrypoint": true,
+    "all_ten_delegate_handlers_recovered": true,
+    "source_animations_exact": true,
+    "source_widget_bindings_present": true,
+    "source_initializer_calls_exact": true,
+    "source_text_targets_exact": true,
+    "source_labels_exact": true,
+    "source_colors_exact": true,
+    "native_detail_format_strings_exact": true,
+    "native_integer_text_is_unprefixed": true,
+    "native_detailed_formatter_offsets_verified": true,
+    "native_duration_formatter_offset_verified": true,
+    "native_number_formatters_verified": true,
+    "source_social_urls_exact": true,
+    "return_sequence_is_complete": true,
+    "master_invokes_summary_initialize_and_voice": true,
+    "source_voice_arrays_exact": true,
+    "source_voice_routing_calls_exact": true,
+    "source_voice_playback_persists": true,
+    "catalog_and_decode_arrays_agree": true,
+    "all_seventy_voice_streams_decoded": true,
+    "all_seventy_voice_assets_imported": true,
+    "voice_array_assignments_exact": true,
+    "voice_aliases_complete": true,
+    "voice_artifact_files_complete": true,
+    "native_summary_uses_source_formatters": true,
+    "native_formatter_uses_original_literals": true,
+    "all_verified": true
+  }
+}

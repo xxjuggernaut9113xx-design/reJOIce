@@ -282,7 +282,7 @@ bool FRecoveredPostGameHandoffTest::RunTest(const FString& Parameters) {
     if (!TestNotNull(TEXT("Post-game summary child"),Summary)) return false;
     auto* Strokes=Cast<UTextBlock>(Summary->GetWidgetFromName(TEXT("TotalStrokesText")));
     if (!TestNotNull(TEXT("Post-game strokes field"),Strokes)) return false;
-    TestEqual(TEXT("Post-game summary receives final strokes"),Strokes->GetText().ToString(),FString(TEXT("42")));
+    TestEqual(TEXT("Post-game summary receives source stroke presentation"),Strokes->GetText().ToString(),FString(TEXT("42")));
     auto* Switcher=Cast<UWidgetSwitcher>(Results->GetWidgetFromName(TEXT("WidgetSwitcher")));
     if (!TestNotNull(TEXT("Post-game switcher"),Switcher)) return false;
     TestEqual(TEXT("Post-game begins on XP source stage"),Switcher->GetActiveWidgetIndex(),0);

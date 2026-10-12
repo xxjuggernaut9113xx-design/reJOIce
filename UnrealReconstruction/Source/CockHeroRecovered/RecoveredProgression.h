@@ -102,6 +102,11 @@ public:
     // GetStatValueText at 0x1481c2b60 taking an enum metric).
     UFUNCTION(BlueprintPure, Category="Recovered|Progression") static FText GetLifetimeStatsText(const FRecoveredLifetimeStats& Stats);
     UFUNCTION(BlueprintPure, Category="Recovered|Progression") static FText GetRewardsText(const FRecoveredSessionRewardData& RewardData);
+    UFUNCTION(BlueprintPure, Category="Recovered|Progression") static FText GetDetailedStatsText(const FRecoveredSessionStats& Stats);
+    UFUNCTION(BlueprintPure, Category="Recovered|Progression") static FText GetDurationText(const FRecoveredSessionStats& Stats);
+    UFUNCTION(BlueprintPure, Category="Recovered|Progression") static FText GetEdgesText(const FRecoveredSessionStats& Stats);
+    UFUNCTION(BlueprintPure, Category="Recovered|Progression") static FText GetComboText(const FRecoveredSessionStats& Stats);
+    UFUNCTION(BlueprintPure, Category="Recovered|Progression") static FText GetStrokesText(const FRecoveredSessionStats& Stats);
     UFUNCTION(BlueprintPure, Category="Recovered|Progression") static FText GetStatValueText(ERecoveredMetric Metric, const FRecoveredSessionStats& SessionStats, const FRecoveredLifetimeStats& LifetimeStats, bool bUseLifetime);
 };
 

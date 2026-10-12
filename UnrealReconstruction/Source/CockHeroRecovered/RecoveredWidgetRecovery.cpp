@@ -6,6 +6,7 @@
 #include "RecoveredRestWidget.h"
 #include "RecoveredEventWidgets.h"
 #include "RecoveredPostCumContinueWidget.h"
+#include "RecoveredSessionSummaryWidget.h"
 #include "RecoveredStatsWidget.h"
 #include "RecoveredStatsTabWidget.h"
 #include "RecoveredPlayerCardsTabWidget.h"
@@ -188,6 +189,7 @@ FString URecoveredWidgetRecovery::BuildWidgetAssets(const FString& EvidencePath)
             if(Screen.Key==TEXT("PG2TabbedInventory_Widget")) ParentClass=URecoveredPG2TabbedInventoryWidget::StaticClass();
             if(Screen.Key==TEXT("RestWidget")) ParentClass=URecoveredRestWidget::StaticClass();
             if(Screen.Key==TEXT("PostCumContinue_Widget")) ParentClass=URecoveredPostCumContinueWidget::StaticClass();
+            if(Screen.Key==TEXT("WBP_SessionSummaryWidget")) ParentClass=URecoveredSessionSummaryWidget::StaticClass();
             if(Screen.Key==TEXT("StatsScreenWidget")) ParentClass=URecoveredStatsScreenWidget::StaticClass();
             if(Screen.Key==TEXT("StatsTabWidget")) ParentClass=URecoveredStatsTabWidget::StaticClass();
             if(Screen.Key==TEXT("PlayerCardsTabWidget")) ParentClass=URecoveredPlayerCardsTabWidget::StaticClass();

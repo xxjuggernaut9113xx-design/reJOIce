@@ -97,6 +97,36 @@ FText URecoveredProgressionLibrary::GetRewardsText(const FRecoveredSessionReward
     return FText::FromString(Out);
 }
 
+FText URecoveredProgressionLibrary::GetDetailedStatsText(const FRecoveredSessionStats& Stats) {
+    return FText::FromString(FString::Printf(
+        TEXT("SUCCUBI DEFEATED: %d\nENEMIES DEFEATED: %d\nTIMES TAUNTED: %d\nTIME AT HIGH HEAT: %d:%02d\nDRAWS AT MAX HEAT: %d\nITEMS USED: %d\nPERFECT EDGES: %d\nBEST EDGE STREAK: %d"),
+        Stats.SuccubiDefeated,
+        URecoveredStateRuleLibrary::AddInt32Wrapping(Stats.EnemiesDefeated, Stats.SuccubiDefeated),
+        Stats.TimesTaunted,
+        Stats.TimeAtHighHeat / 60,
+        Stats.TimeAtHighHeat % 60,
+        Stats.DrawsAtMaxHeat,
+        Stats.ItemsUsed,
+        Stats.PerfectEdges,
+        Stats.EdgeStreak));
+}
+
+FText URecoveredProgressionLibrary::GetDurationText(const FRecoveredSessionStats& Stats) {
+    return FText::FromString(FString::Printf(TEXT("%d:%02d"), Stats.SessionDuration / 60, Stats.SessionDuration % 60));
+}
+
+FText URecoveredProgressionLibrary::GetEdgesText(const FRecoveredSessionStats& Stats) {
+    return FText::FromString(FString::FromInt(Stats.Edges));
+}
+
+FText URecoveredProgressionLibrary::GetComboText(const FRecoveredSessionStats& Stats) {
+    return FText::FromString(FString::FromInt(Stats.MaxCombo));
+}
+
+FText URecoveredProgressionLibrary::GetStrokesText(const FRecoveredSessionStats& Stats) {
+    return FText::FromString(FString::FromInt(Stats.Strokes));
+}
+
 static int32 GetMetricSessionValue(ERecoveredMetric Metric, const FRecoveredSessionStats& S) {
     switch (Metric) {
         case ERecoveredMetric::Strokes: return S.Strokes;

@@ -2,6 +2,7 @@
 #include "RecoveredRewards.h"
 #include "RecoveredProgression.h"
 #include "RecoveredPostGameSequence.h"
+#include "RecoveredSessionSummaryWidget.h"
 #include "RecoveredChallengeTracker.h"
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
@@ -131,22 +132,21 @@ void ARecoveredGlobalManager::BindPostGameResultsData(UUserWidget* Results) {
     FRecoveredSessionRewardData RewardData = bRecoveredSessionFinalized
         ? PendingPostGameRewardData
         : BuildRecoveredSessionRewardData(CalculateRecoveredSessionXP());
-    const FText RewardsText = URecoveredProgressionLibrary::GetRewardsText(RewardData);
-    const FText DurationText = FText::FromString(FString::Printf(TEXT("%d:%02d"), SessionStats.SessionDuration / 60, SessionStats.SessionDuration % 60));
-    const FText ResultText = FText::FromString(RewardData.bWon ? TEXT("Victory") : TEXT("Defeat (-50% Rewards)"));
-    const FString DetailString = FString::Printf(TEXT("Strokes: %d\nEdges: %d\nHighest Combo: %d\nEnemies Defeated: %d\nSuccubi Defeated: %d"),
-        SessionStats.Strokes, SessionStats.Edges, SessionStats.MaxCombo, SessionStats.EnemiesDefeated, SessionStats.SuccubiDefeated);
-
-    // WBP_SessionSummaryWidget fields recovered from its Initialize body.
-    SetNestedText(Results, TEXT("VictoryText"), ResultText);
-    SetNestedText(Results, TEXT("RewardsString"), RewardsText);
-    SetNestedText(Results, TEXT("DurationText"), DurationText);
-    SetNestedText(Results, TEXT("TotalStrokesText"), FText::AsNumber(SessionStats.Strokes));
-    SetNestedText(Results, TEXT("EdgeAmountText"), FText::AsNumber(SessionStats.Edges));
-    SetNestedText(Results, TEXT("HighestComboText"), FText::AsNumber(SessionStats.MaxCombo));
-    SetNestedText(Results, TEXT("DetailedStatsString"), FText::FromString(DetailString));
-
-    BindNestedButton(Results, TEXT("ReturnToMenu"), this);
+    if (URecoveredSessionSummaryWidget* Summary = Cast<URecoveredSessionSummaryWidget>(FindNestedWidget(Results, TEXT("WBP_SessionSummaryWidget")))) {
+        Summary->InitializeRecoveredSummary(RewardData, RewardData.bWon);
+    } else {
+        const FText RewardsText = URecoveredProgressionLibrary::GetRewardsText(RewardData);
+        const FText DurationText = URecoveredProgressionLibrary::GetDurationText(SessionStats);
+        const FText ResultText = FText::FromString(RewardData.bWon ? TEXT("Victory") : TEXT("Defeat (-50% Rewards)"));
+        SetNestedText(Results, TEXT("VictoryText"), ResultText);
+        SetNestedText(Results, TEXT("RewardsString"), RewardsText);
+        SetNestedText(Results, TEXT("DurationText"), DurationText);
+        SetNestedText(Results, TEXT("TotalStrokesText"), URecoveredProgressionLibrary::GetStrokesText(SessionStats));
+        SetNestedText(Results, TEXT("EdgeAmountText"), URecoveredProgressionLibrary::GetEdgesText(SessionStats));
+        SetNestedText(Results, TEXT("HighestComboText"), URecoveredProgressionLibrary::GetComboText(SessionStats));
+        SetNestedText(Results, TEXT("DetailedStatsString"), URecoveredProgressionLibrary::GetDetailedStatsText(SessionStats));
+        BindNestedButton(Results, TEXT("ReturnToMenu"), this);
+    }
     BindNestedButton(Results, TEXT("ReturnToMenuButton"), this);
     if (!PostGameSequence) PostGameSequence = NewObject<URecoveredPostGameSequence>(this);
     PostGameSequence->Begin(this, Results, RewardData);

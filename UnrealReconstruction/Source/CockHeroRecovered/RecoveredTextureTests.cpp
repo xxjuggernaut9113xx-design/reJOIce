@@ -26,15 +26,11 @@ bool FRecoveredTextureTest::RunTest(const FString& Parameters) {
     TMap<FString,UTexture2D*> Textures;
     TMap<FString,UObject*> Resources;
     for(const auto& Pair:Aliases->Values) {
-        if(Pair.Value->AsString().StartsWith(TEXT("/Game/Recovery/Resources/Fonts/")) || Pair.Value->AsString().StartsWith(TEXT("/Game/Recovery/Resources/Audio/")) || Pair.Value->AsString().StartsWith(TEXT("/Game/Recovery/Resources/Video/"))) {
-            auto* Resource=LoadObject<UObject>(nullptr,*Pair.Value->AsString());
-            if(TestNotNull(*Pair.Key,Resource)) Resources.Add(Pair.Key,Resource);
-            continue;
-        }
-        auto* Texture=LoadObject<UTexture2D>(nullptr,*Pair.Value->AsString());
-        if(TestNotNull(*Pair.Key,Texture)) {
+        auto* Resource=LoadObject<UObject>(nullptr,*Pair.Value->AsString());
+        if(!TestNotNull(*Pair.Key,Resource)) continue;
+        Resources.Add(Pair.Key,Resource);
+        if(auto* Texture=Cast<UTexture2D>(Resource)) {
             Textures.Add(Pair.Key,Texture);
-            Resources.Add(Pair.Key,Texture);
             TestTrue(*(Pair.Key+TEXT(" editable source pixels")),Texture->Source.IsValid());
             TestTrue(*(Pair.Key+TEXT(" source dimensions")),Texture->Source.GetSizeX()>0 && Texture->Source.GetSizeY()>0);
         }
