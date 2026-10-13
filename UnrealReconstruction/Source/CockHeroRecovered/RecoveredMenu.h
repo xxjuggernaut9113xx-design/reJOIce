@@ -4,6 +4,12 @@
 #include "Styling/SlateTypes.h"
 #include "RecoveredMenu.generated.h"
 
+class URecoveredSaveGame;
+
+namespace RecoveredMenu {
+COCKHERORECOVERED_API bool NeedsInitialCalibration(const URecoveredSaveGame* Save);
+}
+
 USTRUCT(BlueprintType)
 struct COCKHERORECOVERED_API FRecoveredTooltipDefinition {
     GENERATED_BODY()
@@ -42,6 +48,7 @@ public:
     UPROPERTY(Transient, BlueprintReadOnly, Category="Recovered Menu") TObjectPtr<UUserWidget> LastOpenedScreen;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered Menu") TArray<TObjectPtr<class UTexture2D>> PatreonCoverGirlArray;
     UFUNCTION(BlueprintCallable,Category="Recovered Menu") void InitCoverGirl();
+    UFUNCTION(BlueprintCallable,Category="Recovered Menu") void ApplyPatronLocks();
     UPROPERTY(Transient, BlueprintReadOnly, Category="Recovered Menu") FString LastNavigationError;
     UFUNCTION(BlueprintCallable, Category="Recovered Menu") void OpenDifficulty();
     UFUNCTION(BlueprintCallable, Category="Recovered Menu") void OpenChallenges();
@@ -60,7 +67,6 @@ private:
     void OpenScreen(const TCHAR* ScreenName);
     void BindNavigation(bool bBind);
     void OpenInitialCalibration();
-    FTimerHandle WarningTimer;
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FRecoveredMenuRefreshRequest);

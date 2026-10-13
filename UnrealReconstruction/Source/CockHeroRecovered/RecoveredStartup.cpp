@@ -4,7 +4,9 @@
 #include "Kismet/GameplayStatics.h"
 #include "Misc/CommandLine.h"
 #include "Misc/Parse.h"
+#include "Misc/Paths.h"
 #include "TimerManager.h"
+#include "UnrealClient.h"
 #include "Components/Image.h"
 #include "RecoveredChallengeTracker.h"
 #include "RecoveredEventWidgets.h"
@@ -19,6 +21,43 @@ void ARecoveredGlobalManager::BeginPlay() {
     ReloadRecoveredProfile();
     CreateMainMenuUI();
 #if WITH_DEV_AUTOMATION_TESTS
+    if (FParse::Param(FCommandLine::Get(),TEXT("RecoveredMenuVisualSmoke"))) {
+        FTimerHandle VisualTimer;
+        GetWorldTimerManager().SetTimer(VisualTimer,[this]() {
+            auto* Menu=Cast<URecoveredMainMenu>(MainMenu);
+            auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
+            if (!Menu || !Instance || !Instance->CurrentSave) {
+                UE_LOG(LogTemp,Error,TEXT("RECOVERED_MENU_VISUAL_SMOKE_FAIL: recovered main menu unavailable"));
+                if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                return;
+            }
+            FRecoveredLatencyProfile VisualProfile;
+            if (!Instance->CurrentSave->GetLatencyProfile(VisualProfile)) {
+                UE_LOG(LogTemp,Error,TEXT("RECOVERED_MENU_VISUAL_SMOKE_FAIL: recovery calibration profile could not be staged"));
+                if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                return;
+            }
+            VisualProfile.bIsCalibrated=true;
+            if (!Instance->CurrentSave->SetLatencyProfile(VisualProfile)) {
+                UE_LOG(LogTemp,Error,TEXT("RECOVERED_MENU_VISUAL_SMOKE_FAIL: recovery calibration profile could not be staged"));
+                if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                return;
+            }
+            Menu->CloseAdultWarning();
+            Menu->CloseTutorialSplash();
+            Menu->CloseUpdateSplash();
+            FTimerHandle CaptureTimer;
+            GetWorldTimerManager().SetTimer(CaptureTimer,[this]() {
+                const FString ScreenshotPath=FPaths::ConvertRelativePathToFull(FPaths::ProjectDir()/TEXT("RecoveryEvidence/visual-parity/reconstruction-main-menu-repaired.png"));
+                FScreenshotRequest::RequestScreenshot(ScreenshotPath,true,false);
+                UE_LOG(LogTemp,Display,TEXT("RECOVERED_MENU_VISUAL_SMOKE_CAPTURE_REQUESTED: %s"),*ScreenshotPath);
+                FTimerHandle QuitTimer;
+                GetWorldTimerManager().SetTimer(QuitTimer,[this]() {
+                    if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                },4.0f,false);
+            },5.0f,false);
+        },1.0f,false);
+    }
     if (FParse::Param(FCommandLine::Get(),TEXT("RecoveredSessionSmoke"))) {
         // Only this explicit test switch starts a session without user input.
         FTimerHandle SmokeTimer;

@@ -11,8 +11,56 @@
 #include "TimerManager.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Engine/Texture2D.h"
+#include "Engine/Engine.h"
 #include "Blueprint/WidgetBlueprintGeneratedClass.h"
 #include "Animation/WidgetAnimation.h"
+#include "Misc/CommandLine.h"
+#include "Misc/Parse.h"
+
+namespace {
+const TCHAR* const RecoveredPatreonCoverGirlPaths[] = {
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/14.14"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/15.15"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/16.16"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/17.17"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/18.18"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/19.19"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/20.20"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/21.21"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/23.23"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/29.29"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/30.30"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/31.31"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/32.32"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/33.33"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/34.34"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/35.35"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/36.36"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/37.37"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/38.38"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/39.39"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/40.40"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/Covergirl1.Covergirl1"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/Covergirl1__10_.Covergirl1__10_"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/Covergirl1__11_.Covergirl1__11_"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/Covergirl1__12_.Covergirl1__12_"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/Covergirl1__13_.Covergirl1__13_"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/Covergirl1__2_.Covergirl1__2_"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/Covergirl1__3_.Covergirl1__3_"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/Covergirl1__4_.Covergirl1__4_"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/Covergirl1__5_.Covergirl1__5_"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/Covergirl1__6_.Covergirl1__6_"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/Covergirl1__7_.Covergirl1__7_"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/Covergirl1__8_.Covergirl1__8_"),
+    TEXT("/Game/Recovery/Resources/CoverGirls/V004/Covergirl1__9_.Covergirl1__9_")
+};
+}
+
+bool RecoveredMenu::NeedsInitialCalibration(const URecoveredSaveGame* Save) {
+    if (!Save) return false;
+    FRecoveredLatencyProfile Profile;
+    return !Save->GetLatencyProfile(Profile) || !Profile.bIsCalibrated;
+}
 
 void URecoveredTooltip::SetTitleAndDescription(const FText& Title,const FText& Description) {
     TooltipTitle=Title;TooltipDescription=Description;
@@ -67,15 +115,32 @@ void URecoveredMainMenu::NativeConstruct() {
             CloseTutorialSplash();if (auto* Widget=GetWidgetFromName(TEXT("NewUpdateSplashButton"))) Widget->RemoveFromParent();
         }
         if (Instance->CurrentSave) if (auto* Title=Cast<UTextBlock>(GetWidgetFromName(TEXT("MainMenuTitleText")))) Title->SetText(Instance->CurrentSave->GetTextSetting(TEXT("SelectedTitleText"),FText::GetEmpty()));
+        ApplyPatronLocks();
         RefreshBackground();
     }
 }
 void URecoveredMainMenu::InitCoverGirl() {
     auto* Button=Cast<UButton>(GetWidgetFromName(TEXT("CoverGirlButton")));
-    if (!Button || PatreonCoverGirlArray.IsEmpty()) return;
+    if (!Button) return;
+    TArray<UTexture2D*> ResolvedCoverGirls;
+    ResolvedCoverGirls.Reserve(UE_ARRAY_COUNT(RecoveredPatreonCoverGirlPaths));
+    for (const TCHAR* Path:RecoveredPatreonCoverGirlPaths) if (auto* CoverGirl=LoadObject<UTexture2D>(nullptr,Path)) ResolvedCoverGirls.Add(CoverGirl);
+    for (UTexture2D* CoverGirl:PatreonCoverGirlArray) if (IsValid(CoverGirl) && !ResolvedCoverGirls.Contains(CoverGirl)) ResolvedCoverGirls.Add(CoverGirl);
+    if (ResolvedCoverGirls.IsEmpty()) {
+        if (auto* Fallback=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/CoverGirls/40.40"))) ResolvedCoverGirls.Add(Fallback);
+    }
+    if (ResolvedCoverGirls.IsEmpty()) return;
     // Values from the original branch-free InitCoverGirl Blueprint bytecode.
+    UTexture2D* SelectedCover=nullptr;
+#if WITH_DEV_AUTOMATION_TESTS
+    FString RequestedCover;
+    if (FParse::Value(FCommandLine::Get(),TEXT("RecoveredCoverGirl="),RequestedCover)) {
+        for (UTexture2D* CoverGirl:ResolvedCoverGirls) if (CoverGirl && CoverGirl->GetName().Equals(RequestedCover,ESearchCase::IgnoreCase)) { SelectedCover=CoverGirl;break; }
+    }
+#endif
+    if (!SelectedCover) SelectedCover=ResolvedCoverGirls[FMath::RandRange(0,ResolvedCoverGirls.Num()-1)];
     FSlateBrush Brush;
-    Brush.SetResourceObject(PatreonCoverGirlArray[FMath::RandRange(0,PatreonCoverGirlArray.Num()-1)]);
+    Brush.SetResourceObject(SelectedCover);
     Brush.DrawAs=ESlateBrushDrawType::Image;
     Brush.Tiling=ESlateBrushTileType::NoTile;
     Brush.Mirroring=ESlateBrushMirrorType::NoMirror;
@@ -96,7 +161,22 @@ void URecoveredMainMenu::InitCoverGirl() {
     Style.PressedSlateSound=FSlateSound(); Style.HoveredSlateSound=FSlateSound();
     Button->SetStyle(Style);
 }
-void URecoveredMainMenu::NativeDestruct() { if (GetWorld()) GetWorld()->GetTimerManager().ClearTimer(WarningTimer);BindNavigation(false); Super::NativeDestruct(); }
+void URecoveredMainMenu::ApplyPatronLocks() {
+    auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
+    const bool bIsPatron=Instance && Instance->CurrentSave && Instance->CurrentSave->GetBoolSetting(TEXT("IsPatron?"));
+    auto* Version=Cast<UTextBlock>(GetWidgetFromName(TEXT("VersionInfoMainMenuText")));
+    auto* Support=Cast<UTextBlock>(GetWidgetFromName(TEXT("PatreonSupportText")));
+    if (bIsPatron) {
+        if (Version) Version->SetText(FText::FromString(TEXT("V0.04 Patreon Build")));
+        if (Support) Support->SetText(FText::FromString(TEXT("vote on weekly content packs \r\nvia patreon")));
+        return;
+    }
+    if (auto* Import=Cast<UTextBlock>(GetWidgetFromName(TEXT("ImportText")))) Import->SetOpacity(0.5f);
+    if (auto* Lock=GetWidgetFromName(TEXT("PatronLockImportSizebox"))) Lock->SetVisibility(ESlateVisibility::Visible);
+    if (Version) Version->SetText(FText::FromString(TEXT("V0.04 Public Build")));
+    if (Support) Support->SetText(FText::FromString(TEXT("Join now for complete access and fresh content drops every Friday.")));
+}
+void URecoveredMainMenu::NativeDestruct() { BindNavigation(false); Super::NativeDestruct(); }
 void URecoveredMainMenu::OpenScreen(const TCHAR* ScreenName) {
     LastNavigationError.Reset();
     const FString Path=FString::Printf(TEXT("/Game/Recovery/UI/%s.%s_C"),ScreenName,ScreenName);
@@ -108,7 +188,7 @@ void URecoveredMainMenu::OpenScreen(const TCHAR* ScreenName) {
         StatsScreen->SetRecoveredStatisticsGameInstance(Cast<URecoveredGameInstance>(GetGameInstance()));
     }
     LastOpenedScreen=Screen;
-    Screen->AddToViewport(0);
+    if (GEngine && GEngine->GameViewport) Screen->AddToViewport(0);
     // Source handlers keep the main menu behind the new screen.
 }
 void URecoveredMainMenu::OpenDifficulty() {
@@ -241,7 +321,7 @@ UUMGSequencePlayer* URecoveredMenuWidget::PlayRecoveredAnimation(FName Name,int3
 
 void URecoveredMainMenu::CloseAdultWarning() {
     if (auto* Widget=GetWidgetFromName(TEXT("AdultContentWarningSplashButton"))) { Widget->SetVisibility(ESlateVisibility::Hidden);Widget->RemoveFromParent(); }
-    if (GetWorld()) GetWorld()->GetTimerManager().SetTimer(WarningTimer,this,&URecoveredMainMenu::OpenInitialCalibration,.25f,false);
+    OpenInitialCalibration();
 }
 void URecoveredMainMenu::CloseTutorialSplash() {
     if (auto* Widget=GetWidgetFromName(TEXT("TutorialSplashButton"))) { Widget->SetVisibility(ESlateVisibility::Hidden);Widget->RemoveFromParent(); }
@@ -255,6 +335,6 @@ void URecoveredMainMenu::QuitFromMenu() { if (GetWorld()) { PlayRecoveredAnimati
 void URecoveredMainMenu::RefreshBackground() { if (auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance())) Instance->PlayRecoveredBackgroundMedia(TEXT("backgroundmenuloop"),Cast<UImage>(GetWidgetFromName(TEXT("BackgroundImage")))); }
 
 void URecoveredMainMenu::OpenInitialCalibration() {
-    auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());FRecoveredLatencyProfile Profile;
-    if (Instance && Instance->CurrentSave && Instance->CurrentSave->GetLatencyProfile(Profile) && !Profile.bIsCalibrated) OpenScreen(TEXT("WBP_CalibrationUI"));
+    auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
+    if (Instance && RecoveredMenu::NeedsInitialCalibration(Instance->CurrentSave)) OpenScreen(TEXT("WBP_CalibrationUI"));
 }
