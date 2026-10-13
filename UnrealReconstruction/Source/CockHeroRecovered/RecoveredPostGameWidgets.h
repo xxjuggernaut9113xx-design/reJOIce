@@ -12,6 +12,7 @@ class UWidgetAnimation;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FRecoveredXPBarFilled);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FRecoveredLevelUpScreenComplete);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FRecoveredPostGameSourceAnimationComplete);
 
 UCLASS(Blueprintable)
 class COCKHERORECOVERED_API URecoveredXPBarWidget : public UUserWidget {
@@ -44,6 +45,68 @@ private:
     URecoveredProgressionManager* ResolveRecoveredProgressionManager() const;
     UWidgetAnimation* FindRecoveredAnimation(FName Name) const;
     UPROPERTY(Transient) TObjectPtr<URecoveredGameInstance> RecoveredGameInstance;
+};
+
+UCLASS(Blueprintable)
+class COCKHERORECOVERED_API URecoveredXPSourceTextWidget : public UUserWidget {
+    GENERATED_BODY()
+public:
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void InitializeSource(const FRecoveredXPSourceData& InData);
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void SequenceEvent();
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void SequenceEvent__ENTRYPOINTXBP_XPSourceText();
+    UFUNCTION(BlueprintPure, Category="Recovered|PostGame") float GetRecoveredSourceAnimationDuration() const;
+
+    UPROPERTY(BlueprintAssignable, Category="Recovered|PostGame") FRecoveredPostGameSourceAnimationComplete OnAnimationComplete;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|PostGame") FRecoveredXPSourceData XPSourceData;
+
+private:
+    UWidgetAnimation* FindRecoveredAnimation(FName Name) const;
+};
+
+UCLASS(Blueprintable)
+class COCKHERORECOVERED_API URecoveredUPSourceTextWidget : public UUserWidget {
+    GENERATED_BODY()
+public:
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void InitializeSource(const FRecoveredUPSourceData& InData);
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void SequenceEvent();
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void SequenceEvent__ENTRYPOINTWBP_UPSourceText();
+    UFUNCTION(BlueprintPure, Category="Recovered|PostGame") float GetRecoveredSourceAnimationDuration() const;
+
+    UPROPERTY(BlueprintAssignable, Category="Recovered|PostGame") FRecoveredPostGameSourceAnimationComplete OnAnimationComplete;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|PostGame") FRecoveredUPSourceData UPData;
+
+private:
+    UWidgetAnimation* FindRecoveredAnimation(FName Name) const;
+};
+
+UCLASS(Blueprintable)
+class COCKHERORECOVERED_API URecoveredXPScreenWidget : public UUserWidget {
+    GENERATED_BODY()
+public:
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void InitializeRecoveredScreen(bool bWon);
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void DeterminePlayPenalty();
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void SequenceEvent__ENTRYPOINTWBP_XPScreen();
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|PostGame") bool bRecoveredPenaltyPlayed = false;
+
+private:
+    UPROPERTY(Transient) bool bRecoveredDidPlayerWin = true;
+    bool GetRecoveredWinState() const;
+    UWidgetAnimation* FindRecoveredAnimation(FName Name) const;
+};
+
+UCLASS(Blueprintable)
+class COCKHERORECOVERED_API URecoveredUPRewardScreenWidget : public UUserWidget {
+    GENERATED_BODY()
+public:
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void InitializeRecoveredScreen(bool bWon);
+    UFUNCTION(BlueprintCallable, Category="Recovered|PostGame") void OnSourceAnimationComplete();
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|PostGame") bool bRecoveredSourceAnimationComplete = false;
+
+private:
+    UPROPERTY(Transient) bool bRecoveredDidPlayerWin = true;
+    UWidgetAnimation* FindRecoveredAnimation(FName Name) const;
 };
 
 UCLASS(Blueprintable)

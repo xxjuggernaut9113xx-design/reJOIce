@@ -7,11 +7,19 @@ import unreal
 PROJECT = Path(unreal.Paths.project_dir())
 TARGETS = {
     "WBP_XPBar": "C:/Users/webma/analysis/cockhero-v004/decoded/WBP_XPBar-functions.json",
+    "XBP_XPSourceText": "C:/Users/webma/analysis/cockhero-v004/decoded/XBP_XPSourceText-functions.json",
+    "WBP_XPScreen": "C:/Users/webma/analysis/cockhero-v004/decoded/WBP_XPScreen-functions.json",
+    "WBP_UPRewardScreen": "C:/Users/webma/analysis/cockhero-v004/decoded/WBP_UPRewardScreen-functions.json",
+    "WBP_UPSourceText": "C:/Users/webma/analysis/cockhero-v004/decoded/WBP_UPSourceText-functions.json",
     "WBP_LevelUpScreen": "C:/Users/webma/analysis/cockhero-v004/decoded/WBP_LevelUpScreen-functions.json",
 }
 EXPECTED = {
-    "WBP_XPBar": "ReceiveXP_INST",
-    "WBP_LevelUpScreen": "Anim_LevelUp_INST",
+    "WBP_XPBar": {"ReceiveXP_INST"},
+    "XBP_XPSourceText": {"SpawnAndSlam_INST"},
+    "WBP_XPScreen": {"FadeIn_INST", "Play50PercentPenalty_INST"},
+    "WBP_UPRewardScreen": {"FadeIn_INST", "ReceiveUP_INST"},
+    "WBP_UPSourceText": {"AnimSlam_INST"},
+    "WBP_LevelUpScreen": {"Anim_LevelUp_INST"},
 }
 
 
@@ -23,8 +31,9 @@ def main() -> None:
         if not report.get("saved_assets"):
             raise RuntimeError(f"Animation recovery did not save {asset_name}: {report}")
         actual = {entry.get("name") for entry in report.get("objects", [])}
-        if EXPECTED[asset_name] not in actual:
-            raise RuntimeError(f"Source animation missing for {asset_name}: {actual}")
+        missing = EXPECTED[asset_name] - actual
+        if missing:
+            raise RuntimeError(f"Source animation missing for {asset_name}: {sorted(missing)} from {actual}")
         reports[asset_name] = report
         unreal.SystemLibrary.collect_garbage()
 

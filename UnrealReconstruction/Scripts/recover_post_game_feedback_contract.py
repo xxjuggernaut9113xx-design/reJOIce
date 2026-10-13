@@ -28,7 +28,7 @@ def main() -> None:
     decoded = json.loads(DECODED.read_text(encoding="utf-8"))
     imported = json.loads(IMPORTED.read_text(encoding="utf-8"))
     aliases = json.loads(ALIASES.read_text(encoding="utf-8"))
-    expected = ["whoosh-cinematic-161021_sfx", "drop-coin-384921", "Juice_SFX__11_", "Juice_SFX__9_"]
+    expected = ["whoosh-cinematic-161021_sfx", "drop-coin-384921", "Juice_SFX__11_", "Juice_SFX__9_", "Juice_SFX__5_"]
     catalog_rows = catalog["sounds"]
     decoded_rows = decoded["sounds"]
     imported_rows = imported["sounds"]
@@ -55,10 +55,10 @@ def main() -> None:
         "source_widgets": catalog["source_widgets"],
         "sounds": assets,
         "verified": {
-            "four_source_streams_reconstructed": len(catalog_rows) == 4,
+            "five_source_streams_reconstructed": len(catalog_rows) == 5,
             "source_component_hashes_verified": True,
             "pcm_decode_metadata_verified": True,
-            "soundwaves_imported": len(assets) == 4,
+            "soundwaves_imported": len(assets) == 5,
             "resource_aliases_complete": True,
             "all_verified": True,
         },

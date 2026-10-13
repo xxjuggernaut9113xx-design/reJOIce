@@ -51,9 +51,17 @@ UTexture2D* LoadRecoveredPlayerCardTexture(const FString& OriginalPath) {
 }
 
 USoundBase* LoadRecoveredPostGameSound(const TCHAR* Name) {
-    const FString ObjectPath = FString::Printf(TEXT("/Game/Recovery/Resources/PostGameSoundFX/%s.%s"), Name, Name);
-    const int32 Dot = ObjectPath.Find(TEXT("."), ESearchCase::CaseSensitive, ESearchDir::FromEnd);
-    return Dot > 0 && FPackageName::DoesPackageExist(ObjectPath.Left(Dot)) ? LoadObject<USoundBase>(nullptr, *ObjectPath) : nullptr;
+    const FString ObjectPaths[] = {
+        FString::Printf(TEXT("/Game/Recovery/Resources/PostGameSoundFX/%s.%s"), Name, Name),
+        FString::Printf(TEXT("/Game/Recovery/Resources/Audio/%s.%s"), Name, Name),
+    };
+    for (const FString& ObjectPath : ObjectPaths) {
+        const int32 Dot = ObjectPath.Find(TEXT("."), ESearchCase::CaseSensitive, ESearchDir::FromEnd);
+        if (Dot > 0 && FPackageName::DoesPackageExist(ObjectPath.Left(Dot))) {
+            if (USoundBase* Sound = LoadObject<USoundBase>(nullptr, *ObjectPath)) return Sound;
+        }
+    }
+    return nullptr;
 }
 
 void PlayRecoveredPostGameSound(const UObject* WorldContext, const TCHAR* Name, float Volume, float Pitch) {
@@ -143,6 +151,117 @@ URecoveredProgressionManager* URecoveredXPBarWidget::ResolveRecoveredProgression
 }
 
 UWidgetAnimation* URecoveredXPBarWidget::FindRecoveredAnimation(FName Name) const {
+    return FindPostGameAnimation(this, Name);
+}
+
+void URecoveredXPSourceTextWidget::InitializeSource(const FRecoveredXPSourceData& InData) {
+    XPSourceData = InData;
+    FFormatNamedArguments Arguments;
+    Arguments.Add(TEXT("xpamount"), FText::AsNumber(XPSourceData.XPAmount));
+    SetPostGameText(this, TEXT("XPAmountText"), FText::Format(FText::FromString(TEXT("+{xpamount} XP")), Arguments));
+    Arguments.Reset();
+    Arguments.Add(TEXT("detailtext"), XPSourceData.DetailText);
+    SetPostGameText(this, TEXT("XPDetailText"), FText::Format(FText::FromString(TEXT("({detailtext})")), Arguments));
+    if (UWidgetAnimation* Animation = FindRecoveredAnimation(TEXT("SpawnAndSlam"))) PlayAnimation(Animation, 0.0f, 1, EUMGSequencePlayMode::Forward, 1.0f, false);
+}
+
+void URecoveredXPSourceTextWidget::SequenceEvent() {
+    OnAnimationComplete.Broadcast();
+}
+
+void URecoveredXPSourceTextWidget::SequenceEvent__ENTRYPOINTXBP_XPSourceText() {
+    SequenceEvent();
+}
+
+float URecoveredXPSourceTextWidget::GetRecoveredSourceAnimationDuration() const {
+    if (UWidgetAnimation* Animation = FindRecoveredAnimation(TEXT("SpawnAndSlam"))) return Animation->GetEndTime();
+    return 0.0f;
+}
+
+UWidgetAnimation* URecoveredXPSourceTextWidget::FindRecoveredAnimation(FName Name) const {
+    return FindPostGameAnimation(this, Name);
+}
+
+void URecoveredUPSourceTextWidget::InitializeSource(const FRecoveredUPSourceData& InData) {
+    UPData = InData;
+    FFormatNamedArguments Arguments;
+    Arguments.Add(TEXT("upamount"), FText::AsNumber(UPData.UPAmount));
+    SetPostGameText(this, TEXT("UPAmountText"), FText::Format(FText::FromString(TEXT("+{upamount} UP")), Arguments));
+    Arguments.Reset();
+    Arguments.Add(TEXT("detail"), UPData.DetailText);
+    SetPostGameText(this, TEXT("DetailText"), FText::Format(FText::FromString(TEXT("({detail})")), Arguments));
+    if (UWidgetAnimation* Animation = FindRecoveredAnimation(TEXT("AnimSlam"))) PlayAnimation(Animation, 0.0f, 1, EUMGSequencePlayMode::Forward, 1.0f, false);
+    PlayRecoveredPostGameSound(this, TEXT("Juice_SFX__5_"), 1.0f, 1.0f);
+}
+
+void URecoveredUPSourceTextWidget::SequenceEvent() {
+    OnAnimationComplete.Broadcast();
+}
+
+void URecoveredUPSourceTextWidget::SequenceEvent__ENTRYPOINTWBP_UPSourceText() {
+    SequenceEvent();
+}
+
+float URecoveredUPSourceTextWidget::GetRecoveredSourceAnimationDuration() const {
+    if (UWidgetAnimation* Animation = FindRecoveredAnimation(TEXT("AnimSlam"))) return Animation->GetEndTime();
+    return 0.0f;
+}
+
+UWidgetAnimation* URecoveredUPSourceTextWidget::FindRecoveredAnimation(FName Name) const {
+    return FindPostGameAnimation(this, Name);
+}
+
+void URecoveredXPScreenWidget::InitializeRecoveredScreen(bool bWon) {
+    bRecoveredDidPlayerWin = bWon;
+    if (FBoolProperty* DidPlayerWin = FindFProperty<FBoolProperty>(GetClass(), TEXT("DidPlayerWin?"))) {
+        DidPlayerWin->SetPropertyValue_InContainer(this, bWon);
+    }
+    bRecoveredPenaltyPlayed = false;
+    if (UWidgetAnimation* Animation = FindRecoveredAnimation(TEXT("FadeIn"))) {
+        PlayAnimation(Animation, 0.0f, 1, EUMGSequencePlayMode::Forward, 1.0f, false);
+    }
+    PlayRecoveredPostGameSound(this, TEXT("Juice_SFX__12_"), 1.0f, 1.0f);
+}
+
+void URecoveredXPScreenWidget::DeterminePlayPenalty() {
+    if (GetRecoveredWinState() || bRecoveredPenaltyPlayed) return;
+    if (UWidgetAnimation* Animation = FindRecoveredAnimation(TEXT("Play50PercentPenalty"))) {
+        PlayAnimation(Animation, 0.0f, 1, EUMGSequencePlayMode::Forward, 1.0f, false);
+    }
+    bRecoveredPenaltyPlayed = true;
+}
+
+void URecoveredXPScreenWidget::SequenceEvent__ENTRYPOINTWBP_XPScreen() {
+    DeterminePlayPenalty();
+}
+
+bool URecoveredXPScreenWidget::GetRecoveredWinState() const {
+    return bRecoveredDidPlayerWin;
+}
+
+UWidgetAnimation* URecoveredXPScreenWidget::FindRecoveredAnimation(FName Name) const {
+    return FindPostGameAnimation(this, Name);
+}
+
+void URecoveredUPRewardScreenWidget::InitializeRecoveredScreen(bool bWon) {
+    bRecoveredDidPlayerWin = bWon;
+    if (FBoolProperty* DidPlayerWin = FindFProperty<FBoolProperty>(GetClass(), TEXT("Did Player Win?"))) {
+        DidPlayerWin->SetPropertyValue_InContainer(this, bWon);
+    }
+    bRecoveredSourceAnimationComplete = false;
+    if (UWidget* PenaltyText = GetWidgetFromName(TEXT("50PercentPenaltyText"))) {
+        PenaltyText->SetVisibility(bWon ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
+    }
+    if (UWidgetAnimation* Animation = FindRecoveredAnimation(TEXT("FadeIn"))) {
+        PlayAnimation(Animation, 0.0f, 1, EUMGSequencePlayMode::Forward, 1.0f, false);
+    }
+}
+
+void URecoveredUPRewardScreenWidget::OnSourceAnimationComplete() {
+    bRecoveredSourceAnimationComplete = true;
+}
+
+UWidgetAnimation* URecoveredUPRewardScreenWidget::FindRecoveredAnimation(FName Name) const {
     return FindPostGameAnimation(this, Name);
 }
 

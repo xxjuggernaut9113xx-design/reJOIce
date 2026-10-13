@@ -3,6 +3,7 @@
 #include "Components/Image.h"
 #include "Components/ProgressBar.h"
 #include "Components/TextBlock.h"
+#include "Components/Widget.h"
 #include "Engine/DataTable.h"
 #include "Engine/Engine.h"
 #include "Engine/Texture2D.h"
@@ -36,10 +37,21 @@ UTexture2D* GetImageTexture(UUserWidget* Widget, FName Name) {
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredPostGameWidgetsTest, "CockHero.Recovery.PostGameWidgetContracts", EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
 bool FRecoveredPostGameWidgetsTest::RunTest(const FString& Parameters) {
     UClass* XPBarClass = LoadClass<URecoveredXPBarWidget>(nullptr, TEXT("/Game/Recovery/UI/WBP_XPBar.WBP_XPBar_C"));
+    UClass* XPSourceClass = LoadClass<URecoveredXPSourceTextWidget>(nullptr, TEXT("/Game/Recovery/UI/XBP_XPSourceText.XBP_XPSourceText_C"));
+    UClass* XPScreenClass = LoadClass<URecoveredXPScreenWidget>(nullptr, TEXT("/Game/Recovery/UI/WBP_XPScreen.WBP_XPScreen_C"));
+    UClass* UPRewardScreenClass = LoadClass<URecoveredUPRewardScreenWidget>(nullptr, TEXT("/Game/Recovery/UI/WBP_UPRewardScreen.WBP_UPRewardScreen_C"));
+    UClass* UPSourceClass = LoadClass<URecoveredUPSourceTextWidget>(nullptr, TEXT("/Game/Recovery/UI/WBP_UPSourceText.WBP_UPSourceText_C"));
     UClass* PlayerCardClass = LoadClass<URecoveredPlayerCardWidget>(nullptr, TEXT("/Game/Recovery/UI/WBP_PlayerCard.WBP_PlayerCard_C"));
     UClass* LevelUpClass = LoadClass<URecoveredLevelUpScreenWidget>(nullptr, TEXT("/Game/Recovery/UI/WBP_LevelUpScreen.WBP_LevelUpScreen_C"));
-    if (!TestNotNull(TEXT("Recovered XP bar class"), XPBarClass) || !TestNotNull(TEXT("Recovered player-card class"), PlayerCardClass) || !TestNotNull(TEXT("Recovered level-up class"), LevelUpClass)) return false;
+    if (!TestNotNull(TEXT("Recovered XP bar class"), XPBarClass) || !TestNotNull(TEXT("Recovered XP source class"), XPSourceClass) ||
+        !TestNotNull(TEXT("Recovered XP screen class"), XPScreenClass) || !TestNotNull(TEXT("Recovered UP reward screen class"), UPRewardScreenClass) ||
+        !TestNotNull(TEXT("Recovered UP source class"), UPSourceClass) || !TestNotNull(TEXT("Recovered player-card class"), PlayerCardClass) ||
+        !TestNotNull(TEXT("Recovered level-up class"), LevelUpClass)) return false;
     if (!TestTrue(TEXT("XP bar uses recovered native parent"), XPBarClass->IsChildOf(URecoveredXPBarWidget::StaticClass())) ||
+        !TestTrue(TEXT("XP source uses recovered native parent"), XPSourceClass->IsChildOf(URecoveredXPSourceTextWidget::StaticClass())) ||
+        !TestTrue(TEXT("XP screen uses recovered native parent"), XPScreenClass->IsChildOf(URecoveredXPScreenWidget::StaticClass())) ||
+        !TestTrue(TEXT("UP reward screen uses recovered native parent"), UPRewardScreenClass->IsChildOf(URecoveredUPRewardScreenWidget::StaticClass())) ||
+        !TestTrue(TEXT("UP source uses recovered native parent"), UPSourceClass->IsChildOf(URecoveredUPSourceTextWidget::StaticClass())) ||
         !TestTrue(TEXT("Player card uses recovered native parent"), PlayerCardClass->IsChildOf(URecoveredPlayerCardWidget::StaticClass())) ||
         !TestTrue(TEXT("Level-up screen uses recovered native parent"), LevelUpClass->IsChildOf(URecoveredLevelUpScreenWidget::StaticClass()))) return false;
 
@@ -141,12 +153,66 @@ bool FRecoveredPostGameWidgetsTest::RunTest(const FString& Parameters) {
     if (TestNotNull(TEXT("Source level-up rank image"), LevelUpIcon)) TestEqual(TEXT("Source level-up rank image name"), LevelUpIcon->GetName(), FString(TEXT("Level_10_-_Stroke_Sergeant")));
     TestTrue(TEXT("Source level-up animation restored"), LevelUp->GetRecoveredLevelUpAnimationDuration() > 0.0f);
 
+    URecoveredXPSourceTextWidget* XPSource = CreateWidget<URecoveredXPSourceTextWidget>(World, XPSourceClass);
+    if (!TestNotNull(TEXT("Recovered XP source instantiates"), XPSource)) return false;
+    XPSource->TakeWidget();
+    FRecoveredXPSourceData XPSourceData;
+    XPSourceData.XPAmount = 125;
+    XPSourceData.DetailText = FText::FromString(TEXT("5 MIN"));
+    XPSource->InitializeSource(XPSourceData);
+    UTextBlock* XPAmountText = Cast<UTextBlock>(XPSource->GetWidgetFromName(TEXT("XPAmountText")));
+    UTextBlock* XPDetailText = Cast<UTextBlock>(XPSource->GetWidgetFromName(TEXT("XPDetailText")));
+    if (!TestNotNull(TEXT("Source XP source amount"), XPAmountText) || !TestNotNull(TEXT("Source XP source detail"), XPDetailText)) return false;
+    TestEqual(TEXT("Source XP source text"), XPAmountText->GetText().ToString(), FString(TEXT("+125 XP")));
+    TestEqual(TEXT("Source XP source detail text"), XPDetailText->GetText().ToString(), FString(TEXT("(5 MIN)")));
+    TestEqual(TEXT("Source XP source data"), XPSource->XPSourceData.XPAmount, 125);
+    TestTrue(TEXT("Source XP source animation restored"), XPSource->GetRecoveredSourceAnimationDuration() > 0.0f);
+
+    URecoveredXPScreenWidget* XPScreen = CreateWidget<URecoveredXPScreenWidget>(World, XPScreenClass);
+    if (!TestNotNull(TEXT("Recovered XP screen instantiates"), XPScreen)) return false;
+    XPScreen->TakeWidget();
+    XPScreen->InitializeRecoveredScreen(false);
+    XPScreen->SequenceEvent__ENTRYPOINTWBP_XPScreen();
+    TestTrue(TEXT("Source XP loss callback plays penalty"), XPScreen->bRecoveredPenaltyPlayed);
+    XPScreen->InitializeRecoveredScreen(true);
+    XPScreen->SequenceEvent__ENTRYPOINTWBP_XPScreen();
+    TestFalse(TEXT("Source XP win callback skips penalty"), XPScreen->bRecoveredPenaltyPlayed);
+
+    URecoveredUPRewardScreenWidget* UPRewardScreen = CreateWidget<URecoveredUPRewardScreenWidget>(World, UPRewardScreenClass);
+    if (!TestNotNull(TEXT("Recovered UP reward screen instantiates"), UPRewardScreen)) return false;
+    UPRewardScreen->TakeWidget();
+    UWidget* UPPenaltyText = UPRewardScreen->GetWidgetFromName(TEXT("50PercentPenaltyText"));
+    if (!TestNotNull(TEXT("Source UP penalty text"), UPPenaltyText)) return false;
+    UPRewardScreen->InitializeRecoveredScreen(true);
+    TestEqual(TEXT("Source UP penalty hides on win"), static_cast<uint8>(UPPenaltyText->GetVisibility()), static_cast<uint8>(ESlateVisibility::Collapsed));
+    UPRewardScreen->InitializeRecoveredScreen(false);
+    TestEqual(TEXT("Source UP penalty shows on loss"), static_cast<uint8>(UPPenaltyText->GetVisibility()), static_cast<uint8>(ESlateVisibility::Visible));
+    TestFalse(TEXT("Source UP callback resets before source animation"), UPRewardScreen->bRecoveredSourceAnimationComplete);
+    UPRewardScreen->OnSourceAnimationComplete();
+    TestTrue(TEXT("Source UP callback completes after source animation"), UPRewardScreen->bRecoveredSourceAnimationComplete);
+
+    URecoveredUPSourceTextWidget* UPSource = CreateWidget<URecoveredUPSourceTextWidget>(World, UPSourceClass);
+    if (!TestNotNull(TEXT("Recovered UP source instantiates"), UPSource)) return false;
+    UPSource->TakeWidget();
+    FRecoveredUPSourceData UPSourceData;
+    UPSourceData.UPAmount = 3;
+    UPSourceData.DetailText = FText::FromString(TEXT("LVL 10"));
+    UPSource->InitializeSource(UPSourceData);
+    UTextBlock* UPAmountText = Cast<UTextBlock>(UPSource->GetWidgetFromName(TEXT("UPAmountText")));
+    UTextBlock* UPDetailText = Cast<UTextBlock>(UPSource->GetWidgetFromName(TEXT("DetailText")));
+    if (!TestNotNull(TEXT("Source UP source amount"), UPAmountText) || !TestNotNull(TEXT("Source UP source detail"), UPDetailText)) return false;
+    TestEqual(TEXT("Source UP source text"), UPAmountText->GetText().ToString(), FString(TEXT("+3 UP")));
+    TestEqual(TEXT("Source UP source detail text"), UPDetailText->GetText().ToString(), FString(TEXT("(LVL 10)")));
+    TestEqual(TEXT("Source UP source data"), UPSource->UPData.UPAmount, 3);
+    TestTrue(TEXT("Source UP source animation restored"), UPSource->GetRecoveredSourceAnimationDuration() > 0.0f);
+
     struct FSoundExpectation { const TCHAR* Path; int32 Frames; };
     const FSoundExpectation Sounds[] = {
         {TEXT("/Game/Recovery/Resources/PostGameSoundFX/whoosh-cinematic-161021_sfx.whoosh-cinematic-161021_sfx"), 133632},
         {TEXT("/Game/Recovery/Resources/PostGameSoundFX/drop-coin-384921.drop-coin-384921"), 48384},
         {TEXT("/Game/Recovery/Resources/PostGameSoundFX/Juice_SFX__11_.Juice_SFX__11_"), 304128},
         {TEXT("/Game/Recovery/Resources/PostGameSoundFX/Juice_SFX__9_.Juice_SFX__9_"), 86400},
+        {TEXT("/Game/Recovery/Resources/PostGameSoundFX/Juice_SFX__5_.Juice_SFX__5_"), 19052},
     };
     for (const FSoundExpectation& Expected : Sounds) {
         USoundWave* Sound = LoadObject<USoundWave>(nullptr, Expected.Path);

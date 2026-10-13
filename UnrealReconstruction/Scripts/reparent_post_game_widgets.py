@@ -7,6 +7,10 @@ import unreal
 PROJECT = Path(unreal.Paths.project_dir())
 TARGETS = (
     ("/Game/Recovery/UI/WBP_XPBar", unreal.RecoveredXPBarWidget),
+    ("/Game/Recovery/UI/XBP_XPSourceText", unreal.RecoveredXPSourceTextWidget),
+    ("/Game/Recovery/UI/WBP_XPScreen", unreal.RecoveredXPScreenWidget),
+    ("/Game/Recovery/UI/WBP_UPRewardScreen", unreal.RecoveredUPRewardScreenWidget),
+    ("/Game/Recovery/UI/WBP_UPSourceText", unreal.RecoveredUPSourceTextWidget),
     ("/Game/Recovery/UI/WBP_PlayerCard", unreal.RecoveredPlayerCardWidget),
     ("/Game/Recovery/UI/WBP_LevelUpScreen", unreal.RecoveredLevelUpScreenWidget),
 )

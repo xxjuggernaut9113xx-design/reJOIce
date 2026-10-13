@@ -23,6 +23,25 @@ SOURCE_FUNCTIONS = {
         "PlaySoundFX.json": set(),
         "SequenceEvent.json": set(),
     },
+    "XBP_XPSourceText": {
+        "Initialize.json": {"XPSourceData", "XPAmountText", "XPDetailText", "SpawnAndSlam"},
+        "SequenceEvent.json": set(),
+    },
+    "WBP_XPScreen": {
+        "InitializeScreen.json": {"RewardData", "CurrentSourceIndex", "WBP_PlayerCard", "WBP_XPBar", "DidPlayerWin?", "UPSources"},
+        "PlayNextSource.json": {"bWaitingForLevelUp", "CurrentSourceIndex", "OnAllSourcesComplete", "XBP_XPSourceText", "XPSources"},
+        "HandleBarFilled.json": set(),
+        "ResumeAfterLevelUp.json": set(),
+    },
+    "WBP_UPSourceText": {
+        "Initialize.json": {"UPData", "UPAmountText", "DetailText", "AnimSlam"},
+        "SequenceEvent.json": set(),
+    },
+    "WBP_UPRewardScreen": {
+        "InitializeScreen.json": {"RewardData", "CurrentSourceIndex", "DisplayedUP", "UPTotalText", "50PercentPenaltyText", "Did Player Win?", "UPSources"},
+        "PlayNextSource.json": {"CurrentSourceIndex", "OnAllSourcesComplete", "UPSources", "WBP_UPSourceText"},
+        "OnSourceAnimationComplete.json": set(),
+    },
 }
 
 REQUIRED_NATIVE_MARKERS = {
@@ -37,17 +56,30 @@ REQUIRED_NATIVE_MARKERS = {
         "Juice_SFX__11_",
         "Juice_SFX__9_",
         "void URecoveredLevelUpScreenWidget::SequenceEvent",
+        "void URecoveredXPSourceTextWidget::InitializeSource",
+        "void URecoveredXPSourceTextWidget::SequenceEvent__ENTRYPOINTXBP_XPSourceText",
+        "void URecoveredUPSourceTextWidget::InitializeSource",
+        "void URecoveredUPSourceTextWidget::SequenceEvent__ENTRYPOINTWBP_UPSourceText",
+        "Juice_SFX__5_",
     },
     "Source/CockHeroRecovered/RecoveredPostGameWidgetsTests.cpp": {
         "CockHero.Recovery.PostGameWidgetContracts",
         "Source XP animation retains overflow",
         "Source level-up rank image",
         "Recovered post-game PCM",
+        "Source XP source text",
+        "Source UP source text",
     },
     "Source/CockHeroRecovered/RecoveredPostGameSequence.cpp": {
         "BindPostGameWidgetInstance",
         "RecoveredBar->InitializeBar",
         "RecoveredLevelUp->InitializeScreen",
+        "URecoveredXPSourceTextWidget",
+        "URecoveredUPSourceTextWidget",
+        "Play50PercentPenalty",
+        "Juice_SFX__12_",
+        "Juice_SFX__16_",
+        "VR_teleport",
     },
     "Source/CockHeroRecovered/RecoveredPostGame.cpp": {
         "RecoveredLevelUp->SetRecoveredPostGameGameInstance",
@@ -110,21 +142,35 @@ def main() -> None:
     animation_contract = load_json(animation_path)
     require(level_contract["verified"]["all_verified"], "rank icon recovery contract failed")
     require(audio_contract["verified"]["all_verified"], "post-game audio recovery contract failed")
-    for widget, animation in (("WBP_XPBar", "ReceiveXP_INST"), ("WBP_LevelUpScreen", "Anim_LevelUp_INST")):
+    animation_expectations = {
+        "WBP_XPBar": {"ReceiveXP_INST"},
+        "XBP_XPSourceText": {"SpawnAndSlam_INST"},
+        "WBP_XPScreen": {"FadeIn_INST", "Play50PercentPenalty_INST"},
+        "WBP_UPRewardScreen": {"FadeIn_INST", "ReceiveUP_INST"},
+        "WBP_UPSourceText": {"AnimSlam_INST"},
+        "WBP_LevelUpScreen": {"Anim_LevelUp_INST"},
+    }
+    for widget, expected_animations in animation_expectations.items():
         report = animation_contract.get(widget, {})
         require(report.get("saved_assets"), f"animation was not saved for {widget}")
         require(report.get("complete_references"), f"animation references incomplete for {widget}")
         recovered_names = {entry.get("name") for entry in report.get("objects", [])}
-        require(animation in recovered_names, f"source animation missing for {widget}: {animation}")
+        missing_animations = sorted(expected_animations - recovered_names)
+        require(not missing_animations, f"source animation missing for {widget}: {missing_animations}")
 
     recovered_assets = [
         PROJECT / "Content/Recovery/UI/WBP_XPBar.uasset",
+        PROJECT / "Content/Recovery/UI/XBP_XPSourceText.uasset",
+        PROJECT / "Content/Recovery/UI/WBP_XPScreen.uasset",
+        PROJECT / "Content/Recovery/UI/WBP_UPRewardScreen.uasset",
+        PROJECT / "Content/Recovery/UI/WBP_UPSourceText.uasset",
         PROJECT / "Content/Recovery/UI/WBP_PlayerCard.uasset",
         PROJECT / "Content/Recovery/UI/WBP_LevelUpScreen.uasset",
         PROJECT / "Content/Recovery/Resources/PostGameSoundFX/whoosh-cinematic-161021_sfx.uasset",
         PROJECT / "Content/Recovery/Resources/PostGameSoundFX/drop-coin-384921.uasset",
         PROJECT / "Content/Recovery/Resources/PostGameSoundFX/Juice_SFX__11_.uasset",
         PROJECT / "Content/Recovery/Resources/PostGameSoundFX/Juice_SFX__9_.uasset",
+        PROJECT / "Content/Recovery/Resources/PostGameSoundFX/Juice_SFX__5_.uasset",
     ]
     recovered_assets.extend(
         PROJECT / "Content/Recovery/Resources/UI/PostGameFlow/LevelIcons" / f"{icon.rsplit('.', 1)[-1]}.uasset"
@@ -136,7 +182,15 @@ def main() -> None:
     report = {
         "recovery": "post-game-widget-contract",
         "source_executed": False,
-        "source_widgets": ["WBP_XPBar", "WBP_PlayerCard", "WBP_LevelUpScreen"],
+        "source_widgets": [
+            "WBP_XPBar",
+            "XBP_XPSourceText",
+            "WBP_XPScreen",
+            "WBP_UPRewardScreen",
+            "WBP_UPSourceText",
+            "WBP_PlayerCard",
+            "WBP_LevelUpScreen",
+        ],
         "source_functions": function_reports,
         "native_recovery": native_reports,
         "animation_recovery": {
@@ -145,12 +199,13 @@ def main() -> None:
                 "complete_references": animation_contract[name]["complete_references"],
                 "animation_count": animation_contract[name]["animation_count"],
             }
-            for name in ("WBP_XPBar", "WBP_LevelUpScreen")
+            for name in animation_expectations
         },
         "verified": {
             "source_functions_decoded": True,
             "native_widget_logic_present": True,
             "post_game_animations_restored": True,
+            "source_panel_feedback_recovered": True,
             "level_icons_contract_verified": True,
             "feedback_audio_contract_verified": True,
             "widget_and_feedback_assets_present": True,

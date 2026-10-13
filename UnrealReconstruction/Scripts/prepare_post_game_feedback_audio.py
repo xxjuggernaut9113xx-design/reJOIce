@@ -18,6 +18,7 @@ SPECS = (
     ("drop-coin-384921", "/Game/SoundFX/drop-coin-384921.drop-coin-384921", ANIMATION_AUDIO),
     ("Juice_SFX__11_", "/Game/UI/PostGameFlow/JuiceSFX/Juice_SFX__11_.Juice_SFX__11_", UI_AUDIO),
     ("Juice_SFX__9_", "/Game/UI/PostGameFlow/JuiceSFX/Juice_SFX__9_.Juice_SFX__9_", UI_AUDIO),
+    ("Juice_SFX__5_", "/Game/UI/PostGameFlow/JuiceSFX/Juice_SFX__5_.Juice_SFX__5_", UI_AUDIO),
 )
 
 
@@ -104,7 +105,11 @@ def main() -> None:
     report = {
         "recovery": "post-game-feedback-audio-streams",
         "source_executed": False,
-        "source_widgets": ["/Game/UI/PostGameFlow/WBP_XPBar", "/Game/UI/PostGameFlow/WBP_LevelUpScreen"],
+        "source_widgets": [
+            "/Game/UI/PostGameFlow/WBP_XPBar",
+            "/Game/UI/PostGameFlow/WBP_LevelUpScreen",
+            "/Game/UI/PostGameFlow/WBP_UPSourceText",
+        ],
         "sounds": rows,
     }
     CATALOG.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")

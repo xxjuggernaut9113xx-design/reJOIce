@@ -1,0 +1,70 @@
+{
+  "validation": "first_session_gate_visual_parity",
+  "result": "pass",
+  "captured_at_local": "2026-10-13T01:48:02",
+  "comparison_method": "RGB per-pixel absolute channel comparison",
+  "reference": {
+    "build": "Cock Hero V0.04 shipping",
+    "image": "original-first-session.png",
+    "sha256": "b94110f7afef824565d85b66c5ecb76327070b35a484848d6b38c63cf0ed455e",
+    "resolution": [
+      1920,
+      1080
+    ],
+    "renderer": {
+      "api": "D3D11",
+      "feature_level": "SM5",
+      "adapter": "NVIDIA GeForce GTX 1650 SUPER"
+    },
+    "launch_profile": "fresh isolated user directory"
+  },
+  "reconstruction": {
+    "build": "CockHeroRecovered editor game",
+    "image": "reconstruction-first-session.png",
+    "sha256": "cee380224e6f9ef4778d59cd6165c033d3c7c052f24dbca8f8b607b3aa9fcfda",
+    "resolution": [
+      1920,
+      1080
+    ],
+    "renderer": {
+      "api": "D3D11",
+      "feature_level": "SM5",
+      "adapter": "NVIDIA GeForce GTX 1650 SUPER"
+    },
+    "launch_profile": "fresh process"
+  },
+  "metrics": {
+    "mean_absolute_channel_difference": 0.01012378,
+    "root_mean_square_channel_difference": 0.1384774,
+    "maximum_channel_difference": 5,
+    "exact_pixel_match_ratio": 0.98465278,
+    "pixels_over_channel_threshold": {
+      "0": {
+        "pixels": 31824,
+        "ratio": 0.0153472222
+      },
+      "1": {
+        "pixels": 10081,
+        "ratio": 0.0048615934
+      },
+      "2": {
+        "pixels": 6120,
+        "ratio": 0.0029513889
+      },
+      "4": {
+        "pixels": 167,
+        "ratio": 8.05363e-05
+      },
+      "8": {
+        "pixels": 0,
+        "ratio": 0.0
+      }
+    }
+  },
+  "acceptance": {
+    "dimensions_match": true,
+    "maximum_channel_difference_lte": 8,
+    "pixels_over_channel_difference_4_ratio_lte": 0.001
+  },
+  "scope": "First-session gate at 1920x1080. Existing-session menu was excluded because the original client had persisted session state while the recovery build was fresh."
+}

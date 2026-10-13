@@ -8,6 +8,9 @@
 #include "Components/TextBlock.h"
 #include "Components/WidgetSwitcher.h"
 #include "Engine/World.h"
+#include "Kismet/GameplayStatics.h"
+#include "Misc/PackageName.h"
+#include "Sound/SoundBase.h"
 #include "TimerManager.h"
 #include "UObject/UnrealType.h"
 
@@ -49,6 +52,37 @@ void BindPostGameWidgetInstance(ARecoveredGlobalManager* Manager, UUserWidget* R
     if (URecoveredLevelUpScreenWidget* LevelUp = Cast<URecoveredLevelUpScreenWidget>(FindNestedUserWidget(Root, TEXT("WBP_LevelUpScreen")))) {
         LevelUp->SetRecoveredPostGameGameInstance(Instance);
     }
+}
+
+void InitializePostGamePlayerCard(ARecoveredGlobalManager* Manager, UUserWidget* Page) {
+    if (!Page) return;
+    if (URecoveredPlayerCardWidget* PlayerCard = Cast<URecoveredPlayerCardWidget>(FindNestedUserWidget(Page, TEXT("WBP_PlayerCard")))) {
+        PlayerCard->SetRecoveredPostGameGameInstance(Manager ? Cast<URecoveredGameInstance>(Manager->GetGameInstance()) : nullptr);
+        PlayerCard->InitializePlayerCard();
+    }
+}
+
+USoundBase* LoadPostGameSequenceSound(const TCHAR* Name) {
+    const FString ObjectPaths[] = {
+        FString::Printf(TEXT("/Game/Recovery/Resources/PostGameSoundFX/%s.%s"), Name, Name),
+        FString::Printf(TEXT("/Game/Recovery/Resources/Audio/%s.%s"), Name, Name),
+    };
+    for (const FString& ObjectPath : ObjectPaths) {
+        const FString PackagePath = FPackageName::ObjectPathToPackageName(ObjectPath);
+        if (!FPackageName::DoesPackageExist(PackagePath)) continue;
+        if (USoundBase* Sound = LoadObject<USoundBase>(nullptr, *ObjectPath)) return Sound;
+    }
+    return nullptr;
+}
+
+void PlayPostGameSequenceSound(const UObject* WorldContext, const TCHAR* Name, float Volume, float Pitch) {
+    if (USoundBase* Sound = LoadPostGameSequenceSound(Name)) UGameplayStatics::PlaySound2D(WorldContext, Sound, Volume, Pitch, 0.0f, nullptr, nullptr, true);
+}
+
+void PlayPostGameEngineSound(const UObject* WorldContext, const TCHAR* ObjectPath, float Volume, float Pitch) {
+    const FString PackagePath = FPackageName::ObjectPathToPackageName(FString(ObjectPath));
+    if (!FPackageName::DoesPackageExist(PackagePath)) return;
+    if (USoundBase* Sound = LoadObject<USoundBase>(nullptr, ObjectPath)) UGameplayStatics::PlaySound2D(WorldContext, Sound, Volume, Pitch, 0.0f, nullptr, nullptr, true);
 }
 
 void SetPostGameSequenceText(UUserWidget* Root, const TCHAR* Name, const FText& Value) {
@@ -137,9 +171,18 @@ void URecoveredPostGameSequence::Begin(ARecoveredGlobalManager* InManager, UUser
     SetPage(0);
     if (UUserWidget* XPPage = FindNestedUserWidget(Root, TEXT("WBP_XPScreen"))) {
         SetBoolProperty(XPPage, TEXT("bWaitingForLevelUp"), false);
+        SetBoolProperty(XPPage, TEXT("DidPlayerWin?"), RewardData.bWon);
         SetIntProperty(XPPage, TEXT("CurrentSourceIndex"), 0);
         SetIntProperty(XPPage, TEXT("CurrentLevelUpIndex"), 0);
         UpdateXPBar(XPPage, DisplayedLevel, DisplayedXP, DisplayedXP, false);
+        InitializePostGamePlayerCard(Manager, XPPage);
+        if (URecoveredXPScreenWidget* RecoveredXPPage = Cast<URecoveredXPScreenWidget>(XPPage)) {
+            RecoveredXPPage->InitializeRecoveredScreen(RewardData.bWon);
+        } else {
+            PlayNamedAnimation(XPPage, TEXT("FadeIn"));
+            PlayPostGameSequenceSound(XPPage, TEXT("Juice_SFX__12_"), 1.0f, 1.0f);
+            if (!RewardData.bWon) PlayNamedAnimation(XPPage, TEXT("Play50PercentPenalty"));
+        }
     }
     ShowNextXPSource();
 }
@@ -216,10 +259,16 @@ void URecoveredPostGameSequence::ShowNextXPSource() {
     UUserWidget* XPPage = FindNestedUserWidget(Root, TEXT("WBP_XPScreen"));
     UUserWidget* SourceWidget = FindNestedUserWidget(XPPage, TEXT("XBP_XPSourceText"));
     SetIntProperty(XPPage, TEXT("CurrentSourceIndex"), CurrentXPSourceIndex - 1);
-    SetPostGameSequenceTextAny(SourceWidget, { TEXT("XPAmountText") }, FText::FromString(FString::Printf(TEXT("+%d XP"), Source.XPAmount)));
-    SetPostGameSequenceTextAny(SourceWidget, { TEXT("XPDetailText") }, FText::FromString(FString::Printf(TEXT("(%s)"), *Source.DetailText.ToString())));
     if (SourceWidget) SourceWidget->SetVisibility(ESlateVisibility::Visible);
-    const float SourceDuration = PlayNamedAnimation(SourceWidget, TEXT("SpawnAndSlam"));
+    const float SourceDuration = [&]() {
+        if (URecoveredXPSourceTextWidget* RecoveredSource = Cast<URecoveredXPSourceTextWidget>(SourceWidget)) {
+            RecoveredSource->InitializeSource(Source);
+            return RecoveredSource->GetRecoveredSourceAnimationDuration();
+        }
+        SetPostGameSequenceTextAny(SourceWidget, { TEXT("XPAmountText") }, FText::FromString(FString::Printf(TEXT("+%d XP"), Source.XPAmount)));
+        SetPostGameSequenceTextAny(SourceWidget, { TEXT("XPDetailText") }, FText::FromString(FString::Printf(TEXT("(%s)"), *Source.DetailText.ToString())));
+        return PlayNamedAnimation(SourceWidget, TEXT("SpawnAndSlam"));
+    }();
     ScheduleAdvance(FMath::Max(SourceDuration, KINDA_SMALL_NUMBER), ERecoveredPostGameAdvance::XPSourceAnimation);
 }
 
@@ -327,7 +376,16 @@ void URecoveredPostGameSequence::BeginUnlockPointStage() {
     UUserWidget* UPPage = FindNestedUserWidget(Root, TEXT("WBP_UPRewardScreen"));
     SetIntProperty(UPPage, TEXT("CurrentSourceIndex"), 0);
     UpdateUPTotal(UPPage, DisplayedUP);
-    PlayNamedAnimation(UPPage, TEXT("FadeIn"));
+    InitializePostGamePlayerCard(Manager, UPPage);
+    if (URecoveredUPRewardScreenWidget* RecoveredUPPage = Cast<URecoveredUPRewardScreenWidget>(UPPage)) {
+        RecoveredUPPage->InitializeRecoveredScreen(RewardData.bWon);
+    } else {
+        SetBoolProperty(UPPage, TEXT("Did Player Win?"), RewardData.bWon);
+        if (UWidget* Penalty = FindPostGameSequenceWidget(UPPage, TEXT("50PercentPenaltyText"))) {
+            Penalty->SetVisibility(RewardData.bWon ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
+        }
+        PlayNamedAnimation(UPPage, TEXT("FadeIn"));
+    }
     ShowNextUPSource();
 }
 
@@ -341,10 +399,16 @@ void URecoveredPostGameSequence::ShowNextUPSource() {
     UUserWidget* UPPage = FindNestedUserWidget(Root, TEXT("WBP_UPRewardScreen"));
     UUserWidget* SourceWidget = FindNestedUserWidget(UPPage, TEXT("WBP_UPSourceText"));
     SetIntProperty(UPPage, TEXT("CurrentSourceIndex"), CurrentUPSourceIndex);
-    SetPostGameSequenceText(SourceWidget, TEXT("UPAmountText"), FText::FromString(FString::Printf(TEXT("+%d UP"), Source.UPAmount)));
-    SetPostGameSequenceText(SourceWidget, TEXT("DetailText"), FText::FromString(FString::Printf(TEXT("(%s)"), *Source.DetailText.ToString())));
     if (SourceWidget) SourceWidget->SetVisibility(ESlateVisibility::Visible);
-    const float SourceDuration = PlayNamedAnimation(SourceWidget, TEXT("AnimSlam"));
+    const float SourceDuration = [&]() {
+        if (URecoveredUPSourceTextWidget* RecoveredSource = Cast<URecoveredUPSourceTextWidget>(SourceWidget)) {
+            RecoveredSource->InitializeSource(Source);
+            return RecoveredSource->GetRecoveredSourceAnimationDuration();
+        }
+        SetPostGameSequenceText(SourceWidget, TEXT("UPAmountText"), FText::FromString(FString::Printf(TEXT("+%d UP"), Source.UPAmount)));
+        SetPostGameSequenceText(SourceWidget, TEXT("DetailText"), FText::FromString(FString::Printf(TEXT("(%s)"), *Source.DetailText.ToString())));
+        return PlayNamedAnimation(SourceWidget, TEXT("AnimSlam"));
+    }();
     ScheduleAdvance(FMath::Max(SourceDuration, KINDA_SMALL_NUMBER), ERecoveredPostGameAdvance::UnlockPointSourceAnimation);
 }
 
@@ -358,7 +422,10 @@ void URecoveredPostGameSequence::CompleteUPSource() {
     DisplayedUP += Source.UPAmount;
     UUserWidget* UPPage = FindNestedUserWidget(Root, TEXT("WBP_UPRewardScreen"));
     UpdateUPTotal(UPPage, DisplayedUP);
+    if (UWidget* SourceWidget = FindPostGameSequenceWidget(UPPage, TEXT("WBP_UPSourceText"))) SourceWidget->SetVisibility(ESlateVisibility::Collapsed);
     PlayNamedAnimation(UPPage, TEXT("ReceiveUP"));
+    PlayPostGameEngineSound(UPPage, TEXT("/Engine/VREditor/Sounds/VR_teleport.VR_teleport"), 0.8f, 1.0f);
+    PlayPostGameSequenceSound(UPPage, TEXT("Juice_SFX__16_"), 1.0f, 1.5f);
     ScheduleAdvance(UPSettleDelay, ERecoveredPostGameAdvance::UnlockPointInterSourceDelay);
 }
 
