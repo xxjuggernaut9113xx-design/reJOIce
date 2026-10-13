@@ -1,6 +1,25 @@
 #include "RecoveredProgression.h"
 #include "RecoveredRules.h"
 #include "RecoveredGameplay.h"
+#include "Engine/DataTable.h"
+#include "Engine/Texture2D.h"
+#include "Misc/PackageName.h"
+
+namespace {
+UTexture2D* LoadRecoveredLevelIconTexture(const FString& OriginalPath) {
+    if (OriginalPath.IsEmpty()) return nullptr;
+    const auto LoadTexture = [](const FString& ObjectPath) -> UTexture2D* {
+        int32 Dot = INDEX_NONE;
+        if (!ObjectPath.FindLastChar(TEXT('.'), Dot) || Dot < 1 || !FPackageName::DoesPackageExist(ObjectPath.Left(Dot))) return nullptr;
+        return LoadObject<UTexture2D>(nullptr, *ObjectPath);
+    };
+    if (UTexture2D* Texture = LoadTexture(OriginalPath)) return Texture;
+    FString AssetName = OriginalPath;
+    int32 Dot = INDEX_NONE;
+    if (AssetName.FindLastChar(TEXT('.'), Dot)) AssetName = AssetName.Mid(Dot + 1);
+    return LoadTexture(FString::Printf(TEXT("/Game/Recovery/Resources/UI/PostGameFlow/LevelIcons/%s.%s"), *AssetName, *AssetName));
+}
+}
 
 int32 URecoveredProgressionLibrary::CalculateSessionXP(const FRecoveredSessionStats& Stats,const FRecoveredXPSettings& Settings) {
     // Separate float operations preserve the recovered SSE arithmetic order.
@@ -38,6 +57,23 @@ void URecoveredProgressionManager::AddUnlockPoints(int32 Amount) {
 float URecoveredProgressionLibrary::CalculateLevelProgress(int32 CurrentXP,int32 CurrentLevel) {
     const int32 Required=GetXPForNextLevel(CurrentLevel);
     return Required>0 ? FMath::Clamp(float(CurrentXP)/float(Required),0.0f,1.0f) : 1.0f;
+}
+
+UTexture2D* URecoveredProgressionManager::GetIconForLevel(int32 Level) const {
+    if (!LevelDataTable || LevelDataTable->GetRowStruct() != FRecoveredLevelRow::StaticStruct()) return nullptr;
+    for (const TPair<FName, uint8*>& Pair : LevelDataTable->GetRowMap()) {
+        const auto* Row = reinterpret_cast<const FRecoveredLevelRow*>(Pair.Value);
+        if (Row && Row->Level == Level) return LoadRecoveredLevelIconTexture(Row->LevelIcon);
+    }
+    return nullptr;
+}
+
+UTexture2D* URecoveredProgressionManager::GetCurrentLevelIcon() const {
+    return GetIconForLevel(CurrentLevel);
+}
+
+UTexture2D* URecoveredProgressionManager::GetNextLevelIcon() const {
+    return GetIconForLevel(CurrentLevel < 20 ? URecoveredStateRuleLibrary::AddInt32Wrapping(CurrentLevel, 1) : 20);
 }
 
 void URecoveredProgressionManager::AddXP(int32 Amount,const FString& Source) {

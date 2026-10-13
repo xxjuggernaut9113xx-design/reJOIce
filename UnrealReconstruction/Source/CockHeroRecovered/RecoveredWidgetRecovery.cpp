@@ -6,6 +6,7 @@
 #include "RecoveredRestWidget.h"
 #include "RecoveredEventWidgets.h"
 #include "RecoveredPostCumContinueWidget.h"
+#include "RecoveredPostGameWidgets.h"
 #include "RecoveredSessionSummaryWidget.h"
 #include "RecoveredStatsWidget.h"
 #include "RecoveredStatsTabWidget.h"
@@ -190,6 +191,9 @@ FString URecoveredWidgetRecovery::BuildWidgetAssets(const FString& EvidencePath)
             if(Screen.Key==TEXT("RestWidget")) ParentClass=URecoveredRestWidget::StaticClass();
             if(Screen.Key==TEXT("PostCumContinue_Widget")) ParentClass=URecoveredPostCumContinueWidget::StaticClass();
             if(Screen.Key==TEXT("WBP_SessionSummaryWidget")) ParentClass=URecoveredSessionSummaryWidget::StaticClass();
+            if(Screen.Key==TEXT("WBP_XPBar")) ParentClass=URecoveredXPBarWidget::StaticClass();
+            if(Screen.Key==TEXT("WBP_PlayerCard")) ParentClass=URecoveredPlayerCardWidget::StaticClass();
+            if(Screen.Key==TEXT("WBP_LevelUpScreen")) ParentClass=URecoveredLevelUpScreenWidget::StaticClass();
             if(Screen.Key==TEXT("StatsScreenWidget")) ParentClass=URecoveredStatsScreenWidget::StaticClass();
             if(Screen.Key==TEXT("StatsTabWidget")) ParentClass=URecoveredStatsTabWidget::StaticClass();
             if(Screen.Key==TEXT("PlayerCardsTabWidget")) ParentClass=URecoveredPlayerCardsTabWidget::StaticClass();

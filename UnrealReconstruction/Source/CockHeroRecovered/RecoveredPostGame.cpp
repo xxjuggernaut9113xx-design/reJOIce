@@ -1,6 +1,7 @@
 #include "RecoveredRules.h"
 #include "RecoveredRewards.h"
 #include "RecoveredProgression.h"
+#include "RecoveredPostGameWidgets.h"
 #include "RecoveredPostGameSequence.h"
 #include "RecoveredSessionSummaryWidget.h"
 #include "RecoveredChallengeTracker.h"
@@ -521,6 +522,26 @@ void ARecoveredGlobalManager::HandleRecoveredLevelUp(int32 Level, int32 UnlockPo
     if (auto* LevelUp = CreateWidget<UUserWidget>(Controller, LevelUpClass)) {
         LevelUp->AddToViewport(10);
         EventOverlays.Add(LevelUp);
+        if (URecoveredLevelUpScreenWidget* RecoveredLevelUp = Cast<URecoveredLevelUpScreenWidget>(LevelUp)) {
+            URecoveredGameInstance* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
+            RecoveredLevelUp->SetRecoveredPostGameGameInstance(Instance);
+            FRecoveredLevelUpEventData Event;
+            Event.NewLevel = Level;
+            Event.UPReward = UnlockPoints;
+            Event.Title = FName(*FString::Printf(TEXT("LEVEL %d"), Level));
+            if (Instance && Instance->ProgressionManager && Instance->ProgressionManager->LevelDataTable &&
+                Instance->ProgressionManager->LevelDataTable->GetRowStruct() == FRecoveredLevelRow::StaticStruct()) {
+                for (const TPair<FName, uint8*>& Pair : Instance->ProgressionManager->LevelDataTable->GetRowMap()) {
+                    const FRecoveredLevelRow* Row = reinterpret_cast<const FRecoveredLevelRow*>(Pair.Value);
+                    if (Row && Row->Level == Level) {
+                        Event.Title = FName(*Row->TitleUnlock.ToString());
+                        Event.XPThresholdCrossed = Row->XPRequired;
+                        break;
+                    }
+                }
+            }
+            RecoveredLevelUp->InitializeScreen(Event);
+        }
         // Bind level, unlock points, and content unlocks to text fields.
         TArray<UWidget*> AllWidgets;
         if (LevelUp->WidgetTree) LevelUp->WidgetTree->GetAllWidgets(AllWidgets);

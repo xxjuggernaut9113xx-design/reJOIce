@@ -1,5 +1,6 @@
 ﻿#include "RecoveredPostGameSequence.h"
 
+#include "RecoveredPostGameWidgets.h"
 #include "RecoveredRules.h"
 #include "Animation/WidgetAnimation.h"
 #include "Blueprint/UserWidget.h"
@@ -34,6 +35,20 @@ UWidget* FindPostGameSequenceWidget(UUserWidget* Root, FName Name) {
 
 UUserWidget* FindNestedUserWidget(UUserWidget* Root, FName Name) {
     return Cast<UUserWidget>(FindPostGameSequenceWidget(Root, Name));
+}
+
+void BindPostGameWidgetInstance(ARecoveredGlobalManager* Manager, UUserWidget* Root) {
+    URecoveredGameInstance* Instance = Manager ? Cast<URecoveredGameInstance>(Manager->GetGameInstance()) : nullptr;
+    if (!Instance || !Root) return;
+    if (URecoveredXPBarWidget* XPBar = Cast<URecoveredXPBarWidget>(FindNestedUserWidget(Root, TEXT("WBP_XPBar")))) {
+        XPBar->SetRecoveredPostGameGameInstance(Instance);
+    }
+    if (URecoveredPlayerCardWidget* PlayerCard = Cast<URecoveredPlayerCardWidget>(FindNestedUserWidget(Root, TEXT("WBP_PlayerCard")))) {
+        PlayerCard->SetRecoveredPostGameGameInstance(Instance);
+    }
+    if (URecoveredLevelUpScreenWidget* LevelUp = Cast<URecoveredLevelUpScreenWidget>(FindNestedUserWidget(Root, TEXT("WBP_LevelUpScreen")))) {
+        LevelUp->SetRecoveredPostGameGameInstance(Instance);
+    }
 }
 
 void SetPostGameSequenceText(UUserWidget* Root, const TCHAR* Name, const FText& Value) {
@@ -77,8 +92,16 @@ float PlayNamedAnimation(UUserWidget* Widget, FName Name) {
 void UpdateXPBar(UUserWidget* XPPage, int32 Level, int32 CurrentXP, int32 TargetXP, bool bAnimating) {
     UUserWidget* Bar = FindNestedUserWidget(XPPage, TEXT("WBP_XPBar"));
     if (!Bar) return;
+    const int32 XPToNext = URecoveredProgressionLibrary::GetXPForNextLevel(Level);
+    if (URecoveredXPBarWidget* RecoveredBar = Cast<URecoveredXPBarWidget>(Bar)) {
+        RecoveredBar->InitializeBar(Level, CurrentXP, XPToNext);
+        if (bAnimating) RecoveredBar->AddXPAnimated(URecoveredStateRuleLibrary::AddInt32Wrapping(TargetXP, -CurrentXP), XPAnimationDuration);
+        return;
+    }
     SetIntProperty(Bar, TEXT("CurrentLevel"), Level);
+    SetIntProperty(Bar, TEXT("TargetLevel"), URecoveredStateRuleLibrary::AddInt32Wrapping(Level, 1));
     SetIntProperty(Bar, TEXT("CurrentXP"), CurrentXP);
+    SetIntProperty(Bar, TEXT("MaxXP"), XPToNext);
     SetIntProperty(Bar, TEXT("AnimationStartXP"), CurrentXP);
     SetIntProperty(Bar, TEXT("AnimationTargetXP"), TargetXP);
     SetFloatProperty(Bar, TEXT("AnimationDuration"), XPAnimationDuration);
@@ -100,6 +123,7 @@ void URecoveredPostGameSequence::Begin(ARecoveredGlobalManager* InManager, UUser
     Root = InRoot;
     RewardData = InRewardData;
     if (!Manager || !Root) return;
+    BindPostGameWidgetInstance(Manager, Root);
 
     CurrentXPSourceIndex = 0;
     CurrentUPSourceIndex = 0;
@@ -203,8 +227,9 @@ void URecoveredPostGameSequence::StartXPBarAnimation() {
     UUserWidget* XPPage = FindNestedUserWidget(Root, TEXT("WBP_XPScreen"));
     const int32 Threshold = GetCurrentXPThreshold();
     const int32 TargetXP = Threshold > 0 ? FMath::Min(DisplayedXP + PendingXPAmount, Threshold) : DisplayedXP + PendingXPAmount;
+    UUserWidget* Bar = FindNestedUserWidget(XPPage, TEXT("WBP_XPBar"));
     UpdateXPBar(XPPage, DisplayedLevel, DisplayedXP, TargetXP, true);
-    PlayNamedAnimation(FindNestedUserWidget(XPPage, TEXT("WBP_XPBar")), TEXT("ReceiveXP"));
+    if (!Cast<URecoveredXPBarWidget>(Bar)) PlayNamedAnimation(Bar, TEXT("ReceiveXP"));
     ScheduleAdvance(XPAnimationDuration, ERecoveredPostGameAdvance::XPBarAnimation);
 }
 
@@ -244,13 +269,19 @@ void URecoveredPostGameSequence::PresentLevelUp() {
     SetPage(1);
     const FRecoveredLevelUpEventData& Event = RewardData.LevelUpEvents[CurrentLevelEventIndex];
     UUserWidget* LevelPage = FindNestedUserWidget(Root, TEXT("WBP_LevelUpScreen"));
-    SetPostGameSequenceText(LevelPage, TEXT("LevelText"), FText::AsNumber(Event.NewLevel));
-    SetPostGameSequenceText(LevelPage, TEXT("RankTitle"), FText::FromName(Event.Title));
     if (UUserWidget* XPPage = FindNestedUserWidget(Root, TEXT("WBP_XPScreen"))) {
         SetBoolProperty(XPPage, TEXT("bWaitingForLevelUp"), true);
         SetIntProperty(XPPage, TEXT("CurrentLevelUpIndex"), CurrentLevelEventIndex + 1);
     }
-    const float Duration = PlayNamedAnimation(LevelPage, TEXT("Anim_LevelUp"));
+    const float Duration = [&]() {
+        if (URecoveredLevelUpScreenWidget* RecoveredLevelUp = Cast<URecoveredLevelUpScreenWidget>(LevelPage)) {
+            RecoveredLevelUp->InitializeScreen(Event);
+            return RecoveredLevelUp->GetRecoveredLevelUpAnimationDuration();
+        }
+        SetPostGameSequenceText(LevelPage, TEXT("LevelText"), FText::AsNumber(Event.NewLevel));
+        SetPostGameSequenceText(LevelPage, TEXT("RankTitle"), FText::FromName(Event.Title));
+        return PlayNamedAnimation(LevelPage, TEXT("Anim_LevelUp"));
+    }();
     ScheduleAdvance(FMath::Max(Duration, KINDA_SMALL_NUMBER), ERecoveredPostGameAdvance::LevelUpAnimation);
 }
 
@@ -280,8 +311,9 @@ void URecoveredPostGameSequence::ShowXPOverflow() {
     UUserWidget* XPPage = FindNestedUserWidget(Root, TEXT("WBP_XPScreen"));
     const int32 Threshold = GetCurrentXPThreshold();
     const int32 TargetXP = Threshold > 0 ? FMath::Min(DisplayedXP + PendingXPAmount, Threshold) : DisplayedXP + PendingXPAmount;
+    UUserWidget* Bar = FindNestedUserWidget(XPPage, TEXT("WBP_XPBar"));
     UpdateXPBar(XPPage, DisplayedLevel, DisplayedXP, TargetXP, true);
-    PlayNamedAnimation(FindNestedUserWidget(XPPage, TEXT("WBP_XPBar")), TEXT("ReceiveXP"));
+    if (!Cast<URecoveredXPBarWidget>(Bar)) PlayNamedAnimation(Bar, TEXT("ReceiveXP"));
     ScheduleAdvance(XPAnimationDuration, ERecoveredPostGameAdvance::XPOverflowAnimation);
 }
 

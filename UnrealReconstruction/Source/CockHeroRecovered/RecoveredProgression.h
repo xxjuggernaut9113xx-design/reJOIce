@@ -150,6 +150,9 @@ public:
     UFUNCTION(BlueprintCallable,Category="Recovered") bool EquipPlayerCard(FName CardID);
     UFUNCTION(BlueprintPure,Category="Recovered") FName GetEquippedPlayerCard() const;
     UFUNCTION(BlueprintPure,Category="Recovered") bool IsPlayerCardUnlocked(FName CardID) const;
+    UFUNCTION(BlueprintPure,Category="Recovered") class UTexture2D* GetIconForLevel(int32 Level) const;
+    UFUNCTION(BlueprintPure,Category="Recovered") class UTexture2D* GetCurrentLevelIcon() const;
+    UFUNCTION(BlueprintPure,Category="Recovered") class UTexture2D* GetNextLevelIcon() const;
     bool GetPlayerCardData(FName CardID,FRecoveredPlayerCardRow& OutData) const;
     void GetAllPlayerCardData(TArray<FRecoveredPlayerCardRow>& OutData) const;
     UFUNCTION(BlueprintPure,Category="Recovered") TArray<FName> GetUnlockedPlayerCards() const;

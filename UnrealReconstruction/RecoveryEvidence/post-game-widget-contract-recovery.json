@@ -1,0 +1,214 @@
+{
+  "recovery": "post-game-widget-contract",
+  "source_executed": false,
+  "source_widgets": [
+    "WBP_XPBar",
+    "WBP_PlayerCard",
+    "WBP_LevelUpScreen"
+  ],
+  "source_functions": {
+    "WBP_XPBar/InitializeBar.json": {
+      "statements": 39,
+      "calls": [
+        "Add_IntInt",
+        "Conv_IntToDouble",
+        "Conv_IntToInt64",
+        "Conv_IntToText",
+        "Divide_DoubleDouble",
+        "Format",
+        "GetIconForLevel",
+        "SetBrushFromTexture",
+        "SetPercent",
+        "SetText"
+      ],
+      "required_fields": [
+        "CurrentLevel",
+        "CurrentLevelEmblemIcon",
+        "MaxXP",
+        "NextLevelEmblem",
+        "TargetLevel"
+      ],
+      "decoded": true,
+      "sha256": "5730c1b4cc7b81b61a03a49dbe67f05ac02108df3c3351749e58df16bdb2cc9e"
+    },
+    "WBP_XPBar/UpdateDisplay.json": {
+      "statements": 34,
+      "calls": [
+        "Conv_IntToDouble",
+        "Conv_IntToInt64",
+        "Conv_IntToText",
+        "Divide_DoubleDouble",
+        "Format",
+        "GetIconForLevel",
+        "SetBrushFromTexture",
+        "SetPercent",
+        "SetText"
+      ],
+      "required_fields": [
+        "CurrentLevelEmblemIcon",
+        "CurrentXP",
+        "MaxXP",
+        "NextLevelEmblem",
+        "XPProgressBar",
+        "XPText"
+      ],
+      "decoded": true,
+      "sha256": "eb67b8a75ba676a58be3fbb7047b51640877db8258552881f6d9be2221de0349"
+    },
+    "WBP_XPBar/AddXPAnimated.json": {
+      "statements": 13,
+      "calls": [
+        "Add_IntInt",
+        "Divide_DoubleDouble",
+        "PlayAnimation",
+        "PlaySound2D"
+      ],
+      "required_fields": [
+        "AnimationDuration",
+        "AnimationStartXP",
+        "AnimationTargetXP",
+        "ReceiveXP",
+        "bIsAnimating"
+      ],
+      "decoded": true,
+      "sha256": "74d8a87ec545960cb2b3a568afd530b954ba00338681ddc972b03ce32fc9031e"
+    },
+    "WBP_PlayerCard/InitializePlayerCard.json": {
+      "statements": 6,
+      "calls": [
+        "GetEquippedPlayerCard",
+        "GetPlayerCardData",
+        "SetBrushFromTexture",
+        "SetText"
+      ],
+      "required_fields": [
+        "CurrentSave",
+        "PlayerNameText",
+        "Playercard_Name",
+        "ProgressionManager",
+        "SelectedPlayerCard"
+      ],
+      "decoded": true,
+      "sha256": "51b428ec34a39e3a5c9fc935413581c341b51079ec68c93b87a49574be301e3f"
+    },
+    "WBP_LevelUpScreen/InitializeScreen.json": {
+      "statements": 11,
+      "calls": [
+        "Conv_IntToText",
+        "Conv_NameToText",
+        "GetIconForLevel",
+        "InitializePlayerCard",
+        "PlayAnimation",
+        "SetBrushFromTexture",
+        "SetText"
+      ],
+      "required_fields": [
+        "Anim_LevelUp",
+        "LevelText",
+        "LevelUpData",
+        "ProgressionManager",
+        "RankIcon",
+        "RankTitle",
+        "WBP_PlayerCard"
+      ],
+      "decoded": true,
+      "sha256": "07a61d5097abd60f916eb28f648c03718cdf1e9071fda1c70cfb7952235d611c"
+    },
+    "WBP_LevelUpScreen/PlaySoundFX.json": {
+      "statements": 3,
+      "calls": [
+        "ExecuteUbergraph_WBP_LevelUpScreen"
+      ],
+      "required_fields": [],
+      "decoded": true,
+      "sha256": "8f8419524d88cbbe45d606bce2ec1a625f2aed0598a6066abbb3afe8b4982a4d"
+    },
+    "WBP_LevelUpScreen/SequenceEvent.json": {
+      "statements": 3,
+      "calls": [
+        "ExecuteUbergraph_WBP_LevelUpScreen"
+      ],
+      "required_fields": [],
+      "decoded": true,
+      "sha256": "3b789bb9b7480af775b39b1ea2aebe849de3a73946912464b3060c93b7a1199e"
+    }
+  },
+  "native_recovery": {
+    "Source/CockHeroRecovered/RecoveredPostGameWidgets.cpp": {
+      "markers": [
+        "Juice_SFX__11_",
+        "Juice_SFX__9_",
+        "drop-coin-384921",
+        "void URecoveredLevelUpScreenWidget::InitializeScreen",
+        "void URecoveredLevelUpScreenWidget::SequenceEvent",
+        "void URecoveredPlayerCardWidget::InitializePlayerCard",
+        "void URecoveredXPBarWidget::AddXPAnimated",
+        "void URecoveredXPBarWidget::AdvanceRecoveredXPAnimation",
+        "void URecoveredXPBarWidget::InitializeBar",
+        "whoosh-cinematic-161021_sfx"
+      ],
+      "sha256": "f77a2c87a15ff24ccba60333fe010cb8a23207cf38f049031d0659367b69fe2f"
+    },
+    "Source/CockHeroRecovered/RecoveredPostGameWidgetsTests.cpp": {
+      "markers": [
+        "CockHero.Recovery.PostGameWidgetContracts",
+        "Recovered post-game PCM",
+        "Source XP animation retains overflow",
+        "Source level-up rank image"
+      ],
+      "sha256": "4261993b739b4758eb85d7f5b8e3b1660fd13a8e6095cd955e79533eda6dded2"
+    },
+    "Source/CockHeroRecovered/RecoveredPostGameSequence.cpp": {
+      "markers": [
+        "BindPostGameWidgetInstance",
+        "RecoveredBar->InitializeBar",
+        "RecoveredLevelUp->InitializeScreen"
+      ],
+      "sha256": "99c731f7585439ea74edd0f13e08036030da2a8be5912cf630166f27e4bf66f4"
+    },
+    "Source/CockHeroRecovered/RecoveredPostGame.cpp": {
+      "markers": [
+        "RecoveredLevelUp->InitializeScreen",
+        "RecoveredLevelUp->SetRecoveredPostGameGameInstance"
+      ],
+      "sha256": "e43e07586d76faec33d7c09a3a1c9553d2172b5f5f0c086ddca231f3e8e3cfa9"
+    }
+  },
+  "animation_recovery": {
+    "WBP_XPBar": {
+      "saved_assets": true,
+      "complete_references": true,
+      "animation_count": 1
+    },
+    "WBP_LevelUpScreen": {
+      "saved_assets": true,
+      "complete_references": true,
+      "animation_count": 1
+    }
+  },
+  "verified": {
+    "source_functions_decoded": true,
+    "native_widget_logic_present": true,
+    "post_game_animations_restored": true,
+    "level_icons_contract_verified": true,
+    "feedback_audio_contract_verified": true,
+    "widget_and_feedback_assets_present": true,
+    "automation_contract_present": true,
+    "all_verified": true
+  },
+  "source_sha256": {
+    "RecoveryEvidence/blueprint-functions/WBP_LevelUpScreen/InitializeScreen.json": "07a61d5097abd60f916eb28f648c03718cdf1e9071fda1c70cfb7952235d611c",
+    "RecoveryEvidence/blueprint-functions/WBP_LevelUpScreen/PlaySoundFX.json": "8f8419524d88cbbe45d606bce2ec1a625f2aed0598a6066abbb3afe8b4982a4d",
+    "RecoveryEvidence/blueprint-functions/WBP_LevelUpScreen/SequenceEvent.json": "3b789bb9b7480af775b39b1ea2aebe849de3a73946912464b3060c93b7a1199e",
+    "RecoveryEvidence/blueprint-functions/WBP_PlayerCard/InitializePlayerCard.json": "51b428ec34a39e3a5c9fc935413581c341b51079ec68c93b87a49574be301e3f",
+    "RecoveryEvidence/blueprint-functions/WBP_XPBar/AddXPAnimated.json": "74d8a87ec545960cb2b3a568afd530b954ba00338681ddc972b03ce32fc9031e",
+    "RecoveryEvidence/blueprint-functions/WBP_XPBar/InitializeBar.json": "5730c1b4cc7b81b61a03a49dbe67f05ac02108df3c3351749e58df16bdb2cc9e",
+    "RecoveryEvidence/blueprint-functions/WBP_XPBar/UpdateDisplay.json": "eb67b8a75ba676a58be3fbb7047b51640877db8258552881f6d9be2221de0349",
+    "RecoveryEvidence/level-icon-contract-recovery.json": "e84e01568faebb73a64a09316b46c638e23a8e1ae302ad580c901923a3bb0def",
+    "RecoveryEvidence/post-game-animation-recovery.json": "09e43d4d77405a1fcd863ccdb9dc86c52fef84cb297be7dd1b96f8aa1b64285b",
+    "RecoveryEvidence/post-game-feedback-audio-contract-recovery.json": "fc5ba3b1c578fe736a26206a4accff892b3059aee6203319d8e1acbbcfc7418e"
+  },
+  "reconstruction_sha256": {
+    "Scripts/recover_post_game_widget_contract.py": "42dba52d344c749fab804f3655dd68c15a97e906474a1151891d2f46cb74a3f4"
+  }
+}
