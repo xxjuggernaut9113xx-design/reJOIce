@@ -30,7 +30,7 @@ bool LoadVoiceJson(const TCHAR* RelativePath,TSharedPtr<FJsonObject>& OutObject)
         && OutObject.IsValid();
 }
 
-bool HasSourceAnimation(const UWidgetBlueprintGeneratedClass* Generated,FName Name) {
+bool HasVoiceSourceAnimation(const UWidgetBlueprintGeneratedClass* Generated,FName Name) {
     if (!Generated) return false;
     const FName InstanceName(*FString::Printf(TEXT("%s_INST"),*Name.ToString()));
     for (const TObjectPtr<UWidgetAnimation>& Animation:Generated->Animations) {
@@ -90,10 +90,10 @@ bool FRecoveredVoiceSettingsTest::RunTest(const FString& Parameters) {
     auto* VoiceGenerated=Cast<UWidgetBlueprintGeneratedClass>(VoiceClass);
     auto* EntryGenerated=Cast<UWidgetBlueprintGeneratedClass>(EntryClass);
     for (const TCHAR* Animation:{TEXT("EquipButtonClick"),TEXT("EquipButtonHover"),TEXT("EquipButtonUnhover"),TEXT("Sample1ButtonClick"),TEXT("Sample1ButtonHover"),TEXT("Sample1ButtonUnhover"),TEXT("Sample2ButtonClick"),TEXT("Sample2ButtonHover"),TEXT("Sample2ButtonUnhover"),TEXT("Sample3ButtonClick"),TEXT("Sample3ButtonHover"),TEXT("Sample3ButtonUnhover"),TEXT("SelectPackAnim")}) {
-        TestTrue(*FString::Printf(TEXT("Voice source animation %s"),Animation),HasSourceAnimation(VoiceGenerated,FName(Animation)));
+        TestTrue(*FString::Printf(TEXT("Voice source animation %s"),Animation),HasVoiceSourceAnimation(VoiceGenerated,FName(Animation)));
     }
-    TestTrue(TEXT("Voice entry hover animation"),HasSourceAnimation(EntryGenerated,TEXT("OnHover")));
-    TestTrue(TEXT("Voice entry unhover animation"),HasSourceAnimation(EntryGenerated,TEXT("Unhover")));
+    TestTrue(TEXT("Voice entry hover animation"),HasVoiceSourceAnimation(EntryGenerated,TEXT("OnHover")));
+    TestTrue(TEXT("Voice entry unhover animation"),HasVoiceSourceAnimation(EntryGenerated,TEXT("Unhover")));
 
     FWorldInitializationValues Initialization;
     Initialization.AllowAudioPlayback(false).CreatePhysicsScene(false).CreateNavigation(false).CreateAISystem(false).ShouldSimulatePhysics(false).SetTransactional(false);

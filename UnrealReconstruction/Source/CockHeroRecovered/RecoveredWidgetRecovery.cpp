@@ -19,6 +19,7 @@
 #include "RecoveredModifierWidget.h"
 #include "RecoveredNotificationWidget.h"
 #include "RecoveredUnlockStoreWidget.h"
+#include "RecoveredStoreItem.h"
 #include "RecoveredEditUsernameOverlay.h"
 #include "RecoveredImportWidget.h"
 #include "RecoveredCalibrationWidget.h"
@@ -222,6 +223,14 @@ FString URecoveredWidgetRecovery::BuildWidgetAssets(const FString& EvidencePath)
             if(Screen.Key==TEXT("UMG_BeatIcon")) ParentClass=URecoveredBeatWidget::StaticClass();
             if(Screen.Key==TEXT("WBP_CalibrationUI")) ParentClass=URecoveredCalibrationWidget::StaticClass();
             if(Screen.Key==TEXT("StoreWidget")) ParentClass=URecoveredStoreWidget::StaticClass();
+            if(Screen.Key==TEXT("+XCumChance_StoreItem")) ParentClass=URecoveredStoreItemWidget::StaticClass();
+            if(Screen.Key==TEXT("BonerPillStoreItem")) ParentClass=URecoveredStoreItemWidget::StaticClass();
+            if(Screen.Key==TEXT("BreakStoreItem")) ParentClass=URecoveredStoreItemWidget::StaticClass();
+            if(Screen.Key==TEXT("DecreaseHeatLevel_StoreItem")) ParentClass=URecoveredStoreItemWidget::StaticClass();
+            if(Screen.Key==TEXT("EdgeStoreItem")) ParentClass=URecoveredStoreItemWidget::StaticClass();
+            if(Screen.Key==TEXT("ResupplyStoreItem")) ParentClass=URecoveredStoreItemWidget::StaticClass();
+            if(Screen.Key==TEXT("SlowdownStoreItem")) ParentClass=URecoveredStoreItemWidget::StaticClass();
+            if(Screen.Key==TEXT("SuccuShieldStoreItem")) ParentClass=URecoveredStoreItemWidget::StaticClass();
             if(Screen.Key==TEXT("DifficultySelectScreen_Widget")) ParentClass=URecoveredDifficultyMenu::StaticClass();
             if(Screen.Key==TEXT("SettingsMenuWidget")) ParentClass=URecoveredSettingsMenu::StaticClass();
             if(Screen.Key==TEXT("VoicelineSettingsMenu")) ParentClass=URecoveredVoiceSettings::StaticClass();
@@ -288,6 +297,16 @@ FString URecoveredWidgetRecovery::BuildWidgetAssets(const FString& EvidencePath)
             FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(Blueprint);
             FKismetEditorUtilities::CompileBlueprint(Blueprint);
             if(Blueprint->Status==BS_Error) Errors.Add(MakeShared<FJsonValueString>(Screen.Key+TEXT(" compile failed")));
+            if(auto* StoreDefaults=Cast<URecoveredStoreItemWidget>(Blueprint->GeneratedClass->GetDefaultObject())) {
+                if(Screen.Key==TEXT("+XCumChance_StoreItem")) StoreDefaults->ItemID=TEXT("XCumChance");
+                if(Screen.Key==TEXT("BonerPillStoreItem")) StoreDefaults->ItemID=TEXT("BonerPill");
+                if(Screen.Key==TEXT("BreakStoreItem")) StoreDefaults->ItemID=TEXT("Break");
+                if(Screen.Key==TEXT("DecreaseHeatLevel_StoreItem")) StoreDefaults->ItemID=TEXT("DecreaseHeat");
+                if(Screen.Key==TEXT("EdgeStoreItem")) StoreDefaults->ItemID=TEXT("Edge");
+                if(Screen.Key==TEXT("ResupplyStoreItem")) StoreDefaults->ItemID=TEXT("Resupply");
+                if(Screen.Key==TEXT("SlowdownStoreItem")) StoreDefaults->ItemID=TEXT("Slowdown");
+                if(Screen.Key==TEXT("SuccuShieldStoreItem")) StoreDefaults->ItemID=TEXT("SuccuShield");
+            }
             if(auto* MenuDefaults=Cast<URecoveredMenuWidget>(Blueprint->GeneratedClass->GetDefaultObject())) {
                 MenuDefaults->StaticTooltips.Reset();
                 if(TooltipEvidence.IsValid()) for(const auto& Value:TooltipEvidence->GetArrayField(TEXT("records"))) {

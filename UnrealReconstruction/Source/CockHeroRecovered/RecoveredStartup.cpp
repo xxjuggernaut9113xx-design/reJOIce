@@ -1,6 +1,7 @@
 #include "RecoveredRules.h"
 #include "RecoveredMenu.h"
 #include "RecoveredUnlockStoreWidget.h"
+#include "RecoveredEventWidgets.h"
 #include "GameFramework/PlayerController.h"
 #include "Kismet/GameplayStatics.h"
 #include "Misc/CommandLine.h"
@@ -97,6 +98,58 @@ void ARecoveredGlobalManager::BeginPlay() {
                 const FString ScreenshotPath=FPaths::ConvertRelativePathToFull(FPaths::ProjectDir()/TEXT("RecoveryEvidence/visual-parity/reconstruction-unlock-store.png"));
                 FScreenshotRequest::RequestScreenshot(ScreenshotPath,true,false);
                 UE_LOG(LogTemp,Display,TEXT("RECOVERED_UNLOCK_STORE_VISUAL_SMOKE_CAPTURE_REQUESTED: %s"),*ScreenshotPath);
+                FTimerHandle QuitTimer;
+                GetWorldTimerManager().SetTimer(QuitTimer,[this]() {
+                    if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                },4.0f,false);
+            },1.0f,false);
+        },1.0f,false);
+    }
+    if (FParse::Param(FCommandLine::Get(),TEXT("RecoveredStoreVisualSmoke"))) {
+        FTimerHandle VisualTimer;
+        GetWorldTimerManager().SetTimer(VisualTimer,[this]() {
+            auto* Menu=Cast<URecoveredMainMenu>(MainMenu);
+            auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
+            if (!Menu || !Instance || !Instance->CurrentSave) {
+                UE_LOG(LogTemp,Error,TEXT("RECOVERED_STORE_VISUAL_SMOKE_FAIL: recovered store prerequisites unavailable"));
+                if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                return;
+            }
+            FRecoveredLatencyProfile VisualProfile;
+            if (!Instance->CurrentSave->GetLatencyProfile(VisualProfile)) {
+                UE_LOG(LogTemp,Error,TEXT("RECOVERED_STORE_VISUAL_SMOKE_FAIL: recovery calibration profile could not be staged"));
+                if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                return;
+            }
+            VisualProfile.bIsCalibrated=true;
+            if (!Instance->CurrentSave->SetLatencyProfile(VisualProfile)) {
+                UE_LOG(LogTemp,Error,TEXT("RECOVERED_STORE_VISUAL_SMOKE_FAIL: recovery calibration profile could not be staged"));
+                if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                return;
+            }
+            Menu->CloseAdultWarning();
+            Menu->CloseTutorialSplash();
+            Menu->CloseUpdateSplash();
+            PlayerVariables.PlayerCoins=10000;
+            if (!SpawnRecoveredStore()) {
+                UE_LOG(LogTemp,Error,TEXT("RECOVERED_STORE_VISUAL_SMOKE_FAIL: recovered store did not open"));
+                if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                return;
+            }
+            FTimerHandle CaptureTimer;
+            GetWorldTimerManager().SetTimer(CaptureTimer,[this]() {
+                URecoveredStoreWidget* Store=nullptr;
+                for (const TObjectPtr<UUserWidget>& Overlay:EventOverlays) {
+                    if (auto* Candidate=Cast<URecoveredStoreWidget>(Overlay)) { Store=Candidate;break; }
+                }
+                if (!Store || !Store->IsInViewport()) {
+                    UE_LOG(LogTemp,Error,TEXT("RECOVERED_STORE_VISUAL_SMOKE_FAIL: recovered store viewport initialization incomplete"));
+                    if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                    return;
+                }
+                const FString ScreenshotPath=FPaths::ConvertRelativePathToFull(FPaths::ProjectDir()/TEXT("RecoveryEvidence/visual-parity/reconstruction-store.png"));
+                FScreenshotRequest::RequestScreenshot(ScreenshotPath,true,false);
+                UE_LOG(LogTemp,Display,TEXT("RECOVERED_STORE_VISUAL_SMOKE_CAPTURE_REQUESTED: %s"),*ScreenshotPath);
                 FTimerHandle QuitTimer;
                 GetWorldTimerManager().SetTimer(QuitTimer,[this]() {
                     if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
