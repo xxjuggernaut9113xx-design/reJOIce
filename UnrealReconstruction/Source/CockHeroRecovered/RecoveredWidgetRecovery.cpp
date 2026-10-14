@@ -14,9 +14,13 @@
 #include "RecoveredPlayerCardEntryWidget.h"
 #include "RecoveredModifierCardEntryWidget.h"
 #include "RecoveredChallengeEntryWidget.h"
+#include "RecoveredChallengeWidget.h"
 #include "RecoveredChallengesMenu.h"
+#include "RecoveredModifierWidget.h"
+#include "RecoveredNotificationWidget.h"
 #include "RecoveredUnlockStoreWidget.h"
 #include "RecoveredEditUsernameOverlay.h"
+#include "RecoveredImportWidget.h"
 #include "RecoveredCalibrationWidget.h"
 #include "RecoveredAudioSettings.h"
 #include "RecoveredVideoSettings.h"
@@ -193,6 +197,10 @@ FString URecoveredWidgetRecovery::BuildWidgetAssets(const FString& EvidencePath)
             if(Screen.Key==TEXT("PostCumContinue_Widget")) ParentClass=URecoveredPostCumContinueWidget::StaticClass();
             if(Screen.Key==TEXT("WBP_SessionSummaryWidget")) ParentClass=URecoveredSessionSummaryWidget::StaticClass();
             if(Screen.Key==TEXT("WBP_XPBar")) ParentClass=URecoveredXPBarWidget::StaticClass();
+            if(Screen.Key==TEXT("XBP_XPSourceText")) ParentClass=URecoveredXPSourceTextWidget::StaticClass();
+            if(Screen.Key==TEXT("WBP_XPScreen")) ParentClass=URecoveredXPScreenWidget::StaticClass();
+            if(Screen.Key==TEXT("WBP_UPRewardScreen")) ParentClass=URecoveredUPRewardScreenWidget::StaticClass();
+            if(Screen.Key==TEXT("WBP_UPSourceText")) ParentClass=URecoveredUPSourceTextWidget::StaticClass();
             if(Screen.Key==TEXT("WBP_PlayerCard")) ParentClass=URecoveredPlayerCardWidget::StaticClass();
             if(Screen.Key==TEXT("WBP_LevelUpScreen")) ParentClass=URecoveredLevelUpScreenWidget::StaticClass();
             if(Screen.Key==TEXT("StatsScreenWidget")) ParentClass=URecoveredStatsScreenWidget::StaticClass();
@@ -201,11 +209,15 @@ FString URecoveredWidgetRecovery::BuildWidgetAssets(const FString& EvidencePath)
             if(Screen.Key==TEXT("PlayerCardEntryWidget")) ParentClass=URecoveredPlayerCardEntryWidget::StaticClass();
             if(Screen.Key==TEXT("ModifierCardEntryWidget")) ParentClass=URecoveredModifierCardEntryWidget::StaticClass();
             if(Screen.Key==TEXT("ChallengeEntryWidget")) ParentClass=URecoveredChallengeEntryWidget::StaticClass();
+            if(Screen.Key==TEXT("ChallengesTabWidget")) ParentClass=URecoveredChallengeWidget::StaticClass();
+            if(Screen.Key==TEXT("ModifiersTabWidget")) ParentClass=URecoveredModifierWidget::StaticClass();
             if(Screen.Key==TEXT("ChallengesMenuWidget")) ParentClass=URecoveredChallengesMenu::StaticClass();
             if(Screen.Key==TEXT("CHPackEntryWidget")) ParentClass=URecoveredPackEntryWidget::StaticClass();
             if(Screen.Key==TEXT("UnlockStoreSocialIconBaseButton")) ParentClass=URecoveredUnlockStoreSocialIconWidget::StaticClass();
             if(Screen.Key==TEXT("UnlockStoreWidget")) ParentClass=URecoveredUnlockStoreWidget::StaticClass();
             if(Screen.Key==TEXT("EditUsernameOverlay")) ParentClass=URecoveredEditUsernameOverlay::StaticClass();
+            if(Screen.Key==TEXT("ImportMenuWidget")) ParentClass=URecoveredImportWidget::StaticClass();
+            if(Screen.Key==TEXT("NotificationBoxWidget")) ParentClass=URecoveredNotificationWidget::StaticClass();
             if(URecoveredAnimatedOverlay::SupportsAsset(FName(*Screen.Key))) ParentClass=URecoveredAnimatedOverlay::StaticClass();
             if(Screen.Key==TEXT("UMG_BeatIcon")) ParentClass=URecoveredBeatWidget::StaticClass();
             if(Screen.Key==TEXT("WBP_CalibrationUI")) ParentClass=URecoveredCalibrationWidget::StaticClass();
@@ -213,6 +225,7 @@ FString URecoveredWidgetRecovery::BuildWidgetAssets(const FString& EvidencePath)
             if(Screen.Key==TEXT("DifficultySelectScreen_Widget")) ParentClass=URecoveredDifficultyMenu::StaticClass();
             if(Screen.Key==TEXT("SettingsMenuWidget")) ParentClass=URecoveredSettingsMenu::StaticClass();
             if(Screen.Key==TEXT("VoicelineSettingsMenu")) ParentClass=URecoveredVoiceSettings::StaticClass();
+            if(Screen.Key==TEXT("VoicePackEntryWidget")) ParentClass=URecoveredVoicePackEntryWidget::StaticClass();
             if(Screen.Key==TEXT("AudioSettingsMenu")) ParentClass=URecoveredAudioSettingsMenu::StaticClass();
             if(Screen.Key==TEXT("VideoSettingsMenu")) ParentClass=URecoveredVideoSettingsMenu::StaticClass();
             if(Screen.Key==TEXT("TagSettingsMenu")) ParentClass=URecoveredTagSettingsMenu::StaticClass();

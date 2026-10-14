@@ -7,6 +7,7 @@
 #include "Components/WidgetSwitcher.h"
 #include "Components/TextBlock.h"
 #include "Components/Image.h"
+#include "Components/Widget.h"
 #include "HAL/PlatformProcess.h"
 #include "TimerManager.h"
 #include "Kismet/KismetSystemLibrary.h"
@@ -69,6 +70,9 @@ void URecoveredTooltip::SetTitleAndDescription(const FText& Title,const FText& D
 }
 void URecoveredTooltip::NativeConstruct() { Super::NativeConstruct(); SetTitleAndDescription(TooltipTitle,TooltipDescription); }
 void URecoveredMenuWidget::NativeConstruct() { Super::NativeConstruct(); AttachRecoveredTooltips(); }
+void URecoveredMenuWidget::ChangeCheatCodeRedeemVisibility(UWidget* CheatCodeTextRedeemText) {
+    if (IsValid(CheatCodeTextRedeemText)) CheatCodeTextRedeemText->SetVisibility(ESlateVisibility::Collapsed);
+}
 void URecoveredMenuWidget::AttachRecoveredTooltips() {
     if (StaticTooltips.IsEmpty() || !GetWorld()) return;
     UClass* TooltipClass=LoadClass<URecoveredTooltip>(nullptr,TEXT("/Game/Recovery/UI/CustomToolTip_Widget.CustomToolTip_Widget_C"));
@@ -253,7 +257,6 @@ void URecoveredDifficultyMenu::CompleteSelection() {
     RemoveFromParent();
 }
 
-void URecoveredVoiceSettings::StopAudioComponent() { if (IsValid(AudioComponent)) AudioComponent->Stop(); }
 void URecoveredSettingsMenu::BindNavigation(bool bBind) {
 #define BIND_TAB(Name, Method) \
     if (auto* Button=Cast<UButton>(GetWidgetFromName(TEXT(Name)))) { \

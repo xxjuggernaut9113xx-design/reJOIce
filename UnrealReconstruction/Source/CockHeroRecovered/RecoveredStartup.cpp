@@ -9,6 +9,7 @@
 #include "TimerManager.h"
 #include "UnrealClient.h"
 #include "Components/Image.h"
+#include "Components/WidgetSwitcher.h"
 #include "RecoveredChallengeTracker.h"
 #include "RecoveredEventWidgets.h"
 #include "RecoveredEdgeManager.h"
@@ -100,6 +101,61 @@ void ARecoveredGlobalManager::BeginPlay() {
                 GetWorldTimerManager().SetTimer(QuitTimer,[this]() {
                     if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
                 },4.0f,false);
+            },1.0f,false);
+        },1.0f,false);
+    }
+    if (FParse::Param(FCommandLine::Get(),TEXT("RecoveredVoiceSettingsVisualSmoke"))) {
+        FTimerHandle VisualTimer;
+        GetWorldTimerManager().SetTimer(VisualTimer,[this]() {
+            auto* Menu=Cast<URecoveredMainMenu>(MainMenu);
+            auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
+            if (!Menu || !Instance || !Instance->CurrentSave) {
+                UE_LOG(LogTemp,Error,TEXT("RECOVERED_VOICE_SETTINGS_VISUAL_SMOKE_FAIL: recovered main menu unavailable"));
+                if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                return;
+            }
+            FRecoveredLatencyProfile VisualProfile;
+            if (!Instance->CurrentSave->GetLatencyProfile(VisualProfile)) {
+                UE_LOG(LogTemp,Error,TEXT("RECOVERED_VOICE_SETTINGS_VISUAL_SMOKE_FAIL: recovery calibration profile could not be staged"));
+                if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                return;
+            }
+            VisualProfile.bIsCalibrated=true;
+            if (!Instance->CurrentSave->SetLatencyProfile(VisualProfile)) {
+                UE_LOG(LogTemp,Error,TEXT("RECOVERED_VOICE_SETTINGS_VISUAL_SMOKE_FAIL: recovery calibration profile could not be staged"));
+                if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                return;
+            }
+            Menu->CloseAdultWarning();
+            Menu->CloseTutorialSplash();
+            Menu->CloseUpdateSplash();
+            Menu->OpenSettings();
+            FTimerHandle CaptureTimer;
+            GetWorldTimerManager().SetTimer(CaptureTimer,[this,Menu]() {
+                auto* Settings=Cast<URecoveredSettingsMenu>(Menu->LastOpenedScreen);
+                auto* Voice=Settings ? Cast<URecoveredVoiceSettings>(Settings->GetWidgetFromName(TEXT("VoicelineSettingsMenu"))) : nullptr;
+                if (!Settings || !Settings->IsInViewport() || !Voice || Voice->GetVoicePackEntryCount()!=4 || Voice->VoicePacks.Num()!=4 || !Voice->SelectedEntryWidget) {
+                    UE_LOG(LogTemp,Error,TEXT("RECOVERED_VOICE_SETTINGS_VISUAL_SMOKE_FAIL: voice settings initialization incomplete"));
+                    if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                    return;
+                }
+                Settings->OpenVoiceTab();
+                FTimerHandle VoiceTabTimer;
+                GetWorldTimerManager().SetTimer(VoiceTabTimer,[this,Settings,Voice]() {
+                    auto* Switcher=Cast<UWidgetSwitcher>(Settings ? Settings->GetWidgetFromName(TEXT("WidgetSwitcher")) : nullptr);
+                    if (!Settings || !Settings->IsInViewport() || !Voice || !Switcher || Switcher->GetActiveWidgetIndex()!=3) {
+                        UE_LOG(LogTemp,Error,TEXT("RECOVERED_VOICE_SETTINGS_VISUAL_SMOKE_FAIL: voice tab did not become active"));
+                        if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                        return;
+                    }
+                    const FString ScreenshotPath=FPaths::ConvertRelativePathToFull(FPaths::ProjectDir()/TEXT("RecoveryEvidence/visual-parity/reconstruction-voiceline-settings.png"));
+                    FScreenshotRequest::RequestScreenshot(ScreenshotPath,true,false);
+                    UE_LOG(LogTemp,Display,TEXT("RECOVERED_VOICE_SETTINGS_VISUAL_SMOKE_CAPTURE_REQUESTED: %s"),*ScreenshotPath);
+                    FTimerHandle QuitTimer;
+                    GetWorldTimerManager().SetTimer(QuitTimer,[this]() {
+                        if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                    },4.0f,false);
+                },0.25f,false);
             },1.0f,false);
         },1.0f,false);
     }
