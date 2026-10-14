@@ -15,6 +15,7 @@
 #include "RecoveredModifierCardEntryWidget.h"
 #include "RecoveredChallengeEntryWidget.h"
 #include "RecoveredChallengesMenu.h"
+#include "RecoveredUnlockStoreWidget.h"
 #include "RecoveredEditUsernameOverlay.h"
 #include "RecoveredCalibrationWidget.h"
 #include "RecoveredAudioSettings.h"
@@ -201,6 +202,9 @@ FString URecoveredWidgetRecovery::BuildWidgetAssets(const FString& EvidencePath)
             if(Screen.Key==TEXT("ModifierCardEntryWidget")) ParentClass=URecoveredModifierCardEntryWidget::StaticClass();
             if(Screen.Key==TEXT("ChallengeEntryWidget")) ParentClass=URecoveredChallengeEntryWidget::StaticClass();
             if(Screen.Key==TEXT("ChallengesMenuWidget")) ParentClass=URecoveredChallengesMenu::StaticClass();
+            if(Screen.Key==TEXT("CHPackEntryWidget")) ParentClass=URecoveredPackEntryWidget::StaticClass();
+            if(Screen.Key==TEXT("UnlockStoreSocialIconBaseButton")) ParentClass=URecoveredUnlockStoreSocialIconWidget::StaticClass();
+            if(Screen.Key==TEXT("UnlockStoreWidget")) ParentClass=URecoveredUnlockStoreWidget::StaticClass();
             if(Screen.Key==TEXT("EditUsernameOverlay")) ParentClass=URecoveredEditUsernameOverlay::StaticClass();
             if(URecoveredAnimatedOverlay::SupportsAsset(FName(*Screen.Key))) ParentClass=URecoveredAnimatedOverlay::StaticClass();
             if(Screen.Key==TEXT("UMG_BeatIcon")) ParentClass=URecoveredBeatWidget::StaticClass();
