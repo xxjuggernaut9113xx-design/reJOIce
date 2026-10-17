@@ -4,7 +4,7 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "RecoveredOutcomes.generated.h"
 
-/** Requests from the synchronous outcome entry point; external consumers are not simulated. */
+/** Requests emitted by the synchronous outcome entry point and consumed by the recovered presentation route. */
 USTRUCT(BlueprintType)
 struct COCKHERORECOVERED_API FRecoveredOutcomeEffects {
     GENERATED_BODY()

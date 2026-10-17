@@ -4,6 +4,9 @@
 #include "RecoveredTabbedInventoryWidget.h"
 #include "RecoveredPG2TabbedInventoryWidget.h"
 #include "RecoveredRestWidget.h"
+#include "RecoveredEdgeRestWidget.h"
+#include "RecoveredMercyRestWidget.h"
+#include "RecoveredDecisionWidgets.h"
 #include "RecoveredEventWidgets.h"
 #include "RecoveredPostCumContinueWidget.h"
 #include "RecoveredPostGameWidgets.h"
@@ -195,6 +198,10 @@ FString URecoveredWidgetRecovery::BuildWidgetAssets(const FString& EvidencePath)
             if(Screen.Key==TEXT("PG1TabbedInventory_Widget")) ParentClass=URecoveredTabbedInventoryWidget::StaticClass();
             if(Screen.Key==TEXT("PG2TabbedInventory_Widget")) ParentClass=URecoveredPG2TabbedInventoryWidget::StaticClass();
             if(Screen.Key==TEXT("RestWidget")) ParentClass=URecoveredRestWidget::StaticClass();
+            if(Screen.Key==TEXT("EdgeRestWidget")) ParentClass=URecoveredEdgeRestWidget::StaticClass();
+            if(Screen.Key==TEXT("MercyRestWidget")) ParentClass=URecoveredMercyRestWidget::StaticClass();
+            if(Screen.Key==TEXT("MercyEventWidget")) ParentClass=URecoveredMercyEventWidget::StaticClass();
+            if(Screen.Key==TEXT("TemptationEventWidget")) ParentClass=URecoveredTemptationEventWidget::StaticClass();
             if(Screen.Key==TEXT("PostCumContinue_Widget")) ParentClass=URecoveredPostCumContinueWidget::StaticClass();
             if(Screen.Key==TEXT("WBP_SessionSummaryWidget")) ParentClass=URecoveredSessionSummaryWidget::StaticClass();
             if(Screen.Key==TEXT("WBP_XPBar")) ParentClass=URecoveredXPBarWidget::StaticClass();

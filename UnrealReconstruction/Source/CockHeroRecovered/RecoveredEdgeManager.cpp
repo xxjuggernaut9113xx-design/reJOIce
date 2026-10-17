@@ -156,6 +156,11 @@ bool ARecoveredEdgeManager::CheckRecoveredEdgesUntilMercy() {
     return false;
 }
 
+void ARecoveredEdgeManager::UpdateRecoveredMasterEdgeCountAndSet() {
+    MasterEdgesUntilNextMercy=FMath::TruncToInt(static_cast<double>(MasterEdgesUntilNextMercy)*1.25);
+    CurrentEdgesUntillNextMercy=MasterEdgesUntilNextMercy;
+}
+
 void ARecoveredEdgeManager::AdjustRecoveredBreakDuration() {
     if (!IsValid(GlobalManagerRef)) return;
     const double Percent=FMath::FRandRange(0.05,0.10);

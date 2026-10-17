@@ -35,6 +35,11 @@ bool FRecoveredCardTest::RunTest(const FString& Parameters) {
     Decks->ReplaceEmptyDecks();
     TestEqual(TEXT("Exhausted deck refills"),Decks->Child.Slow.Num(),3);
     TestEqual(TEXT("Master remains intact"),Decks->Master.Slow.Num(),3);
+    Decks->Master.VideoLoops={Second};
+    const int32 VideoLoopSourceCount=Decks->Master.VideoLoops.Num();
+    TestTrue(TEXT("Video-loop selection draws a source pool entry"),Decks->ChooseVideoLoop(Selected));
+    TestEqual(TEXT("Video-loop selection preserves the source pool"),Decks->Master.VideoLoops.Num(),VideoLoopSourceCount);
+    TestEqual(TEXT("Video-loop selection preserves the source entry"),Selected.File,Second.File);
     TestFalse(TEXT("Invalid selection guarded"),URecoveredDeckState::DrawAtIndex(Decks->Child.Slow,99,Selected));
     return true;
 }

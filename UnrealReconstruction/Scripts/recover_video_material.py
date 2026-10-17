@@ -27,7 +27,7 @@ sample=unreal.MaterialEditingLibrary.create_material_expression(material,unreal.
 assert sample is not None
 sample.set_editor_property('parameter_name','BackgroundVideoTexture')
 sample.set_editor_property('texture',texture)
-sample.set_editor_property('sampler_type',unreal.MaterialSamplerType.SAMPLERTYPE_EXTERNAL)
+sample.set_editor_property('sampler_type',unreal.MaterialSamplerType.SAMPLERTYPE_COLOR)
 sample.set_editor_property('desc','Reconstructed video display; original cooked expression graph unavailable')
 assert unreal.MaterialEditingLibrary.connect_material_property(sample,'RGB',unreal.MaterialProperty.MP_EMISSIVE_COLOR)
 unreal.MaterialEditingLibrary.recompile_material(material)

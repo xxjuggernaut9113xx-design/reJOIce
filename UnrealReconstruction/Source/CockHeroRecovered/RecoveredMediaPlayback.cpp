@@ -8,7 +8,7 @@
 #include "Materials/MaterialInterface.h"
 #include "Materials/MaterialInstanceDynamic.h"
 
-bool URecoveredMediaPlayback::OpenEntry(const FRecoveredMediaEntry& Entry) {
+bool URecoveredMediaPlayback::OpenEntry(const FRecoveredMediaEntry& Entry, double InitialSyncTime) {
     StopPlayback();
     CurrentEntry=Entry;
     if (!IFileManager::Get().FileExists(*Entry.FullPath)) { OnMediaError.Broadcast(TEXT("Media file does not exist: ")+Entry.FullPath); return false; }
@@ -19,6 +19,10 @@ bool URecoveredMediaPlayback::OpenEntry(const FRecoveredMediaEntry& Entry) {
         OnMediaReady.Broadcast(CurrentTexture);
         return true;
     }
+    // PlayMediaEntry marks a video for its initial beat-travel alignment before
+    // StartPatternWithMediaSync consumes that one-shot flag.
+    bHasInitialSync=InitialSyncTime>=0.0;
+    BeatTravelTimeOffset=bHasInitialSync ? InitialSyncTime : 0.0;
     if (!MediaPlayer) {
         MediaPlayer=NewObject<UMediaPlayer>(this);
         MediaPlayer->OnMediaOpened.AddDynamic(this,&URecoveredMediaPlayback::HandleOpened);
@@ -38,9 +42,39 @@ void URecoveredMediaPlayback::HandleOpened(FString Url) {
     OnMediaReady.Broadcast(CurrentTexture);
 }
 void URecoveredMediaPlayback::HandleFailed(FString Url) { OnMediaError.Broadcast(TEXT("Video decoder failed: ")+Url); }
-void URecoveredMediaPlayback::StopPlayback() { if(MediaPlayer) MediaPlayer->Close(); CurrentTexture=nullptr; }
+void URecoveredMediaPlayback::StopPlayback() {
+    if(MediaPlayer) MediaPlayer->Close();
+    CurrentTexture=nullptr;
+    bHasInitialSync=false;
+    bUseSyncStartTime=false;
+    BeatTravelTimeOffset=0.0;
+}
 void URecoveredMediaPlayback::SetPaused(bool bPaused) { if(MediaPlayer) { if(bPaused) MediaPlayer->Pause(); else MediaPlayer->Play(); } }
 bool URecoveredMediaPlayback::SetPlaybackRate(float Rate) { return MediaPlayer && MediaPlayer->SetRate(Rate); }
+void URecoveredMediaPlayback::SetBeatInterval(double NewBeatInterval) {
+    BeatInterval=FMath::Max(NewBeatInterval,0.01);
+}
+void URecoveredMediaPlayback::SetSyncStartTime(double InMasterTimeReference,double InTimelineOffset) {
+    MasterTimeReference=InMasterTimeReference;
+    TimelineOffset=InTimelineOffset;
+    SyncStartTime=InMasterTimeReference;
+    bUseSyncStartTime=true;
+    BeatTravelTimeOffset=0.0;
+}
+void URecoveredMediaPlayback::SyncToBeat(double InBeatTime,double InMasterTime,double InOffset) {
+    LastSyncBeatTime=InBeatTime;
+    LastSyncTimelineTime=InMasterTime-InOffset;
+}
+void URecoveredMediaPlayback::BeginPatternSynchronization(double InMasterTimeReference,double InTimelineOffset,double InitialBeatTravelTime) {
+    SetSyncStartTime(InMasterTimeReference,InTimelineOffset);
+    if (!bHasInitialSync) {
+        SyncToBeat(InitialBeatTravelTime,InMasterTimeReference,0.0);
+        return;
+    }
+    BeatTravelTimeOffset=0.0;
+    bHasInitialSync=false;
+}
+void URecoveredMediaPlayback::EnableBeatPatternSync(bool bEnabled) { bBeatSyncEnabled=bEnabled; }
 UMaterialInstanceDynamic* URecoveredMediaPlayback::GetVideoDisplayMaterial() {
     if (!VideoTexture) return nullptr;
     if (!VideoMaterial) {

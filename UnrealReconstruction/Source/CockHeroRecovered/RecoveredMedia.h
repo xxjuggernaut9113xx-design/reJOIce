@@ -22,6 +22,9 @@ struct COCKHERORECOVERED_API FRecoveredMediaDecks {
     UPROPERTY(BlueprintReadOnly) TArray<FRecoveredMediaEntry> Succubus;
     UPROPERTY(BlueprintReadOnly) TArray<FRecoveredMediaEntry> Ass;
     UPROPERTY(BlueprintReadOnly) TArray<FRecoveredMediaEntry> Boobs;
+    // Video loops are a source-owned selection pool.  They are never consumed
+    // by a draw, unlike the pace-card decks above.
+    UPROPERTY(BlueprintReadOnly) TArray<FRecoveredMediaEntry> VideoLoops;
 };
 
 UCLASS()

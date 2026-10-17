@@ -2,14 +2,19 @@
 #include "DataTableUtils.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/GameplayStatics.h"
+#include "HAL/PlatformTime.h"
 #include "Blueprint/UserWidget.h"
 #include "RecoveredEventRules.h"
 #include "RecoveredChallengeTracker.h"
+#include "RecoveredMenu.h"
+#include "RecoveredFileImportManager.h"
 
 void URecoveredGameInstance::Init() {
     Super::Init();
     DeviceManager=NewObject<URecoveredDeviceManager>(this);
     LoadRecoveredSave();
+    if (!FileImportManager) FileImportManager=NewObject<URecoveredFileImportManager>(this);
+    if (CurrentSave) FileImportManager->LoadFromSave(CurrentSave);
 }
 
 void ARecoveredGlobalManager::SuccessfulCum() {
@@ -186,6 +191,9 @@ void ARecoveredGlobalManager::BeatComplete() {
     UpdateBeatCompleteMetrics();
 }
 void ARecoveredGlobalManager::HandleBeatHitCenter(const FRecoveredBeatEvent& Event) {
+    if (MediaPlayback && MediaPlayback->bBeatSyncEnabled) {
+        MediaPlayback->SyncToBeat(Event.TargetHitTime,FPlatformTime::Seconds(),0.0);
+    }
     if (URecoveredGameInstance* Instance = Cast<URecoveredGameInstance>(GetGameInstance())) {
         if (Instance->DeviceManager) Instance->DeviceManager->DispatchBeatHitCenter(Event);
     }
@@ -259,6 +267,11 @@ bool ARecoveredGlobalManager::StartRecoveredBeatSequence(const FRecoveredBeatPat
         if (Instance->DeviceManager) UpdateMinimumBeatInterval(Instance->DeviceManager->GetGameplayDeviceState());
     }
     ApplySavedCalibrationToTimeline();
+    if (MediaPlayback && MediaPlayback->bBeatSyncEnabled) {
+        const double MasterTime=FPlatformTime::Seconds();
+        MediaPlayback->SetBeatInterval(BaseInterval);
+        MediaPlayback->BeginPatternSynchronization(MasterTime,0.0,TravelTime);
+    }
     if (!BeatTimeline->StartPattern(Pattern, BaseInterval, StrokeCount, SpeedModifier, TravelTime)) return false;
     PlayerVariables.CurrentStrokeCount = StrokeCount;
     PlayerVariables.AssignedStrokeCount = StrokeCount;
@@ -270,6 +283,7 @@ void ARecoveredGlobalManager::CompleteBeatSequence() {
     bCanUseSlowdown = true;
     bCanUseBonerPill = true;
     if (bStopSequence || BeatTimeline->GetBeatsRemaining() > 0 || BeatContext.CardType > 8) return;
+    RollAndGiveLootDrops();
     if (BeatContext.CardType == 3) {
         URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats, ERecoveredMetric::SuccubiDefeated, 1);
         OnMetricUpdateRequested.Broadcast(ERecoveredMetric::SuccubiDefeated, 1);
@@ -288,6 +302,14 @@ void ARecoveredGlobalManager::CompleteBeatSequence() {
 bool ARecoveredGlobalManager::LoadMediaPack(const FString& ManifestPath,const TArray<FString>& ExcludedTags) {
     TArray<FRecoveredMediaEntry> Entries;
     if(!URecoveredMediaLibrary::ReadPackManifest(ManifestPath,Entries,LastSessionError)) return false;
+    if (const auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance())) {
+        if (Instance->FileImportManager) {
+            // BP_CardManager appends imported entries before enabled-pack media.
+            TArray<FRecoveredMediaEntry> ImportedEntries=Instance->FileImportManager->GetImportedMediaEntries();
+            ImportedEntries.Append(Entries);
+            Entries=MoveTemp(ImportedEntries);
+        }
+    }
     if(!MediaDeckState) MediaDeckState=NewObject<URecoveredDeckState>(this);
     MediaDeckState->Master=URecoveredMediaLibrary::FilterMedia(Entries,ExcludedTags,BeatContext.ActiveModifiers.Contains(TEXT("Ass Fanatic")),BeatContext.ActiveModifiers.Contains(TEXT("Boobs Fanatic")),BeatContext.ActiveModifiers.Contains(TEXT("Feet Fanatic")));
     MediaDeckState->SetChildDecks();
@@ -340,16 +362,26 @@ bool ARecoveredGlobalManager::StartPaceCard(uint8 Pace,bool bPlayMedia,bool bPre
     if(bPrepare && !PrepareDrawState()) return false;
     MediaDeckState->ReplaceEmptyDecks();
     if(!MediaDeckState->Draw(Pace,false,SelectedRandomCard)) { LastSessionError=TEXT("Selected media deck is empty");return false; }
-    // Media selection precedes timing assignment in the decoded SpawnCustomCardEvent body.
-    if(bPlayMedia && MediaPlayback) MediaPlayback->OpenEntry(SelectedRandomCard);
     const double MinInterval=Pace==2 ? 0.15 : Row->MinIntervalSeconds;
     const int32 RolledStrokes=UKismetMathLibrary::RandomIntegerInRange(Row->MinStrokeCount,Row->MaxStrokeCount);
     const double RolledInterval=UKismetMathLibrary::RandomFloatInRange(MinInterval,Row->MaxIntervalSeconds);
     const auto Timing=URecoveredCardRuleLibrary::CalculateCardTiming(RolledStrokes,RolledInterval,StrokeCountMultiplier,UserStrokeCountMultiplier,StrokeTimeMultiplier);
     PlayerVariables.BeatSpawnInterval=Timing.BeatInterval;
+    // SpawnCustomCardEvent assigns the beat interval before it starts the media.
+    if (bPlayMedia && MediaPlayback) {
+        MediaPlayback->SetBeatInterval(Timing.BeatInterval);
+        MediaPlayback->OpenEntry(SelectedRandomCard,BeatTravelTime);
+    }
     const auto Pattern=URecoveredSessionRuleLibrary::CheckIntervalMultipliers(Patterns[UKismetMathLibrary::RandomIntegerInRange(0,Patterns.Num()-1)],BeatTimeline->GetCurrentInterval());
     if(!StartRecoveredBeatSequence(Pattern,Timing.BeatInterval,Timing.StrokeCount,1.0f,BeatTravelTime)) { LastSessionError=TEXT("Beat timeline rejected card timing");return false; }
+    bPlayerEdgedLastDraw=false;
     BeatContext.CardType=Pace;
+    PlayRecoveredSessionSound(Pace==0 ? TEXT("SlowPace") : Pace==1 ? TEXT("MediumPace") : TEXT("FastPace"));
+    if (auto* Menu=Cast<URecoveredMenuWidget>(SessionScreen)) {
+        Menu->PlayRecoveredAnimation(Pace==0 ? TEXT("SlowPaceAnim") : Pace==1 ? TEXT("MediumPaceAnim") : TEXT("FastPaceAnim"));
+    }
+    ChangeRecoveredBeatBackground(3);
+    PlayRecoveredMusic(Pace);
     OnSessionAction.Broadcast(TEXT("PaceCardStarted"));
     return true;
 }

@@ -204,7 +204,8 @@ bool FRecoveredNotificationWidgetTest::RunTest(const FString& Parameters) {
     if (!TestNotNull(TEXT("Notification source panel"),Panel)) return false;
     auto* EarlyIcon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/Widgets/NotificationBoxIcons/PrematureCumIcon.PrematureCumIcon"));
     auto* SuccessIcon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/Widgets/NotificationBoxIcons/SuccessfulCumIcon.SuccessfulCumIcon"));
-    if (!TestNotNull(TEXT("Recovered premature outcome icon"),EarlyIcon) || !TestNotNull(TEXT("Recovered successful outcome icon"),SuccessIcon)) return false;
+    auto* CashIcon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/Widgets/NotificationBoxIcons/CoinRewardIcon.CoinRewardIcon"));
+    if (!TestNotNull(TEXT("Recovered premature outcome icon"),EarlyIcon) || !TestNotNull(TEXT("Recovered successful outcome icon"),SuccessIcon) || !TestNotNull(TEXT("Recovered source coin reward icon"),CashIcon)) return false;
     Manager->SessionScreen=Session;
     const int32 CountBefore=Panel->GetChildrenCount();
     if (!TestTrue(TEXT("Outcome notification mounts into the recovered panel"),Manager->CreateRecoveredNotification(TEXT("PrematureCumIcon"),TEXT("Early Climax"),TEXT("Post-Game Rewards Cut in Half")))) return false;
@@ -224,11 +225,19 @@ bool FRecoveredNotificationWidgetTest::RunTest(const FString& Parameters) {
     auto* MountedSuccessIcon=Cast<UImage>(MountedSuccess->GetWidgetFromName(TEXT("NotificationIcon")));
     if (!TestNotNull(TEXT("Mounted successful outcome icon field"),MountedSuccessIcon)) return false;
     TestTrue(TEXT("Mounted successful outcome uses recovered source icon"),MountedSuccessIcon->GetBrush().GetResourceObject()==SuccessIcon);
+    if (!TestTrue(TEXT("Cash reward notification mounts into the recovered panel"),Manager->CreateRecoveredNotification(TEXT("CoinRewardIcon"),TEXT("Loot Bar Filled"),TEXT("+50 Coins - Cash Reward Unlocked")))) return false;
+    TestEqual(TEXT("Cash reward notification adds one recovered panel child"),Panel->GetChildrenCount(),CountBefore+3);
+    auto* MountedCash=Cast<URecoveredNotificationWidget>(Panel->GetChildAt(CountBefore+2));
+    if (!TestNotNull(TEXT("Mounted cash reward notification"),MountedCash)) return false;
+    auto* MountedCashIcon=Cast<UImage>(MountedCash->GetWidgetFromName(TEXT("NotificationIcon")));
+    if (!TestNotNull(TEXT("Mounted cash reward icon field"),MountedCashIcon)) return false;
+    TestTrue(TEXT("Mounted cash reward uses recovered source icon"),MountedCashIcon->GetBrush().GetResourceObject()==CashIcon);
     TestTrue(TEXT("Mounted outcome notification remains lifecycle-tracked"),Manager->EventOverlays.Contains(Mounted));
     TestTrue(TEXT("Successful outcome notification remains lifecycle-tracked"),Manager->EventOverlays.Contains(MountedSuccess));
+    TestTrue(TEXT("Cash reward notification remains lifecycle-tracked"),Manager->EventOverlays.Contains(MountedCash));
     if (!TestTrue(TEXT("Notification setting disables source boxes"),Save->SetBoolSetting(TEXT("AreNotificationBoxesEnabled?"),false))) return false;
     TestFalse(TEXT("Disabled source notification does not mount"),Manager->CreateRecoveredNotification(TEXT("PrematureCumIcon"),TEXT("Early Climax"),TEXT("Post-Game Rewards Cut in Half")));
-    TestEqual(TEXT("Disabled source notification preserves panel child count"),Panel->GetChildrenCount(),CountBefore+2);
+    TestEqual(TEXT("Disabled source notification preserves panel child count"),Panel->GetChildrenCount(),CountBefore+3);
     return true;
 }
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredWidgetAttachmentTest,"CockHero.Recovery.WidgetAttachments",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)

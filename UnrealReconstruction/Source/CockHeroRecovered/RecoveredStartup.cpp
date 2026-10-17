@@ -2,6 +2,7 @@
 #include "RecoveredMenu.h"
 #include "RecoveredUnlockStoreWidget.h"
 #include "RecoveredEventWidgets.h"
+#include "RecoveredDecisionWidgets.h"
 #include "GameFramework/PlayerController.h"
 #include "Kismet/GameplayStatics.h"
 #include "Misc/CommandLine.h"
@@ -237,6 +238,44 @@ void ARecoveredGlobalManager::BeginPlay() {
             if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
         },0.25f,false);
     }
+    const bool bMercyDecisionVisualSmoke=FParse::Param(FCommandLine::Get(),TEXT("RecoveredMercyDecisionVisualSmoke"));
+    const bool bTemptationDecisionVisualSmoke=FParse::Param(FCommandLine::Get(),TEXT("RecoveredTemptationDecisionVisualSmoke"));
+    if (bMercyDecisionVisualSmoke || bTemptationDecisionVisualSmoke) {
+        FTimerHandle VisualTimer;
+        GetWorldTimerManager().SetTimer(VisualTimer,[this,bMercyDecisionVisualSmoke]() {
+            bool bStarted=InitializeRecoveredSession();
+            if (bStarted && IsValid(MainMenu)) MainMenu->RemoveFromParent();
+            if (bStarted) {
+                if (bMercyDecisionVisualSmoke) StartMercyEvent();
+                else StartTemptationEvent();
+            }
+            if (!bStarted) {
+                UE_LOG(LogTemp,Error,TEXT("RECOVERED_DECISION_VISUAL_SMOKE_FAIL: %s"),*LastSessionError);
+                if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                return;
+            }
+            FTimerHandle CaptureTimer;
+            GetWorldTimerManager().SetTimer(CaptureTimer,[this,bMercyDecisionVisualSmoke]() {
+                const bool bExpectedOverlay=EventOverlays.ContainsByPredicate([bMercyDecisionVisualSmoke](const TObjectPtr<UUserWidget>& Overlay) {
+                    return bMercyDecisionVisualSmoke ? Cast<URecoveredMercyEventWidget>(Overlay)!=nullptr : Cast<URecoveredTemptationEventWidget>(Overlay)!=nullptr;
+                });
+                const int32 ExpectedBackground=bMercyDecisionVisualSmoke ? 2 : 9;
+                if (!bExpectedOverlay || CurrentBeatBackgroundStyle!=ExpectedBackground) {
+                    UE_LOG(LogTemp,Error,TEXT("RECOVERED_DECISION_VISUAL_SMOKE_FAIL: overlay or background state unavailable"));
+                    if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                    return;
+                }
+                const FString ScreenshotName=bMercyDecisionVisualSmoke ? TEXT("reconstruction-mercy-decision.png") : TEXT("reconstruction-temptation-decision.png");
+                const FString ScreenshotPath=FPaths::ConvertRelativePathToFull(FPaths::ProjectDir()/TEXT("RecoveryEvidence/visual-parity")/ScreenshotName);
+                FScreenshotRequest::RequestScreenshot(ScreenshotPath,true,false);
+                UE_LOG(LogTemp,Display,TEXT("RECOVERED_DECISION_VISUAL_SMOKE_CAPTURE_REQUESTED: %s"),*ScreenshotPath);
+                FTimerHandle QuitTimer;
+                GetWorldTimerManager().SetTimer(QuitTimer,[this]() {
+                    if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                },4.0f,false);
+            },1.0f,false);
+        },0.25f,false);
+    }
 #endif
 }
 
@@ -307,6 +346,8 @@ bool ARecoveredGlobalManager::ReturnToMainMenu() {
     Timers.ClearTimer(BreakLastItemTimerHandle);
     Timers.ClearTimer(SlowdownLastItemTimerHandle);
     Timers.ClearTimer(CumChanceLastItemTimerHandle);
+    Timers.ClearTimer(BonerPillCooldownTimerHandle);
+    Timers.ClearTimer(TemptationCooldownTimer);
     Timers.ClearTimer(DefensiveItemUsageTimerHandle);
     Timers.ClearTimer(OutcomeContinuationTimer);
     Timers.ClearTimer(IdleTimer);
@@ -345,6 +386,8 @@ bool ARecoveredGlobalManager::ReturnToMainMenu() {
     OwnedItemCounts.Reset();
     PendingNotifications.Reset();
     bStoreOnCooldown = false;
+    bIsMercyOnCooldown = false;
+    bIsTemptationOnCooldown = false;
     bBrainMelterEnabled = false;
     SuccubusShields = 0;
     bShieldToggled = false;
@@ -369,6 +412,7 @@ bool ARecoveredGlobalManager::InitializeRecoveredSession() {
     if (!Instance || !Instance->CurrentSave) { LastSessionError=TEXT("Recovered session requires a valid isolated save"); return false; }
     URecoveredSaveGame* Save=Instance->CurrentSave;
     InitializeDifficultyVariables(static_cast<uint8>(Save->GetNumberSetting(TEXT("EdgePacingMultiplierEnum"),0)),static_cast<uint8>(Save->GetNumberSetting(TEXT("StrokeMultiplierEnum"),0)));
+    BindRecoveredBrainMelterInterval();
     UpdateMinimumBeatInterval(Instance->DeviceManager ? Instance->DeviceManager->GetGameplayDeviceState() : FRecoveredDeviceState());
     BeatContext.ActiveModifiers=Save->GetStringArraySetting(TEXT("ActiveModifiers"));
     Rules=LoadObject<URecoveredRulesAsset>(nullptr,TEXT("/Game/Recovery/Definitions/DA_GameRules.DA_GameRules"));

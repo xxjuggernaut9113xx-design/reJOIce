@@ -30,6 +30,13 @@ bool FRecoveredMediaTest::RunTest(const FString& Parameters) {
     TestEqual(TEXT("Native exclusions ignore case"),Decks.Slow.Num(),0);
     Decks=URecoveredMediaLibrary::FilterMedia({Multi},{},true,false,false);
     TestEqual(TEXT("Native categories ignore case"),Decks.Slow.Num(),1);
+    FRecoveredMediaEntry VideoLoop;
+    VideoLoop.File=TEXT("source_loop_medium.webm");
+    VideoLoop.Type=TEXT("video");
+    VideoLoop.Tags={TEXT("medium")};
+    Decks=URecoveredMediaLibrary::FilterMedia({VideoLoop},{},false,false,false);
+    TestEqual(TEXT("Video loop remains in the source-owned loop pool"),Decks.VideoLoops.Num(),1);
+    TestEqual(TEXT("Video loop also retains its tagged pace category"),Decks.Medium.Num(),1);
     const auto Tags=URecoveredMediaLibrary::ParseFilenameTags(TEXT("100_BOOBS_SLOW.png"));
     TestEqual(TEXT("Vocabulary order"),Tags[0],FString(TEXT("slow")));
     TestEqual(TEXT("Case normalized"),Tags[1],FString(TEXT("boobs")));

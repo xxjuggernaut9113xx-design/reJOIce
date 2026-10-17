@@ -1,4 +1,5 @@
 #include "RecoveredRules.h"
+#include "RecoveredFileImportManager.h"
 #include "RecoveredChallengeTracker.h"
 #include "Kismet/GameplayStatics.h"
 #include "Dom/JsonObject.h"
@@ -291,6 +292,8 @@ bool URecoveredGameInstance::LoadRecoveredSaveSlotInternal(const FString& SlotNa
     }
 
     CurrentSave=Loaded;
+    if (!FileImportManager) FileImportManager=NewObject<URecoveredFileImportManager>(this);
+    FileImportManager->LoadFromSave(CurrentSave);
     if (DeviceManager) DeviceManager->LoadDeviceSettings(CurrentSave);
     ActiveRecoverySlot=SlotName;
     ProgressionManager=NewProgression;

@@ -34,6 +34,7 @@ public:
     UFUNCTION(BlueprintPure, Category="Recovered|Edge") bool IsRecoveredEdgeHoldActive() const;
     UFUNCTION(BlueprintPure, Category="Recovered|Edge") bool IsRecoveredEdgeResolutionPending() const;
     UFUNCTION(BlueprintCallable, Category="Recovered|Edge") bool CheckRecoveredEdgesUntilMercy();
+    UFUNCTION(BlueprintCallable, Category="Recovered|Edge") void UpdateRecoveredMasterEdgeCountAndSet();
 
 private:
     void AdjustRecoveredBreakDuration();

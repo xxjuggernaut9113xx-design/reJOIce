@@ -15,6 +15,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<uint8, bool> DeckRepeat;
     UFUNCTION(BlueprintCallable, Category="Recovered|Decks") void SetChildDecks();
     UFUNCTION(BlueprintCallable, Category="Recovered|Decks") void ReplaceEmptyDecks();
+    void ResetDeckFromMasterWhenEmpty(uint8 Deck, bool bFavorite = false);
     UFUNCTION(BlueprintCallable, Category="Recovered|Decks") bool Draw(uint8 Deck, bool bFavorite, FRecoveredMediaEntry& Entry);
     // Shuffle and repeat controls for media decks.
     UFUNCTION(BlueprintCallable, Category="Recovered|Decks") void ShuffleDeck(uint8 Deck);
@@ -26,8 +27,11 @@ public:
     bool ToggleFavorite(uint8 Deck, const FRecoveredMediaEntry& Entry, bool& bNowFavorite);
     void RestoreFavoritePaths(uint8 Deck, const TArray<FString>& Paths);
     TArray<FString> GetFavoritePaths(uint8 Deck) const;
-    // GetAndSetRandomCard shuffles and selects without removing the selected entry.
+    // Non-consuming selection used by manual media routes.
     bool ChooseRandom(uint8 Deck, bool bFavorite, FRecoveredMediaEntry& Entry, bool bShuffle = true);
+    // GetAndSetRandomVideoLoop shuffles a local copy of its dedicated pool and
+    // leaves the source video list intact.
+    bool ChooseVideoLoop(FRecoveredMediaEntry& Entry) const;
     // Deterministic selection hook for validating native Array_RemoveItem semantics.
     static bool DrawAtIndex(TArray<FRecoveredMediaEntry>& Deck, int32 Index, FRecoveredMediaEntry& Entry);
 };

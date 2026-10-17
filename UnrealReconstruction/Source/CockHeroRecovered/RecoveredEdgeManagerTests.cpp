@@ -2,6 +2,7 @@
 #include "RecoveredPG2TabbedInventoryWidget.h"
 #include "Sound/SoundBase.h"
 #include "RecoveredRules.h"
+#include "RecoveredEdgeRestWidget.h"
 #include "RecoveredRestWidget.h"
 #include "RecoveredTabbedInventoryWidget.h"
 #include "Blueprint/UserWidget.h"
@@ -60,14 +61,18 @@ bool FRecoveredEdgeHoldLifecycleTest::RunTest(const FString& Parameters) {
     TestTrue(TEXT("Source one-second hold timer starts"),Edge->IsRecoveredEdgeHoldActive());
     FRecoveredOutcomeEffects Early;
     Early.bClearEdgeHoldTimer=true;
+    Early.BackgroundStyle=4;
     Manager->HandleRecoveredOutcome(Early);
     TestFalse(TEXT("Early outcome clears the source edge hold timer"),Edge->IsRecoveredEdgeHoldActive());
+    TestEqual(TEXT("Early outcome restores the source background"),Manager->CurrentBeatBackgroundStyle,4);
 
     Edge->BeginRecoveredEdgeHold(2.9);
     FRecoveredOutcomeEffects Successful;
     Successful.OutcomeOverlaySourceIndex=-4047;
+    Successful.BackgroundStyle=5;
     Manager->HandleRecoveredOutcome(Successful);
     TestTrue(TEXT("Successful outcome leaves the source edge hold timer active"),Edge->IsRecoveredEdgeHoldActive());
+    TestEqual(TEXT("Successful outcome restores the source background"),Manager->CurrentBeatBackgroundStyle,5);
     Edge->ClearRecoveredEdgeHold();
 
     Edge->BeginRecoveredEdgeHold(3.0);
@@ -527,6 +532,60 @@ bool FRecoveredRestWidgetLifecycleTest::RunTest(const FString& Parameters) {
     Rest->UpdateProgress();
     TestEqual(TEXT("Recovered RestWidget clamps completed progress"),Rest->CurrentProgress,1.0);
     TestFalse(TEXT("Recovered RestWidget completes the active break at its source duration"),Rest->IsRecoveredBreakActive());
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredEdgeRestWidgetLifecycleTest,"CockHero.Recovery.EdgeRestWidgetLifecycle",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FRecoveredEdgeRestWidgetLifecycleTest::RunTest(const FString& Parameters) {
+    UClass* EdgeRestBlueprintClass=LoadClass<URecoveredEdgeRestWidget>(nullptr,TEXT("/Game/Recovery/UI/EdgeRestWidget.EdgeRestWidget_C"));
+    if (!TestNotNull(TEXT("Recovered EdgeRestWidget"),EdgeRestBlueprintClass)) return false;
+    TestTrue(TEXT("Recovered EdgeRestWidget uses its native lifecycle owner"),EdgeRestBlueprintClass->IsChildOf(URecoveredEdgeRestWidget::StaticClass()));
+
+    const auto Initialization=UWorld::InitializationValues().AllowAudioPlayback(false).CreatePhysicsScene(false).CreateNavigation(false).CreateAISystem(false).ShouldSimulatePhysics(false).SetTransactional(false);
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false,NAME_None,nullptr,true,ERHIFeatureLevel::Num,&Initialization);
+    FWorldContext& Context=GEngine->CreateNewWorldContext(EWorldType::Game);
+    Context.SetCurrentWorld(World);
+    ON_SCOPE_EXIT { World->DestroyWorld(false); GEngine->DestroyWorldContext(World); };
+    World->InitializeActorsForPlay(FURL());
+
+    auto* Manager=World->SpawnActor<ARecoveredGlobalManager>();
+    auto* EdgeRest=CreateWidget<URecoveredEdgeRestWidget>(World,EdgeRestBlueprintClass);
+    if (!TestNotNull(TEXT("Recovered EdgeRestWidget instantiates"),EdgeRest) || !TestNotNull(TEXT("Recovered EdgeRestWidget manager"),Manager)) return false;
+    auto* CancelButton=Cast<UButton>(EdgeRest->GetWidgetFromName(TEXT("CancelBreakButton")));
+    auto* ProgressBar=Cast<UProgressBar>(EdgeRest->GetWidgetFromName(TEXT("ProgressBar_0")));
+    auto* EdgesLeft=Cast<UTextBlock>(EdgeRest->GetWidgetFromName(TEXT("EdgesLeftText")));
+    auto* Tooltip=Cast<UTextBlock>(EdgeRest->GetWidgetFromName(TEXT("TooltipTextVar")));
+    if (!TestNotNull(TEXT("Recovered EdgeRestWidget preserves source cancel control"),CancelButton) || !TestNotNull(TEXT("Recovered EdgeRestWidget preserves source progress control"),ProgressBar) || !TestNotNull(TEXT("Recovered EdgeRestWidget preserves source edge counter"),EdgesLeft) || !TestNotNull(TEXT("Recovered EdgeRestWidget preserves source tip control"),Tooltip)) return false;
+
+    Manager->EdgeBreakDurationScaled=7.5;
+    Manager->PlayerVariables=FRecoveredPlayerVariables();
+    Manager->PlayerVariables.bCanUseItems=true;
+    Manager->PlayerVariables.bCanDraw=true;
+    EdgeRest->BeginRecoveredEdgeRest(Manager,1);
+    TestTrue(TEXT("Recovered EdgeRestWidget accepts source cancel input"),EdgeRest->bIsButtonInputAllowed);
+    TestTrue(TEXT("Recovered EdgeRestWidget starts the source break lifecycle"),EdgeRest->IsRecoveredEdgeRestActive());
+    TestEqual(TEXT("Recovered EdgeRestWidget reads scaled edge break duration"),EdgeRest->BreakDuration,7.5);
+    TestEqual(TEXT("Recovered EdgeRestWidget preserves singular mercy copy"),EdgesLeft->GetText().ToString(),FString(TEXT("1 Edge Left Until Mercy")));
+    TestTrue(TEXT("Recovered EdgeRestWidget prefixes an original source tip"),Tooltip->GetText().ToString().StartsWith(TEXT("Tip: ")));
+    TestEqual(TEXT("Recovered EdgeRestWidget restores all original source tips"),EdgeRest->LoadScreenTipsArray.Num(),14);
+    TestFalse(TEXT("Recovered EdgeRestWidget disables item use during break"),Manager->PlayerVariables.bCanUseItems);
+    TestFalse(TEXT("Recovered EdgeRestWidget disables drawing during break"),Manager->PlayerVariables.bCanDraw);
+
+    EdgeRest->StartTime=World->GetUnpausedTimeSeconds()-3.75;
+    EdgeRest->UpdateProgress();
+    TestTrue(TEXT("Recovered EdgeRestWidget derives progress from unpaused time"),FMath::IsNearlyEqual(EdgeRest->CurrentProgress,0.5,0.05));
+    TestTrue(TEXT("Recovered EdgeRestWidget writes source progress to its control"),FMath::IsNearlyEqual(ProgressBar->GetPercent(),0.5f,0.05f));
+    EdgeRest->UpdateEdgesLeftUntilMercy(3);
+    TestEqual(TEXT("Recovered EdgeRestWidget restores plural mercy copy"),EdgesLeft->GetText().ToString(),FString(TEXT("3 Edges Left Until Mercy")));
+    EdgeRest->CancelRecoveredEdgeRest();
+    TestFalse(TEXT("Recovered EdgeRestWidget cancels only once"),EdgeRest->bIsButtonInputAllowed);
+    TestFalse(TEXT("Recovered EdgeRestWidget clears active break on cancel"),EdgeRest->IsRecoveredEdgeRestActive());
+
+    EdgeRest->BeginRecoveredEdgeRest(Manager,2);
+    EdgeRest->StartTime=World->GetUnpausedTimeSeconds()-EdgeRest->BreakDuration;
+    EdgeRest->UpdateProgress();
+    TestEqual(TEXT("Recovered EdgeRestWidget clamps completed progress"),EdgeRest->CurrentProgress,1.0);
+    TestFalse(TEXT("Recovered EdgeRestWidget completes at the source scaled duration"),EdgeRest->IsRecoveredEdgeRestActive());
     return true;
 }
 #endif

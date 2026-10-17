@@ -63,6 +63,7 @@ public:
     UFUNCTION(BlueprintCallable, Category="Recovered Menu") void OpenStatsDebug();
     UFUNCTION(BlueprintCallable, Category="Recovered Menu") void OpenSettings();
     UFUNCTION(BlueprintCallable, Category="Recovered Menu") void OpenUnlockStore();
+    UFUNCTION(BlueprintCallable, Category="Recovered Menu") void OpenImport();
     UFUNCTION() void CloseAdultWarning();
     UFUNCTION() void CloseTutorialSplash();
     UFUNCTION() void CloseUpdateSplash();

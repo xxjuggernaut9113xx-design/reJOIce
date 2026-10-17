@@ -25,7 +25,7 @@ bool FRecoveredVideoMaterialTest::RunTest(const FString& Parameters) {
         auto* Sample=Cast<UMaterialExpressionTextureSampleParameter2D>(Expressions[0]);
         if(TestNotNull(TEXT("Named media texture parameter"),Sample)) {
             TestEqual(TEXT("Display parameter"),Sample->ParameterName,FName(TEXT("BackgroundVideoTexture")));
-            TestTrue(TEXT("External media sampler"),Sample->SamplerType==SAMPLERTYPE_External);
+            TestTrue(TEXT("Color media sampler"),Sample->SamplerType==SAMPLERTYPE_Color);
             TestTrue(TEXT("UI color output connected"),Material->GetEditorOnlyData()->EmissiveColor.Expression==Sample);
         }
     }

@@ -1,7 +1,12 @@
 #include "RecoveredRules.h"
 #include "RecoveredEdgeManager.h"
 #include "RecoveredEventRules.h"
+#include "RecoveredEventWidgets.h"
 #include "RecoveredMenu.h"
+#include "RecoveredPG2TabbedInventoryWidget.h"
+#include "RecoveredSessionWidget.h"
+#include "RecoveredTabbedInventoryWidget.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/ProgressBar.h"
 #include "Components/TextBlock.h"
@@ -11,6 +16,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundBase.h"
 #include "TimerManager.h"
+#include "Engine/Engine.h"
 #include "Engine/World.h"
 
 namespace {
@@ -37,6 +43,76 @@ const FRecoveredBonerPillEffect& GetRecoveredBonerPillEffect(int32 UpgradeLevel)
 
 int32 GetRecoveredSuccuShieldPurchaseAmount(int32 UpgradeLevel) {
     static constexpr int32 Amounts[]={1,4,7,10,15};
+    return Amounts[FMath::Clamp(UpgradeLevel,0,UE_ARRAY_COUNT(Amounts)-1)];
+}
+
+struct FRecoveredLootDrop {
+    FName ItemID;
+    FName IconName;
+    const TCHAR* Description;
+};
+
+const FRecoveredLootDrop GRecoveredLootDrops[] = {
+    {TEXT("DecreaseHeat"),TEXT("DecreaseHealthBarItem"),TEXT("+1 Decrease Heat")},
+    {TEXT("XCumChance"),TEXT("CumChangeItem"),TEXT("+1 Cum Meter Increase")},
+    {TEXT("Edge"),TEXT("EdgeItem"),TEXT("+1 Edge")},
+    {TEXT("Break"),TEXT("BreakItem"),TEXT("+1 Break")},
+    {TEXT("BonerPill"),TEXT("BonerPillItem"),TEXT("+1 Boner Pill")},
+    {TEXT("Resupply"),TEXT("ResupplyItem"),TEXT("+1 Resupply")},
+    {TEXT("Slowdown"),TEXT("SlowdownItem"),TEXT("+1 Slowdown")}
+};
+
+void EmitRecoveredLootDebugMessage(const TCHAR* Message) {
+    UE_LOG(LogTemp,Display,TEXT("%s"),Message);
+    if (GEngine) GEngine->AddOnScreenDebugMessage(-1,2.0f,FLinearColor(0.0f,0.66f,1.0f,1.0f).ToFColor(true),Message);
+}
+
+void PresentRecoveredLootReceipt(ARecoveredGlobalManager& Manager,FName ItemID) {
+    auto* Screen=Cast<URecoveredSessionWidget>(Manager.SessionScreen);
+    if (!Screen) return;
+    if (ItemID==TEXT("BonerPill") || ItemID==TEXT("Resupply") || ItemID==TEXT("SuccuShield")) {
+        auto* Inventory=Cast<URecoveredPG2TabbedInventoryWidget>(Screen->GetWidgetFromName(TEXT("PG2TabbedInventory_Widget")));
+        if (!Inventory) return;
+        if (ItemID==TEXT("BonerPill")) Inventory->ReceiveBonerPillItem();
+        else if (ItemID==TEXT("SuccuShield")) Inventory->ReceiveSuccuShieldItems();
+        else Inventory->ReceiveStoreItem();
+        return;
+    }
+    auto* Inventory=Cast<URecoveredTabbedInventoryWidget>(Screen->GetWidgetFromName(TEXT("PG1TabbedInventory_Widget")));
+    if (!Inventory) return;
+    if (ItemID==TEXT("DecreaseHeat")) Inventory->ReceiveHeatItem();
+    else if (ItemID==TEXT("XCumChance")) Inventory->ReceiveCumChanceItem();
+    else if (ItemID==TEXT("Edge")) Inventory->ReceiveEdgeItem();
+    else if (ItemID==TEXT("Break")) Inventory->ReceiveBreakItem();
+    else if (ItemID==TEXT("Slowdown")) Inventory->ReceiveSlowdownItem();
+}
+
+void AwardRecoveredLootDrop(ARecoveredGlobalManager& Manager,const FRecoveredLootDrop& Drop) {
+    const int32 Maximum=Manager.GetRecoveredItemMaximum(Drop.ItemID);
+    if (Maximum>0 && Manager.GetOwnedItemCount(Drop.ItemID)>=Maximum) {
+        Manager.AddCoins(50);
+        Manager.CreateRecoveredNotification(TEXT("CoinRewardIcon"),TEXT("Loot Bar Filled"),TEXT("+50 Coins - Cash Reward Unlocked"));
+        return;
+    }
+    ++Manager.OwnedItemCounts.FindOrAdd(Drop.ItemID);
+    Manager.PlayerVariables.bHasItems=true;
+    PresentRecoveredLootReceipt(Manager,Drop.ItemID);
+    Manager.CreateRecoveredNotification(Drop.IconName,TEXT("Loot Bar Filled"),Drop.Description);
+}
+
+bool RollRecoveredLootChance(double Chance) {
+    return UKismetMathLibrary::RandomFloatInRange(0.0f,100.0f)<=Chance;
+}
+
+void GrantRecoveredLegacyLoot(ARecoveredGlobalManager& Manager,FName ItemID,int32 Amount=1) {
+    int32& Count=Manager.OwnedItemCounts.FindOrAdd(ItemID);
+    Count=URecoveredStateRuleLibrary::AddInt32Wrapping(Count,Amount);
+    Manager.PlayerVariables.bHasItems=true;
+    PresentRecoveredLootReceipt(Manager,ItemID);
+}
+
+int32 GetRecoveredLegacyShieldGrant(int32 UpgradeLevel) {
+    static constexpr int32 Amounts[]={10,15,20,25,35};
     return Amounts[FMath::Clamp(UpgradeLevel,0,UE_ARRAY_COUNT(Amounts)-1)];
 }
 
@@ -96,7 +172,7 @@ void ARecoveredGlobalManager::HandleRecoveredSessionAction(FName Action) {
     else if (Action==TEXT("SpawnWidget_Onomatopoeia")) SpawnOnomatopoeia();
     else if (Action==TEXT("PlayDrawButtonAnimation")) PlayDrawButtonAnimation();
     else if (Action==TEXT("CreateLootRewardWidget")) CreateLootRewardWidget();
-    else if (Action==TEXT("RollAndGiveLootDropsV2")) RollAndGiveLootDrops();
+    else if (Action==TEXT("RollAndGiveLootDropsV2")) RollAndGiveLootDropsV2();
     // Edge-streak presentation.
     else if (Action==TEXT("HideEdgeStreakCounter") || Action==TEXT("ToggleEdgeStreakCounterVisibilityFalse")) SetEdgeStreakCounterVisible(false);
     else if (Action==TEXT("UpdateEdgeStreakProgressBar")) UpdateEdgeStreakProgressBar();
@@ -104,7 +180,6 @@ void ARecoveredGlobalManager::HandleRecoveredSessionAction(FName Action) {
     else if (Action==TEXT("ClearIdleTimer")) ClearIdleTimer();
     else if (Action==TEXT("AddLifetimeDrawAndSave")) AddLifetimeDrawAndSave();
     else if (Action==TEXT("AddOneToLifetimeStrokesSave")) AddOneToLifetimeStrokesSave();
-    else if (Action==TEXT("SessionFinalized")) OnSessionFinalizedBroadcast();
     // Event families.
     else if (Action==TEXT("MercyEventStarted")) StartMercyEvent();
     else if (Action==TEXT("MercyAccepted")) AcceptMercy();
@@ -177,7 +252,7 @@ void ARecoveredGlobalManager::PlayHeatGainBeatComplete() {
 }
 
 void ARecoveredGlobalManager::PlayBeatCompleteSFX() {
-    PlayRecoveredSessionSound(TEXT("BeatComplete"));
+    PlayRecoveredBeatCompleteAudio();
 }
 
 void ARecoveredGlobalManager::TriggerClothesBreaker() {
@@ -185,9 +260,46 @@ void ARecoveredGlobalManager::TriggerClothesBreaker() {
 }
 
 void ARecoveredGlobalManager::TriggerBrainMelter() {
-    if (!bBrainMelterEnabled) return;
-    SpawnRecoveredOverlay(TEXT("BrainMelterOverlay_Widget"));
-    PlayRecoveredSessionSound(TEXT("BrainMelter"));
+    bLastBrainMelterSwapSucceeded=false;
+    LastBrainMelterSwapDeck=INDEX_NONE;
+    if (!bBrainMelterEnabled || !BeatTimeline || BeatTimeline->GetBeatsRemaining()>1 || !MediaDeckState) return;
+
+    --CurrentBrainMelterSwapInterval;
+    if (CurrentBrainMelterSwapInterval>0) return;
+    CurrentBrainMelterSwapInterval=MasterBrainMelterSwapInterval;
+
+    int32 Deck=INDEX_NONE;
+    switch (BeatContext.CardType) {
+        case 0: Deck=0; break;
+        case 1: Deck=1; break;
+        case 2:
+        case 5: Deck=2; break;
+        case 3: Deck=3; break;
+        case 6: Deck=4; break;
+        case 7: Deck=5; break;
+        case 8: Deck=6; break;
+        default: return;
+    }
+
+    if (!MediaDeckState->Draw(static_cast<uint8>(Deck),false,SelectedRandomCard)) return;
+    MediaDeckState->ResetDeckFromMasterWhenEmpty(static_cast<uint8>(Deck));
+    if (MediaPlayback) {
+        MediaPlayback->SetBeatInterval(PlayerVariables.BeatSpawnInterval);
+        MediaPlayback->OpenEntry(SelectedRandomCard,BeatTravelTime);
+    }
+    LastBrainMelterSwapDeck=Deck;
+    bLastBrainMelterSwapSucceeded=true;
+}
+
+void ARecoveredGlobalManager::BindRecoveredBrainMelterInterval() {
+    auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
+    const double SavedInterval=Instance && Instance->CurrentSave
+        ? Instance->CurrentSave->GetNumberSetting(TEXT("BrainMelterMediaBeatSwapInterval"),1.0)
+        : 1.0;
+    MasterBrainMelterSwapInterval=FMath::TruncToInt(SavedInterval);
+    CurrentBrainMelterSwapInterval=MasterBrainMelterSwapInterval;
+    LastBrainMelterSwapDeck=INDEX_NONE;
+    bLastBrainMelterSwapSucceeded=false;
 }
 
 void ARecoveredGlobalManager::ToggleRecoveredBrainMelter() {
@@ -231,10 +343,20 @@ void ARecoveredGlobalManager::ClearNotificationBoxes() {
 }
 
 void ARecoveredGlobalManager::RemoveAllActiveBeatWidgets() {
-    for (const auto& Overlay : EventOverlays) {
-        if (IsValid(Overlay) && Overlay->GetName().Contains(TEXT("BeatWidget"))) {
-            Overlay->RemoveFromParent();
-        }
+    TArray<UUserWidget*> BeatWidgets;
+    UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this,BeatWidgets,URecoveredBeatWidget::StaticClass(),true);
+    for (UUserWidget* Widget : BeatWidgets) {
+        if (!IsValid(Widget)) continue;
+        Widget->StopAllAnimations();
+        Widget->RemoveFromParent();
+        EventOverlays.Remove(Widget);
+    }
+    for (int32 Index=EventOverlays.Num()-1;Index>=0;--Index) {
+        UUserWidget* Overlay=EventOverlays[Index];
+        if (!IsValid(Overlay) || (!Overlay->IsA<URecoveredBeatWidget>() && !Overlay->GetName().Contains(TEXT("BeatWidget")))) continue;
+        Overlay->StopAllAnimations();
+        Overlay->RemoveFromParent();
+        EventOverlays.RemoveAt(Index);
     }
 }
 
@@ -253,13 +375,28 @@ void ARecoveredGlobalManager::CreateLootRewardWidget() {
 }
 
 void ARecoveredGlobalManager::RollAndGiveLootDrops() {
-    // Rolls loot drops and grants them through the reward path.
-    if (!Rules) return;
-    const int32 Roll = FMath::RandRange(1, 100);
-    if (Roll <= 25) {
-        GrantPlayerCoins(10);
-        URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats, ERecoveredMetric::TotalXPEarned, 5);
+    EmitRecoveredLootDebugMessage(TEXT("Loot Drop Added!"));
+    if (GetOwnedItemCount(TEXT("XCumChance"))<GetRecoveredItemMaximum(TEXT("XCumChance")) && RollRecoveredLootChance(ActiveDifficulty.CumIncreaseItemSpawnChance)) GrantRecoveredLegacyLoot(*this,TEXT("XCumChance"));
+    if (GetOwnedItemCount(TEXT("DecreaseHeat"))<GetRecoveredItemMaximum(TEXT("DecreaseHeat")) && RollRecoveredLootChance(ActiveDifficulty.DecreaseHeatItemSpawnChance)) GrantRecoveredLegacyLoot(*this,TEXT("DecreaseHeat"));
+    if (GetOwnedItemCount(TEXT("Edge"))<GetRecoveredItemMaximum(TEXT("Edge")) && RollRecoveredLootChance(ActiveDifficulty.EdgeItemSpawnChance)) GrantRecoveredLegacyLoot(*this,TEXT("Edge"));
+    if (GetOwnedItemCount(TEXT("Slowdown"))<GetRecoveredItemMaximum(TEXT("Slowdown")) && RollRecoveredLootChance(ActiveDifficulty.SlowdownItemSpawnChance)) GrantRecoveredLegacyLoot(*this,TEXT("Break"));
+    if (GetOwnedItemCount(TEXT("Break"))<GetRecoveredItemMaximum(TEXT("Break")) && RollRecoveredLootChance(ActiveDifficulty.BreakItemSpawnChance)) GrantRecoveredLegacyLoot(*this,TEXT("Slowdown"));
+    if (GetOwnedItemCount(TEXT("BonerPill"))<GetRecoveredItemMaximum(TEXT("BonerPill")) && RollRecoveredLootChance(ActiveDifficulty.BonerPillSpawnChance)) GrantRecoveredLegacyLoot(*this,TEXT("BonerPill"));
+    if (GetOwnedItemCount(TEXT("SuccuShield"))<GetRecoveredItemMaximum(TEXT("SuccuShield")) && RollRecoveredLootChance(ActiveDifficulty.SuccuShieldSpawnChance)) GrantRecoveredLegacyLoot(*this,TEXT("SuccuShield"),GetRecoveredLegacyShieldGrant(GetRecoveredItemUpgradeLevel(TEXT("SuccuShield"))));
+}
+
+void ARecoveredGlobalManager::RollAndGiveLootDropsV2() {
+    // BP_GlobalManager.RollAndGiveLootDropsV2 selects a one-in-six cash
+    // reward, otherwise one of seven items. A capped item becomes cash.
+    if (UKismetMathLibrary::RandomIntegerInRange(0,5)==0) {
+        AddCoins(50);
+        EmitRecoveredLootDebugMessage(TEXT("Coins Rewarded!"));
+        CreateRecoveredNotification(TEXT("CoinRewardIcon"),TEXT("Loot Bar Filled"),TEXT("+50 Coins - Cash Reward Unlocked"));
+        return;
     }
+    EmitRecoveredLootDebugMessage(TEXT("Loot Drop Added!"));
+    const int32 RewardIndex=UKismetMathLibrary::RandomIntegerInRange(0,UE_ARRAY_COUNT(GRecoveredLootDrops)-1);
+    AwardRecoveredLootDrop(*this,GRecoveredLootDrops[RewardIndex]);
 }
 
 void ARecoveredGlobalManager::SetEdgeStreakCounterVisible(bool bVisible) {
@@ -295,14 +432,6 @@ void ARecoveredGlobalManager::OnIdleTimeout() {
     OnSessionAction.Broadcast(TEXT("IdleTimeout"));
 }
 
-void ARecoveredGlobalManager::SyncVideoLoopToBeat() {
-    // Video-loop event: restarts the video aligned to the beat boundary.
-    if (MediaPlayback) {
-        MediaPlayback->SetPaused(false);
-        OnSessionAction.Broadcast(TEXT("VideoLoopSynced"));
-    }
-}
-
 void ARecoveredGlobalManager::AddLifetimeDrawAndSave() {
     // Increments lifetime draws and persists.
     auto* Instance = Cast<URecoveredGameInstance>(GetGameInstance());
@@ -324,50 +453,80 @@ void ARecoveredGlobalManager::AddOneToLifetimeStrokesSave() {
     }
 }
 
-void ARecoveredGlobalManager::OnSessionFinalizedBroadcast() {
-    // SessionFinalized notification received; finalization already ran.
-    // Refresh any live HUD elements here.
-}
-
 void ARecoveredGlobalManager::StartMercyEvent() {
+    PlayerVariables.bHasEdged=false;
+    if (BeatTimeline) BeatTimeline->PauseSequence();
+    bStopSequence=true;
+    ClearIdleTimer();
+    BeatContext.CardType=5;
+    LastDispatchedEvent=TEXT("MercyEvent");
     SpawnRecoveredOverlay(TEXT("MercyEventWidget"));
+    ChangeRecoveredBeatBackground(2);
 }
 
 void ARecoveredGlobalManager::AcceptMercy() {
-    // Mercy accepted: clear the current threat, start cooldown.
-    PlayerVariables.bHasEdged = false;
-    URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats, ERecoveredMetric::ItemsUsed, 0);
-    GetWorldTimerManager().SetTimer(MercyCooldownTimer, this, &ARecoveredGlobalManager::OnMercyCooldownExpired, 60.0f, false);
+    HeatLevel=0.0;
+    bIsMercyOnCooldown=true;
+    SpawnRecoveredMercyBreak();
+    GetWorldTimerManager().SetTimer(MercyCooldownTimer,this,&ARecoveredGlobalManager::OnMercyCooldownExpired,static_cast<float>(MercyCooldownDuration),false);
+    AddCoins(EdgeBank);
+    EdgeBank=0;
 }
 
 void ARecoveredGlobalManager::OnMercyCooldownExpired() {
-    // Mercy is available again.
+    bIsMercyOnCooldown=false;
 }
 
 void ARecoveredGlobalManager::DeclineMercy() {
-    // Mercy declined: continue the threat.
-    OnSessionAction.Broadcast(TEXT("DetermineCardV2"));
+    ContinueRecoveredEdgeStreak();
+}
+
+bool ARecoveredGlobalManager::ContinueRecoveredEdgeStreak() {
+    // MercyEvent clears bHasEdged before showing its decision. The original
+    // rejection branch therefore calls EdgingEventV2 itself rather than
+    // re-entering the general card-selection path.
+    LastDispatchedEvent=TEXT("EdgingEventV2");
+    return DrawRecoveredSpecialCard(LastDispatchedEvent,true);
 }
 
 void ARecoveredGlobalManager::StartTemptationEvent() {
-    SpawnRecoveredOverlay(TEXT("TemptationAcceptOverlay_Widget"));
+    if (BeatTimeline) BeatTimeline->PauseSequence();
+    bIsTemptationOnCooldown=true;
+    bStopSequence=true;
+    ClearIdleTimer();
+    BeatContext.CardType=4;
+    LastDispatchedEvent=TEXT("TemptationEvent");
+    SpawnRecoveredOverlay(TEXT("TemptationEventWidget"));
+    GetWorldTimerManager().SetTimer(TemptationCooldownTimer,this,&ARecoveredGlobalManager::CompleteRecoveredTemptationCooldown,60.0f,false);
+    ChangeRecoveredBeatBackground(9);
 }
 
 void ARecoveredGlobalManager::AcceptTemptation() {
-    // Temptation accepted: grant the reward, apply the cost.
-    GrantPlayerCoins(25);
-    AddHeat(10.0);
+    URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats,ERecoveredMetric::AcceptedTemptation,1);
+    OnMetricUpdateRequested.Broadcast(ERecoveredMetric::AcceptedTemptation,1);
+    HeatLevel=100.0;
+    SpawnRecoveredOverlay(TEXT("TemptationAcceptOverlay_Widget"));
+    StartPaceCard(2,true,false);
 }
 
 void ARecoveredGlobalManager::DeclineTemptation() {
-    OnSessionAction.Broadcast(TEXT("DetermineCardV2"));
+    RequestNextRecoveredCard(true);
+}
+
+void ARecoveredGlobalManager::CompleteRecoveredTemptationCooldown() {
+    bIsTemptationOnCooldown=false;
 }
 
 void ARecoveredGlobalManager::StartPunishmentEvent() {
     SpawnRecoveredOverlay(TEXT("PunishmentSpawn_Overlay_Widget"));
-    // Punishment: heat penalty and combo reset.
-    AddHeat(15.0);
-    PlayerVariables.CurrentComboCount = 0;
+    ClearIdleTimer();
+    LastDispatchedEvent=TEXT("SpawnPunishmentEvent");
+    DrawRecoveredSpecialCard(LastDispatchedEvent,true);
+    if (auto* Menu=Cast<URecoveredMenuWidget>(SessionScreen)) Menu->PlayRecoveredAnimation(TEXT("FastPaceAnim"));
+    PlayDialogueLine(TEXT("SpecialEvent_1"));
+    ChangeRecoveredBeatBackground(8);
+    CreateRecoveredNotification(TEXT("PunishmentIcon"),TEXT("Punishment"),TEXT("Your boasts have consequences."));
+    PlayRecoveredMusic(3);
 }
 
 void ARecoveredGlobalManager::ExecuteTaunt() {
@@ -423,10 +582,6 @@ bool ARecoveredGlobalManager::StartRecoveredTauntCard() {
         LastSessionError=TEXT("Taunt media deck is empty");
         return false;
     }
-    if (MediaPlayback && !MediaPlayback->OpenEntry(SelectedRandomCard)) {
-        LastSessionError=TEXT("Taunt media could not be opened");
-        return false;
-    }
     const auto Timing=URecoveredCardRuleLibrary::CalculateCardTiming(
         UKismetMathLibrary::RandomIntegerInRange(Row->MinStrokeCount,Row->MaxStrokeCount),
         UKismetMathLibrary::RandomFloatInRange(.18,Row->MaxIntervalSeconds),
@@ -434,6 +589,13 @@ bool ARecoveredGlobalManager::StartRecoveredTauntCard() {
         UserStrokeCountMultiplier,
         .75);
     PlayerVariables.BeatSpawnInterval=Timing.BeatInterval;
+    if (MediaPlayback) {
+        MediaPlayback->SetBeatInterval(Timing.BeatInterval);
+        if (!MediaPlayback->OpenEntry(SelectedRandomCard,BeatTravelTime)) {
+            LastSessionError=TEXT("Taunt media could not be opened");
+            return false;
+        }
+    }
     const auto Pattern=URecoveredSessionRuleLibrary::CheckIntervalMultipliers(Rules->FastBeatPatterns[UKismetMathLibrary::RandomIntegerInRange(0,Rules->FastBeatPatterns.Num()-1)],BeatTimeline->GetCurrentInterval());
     if (!StartRecoveredBeatSequence(Pattern,Timing.BeatInterval,Timing.StrokeCount,1.0f,BeatTravelTime)) {
         LastSessionError=TEXT("Taunt beat timeline rejected source timing");
@@ -495,6 +657,7 @@ int32 ARecoveredGlobalManager::GetRecoveredItemMaximum(FName ItemID) const {
     if (ItemID==TEXT("Slowdown")) return 3;
     if (ItemID==TEXT("Break")) return 2;
     if (ItemID==TEXT("BonerPill")) return 5;
+    if (ItemID==TEXT("Resupply")) return 1;
     if (ItemID==TEXT("SuccuShield")) return 15;
     return 0;
 }
@@ -569,6 +732,10 @@ ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::UseRecoveredDecreaseHe
     RecordRecoveredDefensiveItemUse(*this,false);
     if (RollRecoveredPunishmentChance()) {
         LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::PunishmentTriggered;
+        // The heat-item failure path applies its own fifteen-point penalty
+        // before it routes into the shared punishment-card presentation.
+        // SpawnPunishmentEvent itself does not alter heat.
+        AddHeat(15.0);
         StartPunishmentEvent();
         return LastDefensiveItemUseResult;
     }
@@ -777,9 +944,23 @@ void ARecoveredGlobalManager::SyncRecoveredSuccuShieldInventory(int32 Count) {
 
 void ARecoveredGlobalManager::ChangeRecoveredBeatBackground(int32 Style) {
     CurrentBeatBackgroundStyle=Style;
-    if (Style!=9 || !IsValid(SessionScreen)) return;
+    if (!IsValid(SessionScreen)) return;
+    const TCHAR* MediaName=nullptr;
+    switch (Style) {
+    case 0: MediaName=TEXT("backgroundmenuloop"); break;
+    case 1: MediaName=TEXT("decisionbackgroundloop"); break;
+    case 2: MediaName=TEXT("mercybackgroundloop"); break;
+    case 3: MediaName=TEXT("normalbeatbackgroundloop"); break;
+    case 4: MediaName=TEXT("prematurecumbackgroundloop"); break;
+    case 5: MediaName=TEXT("successfulcumbackgroundloop"); break;
+    case 6: MediaName=TEXT("succubusbackgroundloop"); break;
+    case 7: MediaName=TEXT("succubuscumbackgroundloop"); break;
+    case 8: MediaName=TEXT("tauntbackgroundloop"); break;
+    case 9: MediaName=TEXT("temptationbackgroundloop"); break;
+    default: return;
+    }
     auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
-    if (Instance) Instance->PlayRecoveredBackgroundMedia(TEXT("temptationbackgroundloop"),Cast<UImage>(SessionScreen->GetWidgetFromName(TEXT("BackgroundImage"))));
+    if (Instance) Instance->PlayRecoveredBackgroundMedia(MediaName,Cast<UImage>(SessionScreen->GetWidgetFromName(TEXT("BackgroundImage"))));
 }
 
 void ARecoveredGlobalManager::CompleteRecoveredBonerPillCooldown() {

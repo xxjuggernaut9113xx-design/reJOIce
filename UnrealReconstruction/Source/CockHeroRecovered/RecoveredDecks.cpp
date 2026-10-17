@@ -38,6 +38,13 @@ void URecoveredDeckState::ReplaceEmptyDecks() {
         if(Target->IsEmpty() && IsDeckRepeating(Deck)) *Target=*SelectDeck(MasterFavorites,Deck);
     }
 }
+void URecoveredDeckState::ResetDeckFromMasterWhenEmpty(uint8 Deck, bool bFavorite) {
+    FRecoveredMediaDecks& ChildDecks=bFavorite ? ChildFavorites : Child;
+    const FRecoveredMediaDecks& MasterDecks=bFavorite ? MasterFavorites : Master;
+    TArray<FRecoveredMediaEntry>* Target=SelectDeck(ChildDecks,Deck);
+    const TArray<FRecoveredMediaEntry>* Source=SelectDeck(MasterDecks,Deck);
+    if (Target && Source && Target->IsEmpty()) *Target=*Source;
+}
 bool URecoveredDeckState::DrawAtIndex(TArray<FRecoveredMediaEntry>& Deck,int32 Index,FRecoveredMediaEntry& Entry) {
     if(!Deck.IsValidIndex(Index)) { Entry=FRecoveredMediaEntry();return false; }
     Entry=Deck[Index];
@@ -157,9 +164,23 @@ TArray<FString> URecoveredDeckState::GetFavoritePaths(uint8 Deck) const {
 bool URecoveredDeckState::ChooseRandom(uint8 Deck,bool bFavorite,FRecoveredMediaEntry& Entry,bool bShuffle) {
     TArray<FRecoveredMediaEntry>* Target=SelectDeck(bFavorite ? ChildFavorites : Child,Deck);
     if (!Target || Target->IsEmpty()) { Entry=FRecoveredMediaEntry();return false; }
+    TArray<FRecoveredMediaEntry> Candidates=*Target;
     if (bShuffle) {
-        for (int32 Index=0;Index<Target->Num();++Index) Target->Swap(Index,FMath::RandRange(Index,Target->Num()-1));
+        for (int32 Index=0;Index<Candidates.Num();++Index) Candidates.Swap(Index,FMath::RandRange(Index,Candidates.Num()-1));
     }
-    Entry=(*Target)[FMath::RandRange(0,Target->Num()-1)];
+    Entry=Candidates[FMath::RandRange(0,Candidates.Num()-1)];
+    return true;
+}
+
+bool URecoveredDeckState::ChooseVideoLoop(FRecoveredMediaEntry& Entry) const {
+    if (Master.VideoLoops.IsEmpty()) {
+        Entry=FRecoveredMediaEntry();
+        return false;
+    }
+    TArray<FRecoveredMediaEntry> Candidates=Master.VideoLoops;
+    for (int32 Index=0;Index<Candidates.Num();++Index) {
+        Candidates.Swap(Index,FMath::RandRange(Index,Candidates.Num()-1));
+    }
+    Entry=Candidates[FMath::RandRange(0,Candidates.Num()-1)];
     return true;
 }

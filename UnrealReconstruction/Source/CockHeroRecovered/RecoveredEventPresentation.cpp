@@ -10,6 +10,8 @@
 #include "TimerManager.h"
 #include "Misc/PackageName.h"
 #include "RecoveredEdgeManager.h"
+#include "RecoveredEdgeRestWidget.h"
+#include "RecoveredMercyRestWidget.h"
 
 UUserWidget* ARecoveredGlobalManager::SpawnRecoveredOverlay(FName ScreenName) {
     if (ScreenName.IsNone() || !GetWorld()) return nullptr;
@@ -27,10 +29,12 @@ UUserWidget* ARecoveredGlobalManager::SpawnRecoveredOverlay(FName ScreenName) {
 bool ARecoveredGlobalManager::SpawnRecoveredStore() {
     if (BeatTimeline) BeatTimeline->PauseSequence();
     bStoreOnCooldown=true;
+    ClearIdleTimer();
     auto* Store=SpawnRecoveredOverlay(TEXT("StoreWidget"));
     if (!Store) { LastSessionError=TEXT("Recovered store screen is unavailable");return false; }
     BeatContext.CardType=4;
     GetWorldTimerManager().SetTimer(StoreCooldownTimer,this,&ARecoveredGlobalManager::CompleteRecoveredStoreCooldown,180.0f,false);
+    ChangeRecoveredBeatBackground(1);
     OnSessionAction.Broadcast(TEXT("StoreCardStarted"));
     return true;
 }
@@ -46,9 +50,13 @@ bool ARecoveredGlobalManager::CreateRecoveredNotification(FName IconName,const F
     if (!Notification) return false;
     UTexture2D* Icon=nullptr;
     if (IconName==TEXT("PunishmentIcon")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/NotifBoxIcons/PunishmentIcon.PunishmentIcon"));
+    else if (IconName==TEXT("SuccubusIcon")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/Widgets/NotificationBoxIcons/SuccubusIcon.SuccubusIcon"));
+    else if (IconName==TEXT("CoinRewardIcon")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/Widgets/NotificationBoxIcons/CoinRewardIcon.CoinRewardIcon"));
     else if (IconName==TEXT("EdgeItem")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/EdgeItem.EdgeItem"));
     else if (IconName==TEXT("CumChangeItem")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/CumChangeItem.CumChangeItem"));
     else if (IconName==TEXT("DecreaseHealthBarItem")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/DecreaseHealthBarItem.DecreaseHealthBarItem"));
+    else if (IconName==TEXT("BreakItem")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/BreakItem.BreakItem"));
+    else if (IconName==TEXT("ResupplyItem")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/ResupplyItem.ResupplyItem"));
     else if (IconName==TEXT("SlowdownItem")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/SlowdownItem.SlowdownItem"));
     else if (IconName==TEXT("BonerPillItem")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/BonerPillItem.BonerPillItem"));
     else if (IconName==TEXT("SuccuShield")) Icon=LoadObject<UTexture2D>(nullptr,TEXT("/Game/Recovery/Resources/UI/InventoryButtonPNGs/SuccubusShields_On.SuccubusShields_On"));
@@ -67,9 +75,21 @@ bool ARecoveredGlobalManager::CreateRecoveredNotification(FName IconName,const F
 UUserWidget* ARecoveredGlobalManager::SpawnRecoveredEdgeBreak(int32 EdgesUntilNextMercy) {
     if (BeatTimeline) BeatTimeline->PauseSequence();
     UUserWidget* Widget=SpawnRecoveredOverlay(TEXT("EdgeRestWidget"));
-    if (UTextBlock* EdgesLeft=Widget ? Cast<UTextBlock>(Widget->GetWidgetFromName(TEXT("EdgesLeftText"))) : nullptr) {
+    if (auto* EdgeRest=Cast<URecoveredEdgeRestWidget>(Widget)) {
+        EdgeRest->BeginRecoveredEdgeRest(this,EdgesUntilNextMercy);
+    } else if (UTextBlock* EdgesLeft=Widget ? Cast<UTextBlock>(Widget->GetWidgetFromName(TEXT("EdgesLeftText"))) : nullptr) {
         EdgesLeft->SetText(FText::FromString(EdgesUntilNextMercy==1 ? TEXT("1 Edge Left Until Mercy") : FString::Printf(TEXT("%d Edges Left Until Mercy"),EdgesUntilNextMercy)));
     }
+    return Widget;
+}
+UUserWidget* ARecoveredGlobalManager::SpawnRecoveredMercyBreak() {
+    if (BeatTimeline) BeatTimeline->PauseSequence();
+    PlayerVariables.bCanUseItems=false;
+    PlayerVariables.bCanDraw=false;
+    AddToCumMeter(BreakCumMeterAddAmount);
+    ClearIdleTimer();
+    UUserWidget* Widget=SpawnRecoveredOverlay(TEXT("MercyRestWidget"));
+    if (auto* MercyRest=Cast<URecoveredMercyRestWidget>(Widget)) MercyRest->BeginRecoveredMercyRest(this);
     return Widget;
 }
 void ARecoveredGlobalManager::HandleRecoveredNotificationExpired(URecoveredNotificationWidget* Notification) {
@@ -79,6 +99,7 @@ void ARecoveredGlobalManager::HandleRecoveredOutcome(const FRecoveredOutcomeEffe
     if (Effects.bClearEdgeHoldTimer && IsValid(EdgingManager)) EdgingManager->ClearRecoveredEdgeHold();
     const bool bSuccessful=Effects.OutcomeOverlaySourceIndex==-4047;
     CreateRecoveredNotification(bSuccessful ? TEXT("SuccessfulCumIcon") : TEXT("PrematureCumIcon"),bSuccessful ? TEXT("Perfect Finish") : TEXT("Early Climax"),bSuccessful ? TEXT("Full Rewards Unlocked — Victory Achieved") : TEXT("Post-Game Rewards Cut in Half"));
+    ChangeRecoveredBeatBackground(Effects.BackgroundStyle);
     FName Overlay;
     if (Effects.OutcomeOverlaySourceIndex==-4047) Overlay=TEXT("CummingOnTimeOverlay_Widget");
     else if (Effects.OutcomeOverlaySourceIndex==-4046) Overlay=TEXT("CummingEarlySuccubus_Overlay_Widget");
@@ -106,7 +127,6 @@ void ARecoveredGlobalManager::HandleRecoveredOutcome(const FRecoveredOutcomeEffe
 }
 
 void ARecoveredGlobalManager::PresentRecoveredBeat(const FRecoveredBeatEvent& Event) {
-    PlayRecoveredSessionSound(TEXT("BeatTick"));
     auto* Controller=UGameplayStatics::GetPlayerController(this,0);
     UClass* Class=LoadClass<UUserWidget>(nullptr,TEXT("/Game/Recovery/UI/UMG_BeatIcon.UMG_BeatIcon_C"));
     if (!Controller || !Class) return;

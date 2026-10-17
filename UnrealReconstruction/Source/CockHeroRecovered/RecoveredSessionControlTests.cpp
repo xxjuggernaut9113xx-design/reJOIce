@@ -52,6 +52,23 @@ bool FRecoveredSessionControlTest::RunTest(const FString& Parameters) {
     TestEqual(TEXT("Manual fit selects source scale-to-fit"),static_cast<int32>(ScaleBox->GetStretch()),static_cast<int32>(EStretch::ScaleToFit));
     Playback->SetCropMode(ERecoveredCropMode::Auto);
     TestEqual(TEXT("Auto crop defaults to source sixteen-by-nine fill"),static_cast<int32>(ScaleBox->GetStretch()),static_cast<int32>(EStretch::Fill));
+    Playback->SetBeatInterval(0.001);
+    TestEqual(TEXT("Source media beat interval clamps at one hundredth"),Playback->BeatInterval,0.01);
+    Playback->SetSyncStartTime(42.0,3.0);
+    TestEqual(TEXT("Source sync stores the master reference"),Playback->MasterTimeReference,42.0);
+    TestEqual(TEXT("Source sync stores the timeline offset"),Playback->TimelineOffset,3.0);
+    TestTrue(TEXT("Source sync enables its start-time path"),Playback->bUseSyncStartTime);
+    Playback->SyncToBeat(1.5,44.0,0.25);
+    TestEqual(TEXT("Source sync stores beat travel time"),Playback->LastSyncBeatTime,1.5);
+    TestEqual(TEXT("Source sync subtracts the callback offset"),Playback->LastSyncTimelineTime,43.75);
+    Playback->bHasInitialSync=false;
+    Playback->BeginPatternSynchronization(50.0,2.0,1.25);
+    TestEqual(TEXT("Unsynced source media receives its travel-time sync"),Playback->LastSyncBeatTime,1.25);
+    Playback->bHasInitialSync=true;
+    Playback->BeatTravelTimeOffset=9.0;
+    Playback->BeginPatternSynchronization(55.0,4.0,2.0);
+    TestFalse(TEXT("Initial media sync is consumed once"),Playback->bHasInitialSync);
+    TestEqual(TEXT("Consumed initial sync clears its travel offset"),Playback->BeatTravelTimeOffset,0.0);
 
     auto* Manager=NewObject<ARecoveredGlobalManager>(GetTransientPackage());
     Manager->MediaDeckState=Decks;

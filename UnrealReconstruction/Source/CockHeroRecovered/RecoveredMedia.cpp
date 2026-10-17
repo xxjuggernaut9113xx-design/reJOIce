@@ -26,6 +26,10 @@ FRecoveredMediaDecks URecoveredMediaLibrary::FilterMedia(const TArray<FRecovered
         bool bExcluded = false;
         for (const FString& Tag : Entry.Tags) if (ExcludedTags.ContainsByPredicate([&Tag](const FString& Excluded) { return Excluded.Equals(Tag, ESearchCase::IgnoreCase); })) { bExcluded = true; break; }
         if (bExcluded) continue;
+        const FString Extension=FPaths::GetExtension(Entry.File,false).ToLower();
+        if (Entry.Type.Equals(TEXT("video"),ESearchCase::IgnoreCase) || Extension==TEXT("mp4") || Extension==TEXT("webm") || Extension==TEXT("mov") || Extension==TEXT("mkv")) {
+            Result.VideoLoops.Add(Entry);
+        }
         const bool bCategorized = Has(TEXT("slow")) || Has(TEXT("medium")) || Has(TEXT("fast")) || Has(TEXT("cum")) || Has(TEXT("succubus")) || Has(TEXT("ass")) || Has(TEXT("boobs"));
         if (!bCategorized) {
             switch (Fallback++ % 5) {

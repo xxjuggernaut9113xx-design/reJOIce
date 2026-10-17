@@ -1,6 +1,7 @@
 #include "Misc/AutomationTest.h"
 #if WITH_DEV_AUTOMATION_TESTS && WITH_EDITOR
 #include "RecoveredMenu.h"
+#include "RecoveredImportWidget.h"
 #include "RecoveredRules.h"
 #include "RecoveredCalibrationWidget.h"
 #include "WidgetBlueprint.h"
@@ -49,9 +50,9 @@ bool FRecoveredMenuBindingTest::RunTest(const FString& Parameters) {
         TestEqual(TEXT("Cover draw mode follows source"),int32(Cover->GetStyle().Normal.DrawAs),3);
         TestEqual(TEXT("Cover image width follows source"),float(Cover->GetStyle().Normal.ImageSize.X),32.0f);
     }
-    const TCHAR* Buttons[]={TEXT("StartGameButton"),TEXT("StatsButton"),TEXT("Settings"),TEXT("UnlockStoreButton")};
-    const TCHAR* Methods[]={TEXT("OpenDifficulty"),TEXT("OpenChallenges"),TEXT("OpenSettings"),TEXT("OpenUnlockStore")};
-    for (int32 I=0;I<4;++I) {
+    const TCHAR* Buttons[]={TEXT("StartGameButton"),TEXT("StatsButton"),TEXT("Settings"),TEXT("UnlockStoreButton"),TEXT("ImportButton")};
+    const TCHAR* Methods[]={TEXT("OpenDifficulty"),TEXT("OpenChallenges"),TEXT("OpenSettings"),TEXT("OpenUnlockStore"),TEXT("OpenImport")};
+    for (int32 I=0;I<UE_ARRAY_COUNT(Buttons);++I) {
         auto* Button=Cast<UButton>(Menu->GetWidgetFromName(Buttons[I]));
         if (TestNotNull(Buttons[I],Button)) TestTrue(Methods[I],Button->OnClicked.Contains(Menu,FName(Methods[I])));
     }
@@ -87,6 +88,10 @@ bool FRecoveredMenuBindingTest::RunTest(const FString& Parameters) {
     auto* Support=Cast<UTextBlock>(LiveMenu->GetWidgetFromName(TEXT("PatreonSupportText")));
     TestEqual(TEXT("Patron source version is restored"),Version ? Version->GetText().ToString() : FString(),FString(TEXT("V0.04 Patreon Build")));
     TestEqual(TEXT("Patron source support text is restored"),Support ? Support->GetText().ToString() : FString(),FString(TEXT("vote on weekly content packs \r\nvia patreon")));
+    LiveMenu->OpenImport();
+    TestNotNull(TEXT("Patron source route opens the import menu"),Cast<URecoveredImportWidget>(LiveMenu->LastOpenedScreen));
+    if (LiveMenu->LastOpenedScreen) LiveMenu->LastOpenedScreen->RemoveFromParent();
+    LiveMenu->LastOpenedScreen=nullptr;
     TestTrue(TEXT("Public source patron flag writes"),SourceSave->SetBoolSetting(TEXT("IsPatron?"),false));
     LiveMenu->ApplyPatronLocks();
     TestEqual(TEXT("Public source version is restored"),Version ? Version->GetText().ToString() : FString(),FString(TEXT("V0.04 Public Build")));

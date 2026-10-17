@@ -247,9 +247,37 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") bool bCanUseSlowdown = true;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") bool bCanUseBonerPill = true;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered Session") bool bIsTemptationOnCooldown = false;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered Session") bool bIsMercyOnCooldown = false;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") double MercyCooldownDuration = 120.0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") double BreakCumMeterAddAmount = 0.01;
     // Selected beat sound bank and voice pack IDs.
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Audio") FName BeatSoundBank = TEXT("Default");
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Audio") FName VoicePack = TEXT("Default");
+    // Source BP_GlobalManager stores the currently spawned dynamic-music
+    // component and replaces it for every supported card type.
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") TObjectPtr<class UAudioComponent> ActiveMusicComponent;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") FName ActiveMusicTrack = NAME_None;
+    // The source manager keeps independent, initially empty slave pools for
+    // each pace. A pool is reset from its immutable source list only after a
+    // selection cycle drains it.
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") TArray<FName> RecoveredSlowMoanPool;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") TArray<FName> RecoveredMediumMoanPool;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") TArray<FName> RecoveredFastMoanPool;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") FName LastRecoveredMetronome = NAME_None;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") FName LastRecoveredBeatMoan = NAME_None;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") FName LastRecoveredHeatSound = NAME_None;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") float LastRecoveredMetronomeVolume = 0.0f;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") float LastRecoveredMetronomePitch = 0.0f;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") float LastRecoveredMoanVolume = 0.0f;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") float LastRecoveredMoanPitch = 0.0f;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") float LastRecoveredHeatVolume = 0.0f;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") float LastRecoveredHeatPitch = 0.0f;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") TArray<FName> RecoveredEligibleContextualSounds;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") FName LastRecoveredContextualSound;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") int32 RecoveredContextualPlayCount = 0;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") float LastRecoveredContextualVolume = 0.0f;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") float LastRecoveredContextualPitch = 0.0f;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Recovered Audio") float LastRecoveredContextualStartTime = 0.0f;
     // Media pack states: pack ID -> enabled; pack ID -> priority (lower draws first).
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Media") TMap<FString, bool> MediaPackEnabled;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Media") TMap<FString, int32> MediaPackPriority;
@@ -276,7 +304,7 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered Session") int32 SessionDrawsAtMaxHeat = 0;
     UPROPERTY(BlueprintAssignable, Category="Recovered Events") FRecoveredCoinsAdded OnCoinsAdded;
     UPROPERTY(BlueprintAssignable, Category="Recovered Events") FRecoveredCoinsAdded OnEdgeBankAdded;
-    // Challenge evaluation and original widget/audio consumers remain to be reconstructed.
+    // Session metrics feed reconstructed challenge and presentation consumers through this delegate.
     UPROPERTY(BlueprintAssignable, Category="Recovered Events") FRecoveredMetricUpdateRequested OnMetricUpdateRequested;
     UFUNCTION(BlueprintCallable, Category="Recovered") void ApplyDifficulty(ERecoveredDifficulty Difficulty);
     UFUNCTION(BlueprintCallable, Category="Recovered") void InitializeDifficultyVariables(uint8 SavedEdgePacingIndex, uint8 SavedStrokeMultiplierIndex);
@@ -312,6 +340,10 @@ public:
     UFUNCTION(BlueprintCallable, Category="Recovered|Session") bool PrepareDrawState();
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered Events") bool bBrainMelterEnabled=false;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered Events") bool bBrainMelterOverrideEnabled=false;
+    UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Events") int32 MasterBrainMelterSwapInterval=1;
+    UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Events") int32 CurrentBrainMelterSwapInterval=1;
+    UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Events") int32 LastBrainMelterSwapDeck=INDEX_NONE;
+    UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Events") bool bLastBrainMelterSwapSucceeded=false;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered Events") bool bStoreOnCooldown=false;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered Events") int32 SuccubusShields=0;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Recovered Events") bool bShieldToggled=false;
@@ -327,6 +359,7 @@ public:
     UFUNCTION() void PlayBeatCompleteSFX();
     UFUNCTION() void TriggerClothesBreaker();
     UFUNCTION() void TriggerBrainMelter();
+    UFUNCTION(BlueprintCallable,Category="Recovered Events") void BindRecoveredBrainMelterInterval();
     UFUNCTION(BlueprintCallable,Category="Recovered Events") void ToggleRecoveredBrainMelter();
     UFUNCTION(BlueprintCallable,Category="Recovered Events") void AddRecoveredPermanentSuccubusWeight();
     UFUNCTION() void SpawnTaskModifier();
@@ -337,12 +370,12 @@ public:
     UFUNCTION() void PlayDrawButtonAnimation();
     UFUNCTION() void CreateLootRewardWidget();
     UFUNCTION() void RollAndGiveLootDrops();
+    UFUNCTION() void RollAndGiveLootDropsV2();
     UFUNCTION() void SetEdgeStreakCounterVisible(bool bVisible);
     UFUNCTION() void UpdateEdgeStreakProgressBar();
     UFUNCTION() void ClearIdleTimer();
     UFUNCTION() void ResetIdleTimer();
     UFUNCTION() void OnIdleTimeout();
-    UFUNCTION() void SyncVideoLoopToBeat();
     UFUNCTION() void HandleMediaPlaybackError(const FString& ErrorMessage);
     // Notification queue: enqueue, dequeue, and clear pending notifications.
     UFUNCTION(BlueprintCallable, Category="Recovered|Notifications") void EnqueueNotification(const FString& NotificationText);
@@ -357,17 +390,20 @@ public:
     UFUNCTION(BlueprintPure, Category="Recovered|Media") bool IsVideoLoopEnabled() const;
     UFUNCTION() void AddLifetimeDrawAndSave();
     UFUNCTION() void AddOneToLifetimeStrokesSave();
-    UFUNCTION() void OnSessionFinalizedBroadcast();
     // Event family handlers (audit section 3).
     UFUNCTION() void StartMercyEvent();
     UFUNCTION() void AcceptMercy();
     UFUNCTION() void DeclineMercy();
+    // Mercy refusal bypasses the normal draw selector and resumes the source
+    // edge-streak card directly after the decision animation completes.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Session") bool ContinueRecoveredEdgeStreak();
     UFUNCTION() void StartTemptationEvent();
     UFUNCTION() void AcceptTemptation();
     UFUNCTION() void DeclineTemptation();
     UFUNCTION() void StartPunishmentEvent();
     UFUNCTION() void ExecuteTaunt();
     UFUNCTION() void OnMercyCooldownExpired();
+    UFUNCTION() void CompleteRecoveredTemptationCooldown();
     UFUNCTION() void OnTauntCooldownExpired();
     // Grants coins and tracks session earnings separately from the spendable balance.
     UFUNCTION(BlueprintCallable, Category="Recovered|Session") void GrantPlayerCoins(int32 Amount);
@@ -411,6 +447,7 @@ public:
     UFUNCTION() void HandleRecoveredMetric(ERecoveredMetric Metric,int32 Amount);
     UFUNCTION(BlueprintCallable,Category="Recovered Events") class UUserWidget* SpawnRecoveredOverlay(FName ScreenName);
     UFUNCTION(BlueprintCallable,Category="Recovered Events") class UUserWidget* SpawnRecoveredEdgeBreak(int32 EdgesUntilNextMercy);
+    UFUNCTION(BlueprintCallable,Category="Recovered Events") class UUserWidget* SpawnRecoveredMercyBreak();
     UFUNCTION(BlueprintCallable,Category="Recovered Events") bool SpawnRecoveredStore();
     UFUNCTION() void CompleteRecoveredStoreCooldown();
     UFUNCTION() void HandleRecoveredOutcome(const FRecoveredOutcomeEffects& Effects);
@@ -447,6 +484,14 @@ public:
     // Audio presentation: plays session sounds (beat SFX with contextual pitch,
     // outcome stingers) as 2D sounds scaled by the saved volume settings.
     UFUNCTION(BlueprintCallable, Category="Recovered|Audio") void PlayRecoveredSessionSound(FName SoundID);
+    // Exact PlayMusic routing from BP_GlobalManager. Card types zero through
+    // three map to the recovered dynamic tracks; all other types stop music.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Audio") void PlayRecoveredMusic(uint8 CardType);
+    // Exact DetermineBeatCompleteSFX routing: pace metronome/moan playback
+    // followed by the heat category stinger.
+    UFUNCTION(BlueprintCallable, Category="Recovered|Audio") void PlayRecoveredBeatCompleteAudio();
+    UFUNCTION(BlueprintCallable, Category="Recovered|Audio") void PlayRecoveredHeatSFX();
+    UFUNCTION(BlueprintCallable, Category="Recovered|Audio") void PlayRecoveredTagContextualBeatCompleteSFX();
     // Dialogue/voiceline playback with voice-pack routing.
     UFUNCTION(BlueprintCallable, Category="Recovered|Audio") void PlayDialogueLine(FName LineID);
     // Beat sound bank selection: switches the tick sound variant.
@@ -472,6 +517,7 @@ public:
     FTimerHandle SlowdownLastItemTimerHandle;
     FTimerHandle CumChanceLastItemTimerHandle;
     FTimerHandle BonerPillCooldownTimerHandle;
+    FTimerHandle TemptationCooldownTimer;
     FTimerHandle DefensiveItemUsageTimerHandle;
     FTimerHandle OutcomeContinuationTimer;
     FTimerHandle IdleTimer;
@@ -488,7 +534,7 @@ public:
     UPROPERTY(BlueprintAssignable,Category="Recovered Outcomes") FRecoveredOutcomeRequested OnOutcomeRequested;
     UFUNCTION(BlueprintCallable,Category="Recovered Outcomes") void SuccessfulCum();
     UFUNCTION(BlueprintCallable,Category="Recovered Outcomes") void PrematureCum();
-    // The original startup/session/outcome graph is not reconstructed here.
+    // Startup and outcome routing are implemented in the recovered runtime modules.
 };
 
 UCLASS(Blueprintable)
@@ -499,6 +545,7 @@ public:
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Progression") TObjectPtr<URecoveredProgressionManager> ProgressionManager;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Progression") TObjectPtr<class URecoveredChallengeTracker> ChallengeTracker;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Devices") TObjectPtr<class URecoveredDeviceManager> DeviceManager;
+    UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Media") TObjectPtr<class URecoveredFileImportManager> FileImportManager;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Save") TObjectPtr<class URecoveredSaveGame> CurrentSave;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Save") FString ActiveRecoverySlot;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Save") FString LastSaveError;

@@ -101,6 +101,7 @@ void URecoveredMainMenu::BindNavigation(bool bBind) {
     BIND_ROUTE("StatsDebugButton",OpenStatsDebug)
     BIND_ROUTE("Settings",OpenSettings)
     BIND_ROUTE("UnlockStoreButton",OpenUnlockStore)
+    BIND_ROUTE("ImportButton",OpenImport)
     BIND_ROUTE("AdultContentWarningSplashButton",CloseAdultWarning)
     BIND_ROUTE("TutorialSplashButton",CloseTutorialSplash)
     BIND_ROUTE("NewUpdateSplashButton",CloseUpdateSplash)
@@ -215,6 +216,15 @@ void URecoveredMainMenu::OpenSettings() {
 void URecoveredMainMenu::OpenUnlockStore() {
     PlayRecoveredAnimation(TEXT("UnlocksClick"));
     OpenScreen(TEXT("UnlockStoreWidget"));
+}
+void URecoveredMainMenu::OpenImport() {
+    PlayRecoveredAnimation(TEXT("ImportClick"));
+    auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
+    if (Instance && Instance->CurrentSave && Instance->CurrentSave->GetBoolSetting(TEXT("IsPatron?"))) {
+        OpenScreen(TEXT("ImportMenuWidget"));
+        return;
+    }
+    FPlatformProcess::LaunchURL(TEXT("https://www.patreon.com/CockHeroGame"),nullptr,nullptr);
 }
 
 void URecoveredDifficultyMenu::BindNavigation(bool bBind) {

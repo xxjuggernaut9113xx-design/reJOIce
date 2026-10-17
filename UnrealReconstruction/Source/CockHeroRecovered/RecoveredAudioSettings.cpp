@@ -7,12 +7,12 @@ namespace {
 struct FAudioSliderDef { const TCHAR* Slider; const TCHAR* Setting; const TCHAR* Display; float Fallback; };
 // Slider widget name, save setting name, display text widget, default volume.
 const FAudioSliderDef GAudioSliders[] = {
-    { TEXT("BackgroundMusicVolSlider"), TEXT("MusicVolume"), TEXT("BackgroundMusicVolDisplay"), 0.7f },
-    { TEXT("SFXVolSlider"), TEXT("SFXVolume"), TEXT("SFXVolDisplay"), 0.8f },
-    { TEXT("MoansVolSlider"), TEXT("MoansVolume"), TEXT("MoansVolDisplay"), 0.8f },
-    { TEXT("VoicelinesVolSlider"), TEXT("VoicelinesVolume"), TEXT("VoicelinesVolDisplay"), 0.8f },
-    { TEXT("ContextBeatSFXVolSlider"), TEXT("BeatSFXVolume"), TEXT("VoicelinesVolDisplay_1"), 0.8f },
-    { TEXT("MetronomeVolSlider"), TEXT("MetronomeVolume"), TEXT("MetronomeVolDisplay"), 0.5f },
+    { TEXT("BackgroundMusicVolSlider"), TEXT("BackgroundMusicVolume"), TEXT("BackgroundMusicVolDisplay"), 1.0f },
+    { TEXT("SFXVolSlider"), TEXT("SFXVolume"), TEXT("SFXVolDisplay"), 1.0f },
+    { TEXT("MoansVolSlider"), TEXT("MoansVolume"), TEXT("MoansVolDisplay"), 1.0f },
+    { TEXT("VoicelinesVolSlider"), TEXT("VoicelinesVolume"), TEXT("VoicelinesVolDisplay"), 1.0f },
+    { TEXT("ContextBeatSFXVolSlider"), TEXT("ContextBeatSFXVolume"), TEXT("VoicelinesVolDisplay_1"), 1.0f },
+    { TEXT("MetronomeVolSlider"), TEXT("MetronomeVolume"), TEXT("MetronomeVolDisplay"), 1.0f },
 };
 }
 
@@ -70,11 +70,11 @@ void URecoveredAudioSettingsMenu::CommitSliderValue(FName SliderName, const FStr
     }
 }
 
-void URecoveredAudioSettingsMenu::OnMusicSliderCommitted() { CommitSliderValue(TEXT("BackgroundMusicVolSlider"), TEXT("MusicVolume")); }
+void URecoveredAudioSettingsMenu::OnMusicSliderCommitted() { CommitSliderValue(TEXT("BackgroundMusicVolSlider"), TEXT("BackgroundMusicVolume")); }
 void URecoveredAudioSettingsMenu::OnSFXSliderCommitted() { CommitSliderValue(TEXT("SFXVolSlider"), TEXT("SFXVolume")); }
 void URecoveredAudioSettingsMenu::OnMoansSliderCommitted() { CommitSliderValue(TEXT("MoansVolSlider"), TEXT("MoansVolume")); }
 void URecoveredAudioSettingsMenu::OnVoicelinesSliderCommitted() { CommitSliderValue(TEXT("VoicelinesVolSlider"), TEXT("VoicelinesVolume")); }
-void URecoveredAudioSettingsMenu::OnBeatSFXSliderCommitted() { CommitSliderValue(TEXT("ContextBeatSFXVolSlider"), TEXT("BeatSFXVolume")); }
+void URecoveredAudioSettingsMenu::OnBeatSFXSliderCommitted() { CommitSliderValue(TEXT("ContextBeatSFXVolSlider"), TEXT("ContextBeatSFXVolume")); }
 void URecoveredAudioSettingsMenu::OnMetronomeSliderCommitted() { CommitSliderValue(TEXT("MetronomeVolSlider"), TEXT("MetronomeVolume")); }
 
 void URecoveredAudioSettingsMenu::SetSliderFromSetting(FName SliderName, const FString& SettingName, float Fallback) {

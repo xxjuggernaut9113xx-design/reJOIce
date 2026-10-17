@@ -1,47 +1,60 @@
 #pragma once
+
 #include "CoreMinimal.h"
+#include "RecoveredFileImportManager.h"
 #include "RecoveredMenu.h"
+#include "TimerManager.h"
 #include "RecoveredImportWidget.generated.h"
 
-class URecoveredImportWidget;
+class URecoveredFileImportManager;
 
-/** Carries the source path for a dynamically created import-list remove button. */
-UCLASS()
-class COCKHERORECOVERED_API URecoveredImportRemoveForward : public UObject {
-    GENERATED_BODY()
-public:
-    UPROPERTY() TObjectPtr<URecoveredImportWidget> Owner;
-    UPROPERTY() FString FilePath;
-    UFUNCTION() void RemoveFile();
-};
-
-// Media import UI recovered from ImportMenuWidget.  The original widget exposes
-// file/directory pickers, a watched-directory scan, a removable list, and named
-// presets.  This adapter keeps the original tree and supplies the missing native
-// import manager using recovery-owned state only.
 UCLASS(Blueprintable)
 class COCKHERORECOVERED_API URecoveredImportWidget : public URecoveredMenuWidget {
     GENERATED_BODY()
-    friend class FRecoveredImportFailureTest;
 public:
-    UFUNCTION(BlueprintCallable, Category="Recovered Import") bool AddMediaFile(const FString& FilePath);
-    UFUNCTION(BlueprintCallable, Category="Recovered Import") int32 ScanMediaDirectory(const FString& DirPath);
-    UFUNCTION(BlueprintCallable, Category="Recovered Import") void ClearImportedMedia();
-    UFUNCTION(BlueprintPure, Category="Recovered Import") int32 GetImportedCount() const;
-    UFUNCTION(BlueprintCallable, Category="Recovered Import") bool RemoveMediaFile(const FString& FilePath);
-    UFUNCTION(BlueprintPure, Category="Recovered Import") FString GetLastImportStatus() const;
-protected:
+    UFUNCTION(BlueprintCallable, Category="Recovered Import")
+    bool AddMediaFile(const FString& FilePath);
+
+    UFUNCTION(BlueprintCallable, Category="Recovered Import")
+    int32 ScanMediaDirectory(const FString& DirPath);
+
+    UFUNCTION(BlueprintCallable, Category="Recovered Import")
+    void ClearImportedMedia();
+
+    UFUNCTION(BlueprintPure, Category="Recovered Import")
+    int32 GetImportedCount() const;
+
+    UFUNCTION(BlueprintCallable, Category="Recovered Import")
+    bool RemoveMediaFile(const FString& FilePath);
+
+    UFUNCTION(BlueprintCallable, Category="Recovered Import")
+    bool SetMediaFileEnabled(const FString& FilePath, bool bEnabled);
+
+    UFUNCTION(BlueprintPure, Category="Recovered Import")
+    TArray<FRecoveredImportedFile> GetImportedFileRecords() const;
+
+    UFUNCTION(BlueprintPure, Category="Recovered Import")
+    FString GetMediaCountText() const;
+
+    UFUNCTION(BlueprintPure, Category="Recovered Import")
+    FString GetLastImportStatus() const;
+
+    UFUNCTION(BlueprintPure, Category="Recovered Import")
+    int32 GetFilesPerFrame() const { return FilesPerFrame; }
+
+    UFUNCTION(BlueprintCallable, Category="Recovered Import")
+    void CreateFileBatch();
+
     virtual void NativeConstruct() override;
+
+protected:
     virtual void NativeDestruct() override;
+
     void BindControls(bool bBind);
-    void LoadPersistedImportState();
-    void PersistImportState();
     void RefreshImportedFileList();
     void RefreshPresetDropdown();
-    bool RebuildImportedMediaDeck();
-    bool WriteImportedManifest(FString& OutManifestPath) const;
-    static bool IsSupportedMediaFile(const FString& FilePath);
-    void SetImportStatus(const FString& Status);
+    URecoveredFileImportManager* GetImportManager() const;
+
     UFUNCTION() void OnAddFileClicked();
     UFUNCTION() void OnAddDirectoryClicked();
     UFUNCTION() void OnScanClicked();
@@ -49,9 +62,18 @@ protected:
     UFUNCTION() void OnSavePresetClicked();
     UFUNCTION() void OnDeletePresetClicked();
     UFUNCTION() void OnBackClicked();
+    UFUNCTION() void OnBackHovered();
+    UFUNCTION() void OnBackUnhovered();
     UFUNCTION() void OnPresetSelectionChanged(FString SelectedItem, ESelectInfo::Type SelectionType);
-    UPROPERTY() TArray<FString> ImportedFiles;
-    UPROPERTY() TArray<FString> WatchedDirectories;
-    UPROPERTY(Transient) TArray<TObjectPtr<URecoveredImportRemoveForward>> RemoveForwarders;
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered Import") FString LastImportStatus;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered Import")
+    FString LastImportStatus;
+
+    UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category="Recovered Import")
+    int32 CurrentFileIndex = 0;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Recovered Import")
+    int32 FilesPerFrame = 10;
+
+    FTimerHandle BatchHandle;
 };

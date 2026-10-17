@@ -26,6 +26,16 @@ public:
     UPROPERTY(BlueprintReadOnly) TObjectPtr<UTexture> CurrentTexture;
     UPROPERTY(BlueprintReadOnly) TObjectPtr<UMaterialInstanceDynamic> VideoMaterial;
     UPROPERTY(BlueprintReadOnly) FRecoveredMediaEntry CurrentEntry;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|Media Sync") double BeatInterval = 0.01;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|Media Sync") double MasterTimeReference = 0;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|Media Sync") double TimelineOffset = 0;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|Media Sync") double SyncStartTime = 0;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|Media Sync") double BeatTravelTimeOffset = 0;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|Media Sync") double LastSyncBeatTime = 0;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|Media Sync") double LastSyncTimelineTime = 0;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|Media Sync") bool bHasInitialSync = false;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|Media Sync") bool bBeatSyncEnabled = true;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered|Media Sync") bool bUseSyncStartTime = false;
     UPROPERTY(BlueprintAssignable) FRecoveredMediaReady OnMediaReady;
     UPROPERTY(BlueprintAssignable) FRecoveredMediaError OnMediaError;
     UPROPERTY(BlueprintReadWrite) bool bLooping = true;
@@ -33,10 +43,15 @@ public:
     UFUNCTION(BlueprintCallable, Category="Recovered|Media") void SetLooping(bool bEnabled);
     UFUNCTION(BlueprintCallable, Category="Recovered|Media") void SetScaleBoxReference(UScaleBox* InScaleBox);
     UFUNCTION(BlueprintCallable, Category="Recovered|Media") void SetCropMode(ERecoveredCropMode InCropMode);
-    UFUNCTION(BlueprintCallable, Category="Recovered|Media") bool OpenEntry(const FRecoveredMediaEntry& Entry);
+    UFUNCTION(BlueprintCallable, Category="Recovered|Media") bool OpenEntry(const FRecoveredMediaEntry& Entry, double InitialSyncTime = -1.0);
     UFUNCTION(BlueprintCallable, Category="Recovered|Media") void StopPlayback();
     UFUNCTION(BlueprintCallable, Category="Recovered|Media") void SetPaused(bool bPaused);
     UFUNCTION(BlueprintCallable, Category="Recovered|Media") bool SetPlaybackRate(float Rate);
+    UFUNCTION(BlueprintCallable, Category="Recovered|Media Sync") void SetBeatInterval(double NewBeatInterval);
+    UFUNCTION(BlueprintCallable, Category="Recovered|Media Sync") void SetSyncStartTime(double InMasterTimeReference, double InTimelineOffset);
+    UFUNCTION(BlueprintCallable, Category="Recovered|Media Sync") void SyncToBeat(double InBeatTime, double InMasterTime, double InOffset = 0.0);
+    UFUNCTION(BlueprintCallable, Category="Recovered|Media Sync") void BeginPatternSynchronization(double InMasterTimeReference, double InTimelineOffset, double InitialBeatTravelTime);
+    UFUNCTION(BlueprintCallable, Category="Recovered|Media Sync") void EnableBeatPatternSync(bool bEnabled);
     UFUNCTION(BlueprintCallable, Category="Recovered|Media") UMaterialInstanceDynamic* GetVideoDisplayMaterial();
     virtual void BeginDestroy() override;
 private:

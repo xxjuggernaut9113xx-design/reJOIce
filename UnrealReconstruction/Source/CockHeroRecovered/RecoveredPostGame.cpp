@@ -6,6 +6,7 @@
 #include "RecoveredSessionSummaryWidget.h"
 #include "RecoveredChallengeTracker.h"
 #include "Components/Button.h"
+#include "Components/AudioComponent.h"
 #include "Components/TextBlock.h"
 #include "Components/PanelWidget.h"
 #include "Components/WidgetSwitcher.h"
@@ -466,7 +467,6 @@ void ARecoveredGlobalManager::FinalizeRecoveredSession() {
         Tracker->UpdateMetricWithConditions(ERecoveredMetric::SessionsCompleted, 1, SessionStats, SessionStats.ActiveModifiers, Elapsed, WorldSeconds);
     }
     if (Instance && !Instance->PersistRecoveredProgression()) HandleSaveFailure(TEXT("Final session state failed to persist"));
-    OnSessionAction.Broadcast(TEXT("SessionFinalized"));
 }
 
 float ARecoveredGlobalManager::GetRecoveredVolume(const FString& SettingName, float Fallback) const {
@@ -482,29 +482,55 @@ void ARecoveredGlobalManager::PlayRecoveredSessionSound(FName SoundID) {
     // Sound asset per ID; volume from the matching saved slider setting.
     struct FSoundDef { const TCHAR* ID; const TCHAR* Path; const TCHAR* VolumeSetting; float Fallback; };
     static const FSoundDef Sounds[] = {
-        { TEXT("BeatTick"), TEXT("/Game/Recovery/Resources/Audio/beat_tick.beat_tick"), TEXT("BeatSFXVolume"), 0.8f },
         { TEXT("Moan"), TEXT("/Game/Recovery/Resources/Audio/moan_sfx.moan_sfx"), TEXT("MoansVolume"), 0.8f },
         { TEXT("Voiceline"), TEXT("/Game/Recovery/Resources/Audio/voiceline_sfx.voiceline_sfx"), TEXT("VoicelinesVolume"), 0.8f },
         { TEXT("Success"), TEXT("/Game/Recovery/Resources/Audio/success_sfx.success_sfx"), TEXT("SFXVolume"), 0.8f },
         { TEXT("Fail"), TEXT("/Game/Recovery/Resources/Audio/fail_sfx.fail_sfx"), TEXT("SFXVolume"), 0.8f },
         { TEXT("Click"), TEXT("/Game/Recovery/Resources/Audio/click3_sfx.click3_sfx"), TEXT("SFXVolume"), 0.8f },
         { TEXT("BonerPill"), TEXT("/Game/Recovery/Resources/Audio/boner_pill_use_sound_effect.boner_pill_use_sound_effect"), TEXT("SFXVolume"), 0.8f },
+        { TEXT("SlowPace"), TEXT("/Engine/VREditor/Sounds/UI/Enter_Play.Enter_Play"), TEXT("SFXVolume"), 1.0f },
+        { TEXT("MediumPace"), TEXT("/Engine/VREditor/Sounds/VR_open.VR_open"), TEXT("SFXVolume"), 1.0f },
+        { TEXT("FastPace"), TEXT("/Engine/EditorSounds/GamePreview/StartSimulate.StartSimulate"), TEXT("SFXVolume"), 1.0f },
+        { TEXT("EdgeStart"), TEXT("/Engine/VREditor/Sounds/VR_close.VR_close"), TEXT(""), 1.0f },
     };
     const FString ID = SoundID.ToString();
     for (const auto& Def : Sounds) {
         if (ID != Def.ID) continue;
         if (!FPackageName::DoesPackageExist(FPackageName::ObjectPathToPackageName(FString(Def.Path)))) return;
         if (USoundBase* Sound = LoadObject<USoundBase>(nullptr, Def.Path)) {
-            const float Volume = GetRecoveredVolume(Def.VolumeSetting, Def.Fallback);
-            float Pitch = 1.0f;
-            if (ID == TEXT("BeatTick") && BeatTimeline) {
-                CalculateBeatPitch(BeatTimeline->TotalStrokes, BeatTimeline->GetBeatsRemaining());
-                Pitch = static_cast<float>(CurrentPitch.BeatPitch);
-            }
-            UGameplayStatics::PlaySound2D(this, Sound, Volume, Pitch);
+            const float Volume = Def.VolumeSetting[0] == 0 ? Def.Fallback : GetRecoveredVolume(Def.VolumeSetting, Def.Fallback);
+            UGameplayStatics::PlaySound2D(this, Sound, Volume);
         }
         return;
     }
+}
+
+void ARecoveredGlobalManager::PlayRecoveredMusic(uint8 CardType) {
+    struct FMusicDef { uint8 Type; FName Track; const TCHAR* Path; float Volume; };
+    static const FMusicDef Music[] = {
+        { 0, TEXT("dt_110_kit15_loop_within_pad_Dmaj__2_"), TEXT("/Game/Recovery/Resources/DynamicMusic/dt_110_kit15_loop_within_pad_Dmaj__2_.dt_110_kit15_loop_within_pad_Dmaj__2_"), 0.1f },
+        { 1, TEXT("HuntingPerc_02_100bpm__3_"), TEXT("/Game/Recovery/Resources/DynamicMusic/HuntingPerc_02_100bpm__3_.HuntingPerc_02_100bpm__3_"), 0.1f },
+        { 2, TEXT("AMP2_90_A_2_3"), TEXT("/Game/Recovery/Resources/DynamicMusic/AMP2_90_A_2_3.AMP2_90_A_2_3"), 0.15f },
+        { 3, TEXT("NW_OSHRS_80_kit_loop_krakenfall_full_Dmin__3_"), TEXT("/Game/Recovery/Resources/DynamicMusic/NW_OSHRS_80_kit_loop_krakenfall_full_Dmin__3_.NW_OSHRS_80_kit_loop_krakenfall_full_Dmin__3_"), 0.2f },
+    };
+
+    const auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
+    const bool bMusicEnabled=!Instance || !Instance->CurrentSave || Instance->CurrentSave->GetBoolSetting(TEXT("IsDynamicMusicEnabled?"),true);
+    if (IsValid(ActiveMusicComponent)) ActiveMusicComponent->Stop();
+    if (!bMusicEnabled) return;
+
+    const FMusicDef* Selection=nullptr;
+    for (const FMusicDef& Candidate:Music) {
+        if (Candidate.Type==CardType) { Selection=&Candidate; break; }
+    }
+    if (!Selection || !GetWorld()) return;
+    const FString ObjectPath(Selection->Path);
+    if (!FPackageName::DoesPackageExist(FPackageName::ObjectPathToPackageName(ObjectPath))) return;
+    USoundBase* Sound=LoadObject<USoundBase>(nullptr,*ObjectPath);
+    if (!Sound) return;
+    ActiveMusicTrack=Selection->Track;
+    const float Volume=Selection->Volume*GetRecoveredVolume(TEXT("BackgroundMusicVolume"),1.0f);
+    ActiveMusicComponent=UGameplayStatics::SpawnSound2D(this,Sound,Volume,1.0f,0.0f,nullptr,false,true);
 }
 
 void ARecoveredGlobalManager::HandleRecoveredLevelUp(int32 Level, int32 UnlockPoints, const TArray<FString>& ContentUnlocks) {

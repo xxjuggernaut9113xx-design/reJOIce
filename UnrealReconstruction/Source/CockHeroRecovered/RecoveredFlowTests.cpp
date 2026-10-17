@@ -1,4 +1,5 @@
 #include "RecoveredRules.h"
+#include "RecoveredEventWidgets.h"
 #include "Engine/World.h"
 #include "Engine/Engine.h"
 #include "Misc/AutomationTest.h"
@@ -70,31 +71,61 @@ bool FRecoveredPaceFlowTest::RunTest(const FString& Parameters) {
     Manager->BeatTimeline->StopSequence();
     Manager->Rules=Rules;
     Manager->IsAutoDrawEnabled=false;
-    const FName SpecialEvents[]={TEXT("SpawnSuccubus"),TEXT("AssFrenzyEvent"),TEXT("BoobFrenzyEvent")};
-    const uint8 ExpectedTypes[]={3,7,8};
-    for (int32 I=0;I<3;++I) {
+    const FName SpecialEvents[]={TEXT("SpawnSuccubus"),TEXT("SpawnPunishmentEvent"),TEXT("AssFrenzyEvent"),TEXT("BoobFrenzyEvent")};
+    const uint8 ExpectedTypes[]={3,3,7,8};
+    for (int32 I=0;I<4;++I) {
         Manager->StrokeCountMultiplier=1;Manager->StrokeTimeMultiplier=1;
         Manager->PlayerVariables.bCanUseItems=true;
         TestTrue(TEXT("Draw decoded special card"),Manager->DrawRecoveredSpecialCard(SpecialEvents[I],false));
         TestEqual(TEXT("Special card uses decoded type"),Manager->BeatContext.CardType,ExpectedTypes[I]);
         TestTrue(TEXT("Special media path selected"),!Manager->SelectedRandomCard.FullPath.IsEmpty());
         TestTrue(TEXT("Special pattern produces beat queue"),!Manager->BeatTimeline->BeatQueue.IsEmpty());
-        if (I==0) {
+        if (I==0 || I==1) {
             TestFalse(TEXT("Succubus disables items"),Manager->PlayerVariables.bCanUseItems);
             TestTrue(TEXT("Succubus source stroke bounds"),Manager->PlayerVariables.AssignedStrokeCount>=30 && Manager->PlayerVariables.AssignedStrokeCount<=50);
         }
+        if (I==1) {
+            TestTrue(TEXT("Punishment source interval is bounded at its slower floor"),Manager->PlayerVariables.BeatSpawnInterval>=.28 && Manager->PlayerVariables.BeatSpawnInterval<=.33);
+        }
         Manager->BeatTimeline->StopSequence();
     }
+    Manager->StartPunishmentEvent();
+    TestEqual(TEXT("Punishment presentation selects its source background"),Manager->CurrentBeatBackgroundStyle,8);
+    TestEqual(TEXT("Punishment presentation starts the source card type"),Manager->BeatContext.CardType,uint8(3));
+    TestFalse(TEXT("Punishment presentation disables source item use"),Manager->PlayerVariables.bCanUseItems);
+    Manager->BeatTimeline->StopSequence();
     Manager->BeatContext.ActiveModifiers={TEXT("Succufrenzy")};
     const int32 BeforeDraws=Manager->PlayerVariables.TotalDrawCount;
     TestTrue(TEXT("Modifier dispatch reaches actual special card"),Manager->RequestNextRecoveredCard(false));
     TestEqual(TEXT("One preparation per dispatched card"),Manager->PlayerVariables.TotalDrawCount,BeforeDraws+1);
     TestEqual(TEXT("Dispatch uses event identity rather than array index"),Manager->BeatContext.CardType,static_cast<uint8>(3));
     Manager->BeatTimeline->StopSequence();
-    const FName OverrideEvents[]={TEXT("EdgingEventV2"),TEXT("CumEventOverride"),TEXT("CumOverride"),TEXT("PostEdgeSlowEvent"),TEXT("PostEdgeFastEvent")};
-    const uint8 OverrideTypes[]={5,6,6,4,4};
-    for (int32 I=0;I<5;++I) {
+    FRecoveredMediaEntry VideoLoop;
+    VideoLoop.File=TEXT("recovered_source_loop.webm");
+    VideoLoop.Type=TEXT("video");
+    VideoLoop.FullPath=TEXT("C:/Recovery/recovered_source_loop.webm");
+    Manager->MediaDeckState->Master.VideoLoops={VideoLoop};
+    Manager->MediaDeckState->Child.VideoLoops={VideoLoop};
+    const int32 SourceVideoLoopCount=Manager->MediaDeckState->Master.VideoLoops.Num();
+    const FName OverrideEvents[]={
+        TEXT("EdgingEventV2"),
+        TEXT("CumEventOverride"),
+        TEXT("CumOverride"),
+        TEXT("PostEdgeSlow"),
+        TEXT("PostEdgeFast"),
+        TEXT("VideoLoopStrokeEvent")
+    };
+    const uint8 OverrideTypes[]={5,6,6,4,4,1};
+    URecoveredBeatWidget* VideoLoopBeatWidget=nullptr;
+    for (int32 I=0;I<6;++I) {
         Manager->StrokeCountMultiplier=Manager->StrokeTimeMultiplier=1;Manager->PlayerVariables.bHasEdged=true;Manager->PlayerVariables.bCanUseItems=true;
+        if (I==5) {
+            Manager->HeatLevel=25;
+            Manager->BeatContext.HeatCategory=0;
+            Manager->bStopSequence=true;
+            VideoLoopBeatWidget=NewObject<URecoveredBeatWidget>(Manager,TEXT("BeatWidgetFixture"));
+            Manager->EventOverlays.Add(VideoLoopBeatWidget);
+        }
         TestTrue(TEXT("Recovered event override draws media and starts beats"),Manager->DrawRecoveredSpecialCard(OverrideEvents[I],false));
         TestEqual(TEXT("Override uses source card type"),Manager->BeatContext.CardType,OverrideTypes[I]);
         TestTrue(TEXT("Override builds a beat queue"),!Manager->BeatTimeline->BeatQueue.IsEmpty());
@@ -104,8 +135,20 @@ bool FRecoveredPaceFlowTest::RunTest(const FString& Parameters) {
             TestTrue(TEXT("Edge multiplier advances within source range"),Manager->EdgeStrokeMultiplier>=1.2 && Manager->EdgeStrokeMultiplier<=1.35);
             TestTrue(TEXT("Edge interval remains in source clamp"),Manager->LastEdgeInterval>=.15 && Manager->LastEdgeInterval<=1);
         }
+        if (I==5) {
+            TestEqual(TEXT("Video-loop event selects from its decoded dedicated pool"),Manager->SelectedRandomCard.FullPath,VideoLoop.FullPath);
+            TestEqual(TEXT("Video-loop selection does not consume its source pool"),Manager->MediaDeckState->Master.VideoLoops.Num(),SourceVideoLoopCount);
+            TestEqual(TEXT("Video-loop event refreshes the source heat category"),Manager->BeatContext.HeatCategory,uint8(2));
+            TestFalse(TEXT("Video-loop event clears source beat widgets"),Manager->EventOverlays.Contains(VideoLoopBeatWidget));
+            TestFalse(TEXT("Video-loop event clears the source stop flag"),Manager->bStopSequence);
+        }
         Manager->BeatTimeline->StopSequence();
     }
+    Manager->MediaDeckState->Master.VideoLoops.Reset();
+    Manager->MediaDeckState->Child.VideoLoops.Reset();
+    TestTrue(TEXT("Empty source video-loop pool still starts the source beat sequence"),Manager->DrawRecoveredSpecialCard(TEXT("VideoLoopStrokeEvent"),false));
+    TestTrue(TEXT("Empty source video-loop pool clears the current media selection"),Manager->SelectedRandomCard.FullPath.IsEmpty());
+    Manager->BeatTimeline->StopSequence();
     Manager->PlayerVariables.bHasEdged=false;Manager->PlayerVariables.bHasCame=true;
     TestTrue(TEXT("Outcome draw dispatches its override instead of stopping"),Manager->RequestNextRecoveredCard(false));
     TestEqual(TEXT("Outcome override wins dispatch precedence"),Manager->LastDispatchedEvent,FName(TEXT("CumOverride")));
