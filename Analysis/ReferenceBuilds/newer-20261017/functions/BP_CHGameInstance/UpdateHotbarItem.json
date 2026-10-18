@@ -1,0 +1,129 @@
+{
+  "function": "UpdateHotbarItem",
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "",
+        "owner": "null"
+      },
+      "Variable": {
+        "op": "EX_ArrayGetByRef",
+        "ArrayVariable": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "HotBarItems",
+            "owner": "BP_CHGameInstance_C"
+          }
+        },
+        "ArrayIndex": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "SlotIndex",
+            "owner": "UpdateHotbarItem"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "ItemType",
+          "owner": "UpdateHotbarItem"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "UpdateHotbarItem"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameModeSelection",
+              "owner": "BP_CHGameInstance_C"
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 87,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "UpdateHotbarItem"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 150
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "LastSavedHotBarItems",
+        "owner": "BP_CHSaveGame_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "LastSavedHotBarItems",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "LastSavedHotBarItems",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "HotBarItems",
+          "owner": "BP_CHGameInstance_C"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "SaveAllData",
+      "Parameters": []
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

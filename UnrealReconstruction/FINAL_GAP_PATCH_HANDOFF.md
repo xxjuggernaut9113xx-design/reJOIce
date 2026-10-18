@@ -1,3 +1,5 @@
+> Historical checkpoint. See [HANDOFF.md](HANDOFF.md) for the current paths, latest 90-test verification, and remaining work. “Final” here refers to the supplied patch, not completion of the reconstruction.
+
 # Final supplied gap-fill patch: integration and limits
 
 Input: `ghidra-gap-fill-final.patch` supplied by the user on 2026-10-04. Integrated over `a684caf74da3eb301e00a8d4d452cf2cbd4990c2`; the input repeated parts of the earlier patch. Earlier tag delegate lifetime and checked-state fixes were retained. Source files were merged, not regenerated. Original game files, saves, and reconstructed assets were preserved.

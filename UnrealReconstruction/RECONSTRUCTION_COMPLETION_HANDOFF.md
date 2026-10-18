@@ -1,3 +1,5 @@
+> Historical checkpoint. See [HANDOFF.md](HANDOFF.md) for the current paths, latest 90-test verification, and remaining work. This is not the current completion status.
+
 # Supplied patch integration — 2026-10-03
 
 This is an incomplete reconstruction. The Linux-authored patch supplied by the user

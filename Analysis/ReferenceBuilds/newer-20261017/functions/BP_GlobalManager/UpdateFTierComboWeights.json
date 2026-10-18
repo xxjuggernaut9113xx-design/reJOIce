@@ -1,0 +1,188 @@
+{
+  "function": "UpdateFTierComboWeights",
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Add_DoubleDouble_ReturnValue",
+        "owner": "UpdateFTierComboWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Add_DoubleDouble_ReturnValue",
+          "owner": "UpdateFTierComboWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Add_DoubleDouble",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "BaseWeight_8_F7A85592454B999BFA054687E376F2AF",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "SpecialEventInput",
+                "owner": "UpdateFTierComboWeights"
+              }
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "FTierMod_41_B7E25C6E4E12225F9AD03585F1FC2B6E",
+              "owner": "SpecialEventDataStruct"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "SpecialEventInput",
+                "owner": "UpdateFTierComboWeights"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_FClamp_ReturnValue",
+        "owner": "UpdateFTierComboWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FClamp_ReturnValue",
+          "owner": "UpdateFTierComboWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "FClamp",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Add_DoubleDouble_ReturnValue",
+              "owner": "UpdateFTierComboWeights"
+            }
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": "+0"
+          },
+          {
+            "op": "EX_DoubleConst",
+            "Value": 100.0
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "BaseWeight_8_F7A85592454B999BFA054687E376F2AF",
+        "owner": "SpecialEventDataStruct"
+      },
+      "Variable": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "BaseWeight_8_F7A85592454B999BFA054687E376F2AF",
+          "owner": "SpecialEventDataStruct"
+        },
+        "StructExpression": {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "SpecialEventInput",
+            "owner": "UpdateFTierComboWeights"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_FClamp_ReturnValue",
+          "owner": "UpdateFTierComboWeights"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "K2Node_SetFieldsInStruct_StructOut",
+        "owner": "UpdateFTierComboWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SetFieldsInStruct_StructOut",
+          "owner": "UpdateFTierComboWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "SpecialEventInput",
+          "owner": "UpdateFTierComboWeights"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Local Eligible Event",
+        "owner": "UpdateFTierComboWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Local Eligible Event",
+          "owner": "UpdateFTierComboWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SetFieldsInStruct_StructOut",
+          "owner": "UpdateFTierComboWeights"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "SpecialEventModified",
+        "owner": "UpdateFTierComboWeights"
+      },
+      "Variable": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "SpecialEventModified",
+          "owner": "UpdateFTierComboWeights"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Local Eligible Event",
+          "owner": "UpdateFTierComboWeights"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

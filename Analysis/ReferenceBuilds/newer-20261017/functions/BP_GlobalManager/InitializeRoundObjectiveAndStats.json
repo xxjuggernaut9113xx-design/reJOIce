@@ -1,0 +1,1505 @@
+{
+  "function": "InitializeRoundObjectiveAndStats",
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GameInstance",
+                "owner": "BP_GlobalManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "GameModeSelection",
+              "owner": "BP_CHGameInstance_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GameModeSelection",
+                "owner": "BP_CHGameInstance_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 139,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_Context",
+            "ObjectExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GameInstance",
+                "owner": "BP_GlobalManager_C"
+              }
+            },
+            "Offset": 9,
+            "PropertyType": 0,
+            "RValuePointer": {
+              "field": "GameModeSelection",
+              "owner": "BP_CHGameInstance_C"
+            },
+            "ContextExpression": {
+              "op": "EX_InstanceVariable",
+              "Variable": {
+                "field": "GameModeSelection",
+                "owner": "BP_CHGameInstance_C"
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 139,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1964
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetCurrentState_ReturnValue",
+        "owner": "InitializeRoundObjectiveAndStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "RoundManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "RoundManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetCurrentState",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_IntInt_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "GreaterEqual_IntInt",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "CurrentRound",
+              "owner": "RoundState"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetCurrentState_ReturnValue",
+                "owner": "InitializeRoundObjectiveAndStats"
+              }
+            }
+          },
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "TotalRounds",
+              "owner": "RoundState"
+            },
+            "StructExpression": {
+              "op": "EX_LocalVariable",
+              "Variable": {
+                "field": "CallFunc_GetCurrentState_ReturnValue",
+                "owner": "InitializeRoundObjectiveAndStats"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "IsCumRound?",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "IsCumRound?",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GreaterEqual_IntInt_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetCurrentState_ReturnValue",
+        "owner": "InitializeRoundObjectiveAndStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "RoundManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "RoundManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetCurrentState",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "GameInstance",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Offset": 41,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_LocalVirtualFunction",
+        "VirtualFunctionName": "SetCurrentSessionObjective",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Objective",
+              "owner": "RoundOption"
+            },
+            "StructExpression": {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "SelectedOption",
+                "owner": "RoundState"
+              },
+              "StructExpression": {
+                "op": "EX_LocalVariable",
+                "Variable": {
+                  "field": "CallFunc_GetCurrentState_ReturnValue",
+                  "owner": "InitializeRoundObjectiveAndStats"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetCurrentState_ReturnValue",
+        "owner": "InitializeRoundObjectiveAndStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "RoundManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "RoundManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetCurrentState",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Objective",
+              "owner": "RoundOption"
+            },
+            "StructExpression": {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "SelectedOption",
+                "owner": "RoundState"
+              },
+              "StructExpression": {
+                "op": "EX_LocalVariable",
+                "Variable": {
+                  "field": "CallFunc_GetCurrentState_ReturnValue",
+                  "owner": "InitializeRoundObjectiveAndStats"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 1
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 961,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Objective",
+              "owner": "RoundOption"
+            },
+            "StructExpression": {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "SelectedOption",
+                "owner": "RoundState"
+              },
+              "StructExpression": {
+                "op": "EX_LocalVariable",
+                "Variable": {
+                  "field": "CallFunc_GetCurrentState_ReturnValue",
+                  "owner": "InitializeRoundObjectiveAndStats"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1105,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Objective",
+              "owner": "RoundOption"
+            },
+            "StructExpression": {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "SelectedOption",
+                "owner": "RoundState"
+              },
+              "StructExpression": {
+                "op": "EX_LocalVariable",
+                "Variable": {
+                  "field": "CallFunc_GetCurrentState_ReturnValue",
+                  "owner": "InitializeRoundObjectiveAndStats"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 3
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1249,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Objective",
+              "owner": "RoundOption"
+            },
+            "StructExpression": {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "SelectedOption",
+                "owner": "RoundState"
+              },
+              "StructExpression": {
+                "op": "EX_LocalVariable",
+                "Variable": {
+                  "field": "CallFunc_GetCurrentState_ReturnValue",
+                  "owner": "InitializeRoundObjectiveAndStats"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 5
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1393,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Objective",
+              "owner": "RoundOption"
+            },
+            "StructExpression": {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "SelectedOption",
+                "owner": "RoundState"
+              },
+              "StructExpression": {
+                "op": "EX_LocalVariable",
+                "Variable": {
+                  "field": "CallFunc_GetCurrentState_ReturnValue",
+                  "owner": "InitializeRoundObjectiveAndStats"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 6
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1537,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Objective",
+              "owner": "RoundOption"
+            },
+            "StructExpression": {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "SelectedOption",
+                "owner": "RoundState"
+              },
+              "StructExpression": {
+                "op": "EX_LocalVariable",
+                "Variable": {
+                  "field": "CallFunc_GetCurrentState_ReturnValue",
+                  "owner": "InitializeRoundObjectiveAndStats"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 7
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1681,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "NotEqual_ByteByte",
+        "Parameters": [
+          {
+            "op": "EX_StructMemberContext",
+            "StructMemberExpression": {
+              "field": "Objective",
+              "owner": "RoundOption"
+            },
+            "StructExpression": {
+              "op": "EX_StructMemberContext",
+              "StructMemberExpression": {
+                "field": "SelectedOption",
+                "owner": "RoundState"
+              },
+              "StructExpression": {
+                "op": "EX_LocalVariable",
+                "Variable": {
+                  "field": "CallFunc_GetCurrentState_ReturnValue",
+                  "owner": "InitializeRoundObjectiveAndStats"
+                }
+              }
+            }
+          },
+          {
+            "op": "EX_ByteConst",
+            "Value": 8
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 1825,
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "K2Node_SwitchEnum_CmpSuccess_1",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1964
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetCurrentState_ReturnValue",
+        "owner": "InitializeRoundObjectiveAndStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "RoundManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "RoundManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetCurrentState",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Objective_TimeRequired_Seconds",
+        "owner": "BP_CHGameInstance_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Objective_TimeRequired_Seconds",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Objective_TimeRequired_Seconds",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ObjectiveParam",
+          "owner": "RoundOption"
+        },
+        "StructExpression": {
+          "op": "EX_StructMemberContext",
+          "StructMemberExpression": {
+            "field": "SelectedOption",
+            "owner": "RoundState"
+          },
+          "StructExpression": {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetCurrentState_ReturnValue",
+              "owner": "InitializeRoundObjectiveAndStats"
+            }
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1964
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetCurrentState_ReturnValue",
+        "owner": "InitializeRoundObjectiveAndStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "RoundManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "RoundManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetCurrentState",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Objective_StrokesRequired",
+        "owner": "BP_CHGameInstance_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Objective_StrokesRequired",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Objective_StrokesRequired",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ObjectiveParam",
+          "owner": "RoundOption"
+        },
+        "StructExpression": {
+          "op": "EX_StructMemberContext",
+          "StructMemberExpression": {
+            "field": "SelectedOption",
+            "owner": "RoundState"
+          },
+          "StructExpression": {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetCurrentState_ReturnValue",
+              "owner": "InitializeRoundObjectiveAndStats"
+            }
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1964
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetCurrentState_ReturnValue",
+        "owner": "InitializeRoundObjectiveAndStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "RoundManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "RoundManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetCurrentState",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Objective_EdgesRequired",
+        "owner": "BP_CHGameInstance_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Objective_EdgesRequired",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Objective_EdgesRequired",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ObjectiveParam",
+          "owner": "RoundOption"
+        },
+        "StructExpression": {
+          "op": "EX_StructMemberContext",
+          "StructMemberExpression": {
+            "field": "SelectedOption",
+            "owner": "RoundState"
+          },
+          "StructExpression": {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetCurrentState_ReturnValue",
+              "owner": "InitializeRoundObjectiveAndStats"
+            }
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1964
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetCurrentState_ReturnValue",
+        "owner": "InitializeRoundObjectiveAndStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "RoundManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "RoundManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetCurrentState",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Objective_RuinsRequired",
+        "owner": "BP_CHGameInstance_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Objective_RuinsRequired",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Objective_RuinsRequired",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ObjectiveParam",
+          "owner": "RoundOption"
+        },
+        "StructExpression": {
+          "op": "EX_StructMemberContext",
+          "StructMemberExpression": {
+            "field": "SelectedOption",
+            "owner": "RoundState"
+          },
+          "StructExpression": {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetCurrentState_ReturnValue",
+              "owner": "InitializeRoundObjectiveAndStats"
+            }
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1964
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetCurrentState_ReturnValue",
+        "owner": "InitializeRoundObjectiveAndStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "RoundManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "RoundManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetCurrentState",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Objective_PrejacTimeRequired_Seconds",
+        "owner": "BP_CHGameInstance_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Objective_PrejacTimeRequired_Seconds",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Objective_PrejacTimeRequired_Seconds",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ObjectiveParam",
+          "owner": "RoundOption"
+        },
+        "StructExpression": {
+          "op": "EX_StructMemberContext",
+          "StructMemberExpression": {
+            "field": "SelectedOption",
+            "owner": "RoundState"
+          },
+          "StructExpression": {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetCurrentState_ReturnValue",
+              "owner": "InitializeRoundObjectiveAndStats"
+            }
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1964
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetCurrentState_ReturnValue",
+        "owner": "InitializeRoundObjectiveAndStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "RoundManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "RoundManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetCurrentState",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Objective_TributesRequired",
+        "owner": "BP_CHGameInstance_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Objective_TributesRequired",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Objective_TributesRequired",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ObjectiveParam",
+          "owner": "RoundOption"
+        },
+        "StructExpression": {
+          "op": "EX_StructMemberContext",
+          "StructMemberExpression": {
+            "field": "SelectedOption",
+            "owner": "RoundState"
+          },
+          "StructExpression": {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetCurrentState_ReturnValue",
+              "owner": "InitializeRoundObjectiveAndStats"
+            }
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 1964
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetCurrentState_ReturnValue",
+        "owner": "InitializeRoundObjectiveAndStats"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        }
+      },
+      "Expression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "RoundManager",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "RoundManager",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 10,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "CallFunc_GetCurrentState_ReturnValue",
+          "owner": "InitializeRoundObjectiveAndStats"
+        },
+        "ContextExpression": {
+          "op": "EX_FinalFunction",
+          "StackNode": "GetCurrentState",
+          "Parameters": []
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Objective_SuccubusRequired",
+        "owner": "BP_CHGameInstance_C"
+      },
+      "Variable": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "Objective_SuccubusRequired",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "Objective_SuccubusRequired",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "Expression": {
+        "op": "EX_StructMemberContext",
+        "StructMemberExpression": {
+          "field": "ObjectiveParam",
+          "owner": "RoundOption"
+        },
+        "StructExpression": {
+          "op": "EX_StructMemberContext",
+          "StructMemberExpression": {
+            "field": "SelectedOption",
+            "owner": "RoundState"
+          },
+          "StructExpression": {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetCurrentState_ReturnValue",
+              "owner": "InitializeRoundObjectiveAndStats"
+            }
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

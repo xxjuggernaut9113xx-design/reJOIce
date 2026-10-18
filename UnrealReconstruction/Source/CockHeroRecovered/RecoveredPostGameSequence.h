@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "RecoveredProgression.h"
 #include "UObject/Object.h"
+#include "TimerManager.h"
 #include "RecoveredPostGameSequence.generated.h"
 
 class ARecoveredGlobalManager;

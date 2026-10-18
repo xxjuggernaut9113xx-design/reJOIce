@@ -1,5 +1,6 @@
 #include "RecoveredTextureRecovery.h"
 #include "Engine/Texture2D.h"
+#include "TextureResource.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
 #include "Misc/PackageName.h"

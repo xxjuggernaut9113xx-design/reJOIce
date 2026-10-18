@@ -11,6 +11,11 @@ struct COCKHERORECOVERED_API FRecoveredChallengeProgress {
     UPROPERTY(EditAnywhere,BlueprintReadWrite) bool bCompleted=false;
     UPROPERTY(EditAnywhere,BlueprintReadWrite) bool bRewardsClaimed=false;
     UPROPERTY(EditAnywhere,BlueprintReadWrite) float CompletionTime=0;
+    // Recovery-owned definition provenance. Empty on legacy recovery saves;
+    // optional fields keep those version-1 saves readable.
+    UPROPERTY() FString DefinitionContext;
+    UPROPERTY() bool bDefinitionArchived=false;
+    UPROPERTY() bool bWasTrackedWhenArchived=false;
 };
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRecoveredChallengeNotification,FName,ChallengeID);
 

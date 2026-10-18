@@ -7,9 +7,11 @@
 #include "MediaTexture.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Kismet/GameplayStatics.h"
+#include "RecoveredContentPaths.h"
 void URecoveredGameInstance::PlayRecoveredBackgroundMedia(const FString& MediaName,UImage* Image) {
     if (!Image || MediaName.IsEmpty() || MediaName.Contains(TEXT("/")) || MediaName.Contains(TEXT("\\")) || MediaName.Contains(TEXT(".."))) return;
-    const FString Root=TEXT("C:/Users/webma/Downloads/Cock_Hero_Shipping_Build_V0.04_-_Exclusive/PrepV2/Windows/CockHero/Content/Movies");
+    const FString Root=FRecoveredContentPaths::GetMoviesDirectory();
+    if (Root.IsEmpty()) return;
     FRecoveredMediaEntry Entry;
     for (const TCHAR* Extension:{TEXT(".jpg"),TEXT(".png"),TEXT(".mp4"),TEXT(".webm")}) {
         const FString Path=Root/(MediaName+Extension);

@@ -1,6 +1,7 @@
 #include "Misc/AutomationTest.h"
 
 #if WITH_DEV_AUTOMATION_TESTS && WITH_EDITOR
+#include "UObject/Package.h"
 #include "RecoveredDeviceInterface.h"
 #include "RecoveredRules.h"
 #include "RecoveredToySettings.h"

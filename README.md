@@ -1,5 +1,19 @@
 # reJOIce
 
+**2026-10-18 continuation:** recovery profiles now receive verified disk snapshots
+before reconciliation, and newer inventory state persists per profile. The fresh
+editor build and all **92 recovery tests** passed, with zero warnings or failures.
+See [validation](UnrealReconstruction/RecoveryEvidence/continuation-20261018-validation.json).
+Full reconstruction remains incomplete; outstanding runtime and release work is
+listed in [the handoff](UnrealReconstruction/HANDOFF.md).
+
+**Newer-build upgrade started 2026-10-17:** the existing reconstruction is being
+extended from the supplied newer Windows build, preserving older features. See
+[the upgrade checkpoint](UnrealReconstruction/NEWER_BUILD_UPGRADE.md) for recovered
+changes, implementation status, configuration, and current verification limits.
+The first upgrade checkpoint passes the Windows editor build and **90 recovery
+tests**, with zero warnings or failures. Full reconstruction remains in progress.
+
 Saved static analysis and an editable partial Unreal reconstruction of the supplied V0.04 build.
 
 **To continue on another machine, follow [START_ON_OTHER_MACHINE.md](START_ON_OTHER_MACHINE.md).** It covers the private release downloads, SHA-256 verification, folder restoration, tool versions, media paths and build commands.

@@ -1,6 +1,7 @@
 #include "Misc/AutomationTest.h"
 #if WITH_DEV_AUTOMATION_TESTS && WITH_EDITOR
 #include "RecoveredRules.h"
+#include "RecoveredNewerInventory.h"
 #include "Kismet/GameplayStatics.h"
 #include "Dom/JsonObject.h"
 #include "Misc/ScopeExit.h"
@@ -79,8 +80,10 @@ bool FRecoveredNamedSaveProfileSwitchTest::RunTest(const FString& Parameters) {
     }
     const FString ProfileSlot=URecoveredGameInstance::GetNamedRecoverySlotPrefix()+TEXT("Automation_")+FGuid::NewGuid().ToString(EGuidFormats::Digits);
     bool bProfileWritten=false;
+    FString BackupSlot,BackupError;
     ON_SCOPE_EXIT {
         if (bProfileWritten) UGameplayStatics::DeleteGameInSlot(ProfileSlot,0);
+        if (!BackupSlot.IsEmpty()) UGameplayStatics::DeleteGameInSlot(BackupSlot,0);
         if (bHadRegistry) {
             if (auto* OriginalRegistry=Cast<URecoveredSaveSlotIndex>(UGameplayStatics::LoadGameFromMemory(OriginalRegistryBytes))) {
                 UGameplayStatics::SaveGameToSlot(OriginalRegistry,RegistrySlot,0);
@@ -95,6 +98,7 @@ bool FRecoveredNamedSaveProfileSwitchTest::RunTest(const FString& Parameters) {
     if (!TestTrue(TEXT("Isolated named profile records distinct progress"),Source->SetNumberSetting(TEXT("UnlockPoints"),41))) return false;
     bProfileWritten=UGameplayStatics::SaveGameToSlot(Source,ProfileSlot,0);
     if (!TestTrue(TEXT("Isolated named profile writes"),bProfileWritten)) return false;
+    if (!TestTrue(TEXT("Isolated profile backup verifies"),URecoveredGameInstance::BackupRecoverySlot(ProfileSlot,BackupSlot,BackupError))) return false;
 
     TArray<FString> Profiles;
     FString ActiveProfile;
@@ -111,11 +115,20 @@ bool FRecoveredNamedSaveProfileSwitchTest::RunTest(const FString& Parameters) {
     TestEqual(TEXT("Named profile progression receives its unlock balance"),Instance->ProgressionManager->UnlockPoints,41);
     TestNotNull(TEXT("Named profile rehydrates challenge tracking"),Instance->ChallengeTracker.Get());
     TestNotNull(TEXT("Named profile rehydrates calibration"),Instance->CalibrationManager.Get());
+    if (!TestNotNull(TEXT("Legacy profile receives separate newer inventory"),Instance->NewerInventory.Get())) return false;
+    TestTrue(TEXT("Legacy profile does not invent newer ownership"),Instance->NewerInventory->OwnedItems.IsEmpty());
+    Instance->NewerInventory->UnlockItem(ERecoveredShopItemType::Break);
+    Instance->NewerInventory->OwnedItems[ERecoveredShopItemType::Break].Charges=2;
+    Instance->NewerInventory->HotbarItems={ERecoveredShopItemType::Break,ERecoveredShopItemType::None};
     if (!TestTrue(TEXT("Named profile mutates its own active save"),Instance->CurrentSave->SetNumberSetting(TEXT("UnlockPoints"),73))) return false;
     if (!TestTrue(TEXT("Named profile persists to its own target"),Instance->SaveRecoveredState())) return false;
     auto* Persisted=Cast<URecoveredSaveGame>(UGameplayStatics::LoadGameFromSlot(ProfileSlot,0));
     if (!TestNotNull(TEXT("Named profile reloads after persistence"),Persisted)) return false;
     TestEqual(TEXT("Named profile does not fall back to the default target"),Persisted->GetNumberSetting(TEXT("UnlockPoints")),73.0);
+    auto* Inventory=NewObject<URecoveredNewerInventory>();
+    TestTrue(TEXT("Profile save includes valid newer inventory"),Inventory->ImportRecoveryState(Persisted->GetStringSetting(TEXT("RecoveryNewerInventoryState"),TEXT(""))));
+    TestEqual(TEXT("Profile save preserves owned charges"),Inventory->GetItemState(ERecoveredShopItemType::Break).Charges,2);
+    TestEqual(TEXT("Profile save preserves configured hotbar"),Inventory->HotbarItems.Num(),2);
     TestFalse(TEXT("Invalid profile cannot replace the active recovery target"),Instance->LoadRecoveredSaveSlot(TEXT("../PlayerSave")));
     TestEqual(TEXT("Rejected profile leaves active target intact"),Instance->GetActiveRecoverySlot(),ProfileSlot);
     return true;

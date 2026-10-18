@@ -16,12 +16,15 @@
 #include "RecoveredEventWidgets.h"
 #include "RecoveredEdgeManager.h"
 #include "RecoveredPostGameSequence.h"
+#include "RecoveredContentPaths.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Blueprint/WidgetBlueprintGeneratedClass.h"
 #include "Animation/WidgetAnimation.h"
 
 void ARecoveredGlobalManager::BeginPlay() {
     Super::BeginPlay();
+    const FString SourceManifest = FRecoveredContentPaths::GetBaseManifestPath();
+    if (!SourceManifest.IsEmpty()) MediaManifestPath = SourceManifest;
     ReloadRecoveredProfile();
     CreateMainMenuUI();
 #if WITH_DEV_AUTOMATION_TESTS

@@ -7,6 +7,7 @@
 #include "Components/TextBlock.h"
 #include "Components/ProgressBar.h"
 #if WITH_DEV_AUTOMATION_TESTS
+#include "UObject/Package.h"
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredPaceFlowTest,"CockHero.Recovery.PaceCardFlow",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
 bool FRecoveredPaceFlowTest::RunTest(const FString& Parameters) {
     auto* Rules=LoadObject<URecoveredRulesAsset>(nullptr,TEXT("/Game/Recovery/Definitions/DA_GameRules.DA_GameRules"));

@@ -1,0 +1,115 @@
+{
+  "function": "PopulateWidget",
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "PurchaseCost",
+        "owner": "WBP_SuccuStoreItem_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "PurchaseCost",
+          "owner": "WBP_SuccuStoreItem_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "Price",
+          "owner": "PopulateWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "Succu Shop Enum",
+        "owner": "WBP_SuccuStoreItem_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "Succu Shop Enum",
+          "owner": "WBP_SuccuStoreItem_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "SuccuShopEnum",
+          "owner": "PopulateWidget"
+        }
+      }
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "Set Item Description",
+      "Parameters": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "Description",
+            "owner": "PopulateWidget"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "SetItemTitleText",
+      "Parameters": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "Title",
+            "owner": "PopulateWidget"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "SetItemIconTexture",
+      "Parameters": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "Icon",
+            "owner": "PopulateWidget"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_LocalVirtualFunction",
+      "VirtualFunctionName": "SetBuyPriceText",
+      "Parameters": [
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "Price",
+            "owner": "PopulateWidget"
+          }
+        },
+        {
+          "op": "EX_LocalVariable",
+          "Variable": {
+            "field": "HasItem?",
+            "owner": "PopulateWidget"
+          }
+        }
+      ]
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

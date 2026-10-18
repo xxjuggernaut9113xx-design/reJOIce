@@ -1,6 +1,7 @@
 #include "RecoveredUnlockStoreWidget.h"
 
 #include "Components/Button.h"
+#include "Brushes/SlateNoResource.h"
 #include "Components/HorizontalBox.h"
 #include "Components/HorizontalBoxSlot.h"
 #include "Components/Image.h"

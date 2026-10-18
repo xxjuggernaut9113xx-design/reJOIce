@@ -549,6 +549,7 @@ public:
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Save") TObjectPtr<class URecoveredSaveGame> CurrentSave;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Save") FString ActiveRecoverySlot;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Save") FString LastSaveError;
+    UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Inventory") TObjectPtr<class URecoveredNewerInventory> NewerInventory;
     UPROPERTY(Transient,BlueprintReadOnly) bool bHasGameOpenedInSession=false;
     UPROPERTY(Transient,BlueprintReadOnly) TObjectPtr<URecoveredCalibrationManager> CalibrationManager;
     UPROPERTY(Transient) TObjectPtr<URecoveredMediaPlayback> BackgroundMediaPlayback;
@@ -568,6 +569,7 @@ public:
     static FString GetRecoverySlotIndexName();
     static FString GetNamedRecoverySlotPrefix();
     static bool IsRecoverySlotNameValid(const FString& SlotName);
+    static bool BackupRecoverySlot(const FString& SlotName,FString& OutBackupSlot,FString& OutError);
     static bool ReadRecoverySlotIndex(TArray<FString>& OutNamedSlots,FString& OutActiveSlot,const FString& IndexSlotName);
     static bool WriteRecoverySlotIndex(const TArray<FString>& NamedSlots,const FString& ActiveSlot,const FString& IndexSlotName);
     virtual void Init() override;

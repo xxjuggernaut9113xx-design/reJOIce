@@ -1,0 +1,386 @@
+{
+  "function": "DoesDialogueLinePassPronounFilter",
+  "statements": [
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "PassVariable",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_False"
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Trim_ReturnValue",
+        "owner": "DoesDialogueLinePassPronounFilter"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Trim_ReturnValue",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Trim",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "LinePronoun",
+              "owner": "DoesDialogueLinePassPronounFilter"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_ToLower_ReturnValue",
+        "owner": "DoesDialogueLinePassPronounFilter"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ToLower_ReturnValue",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "ToLower",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Trim_ReturnValue",
+              "owner": "DoesDialogueLinePassPronounFilter"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "NormalizedLinePronoun",
+        "owner": "DoesDialogueLinePassPronounFilter"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "NormalizedLinePronoun",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ToLower_ReturnValue",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+        "owner": "DoesDialogueLinePassPronounFilter"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "GetEnumeratorUserFriendlyName",
+        "Parameters": [
+          {
+            "op": "EX_ObjectConst",
+            "Value": -4137
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "PlayerPronoun",
+              "owner": "DoesDialogueLinePassPronounFilter"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_Trim_ReturnValue_1",
+        "owner": "DoesDialogueLinePassPronounFilter"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Trim_ReturnValue_1",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "Trim",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue",
+              "owner": "DoesDialogueLinePassPronounFilter"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_ToLower_ReturnValue_1",
+        "owner": "DoesDialogueLinePassPronounFilter"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ToLower_ReturnValue_1",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "ToLower",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_Trim_ReturnValue_1",
+              "owner": "DoesDialogueLinePassPronounFilter"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "NormalizedPlayerPronoun",
+        "owner": "DoesDialogueLinePassPronounFilter"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "NormalizedPlayerPronoun",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      },
+      "Expression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ToLower_ReturnValue_1",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_StriStri_ReturnValue",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "EqualEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "NormalizedLinePronoun",
+              "owner": "DoesDialogueLinePassPronounFilter"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "NormalizedPlayerPronoun",
+              "owner": "DoesDialogueLinePassPronounFilter"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_StriStri_ReturnValue_1",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "EqualEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "NormalizedLinePronoun",
+              "owner": "DoesDialogueLinePassPronounFilter"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "neutral"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_EqualEqual_StriStri_ReturnValue_2",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "EqualEqual_StriStri",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "NormalizedLinePronoun",
+              "owner": "DoesDialogueLinePassPronounFilter"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": ""
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_BooleanOR_ReturnValue",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "BooleanOR",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_EqualEqual_StriStri_ReturnValue_2",
+              "owner": "DoesDialogueLinePassPronounFilter"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_EqualEqual_StriStri_ReturnValue_1",
+              "owner": "DoesDialogueLinePassPronounFilter"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_BooleanOR_ReturnValue_1",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "BooleanOR",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_BooleanOR_ReturnValue",
+              "owner": "DoesDialogueLinePassPronounFilter"
+            }
+          },
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_EqualEqual_StriStri_ReturnValue",
+              "owner": "DoesDialogueLinePassPronounFilter"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "PassVariable",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_BooleanOR_ReturnValue_1",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalOutVariable",
+        "Variable": {
+          "field": "Passes?",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "PassVariable",
+          "owner": "DoesDialogueLinePassPronounFilter"
+        }
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

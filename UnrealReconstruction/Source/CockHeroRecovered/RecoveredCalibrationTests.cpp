@@ -1,5 +1,6 @@
 #include "Misc/AutomationTest.h"
 #if WITH_DEV_AUTOMATION_TESTS && WITH_EDITOR
+#include "UObject/Package.h"
 #include "RecoveredRules.h"
 #include "RecoveredCalibrationWidget.h"
 #include "Misc/FileHelper.h"

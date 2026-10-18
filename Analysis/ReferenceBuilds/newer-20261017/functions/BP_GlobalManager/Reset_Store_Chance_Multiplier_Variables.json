@@ -1,0 +1,50 @@
+{
+  "function": "Reset Store Chance Multiplier Variables",
+  "statements": [
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "StoreChanceMultiplier",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "StoreChanceMultiplier",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": 1.0
+      }
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "TimeSinceLastShop",
+        "owner": "BP_GlobalManager_C"
+      },
+      "Variable": {
+        "op": "EX_InstanceVariable",
+        "Variable": {
+          "field": "TimeSinceLastShop",
+          "owner": "BP_GlobalManager_C"
+        }
+      },
+      "Expression": {
+        "op": "EX_DoubleConst",
+        "Value": "+0"
+      }
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

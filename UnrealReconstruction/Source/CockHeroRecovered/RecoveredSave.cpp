@@ -5,6 +5,8 @@
 #include "Dom/JsonObject.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
+#include "Misc/SecureHash.h"
+#include "RecoveredNewerInventory.h"
 
 namespace {
 const FString RecoverySlot=TEXT("CockHeroRecovered_Standalone_v1");
@@ -191,6 +193,35 @@ bool URecoveredGameInstance::IsRecoverySlotNameValid(const FString& SlotName) {
     return SlotName==RecoverySlot || IsNamedRecoverySlot(SlotName);
 }
 
+bool URecoveredGameInstance::BackupRecoverySlot(const FString& SlotName,FString& OutBackupSlot,FString& OutError) {
+    OutBackupSlot.Reset();
+    OutError.Reset();
+    if (!IsRecoverySlotNameValid(SlotName)) {
+        OutError=TEXT("Recovery backup rejected an invalid profile name");
+        return false;
+    }
+    if (!UGameplayStatics::DoesSaveGameExist(SlotName,0)) return true;
+    TArray<uint8> Source;
+    if (!UGameplayStatics::LoadDataFromSlot(Source,SlotName,0) || Source.IsEmpty()) {
+        OutError=TEXT("Recovery profile bytes could not be read for backup");
+        return false;
+    }
+    uint8 Digest[FSHA1::DigestSize];
+    FSHA1::HashBuffer(Source.GetData(),Source.Num(),Digest);
+    const FString BackupSlot=SlotName+TEXT("_Backup_")+BytesToHex(Digest,FSHA1::DigestSize);
+    if (!UGameplayStatics::DoesSaveGameExist(BackupSlot,0) && !UGameplayStatics::SaveDataToSlot(Source,BackupSlot,0)) {
+        OutError=TEXT("Recovery profile backup could not be written");
+        return false;
+    }
+    TArray<uint8> Verified;
+    if (!UGameplayStatics::LoadDataFromSlot(Verified,BackupSlot,0) || Verified!=Source) {
+        OutError=TEXT("Recovery profile backup failed byte-for-byte verification");
+        return false;
+    }
+    OutBackupSlot=BackupSlot;
+    return true;
+}
+
 bool URecoveredGameInstance::ReadRecoverySlotIndex(TArray<FString>& OutNamedSlots,FString& OutActiveSlot,const FString& IndexSlotName) {
     OutNamedSlots.Reset();
     OutActiveSlot=RecoverySlot;
@@ -273,6 +304,15 @@ bool URecoveredGameInstance::LoadRecoveredSaveSlotInternal(const FString& SlotNa
         return false;
     }
 
+    FString BackupSlot;
+    if (!BackupRecoverySlot(SlotName,BackupSlot,LastSaveError)) return false;
+
+    auto* NewInventory=NewObject<URecoveredNewerInventory>(this);
+    if (Loaded->HasSetting(TEXT("RecoveryNewerInventoryState")) && !NewInventory->ImportRecoveryState(Loaded->GetStringSetting(TEXT("RecoveryNewerInventoryState"),TEXT("")))) {
+        LastSaveError=TEXT("Recovery inventory state is invalid; the active profile was left unchanged");
+        return false;
+    }
+
     URecoveredProgressionManager* NewProgression=nullptr;
     URecoveredChallengeTracker* NewChallenges=nullptr;
     URecoveredCalibrationManager* NewCalibration=nullptr;
@@ -292,6 +332,7 @@ bool URecoveredGameInstance::LoadRecoveredSaveSlotInternal(const FString& SlotNa
     }
 
     CurrentSave=Loaded;
+    NewerInventory=NewInventory;
     if (!FileImportManager) FileImportManager=NewObject<URecoveredFileImportManager>(this);
     FileImportManager->LoadFromSave(CurrentSave);
     if (DeviceManager) DeviceManager->LoadDeviceSettings(CurrentSave);
@@ -311,6 +352,13 @@ bool URecoveredGameInstance::LoadRecoveredSaveSlotInternal(const FString& SlotNa
 
 bool URecoveredGameInstance::SaveRecoveredState() {
     if (!CurrentSave || !CurrentSave->IsStateValid()) { LastSaveError=TEXT("No valid recovery state to save"); return false; }
+    if (NewerInventory) {
+        const FString InventoryState=NewerInventory->ExportRecoveryState();
+        if (InventoryState.IsEmpty() || !CurrentSave->SetStringSetting(TEXT("RecoveryNewerInventoryState"),InventoryState)) {
+            LastSaveError=TEXT("Could not serialize recovery inventory state");
+            return false;
+        }
+    }
     const FString TargetSlot=IsRecoverySlotNameValid(ActiveRecoverySlot) ? ActiveRecoverySlot : RecoverySlot;
     if (!UGameplayStatics::SaveGameToSlot(CurrentSave,TargetSlot,0)) { LastSaveError=TEXT("Could not write the active recovery save"); return false; }
     LastSaveError.Reset(); return true;

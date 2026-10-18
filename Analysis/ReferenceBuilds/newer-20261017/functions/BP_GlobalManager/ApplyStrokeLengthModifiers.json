@@ -1,0 +1,481 @@
+{
+  "function": "ApplyStrokeLengthModifiers",
+  "statements": [
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 590
+    },
+    {
+      "op": "EX_JumpIfNot",
+      "CodeOffset": 216,
+      "BooleanExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_Context",
+          "ObjectExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "GameInstance",
+              "owner": "BP_GlobalManager_C"
+            }
+          },
+          "Offset": 9,
+          "PropertyType": 0,
+          "RValuePointer": {
+            "field": "CurrentSave",
+            "owner": "BP_CHGameInstance_C"
+          },
+          "ContextExpression": {
+            "op": "EX_InstanceVariable",
+            "Variable": {
+              "field": "CurrentSave",
+              "owner": "BP_CHGameInstance_C"
+            }
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "StrokerFollowsInstructions?",
+          "owner": "BP_CHSaveGame_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "StrokerFollowsInstructions?",
+            "owner": "BP_CHSaveGame_C"
+          }
+        }
+      }
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 500
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 360
+    },
+    {
+      "op": "EX_PushExecutionFlow",
+      "PushingAddress": 271
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_ToLower_ReturnValue",
+        "owner": "ApplyStrokeLengthModifiers"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ToLower_ReturnValue",
+          "owner": "ApplyStrokeLengthModifiers"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "ToLower",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "String",
+              "owner": "ApplyStrokeLengthModifiers"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Contains_ReturnValue_3",
+          "owner": "ApplyStrokeLengthModifiers"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Contains",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_ToLower_ReturnValue",
+              "owner": "ApplyStrokeLengthModifiers"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "tip"
+          },
+          {
+            "op": "EX_False"
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Contains_ReturnValue_3",
+          "owner": "ApplyStrokeLengthModifiers"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AdultToyManager",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AdultToyManager",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "Offset": 10,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetStrokeZoneHeadOnly",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AdultToyManager",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AdultToyManager",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "Offset": 10,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetStrokeZoneFullRange",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_ToLower_ReturnValue",
+        "owner": "ApplyStrokeLengthModifiers"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ToLower_ReturnValue",
+          "owner": "ApplyStrokeLengthModifiers"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "ToLower",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "String",
+              "owner": "ApplyStrokeLengthModifiers"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Contains_ReturnValue_2",
+          "owner": "ApplyStrokeLengthModifiers"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Contains",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_ToLower_ReturnValue",
+              "owner": "ApplyStrokeLengthModifiers"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "full"
+          },
+          {
+            "op": "EX_False"
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Contains_ReturnValue_2",
+          "owner": "ApplyStrokeLengthModifiers"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 216
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_ToLower_ReturnValue",
+        "owner": "ApplyStrokeLengthModifiers"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ToLower_ReturnValue",
+          "owner": "ApplyStrokeLengthModifiers"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "ToLower",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "String",
+              "owner": "ApplyStrokeLengthModifiers"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Contains_ReturnValue_1",
+          "owner": "ApplyStrokeLengthModifiers"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Contains",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_ToLower_ReturnValue",
+              "owner": "ApplyStrokeLengthModifiers"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "shaft"
+          },
+          {
+            "op": "EX_False"
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Contains_ReturnValue_1",
+          "owner": "ApplyStrokeLengthModifiers"
+        }
+      }
+    },
+    {
+      "op": "EX_Context",
+      "ObjectExpression": {
+        "op": "EX_Context",
+        "ObjectExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "GameInstance",
+            "owner": "BP_GlobalManager_C"
+          }
+        },
+        "Offset": 9,
+        "PropertyType": 0,
+        "RValuePointer": {
+          "field": "AdultToyManager",
+          "owner": "BP_CHGameInstance_C"
+        },
+        "ContextExpression": {
+          "op": "EX_InstanceVariable",
+          "Variable": {
+            "field": "AdultToyManager",
+            "owner": "BP_CHGameInstance_C"
+          }
+        }
+      },
+      "Offset": 10,
+      "PropertyType": 0,
+      "RValuePointer": {
+        "field": "",
+        "owner": "null"
+      },
+      "ContextExpression": {
+        "op": "EX_FinalFunction",
+        "StackNode": "SetStrokeZoneBaseOnly",
+        "Parameters": []
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlow"
+    },
+    {
+      "op": "EX_Let",
+      "Value": {
+        "field": "CallFunc_ToLower_ReturnValue",
+        "owner": "ApplyStrokeLengthModifiers"
+      },
+      "Variable": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_ToLower_ReturnValue",
+          "owner": "ApplyStrokeLengthModifiers"
+        }
+      },
+      "Expression": {
+        "op": "EX_CallMath",
+        "StackNode": "ToLower",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "String",
+              "owner": "ApplyStrokeLengthModifiers"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_LetBool",
+      "VariableExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Contains_ReturnValue",
+          "owner": "ApplyStrokeLengthModifiers"
+        }
+      },
+      "AssignmentExpression": {
+        "op": "EX_CallMath",
+        "StackNode": "Contains",
+        "Parameters": [
+          {
+            "op": "EX_LocalVariable",
+            "Variable": {
+              "field": "CallFunc_ToLower_ReturnValue",
+              "owner": "ApplyStrokeLengthModifiers"
+            }
+          },
+          {
+            "op": "EX_StringConst",
+            "Value": "balls"
+          },
+          {
+            "op": "EX_False"
+          },
+          {
+            "op": "EX_False"
+          }
+        ]
+      }
+    },
+    {
+      "op": "EX_PopExecutionFlowIfNot",
+      "BooleanExpression": {
+        "op": "EX_LocalVariable",
+        "Variable": {
+          "field": "CallFunc_Contains_ReturnValue",
+          "owner": "ApplyStrokeLengthModifiers"
+        }
+      }
+    },
+    {
+      "op": "EX_Jump",
+      "CodeOffset": 216
+    },
+    {
+      "op": "EX_Return",
+      "ReturnExpression": {
+        "op": "EX_Nothing"
+      }
+    },
+    {
+      "op": "EX_EndOfScript"
+    }
+  ]
+}

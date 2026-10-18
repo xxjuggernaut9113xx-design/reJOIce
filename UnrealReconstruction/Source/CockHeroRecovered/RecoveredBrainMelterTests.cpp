@@ -2,6 +2,7 @@
 #include "Misc/AutomationTest.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
+#include "UObject/Package.h"
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredBrainMelterTest,"CockHero.Recovery.BrainMelterMediaSwap",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
 bool FRecoveredBrainMelterTest::RunTest(const FString& Parameters) {
     FRecoveredMediaEntry Slow;
