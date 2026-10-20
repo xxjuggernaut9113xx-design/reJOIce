@@ -17,6 +17,7 @@
 #include "RecoveredChallengeEntryWidget.h"
 #include "RecoveredChallengeTracker.h"
 #include "RecoveredProgression.h"
+#include "RecoveredProgressionResources.h"
 #include "RecoveredRules.h"
 #include "Sound/SoundBase.h"
 
@@ -123,6 +124,8 @@ UTexture2D* LoadExistingTexture(const FString& ObjectPath) {
 }
 
 UTexture2D* LoadRecoveredChallengeIcon(const FString& SourcePath) {
+    const FString Resolved=ResolveRecoveredProgressionResource(SourcePath);
+    if (Resolved!=SourcePath) return LoadExistingTexture(Resolved);
     static const FString Prefix(TEXT("/Game/ChallengeIcons/"));
     if (!SourcePath.StartsWith(Prefix)) return LoadExistingTexture(SourcePath);
     int32 DotIndex=INDEX_NONE;
@@ -132,6 +135,8 @@ UTexture2D* LoadRecoveredChallengeIcon(const FString& SourcePath) {
 }
 
 UTexture2D* LoadRecoveredPlayerCardTexture(const FString& SourcePath) {
+    const FString Resolved=ResolveRecoveredProgressionResource(SourcePath);
+    if (Resolved!=SourcePath) return LoadExistingTexture(Resolved);
     if (UTexture2D* Texture=LoadExistingTexture(SourcePath)) return Texture;
     FString AssetName=SourcePath;
     int32 DotIndex=INDEX_NONE;

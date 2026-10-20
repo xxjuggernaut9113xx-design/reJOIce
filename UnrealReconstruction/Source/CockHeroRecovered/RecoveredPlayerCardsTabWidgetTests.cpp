@@ -18,6 +18,7 @@
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
 #include "Misc/ScopeExit.h"
+#include "Misc/ConfigCacheIni.h"
 #include "MovieScene.h"
 #include "RecoveredPlayerCardEntryWidget.h"
 #include "RecoveredMenu.h"
@@ -28,6 +29,9 @@
 #if WITH_DEV_AUTOMATION_TESTS && WITH_EDITOR
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredPlayerCardsTabWidgetTest,"CockHero.Recovery.PlayerCardsTabWidget",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
 bool FRecoveredPlayerCardsTabWidgetTest::RunTest(const FString& Parameters) {
+    bool PreviousNewer=false;const bool HadNewer=GConfig->GetBool(TEXT("Recovery.Content"),TEXT("UseNewerProgression"),PreviousNewer,GGameIni);
+    GConfig->SetBool(TEXT("Recovery.Content"),TEXT("UseNewerProgression"),false,GGameIni);
+    ON_SCOPE_EXIT { if (HadNewer) GConfig->SetBool(TEXT("Recovery.Content"),TEXT("UseNewerProgression"),PreviousNewer,GGameIni);else GConfig->RemoveKey(TEXT("Recovery.Content"),TEXT("UseNewerProgression"),GGameIni); };
     FString EvidenceText;
     TSharedPtr<FJsonObject> Evidence;
     const FString EvidencePath=FPaths::ProjectDir()/TEXT("RecoveryEvidence/player-cards-tab-recovery.json");

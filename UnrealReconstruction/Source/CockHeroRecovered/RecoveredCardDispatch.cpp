@@ -1,4 +1,8 @@
 #include "RecoveredRules.h"
+#include "RecoveredNewerInventoryAdapter.h"
+#include "RecoveredSuccuEconomy.h"
+#include "RecoveredMusicUpgrades.h"
+#include "RecoveredNativeLoot.h"
 #include "RecoveredEdgeManager.h"
 #include "RecoveredEventRules.h"
 #include "RecoveredEventWidgets.h"
@@ -90,11 +94,18 @@ void PresentRecoveredLootReceipt(ARecoveredGlobalManager& Manager,FName ItemID) 
 void AwardRecoveredLootDrop(ARecoveredGlobalManager& Manager,const FRecoveredLootDrop& Drop) {
     const int32 Maximum=Manager.GetRecoveredItemMaximum(Drop.ItemID);
     if (Maximum>0 && Manager.GetOwnedItemCount(Drop.ItemID)>=Maximum) {
-        Manager.AddCoins(50);
+        Manager.AddCoins(Manager.SuccuEconomy ? Manager.SuccuEconomy->AdjustLootCoinReward(50) : 50);
         Manager.CreateRecoveredNotification(TEXT("CoinRewardIcon"),TEXT("Loot Bar Filled"),TEXT("+50 Coins - Cash Reward Unlocked"));
         return;
     }
-    ++Manager.OwnedItemCounts.FindOrAdd(Drop.ItemID);
+    if (auto* Inventory=RecoveredNewerInventoryAdapter::GetInventory(Manager)) {
+        ERecoveredShopItemType Type;
+        if (!RecoveredNewerInventoryAdapter::ResolveType(Drop.ItemID,Type) || !Inventory->OwnedItems.Contains(Type)) {
+            Manager.AddCoins(Manager.SuccuEconomy ? Manager.SuccuEconomy->AdjustLootCoinReward(50) : 50);
+            return;
+        }
+        Manager.AcquireStoreItem(Drop.ItemID);
+    } else ++Manager.OwnedItemCounts.FindOrAdd(Drop.ItemID);
     Manager.PlayerVariables.bHasItems=true;
     PresentRecoveredLootReceipt(Manager,Drop.ItemID);
     Manager.CreateRecoveredNotification(Drop.IconName,TEXT("Loot Bar Filled"),Drop.Description);
@@ -131,6 +142,13 @@ FRecoveredEligibilityState BuildRecoveredEligibilityState(const ARecoveredGlobal
 }
 
 void CommitRecoveredSuccuShieldEligibility(ARecoveredGlobalManager& Manager,const FRecoveredEligibilityState& State) {
+    if (State.ShieldsConsumed>0 && Manager.SuccuEconomy && Manager.SuccuEconomy->HasModifier(14)) {
+        ++Manager.SuccuEconomy->ShieldDraws;
+        if (Manager.SuccuEconomy->ShieldDraws%2==1) {
+            Manager.SyncRecoveredSuccuShieldInventory(State.Shields+State.ShieldsConsumed);
+            return;
+        }
+    }
     Manager.SyncRecoveredSuccuShieldInventory(State.Shields);
     Manager.bShieldToggled=State.bShieldToggled;
     if (State.ShieldsConsumed<=0) return;
@@ -204,7 +222,10 @@ bool ARecoveredGlobalManager::RequestNextRecoveredCard(bool bPlayMedia) {
     }
     if (GetOwnedItemCount(TEXT("SuccuShield"))==0 && SuccubusShields>0) SyncRecoveredSuccuShieldInventory(SuccubusShields);
     FRecoveredEligibilityState State=BuildRecoveredEligibilityState(*this);
-    const auto Eligible=URecoveredEventRuleLibrary::BuildEligibleEvents(Rules->EventRecords,State);
+    if (SuccuEconomy && SuccuEconomy->IsSuccubusOnCooldown()) State.bCanSuccubiSpawn=false;
+    auto SourceEvents=Rules->EventRecords;
+    if (SuccuEconomy && SuccuEconomy->HasModifier(8)) for (auto& Event:SourceEvents) if (Event.EventName==8) Event.BaseWeight*=2;
+    const auto Eligible=URecoveredEventRuleLibrary::BuildEligibleEvents(SourceEvents,State);
     CommitRecoveredSuccuShieldEligibility(*this,State);
     const auto Weighted=URecoveredEventRuleLibrary::ApplyDrawEventWeights(Eligible,State.HeatCategory,CurrentComboTypeEnum);
     const double Total=URecoveredEventRuleLibrary::GetTotalWeight(Weighted);
@@ -328,10 +349,10 @@ void ARecoveredGlobalManager::SpawnTaskModifier() {
 }
 
 void ARecoveredGlobalManager::TriggerMeterOverride() {
-    if (CumMeterPercentage<1.0) return;
-    // Meter-triggered override: forces the override card flow.
-    LastDispatchedEvent = TEXT("MeterOverride");
-    DrawRecoveredSpecialCard(LastDispatchedEvent, true);
+    // The source routes all supported objective thresholds through permission
+    // and the release window; MeterOverride is not a valid special-card ID.
+    TickRecoveredObjectives();
+    if (CurrentSessionObjective==0 && !ClassicObjectiveRuntime.bActive && ActiveRecoveredMode==0 && CumMeterPercentage>=1.0) OpenRecoveredReleaseWindow();
 }
 
 void ARecoveredGlobalManager::ClearNotificationBoxes() {
@@ -386,10 +407,37 @@ void ARecoveredGlobalManager::RollAndGiveLootDrops() {
 }
 
 void ARecoveredGlobalManager::RollAndGiveLootDropsV2() {
+    if (auto* Inventory=RecoveredNewerInventoryAdapter::GetInventory(*this)) {
+        const auto Active=[this](const TCHAR* Modifier) { return BeatContext.ActiveModifiers.Contains(Modifier); };
+        FRecoveredNativeLootContext Context;
+        Context.bBurningProfits=SuccuEconomy && SuccuEconomy->HasModifier(5) && HeatLevel>=100;
+        Context.bBiggerPockets=SuccuEconomy && SuccuEconomy->HasModifier(13);
+        Context.bPrizeMachine=Active(TEXT("Prize Machine")); Context.bBadRNG=Active(TEXT("Bad RNG"));
+        Context.bDrySpell=Active(TEXT("Dry Spell")); Context.bJackpotDrops=Active(TEXT("Jackpot Drops"));
+        const auto Reward=RecoveredNativeLoot::Roll(*Inventory,Context,UKismetMathLibrary::RandomFloatInRange(0,100));
+        if (Reward.Type==4) AcquireStoreItem(RecoveredNewerInventoryAdapter::ResolveID(Reward.Item));
+        else if (Reward.Type==6) {
+            const auto Slots=Inventory->HotbarItems;
+            for (const auto Item:Slots) if (Item!=ERecoveredShopItemType::None) AcquireStoreItem(RecoveredNewerInventoryAdapter::ResolveID(Item));
+            CreateRecoveredNotification(TEXT("LootReward"),TEXT("Jackpot Drop!"),TEXT("A charge for every equipped item"));
+        } else {
+            if (Active(TEXT("Fap Tax"))) {
+                const int32 Tax=FMath::Clamp(FMath::RoundToInt(PlayerVariables.PlayerCoins*.05),0,999999999);
+                PlayerVariables.PlayerCoins-=Tax;
+            }
+            const int32 Coins=SuccuEconomy ? SuccuEconomy->AdjustLootCoinReward(Reward.Amount) : Reward.Amount;
+            PlayerVariables.PlayerCoins=URecoveredStateRuleLibrary::AddInt32Wrapping(PlayerVariables.PlayerCoins,Coins);
+            OnCoinsAdded.Broadcast(Coins,PlayerVariables.PlayerCoins);
+            CreateRecoveredNotification(TEXT("CoinRewardIcon"),TEXT("Loot Bar Filled"),FString::Printf(TEXT("+%d Coins"),Coins));
+        }
+        RecoveredNewerInventoryAdapter::Persist(*this);
+        return;
+    }
     // BP_GlobalManager.RollAndGiveLootDropsV2 selects a one-in-six cash
     // reward, otherwise one of seven items. A capped item becomes cash.
-    if (UKismetMathLibrary::RandomIntegerInRange(0,5)==0) {
-        AddCoins(50);
+    const bool bDoubleDrop=SuccuEconomy && SuccuEconomy->HasModifier(5) && HeatLevel>=SuccuEconomy->GetHeatCap();
+    if (!bDoubleDrop && UKismetMathLibrary::RandomIntegerInRange(0,5)==0) {
+        AddCoins(SuccuEconomy ? SuccuEconomy->AdjustLootCoinReward(50) : 50);
         EmitRecoveredLootDebugMessage(TEXT("Coins Rewarded!"));
         CreateRecoveredNotification(TEXT("CoinRewardIcon"),TEXT("Loot Bar Filled"),TEXT("+50 Coins - Cash Reward Unlocked"));
         return;
@@ -510,6 +558,8 @@ void ARecoveredGlobalManager::AcceptTemptation() {
 }
 
 void ARecoveredGlobalManager::DeclineTemptation() {
+    URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats,ERecoveredMetric::DeclinedTemptation,1);
+    OnMetricUpdateRequested.Broadcast(ERecoveredMetric::DeclinedTemptation,1);
     RequestNextRecoveredCard(true);
 }
 
@@ -613,6 +663,27 @@ void ARecoveredGlobalManager::GrantPlayerCoins(int32 Amount) {
 }
 
 void ARecoveredGlobalManager::AcquireStoreItem(FName ItemID) {
+    if (auto* Inventory=RecoveredNewerInventoryAdapter::GetInventory(*this)) {
+        ERecoveredShopItemType Type;
+        if (!RecoveredNewerInventoryAdapter::ResolveType(ItemID,Type)) return;
+        FRecoveredNewerChargeContext Context;
+        Context.bBiggerPockets=SuccuEconomy && SuccuEconomy->HasModifier(13);
+        if (ActiveRecoveredMode==2) {
+            Context.GameModeSelection=2;
+            Context.bGlobalManagerValid=true;
+            const auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
+            Context.EffectiveMaxBreakCharges=static_cast<int32>(RecoveredMusicUpgrades::GetValue(Instance ? Instance->CurrentSave.Get() : nullptr,1));
+        }
+        const int32 Previous=Inventory->GetItemState(Type).Charges;
+        if (!Inventory->GrantItem(Type,1,Context)) return;
+        const int32 Count=Inventory->GetItemState(Type).Charges;
+        OwnedItemCounts.Add(ItemID,Count);
+        if (ItemID==TEXT("SuccuShield")) SuccubusShields=Count;
+        PlayerVariables.bHasItems=true;
+        if (Count!=Previous) OnSessionAction.Broadcast(FName(*FString::Printf(TEXT("InventoryAcquired_%s"),*ItemID.ToString())));
+        RecoveredNewerInventoryAdapter::Persist(*this);
+        return;
+    }
     int32& Count = OwnedItemCounts.FindOrAdd(ItemID);
     const int32 PreviousCount=Count;
     const int32 Maximum=GetRecoveredItemMaximum(ItemID);
@@ -625,6 +696,15 @@ void ARecoveredGlobalManager::AcquireStoreItem(FName ItemID) {
 }
 
 bool ARecoveredGlobalManager::UseOwnedItem(FName ItemID, int32 Level) {
+    if (RecoveredNewerInventoryAdapter::GetInventory(*this) && RecoveredNativeLoot::IsPanicBlocked(ItemID,HeatLevel,BeatContext.ActiveModifiers)) return false;
+    if (ItemID==TEXT("ApexLure") || ItemID==TEXT("EscapeRope") || ItemID==TEXT("LootRush") || ItemID==TEXT("Bounty") || ItemID==TEXT("ComboCruncher")) return UseRecoveredNewerItem(ItemID);
+    if (auto* Inventory=RecoveredNewerInventoryAdapter::GetInventory(*this)) {
+        ERecoveredShopItemType Type;
+        if (!RecoveredNewerInventoryAdapter::ResolveType(ItemID,Type) || !Inventory->OwnedItems.Contains(Type)) return false;
+        const auto State=Inventory->GetItemState(Type);
+        OwnedItemCounts.Add(ItemID,State.Charges);
+        ItemUpgradeLevels.Add(ItemID,FMath::Clamp(State.Level-1,0,4));
+    }
     if (ItemID==TEXT("Edge")) return UseRecoveredEdgeItem()==ERecoveredEdgeItemUseResult::Triggered;
     if (ItemID==TEXT("Resupply")) return UseRecoveredResupplyItem()==ERecoveredResupplyItemUseResult::Triggered;
     if (!ItemUpgradeLevels.Contains(ItemID)) SetRecoveredItemUpgradeLevel(ItemID,Level);
@@ -639,6 +719,7 @@ bool ARecoveredGlobalManager::UseOwnedItem(FName ItemID, int32 Level) {
     if (!ApplyStoreItemEffect(ItemID, Level)) return false;
     *Count -= 1;
     if (*Count <= 0) OwnedItemCounts.Remove(ItemID);
+    RecoveredNewerInventoryAdapter::SynchronizeConsumed(*this,ItemID);
     PlayerVariables.bHasItems=!OwnedItemCounts.IsEmpty();
     OnSessionAction.Broadcast(FName(*FString::Printf(TEXT("InventoryUsed_%s"),*ItemID.ToString())));
     ShowDefensiveItemOverlay(ItemID);
@@ -646,11 +727,28 @@ bool ARecoveredGlobalManager::UseOwnedItem(FName ItemID, int32 Level) {
 }
 
 int32 ARecoveredGlobalManager::GetOwnedItemCount(FName ItemID) const {
+    if (auto* Inventory=RecoveredNewerInventoryAdapter::GetInventory(*this)) {
+        ERecoveredShopItemType Type;
+        if (RecoveredNewerInventoryAdapter::ResolveType(ItemID,Type)) return Inventory->GetItemState(Type).Charges;
+    }
     const int32* Count = OwnedItemCounts.Find(ItemID);
     return Count ? *Count : 0;
 }
 
 int32 ARecoveredGlobalManager::GetRecoveredItemMaximum(FName ItemID) const {
+    if (auto* Inventory=RecoveredNewerInventoryAdapter::GetInventory(*this)) {
+        ERecoveredShopItemType Type;
+        FRecoveredNewerChargeContext Context;
+        Context.bBiggerPockets=SuccuEconomy && SuccuEconomy->HasModifier(13);
+        if (ActiveRecoveredMode==2) {
+            Context.GameModeSelection=2;
+            Context.bGlobalManagerValid=true;
+            const auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
+            Context.EffectiveMaxBreakCharges=static_cast<int32>(RecoveredMusicUpgrades::GetValue(Instance ? Instance->CurrentSave.Get() : nullptr,1));
+        }
+        int32 Maximum=0;
+        if (RecoveredNewerInventoryAdapter::ResolveType(ItemID,Type) && URecoveredNewerInventory::GetMaxCharges(Type,Context,Maximum)) return Maximum;
+    }
     if (ItemID==TEXT("XCumChance")) return 1;
     if (ItemID==TEXT("DecreaseHeat")) return 3;
     if (ItemID==TEXT("Edge")) return 10;
@@ -663,6 +761,10 @@ int32 ARecoveredGlobalManager::GetRecoveredItemMaximum(FName ItemID) const {
 }
 
 int32 ARecoveredGlobalManager::GetRecoveredItemUpgradeLevel(FName ItemID) const {
+    if (auto* Inventory=RecoveredNewerInventoryAdapter::GetInventory(*this)) {
+        ERecoveredShopItemType Type;
+        if (RecoveredNewerInventoryAdapter::ResolveType(ItemID,Type)) return FMath::Clamp(Inventory->GetItemState(Type).Level-1,0,4);
+    }
     if (const int32* Level=ItemUpgradeLevels.Find(ItemID)) return FMath::Clamp(*Level,0,4);
     const auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
     if (!Instance || !Instance->CurrentSave) return 0;
@@ -671,6 +773,12 @@ int32 ARecoveredGlobalManager::GetRecoveredItemUpgradeLevel(FName ItemID) const 
 
 void ARecoveredGlobalManager::SetRecoveredItemUpgradeLevel(FName ItemID, int32 Level) {
     const int32 ClampedLevel=FMath::Clamp(Level,0,4);
+    if (auto* Inventory=RecoveredNewerInventoryAdapter::GetInventory(*this)) {
+        ERecoveredShopItemType Type;
+        if (RecoveredNewerInventoryAdapter::ResolveType(ItemID,Type)) {
+            if (auto* State=Inventory->OwnedItems.Find(Type)) State->Level=ClampedLevel+1;
+        }
+    }
     ItemUpgradeLevels.Add(ItemID,ClampedLevel);
     if (ItemID==TEXT("Break")) {
         static constexpr double Durations[]={5.0,10.0,15.0,25.0,50.0};
@@ -688,11 +796,16 @@ void RecordRecoveredDefensiveItemUse(ARecoveredGlobalManager& Manager, bool bCou
 }
 
 void ConsumeRecoveredDefensiveItem(ARecoveredGlobalManager& Manager, FName ItemID, float LastItemDelay, FTimerHandle& LastItemTimer) {
+    const int32 PreviousCount=Manager.GetOwnedItemCount(ItemID);
+    if (RecoveredNewerInventoryAdapter::GetInventory(Manager)) Manager.OwnedItemCounts.Add(ItemID,PreviousCount);
     if (int32* Count=Manager.OwnedItemCounts.Find(ItemID)) {
-        --*Count;
+        if (!Manager.SuccuEconomy || !Manager.SuccuEconomy->RollRecycler()) --*Count;
         if (*Count<=0) Manager.OwnedItemCounts.Remove(ItemID);
     }
     Manager.PlayerVariables.bHasItems=!Manager.OwnedItemCounts.IsEmpty();
+    RecoveredNewerInventoryAdapter::SynchronizeConsumed(Manager,ItemID);
+    URecoveredStateRuleLibrary::RecordSessionMetric(Manager.SessionStats,ERecoveredMetric::DefensiveItemsUsed,1);
+    Manager.OnMetricUpdateRequested.Broadcast(ERecoveredMetric::DefensiveItemsUsed,1);
     Manager.OnSessionAction.Broadcast(FName(*FString::Printf(TEXT("InventoryUsed_%s"),*ItemID.ToString())));
     if (Manager.GetOwnedItemCount(ItemID)>0) return;
     const FName ExhaustedAction(*FString::Printf(TEXT("InventoryExhausted_%s"),*ItemID.ToString()));
@@ -720,7 +833,7 @@ double GetRecoveredCumChanceGain(int32 UpgradeLevel) {
 ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::UseRecoveredDecreaseHeatItem() {
     const FName ItemID=TEXT("DecreaseHeat");
     PlayDialogueLine(TEXT("Generic_DefensiveItemUse_DLS"));
-    if (!PlayerVariables.bCanUseItems) {
+    if (!PlayerVariables.bCanUseItems || (RecoveredNewerInventoryAdapter::GetInventory(*this) && RecoveredNativeLoot::IsPanicBlocked(ItemID,HeatLevel,BeatContext.ActiveModifiers))) {
         LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::CannotUseItems;
         return LastDefensiveItemUseResult;
     }
@@ -752,7 +865,11 @@ ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::UseRecoveredDecreaseHe
 
 ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::UseRecoveredBreakItem() {
     const FName ItemID=TEXT("Break");
-    if (!PlayerVariables.bCanUseItems) {
+    if (ActiveRecoveredMode==2 && (!PlaylistRuntime || !PlaylistRuntime->bPlaying || PlaylistRuntime->bPaused || PlaylistRuntime->bOnBreak)) {
+        LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::CooldownActive;
+        return LastDefensiveItemUseResult;
+    }
+    if (!PlayerVariables.bCanUseItems || (RecoveredNewerInventoryAdapter::GetInventory(*this) && RecoveredNativeLoot::IsPanicBlocked(ItemID,HeatLevel,BeatContext.ActiveModifiers))) {
         LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::CannotUseItems;
         return LastDefensiveItemUseResult;
     }
@@ -770,6 +887,12 @@ ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::UseRecoveredBreakItem(
     AddToCumMeter(.01);
     OnSessionAction.Broadcast(TEXT("InventoryUseInitiated_Break"));
     SetRecoveredItemUpgradeLevel(ItemID,GetRecoveredItemUpgradeLevel(ItemID));
+    if (ActiveRecoveredMode==2) {
+        if (!PlaylistRuntime->BeginBreak()) { LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::CooldownActive;return LastDefensiveItemUseResult; }
+        URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats,ERecoveredMetric::MusicBreaksUsed,1);
+        OnMetricUpdateRequested.Broadcast(ERecoveredMetric::MusicBreaksUsed,1);
+        RemoveAllActiveBeatWidgets();
+    }
     if (BeatTimeline) BeatTimeline->PauseSequence();
     ClearIdleTimer();
     SpawnRecoveredOverlay(TEXT("RestWidget"));
@@ -782,7 +905,7 @@ ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::UseRecoveredBreakItem(
 
 ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::UseRecoveredSlowdownItem() {
     const FName ItemID=TEXT("Slowdown");
-    if (!PlayerVariables.bCanUseItems) {
+    if (!PlayerVariables.bCanUseItems || (RecoveredNewerInventoryAdapter::GetInventory(*this) && RecoveredNativeLoot::IsPanicBlocked(ItemID,HeatLevel,BeatContext.ActiveModifiers))) {
         LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::CannotUseItems;
         return LastDefensiveItemUseResult;
     }
@@ -887,12 +1010,16 @@ ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::UseRecoveredBonerPillI
     CreateRecoveredNotification(TEXT("BonerPillItem"),TEXT("Boner Pill"),Effect.NotificationDescription);
     ChangeRecoveredBeatBackground(9);
 
+    if (RecoveredNewerInventoryAdapter::GetInventory(*this)) OwnedItemCounts.Add(ItemID,GetOwnedItemCount(ItemID));
     if (int32* Count=OwnedItemCounts.Find(ItemID)) {
-        --*Count;
+        if (!SuccuEconomy || !SuccuEconomy->RollRecycler()) --*Count;
         if (*Count<=0) OwnedItemCounts.Remove(ItemID);
     }
     PlayerVariables.bHasItems=!OwnedItemCounts.IsEmpty();
     OnSessionAction.Broadcast(TEXT("InventoryUsed_BonerPill"));
+    RecoveredNewerInventoryAdapter::SynchronizeConsumed(*this,ItemID);
+    URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats,ERecoveredMetric::OffensiveItemsUsed,1);
+    OnMetricUpdateRequested.Broadcast(ERecoveredMetric::OffensiveItemsUsed,1);
     if (GetOwnedItemCount(ItemID)<=0) OnSessionAction.Broadcast(TEXT("InventoryExhausted_BonerPill"));
 
     if (UWorld* World=GetWorld()) World->GetTimerManager().SetTimer(BonerPillCooldownTimerHandle,this,&ARecoveredGlobalManager::CompleteRecoveredBonerPillCooldown,60.0f,false);
@@ -902,7 +1029,7 @@ ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::UseRecoveredBonerPillI
 
 ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::ToggleRecoveredSuccuShields() {
     const FName ItemID=TEXT("SuccuShield");
-    if (!PlayerVariables.bCanUseItems) {
+    if (!PlayerVariables.bCanUseItems || (RecoveredNewerInventoryAdapter::GetInventory(*this) && RecoveredNativeLoot::IsPanicBlocked(ItemID,HeatLevel,BeatContext.ActiveModifiers))) {
         LastDefensiveItemUseResult=ERecoveredDefensiveItemUseResult::CannotUseItems;
         return LastDefensiveItemUseResult;
     }
@@ -927,6 +1054,7 @@ ERecoveredDefensiveItemUseResult ARecoveredGlobalManager::ToggleRecoveredSuccuSh
 }
 
 bool ARecoveredGlobalManager::CheckRecoveredSuccubusEligibility() {
+    if (SuccuEconomy && SuccuEconomy->IsSuccubusOnCooldown()) return false;
     if (GetOwnedItemCount(TEXT("SuccuShield"))==0 && SuccubusShields>0) SyncRecoveredSuccuShieldInventory(SuccubusShields);
     FRecoveredEligibilityState State=BuildRecoveredEligibilityState(*this);
     const bool bEligible=URecoveredEventRuleLibrary::CheckSuccubusEligibility(State);
@@ -939,6 +1067,7 @@ void ARecoveredGlobalManager::SyncRecoveredSuccuShieldInventory(int32 Count) {
     if (SanitizedCount>0) OwnedItemCounts.Add(TEXT("SuccuShield"),SanitizedCount);
     else OwnedItemCounts.Remove(TEXT("SuccuShield"));
     SuccubusShields=SanitizedCount;
+    RecoveredNewerInventoryAdapter::SynchronizeConsumed(*this,TEXT("SuccuShield"));
     PlayerVariables.bHasItems=!OwnedItemCounts.IsEmpty();
 }
 
@@ -991,15 +1120,19 @@ void ARecoveredGlobalManager::TriggerRecoveredEdgeItemPunishment() {
 }
 
 bool ARecoveredGlobalManager::CommitRecoveredEdgeItemUse() {
+    if (RecoveredNewerInventoryAdapter::GetInventory(*this)) OwnedItemCounts.Add(TEXT("Edge"),GetOwnedItemCount(TEXT("Edge")));
     int32* Count=OwnedItemCounts.Find(TEXT("Edge"));
     if (!Count || *Count<=0 || !IsValid(EdgingManager) || !EdgingManager->TriggerRecoveredEdgeV2()) {
         LastEdgeItemUseResult=ERecoveredEdgeItemUseResult::EdgeManagerUnavailable;
         return false;
     }
-    *Count-=1;
+    if (!SuccuEconomy || !SuccuEconomy->RollRecycler()) *Count-=1;
     if (*Count<=0) OwnedItemCounts.Remove(TEXT("Edge"));
     PlayerVariables.bHasItems=!OwnedItemCounts.IsEmpty();
     LastEdgeItemUseResult=ERecoveredEdgeItemUseResult::Triggered;
+    RecoveredNewerInventoryAdapter::SynchronizeConsumed(*this,TEXT("Edge"));
+    URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats,ERecoveredMetric::DefensiveItemsUsed,1);
+    OnMetricUpdateRequested.Broadcast(ERecoveredMetric::DefensiveItemsUsed,1);
     OnSessionAction.Broadcast(TEXT("InventoryUsed_Edge"));
     return true;
 }
@@ -1039,7 +1172,7 @@ bool ARecoveredGlobalManager::IsRecoveredResupplyPending() const {
 }
 
 ERecoveredResupplyItemUseResult ARecoveredGlobalManager::UseRecoveredResupplyItem() {
-    if (!PlayerVariables.bCanUseItems) {
+    if (!PlayerVariables.bCanUseItems || (RecoveredNewerInventoryAdapter::GetInventory(*this) && RecoveredNativeLoot::IsPanicBlocked(TEXT("Resupply"),HeatLevel,BeatContext.ActiveModifiers))) {
         LastResupplyItemUseResult=ERecoveredResupplyItemUseResult::CannotUseItems;
         return LastResupplyItemUseResult;
     }
@@ -1071,12 +1204,16 @@ void ARecoveredGlobalManager::CompleteRecoveredResupplyItemUse() {
     if (GetWorld()) GetWorldTimerManager().ClearTimer(ResupplyStoreTimerHandle);
     ResupplyStoreTimerHandle.Invalidate();
     SpawnRecoveredStore();
+    if (RecoveredNewerInventoryAdapter::GetInventory(*this)) OwnedItemCounts.Add(TEXT("Resupply"),GetOwnedItemCount(TEXT("Resupply")));
     if (int32* Count=OwnedItemCounts.Find(TEXT("Resupply"))) {
-        --*Count;
+        if (!SuccuEconomy || !SuccuEconomy->RollRecycler()) --*Count;
         if (*Count<=0) OwnedItemCounts.Remove(TEXT("Resupply"));
     }
     PlayerVariables.bHasItems=!OwnedItemCounts.IsEmpty();
     OnSessionAction.Broadcast(TEXT("InventoryUsed_Resupply"));
+    RecoveredNewerInventoryAdapter::SynchronizeConsumed(*this,TEXT("Resupply"));
+    URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats,ERecoveredMetric::OffensiveItemsUsed,1);
+    OnMetricUpdateRequested.Broadcast(ERecoveredMetric::OffensiveItemsUsed,1);
     if (GetOwnedItemCount(TEXT("Resupply"))>0) return;
     if (GetWorld()) {
         GetWorldTimerManager().SetTimer(ResupplyLastItemTimerHandle,FTimerDelegate::CreateWeakLambda(this,[this]() {

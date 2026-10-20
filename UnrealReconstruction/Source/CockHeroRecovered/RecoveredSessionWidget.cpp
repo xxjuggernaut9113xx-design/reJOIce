@@ -1,5 +1,10 @@
 #include "RecoveredSessionWidget.h"
 #include "RecoveredRules.h"
+#include "RecoveredNewerInventoryAdapter.h"
+#include "RecoveredProgressionResources.h"
+#include "Blueprint/WidgetTree.h"
+#include "Components/SizeBox.h"
+#include "Components/CanvasPanelSlot.h"
 #include "RecoveredEdgeManager.h"
 #include "RecoveredChallengeTracker.h"
 #include "RecoveredTabbedInventoryWidget.h"
@@ -86,6 +91,24 @@ void URecoveredSessionWidget::BindSession(bool bBind) {
 }
 void URecoveredSessionWidget::NativeConstruct() {
     Super::NativeConstruct(); SetIsFocusable(true); BindSession(true);
+    if (IsRecoveredNewerProgressionEnabled() && WidgetTree) {
+        if (auto* FinishButton=Cast<UButton>(GetWidgetFromName(TEXT("CumTextButton_1")))) {
+            if (auto* Caption=Cast<UTextBlock>(FinishButton->GetContent())) Caption->SetText(FText::FromString(TEXT("Finish: Enter")));
+        }
+        if (auto* InventoryBox=Cast<USizeBox>(GetWidgetFromName(TEXT("TabbedInventorySizeBox")))) {
+            auto* Labels=WidgetTree->ConstructWidget<UTextBlock>(UTextBlock::StaticClass(),TEXT("RecoveredHotbarLabels"));
+            Labels->SetAutoWrapText(true);
+            Labels->SetText(FText::FromString(TEXT("Equip items in the store. Use keys 1–5.")));
+            InventoryBox->SetContent(Labels);
+            if (auto* CanvasSlot=Cast<UCanvasPanelSlot>(InventoryBox->Slot)) {
+                CanvasSlot->SetAnchors(FAnchors(0.f,1.f));
+                CanvasSlot->SetAlignment(FVector2D(0.f,1.f));
+                CanvasSlot->SetPosition(FVector2D(16.f,-16.f));
+                CanvasSlot->SetSize(FVector2D(500.f,320.f));
+                CanvasSlot->SetAutoSize(false);
+            }
+        }
+    }
     auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
     if (Manager && Manager->MediaPlayback) Manager->MediaPlayback->SetScaleBoxReference(Cast<UScaleBox>(GetWidgetFromName(TEXT("ScaleBox_416"))));
     if (Manager && Manager->MediaPlayback && Manager->MediaPlayback->CurrentTexture) DisplayMedia(Manager->MediaPlayback->CurrentTexture);
@@ -138,7 +161,7 @@ void URecoveredSessionWidget::OpenSessionSettings() {
 void URecoveredSessionWidget::DrawCard() {
     auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
     // Original handler blocks skipping a succubus before testing CanDraw.
-    if (!Manager || Manager->BeatContext.CardType==3 || !Manager->PlayerVariables.bCanDraw) return;
+    if (!Manager || Manager->ActiveRecoveredMode==2 || Manager->BeatContext.CardType==3 || !Manager->PlayerVariables.bCanDraw) return;
     Manager->RequestNextRecoveredCard(true);
 }
 
@@ -168,8 +191,42 @@ void URecoveredSessionWidget::NativeTick(const FGeometry& Geometry,float DeltaSe
 }
 void URecoveredSessionWidget::RefreshSessionDisplays(ARecoveredGlobalManager* Manager) {
     if (!Manager) return;
+    if (auto* Labels=Cast<UTextBlock>(GetWidgetFromName(TEXT("RecoveredHotbarLabels")))) {
+        FString Loadout;
+        if (Manager->ActiveRecoveredMode==0 && Manager->ClassicObjectiveRuntime.bActive) {
+            const auto& Objective=Manager->ClassicObjectiveRuntime;
+            const auto* Spec=RecoveredObjectives::GetSpecs().FindByPredicate([&Objective](const FRecoveredObjectiveSpec& Entry) { return Entry.Objective==Objective.Objective; });
+            int32 Progress=0;
+            switch (Objective.Objective) {
+            case 1: case 6: Progress=Manager->PlayerVariables.SessionLength-Objective.BaselineDuration;break;
+            case 2: Progress=Manager->SessionStats.Strokes-Objective.BaselineStrokes;break;
+            case 3: Progress=Manager->SessionStats.Edges-Objective.BaselineEdges;break;
+            case 7: Progress=Manager->SessionStats.MilkingCount-Objective.BaselineMilking;break;
+            case 8: Progress=Manager->SessionStats.SuccubiDefeated-Objective.BaselineSuccubi;break;
+            default: Progress=FMath::RoundToInt(FMath::Clamp(Manager->CumMeterPercentage,0.0,1.0)*100);break;
+            }
+            Loadout=FString::Printf(TEXT("%s: %d / %d%s\n"),Spec ? Spec->Title : TEXT("Objective"),FMath::Max(0,Progress),Objective.Objective==0 ? 100 : Objective.Target,Objective.Objective==0 ? TEXT("%") : (Objective.Objective==1 || Objective.Objective==6) ? TEXT(" seconds") : TEXT(""));
+        }
+        if (Manager->PlayerVariables.bIsAllowedToCum && !Manager->PlayerVariables.bHasCame) Loadout+=TEXT("Finish now. Press Enter.\n");
+        if (auto* Inventory=RecoveredNewerInventoryAdapter::GetInventory(*Manager)) {
+            for (int32 HotbarIndex=0;HotbarIndex<Inventory->HotbarItems.Num();++HotbarIndex) {
+                const auto Type=Inventory->HotbarItems[HotbarIndex];
+                const FName ItemID=RecoveredNewerInventoryAdapter::ResolveID(Type);
+                const auto State=Inventory->GetItemState(Type);
+                FString Title=ItemID.IsNone() ? TEXT("Empty") : ItemID.ToString(),Description;
+                RecoveredNewerInventoryAdapter::GetPresentation(ItemID,State.Level-1,Title,Description);
+                Loadout+=FString::Printf(TEXT("%d. %s (%d)\n"),HotbarIndex+1,*Title,State.Charges);
+            }
+        }
+        Labels->SetText(FText::FromString(Loadout));
+    }
     auto Text=[this](FName Name,const FText& Value) { if (auto* Widget=Cast<UTextBlock>(GetWidgetFromName(Name))) Widget->SetText(Value); };
     auto Percent=[this](FName Name,double Value) { if (auto* Widget=Cast<UProgressBar>(GetWidgetFromName(Name))) Widget->SetPercent(static_cast<float>(Value)); };
+    if (IsRecoveredNewerProgressionEnabled()) {
+        if (Manager->ActiveRecoveredMode==2 && Manager->PlaylistRuntime) Text(TEXT("DealerText_UI"),FText::FromString(TEXT("Playlist: ")+Manager->PlaylistRuntime->CurrentSong.Meta.Title));
+        else Text(TEXT("DealerText_UI"),FText::FromString(Manager->PlayerVariables.bIsAllowedToCum ? TEXT("Finish now. Press Enter.") : TEXT("SPACE: Draw. E: Edge.")));
+        if (auto* Draw=GetWidgetFromName(TEXT("DrawButton"))) Draw->SetIsEnabled(Manager->ActiveRecoveredMode!=2);
+    }
     FNumberFormattingOptions IntegerFormat;
     IntegerFormat.UseGrouping=true;IntegerFormat.MinimumIntegralDigits=1;IntegerFormat.MaximumIntegralDigits=324;
     Text(TEXT("StrokeCounter"),FText::AsNumber(FMath::Clamp(Manager->BeatTimeline ? Manager->BeatTimeline->GetBeatsRemaining() : 0,0,999),&IntegerFormat));
@@ -187,6 +244,17 @@ void URecoveredSessionWidget::RefreshSessionDisplays(ARecoveredGlobalManager* Ma
 
 FReply URecoveredSessionWidget::NativeOnKeyDown(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent) {
     const FKey Key = InKeyEvent.GetKey();
+    const FKey HotbarKeys[]={EKeys::One,EKeys::Two,EKeys::Three,EKeys::Four,EKeys::Five};
+    for (int32 HotbarIndex=0;HotbarIndex<UE_ARRAY_COUNT(HotbarKeys);++HotbarIndex) if (Key==HotbarKeys[HotbarIndex]) {
+        auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
+        auto* Inventory=Manager ? RecoveredNewerInventoryAdapter::GetInventory(*Manager) : nullptr;
+        if (!Inventory) break;
+        if (Inventory->HotbarItems.IsValidIndex(HotbarIndex)) {
+            const FName ItemID=RecoveredNewerInventoryAdapter::ResolveID(Inventory->HotbarItems[HotbarIndex]);
+            if (!ItemID.IsNone()) Manager->UseOwnedItem(ItemID,Manager->GetRecoveredItemUpgradeLevel(ItemID));
+        }
+        return FReply::Handled();
+    }
     if (Key == EKeys::Escape) {
         ToggleRecoveredSettingsMenu();
         return FReply::Handled();
@@ -241,8 +309,14 @@ FReply URecoveredSessionWidget::NativeOnKeyDown(const FGeometry& InGeometry, con
     } else if (Key == EKeys::C) {
         ToggleRecoveredUI();
         return FReply::Handled();
-    } else if (Key == EKeys::E) {
+    } else if (Key == EKeys::Enter) {
         RequestRecoveredCumMedia();
+        return FReply::Handled();
+    } else if (Key == EKeys::E) {
+        auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr;
+        if (IsRecoveredNewerProgressionEnabled()) {
+            if (Manager && Manager->ActiveRecoveredMode!=2 && Manager->EdgingManager) Manager->EdgingManager->TriggerRecoveredEdgeV2();
+        } else RequestRecoveredCumMedia();
         return FReply::Handled();
     } else if (Key == EKeys::V) {
         ToggleRecoveredChallengeTracker();
@@ -350,6 +424,14 @@ void URecoveredSessionWidget::RequestRecoveredCumMedia() {
 }
 
 void URecoveredSessionWidget::RequestRecoveredCumMediaFromButton() {
+    if (auto* Manager=GetWorld() ? Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this)) : nullptr) {
+        if (Manager->CurrentSessionObjective==7) {
+            if (Manager->EdgingManager) Manager->EdgingManager->ClearRecoveredEdgeHold();
+            PlayRecoveredAnimation(TEXT("CumButtonClick"));
+            Manager->RecordRecoveredMilking();
+            return;
+        }
+    }
     RequestRecoveredCumMediaWithAnimation(TEXT("CumButtonClick"));
 }
 
@@ -358,7 +440,8 @@ void URecoveredSessionWidget::RequestRecoveredCumMediaWithAnimation(FName Animat
     if (!Manager) return;
     if (Manager->EdgingManager) Manager->EdgingManager->ClearRecoveredEdgeHold();
     PlayRecoveredAnimation(AnimationName);
-    Manager->OpenRecoveredCumMedia();
+    if (Manager->CurrentSessionObjective==7) { Manager->RecordRecoveredMilking(); return; }
+    if (Manager->OpenRecoveredCumMedia()) Manager->ResolveRecoveredClimaxRequest();
 }
 
 void URecoveredSessionWidget::RequestRecoveredTaunt() {

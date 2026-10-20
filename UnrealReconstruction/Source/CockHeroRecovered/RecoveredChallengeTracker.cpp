@@ -152,9 +152,27 @@ void URecoveredChallengeTracker::UpdateChallengeProgress(FName ID,ERecoveredMetr
                 case ERecoveredMetric::BonerPillsUsed:Value=Stats.BonerPillsUsed;break;
                 case ERecoveredMetric::AcceptedTemptation:Value=Stats.AcceptedTemptation;break;
                 case ERecoveredMetric::CameDuringTaunt:Value=Stats.CameDuringTaunt;break;
+                case ERecoveredMetric::DefensiveItemsUsed:Value=Stats.DefensiveItemsUsed;break;
+                case ERecoveredMetric::OffensiveItemsUsed:Value=Stats.OffensiveItemsUsed;break;
+                case ERecoveredMetric::DeclinedTemptation:Value=Stats.DeclinedTemptation;break;
+                case ERecoveredMetric::BountiesCollected:Value=Stats.BountiesCollected;break;
+                case ERecoveredMetric::LootRushesUsed:Value=Stats.LootRushesUsed;break;
+                case ERecoveredMetric::EscapeRopesUsed:Value=Stats.EscapeRopesUsed;break;
+                case ERecoveredMetric::MilkingCount:Value=Stats.MilkingCount;break;
+                case ERecoveredMetric::SuccuSlayerSessionsWon:Value=Stats.SuccuSlayerSessionsWon;break;
+                case ERecoveredMetric::EdgeSessionsWon:Value=Stats.EdgeSessionsWon;break;
+                case ERecoveredMetric::ComboCrunchersUsed:Value=Stats.ComboCrunchersUsed;break;
+                case ERecoveredMetric::SuccuCoinsSpent:Value=Stats.SuccuCoinsSpent;break;
+                case ERecoveredMetric::SessionsWonAtMaxDifficulty:Value=Stats.SessionsWonAtMaxDifficulty;break;
+                case ERecoveredMetric::BestMusicModeWinRounds:Value=Stats.BestMusicModeWinRounds;break;
+                case ERecoveredMetric::BestTowerWinRounds:Value=Stats.BestTowerWinRounds;break;
+                case ERecoveredMetric::MusicBreaksUsed:Value=Stats.MusicBreaksUsed;break;
+                case ERecoveredMetric::DisabledBreakSectionFailures:Value=Stats.DisabledBreakSectionFailures;break;
+                case ERecoveredMetric::BountyCollectionFailures:Value=Stats.BountyCollectionFailures;break;
                 default:break;
             }
         }
+        if (!bSession && (Metric==ERecoveredMetric::BestMusicModeWinRounds || Metric==ERecoveredMetric::BestTowerWinRounds)) Value=FMath::Max(Requirement.CurrentValue,Amount);
         Requirement.CurrentValue=Value;bChanged=true;
         if (Progress->BestValues.IsValidIndex(I) && Progress->BestValues[I]<Value) { Progress->BestValues[I]=Value;bBestChanged=true; }
     }

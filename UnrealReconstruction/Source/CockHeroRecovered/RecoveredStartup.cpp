@@ -1,5 +1,11 @@
 #include "RecoveredRules.h"
+#include "RecoveredIntegratedVisualSmoke.h"
+#include "RecoveredNewerInventoryAdapter.h"
+#include "RecoveredNewerItemEffects.h"
+#include "RecoveredProgressionResources.h"
+#include "RecoveredSuccuEconomy.h"
 #include "RecoveredMenu.h"
+#include "RecoveredModesWidget.h"
 #include "RecoveredUnlockStoreWidget.h"
 #include "RecoveredEventWidgets.h"
 #include "RecoveredDecisionWidgets.h"
@@ -19,6 +25,7 @@
 #include "RecoveredContentPaths.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Blueprint/WidgetBlueprintGeneratedClass.h"
+#include "UObject/StrongObjectPtr.h"
 #include "Animation/WidgetAnimation.h"
 
 void ARecoveredGlobalManager::BeginPlay() {
@@ -27,7 +34,31 @@ void ARecoveredGlobalManager::BeginPlay() {
     if (!SourceManifest.IsEmpty()) MediaManifestPath = SourceManifest;
     ReloadRecoveredProfile();
     CreateMainMenuUI();
+    StartRecoveredIntegratedVisualSmoke(*this);
 #if WITH_DEV_AUTOMATION_TESTS
+    if (FParse::Param(FCommandLine::Get(),TEXT("RecoveredTowerVisualSmoke"))) {
+        FTimerHandle SetupTimer;
+        GetWorldTimerManager().SetTimer(SetupTimer,[this]() {
+            const bool Started=StartTowerSession(5,false);
+            const bool Ready=Started && TowerRuntime && TowerRuntime->Phase==ERecoveredRoundPhase::RoundSelection && TowerRuntime->CurrentOptions.Num()==3 && ModesScreen && ModesScreen->IsInViewport();
+            if (!Ready) {
+                UE_LOG(LogTemp,Error,TEXT("RECOVERED_TOWER_VISUAL_SMOKE_FAIL: %s"),*LastSessionError);
+                if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                return;
+            }
+            FTimerHandle CaptureTimer;
+            GetWorldTimerManager().SetTimer(CaptureTimer,[this]() {
+                const FString Path=FPaths::ConvertRelativePathToFull(FPaths::ProjectDir()/TEXT("RecoveryEvidence/visual-parity/reconstruction-tower-draft.png"));
+                FScreenshotRequest::RequestScreenshot(Path,true,false);
+                UE_LOG(LogTemp,Display,TEXT("RECOVERED_TOWER_VISUAL_SMOKE_CAPTURE_REQUESTED: %s"),*Path);
+                FTimerHandle ExitTimer;
+                GetWorldTimerManager().SetTimer(ExitTimer,[this]() {
+                    StopRecoveredModes();
+                    if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
+                },4.0f,false);
+            },4.0f,false);
+        },1.0f,false);
+    }
     if (FParse::Param(FCommandLine::Get(),TEXT("RecoveredMenuVisualSmoke"))) {
         FTimerHandle VisualTimer;
         GetWorldTimerManager().SetTimer(VisualTimer,[this]() {
@@ -191,7 +222,8 @@ void ARecoveredGlobalManager::BeginPlay() {
             GetWorldTimerManager().SetTimer(CaptureTimer,[this,Menu]() {
                 auto* Settings=Cast<URecoveredSettingsMenu>(Menu->LastOpenedScreen);
                 auto* Voice=Settings ? Cast<URecoveredVoiceSettings>(Settings->GetWidgetFromName(TEXT("VoicelineSettingsMenu"))) : nullptr;
-                if (!Settings || !Settings->IsInViewport() || !Voice || Voice->GetVoicePackEntryCount()!=4 || Voice->VoicePacks.Num()!=4 || !Voice->SelectedEntryWidget) {
+                const int32 ExpectedVoicePacks=IsRecoveredNewerProgressionEnabled() ? 7 : 4;
+                if (!Settings || !Settings->IsInViewport() || !Voice || Voice->GetVoicePackEntryCount()!=ExpectedVoicePacks || Voice->VoicePacks.Num()!=ExpectedVoicePacks || !Voice->SelectedEntryWidget) {
                     UE_LOG(LogTemp,Error,TEXT("RECOVERED_VOICE_SETTINGS_VISUAL_SMOKE_FAIL: voice settings initialization incomplete"));
                     if (APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0)) Controller->ConsoleCommand(TEXT("quit"));
                     return;
@@ -283,12 +315,19 @@ void ARecoveredGlobalManager::BeginPlay() {
 }
 
 void ARecoveredGlobalManager::ReloadRecoveredProfile() {
+    PendingRecoveredLoadoutJson.Reset();
     // Uses the reconstruction's isolated save. Original save slots are never loaded.
     LoadLifetimeStats();
     if (auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance())) {
         if (Instance->CurrentSave) {
             BeatSoundBank=FName(*Instance->CurrentSave->GetStringSetting(TEXT("BeatSoundBank"),TEXT("Default")));
             VoicePack=FName(*Instance->CurrentSave->GetStringSetting(TEXT("VoicePack"),TEXT("Default")));
+            if (IsRecoveredNewerProgressionEnabled() && Instance->CurrentSave->HasSetting(TEXT("SelectedVoicePack"))) {
+                const TCHAR* SourcePacks[]={TEXT("Default"),TEXT("Brat"),TEXT("DommyMommy"),TEXT("Sweetheart"),TEXT("Yandere"),TEXT("Chariot"),TEXT("Pepper")};
+                const int32 Selected=FMath::Clamp(static_cast<int32>(Instance->CurrentSave->GetNumberSetting(TEXT("SelectedVoicePack"),0)),0,6);
+                VoicePack=FName(SourcePacks[Selected]);
+                Instance->CurrentSave->SetStringSetting(TEXT("VoicePack"),VoicePack.ToString());
+            }
             BeatContext.ActiveModifiers.Reset();
             if (Instance->CurrentSave->HasSetting(TEXT("EnabledModifiers")) && Instance->ProgressionManager) {
                 for (const FName ModifierID:Instance->ProgressionManager->EnabledModifiers) BeatContext.ActiveModifiers.Add(ModifierID.ToString());
@@ -325,6 +364,13 @@ bool ARecoveredGlobalManager::CreateMainMenuUI() {
 }
 
 bool ARecoveredGlobalManager::ReturnToMainMenu() {
+    PendingRecoveredLoadoutJson.Reset();
+    StopRecoveredModes();
+    if (SuccuEconomy) SuccuEconomy->ResetRun();
+    if (NewerItemEffects) {
+        LootBarMultiplier=FMath::Max(0.0,LootBarMultiplier-NewerItemEffects->LootRushBonus);
+        NewerItemEffects=nullptr;
+    }
     // Full session teardown before returning: stop playback, clear every
     // session timer, unbind every session delegate, remove session widgets,
     // then rebuild the main menu. Without this, looping timers and stale
@@ -380,6 +426,8 @@ bool ARecoveredGlobalManager::ReturnToMainMenu() {
     bRecoveredSessionFinalized = false;
     bRecoveredSessionCompletionStatsPersisted = false;
     SessionStats = FRecoveredSessionStats();
+    CurrentSessionObjective = 0;
+    ResetRecoveredObjectiveRuntime();
     PlayerVariables = FRecoveredPlayerVariables();
     BeatContext = FRecoveredBeatContext();
     HeatLevel = 10.0;
@@ -414,14 +462,23 @@ bool ARecoveredGlobalManager::InitializeRecoveredSession() {
     auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
     if (!Instance || !Instance->CurrentSave) { LastSessionError=TEXT("Recovered session requires a valid isolated save"); return false; }
     URecoveredSaveGame* Save=Instance->CurrentSave;
+    InitializeRecoveredClassicObjective();
     InitializeDifficultyVariables(static_cast<uint8>(Save->GetNumberSetting(TEXT("EdgePacingMultiplierEnum"),0)),static_cast<uint8>(Save->GetNumberSetting(TEXT("StrokeMultiplierEnum"),0)));
     BindRecoveredBrainMelterInterval();
     UpdateMinimumBeatInterval(Instance->DeviceManager ? Instance->DeviceManager->GetGameplayDeviceState() : FRecoveredDeviceState());
     BeatContext.ActiveModifiers=Save->GetStringArraySetting(TEXT("ActiveModifiers"));
     Rules=LoadObject<URecoveredRulesAsset>(nullptr,TEXT("/Game/Recovery/Definitions/DA_GameRules.DA_GameRules"));
-    HeatCategoryDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_HeatCategories.DT_HeatCategories"));
+    HeatCategoryDataTable=LoadObject<UDataTable>(nullptr,IsRecoveredNewerProgressionEnabled() ? TEXT("/Game/Recovery/Newer20261017/Progression/DT_HeatCategories.DT_HeatCategories") : TEXT("/Game/Recovery/Progression/DT_HeatCategories.DT_HeatCategories"));
     if (!Rules || !HeatCategoryDataTable) { LastSessionError=TEXT("Recovered session rule assets are missing"); return false; }
     if (!LoadMediaPack(MediaManifestPath,Save->GetStringArraySetting(TEXT("ExcludedTags")))) return false;
+    TStrongObjectPtr<URecoveredNewerInventory> PreparedLoadout;
+    if (IsRecoveredNewerProgressionEnabled() && !PendingRecoveredLoadoutJson.IsEmpty()) {
+        PreparedLoadout.Reset(NewObject<URecoveredNewerInventory>(Instance));
+        if (!PreparedLoadout->ImportRecoveryState(PendingRecoveredLoadoutJson)) {
+            LastSessionError=TEXT("The selected fresh loadout is invalid; the active inventory was left unchanged");
+            return false;
+        }
+    }
     APlayerController* Controller=UGameplayStatics::GetPlayerController(this,0);
     UClass* ScreenClass=LoadClass<UUserWidget>(nullptr,TEXT("/Game/Recovery/UI/UI_Manager.UI_Manager_C"));
     if (!Controller || !ScreenClass) { LastSessionError=TEXT("Recovered gameplay screen or controller is unavailable"); return false; }
@@ -438,6 +495,16 @@ bool ARecoveredGlobalManager::InitializeRecoveredSession() {
     }
     EdgingManager->SetRecoveredGlobalManager(this);
     if (Instance->ChallengeTracker) Instance->ChallengeTracker->StartNewSession();
+    if (SuccuEconomy) SuccuEconomy->Initialize(this);
+    if (IsRecoveredNewerProgressionEnabled()) {
+        RecoveredNewerInventoryAdapter::Initialize(*this);
+        RecoveredNewerInventoryAdapter::ResetForFreshRun(*this);
+        if (PreparedLoadout.IsValid()) {
+            Instance->NewerInventory=PreparedLoadout.Get();
+            PendingRecoveredLoadoutJson.Reset();
+        }
+        RecoveredNewerInventoryAdapter::Initialize(*this);
+    }
     ApplySavedCalibrationToTimeline();
     BeatTimeline->OnBeatFired.AddUniqueDynamic(this,&ARecoveredGlobalManager::PresentRecoveredBeat);
     BeatTimeline->OnBeatFired.AddUniqueDynamic(this,&ARecoveredGlobalManager::HandleRecoveredDeviceBeat);

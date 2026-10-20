@@ -7,6 +7,7 @@
 #include "Serialization/JsonSerializer.h"
 #include "Misc/SecureHash.h"
 #include "RecoveredNewerInventory.h"
+#include "RecoveredProgressionResources.h"
 
 namespace {
 const FString RecoverySlot=TEXT("CockHeroRecovered_Standalone_v1");
@@ -53,10 +54,18 @@ bool BuildRecoveredRuntimeState(
     }
 
     auto* Progression=NewObject<URecoveredProgressionManager>(Instance);
-    Progression->LevelDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_LevelData.DT_LevelData"));
-    Progression->PlayerCardDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_PlayerCards.DT_PlayerCards"));
-    Progression->ModifierDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_Modifiers.DT_Modifiers"));
-    Progression->ChallengeDataTable=LoadObject<UDataTable>(nullptr,TEXT("/Game/Recovery/Progression/DT_Challenges.DT_Challenges"));
+    const FString ProgressionRoot=IsRecoveredNewerProgressionEnabled() ? TEXT("/Game/Recovery/Newer20261017/Progression/") : TEXT("/Game/Recovery/Progression/");
+    auto LoadProgressionTable=[&ProgressionRoot](const TCHAR* Name) {
+        return LoadObject<UDataTable>(nullptr,*(ProgressionRoot+Name+TEXT(".")+Name));
+    };
+    Progression->LevelDataTable=LoadProgressionTable(TEXT("DT_LevelData"));
+    Progression->PlayerCardDataTable=LoadProgressionTable(TEXT("DT_PlayerCards"));
+    Progression->ModifierDataTable=LoadProgressionTable(TEXT("DT_Modifiers"));
+    Progression->ChallengeDataTable=LoadProgressionTable(TEXT("DT_Challenges"));
+    if (!Progression->LevelDataTable || !Progression->PlayerCardDataTable || !Progression->ModifierDataTable || !Progression->ChallengeDataTable) {
+        OutError=TEXT("Selected recovery progression catalog is unavailable; restore its versioned assets before loading this profile");
+        return false;
+    }
 
     const bool bHasProgressionState=Save->HasSetting(TEXT("RecoveryProgressionState"));
     const FString ProgressionState=Save->GetStringSetting(TEXT("RecoveryProgressionState"),TEXT(""));
@@ -371,7 +380,11 @@ FText URecoveredSaveGame::GetTextSetting(const FString& Name,const FText& Fallba
     const TSharedPtr<FJsonObject>* Fields=nullptr;
     if (!Value->TryGetObject(Fields) || !Fields || !(*Fields)->TryGetStringField(TEXT("text"),Text)) return Fallback;
     FString Namespace,Key;
-    if ((*Fields)->TryGetStringField(TEXT("namespace"),Namespace) && (*Fields)->TryGetStringField(TEXT("key"),Key)) return FText::ChangeKey(Namespace,Key,FText::FromString(Text));
+    if ((*Fields)->TryGetStringField(TEXT("namespace"),Namespace) && (*Fields)->TryGetStringField(TEXT("key"),Key)) {
+        const FString Serialized=FString::Printf(TEXT("NSLOCTEXT(\"%s\",\"%s\",\"%s\")"),*Namespace.ReplaceCharWithEscapedChar(),*Key.ReplaceCharWithEscapedChar(),*Text.ReplaceCharWithEscapedChar());
+        FText Localized;
+        if (FTextStringHelper::ReadFromBuffer(*Serialized,Localized)) return Localized;
+    }
     return FText::FromString(Text);
 }
 

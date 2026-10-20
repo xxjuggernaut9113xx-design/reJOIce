@@ -10,6 +10,8 @@
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
 #include "RecoveredRules.h"
+#include "RecoveredProgressionResources.h"
+#include "RecoveredDialogueAudio.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
 #include "Sound/SoundBase.h"
@@ -194,9 +196,11 @@ void URecoveredVoiceSettings::BindSourceEvents(bool bBind) {
 
 bool URecoveredVoiceSettings::LoadRecoveredVoicePackCatalog() {
     FString Json;
-    const FString ContentCatalog=FPaths::ProjectContentDir()/VoicePackCatalogRelativePath;
+    const bool bNewer=IsRecoveredNewerProgressionEnabled();
+    const int32 ExpectedCount=bNewer ? 7 : 4;
+    const FString ContentCatalog=FPaths::ProjectContentDir()/(bNewer ? TEXT("Recovery/Definitions/newer-20261017-voice-pack-catalog.json") : VoicePackCatalogRelativePath);
     const FString EvidenceCatalog=FPaths::ProjectDir()/VoicePackEvidenceCatalogRelativePath;
-    if (!FFileHelper::LoadFileToString(Json,*ContentCatalog) && !FFileHelper::LoadFileToString(Json,*EvidenceCatalog)) {
+    if (!FFileHelper::LoadFileToString(Json,*ContentCatalog) && (bNewer || !FFileHelper::LoadFileToString(Json,*EvidenceCatalog))) {
         LastVoiceError=TEXT("Voice-pack catalog unavailable");
         return false;
     }
@@ -206,7 +210,7 @@ bool URecoveredVoiceSettings::LoadRecoveredVoicePackCatalog() {
         return false;
     }
     const TArray<TSharedPtr<FJsonValue>>* Records=nullptr;
-    if (!Root->TryGetArrayField(TEXT("packs"),Records) || !Records || Records->Num()!=4) {
+    if (!Root->TryGetArrayField(TEXT("packs"),Records) || !Records || Records->Num()!=ExpectedCount) {
         LastVoiceError=TEXT("Voice-pack catalog incomplete");
         return false;
     }
@@ -225,7 +229,7 @@ bool URecoveredVoiceSettings::LoadRecoveredVoicePackCatalog() {
             || !ReadVoiceString(Record,TEXT("sample_2_asset_path"),Sample2Path)
             || !ReadVoiceString(Record,TEXT("sample_3_asset_path"),Sample3Path)
             || !ReadVoiceString(Record,TEXT("selection_line_asset_path"),SelectionLinePath)
-            || VoicePackValue<0 || VoicePackValue>3) {
+            || VoicePackValue<0 || VoicePackValue>=ExpectedCount) {
             LastVoiceError=TEXT("Voice-pack catalog record invalid");
             return false;
         }
@@ -242,8 +246,8 @@ bool URecoveredVoiceSettings::LoadRecoveredVoicePackCatalog() {
         Definition.SelectionLine=LoadVoiceSound(Definition.SelectionLineAssetPath);
         Parsed.Add(MoveTemp(Definition));
     }
-    static const TCHAR* const SourceOrder[]={TEXT("Villainess"),TEXT("Teasing Brat"),TEXT("Dommy Mommy"),TEXT("Sweetheart")};
-    for (int32 Index=0;Index<UE_ARRAY_COUNT(SourceOrder);++Index) {
+    static const TCHAR* const SourceOrder[]={TEXT("Villainess"),TEXT("Teasing Brat"),TEXT("Dommy Mommy"),TEXT("Sweetheart"),TEXT("Yandere"),TEXT("Chariot (Mini)"),TEXT("Pepper (Mini)")};
+    for (int32 Index=0;Index<ExpectedCount;++Index) {
         if (Parsed[Index].DisplayName.ToString()!=SourceOrder[Index] || Parsed[Index].VoicePackEnum!=Index) {
             LastVoiceError=TEXT("Voice-pack source order invalid");
             return false;
@@ -257,9 +261,9 @@ bool URecoveredVoiceSettings::LoadRecoveredVoicePackCatalog() {
 void URecoveredVoiceSettings::InitDefaultsFromSaveGame() {
     const auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
     const int32 SavedVoicePack=Instance && Instance->CurrentSave
-        ? FMath::Clamp(FMath::RoundToInt(Instance->CurrentSave->GetNumberSetting(SelectedVoicePackKey,0)),0,3)
+        ? FMath::Clamp(FMath::RoundToInt(Instance->CurrentSave->GetNumberSetting(SelectedVoicePackKey,0)),0,IsRecoveredNewerProgressionEnabled() ? 6 : 3)
         : 0;
-    static const TCHAR* const PackNames[]={TEXT("Villainess"),TEXT("Teasing Brat"),TEXT("Dommy Mommy"),TEXT("Sweetheart")};
+    static const TCHAR* const PackNames[]={TEXT("Villainess"),TEXT("Teasing Brat"),TEXT("Dommy Mommy"),TEXT("Sweetheart"),TEXT("Yandere"),TEXT("Chariot (Mini)"),TEXT("Pepper (Mini)")};
     EquippedPack=FText::FromString(PackNames[SavedVoicePack]);
 }
 
@@ -364,6 +368,13 @@ void URecoveredVoiceSettings::EquipSelectedPack() {
     if (auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance())) {
         if (Instance->CurrentSave) {
             Instance->CurrentSave->SetNumberSetting(SelectedVoicePackKey,VoicePackEnum);
+            if (IsRecoveredNewerProgressionEnabled()) {
+                const FString Canonical=GetRecoveredCanonicalVoicePack(SelectedPack.ToString());
+                if (!Canonical.IsEmpty()) {
+                    Instance->CurrentSave->SetStringSetting(TEXT("VoicePack"),Canonical);
+                    if (auto* Manager=Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this))) Manager->VoicePack=FName(*Canonical);
+                }
+            }
             Instance->SaveRecoveredState();
         }
     }

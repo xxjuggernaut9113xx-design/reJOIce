@@ -11,6 +11,7 @@
 #include "Engine/World.h"
 #include "Kismet/GameplayStatics.h"
 #include "Misc/AutomationTest.h"
+#include "Misc/ConfigCacheIni.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
 #include "Misc/ScopeExit.h"
@@ -59,6 +60,13 @@ URecoveredVoicePackEntryWidget* FindVoiceEntry(UScrollBox* Scrollbox,const TCHAR
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredVoiceSettingsTest,"CockHero.Recovery.VoicelineSettings",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
 bool FRecoveredVoiceSettingsTest::RunTest(const FString& Parameters) {
+    bool PreviousNewer=false;
+    const bool HadNewer=GConfig->GetBool(TEXT("Recovery.Content"),TEXT("UseNewerProgression"),PreviousNewer,GGameIni);
+    GConfig->SetBool(TEXT("Recovery.Content"),TEXT("UseNewerProgression"),false,GGameIni);
+    ON_SCOPE_EXIT {
+        if (HadNewer) GConfig->SetBool(TEXT("Recovery.Content"),TEXT("UseNewerProgression"),PreviousNewer,GGameIni);
+        else GConfig->RemoveKey(TEXT("Recovery.Content"),TEXT("UseNewerProgression"),GGameIni);
+    };
     TSharedPtr<FJsonObject> Evidence,Catalog;
     if (!LoadVoiceJson(TEXT("RecoveryEvidence/voice-pack-recovery.json"),Evidence)
         || !LoadVoiceJson(TEXT("RecoveryEvidence/voice-pack-catalog.json"),Catalog)) {

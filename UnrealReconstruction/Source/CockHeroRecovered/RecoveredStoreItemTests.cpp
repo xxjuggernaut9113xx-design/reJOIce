@@ -1,6 +1,7 @@
 #if WITH_DEV_AUTOMATION_TESTS && WITH_EDITOR
 #include "RecoveredStoreItem.h"
 #include "RecoveredRules.h"
+#include "UObject/Package.h"
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
 #include "Engine/Engine.h"

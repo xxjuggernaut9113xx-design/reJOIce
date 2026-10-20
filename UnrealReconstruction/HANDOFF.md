@@ -1,4 +1,50 @@
-# Current handoff — 2026-10-18
+# Current handoff — 2026-10-20
+
+The active repository is now `E:\reJOIce`; the project is
+`E:\reJOIce\UnrealReconstruction\CockHeroRecovered.uproject`.
+The D: project copy was retired after a 27,917-file comparison with zero
+differences and a successful Git connectivity check. Thirteen duplicate,
+permission-protected audit files remain on D:. No compatibility junction exists.
+The engine remains installed at `D:\Program Files\Epic Games\UE_5.3`.
+
+The October 20 full Editor and Windows Game builds passed. The integrated suite
+then passed **115 tests**, with zero warnings, failures, or skipped tests and exit
+code zero. The versioned report is
+`RecoveryEvidence/integrated-20261020-automation.json`. Subsequent panel-height
+and completion-caption corrections were compiled and linked for Game and
+verified in the packaged GUI;
+the optional follow-up Editor PCH compile was interrupted after Game linking.
+The Editor binary therefore predates those presentation changes and the added
+caption smoke assertion. The final Game build passed with exit code zero.
+
+On October 20, all seven Python content-contract tests and packaging preflight
+passed. Preflight verifies five runtime tables, 146 artwork assets, seven voice
+packs, 28 preview/selection assets, and 8,350 exact encoded dialogue streams.
+The catalog has 8,398 rows: 48 source references are absent from the original
+container and are not replaced with invented audio.
+
+Windows build/cook/archive completed with exit code zero. All 5,741 packages
+cooked; the cook summary reported zero errors and warnings. Final restaging also
+passed. Launch `E:\reJOIceRecoveryPackage\Archive\Windows\CockHeroRecovered.exe`.
+The packaged integrated GUI smoke passed three times. The final run verified Classic
+Enter input, Tower draft-to-round navigation, live Playlist audio, Space draw
+suppression in Playlist, unlock-store navigation, and an isolated profile disk
+round trip. Its test slots were deleted without changing the profile index.
+The final Classic capture shows all five inventory lines within the viewport.
+All 179 newer assets are present in IoStore; the pak contains all 8,350 streams.
+
+See `RecoveryEvidence/integrated-20261020-delivery.json` for package hashes,
+checks, exact scope, and remaining limitations. Complete build, test and GUI
+logs, IoStore inventory, and screenshots are in
+`RecoveryEvidence/packaged-20261020/`. External media is still required. Original
+runtime parity, physical devices, and clean-machine validation remain unverified.
+The completion button now explicitly displays `Finish: Enter`, verified by a
+packaged smoke assertion and visual inspection. E performs the edge action.
+Optional editor-only sound/CoreStyle/cloud lookup and
+movie-scene cleanup warnings remain in the packaged log.
+
+The sections below retain the October 18 checkpoint and historical limits.
+Where they conflict, this October 20 continuation takes precedence.
 
 Latest continuation: editor build passed and **92 recovery tests passed**, with
 zero warnings, failures, or skipped tests. Report created locally at

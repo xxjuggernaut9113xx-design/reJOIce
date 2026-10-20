@@ -5,6 +5,7 @@
 #include "Components/ScaleBox.h"
 #include "Components/TextBlock.h"
 #include "Misc/AutomationTest.h"
+#include "UObject/Package.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredSessionControlTest,"CockHero.Recovery.SessionControlHotkeys",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)

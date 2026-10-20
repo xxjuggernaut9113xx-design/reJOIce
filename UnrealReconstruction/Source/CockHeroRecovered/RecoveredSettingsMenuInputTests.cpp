@@ -1,4 +1,5 @@
 #include "RecoveredSessionWidget.h"
+#include "UObject/Package.h"
 #include "Components/Border.h"
 #include "Components/Button.h"
 #include "Dom/JsonObject.h"

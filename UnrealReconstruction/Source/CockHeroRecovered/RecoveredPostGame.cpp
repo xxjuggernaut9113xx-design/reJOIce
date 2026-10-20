@@ -1,4 +1,6 @@
 #include "RecoveredRules.h"
+#include "RecoveredDialogueAudio.h"
+#include "RecoveredProgressionResources.h"
 #include "RecoveredRewards.h"
 #include "RecoveredProgression.h"
 #include "RecoveredPostGameWidgets.h"
@@ -613,6 +615,20 @@ FName ARecoveredGlobalManager::GetVoicePack() const {
 
 void ARecoveredGlobalManager::PlayDialogueLine(FName LineID) {
     if (!GetWorld()) return;
+    if (IsRecoveredNewerProgressionEnabled()) {
+        FString Pronoun=TEXT("Male");
+        if (const auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance())) {
+            if (Instance->CurrentSave) {
+                if (!Instance->CurrentSave->GetBoolSetting(TEXT("bVoiceLinesEnabled?"),true)) return;
+                const int32 Selection=FMath::Clamp(FMath::RoundToInt(Instance->CurrentSave->GetNumberSetting(TEXT("PlayerPronounSelection"),0)),0,2);
+                Pronoun=GetRecoveredDialoguePronoun(Selection);
+            }
+        }
+        if (USoundBase* Sound=SelectRecoveredSourceDialogue(VoicePack.ToString(),LineID.ToString(),Pronoun)) {
+            UGameplayStatics::PlaySound2D(this,Sound,GetRecoveredVolume(TEXT("VoicelinesVolume"),0.8f));
+        }
+        return;
+    }
     // Voice-pack routing: pack ID selects the dialogue variant subdirectory.
     const FString PackPath = FString::Printf(TEXT("/Game/Recovery/Resources/Audio/Dialogue/%s/%s.%s"),
         *VoicePack.ToString(), *LineID.ToString(), *LineID.ToString());

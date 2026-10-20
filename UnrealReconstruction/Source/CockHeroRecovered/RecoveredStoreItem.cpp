@@ -1,7 +1,10 @@
 #include "RecoveredStoreItem.h"
 #include "RecoveredRules.h"
+#include "RecoveredNewerInventoryAdapter.h"
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
+#include "Components/HorizontalBox.h"
+#include "Blueprint/WidgetTree.h"
 #include "EngineUtils.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -55,12 +58,35 @@ void URecoveredStoreItemWidget::BindControls(bool bBind) {
     BIND_CLICK("BuyButton",OnBuyClicked)
     BIND_CLICK("UpgradeButton",OnUpgradeClicked)
     BIND_CLICK("UseButton",OnUseClicked)
+    BIND_CLICK("EquipButton",OnEquipClicked)
     BIND_HOVER("BuyButton",OnBuyHovered,OnHovered)
     BIND_HOVER("BuyButton",OnBuyUnhovered,OnUnhovered)
     BIND_HOVER("UpgradeButton",OnUpgradeHovered,OnHovered)
     BIND_HOVER("UpgradeButton",OnUpgradeUnhovered,OnUnhovered)
 #undef BIND_HOVER
 #undef BIND_CLICK
+}
+
+TSharedRef<SWidget> URecoveredStoreItemWidget::RebuildWidget() {
+    if (WidgetTree && !WidgetTree->RootWidget) {
+        auto* Row=WidgetTree->ConstructWidget<UHorizontalBox>(UHorizontalBox::StaticClass());
+        WidgetTree->RootWidget=Row;
+        for (const TCHAR* Name:{TEXT("TextBlock_92"),TEXT("EffectDescription_1"),TEXT("EffectDescription")}) {
+            auto* Label=WidgetTree->ConstructWidget<UTextBlock>(UTextBlock::StaticClass(),FName(Name));
+            Label->SetAutoWrapText(true);
+            Row->AddChild(Label);
+        }
+        const TCHAR* Names[]={TEXT("BuyButton"),TEXT("UpgradeButton"),TEXT("UseButton"),TEXT("EquipButton")};
+        const TCHAR* Labels[]={TEXT("Buy"),TEXT("Upgrade"),TEXT("Use"),TEXT("Equip")};
+        for (int32 Index=0;Index<4;++Index) {
+            auto* Button=WidgetTree->ConstructWidget<UButton>(UButton::StaticClass(),FName(Names[Index]));
+            auto* Text=WidgetTree->ConstructWidget<UTextBlock>(UTextBlock::StaticClass(),Index==0 ? FName(TEXT("TextBlock_371")) : Index==1 ? FName(TEXT("TextBlock_506")) : NAME_None);
+            Text->SetText(FText::FromString(Labels[Index]));
+            Button->AddChild(Text);
+            Row->AddChild(Button);
+        }
+    }
+    return Super::RebuildWidget();
 }
 
 void URecoveredStoreItemWidget::NativeConstruct() {
@@ -82,6 +108,9 @@ FString URecoveredStoreItemWidget::LevelSettingName() const {
 }
 
 int32 URecoveredStoreItemWidget::ReadLevelFromSave() const {
+    if (const auto* Manager=GetRecoveredStoreManager(this)) {
+        if (RecoveredNewerInventoryAdapter::GetInventory(*Manager)) return Manager->GetRecoveredItemUpgradeLevel(ItemID);
+    }
     const auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance());
     return Instance && Instance->CurrentSave ? static_cast<int32>(Instance->CurrentSave->GetNumberSetting(LevelSettingName(),0)) : 0;
 }
@@ -113,10 +142,18 @@ void URecoveredStoreItemWidget::PlaySourceAnimation(FName Name) {
 }
 
 int32 URecoveredStoreItemWidget::GetBuyAmount() const {
+    if (const auto* Manager=GetRecoveredStoreManager(this)) {
+        int32 Buy=0,Upgrade=0;
+        if (RecoveredNewerInventoryAdapter::GetInventory(*Manager) && RecoveredNewerInventoryAdapter::GetPricing(ItemID,CurrentLevel,Buy,Upgrade)) return Buy;
+    }
     return GetRecoveredStorePricing(ItemID,CurrentLevel).PurchaseCost;
 }
 
 int32 URecoveredStoreItemWidget::GetUpgradeAmount() const {
+    if (const auto* Manager=GetRecoveredStoreManager(this)) {
+        int32 Buy=0,Upgrade=0;
+        if (RecoveredNewerInventoryAdapter::GetInventory(*Manager) && RecoveredNewerInventoryAdapter::GetPricing(ItemID,CurrentLevel,Buy,Upgrade)) return Upgrade;
+    }
     return GetRecoveredStorePricing(ItemID,CurrentLevel).UpgradeCost;
 }
 
@@ -131,13 +168,18 @@ FText URecoveredStoreItemWidget::GetUpgradeText() const {
 
 FText URecoveredStoreItemWidget::GetLevelText() const {
     int32 Level=CurrentLevel;
-    if (ItemID==TEXT("Resupply")) {
+    const auto* SourceManager=GetRecoveredStoreManager(this);
+    if (ItemID==TEXT("Resupply") && (!SourceManager || !RecoveredNewerInventoryAdapter::GetInventory(*SourceManager))) {
         if (const auto* Manager=GetRecoveredStoreManager(this)) Level=Manager->GetRecoveredItemUpgradeLevel(TEXT("BonerPill"));
     }
     return FText::FromString(FString::Printf(TEXT("Level %d"),FMath::Clamp(Level,0,4)+1));
 }
 
 FText URecoveredStoreItemWidget::GetTitleText() const {
+    if (const auto* Manager=GetRecoveredStoreManager(this)) if (RecoveredNewerInventoryAdapter::GetInventory(*Manager)) {
+        FString Title,Description;
+        if (RecoveredNewerInventoryAdapter::GetPresentation(ItemID,CurrentLevel,Title,Description)) return FText::FromString(Title);
+    }
     const int32 Level=FMath::Clamp(CurrentLevel,0,4);
     if (ItemID==TEXT("XCumChance")) {
         static constexpr int32 Amounts[]={5,8,12,18,35};
@@ -153,10 +195,19 @@ FText URecoveredStoreItemWidget::GetTitleText() const {
     if (ItemID==TEXT("Edge")) return FText::FromString(TEXT("Edge"));
     if (ItemID==TEXT("Resupply")) return FText::FromString(TEXT("resupply"));
     if (ItemID==TEXT("Slowdown")) return FText::FromString(TEXT("Slowdown"));
+    if (ItemID==TEXT("ApexLure")) return FText::FromString(TEXT("Apex Lure"));
+    if (ItemID==TEXT("LootRush")) return FText::FromString(TEXT("Loot Rush"));
+    if (ItemID==TEXT("Bounty")) return FText::FromString(TEXT("Bounty"));
+    if (ItemID==TEXT("EscapeRope")) return FText::FromString(TEXT("Escape Rope"));
+    if (ItemID==TEXT("ComboCruncher")) return FText::FromString(TEXT("Combo Cruncher"));
     return FText::GetEmpty();
 }
 
 FText URecoveredStoreItemWidget::GetEffectDescription() const {
+    if (const auto* Manager=GetRecoveredStoreManager(this)) if (RecoveredNewerInventoryAdapter::GetInventory(*Manager)) {
+        FString Title,Description;
+        if (RecoveredNewerInventoryAdapter::GetPresentation(ItemID,CurrentLevel,Title,Description)) return FText::FromString(Description);
+    }
     const int32 Level=FMath::Clamp(CurrentLevel,0,4);
     if (ItemID==TEXT("XCumChance")) {
         static constexpr int32 Amounts[]={5,8,12,18,35};
@@ -194,6 +245,9 @@ void URecoveredStoreItemWidget::RefreshPrices() {
     const FRecoveredStorePricing& Pricing=GetRecoveredStorePricing(ItemID,CurrentLevel);
     PurchaseCost=Pricing.PurchaseCost;
     UpgradeCost=Pricing.UpgradeCost;
+    if (const auto* Manager=GetRecoveredStoreManager(this)) {
+        if (RecoveredNewerInventoryAdapter::GetInventory(*Manager)) RecoveredNewerInventoryAdapter::GetPricing(ItemID,CurrentLevel,PurchaseCost,UpgradeCost);
+    }
     SetSourceText(TEXT("TextBlock_371"),GetBuyText());
     SetSourceText(TEXT("TextBlock_506"),GetUpgradeText());
     SetSourceText(TEXT("EffectDescription"),GetEffectDescription());
@@ -205,14 +259,33 @@ bool URecoveredStoreItemWidget::TryBuy() {
     EnsureItemID();
     RefreshPrices();
     auto* Manager=GetRecoveredStoreManager(this);
+    if (Manager) {
+        if (auto* Inventory=RecoveredNewerInventoryAdapter::GetInventory(*Manager)) {
+            ERecoveredShopItemType Type;
+            if (!RecoveredNewerInventoryAdapter::ResolveType(ItemID,Type)) {
+                PlaySourceAnimation(TEXT("BuyClickFailure"));
+                return false;
+            }
+        }
+    }
     const bool bAtMaximum=Manager && Manager->GetRecoveredItemMaximum(ItemID)>0 && Manager->GetOwnedItemCount(ItemID)>=Manager->GetRecoveredItemMaximum(ItemID);
-    if (!Manager || bAtMaximum || PurchaseCost<=0 || Manager->PlayerVariables.PlayerCoins<PurchaseCost) {
+    int32 VerifiedBuy=0,VerifiedUpgrade=0;
+    const bool bVerifiedFreePurchase=Manager && RecoveredNewerInventoryAdapter::GetInventory(*Manager) && RecoveredNewerInventoryAdapter::GetPricing(ItemID,CurrentLevel,VerifiedBuy,VerifiedUpgrade) && VerifiedBuy==0;
+    if (!Manager || bAtMaximum || PurchaseCost<0 || (PurchaseCost==0 && !bVerifiedFreePurchase) || Manager->PlayerVariables.PlayerCoins<PurchaseCost) {
         PlaySourceAnimation(TEXT("BuyClickFailure"));
         return false;
     }
     Manager->PlayerVariables.PlayerCoins-=PurchaseCost;
     Manager->AddToPointsSpent(PurchaseCost);
+    if (auto* Inventory=RecoveredNewerInventoryAdapter::GetInventory(*Manager)) {
+        ERecoveredShopItemType Type;
+        if (RecoveredNewerInventoryAdapter::ResolveType(ItemID,Type)) {
+            const auto* State=Inventory->OwnedItems.Find(Type);
+            if (!State || !State->bIsUnlocked) Inventory->UnlockItem(Type);
+        }
+    }
     Manager->AcquireStoreItem(ItemID);
+    RecoveredNewerInventoryAdapter::Persist(*Manager);
     RefreshPrices();
     PlaySourceAnimation(TEXT("BuyClickSuccessful"));
     return true;
@@ -229,6 +302,15 @@ bool URecoveredStoreItemWidget::TryUpgrade() {
     EnsureItemID();
     RefreshPrices();
     auto* Manager=GetRecoveredStoreManager(this);
+    if (Manager) if (auto* Inventory=RecoveredNewerInventoryAdapter::GetInventory(*Manager)) {
+        ERecoveredShopItemType Type;
+        const bool Known=RecoveredNewerInventoryAdapter::ResolveType(ItemID,Type);
+        const auto* State=Known ? Inventory->OwnedItems.Find(Type) : nullptr;
+        if (!State || !State->bIsUnlocked) {
+            PlaySourceAnimation(TEXT("UpgradeClickFailure"));
+            return false;
+        }
+    }
     if (!Manager || CurrentLevel>=MaxLevel || UpgradeCost<=0 || Manager->PlayerVariables.PlayerCoins<UpgradeCost) {
         PlaySourceAnimation(TEXT("UpgradeClickFailure"));
         return false;
@@ -246,6 +328,31 @@ bool URecoveredStoreItemWidget::TryUpgrade() {
 void URecoveredStoreItemWidget::OnBuyClicked() { TryBuy(); }
 void URecoveredStoreItemWidget::OnUpgradeClicked() { TryUpgrade(); }
 void URecoveredStoreItemWidget::OnUseClicked() { TryUse(); }
+bool URecoveredStoreItemWidget::TryEquip(int32 SlotIndex) {
+    auto* Manager=GetRecoveredStoreManager(this);
+    if (!Manager) return false;
+    auto* Inventory=RecoveredNewerInventoryAdapter::GetInventory(*Manager);
+    ERecoveredShopItemType Type;
+    if (!Inventory || SlotIndex<0 || SlotIndex>=5 || !RecoveredNewerInventoryAdapter::ResolveType(ItemID,Type) || !Inventory->EquipToSlot(Type,SlotIndex)) return false;
+    RecoveredNewerInventoryAdapter::Persist(*Manager);
+    return true;
+}
+bool URecoveredStoreItemWidget::TryUnequip(int32 SlotIndex) {
+    auto* Manager=GetRecoveredStoreManager(this);
+    if (!Manager) return false;
+    auto* Inventory=RecoveredNewerInventoryAdapter::GetInventory(*Manager);
+    if (!Inventory || SlotIndex<0 || SlotIndex>=5 || !Inventory->UnEquipSlot(SlotIndex)) return false;
+    RecoveredNewerInventoryAdapter::Persist(*Manager);
+    return true;
+}
+void URecoveredStoreItemWidget::OnEquipClicked() {
+    if (auto* Manager=GetRecoveredStoreManager(this)) {
+        if (auto* Inventory=RecoveredNewerInventoryAdapter::GetInventory(*Manager)) {
+            for (int32 Index=0;Index<Inventory->HotbarItems.Num();++Index) if (Inventory->HotbarItems[Index]==ERecoveredShopItemType::None) { TryEquip(Index); return; }
+            TryEquip(0);
+        }
+    }
+}
 void URecoveredStoreItemWidget::OnBuyHovered() { PlaySourceAnimation(TEXT("BuyHover")); }
 void URecoveredStoreItemWidget::OnBuyUnhovered() { PlaySourceAnimation(TEXT("BuyUnhover")); }
 void URecoveredStoreItemWidget::OnUpgradeHovered() { PlaySourceAnimation(TEXT("UpgradeHover")); }

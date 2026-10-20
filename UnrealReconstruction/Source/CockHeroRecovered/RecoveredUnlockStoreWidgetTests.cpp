@@ -23,7 +23,9 @@
 #include "RecoveredRules.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
+#if WITH_EDITOR
 #include "WidgetBlueprint.h"
+#endif
 #include "Widgets/SWidget.h"
 
 #if WITH_DEV_AUTOMATION_TESTS && WITH_EDITOR

@@ -96,7 +96,7 @@ void URecoveredMainMenu::BindNavigation(bool bBind) {
         if (bBind) Button->OnClicked.AddUniqueDynamic(this,&URecoveredMainMenu::Method); \
         else Button->OnClicked.RemoveDynamic(this,&URecoveredMainMenu::Method); \
     }
-    BIND_ROUTE("StartGameButton",OpenDifficulty)
+    BIND_ROUTE("StartGameButton",OpenModes)
     BIND_ROUTE("StatsButton",OpenChallenges)
     BIND_ROUTE("StatsDebugButton",OpenStatsDebug)
     BIND_ROUTE("Settings",OpenSettings)
@@ -203,6 +203,9 @@ void URecoveredMainMenu::OpenDifficulty() {
     }
     PlayRecoveredAnimation(TEXT("StartGameClick"));
     OpenScreen(TEXT("DifficultySelectScreen_Widget"));
+}
+void URecoveredMainMenu::OpenModes() {
+    if (auto* Manager = Cast<ARecoveredGlobalManager>(UGameplayStatics::GetGameMode(this))) Manager->OpenRecoveredModes();
 }
 void URecoveredMainMenu::OpenChallenges() {
     PlayRecoveredAnimation(TEXT("StatsClick"));

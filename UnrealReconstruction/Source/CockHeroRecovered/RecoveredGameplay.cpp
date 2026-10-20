@@ -92,11 +92,28 @@ int32* MetricField(FRecoveredSessionStats& Stats, ERecoveredMetric Metric) {
     case ERecoveredMetric::BonerPillsUsed: return &Stats.BonerPillsUsed;
     case ERecoveredMetric::AcceptedTemptation: return &Stats.AcceptedTemptation;
     case ERecoveredMetric::CameDuringTaunt: return &Stats.CameDuringTaunt;
+    case ERecoveredMetric::DefensiveItemsUsed: return &Stats.DefensiveItemsUsed;
+    case ERecoveredMetric::OffensiveItemsUsed: return &Stats.OffensiveItemsUsed;
+    case ERecoveredMetric::DeclinedTemptation: return &Stats.DeclinedTemptation;
+    case ERecoveredMetric::BountiesCollected: return &Stats.BountiesCollected;
+    case ERecoveredMetric::LootRushesUsed: return &Stats.LootRushesUsed;
+    case ERecoveredMetric::EscapeRopesUsed: return &Stats.EscapeRopesUsed;
+    case ERecoveredMetric::MilkingCount: return &Stats.MilkingCount;
+    case ERecoveredMetric::SuccuSlayerSessionsWon: return &Stats.SuccuSlayerSessionsWon;
+    case ERecoveredMetric::EdgeSessionsWon: return &Stats.EdgeSessionsWon;
+    case ERecoveredMetric::ComboCrunchersUsed: return &Stats.ComboCrunchersUsed;
+    case ERecoveredMetric::SuccuCoinsSpent: return &Stats.SuccuCoinsSpent;
+    case ERecoveredMetric::SessionsWonAtMaxDifficulty: return &Stats.SessionsWonAtMaxDifficulty;
+    case ERecoveredMetric::BestMusicModeWinRounds: return &Stats.BestMusicModeWinRounds;
+    case ERecoveredMetric::BestTowerWinRounds: return &Stats.BestTowerWinRounds;
+    case ERecoveredMetric::MusicBreaksUsed: return &Stats.MusicBreaksUsed;
+    case ERecoveredMetric::DisabledBreakSectionFailures: return &Stats.DisabledBreakSectionFailures;
+    case ERecoveredMetric::BountyCollectionFailures: return &Stats.BountyCollectionFailures;
     default: return nullptr; // Matches native session switch; other metrics route through challenges.
     }
 }
 bool IsMaximumMetric(ERecoveredMetric Metric) {
-    return Metric == ERecoveredMetric::MaxCombo || Metric == ERecoveredMetric::EdgeStreak || Metric == ERecoveredMetric::ConsecutiveSuccubiSurvived;
+    return Metric == ERecoveredMetric::MaxCombo || Metric == ERecoveredMetric::EdgeStreak || Metric == ERecoveredMetric::ConsecutiveSuccubiSurvived || Metric == ERecoveredMetric::BestMusicModeWinRounds || Metric == ERecoveredMetric::BestTowerWinRounds;
 }
 }
 

@@ -7,7 +7,9 @@
 #include "Misc/Paths.h"
 #include "Serialization/JsonSerializer.h"
 #include "Sound/SoundBase.h"
+#if WITH_EDITOR
 #include "WidgetBlueprint.h"
+#endif
 
 #if WITH_DEV_AUTOMATION_TESTS && WITH_EDITOR
 namespace {

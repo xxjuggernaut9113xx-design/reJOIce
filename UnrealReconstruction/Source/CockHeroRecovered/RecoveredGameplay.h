@@ -35,6 +35,23 @@ enum class ERecoveredMetric : uint8 {
     BonerPillsUsed = 27,
     AcceptedTemptation = 28,
     CameDuringTaunt = 29,
+    DefensiveItemsUsed = 30,
+    OffensiveItemsUsed = 31,
+    DeclinedTemptation = 32,
+    BountiesCollected = 33,
+    LootRushesUsed = 34,
+    EscapeRopesUsed = 35,
+    MilkingCount = 36,
+    SuccuSlayerSessionsWon = 37,
+    EdgeSessionsWon = 38,
+    ComboCrunchersUsed = 39,
+    SuccuCoinsSpent = 40,
+    SessionsWonAtMaxDifficulty = 41,
+    BestMusicModeWinRounds = 42,
+    BestTowerWinRounds = 43,
+    MusicBreaksUsed = 44,
+    DisabledBreakSectionFailures = 45,
+    BountyCollectionFailures = 46,
 };
 
 USTRUCT(BlueprintType)
@@ -114,6 +131,23 @@ struct COCKHERORECOVERED_API FRecoveredSessionStats {
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 BonerPillsUsed = 0;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 AcceptedTemptation = 0;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 CameDuringTaunt = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 DefensiveItemsUsed = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 OffensiveItemsUsed = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 DeclinedTemptation = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 BountiesCollected = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 LootRushesUsed = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 EscapeRopesUsed = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 MilkingCount = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 SuccuSlayerSessionsWon = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 EdgeSessionsWon = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 ComboCrunchersUsed = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 SuccuCoinsSpent = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 SessionsWonAtMaxDifficulty = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 BestMusicModeWinRounds = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 BestTowerWinRounds = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 MusicBreaksUsed = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 DisabledBreakSectionFailures = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") int32 BountyCollectionFailures = 0;
 };
 
 USTRUCT(BlueprintType)

@@ -1,4 +1,7 @@
 #include "RecoveredRules.h"
+#include "RecoveredDialogueAudio.h"
+#include "RecoveredProgressionResources.h"
+#include "Sound/SoundBase.h"
 #include "DataTableUtils.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/GameplayStatics.h"
@@ -8,6 +11,11 @@
 #include "RecoveredChallengeTracker.h"
 #include "RecoveredMenu.h"
 #include "RecoveredFileImportManager.h"
+#include "RecoveredSuccuEconomy.h"
+#include "RecoveredNewerInventoryAdapter.h"
+#include "JsonObjectConverter.h"
+#include "Dom/JsonObject.h"
+#include "Serialization/JsonSerializer.h"
 
 void URecoveredGameInstance::Init() {
     Super::Init();
@@ -18,16 +26,74 @@ void URecoveredGameInstance::Init() {
 }
 
 void ARecoveredGlobalManager::SuccessfulCum() {
+    if (ActiveRecoveredMode==1 && TowerRuntime && (TowerRuntime->Phase==ERecoveredRoundPhase::Playing || TowerRuntime->Phase==ERecoveredRoundPhase::BossRound)) {
+        TowerRuntime->CompleteRound(true);
+        return;
+    }
+    if (ActiveRecoveredMode==2 && PlaylistRuntime) {
+        SessionStats.BestMusicModeWinRounds=FMath::Max(SessionStats.BestMusicModeWinRounds,PlaylistRuntime->CompletedRounds);
+        if (SessionStats.BestMusicModeWinRounds>0) OnMetricUpdateRequested.Broadcast(ERecoveredMetric::BestMusicModeWinRounds,SessionStats.BestMusicModeWinRounds);
+        StopRecoveredModes();
+    }
     LastOutcomeEffects=URecoveredOutcomeLibrary::ApplyOutcome(PlayerVariables,SessionStats,BeatContext.CardType,true,bHasTaunted,false);
+    if (CurrentDifficulty==ERecoveredDifficulty::InsaneMode) {
+        URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats,ERecoveredMetric::SessionsWonAtMaxDifficulty,1);
+        LastOutcomeEffects.MetricRequests.Add(ERecoveredMetric::SessionsWonAtMaxDifficulty);
+    }
+    if (CurrentSessionObjective==8 || CurrentSessionObjective==3) {
+        const auto ObjectiveMetric=CurrentSessionObjective==8 ? ERecoveredMetric::SuccuSlayerSessionsWon : ERecoveredMetric::EdgeSessionsWon;
+        URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats,ObjectiveMetric,1);
+        LastOutcomeEffects.MetricRequests.Add(ObjectiveMetric);
+    }
     for(const auto Metric:LastOutcomeEffects.MetricRequests) OnMetricUpdateRequested.Broadcast(Metric,1);
     OnOutcomeRequested.Broadcast(LastOutcomeEffects);
 }
 
 void ARecoveredGlobalManager::PrematureCum() {
+    if (ActiveRecoveredMode==1 && TowerRuntime && (TowerRuntime->Phase==ERecoveredRoundPhase::Playing || TowerRuntime->Phase==ERecoveredRoundPhase::BossRound)) {
+        TowerRuntime->CompleteRound(false);
+        return;
+    }
+    if (ActiveRecoveredMode==2) {
+        URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats,ERecoveredMetric::DisabledBreakSectionFailures,1);
+        OnMetricUpdateRequested.Broadcast(ERecoveredMetric::DisabledBreakSectionFailures,1);
+        SessionStats.BestMusicModeWinRounds=0;
+        StopRecoveredModes();
+    }
     const bool bIronManActive=BeatContext.ActiveModifiers.ContainsByPredicate([](const FString& Tag) { return Tag.Equals(TEXT("Iron Man"),ESearchCase::IgnoreCase); });
     LastOutcomeEffects=URecoveredOutcomeLibrary::ApplyOutcome(PlayerVariables,SessionStats,BeatContext.CardType,false,bHasTaunted,bIronManActive);
     for(const auto Metric:LastOutcomeEffects.MetricRequests) OnMetricUpdateRequested.Broadcast(Metric,1);
     OnOutcomeRequested.Broadcast(LastOutcomeEffects);
+}
+
+void ARecoveredGlobalManager::RecordRecoveredMilking() {
+    if (CurrentSessionObjective!=7 || PlayerVariables.bHasCame) return;
+    const bool Devil=BeatContext.ActiveModifiers.ContainsByPredicate([](const FString& Modifier) {
+        return Modifier.Equals(TEXT("Deal With The Devil"),ESearchCase::IgnoreCase);
+    });
+    if (Devil && BeatContext.CardType!=3) return;
+    URecoveredStateRuleLibrary::RecordSessionMetric(SessionStats,ERecoveredMetric::MilkingCount,1);
+    OnMetricUpdateRequested.Broadcast(ERecoveredMetric::MilkingCount,1);
+    if (ActiveRecoveredMode==1 && TowerRuntime && SessionStats.MilkingCount-TowerRuntime->BaselineMilking>=TowerRuntime->SelectedOption.ObjectiveParam) TowerRuntime->CompleteRound(true);
+    else if (ActiveRecoveredMode==0 && CurrentSessionObjective==7 && ClassicObjectiveRuntime.bActive && RecoveredObjectives::IsComplete(ClassicObjectiveRuntime,PlayerVariables,SessionStats,CumMeterPercentage)) SuccessfulCum();
+}
+
+void ARecoveredGlobalManager::ResolveRecoveredClimaxRequest() {
+    if (ActiveRecoveredMode==2 && (!PlaylistRuntime || !PlaylistRuntime->bPlaying || PlaylistRuntime->bAwaitingNextTrack || PlaylistRuntime->bPaused)) return;
+    if (ActiveRecoveredMode==1 && TowerRuntime && TowerRuntime->Phase!=ERecoveredRoundPhase::Playing && TowerRuntime->Phase!=ERecoveredRoundPhase::BossRound) return;
+    if (CurrentSessionObjective==6 && ActiveRecoveredMode==1 && TowerRuntime) {
+        if (PlayerVariables.SessionLength-TowerRuntime->BaselineDuration<=TowerRuntime->SelectedOption.ObjectiveParam) SuccessfulCum();
+        return;
+    }
+    if (CurrentSessionObjective==6 && ActiveRecoveredMode==0 && ClassicObjectiveRuntime.bActive) {
+        if (PlayerVariables.bHasCame) return;
+        if (PlayerVariables.SessionLength-ClassicObjectiveRuntime.BaselineDuration<=ClassicObjectiveRuntime.Target) SuccessfulCum();else PrematureCum();
+        return;
+    }
+    if (BeatContext.CardType==5) { PrematureCum(); return; }
+    if (PlayerVariables.bHasCame) return;
+    if (PlayerVariables.bIsAllowedToCum) SuccessfulCum();
+    else PrematureCum();
 }
 
 FRecoveredDifficultyConfig URecoveredRuleLibrary::GetDifficultyConfig(ERecoveredDifficulty Difficulty) {
@@ -96,11 +162,35 @@ UScriptStruct* URecoveredRuleLibrary::GetPlayerCardRowStruct() { return FRecover
 UScriptStruct* URecoveredRuleLibrary::GetHeatCategoryRowStruct() { return FRecoveredHeatCategoryRow::StaticStruct(); }
 UScriptStruct* URecoveredRuleLibrary::GetModifierRowStruct() { return FRecoveredModifierRow::StaticStruct(); }
 FString URecoveredRuleLibrary::ExportTableJson(UDataTable* Table) {
+#if WITH_EDITOR
     return Table ? Table->GetTableAsJSON(EDataTableExportFlags::UseJsonObjectsForStructs | EDataTableExportFlags::UseSimpleText) : TEXT("[]");
+#else
+    if (!Table || !Table->GetRowStruct()) return TEXT("[]");
+    TArray<TSharedPtr<FJsonValue>> Rows;
+    for (const auto& Entry:Table->GetRowMap()) {
+        auto Row=MakeShared<FJsonObject>();Row->SetStringField(TEXT("Name"),Entry.Key.ToString());
+        for (TFieldIterator<FProperty> Property(Table->GetRowStruct());Property;++Property) {
+            auto Value=FJsonObjectConverter::UPropertyToJsonValue(*Property,Property->ContainerPtrToValuePtr<void>(Entry.Value));
+            if (!Value.IsValid()) return FString();
+            Row->SetField(Property->GetName(),Value);
+        }
+        Rows.Add(MakeShared<FJsonValueObject>(Row));
+    }
+    FString Result;
+    return FJsonSerializer::Serialize(Rows,TJsonWriterFactory<>::Create(&Result)) ? Result : FString();
+#endif
 }
 ARecoveredGlobalManager::ARecoveredGlobalManager() {
+    PrimaryActorTick.bCanEverTick=true;
     ActiveDifficulty = URecoveredRuleLibrary::GetDifficultyConfig(CurrentDifficulty);
     BeatTimeline = CreateDefaultSubobject<URecoveredBeatTimeline>(TEXT("RecoveredBeatTimeline"));
+    InitializeRecoveredModes();
+    SuccuEconomy=CreateDefaultSubobject<URecoveredSuccuEconomy>(TEXT("RecoveredSuccuEconomy"));
+}
+void ARecoveredGlobalManager::Tick(float DeltaSeconds) {
+    Super::Tick(DeltaSeconds);
+    TickRecoveredNewerItems(DeltaSeconds);
+    if (ActiveRecoveredMode==0) TickRecoveredObjectives();
 }
 void ARecoveredGlobalManager::ApplyDifficulty(ERecoveredDifficulty Difficulty) {
     CurrentDifficulty = Difficulty;
@@ -113,9 +203,12 @@ void ARecoveredGlobalManager::InitializeDifficultyVariables(uint8 SavedEdgePacin
     UserStrokeCountMultiplier = URecoveredStateRuleLibrary::GetPreferenceMultiplier(SavedStrokeMultiplierIndex, UserStrokeCountMultiplier);
 }
 void ARecoveredGlobalManager::AddHeat(double HeatAdd) {
-    HeatLevel = URecoveredRuleLibrary::CalculateHeat(HeatLevel, HeatAdd, ActiveDifficulty.DifficultyHeatGainMultiplier);
+    const double Adjusted=SuccuEconomy ? SuccuEconomy->AdjustHeatGain(HeatAdd) : HeatAdd;
+    HeatLevel = URecoveredRuleLibrary::CalculateHeat(HeatLevel, Adjusted, ActiveDifficulty.DifficultyHeatGainMultiplier);
+    if (SuccuEconomy) HeatLevel=FMath::Min(HeatLevel,SuccuEconomy->GetHeatCap());
 }
 void ARecoveredGlobalManager::AddCoins(int32 Coins) {
+    if (SuccuEconomy && SuccuEconomy->RollBankingError()) Coins=URecoveredStateRuleLibrary::AddInt32Wrapping(Coins,Coins);
     const int32 Earned = URecoveredStateRuleLibrary::AddCoinsToState(PlayerVariables, Coins);
     if (Earned>0) PlayerVariables.SessionCoinsEarned=URecoveredStateRuleLibrary::AddInt32Wrapping(PlayerVariables.SessionCoinsEarned,Earned);
     OnCoinsAdded.Broadcast(Earned, PlayerVariables.PlayerCoins);
@@ -124,7 +217,20 @@ void ARecoveredGlobalManager::AddToCumMeter(double Amount) {
     CumMeterPercentage = URecoveredStateRuleLibrary::AddToCumMeter(CumMeterPercentage, Amount);
 }
 void ARecoveredGlobalManager::AddToLootBar(double Amount) {
-    LootBarPercentage = URecoveredStateRuleLibrary::AddToLootBar(LootBarPercentage, Amount, LootBarMultiplier);
+    if (SuccuEconomy && SuccuEconomy->HasModifier(9) && BeatContext.CardType==3) Amount*=2;
+    double EffectiveMultiplier=LootBarMultiplier;
+    if (auto* Inventory=RecoveredNewerInventoryAdapter::GetInventory(*this)) {
+        if (BeatContext.ActiveModifiers.Contains(TEXT("Overencumbered"))) {
+            int64 Total=0;
+            for (const auto Type:Inventory->HotbarItems) Total+=Inventory->GetItemState(Type).Charges;
+            if (Total>=2) EffectiveMultiplier-=.5;
+        }
+        if (BeatContext.ActiveModifiers.Contains(TEXT("Greed Machine"))) {
+            const double Combo=PlayerVariables.CurrentComboCount;
+            if (Combo+1667!=0) EffectiveMultiplier+=2*Combo/(Combo+1667);
+        }
+    }
+    LootBarPercentage = URecoveredStateRuleLibrary::AddToLootBar(LootBarPercentage, Amount, EffectiveMultiplier);
 }
 void ARecoveredGlobalManager::AddToEdgeBank(int32 Coins) {
     EdgeBank = URecoveredStateRuleLibrary::AddInt32Wrapping(EdgeBank, Coins);
@@ -179,7 +285,8 @@ void ARecoveredGlobalManager::BeatComplete() {
     DetermineComboType();
     OnSessionAction.Broadcast(TEXT("DetermineAndPlayComboTypeAnimBeatCompletes"));
     const int32 CoinAward = URecoveredSessionRuleLibrary::GetCoinAward(BeatContext.CardType);
-    if (CoinAward != 0) AddCoins(CoinAward);
+    if (RecoveredNewerInventoryAdapter::GetInventory(*this) && BeatContext.CardType==3 && BeatContext.ActiveModifiers.Contains(TEXT("Avarice"))) PlayerVariables.PlayerCoins-=1;
+    else if (CoinAward != 0) AddCoins(CoinAward);
     if (BeatContext.HeatCategory <= 2) AddHeat(URecoveredSessionRuleLibrary::GetHeatAward(BeatContext));
     URecoveredSessionRuleLibrary::AddBeatMeter(PlayerVariables, BeatContext, HeatLevel, BaseMeterGain, CumMeterPercentage);
     OnSessionAction.Broadcast(TEXT("DetermineAndTriggerMeterOverride"));
@@ -259,6 +366,7 @@ bool ARecoveredGlobalManager::ApplyStoreItemEffect(FName ItemID, int32 Level) {
     return true;
 }
 bool ARecoveredGlobalManager::StartRecoveredBeatSequence(const FRecoveredBeatPattern& Pattern, double BaseInterval, int32 StrokeCount, float SpeedModifier, double TravelTime) {
+    if (SuccuEconomy && SuccuEconomy->HasModifier(6)) BaseInterval*=2;
     // Bind to the live actor after subobject instancing, rather than the class-default actor.
     BeatTimeline->OnBeatFired.AddUniqueDynamic(this, &ARecoveredGlobalManager::HandleRecoveredDeviceBeat);
     BeatTimeline->OnBeatHitCenter.AddUniqueDynamic(this, &ARecoveredGlobalManager::HandleBeatHitCenter);
@@ -379,6 +487,24 @@ bool ARecoveredGlobalManager::StartPaceCard(uint8 Pace,bool bPlayMedia,bool bPre
     PlayRecoveredSessionSound(Pace==0 ? TEXT("SlowPace") : Pace==1 ? TEXT("MediumPace") : TEXT("FastPace"));
     if (auto* Menu=Cast<URecoveredMenuWidget>(SessionScreen)) {
         Menu->PlayRecoveredAnimation(Pace==0 ? TEXT("SlowPaceAnim") : Pace==1 ? TEXT("MediumPaceAnim") : TEXT("FastPaceAnim"));
+    }
+    if (IsRecoveredNewerProgressionEnabled()&&GetWorld()) {
+        FString Pronoun=TEXT("Male");
+        bool bSPHEnabled=true;
+        bool bVoiceEnabled=true;
+        if (const auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance())) {
+            if (Instance->CurrentSave) {
+                const int32 Selection=FMath::Clamp(FMath::RoundToInt(Instance->CurrentSave->GetNumberSetting(TEXT("PlayerPronounSelection"),0)),0,2);
+                Pronoun=GetRecoveredDialoguePronoun(Selection);
+                bSPHEnabled=Instance->CurrentSave->GetBoolSetting(TEXT("SPHEnabled?"),true);
+                bVoiceEnabled=Instance->CurrentSave->GetBoolSetting(TEXT("bVoiceLinesEnabled?"),true);
+            }
+        }
+        if (bVoiceEnabled) {
+            if (USoundBase* Voice=SelectRecoveredPaceDialogue(VoicePack.ToString(),Pace,SelectedRandomCard.Tags,Pronoun,bSPHEnabled)) {
+                UGameplayStatics::PlaySound2D(this,Voice,GetRecoveredVolume(TEXT("VoicelinesVolume"),0.8f));
+            }
+        }
     }
     ChangeRecoveredBeatBackground(3);
     PlayRecoveredMusic(Pace);

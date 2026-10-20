@@ -12,6 +12,10 @@
 #include "RecoveredEdgeManager.h"
 #include "RecoveredEdgeRestWidget.h"
 #include "RecoveredMercyRestWidget.h"
+#include "RecoveredNewerInventoryAdapter.h"
+#include "RecoveredStoreItem.h"
+#include "Blueprint/WidgetTree.h"
+#include "Components/ScrollBox.h"
 
 UUserWidget* ARecoveredGlobalManager::SpawnRecoveredOverlay(FName ScreenName) {
     if (ScreenName.IsNone() || !GetWorld()) return nullptr;
@@ -27,11 +31,39 @@ UUserWidget* ARecoveredGlobalManager::SpawnRecoveredOverlay(FName ScreenName) {
     return Widget;
 }
 bool ARecoveredGlobalManager::SpawnRecoveredStore() {
+    const bool WasStoreOnCooldown=bStoreOnCooldown;
+    const bool WasTimelineRunning=BeatTimeline && BeatTimeline->bIsRunning;
+    const auto RestoreAfterFailure=[this,WasStoreOnCooldown,WasTimelineRunning]() {
+        bStoreOnCooldown=WasStoreOnCooldown;
+        if (BeatTimeline && WasTimelineRunning) BeatTimeline->ResumeSequence();
+        ResetIdleTimer();
+        return false;
+    };
     if (BeatTimeline) BeatTimeline->PauseSequence();
     bStoreOnCooldown=true;
     ClearIdleTimer();
     auto* Store=SpawnRecoveredOverlay(TEXT("StoreWidget"));
-    if (!Store) { LastSessionError=TEXT("Recovered store screen is unavailable");return false; }
+    if (!Store) { LastSessionError=TEXT("Recovered store screen is unavailable");return RestoreAfterFailure(); }
+    if (RecoveredNewerInventoryAdapter::GetInventory(*this)) {
+        if (auto* Scroll=Cast<UScrollBox>(Store->GetWidgetFromName(TEXT("ScrollBox_263")))) {
+            Scroll->ClearChildren();
+            auto* Items=Store->WidgetTree->ConstructWidget<UVerticalBox>();
+            Scroll->AddChild(Items);
+            const FName ItemIDs[]={TEXT("DecreaseHeat"),TEXT("Slowdown"),TEXT("Break"),TEXT("BonerPill"),TEXT("SuccuShield"),TEXT("Resupply"),TEXT("ApexLure"),TEXT("EscapeRope"),TEXT("LootRush"),TEXT("Bounty"),TEXT("ComboCruncher")};
+            for (FName ItemID:ItemIDs) {
+                auto* Item=CreateWidget<URecoveredStoreItemWidget>(UGameplayStatics::GetPlayerController(this,0),URecoveredStoreItemWidget::StaticClass());
+                if (!Item) continue;
+                Item->ItemID=ItemID;
+                Items->AddChildToVerticalBox(Item);
+                Item->RefreshPrices();
+            }
+        } else {
+            LastSessionError=TEXT("Newer store requires the recovered scroll container");
+            Store->RemoveFromParent();
+            EventOverlays.Remove(Store);
+            return RestoreAfterFailure();
+        }
+    }
     BeatContext.CardType=4;
     GetWorldTimerManager().SetTimer(StoreCooldownTimer,this,&ARecoveredGlobalManager::CompleteRecoveredStoreCooldown,180.0f,false);
     ChangeRecoveredBeatBackground(1);

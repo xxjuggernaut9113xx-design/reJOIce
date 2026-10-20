@@ -1,6 +1,7 @@
 #include "RecoveredRestWidget.h"
 
 #include "RecoveredRules.h"
+#include "RecoveredMusicUpgrades.h"
 #include "Components/Button.h"
 #include "Components/Image.h"
 #include "Components/ProgressBar.h"
@@ -39,10 +40,16 @@ void URecoveredRestWidget::BeginRecoveredBreak(ARecoveredGlobalManager* Manager)
     ActiveManager=Manager;
     UWorld* World=GetWorld();
     if (!World || !Manager) return;
-    if (Manager->BeatTimeline) Manager->BeatTimeline->PauseSequence();
+    if (Manager->ActiveRecoveredMode==2) {
+        if (!Manager->PlaylistRuntime || (!Manager->PlaylistRuntime->bOnBreak && !Manager->PlaylistRuntime->BeginBreak())) return;
+    } else if (Manager->BeatTimeline) Manager->BeatTimeline->PauseSequence();
     Manager->PlayerVariables.bCanUseItems=false;
     Manager->PlayerVariables.bCanDraw=false;
     BreakDuration=FMath::Max(Manager->MasterBreakDuration,0.01);
+    if (Manager->ActiveRecoveredMode==2) {
+        const auto* Instance=Cast<URecoveredGameInstance>(Manager->GetGameInstance());
+        BreakDuration=RecoveredMusicUpgrades::GetValue(Instance ? Instance->CurrentSave.Get() : nullptr,0);
+    }
     CurrentProgress=0.0;
     if (auto* Progress=Cast<UProgressBar>(GetWidgetFromName(TEXT("ProgressBar_0")))) Progress->SetPercent(0.0f);
     StartTime=World->GetUnpausedTimeSeconds();
@@ -91,7 +98,12 @@ void URecoveredRestWidget::CompleteRecoveredBreak() {
     ARecoveredGlobalManager* Manager=ActiveManager.Get();
     if (!Manager) Manager=ResolveRecoveredGlobalManager();
     if (Manager) {
-        Manager->RequestNextRecoveredCard(true);
+        if (Manager->ActiveRecoveredMode==2 && Manager->PlaylistRuntime) {
+            Manager->PlaylistRuntime->EndBreak();
+            Manager->PlayerVariables.bCanUseItems=!Manager->PlaylistRuntime->bBreakSectionDisabled;
+            Manager->PlayerVariables.bCanDraw=false;
+            Manager->bStopSequence=false;
+        } else Manager->RequestNextRecoveredCard(true);
         Manager->EventOverlays.Remove(this);
     }
     RemoveFromParent();

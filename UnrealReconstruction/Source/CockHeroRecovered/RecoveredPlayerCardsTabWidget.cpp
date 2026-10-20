@@ -12,6 +12,7 @@
 #include "RecoveredEditUsernameOverlay.h"
 #include "RecoveredPlayerCardEntryWidget.h"
 #include "RecoveredProgression.h"
+#include "RecoveredProgressionResources.h"
 #include "RecoveredRules.h"
 
 namespace {
@@ -35,6 +36,8 @@ UTexture2D* LoadRecoveredCardTexture(const FString& OriginalPath) {
         if (!ObjectPath.FindLastChar(TEXT('.'),Dot) || Dot<1) return nullptr;
         return FPackageName::DoesPackageExist(ObjectPath.Left(Dot)) ? LoadObject<UTexture2D>(nullptr,*ObjectPath) : nullptr;
     };
+    const FString Resolved=ResolveRecoveredProgressionResource(OriginalPath);
+    if (Resolved!=OriginalPath) return LoadExistingTexture(Resolved);
     if (UTexture2D* Texture=LoadExistingTexture(OriginalPath)) return Texture;
     FString AssetName=OriginalPath;
     int32 Dot=INDEX_NONE;

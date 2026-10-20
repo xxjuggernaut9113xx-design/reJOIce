@@ -1,5 +1,35 @@
 # Newer Cock Hero reconstruction upgrade
 
+## October 20 integration continuation
+
+The active editable project is on `E:\reJOIce`. The completed October 19
+integrated suite passed 115 tests with zero warnings, failures, or skipped tests;
+see `RecoveryEvidence/integrated-20261019-automation.json`. Classic objectives,
+Tower rounds/rewards, Playlist transport/upgrades, newer inventory effects,
+Succu economy, progression resources, and source dialogue routing are integrated.
+The editor GUI smoke exercised the menu, loadouts, actual Enter input, Tower
+draft selection, live Playlist audio, unlock-store population, and isolated
+profile persistence. Final HUD alignment and the Playlist manual-draw guard
+passed the resumed October 20 build and packaged GUI check. The final follow-up
+panel-height and completion-caption corrections were compiled for Game and
+checked in the packaged runtime; the Editor binary predates those final
+presentation changes and the added caption smoke assertion.
+
+Seven content-contract tests and packaging preflight passed again on October 20.
+Runtime content includes five tables, 146 artwork assets, seven voice packs,
+28 preview/selection assets, and 8,350 byte-verified encoded dialogue streams.
+The 8,398-row catalog contains 48 references absent from the original container.
+Those absences remain explicit. Physical hardware, clean-machine operation,
+original-runtime parity remain unverified. The Windows cook processed 5,741
+packages with zero errors/warnings in its summary; archive creation and final
+restaging passed. The packaged integrated smoke passed three times, including live
+Playlist audio, actual keyboard inputs, Tower selection, store navigation and
+isolated profile reload. IoStore contains all 179 newer assets, and the pak
+contains all 8,350 encoded dialogue streams. Package hashes, retained logs and
+remaining presentation warnings are recorded in
+`RecoveryEvidence/integrated-20261020-delivery.json`. The historical
+implementation notes below precede this integration.
+
 Started 2026-10-17. Work is in progress; the newer game is not fully reconstructed.
 The existing editable project is the starting point. Existing features and original
 files are preserved. Newer verified behavior takes precedence over older behavior.

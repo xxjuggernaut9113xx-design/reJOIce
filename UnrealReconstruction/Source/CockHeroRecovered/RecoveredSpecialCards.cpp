@@ -1,4 +1,5 @@
 #include "RecoveredRules.h"
+#include "RecoveredSuccuEconomy.h"
 #include "RecoveredEventRules.h"
 #include "RecoveredMenu.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -32,6 +33,8 @@ bool ARecoveredGlobalManager::DrawRecoveredSpecialCard(FName Event,bool bPlayMed
         TimeMultiplier=1;
         Travel=1.5;
         if (BeatContext.ActiveModifiers.Contains(TEXT("Hivemind"))) CountMultiplier+=.4*SessionStats.SuccubiDefeated;
+        if (SuccuEconomy) CountMultiplier*=SuccuEconomy->GetSuccubusStrokeMultiplier();
+        if (BeatContext.ActiveModifiers.Contains(TEXT("Double Devil"))) CountMultiplier+=1;
         Patterns=&Rules->SuccubusBeatPatterns;
         bPlayerEdgedLastDraw=false;
     } else if (Event==TEXT("SpawnPunishmentEvent")) {

@@ -1,6 +1,8 @@
 #include "RecoveredChallengesMenu.h"
 
+#if WITH_EDITOR
 #include "WidgetBlueprint.h"
+#endif
 #include "Components/Button.h"
 #include "Components/WidgetSwitcher.h"
 #include "Dom/JsonObject.h"

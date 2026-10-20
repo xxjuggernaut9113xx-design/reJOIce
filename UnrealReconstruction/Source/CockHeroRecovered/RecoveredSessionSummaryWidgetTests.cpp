@@ -6,12 +6,16 @@
 #include "Engine/World.h"
 #include "Misc/AutomationTest.h"
 #include "Misc/ScopeExit.h"
+#include "Misc/ConfigCacheIni.h"
 #include "Sound/SoundWave.h"
 #include "UObject/UnrealType.h"
 
-#if WITH_DEV_AUTOMATION_TESTS
+#if WITH_DEV_AUTOMATION_TESTS && WITH_EDITOR
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRecoveredSessionSummaryWidgetContractTest, "CockHero.Recovery.SessionSummaryWidgetContract", EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
 bool FRecoveredSessionSummaryWidgetContractTest::RunTest(const FString& Parameters) {
+    bool PreviousNewer=false;const bool HadNewer=GConfig->GetBool(TEXT("Recovery.Content"),TEXT("UseNewerProgression"),PreviousNewer,GGameIni);
+    GConfig->SetBool(TEXT("Recovery.Content"),TEXT("UseNewerProgression"),false,GGameIni);
+    ON_SCOPE_EXIT { if (HadNewer) GConfig->SetBool(TEXT("Recovery.Content"),TEXT("UseNewerProgression"),PreviousNewer,GGameIni);else GConfig->RemoveKey(TEXT("Recovery.Content"),TEXT("UseNewerProgression"),GGameIni); };
     UClass* Class = LoadClass<URecoveredSessionSummaryWidget>(nullptr, TEXT("/Game/Recovery/UI/WBP_SessionSummaryWidget.WBP_SessionSummaryWidget_C"));
     if (!TestNotNull(TEXT("Session summary recovered class"), Class)) return false;
     if (!TestTrue(TEXT("Session summary uses native recovery parent"), Class->IsChildOf(URecoveredSessionSummaryWidget::StaticClass()))) return false;

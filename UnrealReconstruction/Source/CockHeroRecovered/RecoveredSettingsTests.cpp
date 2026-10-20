@@ -1,4 +1,5 @@
 #include "Misc/AutomationTest.h"
+#include "UObject/Package.h"
 #if WITH_DEV_AUTOMATION_TESTS && WITH_EDITOR
 #include "RecoveredMenu.h"
 #include "WidgetBlueprint.h"

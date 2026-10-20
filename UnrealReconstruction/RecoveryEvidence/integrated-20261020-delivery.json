@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-20",
+  "timezone": "America/Havana",
+  "repository": "E:/reJOIce",
+  "engine": "Unreal Engine 5.3.2, build 29314046",
+  "status": "integrated Windows reconstruction built and smoke validated",
+  "automation": {
+    "report": "integrated-20261020-automation.json",
+    "succeeded": 115,
+    "succeededWithWarnings": 0,
+    "failed": 0,
+    "notRun": 0,
+    "exitCode": 0,
+    "scope": "Full suite after initial Editor and Game rebuild; final panel-height and completion-caption corrections subsequently compiled and checked in packaged GUI."
+  },
+  "contentContractTests": {"passed": 7, "failed": 0},
+  "packagingPreflight": "PASS",
+  "fullBuildCookArchive": {
+    "exitCode": 0,
+    "cookedPackages": 5741,
+    "cookSummaryErrors": 0,
+    "cookSummaryWarnings": 0,
+    "log": "packaged-20261020/integrated-package-resumed-20261020.log"
+  },
+  "finalLayoutCorrection": {
+    "change": "Inventory panel height increased from 240 to 320 canvas units so the objective plus all five slots remain visible at 1280x720. Completion button content explicitly displays Finish: Enter; packaged smoke asserts its visible text.",
+    "gameTargetCompiledAndLinked": true,
+    "editorFollowup": "Redundant Editor PCH compile interrupted after Game link; initial full Editor build and suite passed. Editor binary predates final panel-height/caption presentation changes and the added caption smoke assertion. Final Game rebuild passed with exit code zero.",
+    "restageExitCode": 0,
+    "log": "packaged-20261020/integrated-package-caption-20261020.log"
+  },
+  "packagedGui": {
+    "result": "PASS",
+    "completedUtc": "2026-10-20T22:59:16Z",
+    "log": "packaged-20261020/integrated-packaged-gui-caption-20261020.log",
+    "checks": ["Menu navigation", "Classic empty loadout and objective", "Visible completion button caption matches Enter input", "Actual Slate Enter outcome", "Tower three-choice draft and actual round", "Playlist asynchronous audio playing beyond intro", "Actual Slate Space cannot start a normal-card sequence in Playlist", "Populated unlock-store navigation", "Isolated profile complete-state disk roundtrip", "All five inventory lines visually within viewport"],
+    "profileSlots": ["CockHeroRecovered_Named_Packaged20261020A", "CockHeroRecovered_Named_Packaged20261020B", "CockHeroRecovered_Named_Packaged20261020C"],
+    "testSlotsDeleted": true,
+    "profileIndexMutated": false
+  },
+  "packageCoverage": {
+    "newerIoStoreAssets": 179,
+    "missingNewerIoStoreAssets": 0,
+    "tables": 5,
+    "textures": 146,
+    "previewAndSelectionSounds": 28,
+    "encodedDialogueStreamsInPak": 8350,
+    "sourceDialogueRows": 8398,
+    "sourceAbsentReferences": 48,
+    "modeDefinitionAndDialogueCatalogInPak": true
+  },
+  "archive": "E:/reJOIceRecoveryPackage/Archive/Windows",
+  "files": [
+    {"path": "CockHeroRecovered/Binaries/Win64/CockHeroRecovered.exe", "bytes": 257850880, "sha256": "0d0ac0e688c658b7e330899f91da47ff35538fe70ad83360867bcca861848543"},
+    {"path": "CockHeroRecovered/Content/Paks/CockHeroRecovered-Windows.pak", "bytes": 973612228, "sha256": "42d2fe02d5ee0019f2ddf8a1e270bead50afae089d657bb1e0cdd59427ee5e36"},
+    {"path": "CockHeroRecovered/Content/Paks/CockHeroRecovered-Windows.ucas", "bytes": 235742016, "sha256": "e2be2b2dd25619a87a083b4049dbc901d3a1cd6a86f10d72f1d14bcf9c248756"},
+    {"path": "CockHeroRecovered/Content/Paks/CockHeroRecovered-Windows.utoc", "bytes": 1834977, "sha256": "5a207c3b35d9a285dfb98345a9dcbec395dc4f51634d95573d2bbad1e4814841"}
+  ],
+  "limitations": [
+    "Original executable was not executed; no complete original-runtime parity claim.",
+    "48 original dialogue references are absent from the original container and have no substituted audio.",
+    "External source media remains required and is configured separately from packaged assets.",
+    "Physical hardware and clean-machine operation are unverified.",
+    "Packaged log includes optional Cloud/IoStoreOnDemand.ini, CoreStyle brush and editor-only sound lookup warnings plus movie-scene audio cleanup warnings; smoke checks pass despite these warnings."
+  ]
+}

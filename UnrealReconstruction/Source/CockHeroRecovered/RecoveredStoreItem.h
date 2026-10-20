@@ -27,7 +27,10 @@ public:
     UFUNCTION(BlueprintCallable, Category="Recovered Store") bool TryBuy();
     UFUNCTION(BlueprintCallable, Category="Recovered Store") bool TryUse();
     UFUNCTION(BlueprintCallable, Category="Recovered Store") bool TryUpgrade();
+    UFUNCTION(BlueprintCallable, Category="Recovered Store") bool TryEquip(int32 SlotIndex);
+    UFUNCTION(BlueprintCallable, Category="Recovered Store") bool TryUnequip(int32 SlotIndex);
 protected:
+    virtual TSharedRef<SWidget> RebuildWidget() override;
     virtual void NativeConstruct() override;
     virtual void NativeDestruct() override;
 private:
@@ -35,6 +38,7 @@ private:
     UFUNCTION() void OnBuyClicked();
     UFUNCTION() void OnUpgradeClicked();
     UFUNCTION() void OnUseClicked();
+    UFUNCTION() void OnEquipClicked();
     UFUNCTION() void OnBuyHovered();
     UFUNCTION() void OnBuyUnhovered();
     UFUNCTION() void OnUpgradeHovered();

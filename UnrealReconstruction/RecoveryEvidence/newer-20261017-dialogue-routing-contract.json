@@ -1,0 +1,45 @@
+{
+  "source_executed": false,
+  "normal_pace_sites": [
+    {
+      "candidate_builder_offset": 88496,
+      "play_offset": 88519,
+      "adjacent_unconditional_call": true,
+      "pace": "slow"
+    },
+    {
+      "candidate_builder_offset": 90153,
+      "play_offset": 90176,
+      "adjacent_unconditional_call": true,
+      "pace": "medium"
+    },
+    {
+      "candidate_builder_offset": 91889,
+      "play_offset": 91912,
+      "adjacent_unconditional_call": true,
+      "pace": "fast"
+    }
+  ],
+  "policy": {
+    "probability_gate": "none between normal pace animation and candidate/play calls",
+    "candidate_weighting": "one random eligible row per matching media tag; uniform choice between resulting candidates",
+    "fallback": "slow/medium/fast category when no tag candidates",
+    "pronouns": {
+      "0": "Male",
+      "1": "Female",
+      "2": "Neutral"
+    },
+    "accepted_row_pronouns": [
+      "matching selected pronoun",
+      "Neutral",
+      "blank"
+    ],
+    "sph_filter": "small_penis tag is excluded when SPHEnabled? is false"
+  },
+  "source_sha256": {
+    "Analysis\\ReferenceBuilds\\newer-20261017\\functions\\BP_GlobalManager\\ExecuteUbergraph_BP_GlobalManager.json": "bb8b381f5570936998a1804498e3f61b32c9afb7d446ad3ed504df51e329a470",
+    "Analysis\\ReferenceBuilds\\newer-20261017\\functions\\BP_GlobalManager\\BuildVoiceLineCandidatesFromContentTags.json": "e889a01d373f0bc56e2d55f3d0382c2aac523e8b84f005717ae5f02fcdd2d99f",
+    "Analysis\\ReferenceBuilds\\newer-20261017\\functions\\BP_GlobalManager\\DoesDialogueLinePassPronounFilter.json": "b7675e2a0a2a3b3d40663ce28ede3e83cd69811a7441487e856b0afbe94e7a2e",
+    "Analysis\\ReferenceBuilds\\newer-20261017\\functions\\BP_GlobalManager\\Set_Dialogue_and_Play_Voiceline.json": "429fffe1961421a722d74052f8fb03c91b1781d3e42a6a2bd5b2df730260c96e"
+  }
+}

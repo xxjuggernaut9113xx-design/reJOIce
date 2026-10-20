@@ -17,6 +17,9 @@
 #include "RecoveredProgression.h"
 #include "RecoveredOutcomes.h"
 #include "RecoveredNotificationWidget.h"
+#include "RecoveredTowerRuntime.h"
+#include "RecoveredPlaylistRuntime.h"
+#include "RecoveredObjectiveRuntime.h"
 #include "RecoveredRules.generated.h"
 
 UENUM(BlueprintType)
@@ -213,10 +216,47 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Media") FString MediaManifestPath=TEXT("C:/Users/webma/Downloads/Cock_Hero_Shipping_Build_V0.04_-_Exclusive/PrepV2/Windows/Extracted/Base_Game_CG/manifest.json");
     UFUNCTION(BlueprintCallable, Category="Recovered Session") bool InitializeRecoveredSession();
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") ERecoveredDifficulty CurrentDifficulty = ERecoveredDifficulty::NormalMode;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered Session") uint8 CurrentSessionObjective=0;
+    FRecoveredObjectiveRuntime ClassicObjectiveRuntime;
+    FString PendingRecoveredLoadoutJson;
+    FTimerHandle ObjectiveReleaseTimer;
+    bool ConfigureRecoveredClassicObjective(int32 Index,int32 Target,FString& Error);
+    void InitializeRecoveredClassicObjective();
+    void ResetRecoveredObjectiveRuntime();
+    void TickRecoveredObjectives();
+    void OpenRecoveredReleaseWindow();
+    void ExpireRecoveredReleaseWindow();
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered") double HeatLevel = 10.0;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Recovered") FRecoveredDifficultyConfig ActiveDifficulty;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered State") FRecoveredPlayerVariables PlayerVariables;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered State") FRecoveredSessionStats SessionStats;
+    UPROPERTY(Transient) TObjectPtr<class URecoveredNewerItemEffects> NewerItemEffects;
+    UPROPERTY(Transient) TObjectPtr<class URecoveredSuccuEconomy> SuccuEconomy;
+    UPROPERTY(Transient) TObjectPtr<URecoveredPlaylistRuntime> PlaylistRuntime;
+    UPROPERTY(Transient) TObjectPtr<URecoveredTowerRuntime> TowerRuntime;
+    UPROPERTY(Transient) TObjectPtr<class UMediaPlayer> PlaylistAudio;
+    UPROPERTY(Transient) TObjectPtr<class UMediaSoundComponent> PlaylistSound;
+    UPROPERTY(Transient) TObjectPtr<class URecoveredModesWidget> ModesScreen;
+    UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Recovered Modes") uint8 ActiveRecoveredMode=0;
+    void InitializeRecoveredModes();
+    UFUNCTION(BlueprintCallable,Category="Recovered Modes") bool StartPlaylistSession(const TArray<FString>& Paths,bool Loop=false);
+    UFUNCTION(BlueprintCallable,Category="Recovered Modes") bool StartTowerSession(int32 Rounds=5,bool Endless=false);
+    UFUNCTION() void HandlePlaylistSongStarted(const FString& AudioPath);
+    UFUNCTION() void HandlePlaylistAudioOpened(FString OpenedUrl);
+    UFUNCTION() void HandlePlaylistAudioFailed(FString FailedUrl);
+    UFUNCTION() void TickPlaylistAudio();
+    UFUNCTION() void HandlePlaylistEvent(const FRecoveredBeatmapEvent& Event);
+    UFUNCTION() void HandlePlaylistSongComplete(int32 CompletedRounds);
+    UFUNCTION() void HandlePlaylistComplete(int32 CompletedRounds);
+    UFUNCTION() void HandleTowerRoundStarted(const FRecoveredTowerOption& Option);
+    UFUNCTION() void HandleTowerRoundCompleted(int32 CompletedRounds);
+    UFUNCTION() void HandleTowerComplete(int32 CompletedRounds);
+    UFUNCTION(BlueprintCallable,Category="Recovered Modes") void StopRecoveredModes();
+    UFUNCTION(BlueprintCallable,Category="Recovered Modes") void OpenRecoveredModes();
+    FTimerHandle PlaylistAudioTimer;
+    bool UseRecoveredNewerItem(FName ItemID);
+    void TickRecoveredNewerItems(float DeltaSeconds);
+    virtual void Tick(float DeltaSeconds) override;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered State") FRecoveredLifetimeStats LifetimeStats;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered State") double CumMeterPercentage = 0;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Recovered State") double LootBarPercentage = 0;
@@ -330,6 +370,8 @@ public:
     UFUNCTION() void HandleRecoveredDeviceStateChanged(ERecoveredDeviceKind DeviceType, bool bConnected);
     UFUNCTION(BlueprintCallable, Category="Recovered|Media") bool LoadMediaPack(const FString& ManifestPath, const TArray<FString>& ExcludedTags);
     UFUNCTION(BlueprintCallable, Category="Recovered|Media") bool OpenRecoveredCumMedia(bool bPlayMedia = true);
+    void RecordRecoveredMilking();
+    void ResolveRecoveredClimaxRequest();
     // Media pack management: enable/disable packs and control their draw priority.
     UFUNCTION(BlueprintCallable, Category="Recovered|Media") void SetMediaPackEnabled(const FString& PackID, bool bEnabled);
     UFUNCTION(BlueprintPure, Category="Recovered|Media") bool IsMediaPackEnabled(const FString& PackID) const;

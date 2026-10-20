@@ -1,6 +1,8 @@
 #include "RecoveredSessionSummaryWidget.h"
 
 #include "RecoveredRules.h"
+#include "RecoveredDialogueAudio.h"
+#include "RecoveredProgressionResources.h"
 #include "Animation/WidgetAnimation.h"
 #include "Blueprint/WidgetBlueprintGeneratedClass.h"
 #include "Components/Button.h"
@@ -183,6 +185,13 @@ USoundBase* URecoveredSessionSummaryWidget::SelectRecoveredPostGameVoiceline() c
 }
 
 USoundBase* URecoveredSessionSummaryWidget::SelectRecoveredPostGameVoicelineFor(FName VoicePackID, bool bWon) const {
+    if (IsRecoveredNewerProgressionEnabled()) {
+        int32 Selection=0;
+        if (const auto* Instance=Cast<URecoveredGameInstance>(GetGameInstance())) {
+            if (Instance->CurrentSave) Selection=FMath::RoundToInt(Instance->CurrentSave->GetNumberSetting(TEXT("PlayerPronounSelection"),0));
+        }
+        return SelectRecoveredSourceDialogue(VoicePackID.ToString(),bWon ? TEXT("postgame_win") : TEXT("postgame_loss"),GetRecoveredDialoguePronoun(Selection));
+    }
     FString Pack = VoicePackID.ToString();
     Pack.ReplaceInline(TEXT(" "), TEXT(""));
     Pack.ReplaceInline(TEXT("_"), TEXT(""));

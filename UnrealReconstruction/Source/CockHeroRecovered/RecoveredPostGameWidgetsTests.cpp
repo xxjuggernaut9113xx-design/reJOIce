@@ -13,7 +13,7 @@
 #include "RecoveredRules.h"
 #include "Sound/SoundWave.h"
 
-#if WITH_DEV_AUTOMATION_TESTS
+#if WITH_DEV_AUTOMATION_TESTS && WITH_EDITOR
 namespace {
 UWorld* CreatePostGameWidgetWorld(FWorldContext*& OutContext) {
     const auto Initialization = UWorld::InitializationValues().AllowAudioPlayback(false).CreatePhysicsScene(false).CreateNavigation(false).CreateAISystem(false).ShouldSimulatePhysics(false).SetTransactional(false);

@@ -1,4 +1,5 @@
 #include "Misc/AutomationTest.h"
+#include "UObject/Package.h"
 #if WITH_DEV_AUTOMATION_TESTS && WITH_EDITOR
 #include "RecoveredMenu.h"
 #include "RecoveredImportWidget.h"
@@ -51,7 +52,7 @@ bool FRecoveredMenuBindingTest::RunTest(const FString& Parameters) {
         TestEqual(TEXT("Cover image width follows source"),float(Cover->GetStyle().Normal.ImageSize.X),32.0f);
     }
     const TCHAR* Buttons[]={TEXT("StartGameButton"),TEXT("StatsButton"),TEXT("Settings"),TEXT("UnlockStoreButton"),TEXT("ImportButton")};
-    const TCHAR* Methods[]={TEXT("OpenDifficulty"),TEXT("OpenChallenges"),TEXT("OpenSettings"),TEXT("OpenUnlockStore"),TEXT("OpenImport")};
+    const TCHAR* Methods[]={TEXT("OpenModes"),TEXT("OpenChallenges"),TEXT("OpenSettings"),TEXT("OpenUnlockStore"),TEXT("OpenImport")};
     for (int32 I=0;I<UE_ARRAY_COUNT(Buttons);++I) {
         auto* Button=Cast<UButton>(Menu->GetWidgetFromName(Buttons[I]));
         if (TestNotNull(Buttons[I],Button)) TestTrue(Methods[I],Button->OnClicked.Contains(Menu,FName(Methods[I])));
